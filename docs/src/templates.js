@@ -264,7 +264,7 @@ if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
 frame.set("toc_group", l_toc_group);
 frame.set("indent", l_indent);
-var t_32 = "";t_32 += "\r\n<w:p>\r\n  <w:pPr>\r\n    <w:pStyle w:val=\"Indent";
+var t_32 = "";t_32 += "\r\n<w:p>\r\n  <w:pPr>\r\n    <w:pStyle w:val=\"IndentHanging";
 t_32 += runtime.suppressValue(l_indent, env.opts.autoescape);
 t_32 += "\"/>\r\n  </w:pPr>";
 frame = frame.push();
