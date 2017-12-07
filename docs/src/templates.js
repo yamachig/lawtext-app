@@ -4143,7 +4143,7 @@ t_61 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "inde
 }
 }
 frame = frame.pop();
-if(runtime.memberLookup((t_65),"children")) {
+if(env.getFilter("length").call(context, runtime.memberLookup((t_65),"children"))) {
 t_61 += runtime.suppressValue((lineno = 195, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_65])), env.opts.autoescape);
 t_61 += runtime.suppressValue((lineno = 196, colno = 18, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["paragraph_item_title_exists",1])), env.opts.autoescape);
 ;

@@ -1,5 +1,5 @@
 "use strict";
-// Transcrypt'ed from Python, 2017-12-07 22:16:57
+// Transcrypt'ed from Python, 2017-12-07 22:32:08
 function _parse_decorate () {
    var __symbols__ = ['__py3.6__', '__esv6__'];
     var __all__ = {};
