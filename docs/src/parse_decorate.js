@@ -1,5 +1,5 @@
 "use strict";
-// Transcrypt'ed from Python, 2017-12-09 13:58:25
+// Transcrypt'ed from Python, 2017-12-09 14:41:37
 function _parse_decorate () {
    var __symbols__ = ['__py3.6__', '__esv6__'];
     var __all__ = {};
@@ -3730,13 +3730,16 @@ function _parse_decorate () {
 								var fig = self.process_fig (current_indent + 1);
 								if (fig) {
 									var style = dict ({'tag': 'Style', 'attr': dict ({}), 'children': list ([fig])});
-									appdx_style_children.append (style);
+									style_struct_children.append (style);
 								}
 								var remarks = self.process_remarks (current_indent + 1);
 								if (remarks) {
 									style_struct_children.append (remarks);
 								}
-								var appdx_style = dict ({'tag': 'AppdxStyle', 'attr': dict ({}), 'children': list ([dict ({'tag': 'StyleStruct', 'attr': dict ({}), 'children': style_struct_children})])});
+								if (len (style_struct_children)) {
+									appdx_style_children.append (dict ({'tag': 'StyleStruct', 'attr': dict ({}), 'children': style_struct_children}));
+								}
+								var appdx_style = dict ({'tag': 'AppdxStyle', 'attr': dict ({}), 'children': appdx_style_children});
 							}
 							return appdx_style;
 						}, 'process_appdx_style');},
