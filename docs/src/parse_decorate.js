@@ -1,5 +1,5 @@
 "use strict";
-// Transcrypt'ed from Python, 2017-12-09 14:41:37
+// Transcrypt'ed from Python, 2017-12-09 16:31:09
 function _parse_decorate () {
    var __symbols__ = ['__py3.6__', '__esv6__'];
     var __all__ = {};
@@ -3028,15 +3028,15 @@ function _parse_decorate () {
 						}
 						return els;
 					};
-					var re_LawNum = re.compile ('^[(（](?P<body>.+?)[）)]$');
-					var re_ArticleRange = re.compile ('(?P<body>[(（].+?[）)])$');
-					var re_ArticleCaption = re.compile ('^[(（](?P<body>.+?)[）)]$');
-					var re_ArticleBody = re.compile ('^(?P<title>\\S+)\\s+(?P<body>\\S.*)$');
-					var re_ParagraphCaption = re.compile ('^[(（](?P<body>.+?)[）)]$');
-					var re_ParagraphItemBody = re.compile ('^(?P<title>\\S+)\\s+(?P<body>\\S.*)$');
-					var re_SupplProvisionLabel = re.compile ('^(?P<title>.+?)\\s*(?:[(（](?P<amend_law_num>.+?)[）)])?(?:\\s+(?P<extract>抄?))?$');
-					var re_AppdxTableLabel = re.compile ('^(?P<title>.+?)\\s*(?:(?P<related_article_num>[(（].+?[）)]))?$');
-					var re_AppdxStyleLabel = re.compile ('^(?P<title>.+?)\\s*(?:(?P<related_article_num>[(（].+?[）)]))?$');
+					var re_LawNum = re.compile ('^[(（](?P<body>.+?)[）)](?:\\s*)$');
+					var re_ArticleRange = re.compile ('(?P<body>[(（].+?[）)])(?:\\s*)$');
+					var re_ArticleCaption = re.compile ('^[(（](?P<body>.+?)[）)](?:\\s*)$');
+					var re_ArticleBody = re.compile ('^(?P<title>\\S+)\\s+(?P<body>\\S.*)(?:\\s*)$');
+					var re_ParagraphCaption = re.compile ('^[(（](?P<body>.+?)[）)](?:\\s*)$');
+					var re_ParagraphItemBody = re.compile ('^(?P<title>\\S+)\\s+(?P<body>\\S.*)(?:\\s*)$');
+					var re_SupplProvisionLabel = re.compile ('^(?P<title>.+?)\\s*(?:[(（](?P<amend_law_num>.+?)[）)])?(?:\\s+(?P<extract>抄?))?(?:\\s*)$');
+					var re_AppdxTableLabel = re.compile ('^(?P<title>.+?)\\s*(?:(?P<related_article_num>[(（].+?[）)]))?(?:\\s*)$');
+					var re_AppdxStyleLabel = re.compile ('^(?P<title>.+?)\\s*(?:(?P<related_article_num>[(（].+?[）)]))?(?:\\s*)$');
 					var Parser = __class__ ('Parser', [object], {
 						get __init__ () {return __get__ (this, function (self, lexed_lines, lineno) {
 							if (typeof lineno == 'undefined' || (lineno != null && lineno .hasOwnProperty ("__kwargtrans__"))) {;
