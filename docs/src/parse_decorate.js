@@ -1,5 +1,5 @@
 "use strict";
-// Transcrypt'ed from Python, 2017-12-07 22:32:08
+// Transcrypt'ed from Python, 2017-12-09 13:58:25
 function _parse_decorate () {
    var __symbols__ = ['__py3.6__', '__esv6__'];
     var __all__ = {};
@@ -2788,13 +2788,11 @@ function _parse_decorate () {
 					__nest__ (re, '', __init__ (__world__.re));
 					var DEFAULT_INDENT = '\u3000';
 					var LawtextParseError = __class__ ('LawtextParseError', [Exception], {
-						get __init__ () {return __get__ (this, function (self) {
-							var lines = list ([]);
-							var lineno = null;
-							var args = tuple ([].slice.apply (arguments).slice (1));
-							__super__ (LawtextParseError, '__init__') (self, ...args, __kwargtrans__ (kwargs));
-							self.lines = lines;
+						get __init__ () {return __get__ (this, function (self, message, lineno, lines) {
+							__super__ (LawtextParseError, '__init__') (self, message);
+							self.message = message;
 							self.lineno = lineno;
+							self.lines = lines;
 						}, '__init__');},
 						get __str__ () {return __get__ (this, function (self) {
 							var lines = function () {
@@ -2804,24 +2802,27 @@ function _parse_decorate () {
 								}
 								return __accu0__;
 							} ();
-							return '{}\n{}\n'.format (' '.join (self.args), ''.join (lines));
+							var lines_str = ''.join (lines);
+							return (self.message + '\n\n') + lines_str;
 						}, '__str__');}
 					});
 					var LexerError = __class__ ('LexerError', [Exception], {
-						get __init__ () {return __get__ (this, function (self) {
-							var lineno = null;
-							var args = tuple ([].slice.apply (arguments).slice (1));
-							__super__ (LexerError, '__init__') (self, ...args, __kwargtrans__ (kwargs));
+						get __init__ () {return __get__ (this, function (self, message, lineno) {
+							__super__ (LexerError, '__init__') (self, message);
+							self.message = message;
 							self.lineno = lineno;
 						}, '__init__');}
 					});
 					var LexerInternalError = __class__ ('LexerInternalError', [Exception], {
+						get __init__ () {return __get__ (this, function (self, message) {
+							__super__ (LexerInternalError, '__init__') (self, message);
+							self.message = message;
+						}, '__init__');}
 					});
 					var ParserError = __class__ ('ParserError', [Exception], {
-						get __init__ () {return __get__ (this, function (self) {
-							var lineno = null;
-							var args = tuple ([].slice.apply (arguments).slice (1));
-							__super__ (ParserError, '__init__') (self, ...args, __kwargtrans__ (kwargs));
+						get __init__ () {return __get__ (this, function (self, message, lineno) {
+							__super__ (ParserError, '__init__') (self, message);
+							self.message = message;
 							self.lineno = lineno;
 						}, '__init__');}
 					});
@@ -2834,12 +2835,11 @@ function _parse_decorate () {
 								indents.add (match.group (1));
 							}
 						}
-						if (!(indents)) {
+						if (!(len (indents))) {
 							return DEFAULT_INDENT;
 						}
 						var indents = sorted (indents, __kwargtrans__ ({key: len}));
-						var indent = (indents ? indents [0] : DEFAULT_INDENT);
-						return indent;
+						return indents [0];
 					};
 					var indent_level = function (indents, indent) {
 						var __left0__ = re.subn (indent, '', indents);
@@ -2858,6 +2858,7 @@ function _parse_decorate () {
 					};
 					var re_TC1stLine = re.compile ('^(?P<indents>\\s*)\\* - (?P<tcbody>.*)$');
 					var re_TCnthLine = re.compile ('^(?P<indents>\\s*)  - (?P<tcbody>.*)$');
+					var re_FigLine = re.compile ('^(?P<indents>\\s*)\\.\\.(?:\\s+)figure::(?:\\s+)(?P<figbody>.*)$');
 					var re_DefaultLine = re.compile ('^(?P<indents>\\s*)(?P<linebody>\\S.*)$');
 					var re_BlankLine = re.compile ('^\\s*$');
 					var lex_line = function (line, indent) {
@@ -2868,6 +2869,10 @@ function _parse_decorate () {
 						var match = re_TCnthLine.match (line);
 						if (match) {
 							return list (['TCnthLine', indent_level (match.group (1), indent), lex_tcbody (match.group (2))]);
+						}
+						var match = re_FigLine.match (line);
+						if (match) {
+							return list (['FigLine', indent_level (match.group (1), indent), dict ({'body': match.group (2)})]);
 						}
 						var match = re_DefaultLine.match (line);
 						if (match) {
@@ -2905,7 +2910,7 @@ function _parse_decorate () {
 							catch (__except0__) {
 								if (isinstance (__except0__, LexerInternalError)) {
 									var error = __except0__;
-									var __except1__ = LexerError (...error.args, __kwargtrans__ ({lineno: lineno}));
+									var __except1__ = LexerError (error.message, lineno);
 									__except1__.__cause__ = null;
 									throw __except1__;
 								}
@@ -3031,6 +3036,7 @@ function _parse_decorate () {
 					var re_ParagraphItemBody = re.compile ('^(?P<title>\\S+)\\s+(?P<body>\\S.*)$');
 					var re_SupplProvisionLabel = re.compile ('^(?P<title>.+?)\\s*(?:[(（](?P<amend_law_num>.+?)[）)])?(?:\\s+(?P<extract>抄?))?$');
 					var re_AppdxTableLabel = re.compile ('^(?P<title>.+?)\\s*(?:(?P<related_article_num>[(（].+?[）)]))?$');
+					var re_AppdxStyleLabel = re.compile ('^(?P<title>.+?)\\s*(?:(?P<related_article_num>[(（].+?[）)]))?$');
 					var Parser = __class__ ('Parser', [object], {
 						get __init__ () {return __get__ (this, function (self, lexed_lines, lineno) {
 							if (typeof lineno == 'undefined' || (lineno != null && lineno .hasOwnProperty ("__kwargtrans__"))) {;
@@ -3100,7 +3106,7 @@ function _parse_decorate () {
 									if (line_type == 'DefaultLine') {
 										var match = re_LawNum.match (data ['body']);
 										if (!(match)) {
-											ParserError ('法令番号は括弧（\u3000）で囲ってください。', __kwargtrans__ ({lineno: lineno}));
+											ParserError ('法令番号は括弧（\u3000）で囲ってください。', lineno);
 										}
 										var law_num = dict ({'tag': 'LawNum', 'attr': dict ({}), 'children': list ([match.group (1)])});
 										self.forward ();
@@ -3161,7 +3167,7 @@ function _parse_decorate () {
 											break;
 										}
 										else if (indent != toc_base_indent + 1) {
-											ParserError ('目次の内容のインデントが整っていません。', __kwargtrans__ ({lineno: lineno}));
+											ParserError ('目次の内容のインデントが整っていません。', lineno);
 										}
 										var sub_toc_group = self.process_toc_group ();
 										if (sub_toc_group) {
@@ -3204,7 +3210,7 @@ function _parse_decorate () {
 									var data = __left0__ [2];
 									if (line_type == 'DefaultLine') {
 										if (indent != toc_base_indent + 1) {
-											ParserError ('目次の内容のインデントが整っていません。', __kwargtrans__ ({lineno: lineno}));
+											ParserError ('目次の内容のインデントが整っていません。', lineno);
 										}
 										var toc_group = self.process_toc_group ();
 										if (toc_group) {
@@ -3578,6 +3584,19 @@ function _parse_decorate () {
 							}
 							return table_column;
 						}, 'process_table_column');},
+						get process_fig () {return __get__ (this, function (self, current_indent) {
+							self.skip_blank_lines ();
+							var fig = null;
+							var __left0__ = self.here ();
+							var line_type = __left0__ [0];
+							var indent = __left0__ [1];
+							var data = __left0__ [2];
+							if (line_type == 'FigLine' && indent == current_indent) {
+								var fig = dict ({'tag': 'Fig', 'attr': dict ({'src': data ['body']}), 'children': list ([])});
+								self.forward ();
+							}
+							return fig;
+						}, 'process_fig');},
 						get process_list () {return __get__ (this, function (self, current_indent) {
 							self.skip_blank_lines ();
 							var list_ = null;
@@ -3666,7 +3685,8 @@ function _parse_decorate () {
 							var next_indent = __left0__ [1];
 							var next_data = __left0__ [2];
 							var match = re_AppdxTableLabel.match (data ['body']);
-							if (line_type == 'DefaultLine' && indent == 0 && match) {
+							var titlejoin = (match ? re.sub ('\\s+', '', match.group (1)) : '');
+							if (line_type == 'DefaultLine' && indent == 0 && match && titlejoin.startswith ('別表')) {
 								appdx_table_children.append (dict ({'tag': 'AppdxTableTitle', 'attr': dict ({}), 'children': list ([match.group (1)])}));
 								if (match.group (2)) {
 									appdx_table_children.append (dict ({'tag': 'RelatedArticleNum', 'attr': dict ({}), 'children': list ([match.group (2)])}));
@@ -3685,6 +3705,41 @@ function _parse_decorate () {
 							}
 							return appdx_table;
 						}, 'process_appdx_table');},
+						get process_appdx_style () {return __get__ (this, function (self) {
+							self.skip_blank_lines ();
+							var appdx_style = null;
+							var appdx_style_children = list ([]);
+							var style_struct_children = list ([]);
+							var __left0__ = self.here ();
+							var line_type = __left0__ [0];
+							var indent = __left0__ [1];
+							var data = __left0__ [2];
+							var match = re_AppdxStyleLabel.match (data ['body']);
+							var body_split = (len (data) ? re.py_split ('\\s+', data ['body'], __kwargtrans__ ({maxsplit: 1})) : list (['']));
+							if (line_type == 'DefaultLine' && indent == 0 && body_split [0].startswith ('様式')) {
+								appdx_style_children.append (dict ({'tag': 'AppdxStyleTitle', 'attr': dict ({}), 'children': list ([match.group (1)])}));
+								if (match.group (2)) {
+									appdx_style_children.append (dict ({'tag': 'RelatedArticleNum', 'attr': dict ({}), 'children': list ([match.group (2)])}));
+								}
+								self.forward ();
+								var current_indent = indent;
+								var remarks = self.process_remarks (current_indent + 1);
+								if (remarks) {
+									style_struct_children.append (remarks);
+								}
+								var fig = self.process_fig (current_indent + 1);
+								if (fig) {
+									var style = dict ({'tag': 'Style', 'attr': dict ({}), 'children': list ([fig])});
+									appdx_style_children.append (style);
+								}
+								var remarks = self.process_remarks (current_indent + 1);
+								if (remarks) {
+									style_struct_children.append (remarks);
+								}
+								var appdx_style = dict ({'tag': 'AppdxStyle', 'attr': dict ({}), 'children': list ([dict ({'tag': 'StyleStruct', 'attr': dict ({}), 'children': style_struct_children})])});
+							}
+							return appdx_style;
+						}, 'process_appdx_style');},
 						get process_remarks () {return __get__ (this, function (self, current_indent) {
 							self.skip_blank_lines ();
 							var remarks = null;
@@ -3747,6 +3802,11 @@ function _parse_decorate () {
 									law_body_children.append (appdx_table);
 									continue;
 								}
+								var appdx_style = self.process_appdx_style ();
+								if (appdx_style) {
+									law_body_children.append (appdx_style);
+									continue;
+								}
 								break;
 							}
 							law_children.append (dict ({'tag': 'LawBody', 'attr': dict ({}), 'children': law_body_children}));
@@ -3765,7 +3825,7 @@ function _parse_decorate () {
 							if (isinstance (__except0__, LexerError)) {
 								var error = __except0__;
 								var lineno = error.lineno;
-								var __except1__ = LawtextParseError (...error.args, __kwargtrans__ ({lines: lines, lineno: lineno}));
+								var __except1__ = LawtextParseError (error.message, lineno, lines);
 								__except1__.__cause__ = null;
 								throw __except1__;
 							}
@@ -3781,7 +3841,7 @@ function _parse_decorate () {
 							if (isinstance (__except0__, ParserError)) {
 								var error = __except0__;
 								var lineno = error.lineno;
-								var __except1__ = LawtextParseError (...error.args, __kwargtrans__ ({lines: lines, lineno: lineno}));
+								var __except1__ = LawtextParseError (error.message, lineno, lines);
 								__except1__.__cause__ = null;
 								throw __except1__;
 							}
@@ -3793,7 +3853,7 @@ function _parse_decorate () {
 							}
 							else if (isinstance (__except0__, Exception)) {
 								var e = __except0__;
-								var __except1__ = LawtextParseError ('この行の処理中にエラーが発生しました。', __kwargtrans__ ({lines: lines, lineno: parser.lineno}));
+								var __except1__ = LawtextParseError ('この行の処理中にエラーが発生しました。', parser.lineno, lines);
 								__except1__.__cause__ = null;
 								throw __except1__;
 							}
@@ -3803,7 +3863,7 @@ function _parse_decorate () {
 						}
 						if (parser.continuing ()) {
 							var lineno = parser.lineno;
-							var __except0__ = LawtextParseError ('この行の種類が判別できません。', __kwargtrans__ ({lines: lines, lineno: lineno}));
+							var __except0__ = LawtextParseError ('この行の種類が判別できません。', lineno, lines);
 							__except0__.__cause__ = null;
 							throw __except0__;
 						}
@@ -3828,6 +3888,7 @@ function _parse_decorate () {
 						__all__.lex_line = lex_line;
 						__all__.lex_tcbody = lex_tcbody;
 						__all__.parse_lawtext = parse_lawtext;
+						__all__.re_AppdxStyleLabel = re_AppdxStyleLabel;
 						__all__.re_AppdxTableLabel = re_AppdxTableLabel;
 						__all__.re_Arg = re_Arg;
 						__all__.re_ArticleBody = re_ArticleBody;
@@ -3837,6 +3898,7 @@ function _parse_decorate () {
 						__all__.re_DETECT_INDENT = re_DETECT_INDENT;
 						__all__.re_DefaultLine = re_DefaultLine;
 						__all__.re_FORCE_EXIT_PARENTHESIS = re_FORCE_EXIT_PARENTHESIS;
+						__all__.re_FigLine = re_FigLine;
 						__all__.re_LawNum = re_LawNum;
 						__all__.re_ParagraphCaption = re_ParagraphCaption;
 						__all__.re_ParagraphItemBody = re_ParagraphItemBody;

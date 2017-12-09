@@ -37,7 +37,9 @@ if(runtime.memberLookup((t_6),"tag") == "LawNum") {
 ;
 }
 else {
-t_2 += runtime.suppressValue((lineno = 6, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_6])), env.opts.autoescape);
+t_2 += "<w:p>\r\n  <w:r>\r\n    <w:t>";
+t_2 += runtime.suppressValue((lineno = 8, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_6])), env.opts.autoescape);
+t_2 += "</w:t>\r\n  </w:r>\r\n</w:p>";
 ;
 }
 ;
@@ -76,31 +78,40 @@ frame.set("loop.first", t_9 === 0);
 frame.set("loop.last", t_9 === t_10 - 1);
 frame.set("loop.length", t_10);
 if(runtime.memberLookup((t_12),"tag") == "LawTitle") {
-t_8 += runtime.suppressValue((lineno = 16, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_law_title"), "m_law_title", context, [t_12])), env.opts.autoescape);
+t_8 += runtime.suppressValue((lineno = 20, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_law_title"), "m_law_title", context, [t_12])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_12),"tag") == "EnactStatement") {
-t_8 += runtime.suppressValue((lineno = 18, colno = 22, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_enact_statement"), "m_enact_statement", context, [t_12])), env.opts.autoescape);
+t_8 += runtime.suppressValue((lineno = 22, colno = 22, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_enact_statement"), "m_enact_statement", context, [t_12])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_12),"tag") == "TOC") {
-t_8 += runtime.suppressValue((lineno = 20, colno = 10, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_toc"), "m_toc", context, [t_12])), env.opts.autoescape);
+t_8 += runtime.suppressValue((lineno = 24, colno = 10, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_toc"), "m_toc", context, [t_12])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.inOperator(runtime.memberLookup((t_12),"tag"),["MainProvision","SupplProvision"])) {
-t_8 += runtime.suppressValue((lineno = 22, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_article_group"), "m_article_group", context, [t_12])), env.opts.autoescape);
+t_8 += runtime.suppressValue((lineno = 26, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_article_group"), "m_article_group", context, [t_12])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_12),"tag") == "AppdxTable") {
-t_8 += runtime.suppressValue((lineno = 24, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_appdx_table"), "m_appdx_table", context, [t_12])), env.opts.autoescape);
+t_8 += runtime.suppressValue((lineno = 28, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_appdx_table"), "m_appdx_table", context, [t_12])), env.opts.autoescape);
 ;
 }
 else {
-t_8 += runtime.suppressValue((lineno = 26, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_12])), env.opts.autoescape);
+if(runtime.memberLookup((t_12),"tag") == "AppdxStyle") {
+t_8 += runtime.suppressValue((lineno = 30, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_appdx_style"), "m_appdx_style", context, [t_12])), env.opts.autoescape);
+;
+}
+else {
+t_8 += "<w:p>\r\n  <w:r>\r\n    <w:t>";
+t_8 += runtime.suppressValue((lineno = 34, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_12])), env.opts.autoescape);
+t_8 += "</w:t>\r\n  </w:r>\r\n</w:p>";
+;
+}
 ;
 }
 ;
@@ -132,7 +143,7 @@ if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
 frame.set("law_title", l_law_title);
 var t_14 = "";t_14 += "\r\n<w:p>";
-t_14 += runtime.suppressValue((lineno = 35, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [l_law_title,1])), env.opts.autoescape);
+t_14 += runtime.suppressValue((lineno = 45, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [l_law_title,1])), env.opts.autoescape);
 t_14 += "</w:p>";
 frame = frame.push();
 var t_17 = runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "law")),"children");
@@ -149,7 +160,7 @@ frame.set("loop.last", t_15 === t_16 - 1);
 frame.set("loop.length", t_16);
 if(runtime.memberLookup((t_18),"tag") == "LawNum") {
 t_14 += "\r\n<w:p>\r\n  <w:r>\r\n    <w:rStyle w:val=\"Emphasis\"/>\r\n    <w:t>（</w:t>\r\n  </w:r>";
-t_14 += runtime.suppressValue((lineno = 44, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_18,1])), env.opts.autoescape);
+t_14 += runtime.suppressValue((lineno = 54, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_18,1])), env.opts.autoescape);
 t_14 += "<w:r>\r\n    <w:rStyle w:val=\"Emphasis\"/>\r\n    <w:t>）</w:t>\r\n  </w:r>\r\n</w:p>";
 ;
 }
@@ -174,7 +185,7 @@ if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
 frame.set("enact_statement", l_enact_statement);
 var t_20 = "";t_20 += "\r\n<w:p>";
-t_20 += runtime.suppressValue((lineno = 58, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [l_enact_statement])), env.opts.autoescape);
+t_20 += runtime.suppressValue((lineno = 68, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [l_enact_statement])), env.opts.autoescape);
 t_20 += "</w:p>";
 ;
 frame = callerFrame;
@@ -208,7 +219,7 @@ frame.set("loop.last", t_23 === t_24 - 1);
 frame.set("loop.length", t_24);
 if(runtime.memberLookup((t_26),"tag") == "TOCLabel") {
 t_22 += "\r\n<w:p>";
-t_22 += runtime.suppressValue((lineno = 73, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_26])), env.opts.autoescape);
+t_22 += runtime.suppressValue((lineno = 83, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_26])), env.opts.autoescape);
 t_22 += "</w:p>";
 ;
 }
@@ -234,11 +245,13 @@ if(runtime.memberLookup((t_30),"tag") == "TOCLabel") {
 }
 else {
 if(runtime.inOperator(runtime.memberLookup((t_30),"tag"),["TOCPart","TOCChapter","TOCSection","TOCSupplProvision"])) {
-t_22 += runtime.suppressValue((lineno = 80, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_toc_group"), "m_toc_group", context, [t_30,1])), env.opts.autoescape);
+t_22 += runtime.suppressValue((lineno = 90, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_toc_group"), "m_toc_group", context, [t_30,1])), env.opts.autoescape);
 ;
 }
 else {
-t_22 += runtime.suppressValue((lineno = 82, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_30])), env.opts.autoescape);
+t_22 += "<w:p>\r\n  <w:r>\r\n    <w:t>";
+t_22 += runtime.suppressValue((lineno = 94, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_30])), env.opts.autoescape);
+t_22 += "</w:t>\r\n  </w:r>\r\n</w:p>";
 ;
 }
 ;
@@ -285,12 +298,12 @@ if(runtime.inOperator(runtime.memberLookup((t_36),"tag"),["TOCChapter","TOCSecti
 }
 else {
 if(runtime.inOperator(runtime.memberLookup((t_36),"tag"),["SupplProvisionLabel","PartTitle","ChapterTitle","SectionTitle","SubsectionTitle","DivisionTitle"])) {
-t_32 += runtime.suppressValue((lineno = 101, colno = 10, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_36])), env.opts.autoescape);
+t_32 += runtime.suppressValue((lineno = 115, colno = 10, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_36])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_36),"tag") == "ArticleRange") {
-t_32 += runtime.suppressValue((lineno = 103, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_36])), env.opts.autoescape);
+t_32 += runtime.suppressValue((lineno = 117, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_36])), env.opts.autoescape);
 ;
 }
 ;
@@ -316,7 +329,7 @@ frame.set("loop.first", t_37 === 0);
 frame.set("loop.last", t_37 === t_38 - 1);
 frame.set("loop.length", t_38);
 if(runtime.inOperator(runtime.memberLookup((t_40),"tag"),["TOCChapter","TOCSection","TOCSubsection","TOCDivision"])) {
-t_32 += runtime.suppressValue((lineno = 109, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_toc_group"), "m_toc_group", context, [t_40,l_indent + 1])), env.opts.autoescape);
+t_32 += runtime.suppressValue((lineno = 123, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_toc_group"), "m_toc_group", context, [t_40,l_indent + 1])), env.opts.autoescape);
 ;
 }
 else {
@@ -328,7 +341,9 @@ if(runtime.memberLookup((t_40),"tag") == "ArticleRange") {
 ;
 }
 else {
-t_32 += runtime.suppressValue((lineno = 117, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_40])), env.opts.autoescape);
+t_32 += "<w:p>\r\n  <w:r>\r\n    <w:t>";
+t_32 += runtime.suppressValue((lineno = 133, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_40])), env.opts.autoescape);
+t_32 += "</w:t>\r\n  </w:r>\r\n</w:p>";
 ;
 }
 ;
@@ -369,7 +384,7 @@ frame.set("loop.first", t_43 === 0);
 frame.set("loop.last", t_43 === t_44 - 1);
 frame.set("loop.length", t_44);
 if(runtime.inOperator(runtime.memberLookup((t_46),"tag"),["Part","Chapter","Section","Subsection","Division"])) {
-t_42 += runtime.suppressValue((lineno = 127, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_article_group"), "m_article_group", context, [t_46])), env.opts.autoescape);
+t_42 += runtime.suppressValue((lineno = 145, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_article_group"), "m_article_group", context, [t_46])), env.opts.autoescape);
 ;
 }
 else {
@@ -386,7 +401,7 @@ context.addExport("title_indent", t_47);
 t_42 += "\r\n<w:p>\r\n  <w:pPr>\r\n    <w:pStyle w:val=\"EmptyParagraph\"/>\r\n  </w:pPr>\r\n</w:p>\r\n<w:p>\r\n  <w:pPr>\r\n    <w:pStyle w:val=\"IndentHanging";
 t_42 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "title_indent"), env.opts.autoescape);
 t_42 += "\"/>\r\n  </w:pPr>";
-t_42 += runtime.suppressValue((lineno = 147, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_46,1])), env.opts.autoescape);
+t_42 += runtime.suppressValue((lineno = 165, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_46,1])), env.opts.autoescape);
 if(runtime.inOperator("AmendLawNum",runtime.memberLookup((l_article_group),"attr"))) {
 t_42 += "\r\n  <w:r>\r\n    <w:rStyle w:val=\"Emphasis\"/>\r\n    <w:t>\r\n        （";
 t_42 += runtime.suppressValue(runtime.memberLookup((runtime.memberLookup((l_article_group),"attr")),"AmendLawNum"), env.opts.autoescape);
@@ -394,7 +409,7 @@ t_42 += "）\r\n    </w:t>\r\n  </w:r>";
 ;
 }
 if(runtime.memberLookup((runtime.memberLookup((l_article_group),"attr")),"Extract") == "true") {
-t_42 += runtime.suppressValue((lineno = 157, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, ["　抄",1])), env.opts.autoescape);
+t_42 += runtime.suppressValue((lineno = 175, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, ["　抄",1])), env.opts.autoescape);
 ;
 }
 t_42 += "\r\n</w:p>";
@@ -402,16 +417,18 @@ t_42 += "\r\n</w:p>";
 }
 else {
 if(runtime.memberLookup((t_46),"tag") == "Article") {
-t_42 += runtime.suppressValue((lineno = 161, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_article"), "m_article", context, [t_46])), env.opts.autoescape);
+t_42 += runtime.suppressValue((lineno = 179, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_article"), "m_article", context, [t_46])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_46),"tag") == "Paragraph") {
-t_42 += runtime.suppressValue((lineno = 163, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_46,{},0])), env.opts.autoescape);
+t_42 += runtime.suppressValue((lineno = 181, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_46,{},0])), env.opts.autoescape);
 ;
 }
 else {
-t_42 += runtime.suppressValue((lineno = 165, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_46])), env.opts.autoescape);
+t_42 += "<w:p>\r\n  <w:r>\r\n    <w:t>";
+t_42 += runtime.suppressValue((lineno = 185, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_46])), env.opts.autoescape);
+t_42 += "</w:t>\r\n  </w:r>\r\n</w:p>";
 ;
 }
 ;
@@ -458,7 +475,7 @@ if(runtime.memberLookup((t_53),"tag") == "ArticleCaption") {
 t_49 += "\r\n<w:p>\r\n  <w:pPr>\r\n    <w:pStyle w:val=\"IndentHanging";
 t_49 += runtime.suppressValue(1, env.opts.autoescape);
 t_49 += "\"/>\r\n  </w:pPr>";
-t_49 += runtime.suppressValue((lineno = 184, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_53])), env.opts.autoescape);
+t_49 += runtime.suppressValue((lineno = 206, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_53])), env.opts.autoescape);
 t_49 += "</w:p>";
 ;
 }
@@ -488,11 +505,13 @@ if(runtime.memberLookup((t_57),"tag") == "ArticleTitle") {
 }
 else {
 if(runtime.memberLookup((t_57),"tag") == "Paragraph") {
-t_49 += runtime.suppressValue((lineno = 192, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_57,l_article,0])), env.opts.autoescape);
+t_49 += runtime.suppressValue((lineno = 214, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_57,l_article,0])), env.opts.autoescape);
 ;
 }
 else {
-t_49 += runtime.suppressValue((lineno = 194, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_57])), env.opts.autoescape);
+t_49 += "<w:p>\r\n  <w:r>\r\n    <w:t>";
+t_49 += runtime.suppressValue((lineno = 218, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_57])), env.opts.autoescape);
+t_49 += "</w:t>\r\n  </w:r>\r\n</w:p>";
 ;
 }
 ;
@@ -538,7 +557,7 @@ if(runtime.memberLookup((t_63),"tag") == "ParagraphCaption") {
 t_59 += "\r\n<w:p>\r\n  <w:pPr>\r\n    <w:pStyle w:val=\"IndentHanging";
 t_59 += runtime.suppressValue(1, env.opts.autoescape);
 t_59 += "\"/>\r\n  </w:pPr>";
-t_59 += runtime.suppressValue((lineno = 209, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_63])), env.opts.autoescape);
+t_59 += runtime.suppressValue((lineno = 235, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_63])), env.opts.autoescape);
 t_59 += "</w:p>";
 ;
 }
@@ -547,7 +566,7 @@ t_59 += "</w:p>";
 }
 frame = frame.pop();
 t_59 += "\r\n<w:p>\r\n  <w:pPr>";
-t_59 += runtime.suppressValue((lineno = 216, colno = 14, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["no_title",1])), env.opts.autoescape);
+t_59 += runtime.suppressValue((lineno = 242, colno = 14, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["no_title",1])), env.opts.autoescape);
 frame = frame.push();
 var t_66 = runtime.memberLookup((l_paragraph_item),"children");
 if(t_66) {var t_65 = t_66.length;
@@ -578,7 +597,7 @@ frame.set("loop.last", t_68 === t_69 - 1);
 frame.set("loop.length", t_69);
 if(runtime.memberLookup((t_71),"tag") == "ArticleTitle") {
 if(env.getFilter("length").call(context, runtime.memberLookup((t_71),"children"))) {
-t_59 += runtime.suppressValue((lineno = 230, colno = 26, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["no_title",0])), env.opts.autoescape);
+t_59 += runtime.suppressValue((lineno = 256, colno = 26, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["no_title",0])), env.opts.autoescape);
 ;
 }
 ;
@@ -590,7 +609,7 @@ frame = frame.pop();
 ;
 }
 if(env.getFilter("length").call(context, runtime.memberLookup((t_67),"children"))) {
-t_59 += runtime.suppressValue((lineno = 237, colno = 20, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["no_title",0])), env.opts.autoescape);
+t_59 += runtime.suppressValue((lineno = 263, colno = 20, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["no_title",0])), env.opts.autoescape);
 ;
 }
 ;
@@ -599,7 +618,7 @@ t_59 += runtime.suppressValue((lineno = 237, colno = 20, runtime.callWrap(runtim
 }
 }
 frame = frame.pop();
-if((lineno = 243, colno = 17, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"get"), "context[\"get\"]", context, ["no_title"]))) {
+if((lineno = 269, colno = 17, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"get"), "context[\"get\"]", context, ["no_title"]))) {
 t_59 += "<w:pStyle w:val=\"IndentFirstLine";
 t_59 += runtime.suppressValue(l_indent, env.opts.autoescape);
 t_59 += "\"/>";
@@ -645,7 +664,7 @@ frame.set("loop.first", t_76 === 0);
 frame.set("loop.last", t_76 === t_77 - 1);
 frame.set("loop.length", t_77);
 if(runtime.memberLookup((t_79),"tag") == "ArticleTitle") {
-t_59 += runtime.suppressValue((lineno = 261, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_79,1])), env.opts.autoescape);
+t_59 += runtime.suppressValue((lineno = 287, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_79,1])), env.opts.autoescape);
 ;
 }
 ;
@@ -655,10 +674,10 @@ frame = frame.pop();
 ;
 }
 if(env.getFilter("length").call(context, runtime.memberLookup((t_75),"children"))) {
-t_59 += runtime.suppressValue((lineno = 266, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_75,1])), env.opts.autoescape);
+t_59 += runtime.suppressValue((lineno = 292, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_75,1])), env.opts.autoescape);
 ;
 }
-if(!(lineno = 268, colno = 25, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"get"), "context[\"get\"]", context, ["no_title"]))) {
+if(!(lineno = 294, colno = 25, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"get"), "context[\"get\"]", context, ["no_title"]))) {
 t_59 += "<w:r>\r\n        <w:t>";
 t_59 += runtime.suppressValue("　", env.opts.autoescape);
 t_59 += "</w:t>\r\n      </w:r>";
@@ -668,7 +687,7 @@ t_59 += "</w:t>\r\n      </w:r>";
 }
 else {
 if(runtime.inOperator(runtime.memberLookup((t_75),"tag"),["ParagraphSentence","ItemSentence","Subitem1Sentence","Subitem2Sentence","Subitem3Sentence","Subitem4Sentence","Subitem5Sentence","Subitem6Sentence","Subitem7Sentence","Subitem8Sentence","Subitem9Sentence","Subitem10Sentence"])) {
-t_59 += runtime.suppressValue((lineno = 279, colno = 36, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item_sentence_run"), "m_paragraph_item_sentence_run", context, [t_75])), env.opts.autoescape);
+t_59 += runtime.suppressValue((lineno = 305, colno = 36, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item_sentence_run"), "m_paragraph_item_sentence_run", context, [t_75])), env.opts.autoescape);
 ;
 }
 ;
@@ -706,21 +725,23 @@ if(runtime.inOperator(runtime.memberLookup((t_83),"tag"),["ParagraphSentence","I
 }
 else {
 if(runtime.inOperator(runtime.memberLookup((t_83),"tag"),["Item","Subitem1","Subitem2","Subitem3","Subitem4","Subitem5","Subitem6","Subitem7","Subitem8","Subitem9","Subitem10"])) {
-t_59 += runtime.suppressValue((lineno = 304, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_83,l_article,l_indent + 1])), env.opts.autoescape);
+t_59 += runtime.suppressValue((lineno = 330, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_83,l_article,l_indent + 1])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_83),"tag") == "TableStruct") {
-t_59 += runtime.suppressValue((lineno = 306, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_struct"), "m_table_struct", context, [t_83,l_indent + 1])), env.opts.autoescape);
+t_59 += runtime.suppressValue((lineno = 332, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_struct"), "m_table_struct", context, [t_83,l_indent + 1])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_83),"tag") == "List") {
-t_59 += runtime.suppressValue((lineno = 308, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_list"), "m_list", context, [t_83,l_indent + 2])), env.opts.autoescape);
+t_59 += runtime.suppressValue((lineno = 334, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_list"), "m_list", context, [t_83,l_indent + 2])), env.opts.autoescape);
 ;
 }
 else {
-t_59 += runtime.suppressValue((lineno = 310, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_83])), env.opts.autoescape);
+t_59 += "<w:p>\r\n  <w:r>\r\n    <w:t>";
+t_59 += runtime.suppressValue((lineno = 338, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_83])), env.opts.autoescape);
+t_59 += "</w:t>\r\n  </w:r>\r\n</w:p>";
 ;
 }
 ;
@@ -767,20 +788,22 @@ frame.set("loop.first", t_86 === 0);
 frame.set("loop.last", t_86 === t_87 - 1);
 frame.set("loop.length", t_87);
 if(runtime.memberLookup((t_89),"tag") == "Sentence") {
-t_85 += runtime.suppressValue((lineno = 321, colno = 10, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_89])), env.opts.autoescape);
+t_85 += runtime.suppressValue((lineno = 351, colno = 10, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_89])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_89),"tag") == "Column") {
-t_85 += runtime.suppressValue((lineno = 323, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_column"), "m_column", context, [t_89])), env.opts.autoescape);
+t_85 += runtime.suppressValue((lineno = 353, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_column"), "m_column", context, [t_89])), env.opts.autoescape);
 if(!runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"last")) {
-t_85 += runtime.suppressValue("　", env.opts.autoescape);
+t_85 += runtime.suppressValue((lineno = 355, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, ["　"])), env.opts.autoescape);
 ;
 }
 ;
 }
 else {
-t_85 += runtime.suppressValue((lineno = 328, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_89])), env.opts.autoescape);
+t_85 += "<w:r>\r\n    <w:t>";
+t_85 += runtime.suppressValue((lineno = 359, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_89])), env.opts.autoescape);
+t_85 += "</w:t>\r\n  </w:r>";
 ;
 }
 ;
@@ -819,11 +842,13 @@ frame.set("loop.first", t_92 === 0);
 frame.set("loop.last", t_92 === t_93 - 1);
 frame.set("loop.length", t_93);
 if(runtime.memberLookup((t_95),"tag") == "Sentence") {
-t_91 += runtime.suppressValue((lineno = 338, colno = 10, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_95])), env.opts.autoescape);
+t_91 += runtime.suppressValue((lineno = 370, colno = 10, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_95])), env.opts.autoescape);
 ;
 }
 else {
-t_91 += runtime.suppressValue((lineno = 340, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_95])), env.opts.autoescape);
+t_91 += "<w:r>\r\n    <w:t>";
+t_91 += runtime.suppressValue((lineno = 373, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_95])), env.opts.autoescape);
+t_91 += "</w:t>\r\n  </w:r>";
 ;
 }
 ;
@@ -861,16 +886,18 @@ frame.set("loop.first", t_98 === 0);
 frame.set("loop.last", t_98 === t_99 - 1);
 frame.set("loop.length", t_99);
 if(runtime.memberLookup((t_101),"tag") == "Table") {
-t_97 += runtime.suppressValue((lineno = 350, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table"), "m_table", context, [t_101,l_indent])), env.opts.autoescape);
+t_97 += runtime.suppressValue((lineno = 384, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table"), "m_table", context, [t_101,l_indent])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_101),"tag") == "Remarks") {
-t_97 += runtime.suppressValue((lineno = 352, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_101,l_indent])), env.opts.autoescape);
+t_97 += runtime.suppressValue((lineno = 386, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_101,l_indent])), env.opts.autoescape);
 ;
 }
 else {
-t_97 += runtime.suppressValue((lineno = 354, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_101])), env.opts.autoescape);
+t_97 += "<w:p>\r\n  <w:r>\r\n    <w:t>";
+t_97 += runtime.suppressValue((lineno = 390, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_101])), env.opts.autoescape);
+t_97 += "</w:t>\r\n  </w:r>\r\n</w:p>";
 ;
 }
 ;
@@ -896,7 +923,7 @@ if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
 frame.set("table", l_table);
 frame.set("indent", l_indent);
-var t_103 = "";l_table = (lineno = 362, colno = 30, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "restructure_table"), "restructure_table", context, [l_table]));
+var t_103 = "";l_table = (lineno = 400, colno = 30, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "restructure_table"), "restructure_table", context, [l_table]));
 frame.set("table", l_table, true);
 if(frame.topLevel) {
 context.setVariable("table", l_table);
@@ -921,11 +948,13 @@ frame.set("loop.first", t_104 === 0);
 frame.set("loop.last", t_104 === t_105 - 1);
 frame.set("loop.length", t_105);
 if(runtime.memberLookup((t_107),"tag") == "TableRow") {
-t_103 += runtime.suppressValue((lineno = 369, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_row"), "m_table_row", context, [t_107])), env.opts.autoescape);
+t_103 += runtime.suppressValue((lineno = 407, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_row"), "m_table_row", context, [t_107])), env.opts.autoescape);
 ;
 }
 else {
-t_103 += runtime.suppressValue((lineno = 371, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_107])), env.opts.autoescape);
+t_103 += "<w:tr>\r\n    <w:tc>\r\n      <w:p>\r\n        <w:r>\r\n          <w:t>";
+t_103 += runtime.suppressValue((lineno = 413, colno = 25, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_107])), env.opts.autoescape);
+t_103 += "</w:t>\r\n        </w:r>\r\n      </w:p>\r\n    </w:tc>\r\n  </w:tr>";
 ;
 }
 ;
@@ -964,16 +993,18 @@ frame.set("loop.first", t_110 === 0);
 frame.set("loop.last", t_110 === t_111 - 1);
 frame.set("loop.length", t_111);
 if(runtime.memberLookup((t_113),"tag") == "TableColumn") {
-t_109 += runtime.suppressValue((lineno = 383, colno = 23, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_column"), "m_table_column", context, [t_113])), env.opts.autoescape);
+t_109 += runtime.suppressValue((lineno = 429, colno = 23, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_column"), "m_table_column", context, [t_113])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_113),"tag") == "TableColumnMerged") {
-t_109 += runtime.suppressValue((lineno = 385, colno = 30, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_column_merged"), "m_table_column_merged", context, [t_113])), env.opts.autoescape);
+t_109 += runtime.suppressValue((lineno = 431, colno = 30, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_column_merged"), "m_table_column_merged", context, [t_113])), env.opts.autoescape);
 ;
 }
 else {
-t_109 += runtime.suppressValue((lineno = 387, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_113])), env.opts.autoescape);
+t_109 += "<w:tc>\r\n      <w:p>\r\n        <w:r>\r\n          <w:t>";
+t_109 += runtime.suppressValue((lineno = 436, colno = 25, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_113])), env.opts.autoescape);
+t_109 += "</w:t>\r\n        </w:r>\r\n      </w:p>\r\n    </w:tc>";
 ;
 }
 ;
@@ -1084,13 +1115,15 @@ frame.set("loop.first", t_118 === 0);
 frame.set("loop.last", t_118 === t_119 - 1);
 frame.set("loop.length", t_119);
 if(runtime.memberLookup((t_121),"tag") == "Sentence") {
-t_115 += "\r\n          <w:p>";
-t_115 += runtime.suppressValue((lineno = 436, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_121])), env.opts.autoescape);
-t_115 += "\r\n          </w:p>";
+t_115 += "\r\n        <w:p>";
+t_115 += runtime.suppressValue((lineno = 488, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_121])), env.opts.autoescape);
+t_115 += "\r\n        </w:p>";
 ;
 }
 else {
-t_115 += runtime.suppressValue((lineno = 439, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_121])), env.opts.autoescape);
+t_115 += "<w:p>\r\n          <w:r>\r\n            <w:t>";
+t_115 += runtime.suppressValue((lineno = 493, colno = 27, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_121])), env.opts.autoescape);
+t_115 += "</w:t>\r\n          </w:r>\r\n        </w:p>";
 ;
 }
 ;
@@ -1129,18 +1162,18 @@ return new runtime.SafeString(t_123);
 context.addExport("m_table_column_merged");
 context.setVariable("m_table_column_merged", macro_t_122);
 var macro_t_124 = runtime.makeMacro(
-["appdx_table"], 
+["style_struct", "indent"], 
 [], 
-function (l_appdx_table, kwargs) {
+function (l_style_struct, l_indent, kwargs) {
 var callerFrame = frame;
 frame = new runtime.Frame();
 kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
-frame.set("appdx_table", l_appdx_table);
-var t_125 = "";t_125 += "\r\n<w:p>\r\n  <w:pPr>\r\n    <w:pStyle w:val=\"EmptyParagraph\"/>\r\n  </w:pPr>\r\n</w:p>";
-frame = frame.push();
-var t_128 = runtime.memberLookup((l_appdx_table),"children");
+frame.set("style_struct", l_style_struct);
+frame.set("indent", l_indent);
+var t_125 = "";frame = frame.push();
+var t_128 = runtime.memberLookup((l_style_struct),"children");
 if(t_128) {var t_127 = t_128.length;
 for(var t_126=0; t_126 < t_128.length; t_126++) {
 var t_129 = t_128[t_126];
@@ -1152,80 +1185,26 @@ frame.set("loop.revindex0", t_127 - t_126 - 1);
 frame.set("loop.first", t_126 === 0);
 frame.set("loop.last", t_126 === t_127 - 1);
 frame.set("loop.length", t_127);
-if(runtime.memberLookup((t_129),"tag") == "AppdxTableTitle") {
-t_125 += "\r\n<w:p>";
-t_125 += runtime.suppressValue((lineno = 470, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_129,1])), env.opts.autoescape);
-frame = frame.push();
-var t_132 = runtime.memberLookup((l_appdx_table),"children");
-if(t_132) {var t_131 = t_132.length;
-for(var t_130=0; t_130 < t_132.length; t_130++) {
-var t_133 = t_132[t_130];
-frame.set("el2", t_133);
-frame.set("loop.index", t_130 + 1);
-frame.set("loop.index0", t_130);
-frame.set("loop.revindex", t_131 - t_130);
-frame.set("loop.revindex0", t_131 - t_130 - 1);
-frame.set("loop.first", t_130 === 0);
-frame.set("loop.last", t_130 === t_131 - 1);
-frame.set("loop.length", t_131);
-if(runtime.memberLookup((t_133),"tag") == "RelatedArticleNum") {
-t_125 += runtime.suppressValue((lineno = 473, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_133,1])), env.opts.autoescape);
-;
-}
-;
-}
-}
-frame = frame.pop();
-t_125 += "\r\n</w:p>";
-;
-}
-;
-}
-}
-frame = frame.pop();
-frame = frame.push();
-var t_136 = runtime.memberLookup((l_appdx_table),"children");
-if(t_136) {var t_135 = t_136.length;
-for(var t_134=0; t_134 < t_136.length; t_134++) {
-var t_137 = t_136[t_134];
-frame.set("el", t_137);
-frame.set("loop.index", t_134 + 1);
-frame.set("loop.index0", t_134);
-frame.set("loop.revindex", t_135 - t_134);
-frame.set("loop.revindex0", t_135 - t_134 - 1);
-frame.set("loop.first", t_134 === 0);
-frame.set("loop.last", t_134 === t_135 - 1);
-frame.set("loop.length", t_135);
-if(runtime.memberLookup((t_137),"tag") == "AppdxTableTitle") {
+if(runtime.memberLookup((t_129),"tag") == "StyleStructTitle") {
+t_125 += "<w:p>";
+t_125 += runtime.suppressValue((lineno = 521, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_129,l_indent])), env.opts.autoescape);
+t_125 += "</w:p>";
 ;
 }
 else {
-if(runtime.memberLookup((t_137),"tag") == "RelatedArticleNum") {
+if(runtime.memberLookup((t_129),"tag") == "Style") {
+t_125 += runtime.suppressValue((lineno = 524, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_style"), "m_style", context, [t_129,l_indent])), env.opts.autoescape);
 ;
 }
 else {
-if(runtime.memberLookup((t_137),"tag") == "TableStruct") {
-t_125 += runtime.suppressValue((lineno = 484, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_struct"), "m_table_struct", context, [t_137,1])), env.opts.autoescape);
+if(runtime.memberLookup((t_129),"tag") == "Remarks") {
+t_125 += runtime.suppressValue((lineno = 526, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_129])), env.opts.autoescape);
 ;
 }
 else {
-if(runtime.memberLookup((t_137),"tag") == "Item") {
-t_125 += runtime.suppressValue((lineno = 486, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_137,{},1])), env.opts.autoescape);
-;
-}
-else {
-if(runtime.memberLookup((t_137),"tag") == "Remarks") {
-t_125 += runtime.suppressValue((lineno = 488, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_137,1])), env.opts.autoescape);
-;
-}
-else {
-t_125 += "\r\n<w:p>\r\n  <w:r>\r\n    <w:t>";
-t_125 += runtime.suppressValue((lineno = 492, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [runtime.contextOrFrameLookup(context, frame, "child")])), env.opts.autoescape);
+t_125 += "<w:p>\r\n  <w:r>\r\n    <w:t>";
+t_125 += runtime.suppressValue((lineno = 530, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_129])), env.opts.autoescape);
 t_125 += "</w:t>\r\n  </w:r>\r\n</w:p>";
-;
-}
-;
-}
 ;
 }
 ;
@@ -1240,38 +1219,40 @@ frame = frame.pop();
 frame = callerFrame;
 return new runtime.SafeString(t_125);
 });
-context.addExport("m_appdx_table");
-context.setVariable("m_appdx_table", macro_t_124);
-var macro_t_138 = runtime.makeMacro(
-["list", "indent"], 
+context.addExport("m_style_struct");
+context.setVariable("m_style_struct", macro_t_124);
+var macro_t_130 = runtime.makeMacro(
+["style", "indent"], 
 [], 
-function (l_list, l_indent, kwargs) {
+function (l_style, l_indent, kwargs) {
 var callerFrame = frame;
 frame = new runtime.Frame();
 kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
-frame.set("list", l_list);
+frame.set("style", l_style);
 frame.set("indent", l_indent);
-var t_139 = "";frame = frame.push();
-var t_142 = runtime.memberLookup((l_list),"children");
-if(t_142) {var t_141 = t_142.length;
-for(var t_140=0; t_140 < t_142.length; t_140++) {
-var t_143 = t_142[t_140];
-frame.set("el", t_143);
-frame.set("loop.index", t_140 + 1);
-frame.set("loop.index0", t_140);
-frame.set("loop.revindex", t_141 - t_140);
-frame.set("loop.revindex0", t_141 - t_140 - 1);
-frame.set("loop.first", t_140 === 0);
-frame.set("loop.last", t_140 === t_141 - 1);
-frame.set("loop.length", t_141);
-if(runtime.memberLookup((t_143),"tag") == "ListSentence") {
-t_139 += runtime.suppressValue((lineno = 506, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_list_sentence"), "m_list_sentence", context, [t_143,l_indent])), env.opts.autoescape);
+var t_131 = "";frame = frame.push();
+var t_134 = runtime.memberLookup((l_style),"children");
+if(t_134) {var t_133 = t_134.length;
+for(var t_132=0; t_132 < t_134.length; t_132++) {
+var t_135 = t_134[t_132];
+frame.set("el", t_135);
+frame.set("loop.index", t_132 + 1);
+frame.set("loop.index0", t_132);
+frame.set("loop.revindex", t_133 - t_132);
+frame.set("loop.revindex0", t_133 - t_132 - 1);
+frame.set("loop.first", t_132 === 0);
+frame.set("loop.last", t_132 === t_133 - 1);
+frame.set("loop.length", t_133);
+if(runtime.memberLookup((t_135),"tag") == "Fig") {
+t_131 += runtime.suppressValue((lineno = 542, colno = 10, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_fig"), "m_fig", context, [t_135,l_indent])), env.opts.autoescape);
 ;
 }
 else {
-t_139 += runtime.suppressValue((lineno = 508, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_143])), env.opts.autoescape);
+t_131 += "<w:p>\r\n  <w:r>\r\n    <w:t>";
+t_131 += runtime.suppressValue((lineno = 546, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_135])), env.opts.autoescape);
+t_131 += "</w:t>\r\n  </w:r>\r\n</w:p>";
 ;
 }
 ;
@@ -1280,23 +1261,67 @@ t_139 += runtime.suppressValue((lineno = 508, colno = 14, runtime.callWrap(runti
 frame = frame.pop();
 ;
 frame = callerFrame;
-return new runtime.SafeString(t_139);
+return new runtime.SafeString(t_131);
 });
-context.addExport("m_list");
-context.setVariable("m_list", macro_t_138);
-var macro_t_144 = runtime.makeMacro(
-["list_sentence", "indent"], 
+context.addExport("m_style");
+context.setVariable("m_style", macro_t_130);
+var macro_t_136 = runtime.makeMacro(
+["appdx_table"], 
 [], 
-function (l_list_sentence, l_indent, kwargs) {
+function (l_appdx_table, kwargs) {
 var callerFrame = frame;
 frame = new runtime.Frame();
 kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
-frame.set("list_sentence", l_list_sentence);
-frame.set("indent", l_indent);
-var t_145 = "";frame = frame.push();
-var t_148 = runtime.memberLookup((l_list_sentence),"children");
+frame.set("appdx_table", l_appdx_table);
+var t_137 = "";t_137 += "\r\n<w:p>\r\n  <w:pPr>\r\n    <w:pStyle w:val=\"EmptyParagraph\"/>\r\n  </w:pPr>\r\n</w:p>";
+frame = frame.push();
+var t_140 = runtime.memberLookup((l_appdx_table),"children");
+if(t_140) {var t_139 = t_140.length;
+for(var t_138=0; t_138 < t_140.length; t_138++) {
+var t_141 = t_140[t_138];
+frame.set("el", t_141);
+frame.set("loop.index", t_138 + 1);
+frame.set("loop.index0", t_138);
+frame.set("loop.revindex", t_139 - t_138);
+frame.set("loop.revindex0", t_139 - t_138 - 1);
+frame.set("loop.first", t_138 === 0);
+frame.set("loop.last", t_138 === t_139 - 1);
+frame.set("loop.length", t_139);
+if(runtime.memberLookup((t_141),"tag") == "AppdxTableTitle") {
+t_137 += "\r\n<w:p>";
+t_137 += runtime.suppressValue((lineno = 564, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_141,1])), env.opts.autoescape);
+frame = frame.push();
+var t_144 = runtime.memberLookup((l_appdx_table),"children");
+if(t_144) {var t_143 = t_144.length;
+for(var t_142=0; t_142 < t_144.length; t_142++) {
+var t_145 = t_144[t_142];
+frame.set("el2", t_145);
+frame.set("loop.index", t_142 + 1);
+frame.set("loop.index0", t_142);
+frame.set("loop.revindex", t_143 - t_142);
+frame.set("loop.revindex0", t_143 - t_142 - 1);
+frame.set("loop.first", t_142 === 0);
+frame.set("loop.last", t_142 === t_143 - 1);
+frame.set("loop.length", t_143);
+if(runtime.memberLookup((t_145),"tag") == "RelatedArticleNum") {
+t_137 += runtime.suppressValue((lineno = 567, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_145,1])), env.opts.autoescape);
+;
+}
+;
+}
+}
+frame = frame.pop();
+t_137 += "\r\n</w:p>";
+;
+}
+;
+}
+}
+frame = frame.pop();
+frame = frame.push();
+var t_148 = runtime.memberLookup((l_appdx_table),"children");
 if(t_148) {var t_147 = t_148.length;
 for(var t_146=0; t_146 < t_148.length; t_146++) {
 var t_149 = t_148[t_146];
@@ -1308,18 +1333,40 @@ frame.set("loop.revindex0", t_147 - t_146 - 1);
 frame.set("loop.first", t_146 === 0);
 frame.set("loop.last", t_146 === t_147 - 1);
 frame.set("loop.length", t_147);
-if(runtime.memberLookup((t_149),"tag") == "Sentence") {
-t_145 += "\r\n<w:p>\r\n  <w:pPr>\r\n    <w:pStyle w:val=\"Indent";
-t_145 += runtime.suppressValue(1, env.opts.autoescape);
-t_145 += "\"/>\r\n  </w:pPr>";
-t_145 += runtime.suppressValue((lineno = 524, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_149])), env.opts.autoescape);
-t_145 += "</w:p>";
+if(runtime.memberLookup((t_149),"tag") == "AppdxTableTitle") {
 ;
 }
 else {
-t_145 += "\r\n<w:p>\r\n  <w:r>\r\n    <w:t>";
-t_145 += runtime.suppressValue((lineno = 529, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [runtime.contextOrFrameLookup(context, frame, "child")])), env.opts.autoescape);
-t_145 += "</w:t>\r\n  </w:r>\r\n</w:p>";
+if(runtime.memberLookup((t_149),"tag") == "RelatedArticleNum") {
+;
+}
+else {
+if(runtime.memberLookup((t_149),"tag") == "TableStruct") {
+t_137 += runtime.suppressValue((lineno = 578, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_struct"), "m_table_struct", context, [t_149,1])), env.opts.autoescape);
+;
+}
+else {
+if(runtime.memberLookup((t_149),"tag") == "Item") {
+t_137 += runtime.suppressValue((lineno = 580, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_149,{},1])), env.opts.autoescape);
+;
+}
+else {
+if(runtime.memberLookup((t_149),"tag") == "Remarks") {
+t_137 += runtime.suppressValue((lineno = 582, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_149,1])), env.opts.autoescape);
+;
+}
+else {
+t_137 += "\r\n<w:p>\r\n  <w:r>\r\n    <w:t>";
+t_137 += runtime.suppressValue((lineno = 586, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_149])), env.opts.autoescape);
+t_137 += "</w:t>\r\n  </w:r>\r\n</w:p>";
+;
+}
+;
+}
+;
+}
+;
+}
 ;
 }
 ;
@@ -1328,26 +1375,24 @@ t_145 += "</w:t>\r\n  </w:r>\r\n</w:p>";
 frame = frame.pop();
 ;
 frame = callerFrame;
-return new runtime.SafeString(t_145);
+return new runtime.SafeString(t_137);
 });
-context.addExport("m_list_sentence");
-context.setVariable("m_list_sentence", macro_t_144);
+context.addExport("m_appdx_table");
+context.setVariable("m_appdx_table", macro_t_136);
 var macro_t_150 = runtime.makeMacro(
-["remarks", "indent"], 
+["appdx_style"], 
 [], 
-function (l_remarks, l_indent, kwargs) {
+function (l_appdx_style, kwargs) {
 var callerFrame = frame;
 frame = new runtime.Frame();
 kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
-frame.set("remarks", l_remarks);
-frame.set("indent", l_indent);
-var t_151 = "";t_151 += "<w:p>\r\n  <w:pPr>\r\n    <w:pStyle w:val=\"IndentHanging";
-t_151 += runtime.suppressValue(l_indent, env.opts.autoescape);
-t_151 += "\"/>\r\n  </w:pPr>";
+frame.set("appdx_style", l_appdx_style);
+var t_151 = "";t_151 += "<w:p>\r\n  <w:pPr>\r\n    <w:pStyle w:val=\"EmptyParagraph\"/>\r\n  </w:pPr>\r\n</w:p>";
+t_151 += "\r\n";
 frame = frame.push();
-var t_154 = runtime.memberLookup((l_remarks),"children");
+var t_154 = runtime.memberLookup((l_appdx_style),"children");
 if(t_154) {var t_153 = t_154.length;
 for(var t_152=0; t_152 < t_154.length; t_152++) {
 var t_155 = t_154[t_152];
@@ -1359,32 +1404,15 @@ frame.set("loop.revindex0", t_153 - t_152 - 1);
 frame.set("loop.first", t_152 === 0);
 frame.set("loop.last", t_152 === t_153 - 1);
 frame.set("loop.length", t_153);
-if(runtime.memberLookup((t_155),"tag") == "RemarksLabel") {
-t_151 += runtime.suppressValue((lineno = 546, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_155])), env.opts.autoescape);
-;
-}
-else {
-if(runtime.memberLookup((t_155),"tag") == "Sentence") {
-t_151 += runtime.suppressValue((lineno = 548, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, ["　"])), env.opts.autoescape);
-t_151 += runtime.suppressValue((lineno = 548, colno = 24, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_155])), env.opts.autoescape);
-if(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"last")) {
-;
-}
-;
-}
-;
-}
-;
-}
-}
-frame = frame.pop();
-t_151 += "</w:p>";
+if(runtime.memberLookup((t_155),"tag") == "AppdxStyleTitle") {
+t_151 += "<w:p>";
+t_151 += runtime.suppressValue((lineno = 607, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_155,1])), env.opts.autoescape);
 frame = frame.push();
-var t_158 = runtime.memberLookup((l_remarks),"children");
+var t_158 = runtime.memberLookup((l_appdx_style),"children");
 if(t_158) {var t_157 = t_158.length;
 for(var t_156=0; t_156 < t_158.length; t_156++) {
 var t_159 = t_158[t_156];
-frame.set("el", t_159);
+frame.set("el2", t_159);
 frame.set("loop.index", t_156 + 1);
 frame.set("loop.index0", t_156);
 frame.set("loop.revindex", t_157 - t_156);
@@ -1392,22 +1420,37 @@ frame.set("loop.revindex0", t_157 - t_156 - 1);
 frame.set("loop.first", t_156 === 0);
 frame.set("loop.last", t_156 === t_157 - 1);
 frame.set("loop.length", t_157);
-if(runtime.memberLookup((t_159),"tag") == "RemarksLabel") {
+if(runtime.memberLookup((t_159),"tag") == "RelatedArticleNum") {
+t_151 += runtime.suppressValue((lineno = 610, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_159,1])), env.opts.autoescape);
+;
+}
+;
+}
+}
+frame = frame.pop();
+t_151 += "\r\n</w:p>";
 ;
 }
 else {
-if(runtime.memberLookup((t_159),"tag") == "Sentence") {
+if(runtime.memberLookup((t_155),"tag") == "RelatedArticleNum") {
 ;
 }
 else {
-if(runtime.memberLookup((t_159),"tag") == "Item") {
-t_151 += runtime.suppressValue((lineno = 559, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_159,{},l_indent])), env.opts.autoescape);
+if(runtime.memberLookup((t_155),"tag") == "StyleStruct") {
+t_151 += runtime.suppressValue((lineno = 616, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_style_struct"), "m_style_struct", context, [t_155,1])), env.opts.autoescape);
 ;
 }
 else {
-t_151 += "\r\n<w:p>\r\n  <w:r>\r\n    <w:t>";
-t_151 += runtime.suppressValue((lineno = 563, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [runtime.contextOrFrameLookup(context, frame, "child")])), env.opts.autoescape);
+if(runtime.memberLookup((t_155),"tag") == "Remarks") {
+t_151 += runtime.suppressValue((lineno = 618, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_155])), env.opts.autoescape);
+;
+}
+else {
+t_151 += "<w:p>\r\n  <w:r>\r\n    <w:t>";
+t_151 += runtime.suppressValue((lineno = 622, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_155])), env.opts.autoescape);
 t_151 += "</w:t>\r\n  </w:r>\r\n</w:p>";
+;
+}
 ;
 }
 ;
@@ -1422,26 +1465,235 @@ frame = frame.pop();
 frame = callerFrame;
 return new runtime.SafeString(t_151);
 });
-context.addExport("m_remarks");
-context.setVariable("m_remarks", macro_t_150);
+context.addExport("m_appdx_style");
+context.setVariable("m_appdx_style", macro_t_150);
 var macro_t_160 = runtime.makeMacro(
-["el"], 
+["list", "indent"], 
 [], 
-function (l_el, kwargs) {
+function (l_list, l_indent, kwargs) {
 var callerFrame = frame;
 frame = new runtime.Frame();
 kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
-frame.set("el", l_el);
-var t_161 = "";t_161 += runtime.suppressValue(env.getFilter("e").call(context, (lineno = 574, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element_raw"), "m_element_raw", context, [l_el]))), env.opts.autoescape);
+frame.set("list", l_list);
+frame.set("indent", l_indent);
+var t_161 = "";frame = frame.push();
+var t_164 = runtime.memberLookup((l_list),"children");
+if(t_164) {var t_163 = t_164.length;
+for(var t_162=0; t_162 < t_164.length; t_162++) {
+var t_165 = t_164[t_162];
+frame.set("el", t_165);
+frame.set("loop.index", t_162 + 1);
+frame.set("loop.index0", t_162);
+frame.set("loop.revindex", t_163 - t_162);
+frame.set("loop.revindex0", t_163 - t_162 - 1);
+frame.set("loop.first", t_162 === 0);
+frame.set("loop.last", t_162 === t_163 - 1);
+frame.set("loop.length", t_163);
+if(runtime.memberLookup((t_165),"tag") == "ListSentence") {
+t_161 += runtime.suppressValue((lineno = 635, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_list_sentence"), "m_list_sentence", context, [t_165,l_indent])), env.opts.autoescape);
+;
+}
+else {
+t_161 += "<w:p>\r\n  <w:r>\r\n    <w:t>";
+t_161 += runtime.suppressValue((lineno = 639, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_165])), env.opts.autoescape);
+t_161 += "</w:t>\r\n  </w:r>\r\n</w:p>";
+;
+}
+;
+}
+}
+frame = frame.pop();
 ;
 frame = callerFrame;
 return new runtime.SafeString(t_161);
 });
-context.addExport("m_element");
-context.setVariable("m_element", macro_t_160);
-var macro_t_162 = runtime.makeMacro(
+context.addExport("m_list");
+context.setVariable("m_list", macro_t_160);
+var macro_t_166 = runtime.makeMacro(
+["list_sentence", "indent"], 
+[], 
+function (l_list_sentence, l_indent, kwargs) {
+var callerFrame = frame;
+frame = new runtime.Frame();
+kwargs = kwargs || {};
+if (kwargs.hasOwnProperty("caller")) {
+frame.set("caller", kwargs.caller); }
+frame.set("list_sentence", l_list_sentence);
+frame.set("indent", l_indent);
+var t_167 = "";frame = frame.push();
+var t_170 = runtime.memberLookup((l_list_sentence),"children");
+if(t_170) {var t_169 = t_170.length;
+for(var t_168=0; t_168 < t_170.length; t_168++) {
+var t_171 = t_170[t_168];
+frame.set("el", t_171);
+frame.set("loop.index", t_168 + 1);
+frame.set("loop.index0", t_168);
+frame.set("loop.revindex", t_169 - t_168);
+frame.set("loop.revindex0", t_169 - t_168 - 1);
+frame.set("loop.first", t_168 === 0);
+frame.set("loop.last", t_168 === t_169 - 1);
+frame.set("loop.length", t_169);
+if(runtime.memberLookup((t_171),"tag") == "Sentence") {
+t_167 += "\r\n<w:p>\r\n  <w:pPr>\r\n    <w:pStyle w:val=\"Indent";
+t_167 += runtime.suppressValue(1, env.opts.autoescape);
+t_167 += "\"/>\r\n  </w:pPr>";
+t_167 += runtime.suppressValue((lineno = 657, colno = 8, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_171])), env.opts.autoescape);
+t_167 += "</w:p>";
+;
+}
+else {
+t_167 += "\r\n<w:p>\r\n  <w:r>\r\n    <w:t>";
+t_167 += runtime.suppressValue((lineno = 662, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_171])), env.opts.autoescape);
+t_167 += "</w:t>\r\n  </w:r>\r\n</w:p>";
+;
+}
+;
+}
+}
+frame = frame.pop();
+;
+frame = callerFrame;
+return new runtime.SafeString(t_167);
+});
+context.addExport("m_list_sentence");
+context.setVariable("m_list_sentence", macro_t_166);
+var macro_t_172 = runtime.makeMacro(
+["fig", "indent"], 
+[], 
+function (l_fig, l_indent, kwargs) {
+var callerFrame = frame;
+frame = new runtime.Frame();
+kwargs = kwargs || {};
+if (kwargs.hasOwnProperty("caller")) {
+frame.set("caller", kwargs.caller); }
+frame.set("fig", l_fig);
+frame.set("indent", l_indent);
+var t_173 = "";t_173 += "<w:p>\r\n  <w:pPr>\r\n    <w:pStyle w:val=\"Indent";
+t_173 += runtime.suppressValue(1, env.opts.autoescape);
+t_173 += "\"/>\r\n  </w:pPr>\r\n  <w:r>\r\n    <w:t>[";
+t_173 += runtime.suppressValue(runtime.memberLookup((runtime.memberLookup((l_fig),"attr")),"src"), env.opts.autoescape);
+t_173 += "]</w:t>\r\n  </w:r>\r\n</w:p>";
+frame = frame.push();
+var t_176 = runtime.memberLookup((l_fig),"children");
+if(t_176) {var t_175 = t_176.length;
+for(var t_174=0; t_174 < t_176.length; t_174++) {
+var t_177 = t_176[t_174];
+frame.set("el", t_177);
+frame.set("loop.index", t_174 + 1);
+frame.set("loop.index0", t_174);
+frame.set("loop.revindex", t_175 - t_174);
+frame.set("loop.revindex0", t_175 - t_174 - 1);
+frame.set("loop.first", t_174 === 0);
+frame.set("loop.last", t_174 === t_175 - 1);
+frame.set("loop.length", t_175);
+t_173 += "<w:p>\r\n  <w:r>\r\n    <w:t>";
+t_173 += runtime.suppressValue((lineno = 684, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_177])), env.opts.autoescape);
+t_173 += "</w:t>\r\n  </w:r>\r\n</w:p>";
+;
+}
+}
+frame = frame.pop();
+;
+frame = callerFrame;
+return new runtime.SafeString(t_173);
+});
+context.addExport("m_fig");
+context.setVariable("m_fig", macro_t_172);
+var macro_t_178 = runtime.makeMacro(
+["remarks", "indent"], 
+[], 
+function (l_remarks, l_indent, kwargs) {
+var callerFrame = frame;
+frame = new runtime.Frame();
+kwargs = kwargs || {};
+if (kwargs.hasOwnProperty("caller")) {
+frame.set("caller", kwargs.caller); }
+frame.set("remarks", l_remarks);
+frame.set("indent", l_indent);
+var t_179 = "";t_179 += "<w:p>\r\n  <w:pPr>\r\n    <w:pStyle w:val=\"IndentHanging";
+t_179 += runtime.suppressValue(l_indent, env.opts.autoescape);
+t_179 += "\"/>\r\n  </w:pPr>";
+frame = frame.push();
+var t_182 = runtime.memberLookup((l_remarks),"children");
+if(t_182) {var t_181 = t_182.length;
+for(var t_180=0; t_180 < t_182.length; t_180++) {
+var t_183 = t_182[t_180];
+frame.set("el", t_183);
+frame.set("loop.index", t_180 + 1);
+frame.set("loop.index0", t_180);
+frame.set("loop.revindex", t_181 - t_180);
+frame.set("loop.revindex0", t_181 - t_180 - 1);
+frame.set("loop.first", t_180 === 0);
+frame.set("loop.last", t_180 === t_181 - 1);
+frame.set("loop.length", t_181);
+if(runtime.memberLookup((t_183),"tag") == "RemarksLabel") {
+t_179 += runtime.suppressValue((lineno = 699, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_183])), env.opts.autoescape);
+;
+}
+else {
+if(runtime.memberLookup((t_183),"tag") == "Sentence") {
+t_179 += runtime.suppressValue((lineno = 701, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, ["　"])), env.opts.autoescape);
+t_179 += runtime.suppressValue((lineno = 701, colno = 24, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_run"), "m_run", context, [t_183])), env.opts.autoescape);
+if(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"last")) {
+;
+}
+;
+}
+;
+}
+;
+}
+}
+frame = frame.pop();
+t_179 += "</w:p>";
+frame = frame.push();
+var t_186 = runtime.memberLookup((l_remarks),"children");
+if(t_186) {var t_185 = t_186.length;
+for(var t_184=0; t_184 < t_186.length; t_184++) {
+var t_187 = t_186[t_184];
+frame.set("el", t_187);
+frame.set("loop.index", t_184 + 1);
+frame.set("loop.index0", t_184);
+frame.set("loop.revindex", t_185 - t_184);
+frame.set("loop.revindex0", t_185 - t_184 - 1);
+frame.set("loop.first", t_184 === 0);
+frame.set("loop.last", t_184 === t_185 - 1);
+frame.set("loop.length", t_185);
+if(runtime.memberLookup((t_187),"tag") == "RemarksLabel") {
+;
+}
+else {
+if(runtime.memberLookup((t_187),"tag") == "Sentence") {
+;
+}
+else {
+if(runtime.memberLookup((t_187),"tag") == "Item") {
+t_179 += runtime.suppressValue((lineno = 712, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_187,{},l_indent])), env.opts.autoescape);
+;
+}
+else {
+t_179 += "\r\n<w:p>\r\n  <w:r>\r\n    <w:t>";
+t_179 += runtime.suppressValue((lineno = 716, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_187])), env.opts.autoescape);
+t_179 += "</w:t>\r\n  </w:r>\r\n</w:p>";
+;
+}
+;
+}
+;
+}
+;
+}
+}
+frame = frame.pop();
+;
+frame = callerFrame;
+return new runtime.SafeString(t_179);
+});
+context.addExport("m_remarks");
+context.setVariable("m_remarks", macro_t_178);
+var macro_t_188 = runtime.makeMacro(
 ["el"], 
 [], 
 function (l_el, kwargs) {
@@ -1451,106 +1703,123 @@ kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
 frame.set("el", l_el);
-var t_163 = "";if(!l_el) {
+var t_189 = "";t_189 += runtime.suppressValue(env.getFilter("escape").call(context, ("" + (lineno = 727, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element_raw"), "m_element_raw", context, [l_el])))), env.opts.autoescape);
+;
+frame = callerFrame;
+return new runtime.SafeString(t_189);
+});
+context.addExport("m_element");
+context.setVariable("m_element", macro_t_188);
+var macro_t_190 = runtime.makeMacro(
+["el"], 
+[], 
+function (l_el, kwargs) {
+var callerFrame = frame;
+frame = new runtime.Frame();
+kwargs = kwargs || {};
+if (kwargs.hasOwnProperty("caller")) {
+frame.set("caller", kwargs.caller); }
+frame.set("el", l_el);
+var t_191 = "";if(!l_el) {
 ;
 }
 else {
 if(!runtime.memberLookup((l_el),"tag")) {
-t_163 += runtime.suppressValue(l_el, env.opts.autoescape);
+t_191 += runtime.suppressValue(env.getFilter("escape").call(context, l_el), env.opts.autoescape);
 ;
 }
 else {
-t_163 += "<";
-t_163 += runtime.suppressValue(runtime.memberLookup((l_el),"tag"), env.opts.autoescape);
+t_191 += "<";
+t_191 += runtime.suppressValue(runtime.memberLookup((l_el),"tag"), env.opts.autoescape);
 frame = frame.push();
-var t_166 = env.getFilter("dictsort").call(context, runtime.memberLookup((l_el),"attr"));
-if(t_166) {var t_164;
-if(runtime.isArray(t_166)) {
-var t_165 = t_166.length;
-for(t_164=0; t_164 < t_166.length; t_164++) {
-var t_167 = t_166[t_164][0]
-frame.set("key", t_166[t_164][0]);
-var t_168 = t_166[t_164][1]
-frame.set("value", t_166[t_164][1]);
-frame.set("loop.index", t_164 + 1);
-frame.set("loop.index0", t_164);
-frame.set("loop.revindex", t_165 - t_164);
-frame.set("loop.revindex0", t_165 - t_164 - 1);
-frame.set("loop.first", t_164 === 0);
-frame.set("loop.last", t_164 === t_165 - 1);
-frame.set("loop.length", t_165);
-t_163 += runtime.suppressValue(" ", env.opts.autoescape);
-t_163 += runtime.suppressValue(t_167, env.opts.autoescape);
-t_163 += "=\"";
-t_163 += runtime.suppressValue(t_168, env.opts.autoescape);
-t_163 += "\"";
+var t_194 = env.getFilter("dictsort").call(context, runtime.memberLookup((l_el),"attr"));
+if(t_194) {var t_192;
+if(runtime.isArray(t_194)) {
+var t_193 = t_194.length;
+for(t_192=0; t_192 < t_194.length; t_192++) {
+var t_195 = t_194[t_192][0]
+frame.set("key", t_194[t_192][0]);
+var t_196 = t_194[t_192][1]
+frame.set("value", t_194[t_192][1]);
+frame.set("loop.index", t_192 + 1);
+frame.set("loop.index0", t_192);
+frame.set("loop.revindex", t_193 - t_192);
+frame.set("loop.revindex0", t_193 - t_192 - 1);
+frame.set("loop.first", t_192 === 0);
+frame.set("loop.last", t_192 === t_193 - 1);
+frame.set("loop.length", t_193);
+t_191 += runtime.suppressValue(" ", env.opts.autoescape);
+t_191 += runtime.suppressValue(t_195, env.opts.autoescape);
+t_191 += "=\"";
+t_191 += runtime.suppressValue(t_196, env.opts.autoescape);
+t_191 += "\"";
 ;
 }
 } else {
-t_164 = -1;
-var t_165 = runtime.keys(t_166).length;
-for(var t_169 in t_166) {
-t_164++;
-var t_170 = t_166[t_169];
-frame.set("key", t_169);
-frame.set("value", t_170);
-frame.set("loop.index", t_164 + 1);
-frame.set("loop.index0", t_164);
-frame.set("loop.revindex", t_165 - t_164);
-frame.set("loop.revindex0", t_165 - t_164 - 1);
-frame.set("loop.first", t_164 === 0);
-frame.set("loop.last", t_164 === t_165 - 1);
-frame.set("loop.length", t_165);
-t_163 += runtime.suppressValue(" ", env.opts.autoescape);
-t_163 += runtime.suppressValue(t_169, env.opts.autoescape);
-t_163 += "=\"";
-t_163 += runtime.suppressValue(t_170, env.opts.autoescape);
-t_163 += "\"";
+t_192 = -1;
+var t_193 = runtime.keys(t_194).length;
+for(var t_197 in t_194) {
+t_192++;
+var t_198 = t_194[t_197];
+frame.set("key", t_197);
+frame.set("value", t_198);
+frame.set("loop.index", t_192 + 1);
+frame.set("loop.index0", t_192);
+frame.set("loop.revindex", t_193 - t_192);
+frame.set("loop.revindex0", t_193 - t_192 - 1);
+frame.set("loop.first", t_192 === 0);
+frame.set("loop.last", t_192 === t_193 - 1);
+frame.set("loop.length", t_193);
+t_191 += runtime.suppressValue(" ", env.opts.autoescape);
+t_191 += runtime.suppressValue(t_197, env.opts.autoescape);
+t_191 += "=\"";
+t_191 += runtime.suppressValue(t_198, env.opts.autoescape);
+t_191 += "\"";
 ;
 }
 }
 }
 frame = frame.pop();
-t_163 += ">";
+t_191 += ">";
 frame = frame.push();
-var t_173 = runtime.memberLookup((l_el),"children");
-if(t_173) {var t_172 = t_173.length;
-for(var t_171=0; t_171 < t_173.length; t_171++) {
-var t_174 = t_173[t_171];
-frame.set("child", t_174);
-frame.set("loop.index", t_171 + 1);
-frame.set("loop.index0", t_171);
-frame.set("loop.revindex", t_172 - t_171);
-frame.set("loop.revindex0", t_172 - t_171 - 1);
-frame.set("loop.first", t_171 === 0);
-frame.set("loop.last", t_171 === t_172 - 1);
-frame.set("loop.length", t_172);
-if(!runtime.memberLookup((t_174),"tag")) {
-t_163 += runtime.suppressValue(t_174, env.opts.autoescape);
+var t_201 = runtime.memberLookup((l_el),"children");
+if(t_201) {var t_200 = t_201.length;
+for(var t_199=0; t_199 < t_201.length; t_199++) {
+var t_202 = t_201[t_199];
+frame.set("child", t_202);
+frame.set("loop.index", t_199 + 1);
+frame.set("loop.index0", t_199);
+frame.set("loop.revindex", t_200 - t_199);
+frame.set("loop.revindex0", t_200 - t_199 - 1);
+frame.set("loop.first", t_199 === 0);
+frame.set("loop.last", t_199 === t_200 - 1);
+frame.set("loop.length", t_200);
+if(!runtime.memberLookup((t_202),"tag")) {
+t_191 += runtime.suppressValue(t_202, env.opts.autoescape);
 ;
 }
 else {
-t_163 += runtime.suppressValue((lineno = 591, colno = 22, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element_raw"), "m_element_raw", context, [t_174])), env.opts.autoescape);
+t_191 += runtime.suppressValue((lineno = 744, colno = 22, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element_raw"), "m_element_raw", context, [t_202])), env.opts.autoescape);
 ;
 }
 ;
 }
 }
 frame = frame.pop();
-t_163 += "</";
-t_163 += runtime.suppressValue(runtime.memberLookup((l_el),"tag"), env.opts.autoescape);
-t_163 += ">";
+t_191 += "</";
+t_191 += runtime.suppressValue(runtime.memberLookup((l_el),"tag"), env.opts.autoescape);
+t_191 += ">";
 ;
 }
 ;
 }
 ;
 frame = callerFrame;
-return new runtime.SafeString(t_163);
+return new runtime.SafeString(t_191);
 });
 context.addExport("m_element_raw");
-context.setVariable("m_element_raw", macro_t_162);
-var macro_t_175 = runtime.makeMacro(
+context.setVariable("m_element_raw", macro_t_190);
+var macro_t_203 = runtime.makeMacro(
 ["el", "emphasis"], 
 [], 
 function (l_el, l_emphasis, kwargs) {
@@ -1561,60 +1830,60 @@ if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
 frame.set("el", l_el);
 frame.set("emphasis", l_emphasis);
-var t_176 = "";if(!l_el) {
+var t_204 = "";if(!l_el) {
 ;
 }
 else {
 if(!runtime.memberLookup((l_el),"tag")) {
-t_176 += "\r\n  <w:r>";
+t_204 += "\r\n  <w:r>";
 if(l_emphasis) {
-t_176 += "\r\n    <w:rStyle w:val=\"Emphasis\"/>";
+t_204 += "\r\n    <w:rStyle w:val=\"Emphasis\"/>";
 ;
 }
-t_176 += "\r\n    <w:t>";
-t_176 += runtime.suppressValue(l_el, env.opts.autoescape);
-t_176 += "</w:t>\r\n  </w:r>";
+t_204 += "\r\n    <w:t>";
+t_204 += runtime.suppressValue(env.getFilter("escape").call(context, l_el), env.opts.autoescape);
+t_204 += "</w:t>\r\n  </w:r>";
 ;
 }
 else {
 frame = frame.push();
-var t_179 = runtime.memberLookup((l_el),"children");
-if(t_179) {var t_178 = t_179.length;
-for(var t_177=0; t_177 < t_179.length; t_177++) {
-var t_180 = t_179[t_177];
-frame.set("child", t_180);
-frame.set("loop.index", t_177 + 1);
-frame.set("loop.index0", t_177);
-frame.set("loop.revindex", t_178 - t_177);
-frame.set("loop.revindex0", t_178 - t_177 - 1);
-frame.set("loop.first", t_177 === 0);
-frame.set("loop.last", t_177 === t_178 - 1);
-frame.set("loop.length", t_178);
-if(!runtime.memberLookup((t_180),"tag")) {
-t_176 += "\r\n  <w:r>";
+var t_207 = runtime.memberLookup((l_el),"children");
+if(t_207) {var t_206 = t_207.length;
+for(var t_205=0; t_205 < t_207.length; t_205++) {
+var t_208 = t_207[t_205];
+frame.set("child", t_208);
+frame.set("loop.index", t_205 + 1);
+frame.set("loop.index0", t_205);
+frame.set("loop.revindex", t_206 - t_205);
+frame.set("loop.revindex0", t_206 - t_205 - 1);
+frame.set("loop.first", t_205 === 0);
+frame.set("loop.last", t_205 === t_206 - 1);
+frame.set("loop.length", t_206);
+if(!runtime.memberLookup((t_208),"tag")) {
+t_204 += "\r\n  <w:r>";
 if(l_emphasis) {
-t_176 += "\r\n    <w:rStyle w:val=\"Emphasis\"/>";
+t_204 += "\r\n    <w:rStyle w:val=\"Emphasis\"/>";
 ;
 }
-t_176 += "\r\n    <w:t>";
-t_176 += runtime.suppressValue(t_180, env.opts.autoescape);
-t_176 += "</w:t>\r\n  </w:r>";
+t_204 += "\r\n    <w:t>";
+t_204 += runtime.suppressValue(env.getFilter("escape").call(context, t_208), env.opts.autoescape);
+t_204 += "</w:t>\r\n  </w:r>";
 ;
 }
 else {
-if(runtime.memberLookup((t_180),"tag") == "Ruby") {
-t_176 += runtime.suppressValue((lineno = 619, colno = 17, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_ruby_run"), "m_ruby_run", context, [t_180,l_emphasis])), env.opts.autoescape);
+if(runtime.memberLookup((t_208),"tag") == "Ruby") {
+t_204 += runtime.suppressValue((lineno = 772, colno = 17, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_ruby_run"), "m_ruby_run", context, [t_208,l_emphasis])), env.opts.autoescape);
 ;
 }
 else {
-t_176 += "\r\n  <w:r>";
+t_204 += "\r\n  <w:r>";
 if(l_emphasis) {
-t_176 += "\r\n    <w:rStyle w:val=\"Emphasis\"/>";
+t_204 += "\r\n    <w:rStyle w:val=\"Emphasis\"/>";
 ;
 }
-t_176 += "\r\n    <w:t>";
-t_176 += runtime.suppressValue((lineno = 625, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_180])), env.opts.autoescape);
-t_176 += "</w:t>\r\n  </w:r>";
+t_204 += "\r\n    <w:t>";
+t_204 += runtime.suppressValue((lineno = 778, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_208])), env.opts.autoescape);
+t_204 += "</w:t>\r\n  </w:r>";
 ;
 }
 ;
@@ -1629,11 +1898,11 @@ frame = frame.pop();
 }
 ;
 frame = callerFrame;
-return new runtime.SafeString(t_176);
+return new runtime.SafeString(t_204);
 });
 context.addExport("m_run");
-context.setVariable("m_run", macro_t_175);
-var macro_t_181 = runtime.makeMacro(
+context.setVariable("m_run", macro_t_203);
+var macro_t_209 = runtime.makeMacro(
 ["el", "emphasis"], 
 [], 
 function (l_el, l_emphasis, kwargs) {
@@ -1644,105 +1913,105 @@ if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
 frame.set("el", l_el);
 frame.set("emphasis", l_emphasis);
-var t_182 = "";t_182 += "\r\n  <w:r>";
+var t_210 = "";t_210 += "\r\n  <w:r>";
 if(l_emphasis) {
-t_182 += "\r\n    <w:rStyle w:val=\"Emphasis\"/>";
+t_210 += "\r\n    <w:rStyle w:val=\"Emphasis\"/>";
 ;
 }
-t_182 += "\r\n    <w:ruby>";
+t_210 += "\r\n    <w:ruby>";
 frame = frame.push();
-var t_185 = runtime.memberLookup((l_el),"children");
-if(t_185) {var t_184 = t_185.length;
-for(var t_183=0; t_183 < t_185.length; t_183++) {
-var t_186 = t_185[t_183];
-frame.set("child", t_186);
-frame.set("loop.index", t_183 + 1);
-frame.set("loop.index0", t_183);
-frame.set("loop.revindex", t_184 - t_183);
-frame.set("loop.revindex0", t_184 - t_183 - 1);
-frame.set("loop.first", t_183 === 0);
-frame.set("loop.last", t_183 === t_184 - 1);
-frame.set("loop.length", t_184);
-if(runtime.memberLookup((t_186),"tag") == "Rt") {
-t_182 += "\r\n      <w:rt>\r\n        <w:r>\r\n          <w:t>";
+var t_213 = runtime.memberLookup((l_el),"children");
+if(t_213) {var t_212 = t_213.length;
+for(var t_211=0; t_211 < t_213.length; t_211++) {
+var t_214 = t_213[t_211];
+frame.set("child", t_214);
+frame.set("loop.index", t_211 + 1);
+frame.set("loop.index0", t_211);
+frame.set("loop.revindex", t_212 - t_211);
+frame.set("loop.revindex0", t_212 - t_211 - 1);
+frame.set("loop.first", t_211 === 0);
+frame.set("loop.last", t_211 === t_212 - 1);
+frame.set("loop.length", t_212);
+if(runtime.memberLookup((t_214),"tag") == "Rt") {
+t_210 += "\r\n      <w:rt>\r\n        <w:r>\r\n          <w:t>";
 frame = frame.push();
-var t_189 = runtime.memberLookup((t_186),"children");
-if(t_189) {var t_188 = t_189.length;
-for(var t_187=0; t_187 < t_189.length; t_187++) {
-var t_190 = t_189[t_187];
-frame.set("subchild", t_190);
-frame.set("loop.index", t_187 + 1);
-frame.set("loop.index0", t_187);
-frame.set("loop.revindex", t_188 - t_187);
-frame.set("loop.revindex0", t_188 - t_187 - 1);
-frame.set("loop.first", t_187 === 0);
-frame.set("loop.last", t_187 === t_188 - 1);
-frame.set("loop.length", t_188);
-t_182 += runtime.suppressValue(t_190, env.opts.autoescape);
+var t_217 = runtime.memberLookup((t_214),"children");
+if(t_217) {var t_216 = t_217.length;
+for(var t_215=0; t_215 < t_217.length; t_215++) {
+var t_218 = t_217[t_215];
+frame.set("subchild", t_218);
+frame.set("loop.index", t_215 + 1);
+frame.set("loop.index0", t_215);
+frame.set("loop.revindex", t_216 - t_215);
+frame.set("loop.revindex0", t_216 - t_215 - 1);
+frame.set("loop.first", t_215 === 0);
+frame.set("loop.last", t_215 === t_216 - 1);
+frame.set("loop.length", t_216);
+t_210 += runtime.suppressValue(t_218, env.opts.autoescape);
 ;
 }
 }
 frame = frame.pop();
-t_182 += "</w:t>\r\n        </w:r>\r\n      </w:rt>";
-;
-}
-;
-}
-}
-frame = frame.pop();
-frame = frame.push();
-var t_193 = runtime.memberLookup((l_el),"children");
-if(t_193) {var t_192 = t_193.length;
-for(var t_191=0; t_191 < t_193.length; t_191++) {
-var t_194 = t_193[t_191];
-frame.set("child", t_194);
-frame.set("loop.index", t_191 + 1);
-frame.set("loop.index0", t_191);
-frame.set("loop.revindex", t_192 - t_191);
-frame.set("loop.revindex0", t_192 - t_191 - 1);
-frame.set("loop.first", t_191 === 0);
-frame.set("loop.last", t_191 === t_192 - 1);
-frame.set("loop.length", t_192);
-if(!runtime.memberLookup((t_194),"tag")) {
-t_182 += "\r\n      <w:rubyBase>\r\n        <w:r>\r\n          <w:t>";
-t_182 += runtime.suppressValue(t_194, env.opts.autoescape);
-t_182 += "</w:t>\r\n        </w:r>\r\n      </w:rubyBase>";
+t_210 += "</w:t>\r\n        </w:r>\r\n      </w:rt>";
 ;
 }
 ;
 }
 }
 frame = frame.pop();
-t_182 += "\r\n    </w:ruby>\r\n  </w:r>";
 frame = frame.push();
-var t_197 = runtime.memberLookup((l_el),"children");
-if(t_197) {var t_196 = t_197.length;
-for(var t_195=0; t_195 < t_197.length; t_195++) {
-var t_198 = t_197[t_195];
-frame.set("child", t_198);
-frame.set("loop.index", t_195 + 1);
-frame.set("loop.index0", t_195);
-frame.set("loop.revindex", t_196 - t_195);
-frame.set("loop.revindex0", t_196 - t_195 - 1);
-frame.set("loop.first", t_195 === 0);
-frame.set("loop.last", t_195 === t_196 - 1);
-frame.set("loop.length", t_196);
-if(!runtime.memberLookup((t_198),"tag")) {
+var t_221 = runtime.memberLookup((l_el),"children");
+if(t_221) {var t_220 = t_221.length;
+for(var t_219=0; t_219 < t_221.length; t_219++) {
+var t_222 = t_221[t_219];
+frame.set("child", t_222);
+frame.set("loop.index", t_219 + 1);
+frame.set("loop.index0", t_219);
+frame.set("loop.revindex", t_220 - t_219);
+frame.set("loop.revindex0", t_220 - t_219 - 1);
+frame.set("loop.first", t_219 === 0);
+frame.set("loop.last", t_219 === t_220 - 1);
+frame.set("loop.length", t_220);
+if(!runtime.memberLookup((t_222),"tag")) {
+t_210 += "\r\n      <w:rubyBase>\r\n        <w:r>\r\n          <w:t>";
+t_210 += runtime.suppressValue(t_222, env.opts.autoescape);
+t_210 += "</w:t>\r\n        </w:r>\r\n      </w:rubyBase>";
+;
+}
+;
+}
+}
+frame = frame.pop();
+t_210 += "\r\n    </w:ruby>\r\n  </w:r>";
+frame = frame.push();
+var t_225 = runtime.memberLookup((l_el),"children");
+if(t_225) {var t_224 = t_225.length;
+for(var t_223=0; t_223 < t_225.length; t_223++) {
+var t_226 = t_225[t_223];
+frame.set("child", t_226);
+frame.set("loop.index", t_223 + 1);
+frame.set("loop.index0", t_223);
+frame.set("loop.revindex", t_224 - t_223);
+frame.set("loop.revindex0", t_224 - t_223 - 1);
+frame.set("loop.first", t_223 === 0);
+frame.set("loop.last", t_223 === t_224 - 1);
+frame.set("loop.length", t_224);
+if(!runtime.memberLookup((t_226),"tag")) {
 ;
 }
 else {
-if(runtime.memberLookup((t_198),"tag") == "Rt") {
+if(runtime.memberLookup((t_226),"tag") == "Rt") {
 ;
 }
 else {
-t_182 += "\r\n  <w:r>";
+t_210 += "\r\n  <w:r>";
 if(l_emphasis) {
-t_182 += "\r\n    <w:rStyle w:val=\"Emphasis\"/>";
+t_210 += "\r\n    <w:rStyle w:val=\"Emphasis\"/>";
 ;
 }
-t_182 += "\r\n    <w:t>";
-t_182 += runtime.suppressValue((lineno = 672, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_198])), env.opts.autoescape);
-t_182 += "</w:t>\r\n  </w:r>";
+t_210 += "\r\n    <w:t>";
+t_210 += runtime.suppressValue((lineno = 825, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_226])), env.opts.autoescape);
+t_210 += "</w:t>\r\n  </w:r>";
 ;
 }
 ;
@@ -1753,12 +2022,12 @@ t_182 += "</w:t>\r\n  </w:r>";
 frame = frame.pop();
 ;
 frame = callerFrame;
-return new runtime.SafeString(t_182);
+return new runtime.SafeString(t_210);
 });
 context.addExport("m_ruby_run");
-context.setVariable("m_ruby_run", macro_t_181);
+context.setVariable("m_ruby_run", macro_t_209);
 output += "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<w:document xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\">\r\n  <w:body>";
-output += runtime.suppressValue((lineno = 681, colno = 10, runtime.callWrap(macro_t_1, "m_law", context, [runtime.contextOrFrameLookup(context, frame, "law")])), env.opts.autoescape);
+output += runtime.suppressValue((lineno = 834, colno = 10, runtime.callWrap(macro_t_1, "m_law", context, [runtime.contextOrFrameLookup(context, frame, "law")])), env.opts.autoescape);
 output += "</w:body>\r\n</w:document>\r\n";
 if(parentTemplate) {
 parentTemplate.rootRenderFunc(env, context, frame, runtime, cb);
@@ -2179,7 +2448,14 @@ t_8 += runtime.suppressValue((lineno = 24, colno = 18, runtime.callWrap(runtime.
 ;
 }
 else {
-t_8 += runtime.suppressValue((lineno = 26, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_12])), env.opts.autoescape);
+if(runtime.memberLookup((t_12),"tag") == "AppdxStyle") {
+t_8 += runtime.suppressValue((lineno = 26, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_appdx_style"), "m_appdx_style", context, [t_12])), env.opts.autoescape);
+;
+}
+else {
+t_8 += runtime.suppressValue((lineno = 28, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_12])), env.opts.autoescape);
+;
+}
 ;
 }
 ;
@@ -2211,7 +2487,7 @@ if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
 frame.set("law_title", l_law_title);
 var t_14 = "";t_14 += "<div class=\"law-title\">";
-t_14 += runtime.suppressValue((lineno = 35, colno = 9, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [l_law_title])), env.opts.autoescape);
+t_14 += runtime.suppressValue((lineno = 37, colno = 9, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [l_law_title])), env.opts.autoescape);
 t_14 += "</div>";
 frame = frame.push();
 var t_17 = runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "law")),"children");
@@ -2228,7 +2504,7 @@ frame.set("loop.last", t_15 === t_16 - 1);
 frame.set("loop.length", t_16);
 if(runtime.memberLookup((t_18),"tag") == "LawNum") {
 t_14 += "<div class=\"law-num\">\r\n      （";
-t_14 += runtime.suppressValue((lineno = 40, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_18])), env.opts.autoescape);
+t_14 += runtime.suppressValue((lineno = 42, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_18])), env.opts.autoescape);
 t_14 += "）\r\n    </div>";
 ;
 }
@@ -2253,7 +2529,7 @@ if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
 frame.set("enact_statement", l_enact_statement);
 var t_20 = "";t_20 += "<div class=\"enact-statement\">";
-t_20 += runtime.suppressValue((lineno = 50, colno = 9, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [l_enact_statement])), env.opts.autoescape);
+t_20 += runtime.suppressValue((lineno = 52, colno = 9, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [l_enact_statement])), env.opts.autoescape);
 t_20 += "</div>";
 ;
 frame = callerFrame;
@@ -2291,7 +2567,7 @@ t_22 += runtime.suppressValue(runtime.memberLookup((l_toc),"tag"), env.opts.auto
 t_22 += "\"\r\n         data-name=\"";
 t_22 += runtime.suppressValue(runtime.memberLookup((runtime.memberLookup((t_26),"children")),0), env.opts.autoescape);
 t_22 += "\">";
-t_22 += runtime.suppressValue((lineno = 63, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_26])), env.opts.autoescape);
+t_22 += runtime.suppressValue((lineno = 65, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_26])), env.opts.autoescape);
 t_22 += "</div>";
 ;
 }
@@ -2318,11 +2594,11 @@ if(runtime.memberLookup((t_30),"tag") == "TOCLabel") {
 }
 else {
 if(runtime.inOperator(runtime.memberLookup((t_30),"tag"),["TOCPart","TOCChapter","TOCSection","TOCSupplProvision"])) {
-t_22 += runtime.suppressValue((lineno = 71, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_toc_group"), "m_toc_group", context, [t_30])), env.opts.autoescape);
+t_22 += runtime.suppressValue((lineno = 73, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_toc_group"), "m_toc_group", context, [t_30])), env.opts.autoescape);
 ;
 }
 else {
-t_22 += runtime.suppressValue((lineno = 73, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_30])), env.opts.autoescape);
+t_22 += runtime.suppressValue((lineno = 75, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_30])), env.opts.autoescape);
 ;
 }
 ;
@@ -2363,21 +2639,21 @@ frame.set("loop.first", t_33 === 0);
 frame.set("loop.last", t_33 === t_34 - 1);
 frame.set("loop.length", t_34);
 if(runtime.inOperator(runtime.memberLookup((t_36),"tag"),["TOCChapter","TOCSection","TOCSubsection","TOCDivision"])) {
-t_32 += runtime.suppressValue((lineno = 86, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_toc_group"), "m_toc_group", context, [t_36])), env.opts.autoescape);
+t_32 += runtime.suppressValue((lineno = 88, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_toc_group"), "m_toc_group", context, [t_36])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.inOperator(runtime.memberLookup((t_36),"tag"),["SupplProvisionLabel","PartTitle","ChapterTitle","SectionTitle","SubsectionTitle","DivisionTitle"])) {
-t_32 += runtime.suppressValue((lineno = 92, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_36])), env.opts.autoescape);
-;
-}
-else {
-if(runtime.memberLookup((t_36),"tag") == "ArticleRange") {
 t_32 += runtime.suppressValue((lineno = 94, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_36])), env.opts.autoescape);
 ;
 }
 else {
-t_32 += runtime.suppressValue((lineno = 96, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_36])), env.opts.autoescape);
+if(runtime.memberLookup((t_36),"tag") == "ArticleRange") {
+t_32 += runtime.suppressValue((lineno = 96, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_36])), env.opts.autoescape);
+;
+}
+else {
+t_32 += runtime.suppressValue((lineno = 98, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_36])), env.opts.autoescape);
 ;
 }
 ;
@@ -2419,7 +2695,7 @@ frame.set("loop.first", t_39 === 0);
 frame.set("loop.last", t_39 === t_40 - 1);
 frame.set("loop.length", t_40);
 if(runtime.inOperator(runtime.memberLookup((t_42),"tag"),["Part","Chapter","Section","Subsection","Division"])) {
-t_38 += runtime.suppressValue((lineno = 107, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_article_group"), "m_article_group", context, [t_42])), env.opts.autoescape);
+t_38 += runtime.suppressValue((lineno = 109, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_article_group"), "m_article_group", context, [t_42])), env.opts.autoescape);
 ;
 }
 else {
@@ -2435,17 +2711,17 @@ context.addExport("title_indent", t_43);
 }
 if(runtime.memberLookup((l_article_group),"tag") == "SupplProvision") {
 if(runtime.inOperator("AmendLawNum",runtime.memberLookup((l_article_group),"attr"))) {
-t_38 += runtime.suppressValue((lineno = 120, colno = 22, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["article_prefix",runtime.memberLookup((runtime.memberLookup((t_42),"children")),0) + runtime.memberLookup((runtime.memberLookup((l_article_group),"attr")),"AmendLawNum")])), env.opts.autoescape);
+t_38 += runtime.suppressValue((lineno = 122, colno = 22, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["article_prefix",runtime.memberLookup((runtime.memberLookup((t_42),"children")),0) + runtime.memberLookup((runtime.memberLookup((l_article_group),"attr")),"AmendLawNum")])), env.opts.autoescape);
 ;
 }
 else {
-t_38 += runtime.suppressValue((lineno = 122, colno = 22, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["article_prefix",runtime.memberLookup((runtime.memberLookup((t_42),"children")),0)])), env.opts.autoescape);
+t_38 += runtime.suppressValue((lineno = 124, colno = 22, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["article_prefix",runtime.memberLookup((runtime.memberLookup((t_42),"children")),0)])), env.opts.autoescape);
 ;
 }
 ;
 }
 else {
-t_38 += runtime.suppressValue((lineno = 125, colno = 20, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["article_prefix",""])), env.opts.autoescape);
+t_38 += runtime.suppressValue((lineno = 127, colno = 20, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["article_prefix",""])), env.opts.autoescape);
 ;
 }
 t_38 += "<div class=\"article-group-title law-anchor\"\r\n         style=\"margin-left:";
@@ -2456,7 +2732,7 @@ t_38 += "\"\r\n         data-name=\"";
 t_38 += runtime.suppressValue(runtime.memberLookup((runtime.memberLookup((t_42),"children")),0), env.opts.autoescape);
 t_38 += runtime.suppressValue(runtime.memberLookup((runtime.memberLookup((l_article_group),"attr")),"AmendLawNum"), env.opts.autoescape);
 t_38 += "\">";
-t_38 += runtime.suppressValue((lineno = 131, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_42])), env.opts.autoescape);
+t_38 += runtime.suppressValue((lineno = 133, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_42])), env.opts.autoescape);
 if(runtime.inOperator("AmendLawNum",runtime.memberLookup((l_article_group),"attr"))) {
 t_38 += "（";
 t_38 += runtime.suppressValue(runtime.memberLookup((runtime.memberLookup((l_article_group),"attr")),"AmendLawNum"), env.opts.autoescape);
@@ -2473,16 +2749,16 @@ t_38 += "</div>";
 }
 else {
 if(runtime.memberLookup((t_42),"tag") == "Article") {
-t_38 += runtime.suppressValue((lineno = 140, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_article"), "m_article", context, [t_42])), env.opts.autoescape);
+t_38 += runtime.suppressValue((lineno = 142, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_article"), "m_article", context, [t_42])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_42),"tag") == "Paragraph") {
-t_38 += runtime.suppressValue((lineno = 142, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_42])), env.opts.autoescape);
+t_38 += runtime.suppressValue((lineno = 144, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_42])), env.opts.autoescape);
 ;
 }
 else {
-t_38 += runtime.suppressValue((lineno = 144, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_42])), env.opts.autoescape);
+t_38 += runtime.suppressValue((lineno = 146, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_42])), env.opts.autoescape);
 ;
 }
 ;
@@ -2527,7 +2803,7 @@ frame.set("loop.last", t_46 === t_47 - 1);
 frame.set("loop.length", t_47);
 if(runtime.memberLookup((t_49),"tag") == "ArticleCaption") {
 t_45 += "<div class=\"article-caption\">";
-t_45 += runtime.suppressValue((lineno = 156, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_49])), env.opts.autoescape);
+t_45 += runtime.suppressValue((lineno = 158, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_49])), env.opts.autoescape);
 t_45 += "</div>";
 ;
 }
@@ -2558,11 +2834,11 @@ if(runtime.memberLookup((t_53),"tag") == "ArticleTitle") {
 }
 else {
 if(runtime.memberLookup((t_53),"tag") == "Paragraph") {
-t_45 += runtime.suppressValue((lineno = 165, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_53,l_article])), env.opts.autoescape);
+t_45 += runtime.suppressValue((lineno = 167, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_53,l_article])), env.opts.autoescape);
 ;
 }
 else {
-t_45 += runtime.suppressValue((lineno = 167, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_53])), env.opts.autoescape);
+t_45 += runtime.suppressValue((lineno = 169, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_53])), env.opts.autoescape);
 ;
 }
 ;
@@ -2607,7 +2883,7 @@ frame.set("loop.last", t_56 === t_57 - 1);
 frame.set("loop.length", t_57);
 if(runtime.memberLookup((t_59),"tag") == "ParagraphCaption") {
 t_55 += "<div class=\"paragraph-item-caption\">";
-t_55 += runtime.suppressValue((lineno = 181, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_59])), env.opts.autoescape);
+t_55 += runtime.suppressValue((lineno = 183, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_59])), env.opts.autoescape);
 t_55 += "</div>";
 ;
 }
@@ -2615,7 +2891,7 @@ t_55 += "</div>";
 }
 }
 frame = frame.pop();
-t_55 += runtime.suppressValue((lineno = 188, colno = 12, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["no_title",1])), env.opts.autoescape);
+t_55 += runtime.suppressValue((lineno = 190, colno = 12, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["no_title",1])), env.opts.autoescape);
 frame = frame.push();
 var t_62 = runtime.memberLookup((l_paragraph_item),"children");
 if(t_62) {var t_61 = t_62.length;
@@ -2646,7 +2922,7 @@ frame.set("loop.last", t_64 === t_65 - 1);
 frame.set("loop.length", t_65);
 if(runtime.memberLookup((t_67),"tag") == "ArticleTitle") {
 if(env.getFilter("length").call(context, runtime.memberLookup((t_67),"children"))) {
-t_55 += runtime.suppressValue((lineno = 202, colno = 24, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["no_title",0])), env.opts.autoescape);
+t_55 += runtime.suppressValue((lineno = 204, colno = 24, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["no_title",0])), env.opts.autoescape);
 ;
 }
 ;
@@ -2658,7 +2934,7 @@ frame = frame.pop();
 ;
 }
 if(env.getFilter("length").call(context, runtime.memberLookup((t_63),"children"))) {
-t_55 += runtime.suppressValue((lineno = 209, colno = 18, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["no_title",0])), env.opts.autoescape);
+t_55 += runtime.suppressValue((lineno = 211, colno = 18, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["no_title",0])), env.opts.autoescape);
 ;
 }
 ;
@@ -2668,7 +2944,7 @@ t_55 += runtime.suppressValue((lineno = 209, colno = 18, runtime.callWrap(runtim
 }
 frame = frame.pop();
 t_55 += "\r\n\r\n<div class=\"";
-if((lineno = 216, colno = 15, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"get"), "context[\"get\"]", context, ["no_title"]))) {
+if((lineno = 218, colno = 15, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"get"), "context[\"get\"]", context, ["no_title"]))) {
 t_55 += "indent-first-line";
 ;
 }
@@ -2713,10 +2989,10 @@ if(runtime.memberLookup((t_75),"tag") == "ArticleTitle") {
 t_55 += "<span class=\"article-title law-anchor\"\r\n                data-tag=\"";
 t_55 += runtime.suppressValue(runtime.memberLookup((l_article),"tag"), env.opts.autoescape);
 t_55 += "\"\r\n                data-name=\"";
-t_55 += runtime.suppressValue((lineno = 234, colno = 39, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"get"), "context[\"get\"]", context, ["article_prefix"])), env.opts.autoescape);
+t_55 += runtime.suppressValue((lineno = 236, colno = 39, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"get"), "context[\"get\"]", context, ["article_prefix"])), env.opts.autoescape);
 t_55 += runtime.suppressValue(runtime.memberLookup((runtime.memberLookup((t_75),"children")),0), env.opts.autoescape);
 t_55 += "\">";
-t_55 += runtime.suppressValue((lineno = 235, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_75])), env.opts.autoescape);
+t_55 += runtime.suppressValue((lineno = 237, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_75])), env.opts.autoescape);
 t_55 += "</span>";
 ;
 }
@@ -2728,11 +3004,11 @@ frame = frame.pop();
 }
 if(runtime.memberLookup((t_71),"children")) {
 t_55 += "<span class=\"paragraph-item-num\">";
-t_55 += runtime.suppressValue((lineno = 242, colno = 15, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_71])), env.opts.autoescape);
+t_55 += runtime.suppressValue((lineno = 244, colno = 15, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_71])), env.opts.autoescape);
 t_55 += "</span>";
 ;
 }
-if(!(lineno = 245, colno = 23, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"get"), "context[\"get\"]", context, ["no_title"]))) {
+if(!(lineno = 247, colno = 23, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"get"), "context[\"get\"]", context, ["no_title"]))) {
 t_55 += runtime.suppressValue("　", env.opts.autoescape);
 ;
 }
@@ -2740,26 +3016,26 @@ t_55 += runtime.suppressValue("　", env.opts.autoescape);
 }
 else {
 if(runtime.inOperator(runtime.memberLookup((t_71),"tag"),["ParagraphSentence","ItemSentence","Subitem1Sentence","Subitem2Sentence","Subitem3Sentence","Subitem4Sentence","Subitem5Sentence","Subitem6Sentence","Subitem7Sentence","Subitem8Sentence","Subitem9Sentence","Subitem10Sentence"])) {
-t_55 += runtime.suppressValue((lineno = 254, colno = 30, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item_sentence"), "m_paragraph_item_sentence", context, [t_71])), env.opts.autoescape);
+t_55 += runtime.suppressValue((lineno = 256, colno = 30, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item_sentence"), "m_paragraph_item_sentence", context, [t_71])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.inOperator(runtime.memberLookup((t_71),"tag"),["Item","Subitem1","Subitem2","Subitem3","Subitem4","Subitem5","Subitem6","Subitem7","Subitem8","Subitem9","Subitem10"])) {
-t_55 += runtime.suppressValue((lineno = 261, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_71])), env.opts.autoescape);
+t_55 += runtime.suppressValue((lineno = 263, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_71])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_71),"tag") == "TableStruct") {
-t_55 += runtime.suppressValue((lineno = 263, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_struct"), "m_table_struct", context, [t_71])), env.opts.autoescape);
+t_55 += runtime.suppressValue((lineno = 265, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_struct"), "m_table_struct", context, [t_71])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_71),"tag") == "List") {
-t_55 += runtime.suppressValue((lineno = 265, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_list"), "m_list", context, [t_71])), env.opts.autoescape);
+t_55 += runtime.suppressValue((lineno = 267, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_list"), "m_list", context, [t_71])), env.opts.autoescape);
 ;
 }
 else {
-t_55 += runtime.suppressValue((lineno = 267, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_71])), env.opts.autoescape);
+t_55 += runtime.suppressValue((lineno = 269, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_71])), env.opts.autoescape);
 ;
 }
 ;
@@ -2807,12 +3083,12 @@ frame.set("loop.first", t_78 === 0);
 frame.set("loop.last", t_78 === t_79 - 1);
 frame.set("loop.length", t_79);
 if(runtime.memberLookup((t_81),"tag") == "Sentence") {
-t_77 += runtime.suppressValue((lineno = 279, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_81])), env.opts.autoescape);
+t_77 += runtime.suppressValue((lineno = 281, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_81])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_81),"tag") == "Column") {
-t_77 += runtime.suppressValue((lineno = 281, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_column"), "m_column", context, [t_81])), env.opts.autoescape);
+t_77 += runtime.suppressValue((lineno = 283, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_column"), "m_column", context, [t_81])), env.opts.autoescape);
 if(!runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"last")) {
 t_77 += runtime.suppressValue("　", env.opts.autoescape);
 ;
@@ -2820,7 +3096,7 @@ t_77 += runtime.suppressValue("　", env.opts.autoescape);
 ;
 }
 else {
-t_77 += runtime.suppressValue((lineno = 286, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_81])), env.opts.autoescape);
+t_77 += runtime.suppressValue((lineno = 288, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_81])), env.opts.autoescape);
 ;
 }
 ;
@@ -2859,11 +3135,11 @@ frame.set("loop.first", t_84 === 0);
 frame.set("loop.last", t_84 === t_85 - 1);
 frame.set("loop.length", t_85);
 if(runtime.memberLookup((t_87),"tag") == "Sentence") {
-t_83 += runtime.suppressValue((lineno = 296, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_87])), env.opts.autoescape);
+t_83 += runtime.suppressValue((lineno = 298, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_87])), env.opts.autoescape);
 ;
 }
 else {
-t_83 += runtime.suppressValue((lineno = 298, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_87])), env.opts.autoescape);
+t_83 += runtime.suppressValue((lineno = 300, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_87])), env.opts.autoescape);
 ;
 }
 ;
@@ -2900,16 +3176,16 @@ frame.set("loop.first", t_90 === 0);
 frame.set("loop.last", t_90 === t_91 - 1);
 frame.set("loop.length", t_91);
 if(runtime.memberLookup((t_93),"tag") == "Table") {
-t_89 += runtime.suppressValue((lineno = 308, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table"), "m_table", context, [t_93])), env.opts.autoescape);
+t_89 += runtime.suppressValue((lineno = 310, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table"), "m_table", context, [t_93])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_93),"tag") == "Remarks") {
-t_89 += runtime.suppressValue((lineno = 310, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_93])), env.opts.autoescape);
+t_89 += runtime.suppressValue((lineno = 312, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_93])), env.opts.autoescape);
 ;
 }
 else {
-t_89 += runtime.suppressValue((lineno = 312, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_93])), env.opts.autoescape);
+t_89 += runtime.suppressValue((lineno = 314, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_93])), env.opts.autoescape);
 ;
 }
 ;
@@ -2949,11 +3225,11 @@ frame.set("loop.first", t_96 === 0);
 frame.set("loop.last", t_96 === t_97 - 1);
 frame.set("loop.length", t_97);
 if(runtime.memberLookup((t_99),"tag") == "TableRow") {
-t_95 += runtime.suppressValue((lineno = 323, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_row"), "m_table_row", context, [t_99])), env.opts.autoescape);
+t_95 += runtime.suppressValue((lineno = 325, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_row"), "m_table_row", context, [t_99])), env.opts.autoescape);
 ;
 }
 else {
-t_95 += runtime.suppressValue((lineno = 325, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_99])), env.opts.autoescape);
+t_95 += runtime.suppressValue((lineno = 327, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_99])), env.opts.autoescape);
 ;
 }
 ;
@@ -2992,11 +3268,11 @@ frame.set("loop.first", t_102 === 0);
 frame.set("loop.last", t_102 === t_103 - 1);
 frame.set("loop.length", t_103);
 if(runtime.memberLookup((t_105),"tag") == "TableColumn") {
-t_101 += runtime.suppressValue((lineno = 337, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_column"), "m_table_column", context, [t_105])), env.opts.autoescape);
+t_101 += runtime.suppressValue((lineno = 339, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_column"), "m_table_column", context, [t_105])), env.opts.autoescape);
 ;
 }
 else {
-t_101 += runtime.suppressValue((lineno = 339, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_105])), env.opts.autoescape);
+t_101 += runtime.suppressValue((lineno = 341, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_105])), env.opts.autoescape);
 ;
 }
 ;
@@ -3086,12 +3362,12 @@ frame.set("loop.last", t_108 === t_109 - 1);
 frame.set("loop.length", t_109);
 if(runtime.memberLookup((t_111),"tag") == "Sentence") {
 t_107 += "<div class=\"sentence\">";
-t_107 += runtime.suppressValue((lineno = 378, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_111])), env.opts.autoescape);
+t_107 += runtime.suppressValue((lineno = 380, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_111])), env.opts.autoescape);
 t_107 += "</div>";
 ;
 }
 else {
-t_107 += runtime.suppressValue((lineno = 381, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_111])), env.opts.autoescape);
+t_107 += runtime.suppressValue((lineno = 383, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_111])), env.opts.autoescape);
 ;
 }
 ;
@@ -3106,18 +3382,17 @@ return new runtime.SafeString(t_107);
 context.addExport("m_table_column");
 context.setVariable("m_table_column", macro_t_106);
 var macro_t_112 = runtime.makeMacro(
-["appdx_table"], 
+["style_struct"], 
 [], 
-function (l_appdx_table, kwargs) {
+function (l_style_struct, kwargs) {
 var callerFrame = frame;
 frame = new runtime.Frame();
 kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
-frame.set("appdx_table", l_appdx_table);
-var t_113 = "";t_113 += "<div class=\"appdx_table\">";
-frame = frame.push();
-var t_116 = runtime.memberLookup((l_appdx_table),"children");
+frame.set("style_struct", l_style_struct);
+var t_113 = "";frame = frame.push();
+var t_116 = runtime.memberLookup((l_style_struct),"children");
 if(t_116) {var t_115 = t_116.length;
 for(var t_114=0; t_114 < t_116.length; t_114++) {
 var t_117 = t_116[t_114];
@@ -3129,83 +3404,24 @@ frame.set("loop.revindex0", t_115 - t_114 - 1);
 frame.set("loop.first", t_114 === 0);
 frame.set("loop.last", t_114 === t_115 - 1);
 frame.set("loop.length", t_115);
-if(runtime.memberLookup((t_117),"tag") == "AppdxTableTitle") {
-t_113 += "<div class=\"appdx_table_title law-anchor\"\r\n         data-tag=\"";
-t_113 += runtime.suppressValue(runtime.memberLookup((l_appdx_table),"tag"), env.opts.autoescape);
-t_113 += "\"\r\n         data-name=\"";
-t_113 += runtime.suppressValue(runtime.memberLookup((runtime.memberLookup((t_117),"children")),0), env.opts.autoescape);
-t_113 += "\">";
-t_113 += runtime.suppressValue((lineno = 396, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_117])), env.opts.autoescape);
-frame = frame.push();
-var t_120 = runtime.memberLookup((l_appdx_table),"children");
-if(t_120) {var t_119 = t_120.length;
-for(var t_118=0; t_118 < t_120.length; t_118++) {
-var t_121 = t_120[t_118];
-frame.set("el2", t_121);
-frame.set("loop.index", t_118 + 1);
-frame.set("loop.index0", t_118);
-frame.set("loop.revindex", t_119 - t_118);
-frame.set("loop.revindex0", t_119 - t_118 - 1);
-frame.set("loop.first", t_118 === 0);
-frame.set("loop.last", t_118 === t_119 - 1);
-frame.set("loop.length", t_119);
-if(runtime.memberLookup((t_121),"tag") == "RelatedArticleNum") {
-t_113 += runtime.suppressValue((lineno = 399, colno = 17, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_121])), env.opts.autoescape);
-;
-}
-;
-}
-}
-frame = frame.pop();
+if(runtime.memberLookup((t_117),"tag") == "StyleStructTitle") {
+t_113 += "<div class=\"style_struct_title\">";
+t_113 += runtime.suppressValue((lineno = 395, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_117])), env.opts.autoescape);
 t_113 += "</div>";
 ;
 }
-;
-}
-}
-frame = frame.pop();
-t_113 += "<div class=\"appdx_table_body\">";
-frame = frame.push();
-var t_124 = runtime.memberLookup((l_appdx_table),"children");
-if(t_124) {var t_123 = t_124.length;
-for(var t_122=0; t_122 < t_124.length; t_122++) {
-var t_125 = t_124[t_122];
-frame.set("el", t_125);
-frame.set("loop.index", t_122 + 1);
-frame.set("loop.index0", t_122);
-frame.set("loop.revindex", t_123 - t_122);
-frame.set("loop.revindex0", t_123 - t_122 - 1);
-frame.set("loop.first", t_122 === 0);
-frame.set("loop.last", t_122 === t_123 - 1);
-frame.set("loop.length", t_123);
-if(runtime.memberLookup((t_125),"tag") == "AppdxTableTitle") {
+else {
+if(runtime.memberLookup((t_117),"tag") == "Style") {
+t_113 += runtime.suppressValue((lineno = 398, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_style"), "m_style", context, [t_117])), env.opts.autoescape);
 ;
 }
 else {
-if(runtime.memberLookup((t_125),"tag") == "RelatedArticleNum") {
+if(runtime.memberLookup((t_117),"tag") == "Remarks") {
+t_113 += runtime.suppressValue((lineno = 400, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_117])), env.opts.autoescape);
 ;
 }
 else {
-if(runtime.memberLookup((t_125),"tag") == "TableStruct") {
-t_113 += runtime.suppressValue((lineno = 410, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_struct"), "m_table_struct", context, [t_125])), env.opts.autoescape);
-;
-}
-else {
-if(runtime.memberLookup((t_125),"tag") == "Item") {
-t_113 += runtime.suppressValue((lineno = 412, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_125])), env.opts.autoescape);
-;
-}
-else {
-if(runtime.memberLookup((t_125),"tag") == "Remarks") {
-t_113 += runtime.suppressValue((lineno = 414, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_125])), env.opts.autoescape);
-;
-}
-else {
-t_113 += runtime.suppressValue((lineno = 416, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_125])), env.opts.autoescape);
-;
-}
-;
-}
+t_113 += runtime.suppressValue((lineno = 402, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_117])), env.opts.autoescape);
 ;
 }
 ;
@@ -3216,69 +3432,115 @@ t_113 += runtime.suppressValue((lineno = 416, colno = 14, runtime.callWrap(runti
 }
 }
 frame = frame.pop();
-t_113 += "</div>\r\n</div>";
 ;
 frame = callerFrame;
 return new runtime.SafeString(t_113);
 });
-context.addExport("m_appdx_table");
-context.setVariable("m_appdx_table", macro_t_112);
-var macro_t_126 = runtime.makeMacro(
-["list"], 
+context.addExport("m_style_struct");
+context.setVariable("m_style_struct", macro_t_112);
+var macro_t_118 = runtime.makeMacro(
+["style"], 
 [], 
-function (l_list, kwargs) {
+function (l_style, kwargs) {
 var callerFrame = frame;
 frame = new runtime.Frame();
 kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
-frame.set("list", l_list);
-var t_127 = "";t_127 += "<div class=\"list\">";
-frame = frame.push();
-var t_130 = runtime.memberLookup((l_list),"children");
-if(t_130) {var t_129 = t_130.length;
-for(var t_128=0; t_128 < t_130.length; t_128++) {
-var t_131 = t_130[t_128];
-frame.set("el", t_131);
-frame.set("loop.index", t_128 + 1);
-frame.set("loop.index0", t_128);
-frame.set("loop.revindex", t_129 - t_128);
-frame.set("loop.revindex0", t_129 - t_128 - 1);
-frame.set("loop.first", t_128 === 0);
-frame.set("loop.last", t_128 === t_129 - 1);
-frame.set("loop.length", t_129);
-if(runtime.memberLookup((t_131),"tag") == "ListSentence") {
-t_127 += runtime.suppressValue((lineno = 429, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_list_sentence"), "m_list_sentence", context, [t_131])), env.opts.autoescape);
+frame.set("style", l_style);
+var t_119 = "";frame = frame.push();
+var t_122 = runtime.memberLookup((l_style),"children");
+if(t_122) {var t_121 = t_122.length;
+for(var t_120=0; t_120 < t_122.length; t_120++) {
+var t_123 = t_122[t_120];
+frame.set("el", t_123);
+frame.set("loop.index", t_120 + 1);
+frame.set("loop.index0", t_120);
+frame.set("loop.revindex", t_121 - t_120);
+frame.set("loop.revindex0", t_121 - t_120 - 1);
+frame.set("loop.first", t_120 === 0);
+frame.set("loop.last", t_120 === t_121 - 1);
+frame.set("loop.length", t_121);
+if(runtime.memberLookup((t_123),"tag") == "Fig") {
+t_119 += runtime.suppressValue((lineno = 412, colno = 10, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_fig"), "m_fig", context, [t_123])), env.opts.autoescape);
 ;
 }
 else {
-t_127 += runtime.suppressValue((lineno = 431, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_131])), env.opts.autoescape);
+t_119 += runtime.suppressValue((lineno = 414, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_123])), env.opts.autoescape);
 ;
 }
 ;
 }
 }
 frame = frame.pop();
-t_127 += "</div>";
 ;
 frame = callerFrame;
-return new runtime.SafeString(t_127);
+return new runtime.SafeString(t_119);
 });
-context.addExport("m_list");
-context.setVariable("m_list", macro_t_126);
-var macro_t_132 = runtime.makeMacro(
-["list_sentence"], 
+context.addExport("m_style");
+context.setVariable("m_style", macro_t_118);
+var macro_t_124 = runtime.makeMacro(
+["appdx_table"], 
 [], 
-function (l_list_sentence, kwargs) {
+function (l_appdx_table, kwargs) {
 var callerFrame = frame;
 frame = new runtime.Frame();
 kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
-frame.set("list_sentence", l_list_sentence);
-var t_133 = "";t_133 += "<div class=\"list-sentence\">";
+frame.set("appdx_table", l_appdx_table);
+var t_125 = "";t_125 += "<div class=\"appdx_table\">";
 frame = frame.push();
-var t_136 = runtime.memberLookup((l_list_sentence),"children");
+var t_128 = runtime.memberLookup((l_appdx_table),"children");
+if(t_128) {var t_127 = t_128.length;
+for(var t_126=0; t_126 < t_128.length; t_126++) {
+var t_129 = t_128[t_126];
+frame.set("el", t_129);
+frame.set("loop.index", t_126 + 1);
+frame.set("loop.index0", t_126);
+frame.set("loop.revindex", t_127 - t_126);
+frame.set("loop.revindex0", t_127 - t_126 - 1);
+frame.set("loop.first", t_126 === 0);
+frame.set("loop.last", t_126 === t_127 - 1);
+frame.set("loop.length", t_127);
+if(runtime.memberLookup((t_129),"tag") == "AppdxTableTitle") {
+t_125 += "<div class=\"appdx_table_title law-anchor\"\r\n         data-tag=\"";
+t_125 += runtime.suppressValue(runtime.memberLookup((l_appdx_table),"tag"), env.opts.autoescape);
+t_125 += "\"\r\n         data-name=\"";
+t_125 += runtime.suppressValue(runtime.memberLookup((runtime.memberLookup((t_129),"children")),0), env.opts.autoescape);
+t_125 += "\">";
+t_125 += runtime.suppressValue((lineno = 428, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_129])), env.opts.autoescape);
+frame = frame.push();
+var t_132 = runtime.memberLookup((l_appdx_table),"children");
+if(t_132) {var t_131 = t_132.length;
+for(var t_130=0; t_130 < t_132.length; t_130++) {
+var t_133 = t_132[t_130];
+frame.set("el2", t_133);
+frame.set("loop.index", t_130 + 1);
+frame.set("loop.index0", t_130);
+frame.set("loop.revindex", t_131 - t_130);
+frame.set("loop.revindex0", t_131 - t_130 - 1);
+frame.set("loop.first", t_130 === 0);
+frame.set("loop.last", t_130 === t_131 - 1);
+frame.set("loop.length", t_131);
+if(runtime.memberLookup((t_133),"tag") == "RelatedArticleNum") {
+t_125 += runtime.suppressValue((lineno = 431, colno = 17, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_133])), env.opts.autoescape);
+;
+}
+;
+}
+}
+frame = frame.pop();
+t_125 += "</div>";
+;
+}
+;
+}
+}
+frame = frame.pop();
+t_125 += "<div class=\"appdx_table_body\">";
+frame = frame.push();
+var t_136 = runtime.memberLookup((l_appdx_table),"children");
 if(t_136) {var t_135 = t_136.length;
 for(var t_134=0; t_134 < t_136.length; t_134++) {
 var t_137 = t_136[t_134];
@@ -3290,40 +3552,64 @@ frame.set("loop.revindex0", t_135 - t_134 - 1);
 frame.set("loop.first", t_134 === 0);
 frame.set("loop.last", t_134 === t_135 - 1);
 frame.set("loop.length", t_135);
-if(runtime.memberLookup((t_137),"tag") == "Sentence") {
-t_133 += "<div class=\"sentence\">";
-t_133 += runtime.suppressValue((lineno = 444, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_137])), env.opts.autoescape);
-t_133 += "</div>";
+if(runtime.memberLookup((t_137),"tag") == "AppdxTableTitle") {
 ;
 }
 else {
-t_133 += runtime.suppressValue((lineno = 447, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_137])), env.opts.autoescape);
+if(runtime.memberLookup((t_137),"tag") == "RelatedArticleNum") {
+;
+}
+else {
+if(runtime.memberLookup((t_137),"tag") == "TableStruct") {
+t_125 += runtime.suppressValue((lineno = 442, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_struct"), "m_table_struct", context, [t_137])), env.opts.autoescape);
+;
+}
+else {
+if(runtime.memberLookup((t_137),"tag") == "Item") {
+t_125 += runtime.suppressValue((lineno = 444, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_137])), env.opts.autoescape);
+;
+}
+else {
+if(runtime.memberLookup((t_137),"tag") == "Remarks") {
+t_125 += runtime.suppressValue((lineno = 446, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_137])), env.opts.autoescape);
+;
+}
+else {
+t_125 += runtime.suppressValue((lineno = 448, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_137])), env.opts.autoescape);
+;
+}
+;
+}
+;
+}
+;
+}
 ;
 }
 ;
 }
 }
 frame = frame.pop();
-t_133 += "</div>";
+t_125 += "</div>\r\n</div>";
 ;
 frame = callerFrame;
-return new runtime.SafeString(t_133);
+return new runtime.SafeString(t_125);
 });
-context.addExport("m_list_sentence");
-context.setVariable("m_list_sentence", macro_t_132);
+context.addExport("m_appdx_table");
+context.setVariable("m_appdx_table", macro_t_124);
 var macro_t_138 = runtime.makeMacro(
-["remarks"], 
+["appdx_style"], 
 [], 
-function (l_remarks, kwargs) {
+function (l_appdx_style, kwargs) {
 var callerFrame = frame;
 frame = new runtime.Frame();
 kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
-frame.set("remarks", l_remarks);
-var t_139 = "";t_139 += "<div class=\"remarks\">";
+frame.set("appdx_style", l_appdx_style);
+var t_139 = "";t_139 += "<div class=\"appdx_style\">";
 frame = frame.push();
-var t_142 = runtime.memberLookup((l_remarks),"children");
+var t_142 = runtime.memberLookup((l_appdx_style),"children");
 if(t_142) {var t_141 = t_142.length;
 for(var t_140=0; t_140 < t_142.length; t_140++) {
 var t_143 = t_142[t_140];
@@ -3335,30 +3621,28 @@ frame.set("loop.revindex0", t_141 - t_140 - 1);
 frame.set("loop.first", t_140 === 0);
 frame.set("loop.last", t_140 === t_141 - 1);
 frame.set("loop.length", t_141);
-if(runtime.memberLookup((t_143),"tag") == "RemarksLabel") {
-t_139 += runtime.suppressValue((lineno = 459, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_143])), env.opts.autoescape);
-;
-}
-else {
-if(runtime.memberLookup((t_143),"tag") == "Sentence") {
-t_139 += runtime.suppressValue("　", env.opts.autoescape);
-t_139 += runtime.suppressValue((lineno = 461, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_143])), env.opts.autoescape);
-if(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"last")) {
-;
-}
-;
-}
-else {
-if(runtime.memberLookup((t_143),"tag") == "Item") {
-t_139 += runtime.suppressValue((lineno = 465, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_143])), env.opts.autoescape);
-;
-}
-else {
-t_139 += runtime.suppressValue((lineno = 467, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_143])), env.opts.autoescape);
-;
-}
-;
-}
+if(runtime.memberLookup((t_143),"tag") == "AppdxStyleTitle") {
+t_139 += "<div class=\"appdx_style_title law-anchor\"\r\n        data-tag=\"";
+t_139 += runtime.suppressValue(runtime.memberLookup((l_appdx_style),"tag"), env.opts.autoescape);
+t_139 += "\"\r\n        data-name=\"";
+t_139 += runtime.suppressValue(runtime.memberLookup((runtime.memberLookup((t_143),"children")),0), env.opts.autoescape);
+t_139 += "\">";
+t_139 += runtime.suppressValue((lineno = 464, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_143])), env.opts.autoescape);
+frame = frame.push();
+var t_146 = runtime.memberLookup((l_appdx_style),"children");
+if(t_146) {var t_145 = t_146.length;
+for(var t_144=0; t_144 < t_146.length; t_144++) {
+var t_147 = t_146[t_144];
+frame.set("el2", t_147);
+frame.set("loop.index", t_144 + 1);
+frame.set("loop.index0", t_144);
+frame.set("loop.revindex", t_145 - t_144);
+frame.set("loop.revindex0", t_145 - t_144 - 1);
+frame.set("loop.first", t_144 === 0);
+frame.set("loop.last", t_144 === t_145 - 1);
+frame.set("loop.length", t_145);
+if(runtime.memberLookup((t_147),"tag") == "RelatedArticleNum") {
+t_139 += runtime.suppressValue((lineno = 467, colno = 17, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_147])), env.opts.autoescape);
 ;
 }
 ;
@@ -3367,29 +3651,250 @@ t_139 += runtime.suppressValue((lineno = 467, colno = 14, runtime.callWrap(runti
 frame = frame.pop();
 t_139 += "</div>";
 ;
+}
+;
+}
+}
+frame = frame.pop();
+t_139 += "<div class=\"appdx_style_body\">";
+frame = frame.push();
+var t_150 = runtime.memberLookup((l_appdx_style),"children");
+if(t_150) {var t_149 = t_150.length;
+for(var t_148=0; t_148 < t_150.length; t_148++) {
+var t_151 = t_150[t_148];
+frame.set("el", t_151);
+frame.set("loop.index", t_148 + 1);
+frame.set("loop.index0", t_148);
+frame.set("loop.revindex", t_149 - t_148);
+frame.set("loop.revindex0", t_149 - t_148 - 1);
+frame.set("loop.first", t_148 === 0);
+frame.set("loop.last", t_148 === t_149 - 1);
+frame.set("loop.length", t_149);
+if(runtime.memberLookup((t_151),"tag") == "AppdxStyleTitle") {
+;
+}
+else {
+if(runtime.memberLookup((t_151),"tag") == "RelatedArticleNum") {
+;
+}
+else {
+if(runtime.memberLookup((t_151),"tag") == "StyleStruct") {
+t_139 += runtime.suppressValue((lineno = 478, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_style_struct"), "m_style_struct", context, [t_151])), env.opts.autoescape);
+;
+}
+else {
+if(runtime.memberLookup((t_151),"tag") == "Remarks") {
+t_139 += runtime.suppressValue((lineno = 480, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_151])), env.opts.autoescape);
+;
+}
+else {
+t_139 += runtime.suppressValue((lineno = 482, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_151])), env.opts.autoescape);
+;
+}
+;
+}
+;
+}
+;
+}
+;
+}
+}
+frame = frame.pop();
+t_139 += "</div>\r\n</div>";
+;
 frame = callerFrame;
 return new runtime.SafeString(t_139);
 });
-context.addExport("m_remarks");
-context.setVariable("m_remarks", macro_t_138);
-var macro_t_144 = runtime.makeMacro(
-["el"], 
+context.addExport("m_appdx_style");
+context.setVariable("m_appdx_style", macro_t_138);
+var macro_t_152 = runtime.makeMacro(
+["list"], 
 [], 
-function (l_el, kwargs) {
+function (l_list, kwargs) {
 var callerFrame = frame;
 frame = new runtime.Frame();
 kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
-frame.set("el", l_el);
-var t_145 = "";t_145 += runtime.suppressValue(env.getFilter("e").call(context, (lineno = 476, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element_raw"), "m_element_raw", context, [l_el]))), env.opts.autoescape);
+frame.set("list", l_list);
+var t_153 = "";t_153 += "<div class=\"list\">";
+frame = frame.push();
+var t_156 = runtime.memberLookup((l_list),"children");
+if(t_156) {var t_155 = t_156.length;
+for(var t_154=0; t_154 < t_156.length; t_154++) {
+var t_157 = t_156[t_154];
+frame.set("el", t_157);
+frame.set("loop.index", t_154 + 1);
+frame.set("loop.index0", t_154);
+frame.set("loop.revindex", t_155 - t_154);
+frame.set("loop.revindex0", t_155 - t_154 - 1);
+frame.set("loop.first", t_154 === 0);
+frame.set("loop.last", t_154 === t_155 - 1);
+frame.set("loop.length", t_155);
+if(runtime.memberLookup((t_157),"tag") == "ListSentence") {
+t_153 += runtime.suppressValue((lineno = 495, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_list_sentence"), "m_list_sentence", context, [t_157])), env.opts.autoescape);
+;
+}
+else {
+t_153 += runtime.suppressValue((lineno = 497, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_157])), env.opts.autoescape);
+;
+}
+;
+}
+}
+frame = frame.pop();
+t_153 += "</div>";
 ;
 frame = callerFrame;
-return new runtime.SafeString(t_145);
+return new runtime.SafeString(t_153);
 });
-context.addExport("m_element");
-context.setVariable("m_element", macro_t_144);
-var macro_t_146 = runtime.makeMacro(
+context.addExport("m_list");
+context.setVariable("m_list", macro_t_152);
+var macro_t_158 = runtime.makeMacro(
+["list_sentence"], 
+[], 
+function (l_list_sentence, kwargs) {
+var callerFrame = frame;
+frame = new runtime.Frame();
+kwargs = kwargs || {};
+if (kwargs.hasOwnProperty("caller")) {
+frame.set("caller", kwargs.caller); }
+frame.set("list_sentence", l_list_sentence);
+var t_159 = "";t_159 += "<div class=\"list-sentence\">";
+frame = frame.push();
+var t_162 = runtime.memberLookup((l_list_sentence),"children");
+if(t_162) {var t_161 = t_162.length;
+for(var t_160=0; t_160 < t_162.length; t_160++) {
+var t_163 = t_162[t_160];
+frame.set("el", t_163);
+frame.set("loop.index", t_160 + 1);
+frame.set("loop.index0", t_160);
+frame.set("loop.revindex", t_161 - t_160);
+frame.set("loop.revindex0", t_161 - t_160 - 1);
+frame.set("loop.first", t_160 === 0);
+frame.set("loop.last", t_160 === t_161 - 1);
+frame.set("loop.length", t_161);
+if(runtime.memberLookup((t_163),"tag") == "Sentence") {
+t_159 += "<div class=\"sentence\">";
+t_159 += runtime.suppressValue((lineno = 510, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_163])), env.opts.autoescape);
+t_159 += "</div>";
+;
+}
+else {
+t_159 += runtime.suppressValue((lineno = 513, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_163])), env.opts.autoescape);
+;
+}
+;
+}
+}
+frame = frame.pop();
+t_159 += "</div>";
+;
+frame = callerFrame;
+return new runtime.SafeString(t_159);
+});
+context.addExport("m_list_sentence");
+context.setVariable("m_list_sentence", macro_t_158);
+var macro_t_164 = runtime.makeMacro(
+["fig"], 
+[], 
+function (l_fig, kwargs) {
+var callerFrame = frame;
+frame = new runtime.Frame();
+kwargs = kwargs || {};
+if (kwargs.hasOwnProperty("caller")) {
+frame.set("caller", kwargs.caller); }
+frame.set("fig", l_fig);
+var t_165 = "";t_165 += "[";
+t_165 += runtime.suppressValue(env.getFilter("escape").call(context, runtime.memberLookup((runtime.memberLookup((l_fig),"attr")),"src")), env.opts.autoescape);
+t_165 += "]";
+frame = frame.push();
+var t_168 = runtime.memberLookup((l_fig),"children");
+if(t_168) {var t_167 = t_168.length;
+for(var t_166=0; t_166 < t_168.length; t_166++) {
+var t_169 = t_168[t_166];
+frame.set("el", t_169);
+frame.set("loop.index", t_166 + 1);
+frame.set("loop.index0", t_166);
+frame.set("loop.revindex", t_167 - t_166);
+frame.set("loop.revindex0", t_167 - t_166 - 1);
+frame.set("loop.first", t_166 === 0);
+frame.set("loop.last", t_166 === t_167 - 1);
+frame.set("loop.length", t_167);
+t_165 += runtime.suppressValue((lineno = 524, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_169])), env.opts.autoescape);
+;
+}
+}
+frame = frame.pop();
+;
+frame = callerFrame;
+return new runtime.SafeString(t_165);
+});
+context.addExport("m_fig");
+context.setVariable("m_fig", macro_t_164);
+var macro_t_170 = runtime.makeMacro(
+["remarks"], 
+[], 
+function (l_remarks, kwargs) {
+var callerFrame = frame;
+frame = new runtime.Frame();
+kwargs = kwargs || {};
+if (kwargs.hasOwnProperty("caller")) {
+frame.set("caller", kwargs.caller); }
+frame.set("remarks", l_remarks);
+var t_171 = "";t_171 += "<div class=\"remarks\">";
+frame = frame.push();
+var t_174 = runtime.memberLookup((l_remarks),"children");
+if(t_174) {var t_173 = t_174.length;
+for(var t_172=0; t_172 < t_174.length; t_172++) {
+var t_175 = t_174[t_172];
+frame.set("el", t_175);
+frame.set("loop.index", t_172 + 1);
+frame.set("loop.index0", t_172);
+frame.set("loop.revindex", t_173 - t_172);
+frame.set("loop.revindex0", t_173 - t_172 - 1);
+frame.set("loop.first", t_172 === 0);
+frame.set("loop.last", t_172 === t_173 - 1);
+frame.set("loop.length", t_173);
+if(runtime.memberLookup((t_175),"tag") == "RemarksLabel") {
+t_171 += runtime.suppressValue((lineno = 534, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_175])), env.opts.autoescape);
+;
+}
+else {
+if(runtime.memberLookup((t_175),"tag") == "Sentence") {
+t_171 += runtime.suppressValue("　", env.opts.autoescape);
+t_171 += runtime.suppressValue((lineno = 536, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_175])), env.opts.autoescape);
+if(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"last")) {
+;
+}
+;
+}
+else {
+if(runtime.memberLookup((t_175),"tag") == "Item") {
+t_171 += runtime.suppressValue((lineno = 540, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_175])), env.opts.autoescape);
+;
+}
+else {
+t_171 += runtime.suppressValue((lineno = 542, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_175])), env.opts.autoescape);
+;
+}
+;
+}
+;
+}
+;
+}
+}
+frame = frame.pop();
+t_171 += "</div>";
+;
+frame = callerFrame;
+return new runtime.SafeString(t_171);
+});
+context.addExport("m_remarks");
+context.setVariable("m_remarks", macro_t_170);
+var macro_t_176 = runtime.makeMacro(
 ["el"], 
 [], 
 function (l_el, kwargs) {
@@ -3399,106 +3904,125 @@ kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
 frame.set("el", l_el);
-var t_147 = "";if(!l_el) {
+var t_177 = "";t_177 += "<pre>";
+t_177 += runtime.suppressValue(env.getFilter("escape").call(context, ("" + (lineno = 552, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element_raw"), "m_element_raw", context, [l_el])))), env.opts.autoescape);
+t_177 += "</pre>";
+;
+frame = callerFrame;
+return new runtime.SafeString(t_177);
+});
+context.addExport("m_element");
+context.setVariable("m_element", macro_t_176);
+var macro_t_178 = runtime.makeMacro(
+["el"], 
+[], 
+function (l_el, kwargs) {
+var callerFrame = frame;
+frame = new runtime.Frame();
+kwargs = kwargs || {};
+if (kwargs.hasOwnProperty("caller")) {
+frame.set("caller", kwargs.caller); }
+frame.set("el", l_el);
+var t_179 = "";if(!l_el) {
 ;
 }
 else {
 if(!runtime.memberLookup((l_el),"tag")) {
-t_147 += runtime.suppressValue(l_el, env.opts.autoescape);
+t_179 += runtime.suppressValue(env.getFilter("escape").call(context, l_el), env.opts.autoescape);
 ;
 }
 else {
-t_147 += "<";
-t_147 += runtime.suppressValue(runtime.memberLookup((l_el),"tag"), env.opts.autoescape);
+t_179 += "<";
+t_179 += runtime.suppressValue(runtime.memberLookup((l_el),"tag"), env.opts.autoescape);
 frame = frame.push();
-var t_150 = env.getFilter("dictsort").call(context, runtime.memberLookup((l_el),"attr"));
-if(t_150) {var t_148;
-if(runtime.isArray(t_150)) {
-var t_149 = t_150.length;
-for(t_148=0; t_148 < t_150.length; t_148++) {
-var t_151 = t_150[t_148][0]
-frame.set("key", t_150[t_148][0]);
-var t_152 = t_150[t_148][1]
-frame.set("value", t_150[t_148][1]);
-frame.set("loop.index", t_148 + 1);
-frame.set("loop.index0", t_148);
-frame.set("loop.revindex", t_149 - t_148);
-frame.set("loop.revindex0", t_149 - t_148 - 1);
-frame.set("loop.first", t_148 === 0);
-frame.set("loop.last", t_148 === t_149 - 1);
-frame.set("loop.length", t_149);
-t_147 += runtime.suppressValue(" ", env.opts.autoescape);
-t_147 += runtime.suppressValue(t_151, env.opts.autoescape);
-t_147 += "=\"";
-t_147 += runtime.suppressValue(t_152, env.opts.autoescape);
-t_147 += "\"";
+var t_182 = env.getFilter("dictsort").call(context, runtime.memberLookup((l_el),"attr"));
+if(t_182) {var t_180;
+if(runtime.isArray(t_182)) {
+var t_181 = t_182.length;
+for(t_180=0; t_180 < t_182.length; t_180++) {
+var t_183 = t_182[t_180][0]
+frame.set("key", t_182[t_180][0]);
+var t_184 = t_182[t_180][1]
+frame.set("value", t_182[t_180][1]);
+frame.set("loop.index", t_180 + 1);
+frame.set("loop.index0", t_180);
+frame.set("loop.revindex", t_181 - t_180);
+frame.set("loop.revindex0", t_181 - t_180 - 1);
+frame.set("loop.first", t_180 === 0);
+frame.set("loop.last", t_180 === t_181 - 1);
+frame.set("loop.length", t_181);
+t_179 += runtime.suppressValue(" ", env.opts.autoescape);
+t_179 += runtime.suppressValue(t_183, env.opts.autoescape);
+t_179 += "=\"";
+t_179 += runtime.suppressValue(t_184, env.opts.autoescape);
+t_179 += "\"";
 ;
 }
 } else {
-t_148 = -1;
-var t_149 = runtime.keys(t_150).length;
-for(var t_153 in t_150) {
-t_148++;
-var t_154 = t_150[t_153];
-frame.set("key", t_153);
-frame.set("value", t_154);
-frame.set("loop.index", t_148 + 1);
-frame.set("loop.index0", t_148);
-frame.set("loop.revindex", t_149 - t_148);
-frame.set("loop.revindex0", t_149 - t_148 - 1);
-frame.set("loop.first", t_148 === 0);
-frame.set("loop.last", t_148 === t_149 - 1);
-frame.set("loop.length", t_149);
-t_147 += runtime.suppressValue(" ", env.opts.autoescape);
-t_147 += runtime.suppressValue(t_153, env.opts.autoescape);
-t_147 += "=\"";
-t_147 += runtime.suppressValue(t_154, env.opts.autoescape);
-t_147 += "\"";
+t_180 = -1;
+var t_181 = runtime.keys(t_182).length;
+for(var t_185 in t_182) {
+t_180++;
+var t_186 = t_182[t_185];
+frame.set("key", t_185);
+frame.set("value", t_186);
+frame.set("loop.index", t_180 + 1);
+frame.set("loop.index0", t_180);
+frame.set("loop.revindex", t_181 - t_180);
+frame.set("loop.revindex0", t_181 - t_180 - 1);
+frame.set("loop.first", t_180 === 0);
+frame.set("loop.last", t_180 === t_181 - 1);
+frame.set("loop.length", t_181);
+t_179 += runtime.suppressValue(" ", env.opts.autoescape);
+t_179 += runtime.suppressValue(t_185, env.opts.autoescape);
+t_179 += "=\"";
+t_179 += runtime.suppressValue(t_186, env.opts.autoescape);
+t_179 += "\"";
 ;
 }
 }
 }
 frame = frame.pop();
-t_147 += ">";
+t_179 += ">";
 frame = frame.push();
-var t_157 = runtime.memberLookup((l_el),"children");
-if(t_157) {var t_156 = t_157.length;
-for(var t_155=0; t_155 < t_157.length; t_155++) {
-var t_158 = t_157[t_155];
-frame.set("child", t_158);
-frame.set("loop.index", t_155 + 1);
-frame.set("loop.index0", t_155);
-frame.set("loop.revindex", t_156 - t_155);
-frame.set("loop.revindex0", t_156 - t_155 - 1);
-frame.set("loop.first", t_155 === 0);
-frame.set("loop.last", t_155 === t_156 - 1);
-frame.set("loop.length", t_156);
-if(!runtime.memberLookup((t_158),"tag")) {
-t_147 += runtime.suppressValue(t_158, env.opts.autoescape);
+var t_189 = runtime.memberLookup((l_el),"children");
+if(t_189) {var t_188 = t_189.length;
+for(var t_187=0; t_187 < t_189.length; t_187++) {
+var t_190 = t_189[t_187];
+frame.set("child", t_190);
+frame.set("loop.index", t_187 + 1);
+frame.set("loop.index0", t_187);
+frame.set("loop.revindex", t_188 - t_187);
+frame.set("loop.revindex0", t_188 - t_187 - 1);
+frame.set("loop.first", t_187 === 0);
+frame.set("loop.last", t_187 === t_188 - 1);
+frame.set("loop.length", t_188);
+if(!runtime.memberLookup((t_190),"tag")) {
+t_179 += runtime.suppressValue(t_190, env.opts.autoescape);
 ;
 }
 else {
-t_147 += runtime.suppressValue((lineno = 493, colno = 22, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element_raw"), "m_element_raw", context, [t_158])), env.opts.autoescape);
+t_179 += runtime.suppressValue((lineno = 570, colno = 22, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element_raw"), "m_element_raw", context, [t_190])), env.opts.autoescape);
 ;
 }
 ;
 }
 }
 frame = frame.pop();
-t_147 += "</";
-t_147 += runtime.suppressValue(runtime.memberLookup((l_el),"tag"), env.opts.autoescape);
-t_147 += ">";
+t_179 += "</";
+t_179 += runtime.suppressValue(runtime.memberLookup((l_el),"tag"), env.opts.autoescape);
+t_179 += ">";
 ;
 }
 ;
 }
 ;
 frame = callerFrame;
-return new runtime.SafeString(t_147);
+return new runtime.SafeString(t_179);
 });
 context.addExport("m_element_raw");
-context.setVariable("m_element_raw", macro_t_146);
-var macro_t_159 = runtime.makeMacro(
+context.setVariable("m_element_raw", macro_t_178);
+var macro_t_191 = runtime.makeMacro(
 ["el"], 
 [], 
 function (l_el, kwargs) {
@@ -3508,39 +4032,39 @@ kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
 frame.set("el", l_el);
-var t_160 = "";if(!l_el) {
+var t_192 = "";if(!l_el) {
 ;
 }
 else {
 if(!runtime.memberLookup((l_el),"tag")) {
-t_160 += runtime.suppressValue(l_el, env.opts.autoescape);
+t_192 += runtime.suppressValue(l_el, env.opts.autoescape);
 ;
 }
 else {
 frame = frame.push();
-var t_163 = runtime.memberLookup((l_el),"children");
-if(t_163) {var t_162 = t_163.length;
-for(var t_161=0; t_161 < t_163.length; t_161++) {
-var t_164 = t_163[t_161];
-frame.set("child", t_164);
-frame.set("loop.index", t_161 + 1);
-frame.set("loop.index0", t_161);
-frame.set("loop.revindex", t_162 - t_161);
-frame.set("loop.revindex0", t_162 - t_161 - 1);
-frame.set("loop.first", t_161 === 0);
-frame.set("loop.last", t_161 === t_162 - 1);
-frame.set("loop.length", t_162);
-if(!runtime.memberLookup((t_164),"tag")) {
-t_160 += runtime.suppressValue(t_164, env.opts.autoescape);
+var t_195 = runtime.memberLookup((l_el),"children");
+if(t_195) {var t_194 = t_195.length;
+for(var t_193=0; t_193 < t_195.length; t_193++) {
+var t_196 = t_195[t_193];
+frame.set("child", t_196);
+frame.set("loop.index", t_193 + 1);
+frame.set("loop.index0", t_193);
+frame.set("loop.revindex", t_194 - t_193);
+frame.set("loop.revindex0", t_194 - t_193 - 1);
+frame.set("loop.first", t_193 === 0);
+frame.set("loop.last", t_193 === t_194 - 1);
+frame.set("loop.length", t_194);
+if(!runtime.memberLookup((t_196),"tag")) {
+t_192 += runtime.suppressValue(t_196, env.opts.autoescape);
 ;
 }
 else {
-if(runtime.memberLookup((t_164),"tag") == "Ruby") {
-t_160 += runtime.suppressValue((lineno = 511, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element_raw"), "m_element_raw", context, [t_164])), env.opts.autoescape);
+if(runtime.memberLookup((t_196),"tag") == "Ruby") {
+t_192 += runtime.suppressValue((lineno = 588, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element_raw"), "m_element_raw", context, [t_196])), env.opts.autoescape);
 ;
 }
 else {
-t_160 += runtime.suppressValue((lineno = 513, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_164])), env.opts.autoescape);
+t_192 += runtime.suppressValue((lineno = 590, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_196])), env.opts.autoescape);
 ;
 }
 ;
@@ -3555,12 +4079,12 @@ frame = frame.pop();
 }
 ;
 frame = callerFrame;
-return new runtime.SafeString(t_160);
+return new runtime.SafeString(t_192);
 });
 context.addExport("m_text");
-context.setVariable("m_text", macro_t_159);
+context.setVariable("m_text", macro_t_191);
 output += "<div class=\"law\">";
-output += runtime.suppressValue((lineno = 527, colno = 6, runtime.callWrap(macro_t_1, "m_law", context, [runtime.contextOrFrameLookup(context, frame, "law")])), env.opts.autoescape);
+output += runtime.suppressValue((lineno = 604, colno = 6, runtime.callWrap(macro_t_1, "m_law", context, [runtime.contextOrFrameLookup(context, frame, "law")])), env.opts.autoescape);
 output += "</div>\r\n\r\n";
 if(parentTemplate) {
 parentTemplate.rootRenderFunc(env, context, frame, runtime, cb);
@@ -3699,7 +4223,14 @@ t_10 += runtime.suppressValue((lineno = 29, colno = 18, runtime.callWrap(runtime
 ;
 }
 else {
-t_10 += runtime.suppressValue((lineno = 31, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_14])), env.opts.autoescape);
+if(runtime.memberLookup((t_14),"tag") == "AppdxStyle") {
+t_10 += runtime.suppressValue((lineno = 31, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_appdx_style"), "m_appdx_style", context, [t_14])), env.opts.autoescape);
+;
+}
+else {
+t_10 += runtime.suppressValue((lineno = 33, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_14])), env.opts.autoescape);
+;
+}
 ;
 }
 ;
@@ -3730,7 +4261,7 @@ kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
 frame.set("law_title", l_law_title);
-var t_16 = "";t_16 += runtime.suppressValue((lineno = 39, colno = 7, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [l_law_title])), env.opts.autoescape);
+var t_16 = "";t_16 += runtime.suppressValue((lineno = 41, colno = 7, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [l_law_title])), env.opts.autoescape);
 t_16 += "\r\n";
 frame = frame.push();
 var t_19 = runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "law")),"children");
@@ -3747,7 +4278,7 @@ frame.set("loop.last", t_17 === t_18 - 1);
 frame.set("loop.length", t_18);
 if(runtime.memberLookup((t_20),"tag") == "LawNum") {
 t_16 += "（";
-t_16 += runtime.suppressValue((lineno = 44, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_20])), env.opts.autoescape);
+t_16 += runtime.suppressValue((lineno = 46, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_20])), env.opts.autoescape);
 t_16 += "）";
 t_16 += "\r\n";
 ;
@@ -3773,7 +4304,7 @@ if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
 frame.set("enact_statement", l_enact_statement);
 var t_22 = "";t_22 += "\r\n";
-t_22 += runtime.suppressValue((lineno = 56, colno = 7, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [l_enact_statement])), env.opts.autoescape);
+t_22 += runtime.suppressValue((lineno = 58, colno = 7, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [l_enact_statement])), env.opts.autoescape);
 t_22 += "\r\n";
 ;
 frame = callerFrame;
@@ -3806,17 +4337,17 @@ frame.set("loop.first", t_25 === 0);
 frame.set("loop.last", t_25 === t_26 - 1);
 frame.set("loop.length", t_26);
 if(runtime.memberLookup((t_28),"tag") == "TOCLabel") {
-t_24 += runtime.suppressValue((lineno = 68, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_28])), env.opts.autoescape);
+t_24 += runtime.suppressValue((lineno = 70, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_28])), env.opts.autoescape);
 t_24 += "\r\n";
 ;
 }
 else {
 if(runtime.inOperator(runtime.memberLookup((t_28),"tag"),["TOCPart","TOCChapter","TOCSection","TOCSupplProvision"])) {
-t_24 += runtime.suppressValue((lineno = 72, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_toc_group"), "m_toc_group", context, [t_28,1])), env.opts.autoescape);
+t_24 += runtime.suppressValue((lineno = 74, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_toc_group"), "m_toc_group", context, [t_28,1])), env.opts.autoescape);
 ;
 }
 else {
-t_24 += runtime.suppressValue((lineno = 74, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_28])), env.opts.autoescape);
+t_24 += runtime.suppressValue((lineno = 76, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_28])), env.opts.autoescape);
 t_24 += "\r\n";
 ;
 }
@@ -3863,7 +4394,7 @@ if(runtime.inOperator(runtime.memberLookup((t_34),"tag"),["TOCChapter","TOCSecti
 else {
 if(runtime.inOperator(runtime.memberLookup((t_34),"tag"),["SupplProvisionLabel","PartTitle","ChapterTitle","SectionTitle","SubsectionTitle","DivisionTitle"])) {
 frame = frame.push();
-var t_37 = (lineno = 91, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "range"), "range", context, [l_indent]));
+var t_37 = (lineno = 93, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "range"), "range", context, [l_indent]));
 if(t_37) {var t_36 = t_37.length;
 for(var t_35=0; t_35 < t_37.length; t_35++) {
 var t_38 = t_37[t_35];
@@ -3880,16 +4411,16 @@ t_30 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "inde
 }
 }
 frame = frame.pop();
-t_30 += runtime.suppressValue((lineno = 94, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_34])), env.opts.autoescape);
-;
-}
-else {
-if(runtime.memberLookup((t_34),"tag") == "ArticleRange") {
 t_30 += runtime.suppressValue((lineno = 96, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_34])), env.opts.autoescape);
 ;
 }
 else {
-t_30 += runtime.suppressValue((lineno = 98, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_34])), env.opts.autoescape);
+if(runtime.memberLookup((t_34),"tag") == "ArticleRange") {
+t_30 += runtime.suppressValue((lineno = 98, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_34])), env.opts.autoescape);
+;
+}
+else {
+t_30 += runtime.suppressValue((lineno = 100, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_34])), env.opts.autoescape);
 ;
 }
 ;
@@ -3915,7 +4446,7 @@ frame.set("loop.first", t_39 === 0);
 frame.set("loop.last", t_39 === t_40 - 1);
 frame.set("loop.length", t_40);
 if(runtime.inOperator(runtime.memberLookup((t_42),"tag"),["TOCChapter","TOCSection","TOCSubsection","TOCDivision"])) {
-t_30 += runtime.suppressValue((lineno = 105, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_toc_group"), "m_toc_group", context, [t_42,l_indent + 1,runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"last")])), env.opts.autoescape);
+t_30 += runtime.suppressValue((lineno = 107, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_toc_group"), "m_toc_group", context, [t_42,l_indent + 1,runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"last")])), env.opts.autoescape);
 ;
 }
 ;
@@ -3952,7 +4483,7 @@ frame.set("loop.first", t_45 === 0);
 frame.set("loop.last", t_45 === t_46 - 1);
 frame.set("loop.length", t_46);
 if(runtime.inOperator(runtime.memberLookup((t_48),"tag"),["Part","Chapter","Section","Subsection","Division"])) {
-t_44 += runtime.suppressValue((lineno = 115, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_article_group"), "m_article_group", context, [t_48])), env.opts.autoescape);
+t_44 += runtime.suppressValue((lineno = 117, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_article_group"), "m_article_group", context, [t_48])), env.opts.autoescape);
 ;
 }
 else {
@@ -3968,7 +4499,7 @@ if(frame.topLevel) {
 context.addExport("title_indent", t_49);
 }
 frame = frame.push();
-var t_52 = (lineno = 128, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "range"), "range", context, [runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "title_indent")),runtime.memberLookup((t_48),"tag"))]));
+var t_52 = (lineno = 130, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "range"), "range", context, [runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "title_indent")),runtime.memberLookup((t_48),"tag"))]));
 if(t_52) {var t_51 = t_52.length;
 for(var t_50=0; t_50 < t_52.length; t_50++) {
 var t_53 = t_52[t_50];
@@ -3985,7 +4516,7 @@ t_44 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "inde
 }
 }
 frame = frame.pop();
-t_44 += runtime.suppressValue((lineno = 131, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_48])), env.opts.autoescape);
+t_44 += runtime.suppressValue((lineno = 133, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_48])), env.opts.autoescape);
 if(runtime.inOperator("AmendLawNum",runtime.memberLookup((l_article_group),"attr"))) {
 t_44 += "（";
 t_44 += runtime.suppressValue(runtime.memberLookup((runtime.memberLookup((l_article_group),"attr")),"AmendLawNum"), env.opts.autoescape);
@@ -4002,16 +4533,16 @@ t_44 += "\r\n";
 }
 else {
 if(runtime.memberLookup((t_48),"tag") == "Article") {
-t_44 += runtime.suppressValue((lineno = 141, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_article"), "m_article", context, [t_48])), env.opts.autoescape);
+t_44 += runtime.suppressValue((lineno = 143, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_article"), "m_article", context, [t_48])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_48),"tag") == "Paragraph") {
-t_44 += runtime.suppressValue((lineno = 143, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_48,0])), env.opts.autoescape);
+t_44 += runtime.suppressValue((lineno = 145, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_48,0])), env.opts.autoescape);
 ;
 }
 else {
-t_44 += runtime.suppressValue((lineno = 145, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_48])), env.opts.autoescape);
+t_44 += runtime.suppressValue((lineno = 147, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_48])), env.opts.autoescape);
 t_44 += "\r\n";
 ;
 }
@@ -4057,22 +4588,22 @@ frame.set("loop.last", t_56 === t_57 - 1);
 frame.set("loop.length", t_57);
 if(runtime.memberLookup((t_59),"tag") == "ArticleCaption") {
 t_55 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "indent_space"), env.opts.autoescape);
-t_55 += runtime.suppressValue((lineno = 159, colno = 25, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_59])), env.opts.autoescape);
+t_55 += runtime.suppressValue((lineno = 161, colno = 25, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_59])), env.opts.autoescape);
 t_55 += "\r\n";
 ;
 }
 else {
 if(runtime.memberLookup((t_59),"tag") == "ArticleTitle") {
-t_55 += runtime.suppressValue((lineno = 163, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_59])), env.opts.autoescape);
+t_55 += runtime.suppressValue((lineno = 165, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_59])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_59),"tag") == "Paragraph") {
-t_55 += runtime.suppressValue((lineno = 165, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_59,0,l_article])), env.opts.autoescape);
+t_55 += runtime.suppressValue((lineno = 167, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_59,0,l_article])), env.opts.autoescape);
 ;
 }
 else {
-t_55 += runtime.suppressValue((lineno = 167, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_59])), env.opts.autoescape);
+t_55 += runtime.suppressValue((lineno = 169, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_59])), env.opts.autoescape);
 t_55 += "\r\n";
 ;
 }
@@ -4102,7 +4633,7 @@ frame.set("caller", kwargs.caller); }
 frame.set("paragraph_item", l_paragraph_item);
 frame.set("indent", l_indent);
 frame.set("article", l_article);
-var t_61 = "";t_61 += runtime.suppressValue((lineno = 177, colno = 12, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["paragraph_item_title_exists",0])), env.opts.autoescape);
+var t_61 = "";t_61 += runtime.suppressValue((lineno = 179, colno = 12, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["paragraph_item_title_exists",0])), env.opts.autoescape);
 frame = frame.push();
 var t_64 = runtime.memberLookup((l_paragraph_item),"children");
 if(t_64) {var t_63 = t_64.length;
@@ -4119,14 +4650,14 @@ frame.set("loop.length", t_63);
 if(runtime.memberLookup((t_65),"tag") == "ParagraphCaption") {
 t_61 += "\r\n";
 t_61 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "indent_space"), env.opts.autoescape);
-t_61 += runtime.suppressValue((lineno = 182, colno = 25, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_65])), env.opts.autoescape);
+t_61 += runtime.suppressValue((lineno = 184, colno = 25, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_65])), env.opts.autoescape);
 t_61 += "\r\n";
 ;
 }
 else {
 if(runtime.inOperator(runtime.memberLookup((t_65),"tag"),["ParagraphNum","ItemTitle","Subitem1Title","Subitem2Title","Subitem3Title","Subitem4Title","Subitem5Title","Subitem6Title","Subitem7Title","Subitem8Title","Subitem9Title","Subitem10Title"])) {
 frame = frame.push();
-var t_68 = (lineno = 191, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "range"), "range", context, [l_indent]));
+var t_68 = (lineno = 193, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "range"), "range", context, [l_indent]));
 if(t_68) {var t_67 = t_68.length;
 for(var t_66=0; t_66 < t_68.length; t_66++) {
 var t_69 = t_68[t_66];
@@ -4144,8 +4675,8 @@ t_61 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "inde
 }
 frame = frame.pop();
 if(env.getFilter("length").call(context, runtime.memberLookup((t_65),"children"))) {
-t_61 += runtime.suppressValue((lineno = 195, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_65])), env.opts.autoescape);
-t_61 += runtime.suppressValue((lineno = 196, colno = 18, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["paragraph_item_title_exists",1])), env.opts.autoescape);
+t_61 += runtime.suppressValue((lineno = 197, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_65])), env.opts.autoescape);
+t_61 += runtime.suppressValue((lineno = 198, colno = 18, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"set"), "context[\"set\"]", context, ["paragraph_item_title_exists",1])), env.opts.autoescape);
 ;
 }
 ;
@@ -4153,7 +4684,7 @@ t_61 += runtime.suppressValue((lineno = 196, colno = 18, runtime.callWrap(runtim
 else {
 if(runtime.inOperator(runtime.memberLookup((t_65),"tag"),["ParagraphSentence","ItemSentence","Subitem1Sentence","Subitem2Sentence","Subitem3Sentence","Subitem4Sentence","Subitem5Sentence","Subitem6Sentence","Subitem7Sentence","Subitem8Sentence","Subitem9Sentence","Subitem10Sentence"])) {
 var t_70;
-t_70 = (lineno = 204, colno = 50, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item_sentence"), "m_paragraph_item_sentence", context, [t_65,l_indent]));
+t_70 = (lineno = 206, colno = 50, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item_sentence"), "m_paragraph_item_sentence", context, [t_65,l_indent]));
 frame.set("sentence_text", t_70, true);
 if(frame.topLevel) {
 context.setVariable("sentence_text", t_70);
@@ -4162,7 +4693,7 @@ if(frame.topLevel) {
 context.addExport("sentence_text", t_70);
 }
 if(env.getFilter("length").call(context, env.getFilter("trim").call(context, runtime.contextOrFrameLookup(context, frame, "sentence_text")))) {
-if((lineno = 206, colno = 21, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"get"), "context[\"get\"]", context, ["paragraph_item_title_exists"])) || l_article) {
+if((lineno = 208, colno = 21, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "context")),"get"), "context[\"get\"]", context, ["paragraph_item_title_exists"])) || l_article) {
 t_61 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "margin_space"), env.opts.autoescape);
 ;
 }
@@ -4181,21 +4712,21 @@ t_61 += "\r\n";
 }
 else {
 if(runtime.inOperator(runtime.memberLookup((t_65),"tag"),["Item","Subitem1","Subitem2","Subitem3","Subitem4","Subitem5","Subitem6","Subitem7","Subitem8","Subitem9","Subitem10"])) {
-t_61 += runtime.suppressValue((lineno = 223, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_65,l_indent + 1])), env.opts.autoescape);
+t_61 += runtime.suppressValue((lineno = 225, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_65,l_indent + 1])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_65),"tag") == "TableStruct") {
-t_61 += runtime.suppressValue((lineno = 225, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_struct"), "m_table_struct", context, [t_65,l_indent + 1])), env.opts.autoescape);
+t_61 += runtime.suppressValue((lineno = 227, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_struct"), "m_table_struct", context, [t_65,l_indent + 1])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_65),"tag") == "List") {
-t_61 += runtime.suppressValue((lineno = 227, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_list"), "m_list", context, [t_65,l_indent + 2])), env.opts.autoescape);
+t_61 += runtime.suppressValue((lineno = 229, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_list"), "m_list", context, [t_65,l_indent + 2])), env.opts.autoescape);
 ;
 }
 else {
-t_61 += runtime.suppressValue((lineno = 229, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_65])), env.opts.autoescape);
+t_61 += runtime.suppressValue((lineno = 231, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_65])), env.opts.autoescape);
 t_61 += "\r\n";
 ;
 }
@@ -4244,12 +4775,12 @@ frame.set("loop.first", t_73 === 0);
 frame.set("loop.last", t_73 === t_74 - 1);
 frame.set("loop.length", t_74);
 if(runtime.memberLookup((t_76),"tag") == "Sentence") {
-t_72 += runtime.suppressValue((lineno = 241, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_76])), env.opts.autoescape);
+t_72 += runtime.suppressValue((lineno = 243, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_76])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_76),"tag") == "Column") {
-t_72 += runtime.suppressValue((lineno = 243, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_column"), "m_column", context, [t_76])), env.opts.autoescape);
+t_72 += runtime.suppressValue((lineno = 245, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_column"), "m_column", context, [t_76])), env.opts.autoescape);
 if(!runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"last")) {
 t_72 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "margin_space"), env.opts.autoescape);
 ;
@@ -4257,7 +4788,7 @@ t_72 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "marg
 ;
 }
 else {
-t_72 += runtime.suppressValue((lineno = 248, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_76])), env.opts.autoescape);
+t_72 += runtime.suppressValue((lineno = 250, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_76])), env.opts.autoescape);
 ;
 }
 ;
@@ -4297,11 +4828,11 @@ frame.set("loop.first", t_79 === 0);
 frame.set("loop.last", t_79 === t_80 - 1);
 frame.set("loop.length", t_80);
 if(runtime.memberLookup((t_82),"tag") == "Sentence") {
-t_78 += runtime.suppressValue((lineno = 260, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_82])), env.opts.autoescape);
+t_78 += runtime.suppressValue((lineno = 262, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_82])), env.opts.autoescape);
 ;
 }
 else {
-t_78 += runtime.suppressValue((lineno = 262, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_82])), env.opts.autoescape);
+t_78 += runtime.suppressValue((lineno = 264, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_82])), env.opts.autoescape);
 ;
 }
 ;
@@ -4339,16 +4870,16 @@ frame.set("loop.first", t_85 === 0);
 frame.set("loop.last", t_85 === t_86 - 1);
 frame.set("loop.length", t_86);
 if(runtime.memberLookup((t_88),"tag") == "Table") {
-t_84 += runtime.suppressValue((lineno = 272, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table"), "m_table", context, [t_88,l_indent])), env.opts.autoescape);
+t_84 += runtime.suppressValue((lineno = 274, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table"), "m_table", context, [t_88,l_indent])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_88),"tag") == "Remarks") {
-t_84 += runtime.suppressValue((lineno = 274, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_88])), env.opts.autoescape);
+t_84 += runtime.suppressValue((lineno = 276, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_88])), env.opts.autoescape);
 ;
 }
 else {
-t_84 += runtime.suppressValue((lineno = 276, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_88])), env.opts.autoescape);
+t_84 += runtime.suppressValue((lineno = 278, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_88])), env.opts.autoescape);
 ;
 }
 ;
@@ -4388,11 +4919,11 @@ frame.set("loop.first", t_91 === 0);
 frame.set("loop.last", t_91 === t_92 - 1);
 frame.set("loop.length", t_92);
 if(runtime.memberLookup((t_94),"tag") == "TableRow") {
-t_90 += runtime.suppressValue((lineno = 286, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_row"), "m_table_row", context, [t_94,l_indent])), env.opts.autoescape);
+t_90 += runtime.suppressValue((lineno = 288, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_row"), "m_table_row", context, [t_94,l_indent])), env.opts.autoescape);
 ;
 }
 else {
-t_90 += runtime.suppressValue((lineno = 288, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_94])), env.opts.autoescape);
+t_90 += runtime.suppressValue((lineno = 290, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_94])), env.opts.autoescape);
 ;
 }
 ;
@@ -4430,11 +4961,11 @@ frame.set("loop.first", t_97 === 0);
 frame.set("loop.last", t_97 === t_98 - 1);
 frame.set("loop.length", t_98);
 if(runtime.memberLookup((t_100),"tag") == "TableColumn") {
-t_96 += runtime.suppressValue((lineno = 298, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_column"), "m_table_column", context, [t_100,l_indent,runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"first")])), env.opts.autoescape);
+t_96 += runtime.suppressValue((lineno = 300, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_column"), "m_table_column", context, [t_100,l_indent,runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"first")])), env.opts.autoescape);
 ;
 }
 else {
-t_96 += runtime.suppressValue((lineno = 300, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_100])), env.opts.autoescape);
+t_96 += runtime.suppressValue((lineno = 302, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_100])), env.opts.autoescape);
 ;
 }
 ;
@@ -4474,7 +5005,7 @@ frame.set("loop.last", t_103 === t_104 - 1);
 frame.set("loop.length", t_104);
 if(runtime.memberLookup((t_106),"tag") == "Sentence") {
 frame = frame.push();
-var t_109 = (lineno = 311, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "range"), "range", context, [l_indent]));
+var t_109 = (lineno = 313, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "range"), "range", context, [l_indent]));
 if(t_109) {var t_108 = t_109.length;
 for(var t_107=0; t_107 < t_109.length; t_107++) {
 var t_110 = t_109[t_107];
@@ -4530,12 +5061,12 @@ else {
 t_102 += runtime.suppressValue("    ", env.opts.autoescape);
 ;
 }
-t_102 += runtime.suppressValue((lineno = 338, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_106])), env.opts.autoescape);
+t_102 += runtime.suppressValue((lineno = 340, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_106])), env.opts.autoescape);
 t_102 += "\r\n";
 ;
 }
 else {
-t_102 += runtime.suppressValue((lineno = 342, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_106])), env.opts.autoescape);
+t_102 += runtime.suppressValue((lineno = 344, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_106])), env.opts.autoescape);
 t_102 += "\r\n";
 ;
 }
@@ -4550,18 +5081,18 @@ return new runtime.SafeString(t_102);
 context.addExport("m_table_column");
 context.setVariable("m_table_column", macro_t_101);
 var macro_t_111 = runtime.makeMacro(
-["appdx_table"], 
+["style_struct", "indent"], 
 [], 
-function (l_appdx_table, kwargs) {
+function (l_style_struct, l_indent, kwargs) {
 var callerFrame = frame;
 frame = new runtime.Frame();
 kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
-frame.set("appdx_table", l_appdx_table);
-var t_112 = "";t_112 += "\r\n";
-frame = frame.push();
-var t_115 = runtime.memberLookup((l_appdx_table),"children");
+frame.set("style_struct", l_style_struct);
+frame.set("indent", l_indent);
+var t_112 = "";frame = frame.push();
+var t_115 = runtime.memberLookup((l_style_struct),"children");
 if(t_115) {var t_114 = t_115.length;
 for(var t_113=0; t_113 < t_115.length; t_113++) {
 var t_116 = t_115[t_113];
@@ -4573,14 +5104,13 @@ frame.set("loop.revindex0", t_114 - t_113 - 1);
 frame.set("loop.first", t_113 === 0);
 frame.set("loop.last", t_113 === t_114 - 1);
 frame.set("loop.length", t_114);
-if(runtime.memberLookup((t_116),"tag") == "AppdxTableTitle") {
-t_112 += runtime.suppressValue((lineno = 356, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_116])), env.opts.autoescape);
+if(runtime.memberLookup((t_116),"tag") == "StyleStructTitle") {
 frame = frame.push();
-var t_119 = runtime.memberLookup((l_appdx_table),"children");
+var t_119 = (lineno = 356, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "range"), "range", context, [l_indent]));
 if(t_119) {var t_118 = t_119.length;
 for(var t_117=0; t_117 < t_119.length; t_117++) {
 var t_120 = t_119[t_117];
-frame.set("el2", t_120);
+frame.set("_", t_120);
 frame.set("loop.index", t_117 + 1);
 frame.set("loop.index0", t_117);
 frame.set("loop.revindex", t_118 - t_117);
@@ -4588,43 +5118,27 @@ frame.set("loop.revindex0", t_118 - t_117 - 1);
 frame.set("loop.first", t_117 === 0);
 frame.set("loop.last", t_117 === t_118 - 1);
 frame.set("loop.length", t_118);
-if(runtime.memberLookup((t_120),"tag") == "RelatedArticleNum") {
-t_112 += runtime.suppressValue((lineno = 359, colno = 15, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_120])), env.opts.autoescape);
-;
-}
+t_112 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "indent_space"), env.opts.autoescape);
 ;
 }
 }
 frame = frame.pop();
+t_112 += runtime.suppressValue((lineno = 359, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_116])), env.opts.autoescape);
 t_112 += "\r\n";
 ;
 }
 else {
-if(runtime.memberLookup((t_116),"tag") == "RelatedArticleNum") {
-;
-}
-else {
-if(runtime.memberLookup((t_116),"tag") == "TableStruct") {
-t_112 += runtime.suppressValue((lineno = 366, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_struct"), "m_table_struct", context, [t_116,1])), env.opts.autoescape);
-;
-}
-else {
-if(runtime.memberLookup((t_116),"tag") == "Item") {
-t_112 += runtime.suppressValue((lineno = 368, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_116,1])), env.opts.autoescape);
+if(runtime.memberLookup((t_116),"tag") == "Style") {
+t_112 += runtime.suppressValue((lineno = 363, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_style"), "m_style", context, [t_116,l_indent])), env.opts.autoescape);
 ;
 }
 else {
 if(runtime.memberLookup((t_116),"tag") == "Remarks") {
-t_112 += runtime.suppressValue((lineno = 370, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_116])), env.opts.autoescape);
+t_112 += runtime.suppressValue((lineno = 365, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_116])), env.opts.autoescape);
 ;
 }
 else {
-t_112 += runtime.suppressValue((lineno = 372, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_116])), env.opts.autoescape);
-t_112 += "\r\n";
-;
-}
-;
-}
+t_112 += runtime.suppressValue((lineno = 367, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_116])), env.opts.autoescape);
 ;
 }
 ;
@@ -4639,21 +5153,21 @@ frame = frame.pop();
 frame = callerFrame;
 return new runtime.SafeString(t_112);
 });
-context.addExport("m_appdx_table");
-context.setVariable("m_appdx_table", macro_t_111);
+context.addExport("m_style_struct");
+context.setVariable("m_style_struct", macro_t_111);
 var macro_t_121 = runtime.makeMacro(
-["list", "indent"], 
+["style", "indent"], 
 [], 
-function (l_list, l_indent, kwargs) {
+function (l_style, l_indent, kwargs) {
 var callerFrame = frame;
 frame = new runtime.Frame();
 kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
-frame.set("list", l_list);
+frame.set("style", l_style);
 frame.set("indent", l_indent);
 var t_122 = "";frame = frame.push();
-var t_125 = runtime.memberLookup((l_list),"children");
+var t_125 = runtime.memberLookup((l_style),"children");
 if(t_125) {var t_124 = t_125.length;
 for(var t_123=0; t_123 < t_125.length; t_123++) {
 var t_126 = t_125[t_123];
@@ -4665,12 +5179,12 @@ frame.set("loop.revindex0", t_124 - t_123 - 1);
 frame.set("loop.first", t_123 === 0);
 frame.set("loop.last", t_123 === t_124 - 1);
 frame.set("loop.length", t_124);
-if(runtime.memberLookup((t_126),"tag") == "ListSentence") {
-t_122 += runtime.suppressValue((lineno = 384, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_list_sentence"), "m_list_sentence", context, [t_126,l_indent])), env.opts.autoescape);
+if(runtime.memberLookup((t_126),"tag") == "Fig") {
+t_122 += runtime.suppressValue((lineno = 377, colno = 10, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_fig"), "m_fig", context, [t_126,l_indent])), env.opts.autoescape);
 ;
 }
 else {
-t_122 += runtime.suppressValue((lineno = 386, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_126])), env.opts.autoescape);
+t_122 += runtime.suppressValue((lineno = 379, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_126])), env.opts.autoescape);
 ;
 }
 ;
@@ -4681,21 +5195,21 @@ frame = frame.pop();
 frame = callerFrame;
 return new runtime.SafeString(t_122);
 });
-context.addExport("m_list");
-context.setVariable("m_list", macro_t_121);
+context.addExport("m_style");
+context.setVariable("m_style", macro_t_121);
 var macro_t_127 = runtime.makeMacro(
-["list_sentence", "indent"], 
+["appdx_table"], 
 [], 
-function (l_list_sentence, l_indent, kwargs) {
+function (l_appdx_table, kwargs) {
 var callerFrame = frame;
 frame = new runtime.Frame();
 kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
-frame.set("list_sentence", l_list_sentence);
-frame.set("indent", l_indent);
-var t_128 = "";frame = frame.push();
-var t_131 = runtime.memberLookup((l_list_sentence),"children");
+frame.set("appdx_table", l_appdx_table);
+var t_128 = "";t_128 += "\r\n";
+frame = frame.push();
+var t_131 = runtime.memberLookup((l_appdx_table),"children");
 if(t_131) {var t_130 = t_131.length;
 for(var t_129=0; t_129 < t_131.length; t_129++) {
 var t_132 = t_131[t_129];
@@ -4707,13 +5221,14 @@ frame.set("loop.revindex0", t_130 - t_129 - 1);
 frame.set("loop.first", t_129 === 0);
 frame.set("loop.last", t_129 === t_130 - 1);
 frame.set("loop.length", t_130);
-if(runtime.memberLookup((t_132),"tag") == "Sentence") {
+if(runtime.memberLookup((t_132),"tag") == "AppdxTableTitle") {
+t_128 += runtime.suppressValue((lineno = 391, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_132])), env.opts.autoescape);
 frame = frame.push();
-var t_135 = (lineno = 396, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "range"), "range", context, [l_indent]));
+var t_135 = runtime.memberLookup((l_appdx_table),"children");
 if(t_135) {var t_134 = t_135.length;
 for(var t_133=0; t_133 < t_135.length; t_133++) {
 var t_136 = t_135[t_133];
-frame.set("_", t_136);
+frame.set("el2", t_136);
 frame.set("loop.index", t_133 + 1);
 frame.set("loop.index0", t_133);
 frame.set("loop.revindex", t_134 - t_133);
@@ -4721,17 +5236,47 @@ frame.set("loop.revindex0", t_134 - t_133 - 1);
 frame.set("loop.first", t_133 === 0);
 frame.set("loop.last", t_133 === t_134 - 1);
 frame.set("loop.length", t_134);
-t_128 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "indent_space"), env.opts.autoescape);
+if(runtime.memberLookup((t_136),"tag") == "RelatedArticleNum") {
+t_128 += runtime.suppressValue((lineno = 394, colno = 15, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_136])), env.opts.autoescape);
+;
+}
 ;
 }
 }
 frame = frame.pop();
-t_128 += runtime.suppressValue((lineno = 399, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_132])), env.opts.autoescape);
 t_128 += "\r\n";
 ;
 }
 else {
-t_128 += runtime.suppressValue((lineno = 403, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_132])), env.opts.autoescape);
+if(runtime.memberLookup((t_132),"tag") == "RelatedArticleNum") {
+;
+}
+else {
+if(runtime.memberLookup((t_132),"tag") == "TableStruct") {
+t_128 += runtime.suppressValue((lineno = 401, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_table_struct"), "m_table_struct", context, [t_132,1])), env.opts.autoescape);
+;
+}
+else {
+if(runtime.memberLookup((t_132),"tag") == "Item") {
+t_128 += runtime.suppressValue((lineno = 403, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_132,1])), env.opts.autoescape);
+;
+}
+else {
+if(runtime.memberLookup((t_132),"tag") == "Remarks") {
+t_128 += runtime.suppressValue((lineno = 405, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_132])), env.opts.autoescape);
+;
+}
+else {
+t_128 += runtime.suppressValue((lineno = 407, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_132])), env.opts.autoescape);
+t_128 += "\r\n";
+;
+}
+;
+}
+;
+}
+;
+}
 ;
 }
 ;
@@ -4742,20 +5287,21 @@ frame = frame.pop();
 frame = callerFrame;
 return new runtime.SafeString(t_128);
 });
-context.addExport("m_list_sentence");
-context.setVariable("m_list_sentence", macro_t_127);
+context.addExport("m_appdx_table");
+context.setVariable("m_appdx_table", macro_t_127);
 var macro_t_137 = runtime.makeMacro(
-["remarks"], 
+["appdx_style"], 
 [], 
-function (l_remarks, kwargs) {
+function (l_appdx_style, kwargs) {
 var callerFrame = frame;
 frame = new runtime.Frame();
 kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
-frame.set("remarks", l_remarks);
-var t_138 = "";frame = frame.push();
-var t_141 = runtime.memberLookup((l_remarks),"children");
+frame.set("appdx_style", l_appdx_style);
+var t_138 = "";t_138 += "\r\n";
+frame = frame.push();
+var t_141 = runtime.memberLookup((l_appdx_style),"children");
 if(t_141) {var t_140 = t_141.length;
 for(var t_139=0; t_139 < t_141.length; t_139++) {
 var t_142 = t_141[t_139];
@@ -4767,29 +5313,51 @@ frame.set("loop.revindex0", t_140 - t_139 - 1);
 frame.set("loop.first", t_139 === 0);
 frame.set("loop.last", t_139 === t_140 - 1);
 frame.set("loop.length", t_140);
-if(runtime.memberLookup((t_142),"tag") == "RemarksLabel") {
-t_138 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "indent_space"), env.opts.autoescape);
-t_138 += runtime.suppressValue((lineno = 413, colno = 25, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_142])), env.opts.autoescape);
+if(runtime.memberLookup((t_142),"tag") == "AppdxStyleTitle") {
+t_138 += runtime.suppressValue((lineno = 421, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_142])), env.opts.autoescape);
+frame = frame.push();
+var t_145 = runtime.memberLookup((l_appdx_style),"children");
+if(t_145) {var t_144 = t_145.length;
+for(var t_143=0; t_143 < t_145.length; t_143++) {
+var t_146 = t_145[t_143];
+frame.set("el2", t_146);
+frame.set("loop.index", t_143 + 1);
+frame.set("loop.index0", t_143);
+frame.set("loop.revindex", t_144 - t_143);
+frame.set("loop.revindex0", t_144 - t_143 - 1);
+frame.set("loop.first", t_143 === 0);
+frame.set("loop.last", t_143 === t_144 - 1);
+frame.set("loop.length", t_144);
+if(runtime.memberLookup((t_146),"tag") == "RelatedArticleNum") {
+t_138 += runtime.suppressValue((lineno = 424, colno = 15, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_146])), env.opts.autoescape);
 ;
 }
-else {
-if(runtime.memberLookup((t_142),"tag") == "Sentence") {
-t_138 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "margin_space"), env.opts.autoescape);
-t_138 += runtime.suppressValue((lineno = 415, colno = 25, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_142])), env.opts.autoescape);
-if(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"last")) {
+;
+}
+}
+frame = frame.pop();
 t_138 += "\r\n";
 ;
 }
+else {
+if(runtime.memberLookup((t_142),"tag") == "RelatedArticleNum") {
 ;
 }
 else {
-if(runtime.memberLookup((t_142),"tag") == "Item") {
-t_138 += runtime.suppressValue((lineno = 421, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_142,0])), env.opts.autoescape);
+if(runtime.memberLookup((t_142),"tag") == "StyleStruct") {
+t_138 += runtime.suppressValue((lineno = 431, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_style_struct"), "m_style_struct", context, [t_142,1])), env.opts.autoescape);
 ;
 }
 else {
-t_138 += runtime.suppressValue((lineno = 423, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_142])), env.opts.autoescape);
+if(runtime.memberLookup((t_142),"tag") == "Remarks") {
+t_138 += runtime.suppressValue((lineno = 433, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_remarks"), "m_remarks", context, [t_142])), env.opts.autoescape);
+;
+}
+else {
+t_138 += runtime.suppressValue((lineno = 435, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_142])), env.opts.autoescape);
 t_138 += "\r\n";
+;
+}
 ;
 }
 ;
@@ -4804,9 +5372,230 @@ frame = frame.pop();
 frame = callerFrame;
 return new runtime.SafeString(t_138);
 });
+context.addExport("m_appdx_style");
+context.setVariable("m_appdx_style", macro_t_137);
+var macro_t_147 = runtime.makeMacro(
+["list", "indent"], 
+[], 
+function (l_list, l_indent, kwargs) {
+var callerFrame = frame;
+frame = new runtime.Frame();
+kwargs = kwargs || {};
+if (kwargs.hasOwnProperty("caller")) {
+frame.set("caller", kwargs.caller); }
+frame.set("list", l_list);
+frame.set("indent", l_indent);
+var t_148 = "";frame = frame.push();
+var t_151 = runtime.memberLookup((l_list),"children");
+if(t_151) {var t_150 = t_151.length;
+for(var t_149=0; t_149 < t_151.length; t_149++) {
+var t_152 = t_151[t_149];
+frame.set("el", t_152);
+frame.set("loop.index", t_149 + 1);
+frame.set("loop.index0", t_149);
+frame.set("loop.revindex", t_150 - t_149);
+frame.set("loop.revindex0", t_150 - t_149 - 1);
+frame.set("loop.first", t_149 === 0);
+frame.set("loop.last", t_149 === t_150 - 1);
+frame.set("loop.length", t_150);
+if(runtime.memberLookup((t_152),"tag") == "ListSentence") {
+t_148 += runtime.suppressValue((lineno = 447, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_list_sentence"), "m_list_sentence", context, [t_152,l_indent])), env.opts.autoescape);
+;
+}
+else {
+t_148 += runtime.suppressValue((lineno = 449, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_152])), env.opts.autoescape);
+;
+}
+;
+}
+}
+frame = frame.pop();
+;
+frame = callerFrame;
+return new runtime.SafeString(t_148);
+});
+context.addExport("m_list");
+context.setVariable("m_list", macro_t_147);
+var macro_t_153 = runtime.makeMacro(
+["list_sentence", "indent"], 
+[], 
+function (l_list_sentence, l_indent, kwargs) {
+var callerFrame = frame;
+frame = new runtime.Frame();
+kwargs = kwargs || {};
+if (kwargs.hasOwnProperty("caller")) {
+frame.set("caller", kwargs.caller); }
+frame.set("list_sentence", l_list_sentence);
+frame.set("indent", l_indent);
+var t_154 = "";frame = frame.push();
+var t_157 = runtime.memberLookup((l_list_sentence),"children");
+if(t_157) {var t_156 = t_157.length;
+for(var t_155=0; t_155 < t_157.length; t_155++) {
+var t_158 = t_157[t_155];
+frame.set("el", t_158);
+frame.set("loop.index", t_155 + 1);
+frame.set("loop.index0", t_155);
+frame.set("loop.revindex", t_156 - t_155);
+frame.set("loop.revindex0", t_156 - t_155 - 1);
+frame.set("loop.first", t_155 === 0);
+frame.set("loop.last", t_155 === t_156 - 1);
+frame.set("loop.length", t_156);
+if(runtime.memberLookup((t_158),"tag") == "Sentence") {
+frame = frame.push();
+var t_161 = (lineno = 459, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "range"), "range", context, [l_indent]));
+if(t_161) {var t_160 = t_161.length;
+for(var t_159=0; t_159 < t_161.length; t_159++) {
+var t_162 = t_161[t_159];
+frame.set("_", t_162);
+frame.set("loop.index", t_159 + 1);
+frame.set("loop.index0", t_159);
+frame.set("loop.revindex", t_160 - t_159);
+frame.set("loop.revindex0", t_160 - t_159 - 1);
+frame.set("loop.first", t_159 === 0);
+frame.set("loop.last", t_159 === t_160 - 1);
+frame.set("loop.length", t_160);
+t_154 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "indent_space"), env.opts.autoescape);
+;
+}
+}
+frame = frame.pop();
+t_154 += runtime.suppressValue((lineno = 462, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_158])), env.opts.autoescape);
+t_154 += "\r\n";
+;
+}
+else {
+t_154 += runtime.suppressValue((lineno = 466, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_158])), env.opts.autoescape);
+;
+}
+;
+}
+}
+frame = frame.pop();
+;
+frame = callerFrame;
+return new runtime.SafeString(t_154);
+});
+context.addExport("m_list_sentence");
+context.setVariable("m_list_sentence", macro_t_153);
+var macro_t_163 = runtime.makeMacro(
+["fig", "indent"], 
+[], 
+function (l_fig, l_indent, kwargs) {
+var callerFrame = frame;
+frame = new runtime.Frame();
+kwargs = kwargs || {};
+if (kwargs.hasOwnProperty("caller")) {
+frame.set("caller", kwargs.caller); }
+frame.set("fig", l_fig);
+frame.set("indent", l_indent);
+var t_164 = "";frame = frame.push();
+var t_167 = (lineno = 474, colno = 15, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "range"), "range", context, [l_indent]));
+if(t_167) {var t_166 = t_167.length;
+for(var t_165=0; t_165 < t_167.length; t_165++) {
+var t_168 = t_167[t_165];
+frame.set("_", t_168);
+frame.set("loop.index", t_165 + 1);
+frame.set("loop.index0", t_165);
+frame.set("loop.revindex", t_166 - t_165);
+frame.set("loop.revindex0", t_166 - t_165 - 1);
+frame.set("loop.first", t_165 === 0);
+frame.set("loop.last", t_165 === t_166 - 1);
+frame.set("loop.length", t_166);
+t_164 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "indent_space"), env.opts.autoescape);
+;
+}
+}
+frame = frame.pop();
+t_164 += ".. figure:: ";
+t_164 += runtime.suppressValue(runtime.memberLookup((runtime.memberLookup((l_fig),"attr")),"src"), env.opts.autoescape);
+t_164 += "\r\n";
+frame = frame.push();
+var t_171 = runtime.memberLookup((l_fig),"children");
+if(t_171) {var t_170 = t_171.length;
+for(var t_169=0; t_169 < t_171.length; t_169++) {
+var t_172 = t_171[t_169];
+frame.set("el", t_172);
+frame.set("loop.index", t_169 + 1);
+frame.set("loop.index0", t_169);
+frame.set("loop.revindex", t_170 - t_169);
+frame.set("loop.revindex0", t_170 - t_169 - 1);
+frame.set("loop.first", t_169 === 0);
+frame.set("loop.last", t_169 === t_170 - 1);
+frame.set("loop.length", t_170);
+t_164 += runtime.suppressValue((lineno = 481, colno = 12, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_172])), env.opts.autoescape);
+;
+}
+}
+frame = frame.pop();
+;
+frame = callerFrame;
+return new runtime.SafeString(t_164);
+});
+context.addExport("m_fig");
+context.setVariable("m_fig", macro_t_163);
+var macro_t_173 = runtime.makeMacro(
+["remarks"], 
+[], 
+function (l_remarks, kwargs) {
+var callerFrame = frame;
+frame = new runtime.Frame();
+kwargs = kwargs || {};
+if (kwargs.hasOwnProperty("caller")) {
+frame.set("caller", kwargs.caller); }
+frame.set("remarks", l_remarks);
+var t_174 = "";frame = frame.push();
+var t_177 = runtime.memberLookup((l_remarks),"children");
+if(t_177) {var t_176 = t_177.length;
+for(var t_175=0; t_175 < t_177.length; t_175++) {
+var t_178 = t_177[t_175];
+frame.set("el", t_178);
+frame.set("loop.index", t_175 + 1);
+frame.set("loop.index0", t_175);
+frame.set("loop.revindex", t_176 - t_175);
+frame.set("loop.revindex0", t_176 - t_175 - 1);
+frame.set("loop.first", t_175 === 0);
+frame.set("loop.last", t_175 === t_176 - 1);
+frame.set("loop.length", t_176);
+if(runtime.memberLookup((t_178),"tag") == "RemarksLabel") {
+t_174 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "indent_space"), env.opts.autoescape);
+t_174 += runtime.suppressValue((lineno = 490, colno = 25, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_178])), env.opts.autoescape);
+;
+}
+else {
+if(runtime.memberLookup((t_178),"tag") == "Sentence") {
+t_174 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "margin_space"), env.opts.autoescape);
+t_174 += runtime.suppressValue((lineno = 492, colno = 25, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_178])), env.opts.autoescape);
+if(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "loop")),"last")) {
+t_174 += "\r\n";
+;
+}
+;
+}
+else {
+if(runtime.memberLookup((t_178),"tag") == "Item") {
+t_174 += runtime.suppressValue((lineno = 498, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_paragraph_item"), "m_paragraph_item", context, [t_178,0])), env.opts.autoescape);
+;
+}
+else {
+t_174 += runtime.suppressValue((lineno = 500, colno = 14, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_178])), env.opts.autoescape);
+t_174 += "\r\n";
+;
+}
+;
+}
+;
+}
+;
+}
+}
+frame = frame.pop();
+;
+frame = callerFrame;
+return new runtime.SafeString(t_174);
+});
 context.addExport("m_remarks");
-context.setVariable("m_remarks", macro_t_137);
-var macro_t_143 = runtime.makeMacro(
+context.setVariable("m_remarks", macro_t_173);
+var macro_t_179 = runtime.makeMacro(
 ["el"], 
 [], 
 function (l_el, kwargs) {
@@ -4816,104 +5605,104 @@ kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
 frame.set("el", l_el);
-var t_144 = "";if(!l_el) {
+var t_180 = "";if(!l_el) {
 ;
 }
 else {
 if(!runtime.memberLookup((l_el),"tag")) {
-t_144 += runtime.suppressValue(l_el, env.opts.autoescape);
+t_180 += runtime.suppressValue(l_el, env.opts.autoescape);
 ;
 }
 else {
-t_144 += "<";
-t_144 += runtime.suppressValue(runtime.memberLookup((l_el),"tag"), env.opts.autoescape);
+t_180 += "<";
+t_180 += runtime.suppressValue(runtime.memberLookup((l_el),"tag"), env.opts.autoescape);
 frame = frame.push();
-var t_147 = env.getFilter("dictsort").call(context, runtime.memberLookup((l_el),"attr"));
-if(t_147) {var t_145;
-if(runtime.isArray(t_147)) {
-var t_146 = t_147.length;
-for(t_145=0; t_145 < t_147.length; t_145++) {
-var t_148 = t_147[t_145][0]
-frame.set("key", t_147[t_145][0]);
-var t_149 = t_147[t_145][1]
-frame.set("value", t_147[t_145][1]);
-frame.set("loop.index", t_145 + 1);
-frame.set("loop.index0", t_145);
-frame.set("loop.revindex", t_146 - t_145);
-frame.set("loop.revindex0", t_146 - t_145 - 1);
-frame.set("loop.first", t_145 === 0);
-frame.set("loop.last", t_145 === t_146 - 1);
-frame.set("loop.length", t_146);
-t_144 += runtime.suppressValue(" ", env.opts.autoescape);
-t_144 += runtime.suppressValue(t_148, env.opts.autoescape);
-t_144 += "=";
-t_144 += runtime.suppressValue(t_149, env.opts.autoescape);
+var t_183 = env.getFilter("dictsort").call(context, runtime.memberLookup((l_el),"attr"));
+if(t_183) {var t_181;
+if(runtime.isArray(t_183)) {
+var t_182 = t_183.length;
+for(t_181=0; t_181 < t_183.length; t_181++) {
+var t_184 = t_183[t_181][0]
+frame.set("key", t_183[t_181][0]);
+var t_185 = t_183[t_181][1]
+frame.set("value", t_183[t_181][1]);
+frame.set("loop.index", t_181 + 1);
+frame.set("loop.index0", t_181);
+frame.set("loop.revindex", t_182 - t_181);
+frame.set("loop.revindex0", t_182 - t_181 - 1);
+frame.set("loop.first", t_181 === 0);
+frame.set("loop.last", t_181 === t_182 - 1);
+frame.set("loop.length", t_182);
+t_180 += runtime.suppressValue(" ", env.opts.autoescape);
+t_180 += runtime.suppressValue(t_184, env.opts.autoescape);
+t_180 += "=";
+t_180 += runtime.suppressValue(t_185, env.opts.autoescape);
 ;
 }
 } else {
-t_145 = -1;
-var t_146 = runtime.keys(t_147).length;
-for(var t_150 in t_147) {
-t_145++;
-var t_151 = t_147[t_150];
-frame.set("key", t_150);
-frame.set("value", t_151);
-frame.set("loop.index", t_145 + 1);
-frame.set("loop.index0", t_145);
-frame.set("loop.revindex", t_146 - t_145);
-frame.set("loop.revindex0", t_146 - t_145 - 1);
-frame.set("loop.first", t_145 === 0);
-frame.set("loop.last", t_145 === t_146 - 1);
-frame.set("loop.length", t_146);
-t_144 += runtime.suppressValue(" ", env.opts.autoescape);
-t_144 += runtime.suppressValue(t_150, env.opts.autoescape);
-t_144 += "=";
-t_144 += runtime.suppressValue(t_151, env.opts.autoescape);
+t_181 = -1;
+var t_182 = runtime.keys(t_183).length;
+for(var t_186 in t_183) {
+t_181++;
+var t_187 = t_183[t_186];
+frame.set("key", t_186);
+frame.set("value", t_187);
+frame.set("loop.index", t_181 + 1);
+frame.set("loop.index0", t_181);
+frame.set("loop.revindex", t_182 - t_181);
+frame.set("loop.revindex0", t_182 - t_181 - 1);
+frame.set("loop.first", t_181 === 0);
+frame.set("loop.last", t_181 === t_182 - 1);
+frame.set("loop.length", t_182);
+t_180 += runtime.suppressValue(" ", env.opts.autoescape);
+t_180 += runtime.suppressValue(t_186, env.opts.autoescape);
+t_180 += "=";
+t_180 += runtime.suppressValue(t_187, env.opts.autoescape);
 ;
 }
 }
 }
 frame = frame.pop();
-t_144 += ">";
+t_180 += ">";
 frame = frame.push();
-var t_154 = runtime.memberLookup((l_el),"children");
-if(t_154) {var t_153 = t_154.length;
-for(var t_152=0; t_152 < t_154.length; t_152++) {
-var t_155 = t_154[t_152];
-frame.set("child", t_155);
-frame.set("loop.index", t_152 + 1);
-frame.set("loop.index0", t_152);
-frame.set("loop.revindex", t_153 - t_152);
-frame.set("loop.revindex0", t_153 - t_152 - 1);
-frame.set("loop.first", t_152 === 0);
-frame.set("loop.last", t_152 === t_153 - 1);
-frame.set("loop.length", t_153);
-if(!runtime.memberLookup((t_155),"tag")) {
-t_144 += runtime.suppressValue(t_155, env.opts.autoescape);
+var t_190 = runtime.memberLookup((l_el),"children");
+if(t_190) {var t_189 = t_190.length;
+for(var t_188=0; t_188 < t_190.length; t_188++) {
+var t_191 = t_190[t_188];
+frame.set("child", t_191);
+frame.set("loop.index", t_188 + 1);
+frame.set("loop.index0", t_188);
+frame.set("loop.revindex", t_189 - t_188);
+frame.set("loop.revindex0", t_189 - t_188 - 1);
+frame.set("loop.first", t_188 === 0);
+frame.set("loop.last", t_188 === t_189 - 1);
+frame.set("loop.length", t_189);
+if(!runtime.memberLookup((t_191),"tag")) {
+t_180 += runtime.suppressValue(t_191, env.opts.autoescape);
 ;
 }
 else {
-t_144 += runtime.suppressValue((lineno = 444, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_155])), env.opts.autoescape);
+t_180 += runtime.suppressValue((lineno = 521, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_191])), env.opts.autoescape);
 ;
 }
 ;
 }
 }
 frame = frame.pop();
-t_144 += "</";
-t_144 += runtime.suppressValue(runtime.memberLookup((l_el),"tag"), env.opts.autoescape);
-t_144 += ">";
+t_180 += "</";
+t_180 += runtime.suppressValue(runtime.memberLookup((l_el),"tag"), env.opts.autoescape);
+t_180 += ">";
 ;
 }
 ;
 }
 ;
 frame = callerFrame;
-return new runtime.SafeString(t_144);
+return new runtime.SafeString(t_180);
 });
 context.addExport("m_element");
-context.setVariable("m_element", macro_t_143);
-var macro_t_156 = runtime.makeMacro(
+context.setVariable("m_element", macro_t_179);
+var macro_t_192 = runtime.makeMacro(
 ["el"], 
 [], 
 function (l_el, kwargs) {
@@ -4923,34 +5712,34 @@ kwargs = kwargs || {};
 if (kwargs.hasOwnProperty("caller")) {
 frame.set("caller", kwargs.caller); }
 frame.set("el", l_el);
-var t_157 = "";if(!l_el) {
+var t_193 = "";if(!l_el) {
 ;
 }
 else {
 if(!runtime.memberLookup((l_el),"tag")) {
-t_157 += runtime.suppressValue(l_el, env.opts.autoescape);
+t_193 += runtime.suppressValue(l_el, env.opts.autoescape);
 ;
 }
 else {
 frame = frame.push();
-var t_160 = runtime.memberLookup((l_el),"children");
-if(t_160) {var t_159 = t_160.length;
-for(var t_158=0; t_158 < t_160.length; t_158++) {
-var t_161 = t_160[t_158];
-frame.set("child", t_161);
-frame.set("loop.index", t_158 + 1);
-frame.set("loop.index0", t_158);
-frame.set("loop.revindex", t_159 - t_158);
-frame.set("loop.revindex0", t_159 - t_158 - 1);
-frame.set("loop.first", t_158 === 0);
-frame.set("loop.last", t_158 === t_159 - 1);
-frame.set("loop.length", t_159);
-if(!runtime.memberLookup((t_161),"tag")) {
-t_157 += runtime.suppressValue(t_161, env.opts.autoescape);
+var t_196 = runtime.memberLookup((l_el),"children");
+if(t_196) {var t_195 = t_196.length;
+for(var t_194=0; t_194 < t_196.length; t_194++) {
+var t_197 = t_196[t_194];
+frame.set("child", t_197);
+frame.set("loop.index", t_194 + 1);
+frame.set("loop.index0", t_194);
+frame.set("loop.revindex", t_195 - t_194);
+frame.set("loop.revindex0", t_195 - t_194 - 1);
+frame.set("loop.first", t_194 === 0);
+frame.set("loop.last", t_194 === t_195 - 1);
+frame.set("loop.length", t_195);
+if(!runtime.memberLookup((t_197),"tag")) {
+t_193 += runtime.suppressValue(t_197, env.opts.autoescape);
 ;
 }
 else {
-t_157 += runtime.suppressValue((lineno = 462, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_161])), env.opts.autoescape);
+t_193 += runtime.suppressValue((lineno = 539, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_197])), env.opts.autoescape);
 ;
 }
 ;
@@ -4963,11 +5752,11 @@ frame = frame.pop();
 }
 ;
 frame = callerFrame;
-return new runtime.SafeString(t_157);
+return new runtime.SafeString(t_193);
 });
 context.addExport("m_text");
-context.setVariable("m_text", macro_t_156);
-output += runtime.suppressValue((lineno = 475, colno = 6, runtime.callWrap(macro_t_3, "m_law", context, [runtime.contextOrFrameLookup(context, frame, "law")])), env.opts.autoescape);
+context.setVariable("m_text", macro_t_192);
+output += runtime.suppressValue((lineno = 552, colno = 6, runtime.callWrap(macro_t_3, "m_law", context, [runtime.contextOrFrameLookup(context, frame, "law")])), env.opts.autoescape);
 if(parentTemplate) {
 parentTemplate.rootRenderFunc(env, context, frame, runtime, cb);
 } else {
