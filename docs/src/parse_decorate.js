@@ -1,5 +1,5 @@
 "use strict";
-// Transcrypt'ed from Python, 2017-12-09 16:31:09
+// Transcrypt'ed from Python, 2017-12-10 12:57:36
 function _parse_decorate () {
    var __symbols__ = ['__py3.6__', '__esv6__'];
     var __all__ = {};
@@ -3780,11 +3780,13 @@ function _parse_decorate () {
 							if (law_title) {
 								law_body_children.append (law_title);
 							}
-							if (law_title) {
+							while (self.continuing ()) {
 								var enact_statement = self.process_enact_statement ();
 								if (enact_statement) {
 									law_body_children.append (enact_statement);
+									continue;
 								}
+								break;
 							}
 							var toc = self.process_toc ();
 							if (toc) {
