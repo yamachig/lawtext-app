@@ -1,5 +1,5 @@
 "use strict";
-// Transcrypt'ed from Python, 2017-12-10 12:57:36
+// Transcrypt'ed from Python, 2017-12-14 08:29:55
 function _parse_decorate () {
    var __symbols__ = ['__py3.6__', '__esv6__'];
     var __all__ = {};
@@ -2512,6 +2512,23 @@ function _parse_decorate () {
 						}
 						return null;
 					};
+					var parse_romannum = function (text) {
+						var num = 0;
+						for (var [i, char] of enumerate (text)) {
+							if (__in__ (char, tuple (['i', 'I', 'ｉ', 'Ｉ']))) {
+								if (i + 1 < len (text) && __in__ (text [i + 1], tuple (['x', 'X', 'ｘ', 'Ｘ']))) {
+									num--;
+								}
+								else {
+									num++;
+								}
+							}
+							if (__in__ (char, tuple (['x', 'X', 'ｘ', 'Ｘ']))) {
+								num += 10;
+							}
+						}
+						return num;
+					};
 					var eras = dict ({'明治': 'Meiji', '大正': 'Taisho', '昭和': 'Showa', '平成': 'Heisei'});
 					var re_LawTypes = list ([tuple ([re.compile ('^法律$'), 'Act']), tuple ([re.compile ('^政令$'), 'CabinetOrder']), tuple ([re.compile ('^勅令$'), 'ImperialOrder']), tuple ([re.compile ('^\\S*[^政勅]令$'), 'MinisterialOrdinance']), tuple ([re.compile ('^\\S*規則$'), 'Rule'])]);
 					var re_LawNum = re.compile ('(?P<era>\\S+?)(?P<year>[一二三四五六七八九十]+)年(?P<law_type>\\S+?)第(?P<num>[一二三四五六七八九十百千]+)号');
@@ -2558,7 +2575,7 @@ function _parse_decorate () {
 					var re_ItemNum = re.compile ('^\\D*(?P<num>\\d+)\\D*$');
 					var parse_named_num = function (text) {
 						var nums_group = list ([]);
-						for (var subtext of text.py_replace ('及び', '、').py_replace ('から', '、').py_replace ('まで', '').py_split ('、')) {
+						for (var subtext of text.py_replace ('及び', '、').py_replace ('から', '、').py_replace ('まで', '').py_replace ('～', '、').py_replace ('・', '、').py_split ('、')) {
 							var match = re_NamedNum.match (subtext);
 							if (match) {
 								var nums = list ([parse_jpnum (match.group (2))]);
@@ -2591,6 +2608,10 @@ function _parse_decorate () {
 									nums_group.append (match.group (1));
 									continue;
 								}
+							}
+							var roman_num = parse_romannum (subtext);
+							if (roman_num) {
+								nums_group.append (str (roman_num));
 							}
 						}
 						return ':'.join (nums_group);
@@ -2767,6 +2788,7 @@ function _parse_decorate () {
 						__all__.jpnum_digits = jpnum_digits;
 						__all__.parse_jpnum = parse_jpnum;
 						__all__.parse_named_num = parse_named_num;
+						__all__.parse_romannum = parse_romannum;
 						__all__.re_ItemNum = re_ItemNum;
 						__all__.re_JpNum = re_JpNum;
 						__all__.re_LawNum = re_LawNum;
