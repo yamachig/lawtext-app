@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-46954277-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-46954277-3');
+</script>
+
+<script src="lib/jquery-3.2.1.min.js"></script>
+<script src="lib/underscore-min.js"></script>
+<script src="lib/backbone-min.js"></script>
+<script src="lib/nunjucks-slim.min.js"></script>
+<script src="lib/jszip.min.js"></script>
+<script src="lib/FileSaver.min.js"></script>
+<script src="lib/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="lib/bootstrap.min.css">
+
+
+<meta charset="UTF-8">
+
+<title>ダウンロード版 | Lawtext</title>
+
+<div class="container" style="padding-top: 1em;">
+<div class="jumbotron">
+  <h1 class="display-3">Lawtext<small>をダウンロード</small></h1>
+  <p class="lead">LawtextのWebアプリは、ダウンロードしてオフラインで実行できます。</p>
+  <hr class="my-4">
+  <p>次のボタンからLawtextがダウンロードできます。Zipファイルを解凍し、中にあるindex.htmlを開いてください。ブラウザが起動して、Lawtextが実行されます。</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="media/app.zip" download="Lawtext.zip" role="button"
+       onclick="ga('send', 'event', 'download', 'click', 'Lawtext.zip');">
+      Lawtextをダウンロード
+    </a>
+  </p>
+  <p>
+    <a href="index.html">
+      Web版Lawtext
+    </a>
+  </p>
+</div>
+<p class="sidebar-footer-block">
+  <div style="font-size: 0.8em; text-align: center; padding: 0.3em 0; color: rgb(192, 192, 192)">
+    <a href="https://github.com/yamachig/lawtext" target="_blank" style="margin-right: 2em;">
+      GitHub
+    </a>
+    &copy; <script>document.write(new Date().getFullYear())</script> yamachi
+  </div>
+</p>
+</div>
+
+</body>
+</html>
