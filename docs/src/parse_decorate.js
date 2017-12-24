@@ -1,7 +1,7 @@
 "use strict";
-// Transcrypt'ed from Python, 2017-12-24 10:04:16
+// Transcrypt'ed from Python, 2017-12-25 01:10:02
 function _parse_decorate () {
-   var __symbols__ = ['__py3.6__', '__esv6__'];
+   var __symbols__ = ['__py3.6__', '__esv5__'];
     var __all__ = {};
     var __world__ = __all__;
     
@@ -47,8 +47,6 @@ function _parse_decorate () {
     __all__.__init__ = __init__;
     
     
-    // Proxy switch, controlled by __pragma__ ('proxy') and __pragma ('noproxy')
-    var __proxy__ = false;  // No use assigning it to __all__, only its transient state is important
     
     
     // Since we want to assign functions, a = b.f should make b.f produce a bound function
@@ -128,12 +126,6 @@ function _parse_decorate () {
                     var descrip = Object.getOwnPropertyDescriptor (base, attrib);
                     Object.defineProperty (cls, attrib, descrip);
                 }           
-
-                for (var symbol of Object.getOwnPropertySymbols (base)) {
-                    var descrip = Object.getOwnPropertyDescriptor (base, symbol);
-                    Object.defineProperty (cls, symbol, descrip);
-                }
-                
             }
             
             // Add class specific attributes to the created cls object
@@ -146,12 +138,6 @@ function _parse_decorate () {
                 var descrip = Object.getOwnPropertyDescriptor (attribs, attrib);
                 Object.defineProperty (cls, attrib, descrip);
             }
-
-            for (var symbol of Object.getOwnPropertySymbols (attribs)) {
-                var descrip = Object.getOwnPropertyDescriptor (attribs, symbol);
-                Object.defineProperty (cls, symbol, descrip);
-            }
-            
             // Return created cls object
             return cls;
         }
@@ -174,28 +160,6 @@ function _parse_decorate () {
             // The descriptor produced by __get__ will return the right method flavor
             var instance = Object.create (this, {__class__: {value: this, enumerable: true}});
             
-            if ('__getattr__' in this || '__setattr__' in this) {
-                instance = new Proxy (instance, {
-                    get: function (target, name) {
-                        var result = target [name];
-                        if (result == undefined) {  // Target doesn't have attribute named name
-                            return target.__getattr__ (name);
-                        }
-                        else {
-                            return result;
-                        }
-                    },
-                    set: function (target, name, value) {
-                        try {
-                            target.__setattr__ (name, value);
-                        }
-                        catch (exception) {         // Target doesn't have a __setattr__ method
-                            target [name] = value;
-                        }
-                        return true;
-                    }
-                })
-            }
 
             // Call constructor
             this.__init__.apply (null, [instance] .concat (args));
@@ -432,7 +396,9 @@ function _parse_decorate () {
 					var map = function (func, iterable) {
 						return function () {
 							var __accu0__ = [];
-							for (var item of iterable) {
+							var __iterable0__ = iterable;
+							for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+								var item = __iterable0__ [__index0__];
 								__accu0__.append (func (item));
 							}
 							return __accu0__;
@@ -444,7 +410,9 @@ function _parse_decorate () {
 						}
 						return function () {
 							var __accu0__ = [];
-							for (var item of iterable) {
+							var __iterable0__ = iterable;
+							for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+								var item = __iterable0__ [__index0__];
 								if (func (item)) {
 									__accu0__.append (item);
 								}
@@ -490,7 +458,9 @@ function _parse_decorate () {
 							}
 							self.buffer = '{}{}{}'.format (self.buffer, sep.join (function () {
 								var __accu0__ = [];
-								for (var arg of args) {
+								var __iterable0__ = args;
+								for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+									var arg = __iterable0__ [__index0__];
 									__accu0__.append (str (arg));
 								}
 								return __accu0__;
@@ -502,7 +472,9 @@ function _parse_decorate () {
 							else {
 								console.log (sep.join (function () {
 									var __accu0__ = [];
-									for (var arg of args) {
+									var __iterable0__ = args;
+									for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+										var arg = __iterable0__ [__index0__];
 										__accu0__.append (str (arg));
 									}
 									return __accu0__;
@@ -645,7 +617,8 @@ function _parse_decorate () {
         // Lean and fast, no C3 linearization, only call first implementation encountered
         // Will allow __super__ ('<methodName>') (self, <params>) rather than only <className>.<methodName> (self, <params>)
         
-        for (let base of aClass.__bases__) {
+        for (var index = 0; index < aClass.__bases__.length; index++) {
+            var base = aClass.__bases__ [index];
             if (methodName in base) {
                return base [methodName];
             }
@@ -887,7 +860,8 @@ function _parse_decorate () {
         }
 
         if (classinfo instanceof Array) {   // Assume in most cases it isn't, then making it recursive rather than two functions saves a call
-            for (let aClass of classinfo) {
+            for (var index = 0; index < classinfo.length; index++) {
+                var aClass = classinfo [index];
                 if (isinstance (anObject, aClass)) {
                     return true;
                 }
@@ -1168,25 +1142,25 @@ function _parse_decorate () {
     // Any, all and sum
 
     function any (iterable) {
-        for (let item of iterable) {
-            if (bool (item)) {
+        for (var index = 0; index < iterable.length; index++) {
+            if (bool (iterable [index])) {
                 return true;
             }
         }
         return false;
     }
     function all (iterable) {
-        for (let item of iterable) {
-            if (! bool (item)) {
+        for (var index = 0; index < iterable.length; index++) {
+            if (! bool (iterable [index])) {
                 return false;
             }
         }
         return true;
     }
     function sum (iterable) {
-        let result = 0;
-        for (let item of iterable) {
-            result += item;
+        var result = 0;
+        for (var index = 0; index < iterable.length; index++) {
+            result += iterable [index];
         }
         return result;
     }
@@ -1238,7 +1212,7 @@ function _parse_decorate () {
     // List extensions to Array
 
     function list (iterable) {                                      // All such creators should be callable without new
-        var instance = iterable ? Array.from (iterable) : [];
+        var instance = iterable ? [] .slice.apply (iterable) : [];  // Spread iterable, n.b. array.slice (), so array before dot
         // Sort is the normal JavaScript sort, Python sort is a non-member function
         return instance;
     }
@@ -1689,7 +1663,6 @@ function _parse_decorate () {
     };
 
     String.prototype.join = function (strings) {
-        strings = Array.from (strings); // Much faster than iterating through strings char by char
         return strings.join (this);
     };
 
@@ -2514,7 +2487,11 @@ function _parse_decorate () {
 					};
 					var parse_romannum = function (text) {
 						var num = 0;
-						for (var [i, char] of enumerate (text)) {
+						var __iterable0__ = enumerate (text);
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var __left0__ = __iterable0__ [__index0__];
+							var i = __left0__ [0];
+							var char = __left0__ [1];
 							if (__in__ (char, tuple (['i', 'I', 'ｉ', 'Ｉ']))) {
 								if (i + 1 < len (text) && __in__ (text [i + 1], tuple (['x', 'X', 'ｘ', 'Ｘ']))) {
 									num--;
@@ -2534,7 +2511,9 @@ function _parse_decorate () {
 					var re_LawNum = re.compile ('(?P<era>\\S+?)(?P<year>[一二三四五六七八九十]+)年(?P<law_type>\\S+?)第(?P<num>[一二三四五六七八九十百千]+)号');
 					var decorate_law = function (el) {
 						el ['attr'] ['Lang'] = 'ja';
-						for (var subel of el ['children']) {
+						var __iterable0__ = el ['children'];
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var subel = __iterable0__ [__index0__];
 							if (subel ['tag'] == 'LawNum' && len (subel ['children'])) {
 								var law_num = subel ['children'] [0];
 								var match = re_LawNum.match (law_num);
@@ -2547,7 +2526,11 @@ function _parse_decorate () {
 									if (year) {
 										el ['attr'] ['Year'] = str (year);
 									}
-									for (var [re_LawType, law_type] of re_LawTypes) {
+									var __iterable1__ = re_LawTypes;
+									for (var __index1__ = 0; __index1__ < __iterable1__.length; __index1__++) {
+										var __left0__ = __iterable1__ [__index1__];
+										var re_LawType = __left0__ [0];
+										var law_type = __left0__ [1];
 										var law_type_match = re_LawType.match (match.group (3));
 										if (law_type_match) {
 											el ['attr'] ['LawType'] = law_type;
@@ -2565,7 +2548,11 @@ function _parse_decorate () {
 					var WIDE_NUMS = dict ({'０': '0', '１': '1', '２': '2', '３': '3', '４': '4', '５': '5', '６': '6', '７': '7', '８': '8', '９': '9'});
 					var replace_wide_num = function (text) {
 						var ret = text;
-						for (var [wide, narrow] of WIDE_NUMS.py_items ()) {
+						var __iterable0__ = WIDE_NUMS.py_items ();
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var __left0__ = __iterable0__ [__index0__];
+							var wide = __left0__ [0];
+							var narrow = __left0__ [1];
 							var ret = ret.py_replace (wide, narrow);
 						}
 						return ret;
@@ -2575,14 +2562,18 @@ function _parse_decorate () {
 					var re_ItemNum = re.compile ('^\\D*(?P<num>\\d+)\\D*$');
 					var parse_named_num = function (text) {
 						var nums_group = list ([]);
-						for (var subtext of text.py_replace ('及び', '、').py_replace ('から', '、').py_replace ('まで', '').py_replace ('～', '、').py_replace ('・', '、').py_split ('、')) {
+						var __iterable0__ = text.py_replace ('及び', '、').py_replace ('から', '、').py_replace ('まで', '').py_replace ('～', '、').py_replace ('・', '、').py_split ('、');
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var subtext = __iterable0__ [__index0__];
 							var match = re_NamedNum.match (subtext);
 							if (match) {
 								var nums = list ([parse_jpnum (match.group (2))]);
 								if (match.group (3)) {
 									nums.extend (function () {
 										var __accu0__ = [];
-										for (var b of match.group (3).py_split ('の')) {
+										var __iterable1__ = match.group (3).py_split ('の');
+										for (var __index1__ = 0; __index1__ < __iterable1__.length; __index1__++) {
+											var b = __iterable1__ [__index1__];
 											if (b) {
 												__accu0__.append (parse_jpnum (b));
 											}
@@ -2594,7 +2585,11 @@ function _parse_decorate () {
 								continue;
 							}
 							var iroha_char_detected = false;
-							for (var [i, char] of enumerate (IROHA_CHARS)) {
+							var __iterable1__ = enumerate (IROHA_CHARS);
+							for (var __index1__ = 0; __index1__ < __iterable1__.length; __index1__++) {
+								var __left0__ = __iterable1__ [__index1__];
+								var i = __left0__ [0];
+								var char = __left0__ [1];
 								if (__in__ (char, subtext)) {
 									nums_group.append (str (i + 1));
 									var iroha_char_detected = true;
@@ -2618,7 +2613,9 @@ function _parse_decorate () {
 					};
 					var decorate_toc_article_group = function (el) {
 						el ['attr'] ['Delete'] = 'false';
-						for (var subel of el ['children']) {
+						var __iterable0__ = el ['children'];
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var subel = __iterable0__ [__index0__];
 							if (__in__ (subel ['tag'], tuple (['PartTitle', 'ChapterTitle', 'SectionTitle', 'SubsectionTitle', 'DivisionTitle', 'ArticleTitle'])) && len (subel ['children'])) {
 								var body = subel ['children'] [0];
 								var num = parse_named_num (body.py_split () [0]);
@@ -2631,7 +2628,9 @@ function _parse_decorate () {
 					var decorate_article_group = function (el) {
 						el ['attr'] ['Delete'] = 'false';
 						el ['attr'] ['Hide'] = 'false';
-						for (var subel of el ['children']) {
+						var __iterable0__ = el ['children'];
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var subel = __iterable0__ [__index0__];
 							if (__in__ (subel ['tag'], tuple (['PartTitle', 'ChapterTitle', 'SectionTitle', 'SubsectionTitle', 'DivisionTitle', 'ArticleTitle'])) && len (subel ['children'])) {
 								var body = subel ['children'] [0];
 								var num = parse_named_num (body.py_split () [0]);
@@ -2644,7 +2643,9 @@ function _parse_decorate () {
 					var decorate_article = function (el) {
 						el ['attr'] ['Delete'] = 'false';
 						el ['attr'] ['Hide'] = 'false';
-						for (var subel of el ['children']) {
+						var __iterable0__ = el ['children'];
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var subel = __iterable0__ [__index0__];
 							if (subel ['tag'] == 'ArticleTitle' && len (subel ['children'])) {
 								var body = subel ['children'] [0];
 								var num = parse_named_num (body.py_split () [0]);
@@ -2657,7 +2658,9 @@ function _parse_decorate () {
 					var decorate_paragraph = function (el) {
 						el ['attr'] ['Hide'] = 'false';
 						el ['attr'] ['OldStyle'] = 'false';
-						for (var subel of el ['children']) {
+						var __iterable0__ = el ['children'];
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var subel = __iterable0__ [__index0__];
 							if (subel ['tag'] == 'ParagraphNum') {
 								if (len (subel ['children'])) {
 									var paragraph_num = subel ['children'] [0];
@@ -2675,7 +2678,9 @@ function _parse_decorate () {
 					var decorate_item = function (el) {
 						el ['attr'] ['Delete'] = 'false';
 						el ['attr'] ['Hide'] = 'false';
-						for (var subel of el ['children']) {
+						var __iterable0__ = el ['children'];
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var subel = __iterable0__ [__index0__];
 							if (__in__ (subel ['tag'], tuple (['ItemTitle', 'Subitem1Title', 'Subitem2Title', 'Subitem3Title', 'Subitem4Title', 'Subitem5Title', 'Subitem6Title', 'Subitem7Title', 'Subitem8Title', 'Subitem9Title', 'Subitem10Title']))) {
 								var body = subel ['children'] [0];
 								var num = parse_named_num (body.py_split () [0]);
@@ -2687,13 +2692,19 @@ function _parse_decorate () {
 					};
 					var decorate_column_sentence_group = function (el) {
 						var column_sentences = list ([]);
-						for (var subel of el ['children']) {
+						var __iterable0__ = el ['children'];
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var subel = __iterable0__ [__index0__];
 							if (__in__ (subel ['tag'], tuple (['Column', 'Sentence']))) {
 								column_sentences.append (subel);
 							}
 						}
 						var proviso_nums = list ([]);
-						for (var [i, subel] of enumerate (column_sentences)) {
+						var __iterable0__ = enumerate (column_sentences);
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var __left0__ = __iterable0__ [__index0__];
+							var i = __left0__ [0];
+							var subel = __left0__ [1];
 							if (len (column_sentences) > 1) {
 								subel ['attr'] ['Num'] = str (i + 1);
 							}
@@ -2705,7 +2716,11 @@ function _parse_decorate () {
 							}
 						}
 						if (len (proviso_nums)) {
-							for (var [i, subel] of enumerate (column_sentences)) {
+							var __iterable0__ = enumerate (column_sentences);
+							for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+								var __left0__ = __iterable0__ [__index0__];
+								var i = __left0__ [0];
+								var subel = __left0__ [1];
 								subel ['attr'] ['Function'] = (__in__ (i, proviso_nums) ? 'proviso' : 'main');
 							}
 						}
@@ -2759,7 +2774,9 @@ function _parse_decorate () {
 						else if (el ['tag'] == 'AppdxTableTitle') {
 							appdx_table_title (el);
 						}
-						for (var subel of el ['children']) {
+						var __iterable0__ = el ['children'];
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var subel = __iterable0__ [__index0__];
 							if (isinstance (subel, str)) {
 								continue;
 							}
@@ -2851,7 +2868,9 @@ function _parse_decorate () {
 					var re_DETECT_INDENT = re.compile ('^(?P<indent>[ \\t\\f\\v]+)\\S.*$');
 					var detect_indent = function (lines) {
 						var indents = set ();
-						for (var line of lines) {
+						var __iterable0__ = lines;
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var line = __iterable0__ [__index0__];
 							var match = re_DETECT_INDENT.match (line);
 							if (match) {
 								indents.add (match.group (1));
@@ -2925,7 +2944,11 @@ function _parse_decorate () {
 					var lex = function (lines) {
 						var indent = detect_indent (lines);
 						var ret = list ([]);
-						for (var [lineno, line] of enumerate (lines)) {
+						var __iterable0__ = enumerate (lines);
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var __left0__ = __iterable0__ [__index0__];
+							var lineno = __left0__ [0];
+							var line = __left0__ [1];
 							try {
 								ret.append (lex_line (line, indent));
 							}
@@ -2950,7 +2973,9 @@ function _parse_decorate () {
 						var __left0__ = tuple ([null, null]);
 						var re_sp = __left0__ [0];
 						var re_ep = __left0__ [1];
-						for (var re_pair of PARENTHESIS_PAIRS) {
+						var __iterable0__ = PARENTHESIS_PAIRS;
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var re_pair = __iterable0__ [__index0__];
 							if (re_pair [0].match (text [pos])) {
 								var __left0__ = re_pair;
 								var re_sp = __left0__ [0];
@@ -2988,7 +3013,9 @@ function _parse_decorate () {
 							if (pos != old_pos) {
 								continue;
 							}
-							for (var sentence_delimiter of SENTENCE_DELIMITERS) {
+							var __iterable0__ = SENTENCE_DELIMITERS;
+							for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+								var sentence_delimiter = __iterable0__ [__index0__];
 								if (sentence_delimiter.match (text [pos])) {
 									pos++;
 									sentences.append (text.__getslice__ (start_pos, pos, 1));
@@ -3029,10 +3056,14 @@ function _parse_decorate () {
 						var els = list ([]);
 						var text_split = py_split (text);
 						if (len (text_split) >= 2) {
-							for (var column of text_split) {
+							var __iterable0__ = text_split;
+							for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+								var column = __iterable0__ [__index0__];
 								els.append (dict ({'tag': 'Column', 'attr': dict ({}), 'children': function () {
 									var __accu0__ = [];
-									for (var sentence of split_sentences (column)) {
+									var __iterable1__ = split_sentences (column);
+									for (var __index1__ = 0; __index1__ < __iterable1__.length; __index1__++) {
+										var sentence = __iterable1__ [__index1__];
 										__accu0__.append (dict ({'tag': 'Sentence', 'attr': dict ({}), 'children': list ([sentence])}));
 									}
 									return __accu0__;
@@ -3042,7 +3073,9 @@ function _parse_decorate () {
 						else {
 							els.extend (function () {
 								var __accu0__ = [];
-								for (var sentence of split_sentences (text)) {
+								var __iterable0__ = split_sentences (text);
+								for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+									var sentence = __iterable0__ [__index0__];
 									__accu0__.append (dict ({'tag': 'Sentence', 'attr': dict ({}), 'children': list ([sentence])}));
 								}
 								return __accu0__;
@@ -3997,7 +4030,11 @@ function _parse_decorate () {
 							if (typeof namedGroups == 'undefined' || (namedGroups != null && namedGroups .hasOwnProperty ("__kwargtrans__"))) {;
 								var namedGroups = null;
 							};
-							for (var [index, match] of enumerate (mObj)) {
+							var __iterable0__ = enumerate (mObj);
+							for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+								var __left0__ = __iterable0__ [__index0__];
+								var index = __left0__ [0];
+								var match = __left0__ [1];
 								mObj [index] = (mObj [index] == undefined ? null : mObj [index]);
 							}
 							self._obj = mObj;
@@ -4084,7 +4121,9 @@ function _parse_decorate () {
 							var args = tuple ([].slice.apply (arguments).slice (1));
 							var ret = list ([]);
 							if (len (args) > 0) {
-								for (var index of args) {
+								var __iterable0__ = args;
+								for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+									var index = __iterable0__ [__index0__];
 									if (py_typeof (index) === str) {
 										if (self._namedGroups !== null) {
 											if (!__in__ (index, self._namedGroups.py_keys ())) {
@@ -4128,7 +4167,9 @@ function _parse_decorate () {
 								var ret = self._obj.__getslice__ (1, null, 1);
 								return tuple (function () {
 									var __accu0__ = [];
-									for (var x of ret) {
+									var __iterable0__ = ret;
+									for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+										var x = __iterable0__ [__index0__];
 										__accu0__.append ((x !== null ? x : py_default));
 									}
 									return __accu0__;
@@ -4144,7 +4185,11 @@ function _parse_decorate () {
 							};
 							if (self._namedGroups !== null) {
 								var ret = dict ({});
-								for (var [gName, gId] of self._namedGroups.py_items ()) {
+								var __iterable0__ = self._namedGroups.py_items ();
+								for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+									var __left0__ = __iterable0__ [__index0__];
+									var gName = __left0__ [0];
+									var gId = __left0__ [1];
 									var value = self._obj [gId];
 									ret [gName] = (value !== null ? value : py_default);
 								}
@@ -4327,7 +4372,7 @@ function _parse_decorate () {
 							var errObj = null;
 							
 							                   try {
-							                     rObj = new RegExp(pattern, jsFlags)
+							                     rObj = new RegExp(pattern, jsFlags.replace("u", ""))
 							                   } catch( err ) {
 							                     errObj = err
 							                   }
@@ -4343,7 +4388,9 @@ function _parse_decorate () {
 							var bitmaps = list ([tuple ([DEBUG, '']), tuple ([IGNORECASE, 'i']), tuple ([MULTILINE, 'm']), tuple ([STICKY, 'y']), tuple ([GLOBAL, 'g']), tuple ([UNICODE, 'u'])]);
 							var ret = ''.join (function () {
 								var __accu0__ = [];
-								for (var x of bitmaps) {
+								var __iterable0__ = bitmaps;
+								for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+									var x = __iterable0__ [__index0__];
 									if ((x [0] & flags) > 0) {
 										__accu0__.append (x [1]);
 									}
@@ -4554,11 +4601,9 @@ function _parse_decorate () {
 							if (typeof endpos == 'undefined' || (endpos != null && endpos .hasOwnProperty ("__kwargtrans__"))) {;
 								var endpos = null;
 							};
-							var mlist = self._findAllMatches (string, pos, endpos);
-							var ret = map ((function __lambda__ (m) {
-								return Match (m, string, 0, len (string), self, self._groupindex);
-							}), mlist);
-							return py_iter (ret);
+							var __except0__ = NotImplementedError ('No Iterator Support in es5');
+							__except0__.__cause__ = null;
+							throw __except0__;
 						}, 'finditer');},
 						get sub () {return __get__ (this, function (self, repl, string, count) {
 							if (typeof count == 'undefined' || (count != null && count .hasOwnProperty ("__kwargtrans__"))) {;
@@ -4818,12 +4863,16 @@ function _parse_decorate () {
 					var generateGroupSpans = function (tokens) {
 						var groupInfo = list ([]);
 						var idx = 0;
-						for (var token of tokens) {
+						var __iterable0__ = tokens;
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var token = __iterable0__ [__index0__];
 							if (__t__ (token.py_name.startswith ('('))) {
 								groupInfo.append (Group (idx, null, token.py_name));
 							}
 							else if (__t__ (token.py_name == ')')) {
-								for (var group of py_reversed (groupInfo)) {
+								var __iterable1__ = py_reversed (groupInfo);
+								for (var __index1__ = 0; __index1__ < __iterable1__.length; __index1__++) {
+									var group = __iterable1__ [__index1__];
 									if (__t__ (group.end === null)) {
 										group.end = idx;
 									}
@@ -4836,7 +4885,9 @@ function _parse_decorate () {
 					var countCaptureGroups = function (tokens) {
 						var groupInfo = generateGroupSpans (tokens);
 						var count = 0;
-						for (var token of tokens) {
+						var __iterable0__ = tokens;
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var token = __iterable0__ [__index0__];
 							if (__t__ (token.py_name == '(')) {
 								count++;
 							}
@@ -4851,7 +4902,9 @@ function _parse_decorate () {
 							var id = namedGroups [groupRef];
 						}
 						var search = 0;
-						for (var group of groupInfo) {
+						var __iterable0__ = groupInfo;
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var group = __iterable0__ [__index0__];
 							if (__t__ (group.klass == '(')) {
 								search++;
 								if (__t__ (search == id)) {
@@ -4863,7 +4916,9 @@ function _parse_decorate () {
 					var splitIfElse = function (tokens, namedGroups) {
 						var variants = list ([]);
 						var groupInfo = generateGroupSpans (tokens);
-						for (var group of groupInfo) {
+						var __iterable0__ = groupInfo;
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var group = __iterable0__ [__index0__];
 							if (__t__ (group.klass == '(?<')) {
 								var iff = tokens.__getslice__ (0, null, 1);
 								var els = tokens.__getslice__ (0, null, 1);
@@ -4923,7 +4978,9 @@ function _parse_decorate () {
 							return list ([tokens]);
 						}
 						var allVariants = list ([]);
-						for (var variant of variants) {
+						var __iterable0__ = variants;
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var variant = __iterable0__ [__index0__];
 							allVariants.extend (splitIfElse (variant, namedGroups));
 						}
 						return allVariants;
@@ -4949,7 +5006,9 @@ function _parse_decorate () {
 						}, '__repr__');},
 						get resolve () {return __get__ (this, function (self) {
 							var paras = '';
-							for (var para of self.paras) {
+							var __iterable0__ = self.paras;
+							for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+								var para = __iterable0__ [__index0__];
 								paras += str (para);
 							}
 							return self.py_name + paras;
@@ -4976,7 +5035,9 @@ function _parse_decorate () {
 						var s0 = (__t__ (len (stack) > 0) ? stack [high] : Token (''));
 						var s1 = (__t__ (len (stack) > 1) ? stack [high - 1] : Token (''));
 						if (__t__ (VERBOSE)) {
-							for (var token of stack) {
+							var __iterable0__ = stack;
+							for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+								var token = __iterable0__ [__index0__];
 								console.log (token.resolve (), '\t', __kwargtrans__ ({end: ''}));
 							}
 							console.log ('');
@@ -5147,7 +5208,9 @@ function _parse_decorate () {
 						var stack = final;
 						var groupInfo = generateGroupSpans (stack);
 						var resolvedTokens = list ([]);
-						for (var token of stack) {
+						var __iterable0__ = stack;
+						for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+							var token = __iterable0__ [__index0__];
 							var stringed = token.resolve ();
 							if (__t__ (__t__ (flags & re.DOTALL) && stringed == '.')) {
 								var stringed = '[\\s\\S]';
