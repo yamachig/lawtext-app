@@ -249,13 +249,13 @@ Lawtext.Data = Backbone.Model.extend({
         self.set({opening_file: true});
 
         var load_law_num = function(lawnum) {
-            var url = "http://elaws.e-gov.go.jp/api/1/lawdata/"
+            var url = "https://lic857vlz1.execute-api.ap-northeast-1.amazonaws.com/prod/Lawtext-API?method=lawdata&lawnum=";
             url += encodeURI(lawnum);
             $.get(url)
             .done(function(data){
-                var doc = $(data);
-                var text = doc.find("LawFullText").text();
-                self.load_law_text(text);
+                var serializer = new XMLSerializer();
+                var xml = serializer.serializeToString(data);
+                self.load_law_text(xml);
             });
         };
 
@@ -266,20 +266,13 @@ Lawtext.Data = Backbone.Model.extend({
             lawnum = match[0];
             load_law_num(lawnum);
         } else {
-            var url = "http://elaws.e-gov.go.jp/search/elawsSearch/elaws_search/lsg0100/search?searchType=2&abbreviationFlg=true&searchLawName=";
+            var url = "https://lic857vlz1.execute-api.ap-northeast-1.amazonaws.com/prod/Lawtext-API?method=lawnums&lawname=";
             url += encodeURI(law_search_key);
             $.get(url)
             .done(function(data){
-                var doc = $(data);
-                var tds = doc.find("td");
-                for(var i = 0; i < tds.length; i++) {
-                    var td = tds[i];
-                    var match = re_lawnum.exec(td.innerHTML);
-                    if(match) {
-                        lawnum = match[0];
-                        load_law_num(lawnum);
-                        return;
-                    }
+                if(data.length) {
+                    load_law_num(data[0][1]);
+                    return;
                 }
                 self.set({opening_file: false});
             });
