@@ -1,5 +1,7 @@
 'use strict';
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 if (!String.prototype.startsWith) {
     String.prototype.startsWith = function (searchString, position) {
         position = position || 0;
@@ -161,11 +163,11 @@ Lawtext.render_law = function (template_name, law) {
 };
 
 Lawtext.Data = Backbone.Model.extend({
-    defaults: {
+    defaults: _defineProperty({
         "law": null,
         "opening_file": false,
         "law_search_key": null
-    },
+    }, 'law_search_key', null),
 
     initialize: function initialize(options) {
         var self = this;
@@ -204,6 +206,12 @@ Lawtext.Data = Backbone.Model.extend({
         reader.readAsText(file);
     },
 
+    invoke_error: function invoke_error(title, body_el) {
+        var self = this;
+
+        self.trigger("error", title, body_el);
+    },
+
     load_law_text: function load_law_text(text) {
         var self = this;
 
@@ -217,10 +225,8 @@ Lawtext.Data = Backbone.Model.extend({
                 _parse_decorate.decorate(law);
             } catch (err) {
                 var err_str = err.__str__();
-                var modal = $("#errorModal");
                 var pre = $("<pre>").css({ "white-space": "pre-wrap" }).css({ "line-height": "1.2em" }).css({ "padding": "1em 0" }).html(err_str);
-                modal.find(".modal-body").html(pre);
-                modal.modal('show');
+                self.invoke_error("読み込んだLawtextにエラーがあります", pre[0]);
                 law = null;
             }
         }
@@ -261,6 +267,10 @@ Lawtext.Data = Backbone.Model.extend({
                     datetime: new Date().toISOString(),
                     xml: xml
                 }));
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR, textStatus, errorThrown);
+                self.set({ opening_file: false });
+                self.invoke_error("法令の読み込み中にエラーが発生しました", jqXHR.responseText);
             });
         };
 
@@ -300,6 +310,8 @@ Lawtext.Data = Backbone.Model.extend({
                         lawnum: lawnum
                     }));
                     return;
+                } else {
+                    self.invoke_error("法令が見つかりません", "「" + law_search_key + "」を検索しましたが、見つかりませんでした。");
                 }
                 self.set({ opening_file: false });
             });
@@ -490,6 +502,7 @@ Lawtext.MainView = Backbone.View.extend({
 
         self.listenTo(self.data, "change:law_search_key", self.law_search_key_change);
         self.listenTo(self.data, "change:law", self.law_change);
+        self.listenTo(self.data, "error", self.onerror);
     },
 
     render: function render(options) {
@@ -579,6 +592,15 @@ Lawtext.MainView = Backbone.View.extend({
         } else {
             document.title = "Lawtext";
         }
+    },
+
+    onerror: function onerror(title, body_el) {
+        var self = this;
+
+        var modal = self.$("#errorModal");
+        modal.find(".modal-title").html(title);
+        modal.find(".modal-body").html(body_el);
+        modal.modal("show");
     }
 });
 
