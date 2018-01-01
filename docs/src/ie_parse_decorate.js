@@ -1,5 +1,5 @@
 "use strict";
-// Transcrypt'ed from Python, 2018-01-01 17:39:38
+// Transcrypt'ed from Python, 2018-01-02 00:16:17
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -2516,10 +2516,6 @@ function _parse_decorate() {
 					var positions = sorted(positions, __kwargtrans__({ key: function __lambda__(x) {
 							return x[0] * 1000000000000 + x[1] * 1000000 + x[2];
 						}, reverse: true }));
-					if (len(positions) > 0) {
-						print(mixed);
-						print(positions);
-					}
 					var __iterable0__ = positions;
 					for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
 						var __left0__ = __iterable0__[__index0__];
@@ -3026,6 +3022,7 @@ function _parse_decorate() {
 				};
 				var re_TC1stLine = re.compile('^(?P<indents>\\s*)\\* - (?P<tcbody>.*)$');
 				var re_TCnthLine = re.compile('^(?P<indents>\\s*)  - (?P<tcbody>.*)$');
+				var re_OptionLine = re.compile('^(?P<indents>\\s*):(?P<optname>\\S+?):\\s*(?P<optbody>.*)$');
 				var re_FigLine = re.compile('^(?P<indents>\\s*)\\.\\.(?:\\s+)figure::(?:\\s+)(?P<figbody>.*)$');
 				var re_DefaultLine = re.compile('^(?P<indents>\\s*)(?P<linebody>\\S.*)$');
 				var re_BlankLine = re.compile('^\\s*$');
@@ -3037,6 +3034,10 @@ function _parse_decorate() {
 					var match = re_TCnthLine.match(line);
 					if (match) {
 						return list(['TCnthLine', indent_level(match.group(1), indent), lex_tcbody(match.group(2))]);
+					}
+					var match = re_OptionLine.match(line);
+					if (match) {
+						return list(['OptionLine', indent_level(match.group(1), indent), dict({ 'name': match.group(2), 'body': match.group(3) })]);
 					}
 					var match = re_FigLine.match(line);
 					if (match) {
@@ -3652,9 +3653,13 @@ function _parse_decorate() {
 								if (table_struct) {
 									paragraph_item_children.append(table_struct);
 								}
-								var list_ = self.process_list(current_indent + 2);
-								if (list_) {
-									paragraph_item_children.append(list_);
+								while (self.continuing()) {
+									var list_ = self.process_list(current_indent + 2);
+									if (list_) {
+										paragraph_item_children.append(list_);
+									} else {
+										break;
+									}
 								}
 								var paragraph_item = dict({ 'tag': paragraph_item_tag, 'attr': dict({}), 'children': paragraph_item_children });
 							}
@@ -3671,27 +3676,48 @@ function _parse_decorate() {
 							if (remarks) {
 								table_struct_children.append(remarks);
 							}
-							var __left0__ = self.here();
-							var line_type = __left0__[0];
-							var indent = __left0__[1];
-							var data = __left0__[2];
-							var __left0__ = self.py_next();
-							var next_line_type = __left0__[0];
-							var next_indent = __left0__[1];
-							var next_data = __left0__[2];
-							if (line_type == 'TC1stLine' && indent == current_indent) {
-								var table_rows = self.process_table_rows(current_indent);
-								if (len(table_rows)) {
-									table_children.extend(table_rows);
-									var table = dict({ 'tag': 'Table', 'attr': dict({}), 'children': table_children });
-									table_struct_children.append(table);
+							var options = dict({});
+							while (self.continuing()) {
+								var option = self.process_option(current_indent);
+								if (option) {
+									options[option[0]] = option[1];
+								} else {
+									break;
 								}
+							}
+							var table_struct_title = options.py_get('table-struct-title');
+							if (table_struct_title) {
+								table_struct_children.append(dict({ 'tag': 'TableStructTitle', 'attr': dict({}), 'children': table_struct_title }));
+							}
+							var table = self.process_table(current_indent);
+							if (table) {
+								table_struct_children.append(table);
+							}
+							var remarks = self.process_remarks(current_indent);
+							if (remarks) {
+								table_struct_children.append(remarks);
 							}
 							if (len(table_struct_children)) {
 								var table_struct = dict({ 'tag': 'TableStruct', 'attr': dict({}), 'children': table_struct_children });
 							}
 							return table_struct;
 						}, 'process_table_struct');
+					},
+					get process_table() {
+						return __get__(this, function (self, current_indent) {
+							var table = null;
+							var __left0__ = self.here();
+							var line_type = __left0__[0];
+							var indent = __left0__[1];
+							var data = __left0__[2];
+							if (line_type == 'TC1stLine' && indent == current_indent) {
+								var table_rows = self.process_table_rows(current_indent);
+								if (len(table_rows)) {
+									var table = dict({ 'tag': 'Table', 'attr': dict({}), 'children': table_rows });
+								}
+							}
+							return table;
+						}, 'process_table');
 					},
 					get process_table_rows() {
 						return __get__(this, function (self, current_indent) {
@@ -3831,6 +3857,21 @@ function _parse_decorate() {
 							return list_;
 						}, 'process_list');
 					},
+					get process_option() {
+						return __get__(this, function (self, current_indent) {
+							self.skip_blank_lines();
+							var __left0__ = self.here();
+							var line_type = __left0__[0];
+							var indent = __left0__[1];
+							var data = __left0__[2];
+							var option = null;
+							if (line_type == 'OptionLine' && indent == current_indent) {
+								var option = tuple([data['name'], data['body']]);
+								self.forward();
+							}
+							return option;
+						}, 'process_option');
+					},
 					get process_suppl_provision() {
 						return __get__(this, function (self) {
 							self.skip_blank_lines();
@@ -3941,26 +3982,59 @@ function _parse_decorate() {
 								}
 								self.forward();
 								var current_indent = indent;
-								var remarks = self.process_remarks(current_indent + 1);
-								if (remarks) {
-									style_struct_children.append(remarks);
-								}
-								var fig = self.process_fig(current_indent + 1);
-								if (fig) {
-									var style = dict({ 'tag': 'Style', 'attr': dict({}), 'children': list([fig]) });
-									style_struct_children.append(style);
-								}
-								var remarks = self.process_remarks(current_indent + 1);
-								if (remarks) {
-									style_struct_children.append(remarks);
-								}
-								if (len(style_struct_children)) {
-									appdx_style_children.append(dict({ 'tag': 'StyleStruct', 'attr': dict({}), 'children': style_struct_children }));
+								while (self.continuing()) {
+									var style_struct = self.process_style_struct(current_indent + 1);
+									if (style_struct) {
+										appdx_style_children.append(style_struct);
+									} else {
+										break;
+									}
 								}
 								var appdx_style = dict({ 'tag': 'AppdxStyle', 'attr': dict({}), 'children': appdx_style_children });
 							}
 							return appdx_style;
 						}, 'process_appdx_style');
+					},
+					get process_style_struct() {
+						return __get__(this, function (self, current_indent) {
+							self.skip_blank_lines();
+							var style_struct = null;
+							var style_struct_children = list([]);
+							var remarks = self.process_remarks(current_indent);
+							if (remarks) {
+								style_struct_children.append(remarks);
+							}
+							var __left0__ = self.here();
+							var line_type = __left0__[0];
+							var indent = __left0__[1];
+							var data = __left0__[2];
+							var __left0__ = self.py_next();
+							var next_line_type = __left0__[0];
+							var next_indent = __left0__[1];
+							var next_data = __left0__[2];
+							if (line_type == 'DefaultLine' && indent == current_indent && next_line_type != 'BlankLine' && next_indent == current_indent) {
+								style_struct_children.append(dict({ 'tag': 'StyleStructTitle', 'attr': dict({}), 'children': list([data['body']]) }));
+								self.forward();
+							}
+							var fig = self.process_fig(current_indent);
+							if (fig) {
+								var style = dict({ 'tag': 'Style', 'attr': dict({}), 'children': list([fig]) });
+								style_struct_children.append(style);
+							}
+							var table = self.process_table(current_indent);
+							if (table) {
+								var style = dict({ 'tag': 'Style', 'attr': dict({}), 'children': list([table]) });
+								style_struct_children.append(style);
+							}
+							var remarks = self.process_remarks(current_indent);
+							if (remarks) {
+								style_struct_children.append(remarks);
+							}
+							if (len(style_struct_children)) {
+								var style_struct = dict({ 'tag': 'StyleStruct', 'attr': dict({}), 'children': style_struct_children });
+							}
+							return style_struct;
+						}, 'process_style_struct');
 					},
 					get process_remarks() {
 						return __get__(this, function (self, current_indent) {
@@ -3972,7 +4046,7 @@ function _parse_decorate() {
 							var indent = __left0__[1];
 							var data = __left0__[2];
 							var body_split = len(data) ? re.py_split('\\s+', data['body'], __kwargtrans__({ maxsplit: 1 })) : list(['']);
-							if (line_type == 'DefaultLine' && indent == current_indent && body_split[0].startswith('備考')) {
+							if (line_type == 'DefaultLine' && indent == current_indent && (body_split[0].startswith('備考') || body_split[0].startswith('注'))) {
 								remarks_children.append(dict({ 'tag': 'RemarksLabel', 'attr': dict({}), 'children': list([body_split[0]]) }));
 								if (len(body_split) > 1) {
 									remarks_children.extend(get_sentences(body_split[1]));
@@ -4120,6 +4194,7 @@ function _parse_decorate() {
 				__all__.re_FORCE_EXIT_PARENTHESIS = re_FORCE_EXIT_PARENTHESIS;
 				__all__.re_FigLine = re_FigLine;
 				__all__.re_LawNum = re_LawNum;
+				__all__.re_OptionLine = re_OptionLine;
 				__all__.re_ParagraphCaption = re_ParagraphCaption;
 				__all__.re_ParagraphItemBody = re_ParagraphItemBody;
 				__all__.re_SupplProvisionLabel = re_SupplProvisionLabel;
