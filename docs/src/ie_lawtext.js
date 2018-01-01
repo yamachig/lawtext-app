@@ -1,7 +1,5 @@
 'use strict';
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 if (!String.prototype.startsWith) {
     String.prototype.startsWith = function (searchString, position) {
         position = position || 0;
@@ -163,11 +161,11 @@ Lawtext.render_law = function (template_name, law) {
 };
 
 Lawtext.Data = Backbone.Model.extend({
-    defaults: _defineProperty({
+    defaults: {
         "law": null,
         "opening_file": false,
         "law_search_key": null
-    }, 'law_search_key', null),
+    },
 
     initialize: function initialize(options) {
         var self = this;
@@ -241,10 +239,17 @@ Lawtext.Data = Backbone.Model.extend({
         var self = this;
 
         self.set({ opening_file: true });
+        setTimeout(function () {
+            self.search_law_inner(law_search_key);
+        }, 30);
+    },
+
+    search_law_inner: function search_law_inner(law_search_key) {
+        var self = this;
 
         var load_law_num = function load_law_num(lawnum) {
 
-            var law_data = localStorage.getItem("law_for:" + lawnum);
+            var law_data = localStorage ? localStorage.getItem("law_for:" + lawnum) : null;
             if (law_data) {
                 law_data = JSON.parse(law_data);
                 var datetime = new Date(law_data.datetime);
@@ -263,10 +268,12 @@ Lawtext.Data = Backbone.Model.extend({
                 var serializer = new XMLSerializer();
                 var xml = serializer.serializeToString(data);
                 self.load_law_text(xml);
-                localStorage.setItem("law_for:" + lawnum, JSON.stringify({
-                    datetime: new Date().toISOString(),
-                    xml: xml
-                }));
+                if (localStorage) {
+                    localStorage.setItem("law_for:" + lawnum, JSON.stringify({
+                        datetime: new Date().toISOString(),
+                        xml: xml
+                    }));
+                }
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 console.log(jqXHR, textStatus, errorThrown);
                 self.set({ opening_file: false });
@@ -276,7 +283,7 @@ Lawtext.Data = Backbone.Model.extend({
 
         var lawnum = null;
 
-        var law_num_data = localStorage.getItem("law_num_for:" + law_search_key);
+        var law_num_data = localStorage ? localStorage.getItem("law_num_for:" + law_search_key) : null;
         if (law_num_data) {
             law_num_data = JSON.parse(law_num_data);
             var datetime = new Date(law_num_data.datetime);
@@ -294,10 +301,12 @@ Lawtext.Data = Backbone.Model.extend({
         if (match) {
             lawnum = match[0];
             load_law_num(lawnum);
-            localStorage.setItem("law_num_for:" + law_search_key, JSON.stringify({
-                datetime: new Date().toISOString(),
-                lawnum: lawnum
-            }));
+            if (localStorage) {
+                localStorage.setItem("law_num_for:" + law_search_key, JSON.stringify({
+                    datetime: new Date().toISOString(),
+                    lawnum: lawnum
+                }));
+            }
         } else {
             var url = "https://lic857vlz1.execute-api.ap-northeast-1.amazonaws.com/prod/Lawtext-API?method=lawnums&lawname=";
             url += encodeURI(law_search_key);
@@ -305,10 +314,12 @@ Lawtext.Data = Backbone.Model.extend({
                 if (data.length) {
                     lawnum = data[0][1];
                     load_law_num(lawnum);
-                    localStorage.setItem("law_num_for:" + law_search_key, JSON.stringify({
-                        datetime: new Date().toISOString(),
-                        lawnum: lawnum
-                    }));
+                    if (localStorage) {
+                        localStorage.setItem("law_num_for:" + law_search_key, JSON.stringify({
+                            datetime: new Date().toISOString(),
+                            lawnum: lawnum
+                        }));
+                    }
                     return;
                 } else {
                     self.invoke_error("法令が見つかりません", "「" + law_search_key + "」を検索しましたが、見つかりませんでした。");
@@ -458,6 +469,18 @@ Lawtext.HTMLpreviewView = Backbone.View.extend({
             data: self.data.attributes,
             law_html: self.law_html
         }));
+
+        setTimeout(function () {
+            if (!_(law).isNull()) {
+                law = _parse_decorate.analyze(law);
+                self.law_html = Lawtext.render_law('htmlfragment.html', law);
+                self.$el.html(self.template({
+                    data: self.data.attributes,
+                    law_html: self.law_html
+                }));
+                self.process_law();
+            }
+        }, 0);
     },
 
     scroll_to_law_anchor: function scroll_to_law_anchor(tag, name) {
@@ -467,6 +490,19 @@ Lawtext.HTMLpreviewView = Backbone.View.extend({
             var obj = $(this);
             if (obj.data('tag') == tag && obj.data('name') == name) {
                 $('html,body').animate({ scrollTop: obj.offset().top }, 'normal');
+            }
+        });
+    },
+
+    process_law: function process_law() {
+        var self = this;
+
+        self.$(".lawtext-analyzed").each(function () {
+            var obj = $(this);
+
+            if (obj.hasClass("lawtext-analyzed-lawnum")) {
+                var lawnum = obj.data('lawnum');
+                obj.replaceWith($("<a>").attr('href', '#' + lawnum).attr('target', '_blank').html(obj.html()));
             }
         });
     }

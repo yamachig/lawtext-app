@@ -1,5 +1,5 @@
 "use strict";
-// Transcrypt'ed from Python, 2017-12-27 20:49:42
+// Transcrypt'ed from Python, 2018-01-01 17:39:38
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -2418,6 +2418,188 @@ function _parse_decorate() {
 		}
 	};
 	__all__.__setslice__ = __setslice__;
+	__nest__(__all__, 'lawtext.analyze', {
+		__all__: {
+			__inited__: false,
+			__init__: function __init__(__all__) {
+				var re = {};
+				__nest__(re, '', _init__(__world__.re));
+				var re_LawNum = re.compile('(?P<era>明治|大正|昭和|平成)(?P<year>[一二三四五六七八九十]+)年(?P<law_type>\\S+?)第(?P<num>[一二三四五六七八九十百千]+)号');
+				var replace_lawnum = function replace_lawnum(text) {
+					var repl = function repl(match) {
+						var s = match.group(0);
+						var t = '<span class="lawtext-analyzed lawtext-analyzed-lawnum" data-lawnum="{}">{}</span>'.format(s, s);
+						return t;
+					};
+					return re_LawNum.sub(repl, text);
+				};
+				var re_ParStartAny = re.compile('[(（「]');
+				var re_ParEndRound = re.compile('[)）]');
+				var re_ParEndSquare = re.compile('[」]');
+				var replace_parenthesis = function replace_parenthesis(mixed) {
+					var in_square = false;
+					var start_pos = list([]);
+					var pairs = list([]);
+					var ret = list(mixed);
+					var __iterable0__ = enumerate(mixed);
+					for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+						var __left0__ = __iterable0__[__index0__];
+						var i = __left0__[0];
+						var node = __left0__[1];
+						if (!isinstance(node, str)) {
+							continue;
+						}
+						var text = node;
+						var search_start_pos = 0;
+						while (true) {
+							if (len(text) <= search_start_pos) {
+								break;
+							}
+							if (in_square) {
+								var e_match = re_ParEndSquare.search(text.__getslice__(search_start_pos, null, 1));
+								if (e_match) {
+									var __left0__ = start_pos.py_pop();
+									var s_i = __left0__[0];
+									var s_start = __left0__[1];
+									var s_end = __left0__[2];
+									pairs.append(tuple([tuple([s_i, s_start, s_end]), tuple([i, e_match.start() + search_start_pos, e_match.end() + search_start_pos])]));
+									var in_square = false;
+									search_start_pos += e_match.end();
+								} else {
+									break;
+								}
+							} else {
+								var s_match = re_ParStartAny.search(text.__getslice__(search_start_pos, null, 1));
+								var e_match = re_ParEndRound.search(text.__getslice__(search_start_pos, null, 1));
+								if (!s_match && !e_match) {
+									break;
+								}
+								if (s_match && e_match) {
+									if (s_match.start() < e_match.start()) {
+										var e_match = null;
+									} else {
+										var s_match = null;
+									}
+								}
+								if (s_match) {
+									start_pos.append(tuple([i, s_match.start() + search_start_pos, s_match.end() + search_start_pos]));
+									if (s_match.group(0) == '「') {
+										var in_square = true;
+									}
+									search_start_pos += s_match.end();
+								} else if (e_match) {
+									if (len(start_pos) > 0) {
+										var __left0__ = start_pos.py_pop();
+										var s_i = __left0__[0];
+										var s_start = __left0__[1];
+										var s_end = __left0__[2];
+										pairs.append(tuple([tuple([s_i, s_start, s_end]), tuple([i, e_match.start() + search_start_pos, e_match.end() + search_start_pos])]));
+									}
+									search_start_pos += e_match.end();
+								}
+							}
+						}
+					}
+					var positions = list([]);
+					var __iterable0__ = pairs;
+					for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+						var __left0__ = __iterable0__[__index0__];
+						var s_i = __left0__[0][0];
+						var s_start = __left0__[0][1];
+						var s_end = __left0__[0][2];
+						var e_i = __left0__[1][0];
+						var e_start = __left0__[1][1];
+						var e_end = __left0__[1][2];
+						positions.append(tuple([s_i, s_start, s_end, 'start']));
+						positions.append(tuple([e_i, e_start, e_end, 'end']));
+					}
+					var positions = sorted(positions, __kwargtrans__({ key: function __lambda__(x) {
+							return x[0] * 1000000000000 + x[1] * 1000000 + x[2];
+						}, reverse: true }));
+					if (len(positions) > 0) {
+						print(mixed);
+						print(positions);
+					}
+					var __iterable0__ = positions;
+					for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+						var __left0__ = __iterable0__[__index0__];
+						var i = __left0__[0];
+						var start = __left0__[1];
+						var end = __left0__[2];
+						var _type = __left0__[3];
+						var text = mixed[i].__getslice__(start, end, 1);
+						var rep = text;
+						if (_type == 'start') {
+							if (__in__(text, tuple(['(', '（']))) {
+								var rep = '<span class="lawtext-analyzed lawtext-analyzed-round-parentheses"><span class="lawtext-analyzed lawtext-analyzed-round-parenthesis-start">{}</span><span class="lawtext-analyzed lawtext-analyzed-round-parentheses-content">'.format(text);
+							} else if (__in__(text, tuple(['「']))) {
+								var rep = '<span class="lawtext-analyzed lawtext-analyzed-square-parentheses"><span class="lawtext-analyzed lawtext-analyzed-square-parenthesis-start">{}</span><span class="lawtext-analyzed lawtext-analyzed-square-parentheses-content">'.format(text);
+							}
+						} else if (_type == 'end') {
+							if (__in__(text, tuple([')', '）']))) {
+								var rep = '</span><span class="lawtext-analyzed lawtext-analyzed-round-parenthesis-end">{}</span></span>'.format(text);
+							} else if (__in__(text, tuple(['」']))) {
+								var rep = '</span><span class="lawtext-analyzed lawtext-analyzed-square-parenthesis-end">{}</span></span>'.format(text);
+							}
+						}
+						ret[i] = ret[i].__getslice__(0, start, 1) + rep + ret[i].__getslice__(end, null, 1);
+					}
+					return ret;
+				};
+				var analyze_mixed = function analyze_mixed(mixed) {
+					var ret = list([]);
+					var mixed = replace_parenthesis(mixed);
+					var __iterable0__ = mixed;
+					for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+						var node = __iterable0__[__index0__];
+						if (isinstance(node, str)) {
+							ret.append(replace_lawnum(node));
+						} else {
+							ret.append(node);
+						}
+					}
+					return ret;
+				};
+				var analyze = function analyze(el) {
+					var el_children = el['children'];
+					var mixed = false;
+					var __iterable0__ = el_children;
+					for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+						var se = __iterable0__[__index0__];
+						if (isinstance(se, str)) {
+							var mixed = true;
+							break;
+						}
+					}
+					if (mixed) {
+						var children = analyze_mixed(el_children);
+					} else {
+						var children = function () {
+							var __accu0__ = [];
+							var __iterable0__ = el_children;
+							for (var __index0__ = 0; __index0__ < __iterable0__.length; __index0__++) {
+								var subel = __iterable0__[__index0__];
+								__accu0__.append(analyze(subel));
+							}
+							return __accu0__;
+						}();
+					}
+					return dict({ 'tag': el['tag'], 'attr': el['attr'], 'children': children });
+				};
+				__pragma__('<use>' + 're' + '</use>');
+				__pragma__('<all>');
+				__all__.analyze = analyze;
+				__all__.analyze_mixed = analyze_mixed;
+				__all__.re_LawNum = re_LawNum;
+				__all__.re_ParEndRound = re_ParEndRound;
+				__all__.re_ParEndSquare = re_ParEndSquare;
+				__all__.re_ParStartAny = re_ParStartAny;
+				__all__.replace_lawnum = replace_lawnum;
+				__all__.replace_parenthesis = replace_parenthesis;
+				__pragma__('</all>');
+			}
+		}
+	});
 	__nest__(__all__, 'lawtext.decorate', {
 		__all__: {
 			__inited__: false,
@@ -5275,8 +5457,10 @@ function _parse_decorate() {
 	(function () {
 		var parse_lawtext = _init__(__world__.lawtext.parse).parse_lawtext;
 		var decorate = _init__(__world__.lawtext.decorate).decorate;
-		__pragma__('<use>' + 'lawtext.decorate' + 'lawtext.parse' + '</use>');
+		var analyze = _init__(__world__.lawtext.analyze).analyze;
+		__pragma__('<use>' + 'lawtext.analyze' + 'lawtext.decorate' + 'lawtext.parse' + '</use>');
 		__pragma__('<all>');
+		__all__.analyze = analyze;
 		__all__.decorate = decorate;
 		__all__.parse_lawtext = parse_lawtext;
 		__pragma__('</all>');
