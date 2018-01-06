@@ -5353,7 +5353,8 @@ t_120 += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "ind
 }
 }
 frame = frame.pop();
-t_120 += runtime.suppressValue((lineno = 378, colno = 11, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_124])), env.opts.autoescape);
+t_120 += ":style-struct-title:";
+t_120 += runtime.suppressValue((lineno = 378, colno = 31, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text"), "m_text", context, [t_124])), env.opts.autoescape);
 t_120 += "\r\n";
 ;
 }

@@ -1,5 +1,5 @@
 "use strict";
-// Transcrypt'ed from Python, 2018-01-02 00:16:17
+// Transcrypt'ed from Python, 2018-01-06 21:48:43
 function _parse_decorate () {
    var __symbols__ = ['__py3.6__', '__esv5__'];
     var __all__ = {};
@@ -2482,10 +2482,11 @@ function _parse_decorate () {
 						return re_LawNum.sub (repl, text);
 					};
 					var re_ParStartAny = re.compile ('[(（「]');
-					var re_ParEndRound = re.compile ('[)）]');
+					var re_ParEndAny = re.compile ('[)）」]');
+					var re_ParStartSquare = re.compile ('[」]');
 					var re_ParEndSquare = re.compile ('[」]');
 					var replace_parenthesis = function (mixed) {
-						var in_square = false;
+						var square_count = 0;
 						var start_pos = list ([]);
 						var pairs = list ([]);
 						var ret = list (mixed);
@@ -2503,52 +2504,44 @@ function _parse_decorate () {
 								if (len (text) <= search_start_pos) {
 									break;
 								}
-								if (in_square) {
+								if (square_count) {
+									var s_match = re_ParStartSquare.search (text.__getslice__ (search_start_pos, null, 1));
 									var e_match = re_ParEndSquare.search (text.__getslice__ (search_start_pos, null, 1));
-									if (e_match) {
+								}
+								else {
+									var s_match = re_ParStartAny.search (text.__getslice__ (search_start_pos, null, 1));
+									var e_match = re_ParEndAny.search (text.__getslice__ (search_start_pos, null, 1));
+								}
+								if (!(s_match) && !(e_match)) {
+									break;
+								}
+								if (s_match && e_match) {
+									if (s_match.start () < e_match.start ()) {
+										var e_match = null;
+									}
+									else {
+										var s_match = null;
+									}
+								}
+								if (s_match) {
+									start_pos.append (tuple ([i, s_match.start () + search_start_pos, s_match.end () + search_start_pos]));
+									if (re_ParStartSquare.match (s_match.group (0))) {
+										square_count++;
+									}
+									search_start_pos += s_match.end ();
+								}
+								else if (e_match) {
+									if (len (start_pos) > 0) {
 										var __left0__ = start_pos.py_pop ();
 										var s_i = __left0__ [0];
 										var s_start = __left0__ [1];
 										var s_end = __left0__ [2];
 										pairs.append (tuple ([tuple ([s_i, s_start, s_end]), tuple ([i, e_match.start () + search_start_pos, e_match.end () + search_start_pos])]));
-										var in_square = false;
-										search_start_pos += e_match.end ();
 									}
-									else {
-										break;
+									if (square_count) {
+										square_count--;
 									}
-								}
-								else {
-									var s_match = re_ParStartAny.search (text.__getslice__ (search_start_pos, null, 1));
-									var e_match = re_ParEndRound.search (text.__getslice__ (search_start_pos, null, 1));
-									if (!(s_match) && !(e_match)) {
-										break;
-									}
-									if (s_match && e_match) {
-										if (s_match.start () < e_match.start ()) {
-											var e_match = null;
-										}
-										else {
-											var s_match = null;
-										}
-									}
-									if (s_match) {
-										start_pos.append (tuple ([i, s_match.start () + search_start_pos, s_match.end () + search_start_pos]));
-										if (s_match.group (0) == '「') {
-											var in_square = true;
-										}
-										search_start_pos += s_match.end ();
-									}
-									else if (e_match) {
-										if (len (start_pos) > 0) {
-											var __left0__ = start_pos.py_pop ();
-											var s_i = __left0__ [0];
-											var s_start = __left0__ [1];
-											var s_end = __left0__ [2];
-											pairs.append (tuple ([tuple ([s_i, s_start, s_end]), tuple ([i, e_match.start () + search_start_pos, e_match.end () + search_start_pos])]));
-										}
-										search_start_pos += e_match.end ();
-									}
+									search_start_pos += e_match.end ();
 								}
 							}
 						}
@@ -2646,9 +2639,10 @@ function _parse_decorate () {
 						__all__.analyze = analyze;
 						__all__.analyze_mixed = analyze_mixed;
 						__all__.re_LawNum = re_LawNum;
-						__all__.re_ParEndRound = re_ParEndRound;
+						__all__.re_ParEndAny = re_ParEndAny;
 						__all__.re_ParEndSquare = re_ParEndSquare;
 						__all__.re_ParStartAny = re_ParStartAny;
+						__all__.re_ParStartSquare = re_ParStartSquare;
 						__all__.replace_lawnum = replace_lawnum;
 						__all__.replace_parenthesis = replace_parenthesis;
 					__pragma__ ('</all>')
