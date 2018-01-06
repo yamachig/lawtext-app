@@ -1,5 +1,5 @@
 "use strict";
-// Transcrypt'ed from Python, 2018-01-06 21:48:43
+// Transcrypt'ed from Python, 2018-01-06 22:38:10
 function _parse_decorate () {
    var __symbols__ = ['__py3.6__', '__esv5__'];
     var __all__ = {};
@@ -4028,6 +4028,20 @@ function _parse_decorate () {
 							if (remarks) {
 								style_struct_children.append (remarks);
 							}
+							var options = dict ({});
+							while (self.continuing ()) {
+								var option = self.process_option (current_indent);
+								if (option) {
+									options [option [0]] = option [1];
+								}
+								else {
+									break;
+								}
+							}
+							var style_struct_title = options.py_get ('style-struct-title');
+							if (style_struct_title) {
+								style_struct_children.append (dict ({'tag': 'StyleStructTitle', 'attr': dict ({}), 'children': style_struct_title}));
+							}
 							var __left0__ = self.here ();
 							var line_type = __left0__ [0];
 							var indent = __left0__ [1];
@@ -4036,10 +4050,6 @@ function _parse_decorate () {
 							var next_line_type = __left0__ [0];
 							var next_indent = __left0__ [1];
 							var next_data = __left0__ [2];
-							if (line_type == 'DefaultLine' && indent == current_indent && next_line_type != 'BlankLine' && next_indent == current_indent) {
-								style_struct_children.append (dict ({'tag': 'StyleStructTitle', 'attr': dict ({}), 'children': list ([data ['body']])}));
-								self.forward ();
-							}
 							var fig = self.process_fig (current_indent);
 							if (fig) {
 								var style = dict ({'tag': 'Style', 'attr': dict ({}), 'children': list ([fig])});
