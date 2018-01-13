@@ -28,6 +28,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       function lex(text) {
 
         var lines = text.split(/\r?\n/);
+        var lines_count = lines.length;
         var replaced_lines = [];
         var indent_depth = 0;
         var indent_memo = {};
@@ -95,20 +96,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         var replaced_text = replaced_lines.join("\n");
 
-        return [replaced_text, indent_memo];
+        return [replaced_text, indent_memo, lines_count];
       }
 
       function parse(text) {
+
         console.error("\\\\\\\\\\ parse start \\\\\\\\\\");
+        var t0 = new Date().getTime();
 
         var _lex = lex(text),
-            _lex2 = _slicedToArray(_lex, 2),
+            _lex2 = _slicedToArray(_lex, 3),
             lexed = _lex2[0],
-            indent_memo = _lex2[1];
+            indent_memo = _lex2[1],
+            lines_count = _lex2[2];
 
         try {
           var parsed = parser.parse(lexed, { indent_memo: indent_memo });
+
+          var t1 = new Date().getTime();
           console.error("/////  parse end  /////");
+          console.error("( " + Math.round((t1 - t0) / lines_count * 1000) + " \u03BCs/line  =  " + (t1 - t0) + " ms / " + lines_count + " lines )");
         } catch (e) {
           console.error("##### parse error #####");
           if (e.location) {
@@ -293,12 +300,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return law;
       },
           peg$c2 = function peg$c2(law_title, enact_statements, toc, main_provision, appdx_items) {
-        var law = new EL("Law");
+        var law = new EL("Law", { Lang: "ja" });
         var law_body = new EL("LawBody");
 
         if (law_title !== null) {
           if (law_title.law_num) {
             law.append(new EL("LawNum", {}, [law_title.law_num]));
+
+            var m = law_title.law_num.match(/(明治|大正|昭和|平成)([一二三四五六七八九十]+)年(\S+?)第([一二三四五六七八九十百千]+)号/);
+            if (m) {
+              var _m$slice = m.slice(1),
+                  _m$slice2 = _slicedToArray(_m$slice, 4),
+                  era = _m$slice2[0],
+                  year = _m$slice2[1],
+                  law_type = _m$slice2[2],
+                  num = _m$slice2[3];
+
+              var era_val = eras[era];
+              if (era_val) law.attr.Era = era_val;
+
+              var year_val = parse_kanji_num(year);
+              if (year_val !== null) law.attr.Year = year_val;
+
+              var law_type_val = get_lawtype(law_type);
+              if (law_type_val !== null) law.attr.LawType = law_type_val;
+
+              var num_val = parse_kanji_num(num);
+              if (num_val !== null) law.attr.Num = num_val;
+            }
           }
 
           if (law_title.law_title) {
@@ -358,11 +387,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       },
           peg$c19 = function peg$c19(title, article_range, children) {
         var type_char = title.match(/[編章節款目章則]/)[0];
-        var toc_item = new EL("TOC" + article_group_type[type_char], {}, []);
+        var toc_item = new EL("TOC" + article_group_type[type_char]);
+
+        if (title.match(/[編章節款目章]/)) {
+          toc_item.attr.Delete = 'false';
+          var num = parse_named_num(title);
+          if (num) {
+            toc_item.attr.Num = num;
+          }
+        }
+
         toc_item.append(new EL(article_group_title_tag[type_char], {}, [title]));
+
         if (article_range !== null) {
           toc_item.append(new EL("ArticleRange", {}, [article_range]));
         }
+
         toc_item.extend(children || []);
 
         return toc_item;
@@ -377,8 +417,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           peg$c25 = peg$classExpectation([" ", "\u3000", "\t", "\r", "\n", "\u7DE8", "\u7AE0", "\u7BC0", "\u6B3E", "\u76EE"], true, false),
           peg$c26 = /^[\u7DE8\u7AE0\u7BC0\u6B3E\u76EE]/,
           peg$c27 = peg$classExpectation(["\u7DE8", "\u7AE0", "\u7BC0", "\u6B3E", "\u76EE"], false, false),
-          peg$c28 = "\u306E",
-          peg$c29 = peg$literalExpectation("\u306E", false),
+          peg$c28 = /^[\u306E\u30CE]/,
+          peg$c29 = peg$classExpectation(["\u306E", "\u30CE"], false, false),
           peg$c30 = /^[^ \u3000\t\r\n]/,
           peg$c31 = peg$classExpectation([" ", "\u3000", "\t", "\r", "\n"], true, false),
           peg$c32 = function peg$c32(type_char) {
@@ -400,9 +440,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return article_group;
       },
           peg$c37 = function peg$c37(article_group_title, children) {
-        var article_group = new EL(article_group_type[article_group_title.type_char]);
+        var article_group = new EL(article_group_type[article_group_title.type_char], { Delete: "false", Hide: "false" });
+
         article_group.append(new EL(article_group_type[article_group_title.type_char] + "Title", {}, [article_group_title.text]));
+
+        var num = parse_named_num(article_group_title.text);
+        if (num) {
+          article_group.attr.Num = num;
+        }
+
         article_group.extend(children);
+
         return article_group;
       },
           peg$c38 = peg$otherExpectation("article_paragraph_caption"),
@@ -419,7 +467,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return target;
       },
           peg$c47 = function peg$c47(article_caption, article_title) {
-        return [new EL("Sentence")];
+        return [new EL("Sentence", { WritingMode: 'vertical' })];
       },
           peg$c48 = function peg$c48(article_caption, article_title, inline_contents, target) {
         return target;
@@ -437,13 +485,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return [target].concat(target_rest);
       },
           peg$c53 = function peg$c53(article_caption, article_title, inline_contents, lists, children1, paragraphs, children2) {
-        var article = new EL("Article");
+        var article = new EL("Article", { Delete: "false", Hide: "false" });
         if (article_caption !== null) {
           article.append(new EL("ArticleCaption", {}, [article_caption]));
         }
         article.append(new EL("ArticleTitle", {}, [article_title]));
 
+        var num = parse_named_num(article_title);
+        if (num) {
+          article.attr.Num = num;
+        }
+
         var paragraph = new EL("Paragraph");
+        paragraph.attr.OldStyle = "false";
+        paragraph.attr.Delete = "false";
         article.append(paragraph);
 
         paragraph.append(new EL("ParagraphNum"));
@@ -483,12 +538,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         }
 
-        var paragraph_item = new EL(paragraph_item_tags[indent]);
+        var paragraph_item = new EL(paragraph_item_tags[indent], { Hide: "false" });
+        if (indent === 0) {
+          paragraph_item.attr.OldStyle = "false";
+        } else {
+          paragraph_item.attr.Delete = "false";
+        }
         if (paragraph_caption !== null) {
           paragraph_item.append(new EL("ParagraphCaption", {}, [paragraph_caption]));
         }
+
         paragraph_item.append(new EL(paragraph_item_title_tags[indent], {}, [paragraph_item_title]));
+
+        var num = parse_named_num(paragraph_item_title);
+        if (num) {
+          paragraph_item.attr.Num = num;
+        }
+
         paragraph_item.append(new EL(paragraph_item_sentence_tags[indent], {}, inline_contents));
+
         paragraph_item.extend(lists || []);
         paragraph_item.extend(children || []);
 
@@ -508,7 +576,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var indent = indent_memo[location().start.line];
         // console.error("paragraph_item: " + JSON.stringify(location().start.line));
         // console.error("    indent: " + indent);
-        var paragraph_item = new EL(paragraph_item_tags[indent]);
+        var paragraph_item = new EL(paragraph_item_tags[indent], { Hide: "false", Num: "1" });
+        if (indent === 0) {
+          paragraph_item.attr.OldStyle = "false";
+        } else {
+          paragraph_item.attr.Delete = "false";
+        }
         paragraph_item.append(new EL(paragraph_item_title_tags[indent]));
         paragraph_item.append(new EL(paragraph_item_sentence_tags[indent], {}, inline_contents));
         paragraph_item.extend(lists || []);
@@ -565,7 +638,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return [first].concat(rest);
       },
           peg$c86 = function peg$c86(table_row_columns) {
-        var table = new EL("Table");
+        var table = new EL("Table", { WritingMode: "vertical" });
         for (var i = 0; i < table_row_columns.length; i++) {
           var table_row = new EL("TableRow", {}, table_row_columns[i]);
           table.append(table_row);
@@ -608,13 +681,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
         for (var _i = 0; _i < lines.length; _i++) {
           var line = lines[_i];
-          table_column.append(new EL("Sentence", {}, [line]));
+          var sentence = new EL("Sentence", { WritingMode: "vertical" }, [line]);
+          table_column.append(sentence);
         }
 
         return table_column;
       },
           peg$c104 = function peg$c104() {
-        return new EL("TableColumn", {}, [new EL("Sentence")]);
+        return new EL("TableColumn", {
+          BorderTop: "solid",
+          BorderRight: "solid",
+          BorderBottom: "solid",
+          BorderLeft: "solid"
+        }, [new EL("Sentence", { WritingMode: "vertical" })]);
       },
           peg$c105 = peg$otherExpectation("style_struct"),
           peg$c106 = function peg$c106(style_struct_title, remarkses1, style, remarkses2) {
@@ -654,7 +733,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           peg$c118 = "\u6CE8",
           peg$c119 = peg$literalExpectation("\u6CE8", false),
           peg$c120 = function peg$c120(label, _target) {
-        return new EL("Sentence", {}, [_target]);
+        return new EL("Sentence", { WritingMode: "vertical" }, [_target]);
       },
           peg$c121 = "",
           peg$c122 = function peg$c122(label, first) {
@@ -672,7 +751,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           peg$c126 = "DUMMY",
           peg$c127 = peg$literalExpectation("DUMMY", false),
           peg$c128 = function peg$c128(label, first, _target) {
-        return new EL("Sentence", {}, [_target]);
+        return new EL("Sentence", { WritingMode: "vertical" }, [_target]);
       },
           peg$c129 = function peg$c129(label, first, target) {
         return target;
@@ -681,6 +760,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var children = rest || [];
         if (first !== null) {
           children = [].concat(first).concat(children);
+        }
+        if (children.length >= 2) {
+          for (var i = 0; i < children.length; i++) {
+            var child = children[i];
+            if (child.tag.match(/Sentence|Column/)) {
+              child.attr.Num = "" + (i + 1);
+            }
+          }
         }
 
         var remarks = new EL("Remarks");
@@ -727,10 +814,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var appdx_table = new EL("AppdxTable");
         if (title_struct.table_struct_title !== "") {
           console.error("### line " + location().start.line + ": Maybe irregular AppdxTableTitle!");
-          appdx_table.append(new EL("AppdxTableTitle", {}, [title_struct.text]));
+          appdx_table.append(new EL("AppdxTableTitle", { WritingMode: "vertical" }, [title_struct.text]));
         } else {
-          appdx_table.append(new EL("AppdxTableTitle", {}, [title_struct.title]));
-          if (title_struct.related_article_num !== null) {
+          appdx_table.append(new EL("AppdxTableTitle", { WritingMode: "vertical" }, [title_struct.title]));
+          if (title_struct.related_article_num) {
             appdx_table.append(new EL("RelatedArticleNum", {}, [title_struct.related_article_num]));
           }
         }
@@ -763,7 +850,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           peg$c160 = function peg$c160(title_struct, children) {
         var appdx_style = new EL("AppdxStyle");
         appdx_style.append(new EL("AppdxStyleTitle", {}, [title_struct.title]));
-        if (title_struct.related_article_num !== null) {
+        if (title_struct.related_article_num) {
           appdx_style.append(new EL("RelatedArticleNum", {}, [title_struct.related_article_num]));
         }
         appdx_style.extend(children || []);
@@ -794,7 +881,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       },
           peg$c173 = function peg$c173(suppl_provision_label, children) {
         var suppl_provision = new EL("SupplProvision");
-        if (suppl_provision_label.amend_law_num !== null) {
+        if (suppl_provision_label.amend_law_num) {
           suppl_provision.attr["AmendLawNum"] = suppl_provision_label.amend_law_num;
         }
         if (suppl_provision_label.extract !== null) {
@@ -807,16 +894,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           peg$c174 = peg$otherExpectation("columns_or_sentences"),
           peg$c175 = function peg$c175(inline) {
         console.error("### line " + location().start.line + ": Maybe mismatched parenthesis!");
-        var sentence = new EL("Sentence", {}, [inline]);
+        var sentence = new EL("Sentence", { WritingMode: "vertical" }, [inline]);
         return [sentence];
       },
           peg$c176 = peg$otherExpectation("period_sentences"),
           peg$c177 = function peg$c177(fragments) {
         var sentences = [];
+        var proviso_indices = [];
         for (var i = 0; i < fragments.length; i++) {
           var sentence_str = fragments[i];
-          var sentence = new EL("Sentence", {}, [sentence_str]);
+          var sentence = new EL("Sentence", { WritingMode: "vertical" }, [sentence_str]);
+          if (fragments.length >= 2) sentence.attr.Num = "" + (i + 1);
+          if (sentence_str.match(/^ただし、|但し、/)) {
+            proviso_indices.push(i);
+          }
           sentences.push(sentence);
+        }
+        if (proviso_indices.length > 0) {
+          for (var _i2 = 0; _i2 < sentences.length; _i2++) {
+            sentences[_i2].attr.Function = proviso_indices.indexOf(_i2) >= 0 ? 'proviso' : 'main';
+          }
         }
         return sentences;
       },
@@ -828,7 +925,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var column_inner_sets = [first].concat(rest);
         var columns = [];
         for (var i = 0; i < column_inner_sets.length; i++) {
-          var column = new EL("Column", {}, column_inner_sets[i]);
+          var column = new EL("Column", { LineBreak: "false" }, column_inner_sets[i]);
+          if (column_inner_sets.length >= 2) {
+            column.attr.Num = "" + (i + 1);
+          }
           columns.push(column);
         }
         return columns;
@@ -1788,8 +1888,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
               if (s5 !== peg$FAILED) {
                 s6 = peg$currPos;
-                if (input.charCodeAt(peg$currPos) === 12398) {
-                  s7 = peg$c28;
+                if (peg$c28.test(input.charAt(peg$currPos))) {
+                  s7 = input.charAt(peg$currPos);
                   peg$currPos++;
                 } else {
                   s7 = peg$FAILED;
@@ -2172,8 +2272,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
             if (s3 !== peg$FAILED) {
               s4 = peg$currPos;
-              if (input.charCodeAt(peg$currPos) === 12398) {
-                s5 = peg$c28;
+              if (peg$c28.test(input.charAt(peg$currPos))) {
+                s5 = input.charAt(peg$currPos);
                 peg$currPos++;
               } else {
                 s5 = peg$FAILED;
@@ -6792,6 +6892,113 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         '款': 'SubsectionTitle', '目': 'DivisionTitle', '条': 'ArticleTitle',
         '則': 'SupplProvisionLabel'
       };
+
+      var re_kanji_num = /((\S*)千)?((\S*)百)?((\S*)十)?(\S*)/;
+
+      function parse_kanji_num(text) {
+        var m = text.match(re_kanji_num);
+        if (m) {
+          var d1000 = m[1] ? kanji_digits[m[2]] || 1 : 0;
+          var d100 = m[3] ? kanji_digits[m[4]] || 1 : 0;
+          var d10 = m[5] ? kanji_digits[m[6]] || 1 : 0;
+          var d1 = kanji_digits[m[7]] || 0;
+          return "" + (d1000 * 1000 + d100 * 100 + d10 * 10 + d1);
+        }
+        return null;
+      }
+
+      function get_lawtype(text) {
+        if (text.match(/^法律/)) return "Act";else if (text.match(/^政令/)) return "CabinetOrder";else if (text.match(/^勅令/)) return "ImperialOrder";else if (text.match(/^^\S*[^政勅]令/)) return "MinisterialOrdinance";else if (text.match(/^\S*規則/)) return "Rule";else return null;
+      }
+
+      var kanji_digits = {
+        '〇': 0, '一': 1, '二': 2, '三': 3, '四': 4,
+        '五': 5, '六': 6, '七': 7, '八': 8, '九': 9
+      };
+
+      var eras = {
+        '明治': 'Meiji', '大正': 'Taisho',
+        '昭和': 'Showa', '平成': 'Heisei'
+      };
+
+      var re_named_num = /^(○?)第?([一二三四五六七八九十百千]+)\S*?([のノ一二三四五六七八九十百千]*)$/;
+      var iroha_chars = "イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセスン";
+      var re_iroha_char = /[イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセスン]/;
+      var re_item_num = /^\D*(\d+)\D*$/;
+
+      function parse_roman_num(text) {
+        var num = 0;
+        for (var i = 0; i < text.length; i++) {
+          var char = text[i];
+          var next_char = text[i + 1] || "";
+          if (char.match(/[iIｉＩ]/)) {
+            if (next_char.match(/[xXｘＸ]/)) num -= 1;else num += 1;
+          }
+          if (char.match(/[xXｘＸ]/)) {
+            num += 10;
+          }
+        }
+        return num;
+      }
+
+      var re_wide_digits = [[/０/g, '0'], [/１/g, '1'], [/２/g, '2'], [/３/g, '3'], [/４/g, '4'], [/５/g, '5'], [/６/g, '6'], [/７/g, '7'], [/８/g, '8'], [/９/g, '9']];
+
+      function replace_wide_num(text) {
+        var ret = text;
+
+        for (var i = 0; i < re_wide_digits.length; i++) {
+          var _re_wide_digits$i = _slicedToArray(re_wide_digits[i], 2),
+              re_wide = _re_wide_digits$i[0],
+              narrow = _re_wide_digits$i[1];
+
+          ret = ret.replace(re_wide, narrow);
+        }
+        return ret;
+      }
+
+      function parse_named_num(text) {
+        var nums_group = [];
+
+        var subtexts = text.split(/\s+/)[0].replace("及び", "、").replace("から", "、").replace("まで", "").replace("～", "、").replace("・", "、").split("、");
+
+        for (var i = 0; i < subtexts.length; i++) {
+          var subtext = subtexts[i];
+
+          var m = subtext.match(re_named_num);
+          if (m) {
+            var nums = [parse_kanji_num(m[2])];
+            if (m[3]) {
+              var bs = m[3].split(/のノ/g);
+              for (var j = 0; j < bs.length; j++) {
+                if (!bs[j]) continue;
+                nums.push(parse_kanji_num(bs[j]));
+              }
+            }
+            nums_group.push(nums.join('_'));
+            continue;
+          }
+
+          m = subtext.match(re_iroha_char);
+          if (m) {
+            nums_group.push(iroha_chars.indexOf(m[0]) + 1);
+            continue;
+          }
+
+          subtext = replace_wide_num(subtext);
+          m = subtext.match(re_item_num);
+          if (m) {
+            nums_group.push(m[1]);
+            continue;
+          }
+
+          var roman_num = parse_roman_num(subtext);
+          if (roman_num !== 0) {
+            nums_group.push(roman_num);
+          }
+        }
+
+        return nums_group.join(':');
+      }
 
       peg$result = peg$startRuleFunction();
 
