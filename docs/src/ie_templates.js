@@ -4030,40 +4030,61 @@
             frame.set("caller", kwargs.caller);
           }
           frame.set("el", l_el);
-          var t_198 = "";if (!l_el) {
+          var t_198 = "";if (runtime.contextOrFrameLookup(context, frame, "annotate_html")) {
+            t_198 += runtime.suppressValue(env.getFilter("safe").call(context, (lineno = 614, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "annotate_html"), "annotate_html", context, [(lineno = 614, colno = 29, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text_raw"), "m_text_raw", context, [l_el]))]))), env.opts.autoescape);
+            ;
+          } else {
+            t_198 += runtime.suppressValue((lineno = 616, colno = 15, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text_raw"), "m_text_raw", context, [l_el])), env.opts.autoescape);
+            ;
+          }
+          ;
+          frame = callerFrame;
+          return new runtime.SafeString(t_198);
+        });
+        context.addExport("m_text");
+        context.setVariable("m_text", macro_t_197);
+        var macro_t_199 = runtime.makeMacro(["el"], [], function (l_el, kwargs) {
+          var callerFrame = frame;
+          frame = new runtime.Frame();
+          kwargs = kwargs || {};
+          if (kwargs.hasOwnProperty("caller")) {
+            frame.set("caller", kwargs.caller);
+          }
+          frame.set("el", l_el);
+          var t_200 = "";if (!l_el) {
             ;
           } else {
             if (!runtime.memberLookup(l_el, "tag")) {
-              t_198 += runtime.suppressValue(env.getFilter("safe").call(context, l_el), env.opts.autoescape);
+              t_200 += runtime.suppressValue(env.getFilter("safe").call(context, l_el), env.opts.autoescape);
               ;
             } else {
               frame = frame.push();
-              var t_201 = runtime.memberLookup(l_el, "children");
-              if (t_201) {
-                var t_200 = t_201.length;
-                for (var t_199 = 0; t_199 < t_201.length; t_199++) {
-                  var t_202 = t_201[t_199];
-                  frame.set("child", t_202);
-                  frame.set("loop.index", t_199 + 1);
-                  frame.set("loop.index0", t_199);
-                  frame.set("loop.revindex", t_200 - t_199);
-                  frame.set("loop.revindex0", t_200 - t_199 - 1);
-                  frame.set("loop.first", t_199 === 0);
-                  frame.set("loop.last", t_199 === t_200 - 1);
-                  frame.set("loop.length", t_200);
-                  if (!runtime.memberLookup(t_202, "tag")) {
-                    t_198 += runtime.suppressValue(env.getFilter("safe").call(context, t_202), env.opts.autoescape);
+              var t_203 = runtime.memberLookup(l_el, "children");
+              if (t_203) {
+                var t_202 = t_203.length;
+                for (var t_201 = 0; t_201 < t_203.length; t_201++) {
+                  var t_204 = t_203[t_201];
+                  frame.set("child", t_204);
+                  frame.set("loop.index", t_201 + 1);
+                  frame.set("loop.index0", t_201);
+                  frame.set("loop.revindex", t_202 - t_201);
+                  frame.set("loop.revindex0", t_202 - t_201 - 1);
+                  frame.set("loop.first", t_201 === 0);
+                  frame.set("loop.last", t_201 === t_202 - 1);
+                  frame.set("loop.length", t_202);
+                  if (!runtime.memberLookup(t_204, "tag")) {
+                    t_200 += runtime.suppressValue(env.getFilter("safe").call(context, t_204), env.opts.autoescape);
                     ;
                   } else {
-                    if (runtime.memberLookup(t_202, "tag") == "Ruby") {
-                      t_198 += runtime.suppressValue((lineno = 621, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element_raw"), "m_element_raw", context, [t_202])), env.opts.autoescape);
+                    if (runtime.memberLookup(t_204, "tag") == "Ruby") {
+                      t_200 += runtime.suppressValue((lineno = 631, colno = 20, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element_raw"), "m_element_raw", context, [t_204])), env.opts.autoescape);
                       ;
                     } else {
-                      if (runtime.memberLookup(t_202, "tag") == "QuoteStruct") {
-                        t_198 += runtime.suppressValue((lineno = 623, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_quote_struct"), "m_quote_struct", context, [t_202])), env.opts.autoescape);
+                      if (runtime.memberLookup(t_204, "tag") == "QuoteStruct") {
+                        t_200 += runtime.suppressValue((lineno = 633, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_quote_struct"), "m_quote_struct", context, [t_204])), env.opts.autoescape);
                         ;
                       } else {
-                        t_198 += runtime.suppressValue((lineno = 625, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_202])), env.opts.autoescape);
+                        t_200 += runtime.suppressValue((lineno = 635, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_204])), env.opts.autoescape);
                         ;
                       }
                       ;
@@ -4080,12 +4101,12 @@
           }
           ;
           frame = callerFrame;
-          return new runtime.SafeString(t_198);
+          return new runtime.SafeString(t_200);
         });
-        context.addExport("m_text");
-        context.setVariable("m_text", macro_t_197);
+        context.addExport("m_text_raw");
+        context.setVariable("m_text_raw", macro_t_199);
         output += "<div class=\"law\">";
-        output += runtime.suppressValue((lineno = 639, colno = 6, runtime.callWrap(macro_t_1, "m_law", context, [runtime.contextOrFrameLookup(context, frame, "law")])), env.opts.autoescape);
+        output += runtime.suppressValue((lineno = 649, colno = 6, runtime.callWrap(macro_t_1, "m_law", context, [runtime.contextOrFrameLookup(context, frame, "law")])), env.opts.autoescape);
         output += "</div>\r\n\r\n";
         if (parentTemplate) {
           parentTemplate.rootRenderFunc(env, context, frame, runtime, cb);
