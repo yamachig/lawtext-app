@@ -209,6 +209,7 @@ Lawtext.Data = Backbone.Model.extend({
         self.set({opening_file: true});
 
         var file = evt.target.files[0];
+        if(file === null) return;
         var reader = new FileReader();
         reader.onload = (function(e) {
             $(evt.target).val('');
@@ -236,7 +237,11 @@ Lawtext.Data = Backbone.Model.extend({
             law = Lawtext.xml_to_json(text);
         } else {
             try {
-                law = _parse_decorate.parse_lawtext(text);
+                if(Lawtext.use_py_parse) {
+                    law = _parse_decorate.parse_lawtext(text);
+                } else {
+                    law = Lawtext.parse(text);
+                }
                 _parse_decorate.decorate(law);
             } catch(err) {
                 var err_str = err.__str__();
