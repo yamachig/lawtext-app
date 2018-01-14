@@ -1169,7 +1169,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       function replace_lawnum(text) {
-        return text.replace(/(明治|大正|昭和|平成)([一二三四五六七八九十]+)年(\S+?)第([一二三四五六七八九十百千]+)号/, function (s) {
+        return text.replace(/(明治|大正|昭和|平成)([一二三四五六七八九十]+)年(\S+?)第([一二三四五六七八九十百千]+)号/g, function (s) {
           return "<span class=\"lawtext-analyzed lawtext-analyzed-lawnum\" data-lawnum=\"" + s + "\">" + s + "</span>";
         });
       }
@@ -1206,22 +1206,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var replaced_lines = [];
         var indent_depth = 0;
         var indent_memo = {};
-        var re_indent = /^(?:  |　|\t)(?!- |-$|[ 　\t]*(?:第\S+[編章節款目章則]|[附付]\s+則|別表))/;
+        var re_indent = /^(?:  |　|\t)(?!- |-$|[ 　\t]*(?:第[一二三四五六七八九十百千]+[編章節款目章]|[附付]\s+則|別表))/;
         var re_force_dedent_parentheses = /^(?:  |　|\t)[(（][^)）]*[)）][ 　\t]*$/;
         var re_indent_in_toc = /^(?:  |　|\t)/;
         var in_toc = false;
 
         for (var i = 0; i < lines.length; i++) {
           var line = lines[i];
-          if (line.match(/^\S*目次$/)) {
-            in_toc = true;
-            replaced_lines.push(line);
-            continue;
-          }
+
           if (line.match(/^\s*$/)) {
             in_toc = false;
             replaced_lines.push(line);
             continue;
+          }
+
+          if (line.match(/^\S*目次$/)) {
+            in_toc = true;
           }
 
           var force_dedent = false;
@@ -1283,6 +1283,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             lexed = _lex2[0],
             indent_memo = _lex2[1],
             lines_count = _lex2[2];
+        // console.error(lexed);
+
 
         try {
           options = Object.assign({}, options, { indent_memo: indent_memo });
@@ -1476,7 +1478,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           peg$c1 = function peg$c1(law) {
         return law;
       },
-          peg$c2 = function peg$c2(law_title, enact_statements, toc, main_provision, appdx_items) {
+          peg$c2 = function peg$c2(law_title, target) {
+        return target;
+      },
+          peg$c3 = function peg$c3(law_title, enact_statements, toc, main_provision, appdx_items) {
         var law = new EL("Law", { Lang: "ja" });
         var law_body = new EL("LawBody");
 
@@ -1514,39 +1519,39 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         law.append(law_body);
 
-        law_body.extend(enact_statements);
+        law_body.extend(enact_statements || []);
         law_body.append(toc);
         law_body.append(main_provision);
         law_body.extend(appdx_items);
 
         return law;
       },
-          peg$c3 = peg$otherExpectation("law_title"),
-          peg$c4 = function peg$c4(law_title, law_num) {
+          peg$c4 = peg$otherExpectation("law_title"),
+          peg$c5 = function peg$c5(law_title, law_num) {
         return {
           law_title: law_title,
           law_num: law_num.content
         };
       },
-          peg$c5 = function peg$c5(law_title) {
+          peg$c6 = function peg$c6(law_title) {
         return {
           law_title: law_title
         };
       },
-          peg$c6 = peg$otherExpectation("enact_statement"),
-          peg$c7 = function peg$c7(target) {
+          peg$c7 = peg$otherExpectation("enact_statement"),
+          peg$c8 = function peg$c8(target) {
         return new EL("EnactStatement", {}, [target]);
       },
-          peg$c8 = peg$otherExpectation("toc_label"),
-          peg$c9 = /^[^\r\n\u76EE]/,
-          peg$c10 = peg$classExpectation(["\r", "\n", "\u76EE"], true, false),
-          peg$c11 = "\u76EE\u6B21",
-          peg$c12 = peg$literalExpectation("\u76EE\u6B21", false),
-          peg$c13 = peg$otherExpectation("toc"),
-          peg$c14 = function peg$c14(toc_label, first, target) {
+          peg$c9 = peg$otherExpectation("toc_label"),
+          peg$c10 = /^[^\r\n\u76EE]/,
+          peg$c11 = peg$classExpectation(["\r", "\n", "\u76EE"], true, false),
+          peg$c12 = "\u76EE\u6B21",
+          peg$c13 = peg$literalExpectation("\u76EE\u6B21", false),
+          peg$c14 = peg$otherExpectation("toc"),
+          peg$c15 = function peg$c15(toc_label, first, target) {
         return target;
       },
-          peg$c15 = function peg$c15(toc_label, first, rest) {
+          peg$c16 = function peg$c16(toc_label, first, rest) {
         var children = [first].concat(rest);
 
         var toc = new EL("TOC", {}, []);
@@ -1555,14 +1560,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         return toc;
       },
-          peg$c16 = peg$otherExpectation("toc_item"),
-          peg$c17 = function peg$c17(title, article_range, first, target) {
+          peg$c17 = peg$otherExpectation("toc_item"),
+          peg$c18 = function peg$c18(title, article_range, first, target) {
         return target;
       },
-          peg$c18 = function peg$c18(title, article_range, first, rest) {
+          peg$c19 = function peg$c19(title, article_range, first, rest) {
         return [first].concat(rest);
       },
-          peg$c19 = function peg$c19(title, article_range, children) {
+          peg$c20 = function peg$c20(title, article_range, children) {
         var type_char = title.match(/[編章節款目章則]/)[0];
         var toc_item = new EL("TOC" + article_group_type[type_char]);
 
@@ -1584,39 +1589,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         return toc_item;
       },
-          peg$c20 = function peg$c20(children) {
+          peg$c21 = function peg$c21(children) {
         return new EL("MainProvision", {}, children);
       },
-          peg$c21 = peg$otherExpectation("article_group_title"),
-          peg$c22 = "\u7B2C",
-          peg$c23 = peg$literalExpectation("\u7B2C", false),
-          peg$c24 = /^[^ \u3000\t\r\n\u7DE8\u7AE0\u7BC0\u6B3E\u76EE]/,
-          peg$c25 = peg$classExpectation([" ", "\u3000", "\t", "\r", "\n", "\u7DE8", "\u7AE0", "\u7BC0", "\u6B3E", "\u76EE"], true, false),
-          peg$c26 = /^[\u7DE8\u7AE0\u7BC0\u6B3E\u76EE]/,
-          peg$c27 = peg$classExpectation(["\u7DE8", "\u7AE0", "\u7BC0", "\u6B3E", "\u76EE"], false, false),
-          peg$c28 = /^[\u306E\u30CE]/,
-          peg$c29 = peg$classExpectation(["\u306E", "\u30CE"], false, false),
-          peg$c30 = /^[^ \u3000\t\r\n]/,
-          peg$c31 = peg$classExpectation([" ", "\u3000", "\t", "\r", "\n"], true, false),
-          peg$c32 = function peg$c32(type_char) {
+          peg$c22 = function peg$c22(paragraph) {
+        return new EL("MainProvision", {}, [paragraph]);
+      },
+          peg$c23 = peg$otherExpectation("article_group_title"),
+          peg$c24 = "\u7B2C",
+          peg$c25 = peg$literalExpectation("\u7B2C", false),
+          peg$c26 = /^[^ \u3000\t\r\n\u7DE8\u7AE0\u7BC0\u6B3E\u76EE]/,
+          peg$c27 = peg$classExpectation([" ", "\u3000", "\t", "\r", "\n", "\u7DE8", "\u7AE0", "\u7BC0", "\u6B3E", "\u76EE"], true, false),
+          peg$c28 = /^[\u7DE8\u7AE0\u7BC0\u6B3E\u76EE]/,
+          peg$c29 = peg$classExpectation(["\u7DE8", "\u7AE0", "\u7BC0", "\u6B3E", "\u76EE"], false, false),
+          peg$c30 = /^[\u306E\u30CE]/,
+          peg$c31 = peg$classExpectation(["\u306E", "\u30CE"], false, false),
+          peg$c32 = /^[^ \u3000\t\r\n]/,
+          peg$c33 = peg$classExpectation([" ", "\u3000", "\t", "\r", "\n"], true, false),
+          peg$c34 = function peg$c34(type_char) {
         return {
           text: text(),
           type_char: type_char
         };
       },
-          peg$c33 = function peg$c33(title) {
+          peg$c35 = function peg$c35(title) {
         return title;
       },
-          peg$c34 = peg$otherExpectation("article_group"),
-          peg$c35 = function peg$c35(article_group_title, next_title) {
+          peg$c36 = peg$otherExpectation("article_group"),
+          peg$c37 = function peg$c37(article_group_title, next_title) {
         var current_level = article_group_type_chars.indexOf(article_group_title.type_char);
         var next_level = article_group_type_chars.indexOf(next_title.type_char);
         return current_level < next_level;
       },
-          peg$c36 = function peg$c36(article_group_title, article_group) {
+          peg$c38 = function peg$c38(article_group_title, article_group) {
         return article_group;
       },
-          peg$c37 = function peg$c37(article_group_title, children) {
+          peg$c39 = function peg$c39(article_group_title, children) {
         var article_group = new EL(article_group_type[article_group_title.type_char], { Delete: "false", Hide: "false" });
 
         article_group.append(new EL(article_group_type[article_group_title.type_char] + "Title", {}, [article_group_title.text]));
@@ -1630,38 +1638,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         return article_group;
       },
-          peg$c38 = peg$otherExpectation("article_paragraph_caption"),
-          peg$c39 = function peg$c39(article_paragraph_caption) {
+          peg$c40 = peg$otherExpectation("article_paragraph_caption"),
+          peg$c41 = function peg$c41(article_paragraph_caption) {
         return article_paragraph_caption;
       },
-          peg$c40 = peg$otherExpectation("article_title"),
-          peg$c41 = /^[^ \u3000\t\r\n\u6761]/,
-          peg$c42 = peg$classExpectation([" ", "\u3000", "\t", "\r", "\n", "\u6761"], true, false),
-          peg$c43 = "\u6761",
-          peg$c44 = peg$literalExpectation("\u6761", false),
-          peg$c45 = peg$otherExpectation("article"),
-          peg$c46 = function peg$c46(article_caption, article_title, target) {
+          peg$c42 = peg$otherExpectation("article_title"),
+          peg$c43 = /^[^ \u3000\t\r\n\u6761]/,
+          peg$c44 = peg$classExpectation([" ", "\u3000", "\t", "\r", "\n", "\u6761"], true, false),
+          peg$c45 = "\u6761",
+          peg$c46 = peg$literalExpectation("\u6761", false),
+          peg$c47 = peg$otherExpectation("article"),
+          peg$c48 = function peg$c48(article_caption, article_title, target) {
         return target;
       },
-          peg$c47 = function peg$c47(article_caption, article_title) {
+          peg$c49 = function peg$c49(article_caption, article_title) {
         return [new EL("Sentence", { WritingMode: 'vertical' })];
       },
-          peg$c48 = function peg$c48(article_caption, article_title, inline_contents, target) {
+          peg$c50 = function peg$c50(article_caption, article_title, inline_contents, target) {
         return target;
       },
-          peg$c49 = function peg$c49(article_caption, article_title, inline_contents, lists, target, _target) {
+          peg$c51 = function peg$c51(article_caption, article_title, inline_contents, lists, target, _target) {
         return _target;
       },
-          peg$c50 = function peg$c50(article_caption, article_title, inline_contents, lists, target, target_rest) {
+          peg$c52 = function peg$c52(article_caption, article_title, inline_contents, lists, target, target_rest) {
         return [target].concat(target_rest);
       },
-          peg$c51 = function peg$c51(article_caption, article_title, inline_contents, lists, children1, paragraphs, target, _target) {
+          peg$c53 = function peg$c53(article_caption, article_title, inline_contents, lists, children1, paragraphs, target, _target) {
         return _target;
       },
-          peg$c52 = function peg$c52(article_caption, article_title, inline_contents, lists, children1, paragraphs, target, target_rest) {
+          peg$c54 = function peg$c54(article_caption, article_title, inline_contents, lists, children1, paragraphs, target, target_rest) {
         return [target].concat(target_rest);
       },
-          peg$c53 = function peg$c53(article_caption, article_title, inline_contents, lists, children1, paragraphs, children2) {
+          peg$c55 = function peg$c55(article_caption, article_title, inline_contents, lists, children1, paragraphs, children2) {
         var article = new EL("Article", { Delete: "false", Hide: "false" });
         if (article_caption !== null) {
           article.append(new EL("ArticleCaption", {}, [article_caption]));
@@ -1688,19 +1696,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         return article;
       },
-          peg$c54 = peg$otherExpectation("paragraph_item"),
-          peg$c55 = /^[^ \u3000\t\r\n\u6761<]/,
-          peg$c56 = peg$classExpectation([" ", "\u3000", "\t", "\r", "\n", "\u6761", "<"], true, false),
-          peg$c57 = function peg$c57(paragraph_caption, paragraph_item_title, inline_contents, target) {
+          peg$c56 = peg$otherExpectation("paragraph_item"),
+          peg$c57 = /^[^ \u3000\t\r\n\u6761<]/,
+          peg$c58 = peg$classExpectation([" ", "\u3000", "\t", "\r", "\n", "\u6761", "<"], true, false),
+          peg$c59 = function peg$c59(paragraph_caption, paragraph_item_title, inline_contents, target) {
         return target;
       },
-          peg$c58 = function peg$c58(paragraph_caption, paragraph_item_title, inline_contents, lists, target, _target) {
+          peg$c60 = function peg$c60(paragraph_caption, paragraph_item_title, inline_contents, lists, target, _target) {
         return _target;
       },
-          peg$c59 = function peg$c59(paragraph_caption, paragraph_item_title, inline_contents, lists, target, target_rest) {
+          peg$c61 = function peg$c61(paragraph_caption, paragraph_item_title, inline_contents, lists, target, target_rest) {
         return [target].concat(target_rest);
       },
-          peg$c60 = function peg$c60(paragraph_caption, paragraph_item_title, inline_contents, lists, children) {
+          peg$c62 = function peg$c62(paragraph_caption, paragraph_item_title, inline_contents, lists, children) {
         var lineno = location().start.line;
         var indent = indent_memo[lineno];
 
@@ -1739,17 +1747,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         return paragraph_item;
       },
-          peg$c61 = peg$otherExpectation("no_name_paragraph_item"),
-          peg$c62 = function peg$c62(inline_contents, target) {
+          peg$c63 = peg$otherExpectation("no_name_paragraph_item"),
+          peg$c64 = function peg$c64(inline_contents, target) {
         return target;
       },
-          peg$c63 = function peg$c63(inline_contents, lists, target, _target) {
+          peg$c65 = function peg$c65(inline_contents, lists, target, _target) {
         return _target;
       },
-          peg$c64 = function peg$c64(inline_contents, lists, target, target_rest) {
+          peg$c66 = function peg$c66(inline_contents, lists, target, target_rest) {
         return [target].concat(target_rest);
       },
-          peg$c65 = function peg$c65(inline_contents, lists, children) {
+          peg$c67 = function peg$c67(inline_contents, lists, children) {
         var lineno = location().start.line;
         var indent = indent_memo[lineno];
 
@@ -1777,19 +1785,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         return paragraph_item;
       },
-          peg$c66 = peg$otherExpectation("paragraph_item_child"),
-          peg$c67 = peg$otherExpectation("list"),
-          peg$c68 = function peg$c68(columns_or_sentences) {
-        var list = new EL("List");
-        var list_sentence = new EL("ListSentence");
+          peg$c68 = peg$otherExpectation("paragraph_item_child"),
+          peg$c69 = peg$otherExpectation("list"),
+          peg$c70 = "",
+          peg$c71 = function peg$c71(columns_or_sentences) {
+        list_depth++;return true;
+      },
+          peg$c72 = function peg$c72(columns_or_sentences, target) {
+        list_depth--;return true;
+      },
+          peg$c73 = function peg$c73(columns_or_sentences, target) {
+        return target;
+      },
+          peg$c74 = function peg$c74(columns_or_sentences) {
+        list_depth--;return false;
+      },
+          peg$c75 = "DUMMY",
+          peg$c76 = peg$literalExpectation("DUMMY", false),
+          peg$c77 = function peg$c77(columns_or_sentences, sublists) {
+        var list = new EL(list_tags[list_depth]);
+        var list_sentence = new EL(list_tags[list_depth] + "Sentence");
         list.append(list_sentence);
 
         list_sentence.extend(columns_or_sentences);
 
+        list.extend(sublists || []);
+
         return list;
       },
-          peg$c69 = peg$otherExpectation("table_struct"),
-          peg$c70 = function peg$c70(table_struct_title, remarkses1, table, remarkses2) {
+          peg$c78 = peg$otherExpectation("table_struct"),
+          peg$c79 = function peg$c79(table_struct_title, remarkses1, table, remarkses2) {
         var table_struct = new EL("TableStruct");
 
         if (table_struct_title !== null) {
@@ -1804,28 +1829,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         return table_struct;
       },
-          peg$c71 = peg$otherExpectation("table_struct_title"),
-          peg$c72 = ":table-struct-title:",
-          peg$c73 = peg$literalExpectation(":table-struct-title:", false),
-          peg$c74 = function peg$c74(title) {
+          peg$c80 = peg$otherExpectation("table_struct_title"),
+          peg$c81 = ":table-struct-title:",
+          peg$c82 = peg$literalExpectation(":table-struct-title:", false),
+          peg$c83 = function peg$c83(title) {
         return new EL("TableStructTitle", {}, [title]);
       },
-          peg$c75 = peg$otherExpectation("table"),
-          peg$c76 = "*",
-          peg$c77 = peg$literalExpectation("*", false),
-          peg$c78 = "  ",
-          peg$c79 = peg$literalExpectation("  ", false),
-          peg$c80 = "\u3000",
-          peg$c81 = peg$literalExpectation("\u3000", false),
-          peg$c82 = "\t",
-          peg$c83 = peg$literalExpectation("\t", false),
-          peg$c84 = function peg$c84(first, target) {
+          peg$c84 = peg$otherExpectation("table"),
+          peg$c85 = "*",
+          peg$c86 = peg$literalExpectation("*", false),
+          peg$c87 = "  ",
+          peg$c88 = peg$literalExpectation("  ", false),
+          peg$c89 = "\u3000",
+          peg$c90 = peg$literalExpectation("\u3000", false),
+          peg$c91 = "\t",
+          peg$c92 = peg$literalExpectation("\t", false),
+          peg$c93 = function peg$c93(first, target) {
         return target;
       },
-          peg$c85 = function peg$c85(first, rest) {
+          peg$c94 = function peg$c94(first, rest) {
         return [first].concat(rest);
       },
-          peg$c86 = function peg$c86(table_row_columns) {
+          peg$c95 = function peg$c95(table_row_columns) {
         var table = new EL("Table", { WritingMode: "vertical" });
         for (var i = 0; i < table_row_columns.length; i++) {
           var table_row = new EL("TableRow", {}, table_row_columns[i]);
@@ -1834,30 +1859,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         return table;
       },
-          peg$c87 = peg$otherExpectation("table_column"),
-          peg$c88 = "-",
-          peg$c89 = peg$literalExpectation("-", false),
-          peg$c90 = "[",
-          peg$c91 = peg$literalExpectation("[", false),
-          peg$c92 = /^[^ \u3000\t\r\n\]=]/,
-          peg$c93 = peg$classExpectation([" ", "\u3000", "\t", "\r", "\n", "]", "="], true, false),
-          peg$c94 = "=\"",
-          peg$c95 = peg$literalExpectation("=\"", false),
-          peg$c96 = /^[^ \u3000\t\r\n\]"]/,
-          peg$c97 = peg$classExpectation([" ", "\u3000", "\t", "\r", "\n", "]", "\""], true, false),
-          peg$c98 = "\"]",
-          peg$c99 = peg$literalExpectation("\"]", false),
-          peg$c100 = function peg$c100(name, value) {
+          peg$c96 = peg$otherExpectation("table_column"),
+          peg$c97 = "-",
+          peg$c98 = peg$literalExpectation("-", false),
+          peg$c99 = "[",
+          peg$c100 = peg$literalExpectation("[", false),
+          peg$c101 = /^[^ \u3000\t\r\n\]=]/,
+          peg$c102 = peg$classExpectation([" ", "\u3000", "\t", "\r", "\n", "]", "="], true, false),
+          peg$c103 = "=\"",
+          peg$c104 = peg$literalExpectation("=\"", false),
+          peg$c105 = /^[^ \u3000\t\r\n\]"]/,
+          peg$c106 = peg$classExpectation([" ", "\u3000", "\t", "\r", "\n", "]", "\""], true, false),
+          peg$c107 = "\"]",
+          peg$c108 = peg$literalExpectation("\"]", false),
+          peg$c109 = function peg$c109(name, value) {
         return [name, value];
       },
-          peg$c101 = function peg$c101(attr, first, _target) {
+          peg$c110 = function peg$c110(attr, inline) {
+        return new EL("Sentence", { WritingMode: "vertical" }, [inline || ""]);
+      },
+          peg$c111 = function peg$c111(attr, first, inline) {
+        return new EL("Sentence", { WritingMode: "vertical" }, [inline]);
+      },
+          peg$c112 = function peg$c112(attr, first, _target) {
         return _target;
       },
-          peg$c102 = function peg$c102(attr, first, target) {
+          peg$c113 = function peg$c113(attr, first, target) {
         return target;
       },
-          peg$c103 = function peg$c103(attr, first, rest) {
-        var lines = [first || ""].concat(rest || []);
+          peg$c114 = function peg$c114(attr, first, rest) {
+        var children = [first].concat(rest || []);
 
         var table_column = new EL("TableColumn");
         for (var i = 0; i < attr.length; i++) {
@@ -1867,15 +1898,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           table_column.attr[name] = value;
         }
-        for (var _i = 0; _i < lines.length; _i++) {
-          var line = lines[_i];
-          var sentence = new EL("Sentence", { WritingMode: "vertical" }, [line]);
-          table_column.append(sentence);
-        }
+
+        table_column.extend(children);
 
         return table_column;
       },
-          peg$c104 = function peg$c104() {
+          peg$c115 = function peg$c115(here) {
+        console.error("tc 10 line " + location().start.line + ": \"" + here + "\"");return true;
+      },
+          peg$c116 = function peg$c116() {
         return new EL("TableColumn", {
           BorderTop: "solid",
           BorderRight: "solid",
@@ -1883,8 +1914,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           BorderLeft: "solid"
         }, [new EL("Sentence", { WritingMode: "vertical" })]);
       },
-          peg$c105 = peg$otherExpectation("style_struct"),
-          peg$c106 = function peg$c106(style_struct_title, remarkses1, style, remarkses2) {
+          peg$c117 = peg$otherExpectation("style_struct"),
+          peg$c118 = function peg$c118(style_struct_title, remarkses1, style, remarkses2) {
         var style_struct = new EL("StyleStruct");
 
         if (style_struct_title !== null) {
@@ -1899,52 +1930,52 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         return style_struct;
       },
-          peg$c107 = peg$otherExpectation("style_struct_title"),
-          peg$c108 = ":style-struct-title:",
-          peg$c109 = peg$literalExpectation(":style-struct-title:", false),
-          peg$c110 = function peg$c110(title) {
+          peg$c119 = peg$otherExpectation("style_struct_title"),
+          peg$c120 = ":style-struct-title:",
+          peg$c121 = peg$literalExpectation(":style-struct-title:", false),
+          peg$c122 = function peg$c122(title) {
         return new EL("StyleStructTitle", {}, [title]);
       },
-          peg$c111 = peg$otherExpectation("style"),
-          peg$c112 = function peg$c112(table) {
+          peg$c123 = peg$otherExpectation("style"),
+          peg$c124 = function peg$c124(table) {
         return [table];
       },
-          peg$c113 = function peg$c113(fig) {
+          peg$c125 = function peg$c125(fig) {
         return [fig];
       },
-          peg$c114 = function peg$c114(children) {
-        return new EL("Style", {}, children);
-      },
-          peg$c115 = peg$otherExpectation("remarks"),
-          peg$c116 = "\u5099\u8003",
-          peg$c117 = peg$literalExpectation("\u5099\u8003", false),
-          peg$c118 = "\u6CE8",
-          peg$c119 = peg$literalExpectation("\u6CE8", false),
-          peg$c120 = function peg$c120(label, _target) {
-        return new EL("Sentence", { WritingMode: "vertical" }, [_target]);
-      },
-          peg$c121 = "",
-          peg$c122 = function peg$c122(label, first) {
-        base_indent_stack.push([indent_memo[location().start.line] - 1, false, location().start.line]);return true;
-      },
-          peg$c123 = function peg$c123(label, first, _target) {
-        base_indent_stack.pop();return true;
-      },
-          peg$c124 = function peg$c124(label, first, _target) {
-        return _target;
-      },
-          peg$c125 = function peg$c125(label, first) {
-        base_indent_stack.pop();return false;
-      },
-          peg$c126 = "DUMMY",
-          peg$c127 = peg$literalExpectation("DUMMY", false),
-          peg$c128 = function peg$c128(label, first, _target) {
-        return new EL("Sentence", { WritingMode: "vertical" }, [_target]);
-      },
-          peg$c129 = function peg$c129(label, first, target) {
+          peg$c126 = function peg$c126(target) {
         return target;
       },
-          peg$c130 = function peg$c130(label, first, rest) {
+          peg$c127 = function peg$c127(children) {
+        return new EL("Style", {}, children);
+      },
+          peg$c128 = peg$otherExpectation("remarks"),
+          peg$c129 = "\u5099\u8003",
+          peg$c130 = peg$literalExpectation("\u5099\u8003", false),
+          peg$c131 = "\u6CE8",
+          peg$c132 = peg$literalExpectation("\u6CE8", false),
+          peg$c133 = function peg$c133(label, _target) {
+        return new EL("Sentence", { WritingMode: "vertical" }, [_target]);
+      },
+          peg$c134 = function peg$c134(label, first) {
+        base_indent_stack.push([indent_memo[location().start.line] - 1, false, location().start.line]);return true;
+      },
+          peg$c135 = function peg$c135(label, first, _target) {
+        base_indent_stack.pop();return true;
+      },
+          peg$c136 = function peg$c136(label, first, _target) {
+        return _target;
+      },
+          peg$c137 = function peg$c137(label, first) {
+        base_indent_stack.pop();return false;
+      },
+          peg$c138 = function peg$c138(label, first, _target) {
+        return new EL("Sentence", { WritingMode: "vertical" }, [_target]);
+      },
+          peg$c139 = function peg$c139(label, first, target) {
+        return target;
+      },
+          peg$c140 = function peg$c140(label, first, rest) {
         var children = rest || [];
         if (first !== null) {
           children = [].concat(first).concat(children);
@@ -1964,26 +1995,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         return remarks;
       },
-          peg$c131 = peg$otherExpectation("fig"),
-          peg$c132 = "..",
-          peg$c133 = peg$literalExpectation("..", false),
-          peg$c134 = "figure",
-          peg$c135 = peg$literalExpectation("figure", false),
-          peg$c136 = "::",
-          peg$c137 = peg$literalExpectation("::", false),
-          peg$c138 = function peg$c138(src) {
+          peg$c141 = peg$otherExpectation("fig_struct"),
+          peg$c142 = function peg$c142(fig) {
+        return new EL("FigStruct", {}, [fig]);
+      },
+          peg$c143 = peg$otherExpectation("fig"),
+          peg$c144 = "..",
+          peg$c145 = peg$literalExpectation("..", false),
+          peg$c146 = "figure",
+          peg$c147 = peg$literalExpectation("figure", false),
+          peg$c148 = "::",
+          peg$c149 = peg$literalExpectation("::", false),
+          peg$c150 = function peg$c150(src) {
         return new EL("Fig", { src: src });
       },
-          peg$c139 = peg$otherExpectation("appdx_item"),
-          peg$c140 = peg$otherExpectation("appdx_table_title"),
-          peg$c141 = "\u5225\u8868",
-          peg$c142 = peg$literalExpectation("\u5225\u8868", false),
-          peg$c143 = /^[^\r\n(\uFF08]/,
-          peg$c144 = peg$classExpectation(["\r", "\n", "(", "\uFF08"], true, false),
-          peg$c145 = function peg$c145(title, target) {
+          peg$c151 = peg$otherExpectation("appdx_item"),
+          peg$c152 = peg$otherExpectation("appdx_table_title"),
+          peg$c153 = "\u5225\u8868",
+          peg$c154 = peg$literalExpectation("\u5225\u8868", false),
+          peg$c155 = /^[^\r\n(\uFF08]/,
+          peg$c156 = peg$classExpectation(["\r", "\n", "(", "\uFF08"], true, false),
+          peg$c157 = function peg$c157(title, target) {
         return target.text;
       },
-          peg$c146 = function peg$c146(title, related_article_num, table_struct_title) {
+          peg$c158 = function peg$c158(title, related_article_num, table_struct_title) {
         return {
           text: text(),
           title: title,
@@ -1991,14 +2026,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           table_struct_title: table_struct_title
         };
       },
-          peg$c147 = function peg$c147(title_struct) {
+          peg$c159 = function peg$c159(title_struct) {
         return title_struct;
       },
-          peg$c148 = peg$otherExpectation("appdx_table"),
-          peg$c149 = function peg$c149(title_struct, target, remarkses) {
+          peg$c160 = peg$otherExpectation("appdx_table"),
+          peg$c161 = function peg$c161(title_struct, target, remarkses) {
         return target.concat(remarkses);
       },
-          peg$c150 = function peg$c150(title_struct, children) {
+          peg$c162 = function peg$c162(title_struct, children) {
         var appdx_table = new EL("AppdxTable");
         if (title_struct.table_struct_title !== "") {
           console.error("### line " + location().start.line + ": Maybe irregular AppdxTableTitle!");
@@ -2013,14 +2048,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         return appdx_table;
       },
-          peg$c151 = peg$otherExpectation("appdx_table_children"),
-          peg$c152 = function peg$c152(table_struct) {
+          peg$c163 = peg$otherExpectation("appdx_table_children"),
+          peg$c164 = function peg$c164(table_struct) {
         return [table_struct];
       },
-          peg$c153 = peg$otherExpectation("appdx_style_title"),
-          peg$c154 = "\u69D8\u5F0F",
-          peg$c155 = peg$literalExpectation("\u69D8\u5F0F", false),
-          peg$c156 = function peg$c156(title, related_article_num, style_struct_title) {
+          peg$c165 = peg$otherExpectation("appdx_style_title"),
+          peg$c166 = "\u69D8\u5F0F",
+          peg$c167 = peg$literalExpectation("\u69D8\u5F0F", false),
+          peg$c168 = function peg$c168(title, related_article_num, style_struct_title) {
         return {
           text: text(),
           title: title,
@@ -2028,17 +2063,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           style_struct_title: style_struct_title
         };
       },
-          peg$c157 = peg$otherExpectation("appdx_style"),
-          peg$c158 = function peg$c158(title_struct, first, _target) {
+          peg$c169 = peg$otherExpectation("appdx_style"),
+          peg$c170 = function peg$c170(title_struct, first, _target) {
         return _target;
       },
-          peg$c159 = function peg$c159(title_struct, first, rest) {
+          peg$c171 = function peg$c171(title_struct, first, rest) {
         return [first].concat(rest);
       },
-          peg$c160 = function peg$c160(title_struct, target) {
+          peg$c172 = function peg$c172(title_struct, target) {
         return target;
       },
-          peg$c161 = function peg$c161(title_struct, children) {
+          peg$c173 = function peg$c173(title_struct, children) {
         var appdx_style = new EL("AppdxStyle");
         appdx_style.append(new EL("AppdxStyleTitle", {}, [title_struct.title]));
         if (title_struct.related_article_num) {
@@ -2048,29 +2083,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         return appdx_style;
       },
-          peg$c162 = peg$otherExpectation("appdx_style_children"),
-          peg$c163 = peg$otherExpectation("suppl_provision_label"),
-          peg$c164 = /^[\u9644\u4ED8]/,
-          peg$c165 = peg$classExpectation(["\u9644", "\u4ED8"], false, false),
-          peg$c166 = "\u5247",
-          peg$c167 = peg$literalExpectation("\u5247", false),
-          peg$c168 = function peg$c168(label, target) {
+          peg$c174 = peg$otherExpectation("appdx_style_children"),
+          peg$c175 = peg$otherExpectation("suppl_provision_label"),
+          peg$c176 = /^[\u9644\u4ED8]/,
+          peg$c177 = peg$classExpectation(["\u9644", "\u4ED8"], false, false),
+          peg$c178 = "\u5247",
+          peg$c179 = peg$literalExpectation("\u5247", false),
+          peg$c180 = function peg$c180(label, target) {
         return target.content;
       },
-          peg$c169 = "\u6284",
-          peg$c170 = peg$literalExpectation("\u6284", false),
-          peg$c171 = function peg$c171(label, amend_law_num, extract) {
+          peg$c181 = "\u6284",
+          peg$c182 = peg$literalExpectation("\u6284", false),
+          peg$c183 = function peg$c183(label, amend_law_num, extract) {
         return {
           label: label,
           amend_law_num: amend_law_num,
           extract: extract
         };
       },
-          peg$c172 = peg$otherExpectation("suppl_provision"),
-          peg$c173 = function peg$c173(suppl_provision_label, first, rest) {
+          peg$c184 = peg$otherExpectation("suppl_provision"),
+          peg$c185 = function peg$c185(suppl_provision_label, first, rest) {
         return [first].concat(rest);
       },
-          peg$c174 = function peg$c174(suppl_provision_label, children) {
+          peg$c186 = function peg$c186(suppl_provision_label, children) {
         var suppl_provision = new EL("SupplProvision");
         if (suppl_provision_label.amend_law_num) {
           suppl_provision.attr["AmendLawNum"] = suppl_provision_label.amend_law_num;
@@ -2082,14 +2117,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         suppl_provision.extend(children);
         return suppl_provision;
       },
-          peg$c175 = peg$otherExpectation("columns_or_sentences"),
-          peg$c176 = function peg$c176(inline) {
+          peg$c187 = peg$otherExpectation("columns_or_sentences"),
+          peg$c188 = function peg$c188(inline) {
         console.error("### line " + location().start.line + ": Maybe mismatched parenthesis!");
         var sentence = new EL("Sentence", { WritingMode: "vertical" }, [inline]);
         return [sentence];
       },
-          peg$c177 = peg$otherExpectation("period_sentences"),
-          peg$c178 = function peg$c178(fragments) {
+          peg$c189 = peg$otherExpectation("period_sentences"),
+          peg$c190 = function peg$c190(fragments) {
         var sentences = [];
         var proviso_indices = [];
         for (var i = 0; i < fragments.length; i++) {
@@ -2102,21 +2137,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           sentences.push(sentence);
         }
         if (proviso_indices.length > 0) {
-          for (var _i2 = 0; _i2 < sentences.length; _i2++) {
-            sentences[_i2].attr.Function = proviso_indices.indexOf(_i2) >= 0 ? 'proviso' : 'main';
+          for (var _i = 0; _i < sentences.length; _i++) {
+            sentences[_i].attr.Function = proviso_indices.indexOf(_i) >= 0 ? 'proviso' : 'main';
           }
         }
         return sentences;
       },
-          peg$c179 = peg$otherExpectation("columns"),
-          peg$c180 = function peg$c180(first, target) {
+          peg$c191 = peg$otherExpectation("columns"),
+          peg$c192 = function peg$c192(first, target) {
         return target;
       },
-          peg$c181 = function peg$c181(first, rest) {
+          peg$c193 = function peg$c193(first, rest) {
         var column_inner_sets = [first].concat(rest);
         var columns = [];
         for (var i = 0; i < column_inner_sets.length; i++) {
-          var column = new EL("Column", { LineBreak: "false" }, column_inner_sets[i]);
+          var column = new EL("Column", {}, column_inner_sets[i]);
           if (column_inner_sets.length >= 2) {
             column.attr.Num = "" + (i + 1);
           }
@@ -2124,80 +2159,85 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
         return columns;
       },
-          peg$c182 = peg$otherExpectation("INLINE"),
-          peg$c183 = /^[^\r\n]/,
-          peg$c184 = peg$classExpectation(["\r", "\n"], true, false),
-          peg$c185 = peg$otherExpectation("NEXTINLINE"),
-          peg$c186 = /^[\r\n]/,
-          peg$c187 = peg$classExpectation(["\r", "\n"], false, false),
-          peg$c188 = function peg$c188(inline) {
+          peg$c194 = peg$otherExpectation("INLINE"),
+          peg$c195 = /^[^\r\n]/,
+          peg$c196 = peg$classExpectation(["\r", "\n"], true, false),
+          peg$c197 = peg$otherExpectation("NEXTINLINE"),
+          peg$c198 = /^[\r\n]/,
+          peg$c199 = peg$classExpectation(["\r", "\n"], false, false),
+          peg$c200 = function peg$c200(inline) {
         return {
           text: text(),
           inline: inline
         };
       },
-          peg$c189 = peg$otherExpectation("NOT_PARENTHESIS_CHAR"),
-          peg$c190 = /^[^\r\n()\uFF08\uFF09[\]\uFF3B\uFF3D{}\uFF5B\uFF5D\u300C\u300D]/,
-          peg$c191 = peg$classExpectation(["\r", "\n", "(", ")", "\uFF08", "\uFF09", "[", "]", "\uFF3B", "\uFF3D", "{", "}", "\uFF5B", "\uFF5D", "\u300C", "\u300D"], true, false),
-          peg$c192 = peg$otherExpectation("INLINE_FRAGMENT"),
-          peg$c193 = /^[^\r\n()\uFF08\uFF09[\]\uFF3B\uFF3D{}\uFF5B\uFF5D\u300C\u300D \u3000\t]/,
-          peg$c194 = peg$classExpectation(["\r", "\n", "(", ")", "\uFF08", "\uFF09", "[", "]", "\uFF3B", "\uFF3D", "{", "}", "\uFF5B", "\uFF5D", "\u300C", "\u300D", " ", "\u3000", "\t"], true, false),
-          peg$c195 = peg$otherExpectation("PERIOD_SENTENCE_FRAGMENT"),
-          peg$c196 = /^[^\r\n()\uFF08\uFF09[\]\uFF3B\uFF3D{}\uFF5B\uFF5D\u300C\u300D \u3000\t\u3002]/,
-          peg$c197 = peg$classExpectation(["\r", "\n", "(", ")", "\uFF08", "\uFF09", "[", "]", "\uFF3B", "\uFF3D", "{", "}", "\uFF5B", "\uFF5D", "\u300C", "\u300D", " ", "\u3000", "\t", "\u3002"], true, false),
-          peg$c198 = "\u3002",
-          peg$c199 = peg$literalExpectation("\u3002", false),
-          peg$c200 = peg$otherExpectation("OUTSIDE_PARENTHESES_INLINE"),
-          peg$c201 = peg$otherExpectation("PARENTHESES_INLINE"),
-          peg$c202 = peg$otherExpectation("ROUND_PARENTHESES_INLINE"),
-          peg$c203 = /^[(\uFF08]/,
-          peg$c204 = peg$classExpectation(["(", "\uFF08"], false, false),
-          peg$c205 = /^[)\uFF09]/,
-          peg$c206 = peg$classExpectation([")", "\uFF09"], false, false),
-          peg$c207 = function peg$c207(start, content, end) {
+          peg$c201 = peg$otherExpectation("NOT_PARENTHESIS_CHAR"),
+          peg$c202 = /^[^\r\n()\uFF08\uFF09[\]\uFF3B\uFF3D{}\uFF5B\uFF5D\u300C\u300D]/,
+          peg$c203 = peg$classExpectation(["\r", "\n", "(", ")", "\uFF08", "\uFF09", "[", "]", "\uFF3B", "\uFF3D", "{", "}", "\uFF5B", "\uFF5D", "\u300C", "\u300D"], true, false),
+          peg$c204 = peg$otherExpectation("INLINE_FRAGMENT"),
+          peg$c205 = /^[^\r\n()\uFF08\uFF09[\]\uFF3B\uFF3D{}\uFF5B\uFF5D\u300C\u300D \u3000\t]/,
+          peg$c206 = peg$classExpectation(["\r", "\n", "(", ")", "\uFF08", "\uFF09", "[", "]", "\uFF3B", "\uFF3D", "{", "}", "\uFF5B", "\uFF5D", "\u300C", "\u300D", " ", "\u3000", "\t"], true, false),
+          peg$c207 = peg$otherExpectation("PERIOD_SENTENCE_FRAGMENT"),
+          peg$c208 = "<QuoteStruct>",
+          peg$c209 = peg$literalExpectation("<QuoteStruct>", false),
+          peg$c210 = /^[^\r\n()\uFF08\uFF09[\]\uFF3B\uFF3D{}\uFF5B\uFF5D\u300C\u300D \u3000\t\u3002]/,
+          peg$c211 = peg$classExpectation(["\r", "\n", "(", ")", "\uFF08", "\uFF09", "[", "]", "\uFF3B", "\uFF3D", "{", "}", "\uFF5B", "\uFF5D", "\u300C", "\u300D", " ", "\u3000", "\t", "\u3002"], true, false),
+          peg$c212 = "\u3002",
+          peg$c213 = peg$literalExpectation("\u3002", false),
+          peg$c214 = peg$otherExpectation("OUTSIDE_PARENTHESES_INLINE"),
+          peg$c215 = peg$otherExpectation("PARENTHESES_INLINE"),
+          peg$c216 = peg$otherExpectation("ROUND_PARENTHESES_INLINE"),
+          peg$c217 = /^[(\uFF08]/,
+          peg$c218 = peg$classExpectation(["(", "\uFF08"], false, false),
+          peg$c219 = /^[)\uFF09]/,
+          peg$c220 = peg$classExpectation([")", "\uFF09"], false, false),
+          peg$c221 = function peg$c221(start, content, end) {
         return {
           text: text(),
           content: content
         };
       },
-          peg$c208 = peg$otherExpectation("SQUARE_BRACKETS_INLINE"),
-          peg$c209 = /^[[\uFF3B]/,
-          peg$c210 = peg$classExpectation(["[", "\uFF3B"], false, false),
-          peg$c211 = /^[\]\uFF3D]/,
-          peg$c212 = peg$classExpectation(["]", "\uFF3D"], false, false),
-          peg$c213 = peg$otherExpectation("CURLY_BRACKETS_INLINE"),
-          peg$c214 = /^[{\uFF5B]/,
-          peg$c215 = peg$classExpectation(["{", "\uFF5B"], false, false),
-          peg$c216 = /^[}\uFF5D]/,
-          peg$c217 = peg$classExpectation(["}", "\uFF5D"], false, false),
-          peg$c218 = peg$otherExpectation("SQUARE_PARENTHESES_INLINE"),
-          peg$c219 = /^[\u300C]/,
-          peg$c220 = peg$classExpectation(["\u300C"], false, false),
-          peg$c221 = /^[^\r\n\u300C\u300D]/,
-          peg$c222 = peg$classExpectation(["\r", "\n", "\u300C", "\u300D"], true, false),
-          peg$c223 = /^[\u300D]/,
-          peg$c224 = peg$classExpectation(["\u300D"], false, false),
-          peg$c225 = peg$otherExpectation("INDENT"),
-          peg$c226 = "<INDENT str=\"",
-          peg$c227 = peg$literalExpectation("<INDENT str=\"", false),
-          peg$c228 = /^[^"]/,
-          peg$c229 = peg$classExpectation(["\""], true, false),
-          peg$c230 = "\">",
-          peg$c231 = peg$literalExpectation("\">", false),
-          peg$c232 = function peg$c232(str) {
+          peg$c222 = peg$otherExpectation("SQUARE_BRACKETS_INLINE"),
+          peg$c223 = /^[[\uFF3B]/,
+          peg$c224 = peg$classExpectation(["[", "\uFF3B"], false, false),
+          peg$c225 = /^[\]\uFF3D]/,
+          peg$c226 = peg$classExpectation(["]", "\uFF3D"], false, false),
+          peg$c227 = peg$otherExpectation("CURLY_BRACKETS_INLINE"),
+          peg$c228 = /^[{\uFF5B]/,
+          peg$c229 = peg$classExpectation(["{", "\uFF5B"], false, false),
+          peg$c230 = /^[}\uFF5D]/,
+          peg$c231 = peg$classExpectation(["}", "\uFF5D"], false, false),
+          peg$c232 = peg$otherExpectation("SQUARE_PARENTHESES_INLINE"),
+          peg$c233 = /^[\u300C]/,
+          peg$c234 = peg$classExpectation(["\u300C"], false, false),
+          peg$c235 = /^[^\r\n\u300C\u300D]/,
+          peg$c236 = peg$classExpectation(["\r", "\n", "\u300C", "\u300D"], true, false),
+          peg$c237 = /^[\u300D]/,
+          peg$c238 = peg$classExpectation(["\u300D"], false, false),
+          peg$c239 = peg$otherExpectation("quote_struct"),
+          peg$c240 = "</QuoteStruct>",
+          peg$c241 = peg$literalExpectation("</QuoteStruct>", false),
+          peg$c242 = peg$otherExpectation("INDENT"),
+          peg$c243 = "<INDENT str=\"",
+          peg$c244 = peg$literalExpectation("<INDENT str=\"", false),
+          peg$c245 = /^[^"]/,
+          peg$c246 = peg$classExpectation(["\""], true, false),
+          peg$c247 = "\">",
+          peg$c248 = peg$literalExpectation("\">", false),
+          peg$c249 = function peg$c249(str) {
         return str;
       },
-          peg$c233 = peg$otherExpectation("DEDENT"),
-          peg$c234 = "<DEDENT>",
-          peg$c235 = peg$literalExpectation("<DEDENT>", false),
-          peg$c236 = /^[ \u3000\t]/,
-          peg$c237 = peg$classExpectation([" ", "\u3000", "\t"], false, false),
-          peg$c238 = peg$otherExpectation("WHITESPACES"),
-          peg$c239 = peg$otherExpectation("NEWLINE"),
-          peg$c240 = /^[\r]/,
-          peg$c241 = peg$classExpectation(["\r"], false, false),
-          peg$c242 = /^[\n]/,
-          peg$c243 = peg$classExpectation(["\n"], false, false),
+          peg$c250 = peg$otherExpectation("DEDENT"),
+          peg$c251 = "<DEDENT>",
+          peg$c252 = peg$literalExpectation("<DEDENT>", false),
+          peg$c253 = /^[ \u3000\t]/,
+          peg$c254 = peg$classExpectation([" ", "\u3000", "\t"], false, false),
+          peg$c255 = peg$otherExpectation("WHITESPACES"),
+          peg$c256 = peg$otherExpectation("NEWLINE"),
+          peg$c257 = /^[\r]/,
+          peg$c258 = peg$classExpectation(["\r"], false, false),
+          peg$c259 = /^[\n]/,
+          peg$c260 = peg$classExpectation(["\n"], false, false),
           peg$currPos = 0,
           peg$savedPos = 0,
           peg$posDetailsCache = [{ line: 1, column: 1 }],
@@ -2379,7 +2419,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       function peg$parselaw() {
-        var s0, s1, s2, s3, s4, s5, s6;
+        var s0, s1, s2, s3, s4, s5, s6, s7;
 
         s0 = peg$currPos;
         s1 = peg$parselaw_title();
@@ -2387,11 +2427,51 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           s1 = null;
         }
         if (s1 !== peg$FAILED) {
-          s2 = [];
-          s3 = peg$parseenact_statement();
-          while (s3 !== peg$FAILED) {
-            s2.push(s3);
-            s3 = peg$parseenact_statement();
+          s2 = peg$currPos;
+          s3 = peg$parseINDENT();
+          if (s3 !== peg$FAILED) {
+            s4 = peg$parseINDENT();
+            if (s4 !== peg$FAILED) {
+              s5 = [];
+              s6 = peg$parseenact_statement();
+              if (s6 !== peg$FAILED) {
+                while (s6 !== peg$FAILED) {
+                  s5.push(s6);
+                  s6 = peg$parseenact_statement();
+                }
+              } else {
+                s5 = peg$FAILED;
+              }
+              if (s5 !== peg$FAILED) {
+                s6 = peg$parseDEDENT();
+                if (s6 !== peg$FAILED) {
+                  s7 = peg$parseDEDENT();
+                  if (s7 !== peg$FAILED) {
+                    peg$savedPos = s2;
+                    s3 = peg$c2(s1, s5);
+                    s2 = s3;
+                  } else {
+                    peg$currPos = s2;
+                    s2 = peg$FAILED;
+                  }
+                } else {
+                  peg$currPos = s2;
+                  s2 = peg$FAILED;
+                }
+              } else {
+                peg$currPos = s2;
+                s2 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s2;
+              s2 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s2;
+            s2 = peg$FAILED;
+          }
+          if (s2 === peg$FAILED) {
+            s2 = null;
           }
           if (s2 !== peg$FAILED) {
             s3 = peg$parsetoc();
@@ -2409,7 +2489,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 }
                 if (s5 !== peg$FAILED) {
                   peg$savedPos = s0;
-                  s1 = peg$c2(s1, s2, s3, s4, s5);
+                  s1 = peg$c3(s1, s2, s3, s4, s5);
                   s0 = s1;
                 } else {
                   peg$currPos = s0;
@@ -2464,7 +2544,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
               if (s4 !== peg$FAILED) {
                 peg$savedPos = s0;
-                s1 = peg$c4(s1, s3);
+                s1 = peg$c5(s1, s3);
                 s0 = s1;
               } else {
                 peg$currPos = s0;
@@ -2504,7 +2584,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
             if (s2 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c5(s1);
+              s1 = peg$c6(s1);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -2519,7 +2599,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c3);
+            peg$fail(peg$c4);
           }
         }
 
@@ -2584,7 +2664,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 }
                 if (s5 !== peg$FAILED) {
                   peg$savedPos = s0;
-                  s1 = peg$c7(s4);
+                  s1 = peg$c8(s4);
                   s0 = s1;
                 } else {
                   peg$currPos = s0;
@@ -2610,7 +2690,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c6);
+            peg$fail(peg$c7);
           }
         }
 
@@ -2657,35 +2737,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             if (s3 !== peg$FAILED) {
               s4 = peg$currPos;
               s5 = [];
-              if (peg$c9.test(input.charAt(peg$currPos))) {
+              if (peg$c10.test(input.charAt(peg$currPos))) {
                 s6 = input.charAt(peg$currPos);
                 peg$currPos++;
               } else {
                 s6 = peg$FAILED;
                 if (peg$silentFails === 0) {
-                  peg$fail(peg$c10);
+                  peg$fail(peg$c11);
                 }
               }
               while (s6 !== peg$FAILED) {
                 s5.push(s6);
-                if (peg$c9.test(input.charAt(peg$currPos))) {
+                if (peg$c10.test(input.charAt(peg$currPos))) {
                   s6 = input.charAt(peg$currPos);
                   peg$currPos++;
                 } else {
                   s6 = peg$FAILED;
                   if (peg$silentFails === 0) {
-                    peg$fail(peg$c10);
+                    peg$fail(peg$c11);
                   }
                 }
               }
               if (s5 !== peg$FAILED) {
-                if (input.substr(peg$currPos, 2) === peg$c11) {
-                  s6 = peg$c11;
+                if (input.substr(peg$currPos, 2) === peg$c12) {
+                  s6 = peg$c12;
                   peg$currPos += 2;
                 } else {
                   s6 = peg$FAILED;
                   if (peg$silentFails === 0) {
-                    peg$fail(peg$c12);
+                    peg$fail(peg$c13);
                   }
                 }
                 if (s6 !== peg$FAILED) {
@@ -2737,7 +2817,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c8);
+            peg$fail(peg$c9);
           }
         }
 
@@ -2768,7 +2848,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 s7 = peg$parsetoc_item();
                 if (s7 !== peg$FAILED) {
                   peg$savedPos = s6;
-                  s7 = peg$c14(s1, s4, s7);
+                  s7 = peg$c15(s1, s4, s7);
                 }
                 s6 = s7;
                 while (s6 !== peg$FAILED) {
@@ -2777,7 +2857,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   s7 = peg$parsetoc_item();
                   if (s7 !== peg$FAILED) {
                     peg$savedPos = s6;
-                    s7 = peg$c14(s1, s4, s7);
+                    s7 = peg$c15(s1, s4, s7);
                   }
                   s6 = s7;
                 }
@@ -2792,7 +2872,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     s7 = peg$parseDEDENT();
                     if (s7 !== peg$FAILED) {
                       peg$savedPos = s0;
-                      s1 = peg$c15(s1, s4, s5);
+                      s1 = peg$c16(s1, s4, s5);
                       s0 = s1;
                     } else {
                       peg$currPos = s0;
@@ -2826,7 +2906,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c13);
+            peg$fail(peg$c14);
           }
         }
 
@@ -2902,7 +2982,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         s12 = peg$parsetoc_item();
                         if (s12 !== peg$FAILED) {
                           peg$savedPos = s11;
-                          s12 = peg$c17(s4, s5, s9, s12);
+                          s12 = peg$c18(s4, s5, s9, s12);
                         }
                         s11 = s12;
                         while (s11 !== peg$FAILED) {
@@ -2911,7 +2991,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                           s12 = peg$parsetoc_item();
                           if (s12 !== peg$FAILED) {
                             peg$savedPos = s11;
-                            s12 = peg$c17(s4, s5, s9, s12);
+                            s12 = peg$c18(s4, s5, s9, s12);
                           }
                           s11 = s12;
                         }
@@ -2926,7 +3006,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                             s12 = peg$parseDEDENT();
                             if (s12 !== peg$FAILED) {
                               peg$savedPos = s7;
-                              s8 = peg$c18(s4, s5, s9, s10);
+                              s8 = peg$c19(s4, s5, s9, s10);
                               s7 = s8;
                             } else {
                               peg$currPos = s7;
@@ -2953,7 +3033,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     }
                     if (s7 !== peg$FAILED) {
                       peg$savedPos = s0;
-                      s1 = peg$c19(s4, s5, s7);
+                      s1 = peg$c20(s4, s5, s7);
                       s0 = s1;
                     } else {
                       peg$currPos = s0;
@@ -2987,7 +3067,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c16);
+            peg$fail(peg$c17);
           }
         }
 
@@ -3016,9 +3096,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
         if (s1 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c20(s1);
+          s1 = peg$c21(s1);
         }
         s0 = s1;
+        if (s0 === peg$FAILED) {
+          s0 = peg$currPos;
+          s1 = peg$parseno_name_paragraph_item();
+          if (s1 !== peg$FAILED) {
+            peg$savedPos = s0;
+            s1 = peg$c22(s1);
+          }
+          s0 = s1;
+        }
 
         return s0;
       }
@@ -3032,35 +3121,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s1 !== peg$FAILED) {
           s2 = peg$currPos;
           if (input.charCodeAt(peg$currPos) === 31532) {
-            s3 = peg$c22;
+            s3 = peg$c24;
             peg$currPos++;
           } else {
             s3 = peg$FAILED;
             if (peg$silentFails === 0) {
-              peg$fail(peg$c23);
+              peg$fail(peg$c25);
             }
           }
           if (s3 !== peg$FAILED) {
             s4 = [];
-            if (peg$c24.test(input.charAt(peg$currPos))) {
+            if (peg$c26.test(input.charAt(peg$currPos))) {
               s5 = input.charAt(peg$currPos);
               peg$currPos++;
             } else {
               s5 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c25);
+                peg$fail(peg$c27);
               }
             }
             if (s5 !== peg$FAILED) {
               while (s5 !== peg$FAILED) {
                 s4.push(s5);
-                if (peg$c24.test(input.charAt(peg$currPos))) {
+                if (peg$c26.test(input.charAt(peg$currPos))) {
                   s5 = input.charAt(peg$currPos);
                   peg$currPos++;
                 } else {
                   s5 = peg$FAILED;
                   if (peg$silentFails === 0) {
-                    peg$fail(peg$c25);
+                    peg$fail(peg$c27);
                   }
                 }
               }
@@ -3068,47 +3157,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               s4 = peg$FAILED;
             }
             if (s4 !== peg$FAILED) {
-              if (peg$c26.test(input.charAt(peg$currPos))) {
+              if (peg$c28.test(input.charAt(peg$currPos))) {
                 s5 = input.charAt(peg$currPos);
                 peg$currPos++;
               } else {
                 s5 = peg$FAILED;
                 if (peg$silentFails === 0) {
-                  peg$fail(peg$c27);
+                  peg$fail(peg$c29);
                 }
               }
               if (s5 !== peg$FAILED) {
                 s6 = peg$currPos;
-                if (peg$c28.test(input.charAt(peg$currPos))) {
+                if (peg$c30.test(input.charAt(peg$currPos))) {
                   s7 = input.charAt(peg$currPos);
                   peg$currPos++;
                 } else {
                   s7 = peg$FAILED;
                   if (peg$silentFails === 0) {
-                    peg$fail(peg$c29);
+                    peg$fail(peg$c31);
                   }
                 }
                 if (s7 !== peg$FAILED) {
                   s8 = [];
-                  if (peg$c30.test(input.charAt(peg$currPos))) {
+                  if (peg$c32.test(input.charAt(peg$currPos))) {
                     s9 = input.charAt(peg$currPos);
                     peg$currPos++;
                   } else {
                     s9 = peg$FAILED;
                     if (peg$silentFails === 0) {
-                      peg$fail(peg$c31);
+                      peg$fail(peg$c33);
                     }
                   }
                   if (s9 !== peg$FAILED) {
                     while (s9 !== peg$FAILED) {
                       s8.push(s9);
-                      if (peg$c30.test(input.charAt(peg$currPos))) {
+                      if (peg$c32.test(input.charAt(peg$currPos))) {
                         s9 = input.charAt(peg$currPos);
                         peg$currPos++;
                       } else {
                         s9 = peg$FAILED;
                         if (peg$silentFails === 0) {
-                          peg$fail(peg$c31);
+                          peg$fail(peg$c33);
                         }
                       }
                     }
@@ -3150,7 +3239,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   }
                   if (s7 !== peg$FAILED) {
                     peg$savedPos = s2;
-                    s3 = peg$c32(s5);
+                    s3 = peg$c34(s5);
                     s2 = s3;
                   } else {
                     peg$currPos = s2;
@@ -3185,7 +3274,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
             if (s3 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c33(s2);
+              s1 = peg$c35(s2);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -3203,7 +3292,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c21);
+            peg$fail(peg$c23);
           }
         }
 
@@ -3227,7 +3316,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             s6 = peg$parsearticle_group_title();
             if (s6 !== peg$FAILED) {
               peg$savedPos = peg$currPos;
-              s7 = peg$c35(s1, s6);
+              s7 = peg$c37(s1, s6);
               if (s7) {
                 s7 = void 0;
               } else {
@@ -3255,7 +3344,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               s5 = peg$parsearticle_group();
               if (s5 !== peg$FAILED) {
                 peg$savedPos = s3;
-                s4 = peg$c36(s1, s5);
+                s4 = peg$c38(s1, s5);
                 s3 = s4;
               } else {
                 peg$currPos = s3;
@@ -3278,7 +3367,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 s6 = peg$parsearticle_group_title();
                 if (s6 !== peg$FAILED) {
                   peg$savedPos = peg$currPos;
-                  s7 = peg$c35(s1, s6);
+                  s7 = peg$c37(s1, s6);
                   if (s7) {
                     s7 = void 0;
                   } else {
@@ -3306,7 +3395,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   s5 = peg$parsearticle_group();
                   if (s5 !== peg$FAILED) {
                     peg$savedPos = s3;
-                    s4 = peg$c36(s1, s5);
+                    s4 = peg$c38(s1, s5);
                     s3 = s4;
                   } else {
                     peg$currPos = s3;
@@ -3323,7 +3412,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
           if (s2 !== peg$FAILED) {
             peg$savedPos = s0;
-            s1 = peg$c37(s1, s2);
+            s1 = peg$c39(s1, s2);
             s0 = s1;
           } else {
             peg$currPos = s0;
@@ -3337,7 +3426,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c34);
+            peg$fail(peg$c36);
           }
         }
 
@@ -3363,13 +3452,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             if (s3 !== peg$FAILED) {
               s4 = peg$currPos;
               peg$silentFails++;
-              if (peg$c30.test(input.charAt(peg$currPos))) {
+              if (peg$c32.test(input.charAt(peg$currPos))) {
                 s5 = input.charAt(peg$currPos);
                 peg$currPos++;
               } else {
                 s5 = peg$FAILED;
                 if (peg$silentFails === 0) {
-                  peg$fail(peg$c31);
+                  peg$fail(peg$c33);
                 }
               }
               peg$silentFails--;
@@ -3381,7 +3470,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
               if (s4 !== peg$FAILED) {
                 peg$savedPos = s0;
-                s1 = peg$c39(s2);
+                s1 = peg$c41(s2);
                 s0 = s1;
               } else {
                 peg$currPos = s0;
@@ -3403,7 +3492,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c38);
+            peg$fail(peg$c40);
           }
         }
 
@@ -3416,35 +3505,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         peg$silentFails++;
         s0 = peg$currPos;
         if (input.charCodeAt(peg$currPos) === 31532) {
-          s1 = peg$c22;
+          s1 = peg$c24;
           peg$currPos++;
         } else {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c23);
+            peg$fail(peg$c25);
           }
         }
         if (s1 !== peg$FAILED) {
           s2 = [];
-          if (peg$c41.test(input.charAt(peg$currPos))) {
+          if (peg$c43.test(input.charAt(peg$currPos))) {
             s3 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s3 = peg$FAILED;
             if (peg$silentFails === 0) {
-              peg$fail(peg$c42);
+              peg$fail(peg$c44);
             }
           }
           if (s3 !== peg$FAILED) {
             while (s3 !== peg$FAILED) {
               s2.push(s3);
-              if (peg$c41.test(input.charAt(peg$currPos))) {
+              if (peg$c43.test(input.charAt(peg$currPos))) {
                 s3 = input.charAt(peg$currPos);
                 peg$currPos++;
               } else {
                 s3 = peg$FAILED;
                 if (peg$silentFails === 0) {
-                  peg$fail(peg$c42);
+                  peg$fail(peg$c44);
                 }
               }
             }
@@ -3453,46 +3542,46 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
           if (s2 !== peg$FAILED) {
             if (input.charCodeAt(peg$currPos) === 26465) {
-              s3 = peg$c43;
+              s3 = peg$c45;
               peg$currPos++;
             } else {
               s3 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c44);
+                peg$fail(peg$c46);
               }
             }
             if (s3 !== peg$FAILED) {
               s4 = peg$currPos;
-              if (peg$c28.test(input.charAt(peg$currPos))) {
+              if (peg$c30.test(input.charAt(peg$currPos))) {
                 s5 = input.charAt(peg$currPos);
                 peg$currPos++;
               } else {
                 s5 = peg$FAILED;
                 if (peg$silentFails === 0) {
-                  peg$fail(peg$c29);
+                  peg$fail(peg$c31);
                 }
               }
               if (s5 !== peg$FAILED) {
                 s6 = [];
-                if (peg$c30.test(input.charAt(peg$currPos))) {
+                if (peg$c32.test(input.charAt(peg$currPos))) {
                   s7 = input.charAt(peg$currPos);
                   peg$currPos++;
                 } else {
                   s7 = peg$FAILED;
                   if (peg$silentFails === 0) {
-                    peg$fail(peg$c31);
+                    peg$fail(peg$c33);
                   }
                 }
                 if (s7 !== peg$FAILED) {
                   while (s7 !== peg$FAILED) {
                     s6.push(s7);
-                    if (peg$c30.test(input.charAt(peg$currPos))) {
+                    if (peg$c32.test(input.charAt(peg$currPos))) {
                       s7 = input.charAt(peg$currPos);
                       peg$currPos++;
                     } else {
                       s7 = peg$FAILED;
                       if (peg$silentFails === 0) {
-                        peg$fail(peg$c31);
+                        peg$fail(peg$c33);
                       }
                     }
                   }
@@ -3536,7 +3625,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c40);
+            peg$fail(peg$c42);
           }
         }
 
@@ -3544,7 +3633,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       function peg$parsearticle() {
-        var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13;
+        var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16;
 
         peg$silentFails++;
         s0 = peg$currPos;
@@ -3567,7 +3656,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               s5 = peg$parsecolumns_or_sentences();
               if (s5 !== peg$FAILED) {
                 peg$savedPos = s3;
-                s4 = peg$c46(s1, s2, s5);
+                s4 = peg$c48(s1, s2, s5);
                 s3 = s4;
               } else {
                 peg$currPos = s3;
@@ -3582,7 +3671,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               s4 = peg$parse_();
               if (s4 !== peg$FAILED) {
                 peg$savedPos = s3;
-                s4 = peg$c47(s1, s2);
+                s4 = peg$c49(s1, s2);
               }
               s3 = s4;
             }
@@ -3626,7 +3715,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                           s11 = peg$parseDEDENT();
                           if (s11 !== peg$FAILED) {
                             peg$savedPos = s5;
-                            s6 = peg$c48(s1, s2, s3, s8);
+                            s6 = peg$c50(s1, s2, s3, s8);
                             s5 = s6;
                           } else {
                             peg$currPos = s5;
@@ -3662,35 +3751,63 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     s8 = peg$parseparagraph_item_child();
                     if (s8 !== peg$FAILED) {
                       s9 = [];
-                      s10 = peg$currPos;
-                      s11 = peg$parseparagraph_item_child();
-                      if (s11 !== peg$FAILED) {
-                        peg$savedPos = s10;
-                        s11 = peg$c49(s1, s2, s3, s5, s8, s11);
-                      }
-                      s10 = s11;
+                      s10 = peg$parseNEWLINE();
                       while (s10 !== peg$FAILED) {
                         s9.push(s10);
-                        s10 = peg$currPos;
-                        s11 = peg$parseparagraph_item_child();
-                        if (s11 !== peg$FAILED) {
-                          peg$savedPos = s10;
-                          s11 = peg$c49(s1, s2, s3, s5, s8, s11);
-                        }
-                        s10 = s11;
+                        s10 = peg$parseNEWLINE();
                       }
                       if (s9 !== peg$FAILED) {
                         s10 = [];
-                        s11 = peg$parseNEWLINE();
+                        s11 = peg$currPos;
+                        s12 = peg$parseparagraph_item_child();
+                        if (s12 !== peg$FAILED) {
+                          s13 = [];
+                          s14 = peg$parseNEWLINE();
+                          while (s14 !== peg$FAILED) {
+                            s13.push(s14);
+                            s14 = peg$parseNEWLINE();
+                          }
+                          if (s13 !== peg$FAILED) {
+                            peg$savedPos = s11;
+                            s12 = peg$c51(s1, s2, s3, s5, s8, s12);
+                            s11 = s12;
+                          } else {
+                            peg$currPos = s11;
+                            s11 = peg$FAILED;
+                          }
+                        } else {
+                          peg$currPos = s11;
+                          s11 = peg$FAILED;
+                        }
                         while (s11 !== peg$FAILED) {
                           s10.push(s11);
-                          s11 = peg$parseNEWLINE();
+                          s11 = peg$currPos;
+                          s12 = peg$parseparagraph_item_child();
+                          if (s12 !== peg$FAILED) {
+                            s13 = [];
+                            s14 = peg$parseNEWLINE();
+                            while (s14 !== peg$FAILED) {
+                              s13.push(s14);
+                              s14 = peg$parseNEWLINE();
+                            }
+                            if (s13 !== peg$FAILED) {
+                              peg$savedPos = s11;
+                              s12 = peg$c51(s1, s2, s3, s5, s8, s12);
+                              s11 = s12;
+                            } else {
+                              peg$currPos = s11;
+                              s11 = peg$FAILED;
+                            }
+                          } else {
+                            peg$currPos = s11;
+                            s11 = peg$FAILED;
+                          }
                         }
                         if (s10 !== peg$FAILED) {
                           s11 = peg$parseDEDENT();
                           if (s11 !== peg$FAILED) {
                             peg$savedPos = s6;
-                            s7 = peg$c50(s1, s2, s3, s5, s8, s9);
+                            s7 = peg$c52(s1, s2, s3, s5, s8, s10);
                             s6 = s7;
                           } else {
                             peg$currPos = s6;
@@ -3729,35 +3846,63 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         s10 = peg$parseparagraph_item_child();
                         if (s10 !== peg$FAILED) {
                           s11 = [];
-                          s12 = peg$currPos;
-                          s13 = peg$parseparagraph_item_child();
-                          if (s13 !== peg$FAILED) {
-                            peg$savedPos = s12;
-                            s13 = peg$c51(s1, s2, s3, s5, s6, s7, s10, s13);
-                          }
-                          s12 = s13;
+                          s12 = peg$parseNEWLINE();
                           while (s12 !== peg$FAILED) {
                             s11.push(s12);
-                            s12 = peg$currPos;
-                            s13 = peg$parseparagraph_item_child();
-                            if (s13 !== peg$FAILED) {
-                              peg$savedPos = s12;
-                              s13 = peg$c51(s1, s2, s3, s5, s6, s7, s10, s13);
-                            }
-                            s12 = s13;
+                            s12 = peg$parseNEWLINE();
                           }
                           if (s11 !== peg$FAILED) {
                             s12 = [];
-                            s13 = peg$parseNEWLINE();
+                            s13 = peg$currPos;
+                            s14 = peg$parseparagraph_item_child();
+                            if (s14 !== peg$FAILED) {
+                              s15 = [];
+                              s16 = peg$parseNEWLINE();
+                              while (s16 !== peg$FAILED) {
+                                s15.push(s16);
+                                s16 = peg$parseNEWLINE();
+                              }
+                              if (s15 !== peg$FAILED) {
+                                peg$savedPos = s13;
+                                s14 = peg$c53(s1, s2, s3, s5, s6, s7, s10, s14);
+                                s13 = s14;
+                              } else {
+                                peg$currPos = s13;
+                                s13 = peg$FAILED;
+                              }
+                            } else {
+                              peg$currPos = s13;
+                              s13 = peg$FAILED;
+                            }
                             while (s13 !== peg$FAILED) {
                               s12.push(s13);
-                              s13 = peg$parseNEWLINE();
+                              s13 = peg$currPos;
+                              s14 = peg$parseparagraph_item_child();
+                              if (s14 !== peg$FAILED) {
+                                s15 = [];
+                                s16 = peg$parseNEWLINE();
+                                while (s16 !== peg$FAILED) {
+                                  s15.push(s16);
+                                  s16 = peg$parseNEWLINE();
+                                }
+                                if (s15 !== peg$FAILED) {
+                                  peg$savedPos = s13;
+                                  s14 = peg$c53(s1, s2, s3, s5, s6, s7, s10, s14);
+                                  s13 = s14;
+                                } else {
+                                  peg$currPos = s13;
+                                  s13 = peg$FAILED;
+                                }
+                              } else {
+                                peg$currPos = s13;
+                                s13 = peg$FAILED;
+                              }
                             }
                             if (s12 !== peg$FAILED) {
                               s13 = peg$parseDEDENT();
                               if (s13 !== peg$FAILED) {
                                 peg$savedPos = s8;
-                                s9 = peg$c52(s1, s2, s3, s5, s6, s7, s10, s11);
+                                s9 = peg$c54(s1, s2, s3, s5, s6, s7, s10, s12);
                                 s8 = s9;
                               } else {
                                 peg$currPos = s8;
@@ -3784,7 +3929,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       }
                       if (s8 !== peg$FAILED) {
                         peg$savedPos = s0;
-                        s1 = peg$c53(s1, s2, s3, s5, s6, s7, s8);
+                        s1 = peg$c55(s1, s2, s3, s5, s6, s7, s8);
                         s0 = s1;
                       } else {
                         peg$currPos = s0;
@@ -3822,7 +3967,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c45);
+            peg$fail(peg$c47);
           }
         }
 
@@ -3830,7 +3975,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       function peg$parseparagraph_item() {
-        var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12;
+        var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15;
 
         peg$silentFails++;
         s0 = peg$currPos;
@@ -3886,25 +4031,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 }
                 if (s7 !== peg$FAILED) {
                   s8 = [];
-                  if (peg$c55.test(input.charAt(peg$currPos))) {
+                  if (peg$c57.test(input.charAt(peg$currPos))) {
                     s9 = input.charAt(peg$currPos);
                     peg$currPos++;
                   } else {
                     s9 = peg$FAILED;
                     if (peg$silentFails === 0) {
-                      peg$fail(peg$c56);
+                      peg$fail(peg$c58);
                     }
                   }
                   if (s9 !== peg$FAILED) {
                     while (s9 !== peg$FAILED) {
                       s8.push(s9);
-                      if (peg$c55.test(input.charAt(peg$currPos))) {
+                      if (peg$c57.test(input.charAt(peg$currPos))) {
                         s9 = input.charAt(peg$currPos);
                         peg$currPos++;
                       } else {
                         s9 = peg$FAILED;
                         if (peg$silentFails === 0) {
-                          peg$fail(peg$c56);
+                          peg$fail(peg$c58);
                         }
                       }
                     }
@@ -3983,7 +4128,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                             s12 = peg$parseDEDENT();
                             if (s12 !== peg$FAILED) {
                               peg$savedPos = s6;
-                              s7 = peg$c57(s1, s2, s4, s9);
+                              s7 = peg$c59(s1, s2, s4, s9);
                               s6 = s7;
                             } else {
                               peg$currPos = s6;
@@ -4019,35 +4164,63 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       s9 = peg$parseparagraph_item_child();
                       if (s9 !== peg$FAILED) {
                         s10 = [];
-                        s11 = peg$currPos;
-                        s12 = peg$parseparagraph_item_child();
-                        if (s12 !== peg$FAILED) {
-                          peg$savedPos = s11;
-                          s12 = peg$c58(s1, s2, s4, s6, s9, s12);
-                        }
-                        s11 = s12;
+                        s11 = peg$parseNEWLINE();
                         while (s11 !== peg$FAILED) {
                           s10.push(s11);
-                          s11 = peg$currPos;
-                          s12 = peg$parseparagraph_item_child();
-                          if (s12 !== peg$FAILED) {
-                            peg$savedPos = s11;
-                            s12 = peg$c58(s1, s2, s4, s6, s9, s12);
-                          }
-                          s11 = s12;
+                          s11 = peg$parseNEWLINE();
                         }
                         if (s10 !== peg$FAILED) {
                           s11 = [];
-                          s12 = peg$parseNEWLINE();
+                          s12 = peg$currPos;
+                          s13 = peg$parseparagraph_item_child();
+                          if (s13 !== peg$FAILED) {
+                            s14 = [];
+                            s15 = peg$parseNEWLINE();
+                            while (s15 !== peg$FAILED) {
+                              s14.push(s15);
+                              s15 = peg$parseNEWLINE();
+                            }
+                            if (s14 !== peg$FAILED) {
+                              peg$savedPos = s12;
+                              s13 = peg$c60(s1, s2, s4, s6, s9, s13);
+                              s12 = s13;
+                            } else {
+                              peg$currPos = s12;
+                              s12 = peg$FAILED;
+                            }
+                          } else {
+                            peg$currPos = s12;
+                            s12 = peg$FAILED;
+                          }
                           while (s12 !== peg$FAILED) {
                             s11.push(s12);
-                            s12 = peg$parseNEWLINE();
+                            s12 = peg$currPos;
+                            s13 = peg$parseparagraph_item_child();
+                            if (s13 !== peg$FAILED) {
+                              s14 = [];
+                              s15 = peg$parseNEWLINE();
+                              while (s15 !== peg$FAILED) {
+                                s14.push(s15);
+                                s15 = peg$parseNEWLINE();
+                              }
+                              if (s14 !== peg$FAILED) {
+                                peg$savedPos = s12;
+                                s13 = peg$c60(s1, s2, s4, s6, s9, s13);
+                                s12 = s13;
+                              } else {
+                                peg$currPos = s12;
+                                s12 = peg$FAILED;
+                              }
+                            } else {
+                              peg$currPos = s12;
+                              s12 = peg$FAILED;
+                            }
                           }
                           if (s11 !== peg$FAILED) {
                             s12 = peg$parseDEDENT();
                             if (s12 !== peg$FAILED) {
                               peg$savedPos = s7;
-                              s8 = peg$c59(s1, s2, s4, s6, s9, s10);
+                              s8 = peg$c61(s1, s2, s4, s6, s9, s11);
                               s7 = s8;
                             } else {
                               peg$currPos = s7;
@@ -4074,7 +4247,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     }
                     if (s7 !== peg$FAILED) {
                       peg$savedPos = s0;
-                      s1 = peg$c60(s1, s2, s4, s6, s7);
+                      s1 = peg$c62(s1, s2, s4, s6, s7);
                       s0 = s1;
                     } else {
                       peg$currPos = s0;
@@ -4108,7 +4281,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c54);
+            peg$fail(peg$c56);
           }
         }
 
@@ -4116,7 +4289,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       function peg$parseno_name_paragraph_item() {
-        var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9;
+        var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12;
 
         peg$silentFails++;
         s0 = peg$currPos;
@@ -4161,7 +4334,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       s9 = peg$parseDEDENT();
                       if (s9 !== peg$FAILED) {
                         peg$savedPos = s3;
-                        s4 = peg$c62(s1, s6);
+                        s4 = peg$c64(s1, s6);
                         s3 = s4;
                       } else {
                         peg$currPos = s3;
@@ -4197,35 +4370,63 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 s6 = peg$parseparagraph_item_child();
                 if (s6 !== peg$FAILED) {
                   s7 = [];
-                  s8 = peg$currPos;
-                  s9 = peg$parseparagraph_item_child();
-                  if (s9 !== peg$FAILED) {
-                    peg$savedPos = s8;
-                    s9 = peg$c63(s1, s3, s6, s9);
-                  }
-                  s8 = s9;
+                  s8 = peg$parseNEWLINE();
                   while (s8 !== peg$FAILED) {
                     s7.push(s8);
-                    s8 = peg$currPos;
-                    s9 = peg$parseparagraph_item_child();
-                    if (s9 !== peg$FAILED) {
-                      peg$savedPos = s8;
-                      s9 = peg$c63(s1, s3, s6, s9);
-                    }
-                    s8 = s9;
+                    s8 = peg$parseNEWLINE();
                   }
                   if (s7 !== peg$FAILED) {
                     s8 = [];
-                    s9 = peg$parseNEWLINE();
+                    s9 = peg$currPos;
+                    s10 = peg$parseparagraph_item_child();
+                    if (s10 !== peg$FAILED) {
+                      s11 = [];
+                      s12 = peg$parseNEWLINE();
+                      while (s12 !== peg$FAILED) {
+                        s11.push(s12);
+                        s12 = peg$parseNEWLINE();
+                      }
+                      if (s11 !== peg$FAILED) {
+                        peg$savedPos = s9;
+                        s10 = peg$c65(s1, s3, s6, s10);
+                        s9 = s10;
+                      } else {
+                        peg$currPos = s9;
+                        s9 = peg$FAILED;
+                      }
+                    } else {
+                      peg$currPos = s9;
+                      s9 = peg$FAILED;
+                    }
                     while (s9 !== peg$FAILED) {
                       s8.push(s9);
-                      s9 = peg$parseNEWLINE();
+                      s9 = peg$currPos;
+                      s10 = peg$parseparagraph_item_child();
+                      if (s10 !== peg$FAILED) {
+                        s11 = [];
+                        s12 = peg$parseNEWLINE();
+                        while (s12 !== peg$FAILED) {
+                          s11.push(s12);
+                          s12 = peg$parseNEWLINE();
+                        }
+                        if (s11 !== peg$FAILED) {
+                          peg$savedPos = s9;
+                          s10 = peg$c65(s1, s3, s6, s10);
+                          s9 = s10;
+                        } else {
+                          peg$currPos = s9;
+                          s9 = peg$FAILED;
+                        }
+                      } else {
+                        peg$currPos = s9;
+                        s9 = peg$FAILED;
+                      }
                     }
                     if (s8 !== peg$FAILED) {
                       s9 = peg$parseDEDENT();
                       if (s9 !== peg$FAILED) {
                         peg$savedPos = s4;
-                        s5 = peg$c64(s1, s3, s6, s7);
+                        s5 = peg$c66(s1, s3, s6, s8);
                         s4 = s5;
                       } else {
                         peg$currPos = s4;
@@ -4252,7 +4453,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
               if (s4 !== peg$FAILED) {
                 peg$savedPos = s0;
-                s1 = peg$c65(s1, s3, s4);
+                s1 = peg$c67(s1, s3, s4);
                 s0 = s1;
               } else {
                 peg$currPos = s0;
@@ -4274,7 +4475,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c61);
+            peg$fail(peg$c63);
           }
         }
 
@@ -4288,12 +4489,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         s0 = peg$parsetable_struct();
         if (s0 === peg$FAILED) {
           s0 = peg$parseparagraph_item();
+          if (s0 === peg$FAILED) {
+            s0 = peg$parsestyle_struct();
+          }
         }
         peg$silentFails--;
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c66);
+            peg$fail(peg$c68);
           }
         }
 
@@ -4301,7 +4505,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       function peg$parselist() {
-        var s0, s1, s2, s3;
+        var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14;
 
         peg$silentFails++;
         s0 = peg$currPos;
@@ -4318,9 +4522,195 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             s2 = peg$FAILED;
           }
           if (s2 !== peg$FAILED) {
-            peg$savedPos = s0;
-            s1 = peg$c68(s1);
-            s0 = s1;
+            s3 = peg$currPos;
+            s4 = peg$currPos;
+            peg$silentFails++;
+            s5 = peg$currPos;
+            s6 = peg$c70;
+            if (s6 !== peg$FAILED) {
+              peg$savedPos = peg$currPos;
+              s7 = peg$c71(s1);
+              if (s7) {
+                s7 = void 0;
+              } else {
+                s7 = peg$FAILED;
+              }
+              if (s7 !== peg$FAILED) {
+                s6 = [s6, s7];
+                s5 = s6;
+              } else {
+                peg$currPos = s5;
+                s5 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s5;
+              s5 = peg$FAILED;
+            }
+            peg$silentFails--;
+            if (s5 !== peg$FAILED) {
+              peg$currPos = s4;
+              s4 = void 0;
+            } else {
+              s4 = peg$FAILED;
+            }
+            if (s4 !== peg$FAILED) {
+              s5 = peg$parseINDENT();
+              if (s5 !== peg$FAILED) {
+                s6 = peg$parseINDENT();
+                if (s6 !== peg$FAILED) {
+                  s7 = [];
+                  s8 = peg$parselist();
+                  if (s8 !== peg$FAILED) {
+                    while (s8 !== peg$FAILED) {
+                      s7.push(s8);
+                      s8 = peg$parselist();
+                    }
+                  } else {
+                    s7 = peg$FAILED;
+                  }
+                  if (s7 !== peg$FAILED) {
+                    s8 = [];
+                    s9 = peg$parseNEWLINE();
+                    while (s9 !== peg$FAILED) {
+                      s8.push(s9);
+                      s9 = peg$parseNEWLINE();
+                    }
+                    if (s8 !== peg$FAILED) {
+                      s9 = peg$parseDEDENT();
+                      if (s9 !== peg$FAILED) {
+                        s10 = peg$parseDEDENT();
+                        if (s10 !== peg$FAILED) {
+                          s11 = peg$currPos;
+                          peg$silentFails++;
+                          s12 = peg$currPos;
+                          s13 = peg$c70;
+                          if (s13 !== peg$FAILED) {
+                            peg$savedPos = peg$currPos;
+                            s14 = peg$c72(s1, s7);
+                            if (s14) {
+                              s14 = void 0;
+                            } else {
+                              s14 = peg$FAILED;
+                            }
+                            if (s14 !== peg$FAILED) {
+                              s13 = [s13, s14];
+                              s12 = s13;
+                            } else {
+                              peg$currPos = s12;
+                              s12 = peg$FAILED;
+                            }
+                          } else {
+                            peg$currPos = s12;
+                            s12 = peg$FAILED;
+                          }
+                          peg$silentFails--;
+                          if (s12 !== peg$FAILED) {
+                            peg$currPos = s11;
+                            s11 = void 0;
+                          } else {
+                            s11 = peg$FAILED;
+                          }
+                          if (s11 !== peg$FAILED) {
+                            peg$savedPos = s3;
+                            s4 = peg$c73(s1, s7);
+                            s3 = s4;
+                          } else {
+                            peg$currPos = s3;
+                            s3 = peg$FAILED;
+                          }
+                        } else {
+                          peg$currPos = s3;
+                          s3 = peg$FAILED;
+                        }
+                      } else {
+                        peg$currPos = s3;
+                        s3 = peg$FAILED;
+                      }
+                    } else {
+                      peg$currPos = s3;
+                      s3 = peg$FAILED;
+                    }
+                  } else {
+                    peg$currPos = s3;
+                    s3 = peg$FAILED;
+                  }
+                } else {
+                  peg$currPos = s3;
+                  s3 = peg$FAILED;
+                }
+              } else {
+                peg$currPos = s3;
+                s3 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s3;
+              s3 = peg$FAILED;
+            }
+            if (s3 === peg$FAILED) {
+              s3 = peg$currPos;
+              s4 = peg$currPos;
+              peg$silentFails++;
+              s5 = peg$currPos;
+              s6 = peg$c70;
+              if (s6 !== peg$FAILED) {
+                peg$savedPos = peg$currPos;
+                s7 = peg$c74(s1);
+                if (s7) {
+                  s7 = void 0;
+                } else {
+                  s7 = peg$FAILED;
+                }
+                if (s7 !== peg$FAILED) {
+                  s6 = [s6, s7];
+                  s5 = s6;
+                } else {
+                  peg$currPos = s5;
+                  s5 = peg$FAILED;
+                }
+              } else {
+                peg$currPos = s5;
+                s5 = peg$FAILED;
+              }
+              peg$silentFails--;
+              if (s5 !== peg$FAILED) {
+                peg$currPos = s4;
+                s4 = void 0;
+              } else {
+                s4 = peg$FAILED;
+              }
+              if (s4 !== peg$FAILED) {
+                if (input.substr(peg$currPos, 5) === peg$c75) {
+                  s5 = peg$c75;
+                  peg$currPos += 5;
+                } else {
+                  s5 = peg$FAILED;
+                  if (peg$silentFails === 0) {
+                    peg$fail(peg$c76);
+                  }
+                }
+                if (s5 !== peg$FAILED) {
+                  s4 = [s4, s5];
+                  s3 = s4;
+                } else {
+                  peg$currPos = s3;
+                  s3 = peg$FAILED;
+                }
+              } else {
+                peg$currPos = s3;
+                s3 = peg$FAILED;
+              }
+            }
+            if (s3 === peg$FAILED) {
+              s3 = null;
+            }
+            if (s3 !== peg$FAILED) {
+              peg$savedPos = s0;
+              s1 = peg$c77(s1, s3);
+              s0 = s1;
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
           } else {
             peg$currPos = s0;
             s0 = peg$FAILED;
@@ -4333,7 +4723,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c67);
+            peg$fail(peg$c69);
           }
         }
 
@@ -4400,7 +4790,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     }
                     if (s7 !== peg$FAILED) {
                       peg$savedPos = s0;
-                      s1 = peg$c70(s4, s5, s6, s7);
+                      s1 = peg$c79(s4, s5, s6, s7);
                       s0 = s1;
                     } else {
                       peg$currPos = s0;
@@ -4434,7 +4824,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c69);
+            peg$fail(peg$c78);
           }
         }
 
@@ -4446,13 +4836,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         peg$silentFails++;
         s0 = peg$currPos;
-        if (input.substr(peg$currPos, 20) === peg$c72) {
-          s1 = peg$c72;
+        if (input.substr(peg$currPos, 20) === peg$c81) {
+          s1 = peg$c81;
           peg$currPos += 20;
         } else {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c73);
+            peg$fail(peg$c82);
           }
         }
         if (s1 !== peg$FAILED) {
@@ -4469,7 +4859,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               s4 = peg$parseNEWLINE();
               if (s4 !== peg$FAILED) {
                 peg$savedPos = s0;
-                s1 = peg$c74(s3);
+                s1 = peg$c83(s3);
                 s0 = s1;
               } else {
                 peg$currPos = s0;
@@ -4491,7 +4881,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c71);
+            peg$fail(peg$c80);
           }
         }
 
@@ -4506,12 +4896,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         s1 = [];
         s2 = peg$currPos;
         if (input.charCodeAt(peg$currPos) === 42) {
-          s3 = peg$c76;
+          s3 = peg$c85;
           peg$currPos++;
         } else {
           s3 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c77);
+            peg$fail(peg$c86);
           }
         }
         if (s3 !== peg$FAILED) {
@@ -4521,33 +4911,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             if (s5 !== peg$FAILED) {
               s6 = [];
               s7 = peg$currPos;
-              if (input.substr(peg$currPos, 2) === peg$c78) {
-                s8 = peg$c78;
+              if (input.substr(peg$currPos, 2) === peg$c87) {
+                s8 = peg$c87;
                 peg$currPos += 2;
               } else {
                 s8 = peg$FAILED;
                 if (peg$silentFails === 0) {
-                  peg$fail(peg$c79);
+                  peg$fail(peg$c88);
                 }
               }
               if (s8 === peg$FAILED) {
                 if (input.charCodeAt(peg$currPos) === 12288) {
-                  s8 = peg$c80;
+                  s8 = peg$c89;
                   peg$currPos++;
                 } else {
                   s8 = peg$FAILED;
                   if (peg$silentFails === 0) {
-                    peg$fail(peg$c81);
+                    peg$fail(peg$c90);
                   }
                 }
                 if (s8 === peg$FAILED) {
                   if (input.charCodeAt(peg$currPos) === 9) {
-                    s8 = peg$c82;
+                    s8 = peg$c91;
                     peg$currPos++;
                   } else {
                     s8 = peg$FAILED;
                     if (peg$silentFails === 0) {
-                      peg$fail(peg$c83);
+                      peg$fail(peg$c92);
                     }
                   }
                 }
@@ -4556,7 +4946,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 s9 = peg$parsetable_column();
                 if (s9 !== peg$FAILED) {
                   peg$savedPos = s7;
-                  s8 = peg$c84(s5, s9);
+                  s8 = peg$c93(s5, s9);
                   s7 = s8;
                 } else {
                   peg$currPos = s7;
@@ -4569,33 +4959,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               while (s7 !== peg$FAILED) {
                 s6.push(s7);
                 s7 = peg$currPos;
-                if (input.substr(peg$currPos, 2) === peg$c78) {
-                  s8 = peg$c78;
+                if (input.substr(peg$currPos, 2) === peg$c87) {
+                  s8 = peg$c87;
                   peg$currPos += 2;
                 } else {
                   s8 = peg$FAILED;
                   if (peg$silentFails === 0) {
-                    peg$fail(peg$c79);
+                    peg$fail(peg$c88);
                   }
                 }
                 if (s8 === peg$FAILED) {
                   if (input.charCodeAt(peg$currPos) === 12288) {
-                    s8 = peg$c80;
+                    s8 = peg$c89;
                     peg$currPos++;
                   } else {
                     s8 = peg$FAILED;
                     if (peg$silentFails === 0) {
-                      peg$fail(peg$c81);
+                      peg$fail(peg$c90);
                     }
                   }
                   if (s8 === peg$FAILED) {
                     if (input.charCodeAt(peg$currPos) === 9) {
-                      s8 = peg$c82;
+                      s8 = peg$c91;
                       peg$currPos++;
                     } else {
                       s8 = peg$FAILED;
                       if (peg$silentFails === 0) {
-                        peg$fail(peg$c83);
+                        peg$fail(peg$c92);
                       }
                     }
                   }
@@ -4604,7 +4994,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   s9 = peg$parsetable_column();
                   if (s9 !== peg$FAILED) {
                     peg$savedPos = s7;
-                    s8 = peg$c84(s5, s9);
+                    s8 = peg$c93(s5, s9);
                     s7 = s8;
                   } else {
                     peg$currPos = s7;
@@ -4617,7 +5007,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
               if (s6 !== peg$FAILED) {
                 peg$savedPos = s2;
-                s3 = peg$c85(s5, s6);
+                s3 = peg$c94(s5, s6);
                 s2 = s3;
               } else {
                 peg$currPos = s2;
@@ -4640,12 +5030,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             s1.push(s2);
             s2 = peg$currPos;
             if (input.charCodeAt(peg$currPos) === 42) {
-              s3 = peg$c76;
+              s3 = peg$c85;
               peg$currPos++;
             } else {
               s3 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c77);
+                peg$fail(peg$c86);
               }
             }
             if (s3 !== peg$FAILED) {
@@ -4655,33 +5045,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 if (s5 !== peg$FAILED) {
                   s6 = [];
                   s7 = peg$currPos;
-                  if (input.substr(peg$currPos, 2) === peg$c78) {
-                    s8 = peg$c78;
+                  if (input.substr(peg$currPos, 2) === peg$c87) {
+                    s8 = peg$c87;
                     peg$currPos += 2;
                   } else {
                     s8 = peg$FAILED;
                     if (peg$silentFails === 0) {
-                      peg$fail(peg$c79);
+                      peg$fail(peg$c88);
                     }
                   }
                   if (s8 === peg$FAILED) {
                     if (input.charCodeAt(peg$currPos) === 12288) {
-                      s8 = peg$c80;
+                      s8 = peg$c89;
                       peg$currPos++;
                     } else {
                       s8 = peg$FAILED;
                       if (peg$silentFails === 0) {
-                        peg$fail(peg$c81);
+                        peg$fail(peg$c90);
                       }
                     }
                     if (s8 === peg$FAILED) {
                       if (input.charCodeAt(peg$currPos) === 9) {
-                        s8 = peg$c82;
+                        s8 = peg$c91;
                         peg$currPos++;
                       } else {
                         s8 = peg$FAILED;
                         if (peg$silentFails === 0) {
-                          peg$fail(peg$c83);
+                          peg$fail(peg$c92);
                         }
                       }
                     }
@@ -4690,7 +5080,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     s9 = peg$parsetable_column();
                     if (s9 !== peg$FAILED) {
                       peg$savedPos = s7;
-                      s8 = peg$c84(s5, s9);
+                      s8 = peg$c93(s5, s9);
                       s7 = s8;
                     } else {
                       peg$currPos = s7;
@@ -4703,33 +5093,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   while (s7 !== peg$FAILED) {
                     s6.push(s7);
                     s7 = peg$currPos;
-                    if (input.substr(peg$currPos, 2) === peg$c78) {
-                      s8 = peg$c78;
+                    if (input.substr(peg$currPos, 2) === peg$c87) {
+                      s8 = peg$c87;
                       peg$currPos += 2;
                     } else {
                       s8 = peg$FAILED;
                       if (peg$silentFails === 0) {
-                        peg$fail(peg$c79);
+                        peg$fail(peg$c88);
                       }
                     }
                     if (s8 === peg$FAILED) {
                       if (input.charCodeAt(peg$currPos) === 12288) {
-                        s8 = peg$c80;
+                        s8 = peg$c89;
                         peg$currPos++;
                       } else {
                         s8 = peg$FAILED;
                         if (peg$silentFails === 0) {
-                          peg$fail(peg$c81);
+                          peg$fail(peg$c90);
                         }
                       }
                       if (s8 === peg$FAILED) {
                         if (input.charCodeAt(peg$currPos) === 9) {
-                          s8 = peg$c82;
+                          s8 = peg$c91;
                           peg$currPos++;
                         } else {
                           s8 = peg$FAILED;
                           if (peg$silentFails === 0) {
-                            peg$fail(peg$c83);
+                            peg$fail(peg$c92);
                           }
                         }
                       }
@@ -4738,7 +5128,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       s9 = peg$parsetable_column();
                       if (s9 !== peg$FAILED) {
                         peg$savedPos = s7;
-                        s8 = peg$c84(s5, s9);
+                        s8 = peg$c93(s5, s9);
                         s7 = s8;
                       } else {
                         peg$currPos = s7;
@@ -4751,7 +5141,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   }
                   if (s6 !== peg$FAILED) {
                     peg$savedPos = s2;
-                    s3 = peg$c85(s5, s6);
+                    s3 = peg$c94(s5, s6);
                     s2 = s3;
                   } else {
                     peg$currPos = s2;
@@ -4775,14 +5165,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
         if (s1 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c86(s1);
+          s1 = peg$c95(s1);
         }
         s0 = s1;
         peg$silentFails--;
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c75);
+            peg$fail(peg$c84);
           }
         }
 
@@ -4795,12 +5185,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         peg$silentFails++;
         s0 = peg$currPos;
         if (input.charCodeAt(peg$currPos) === 45) {
-          s1 = peg$c88;
+          s1 = peg$c97;
           peg$currPos++;
         } else {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c89);
+            peg$fail(peg$c98);
           }
         }
         if (s1 !== peg$FAILED) {
@@ -4809,36 +5199,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             s3 = [];
             s4 = peg$currPos;
             if (input.charCodeAt(peg$currPos) === 91) {
-              s5 = peg$c90;
+              s5 = peg$c99;
               peg$currPos++;
             } else {
               s5 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c91);
+                peg$fail(peg$c100);
               }
             }
             if (s5 !== peg$FAILED) {
               s6 = peg$currPos;
               s7 = [];
-              if (peg$c92.test(input.charAt(peg$currPos))) {
+              if (peg$c101.test(input.charAt(peg$currPos))) {
                 s8 = input.charAt(peg$currPos);
                 peg$currPos++;
               } else {
                 s8 = peg$FAILED;
                 if (peg$silentFails === 0) {
-                  peg$fail(peg$c93);
+                  peg$fail(peg$c102);
                 }
               }
               if (s8 !== peg$FAILED) {
                 while (s8 !== peg$FAILED) {
                   s7.push(s8);
-                  if (peg$c92.test(input.charAt(peg$currPos))) {
+                  if (peg$c101.test(input.charAt(peg$currPos))) {
                     s8 = input.charAt(peg$currPos);
                     peg$currPos++;
                   } else {
                     s8 = peg$FAILED;
                     if (peg$silentFails === 0) {
-                      peg$fail(peg$c93);
+                      peg$fail(peg$c102);
                     }
                   }
                 }
@@ -4851,37 +5241,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 s6 = s7;
               }
               if (s6 !== peg$FAILED) {
-                if (input.substr(peg$currPos, 2) === peg$c94) {
-                  s7 = peg$c94;
+                if (input.substr(peg$currPos, 2) === peg$c103) {
+                  s7 = peg$c103;
                   peg$currPos += 2;
                 } else {
                   s7 = peg$FAILED;
                   if (peg$silentFails === 0) {
-                    peg$fail(peg$c95);
+                    peg$fail(peg$c104);
                   }
                 }
                 if (s7 !== peg$FAILED) {
                   s8 = peg$currPos;
                   s9 = [];
-                  if (peg$c96.test(input.charAt(peg$currPos))) {
+                  if (peg$c105.test(input.charAt(peg$currPos))) {
                     s10 = input.charAt(peg$currPos);
                     peg$currPos++;
                   } else {
                     s10 = peg$FAILED;
                     if (peg$silentFails === 0) {
-                      peg$fail(peg$c97);
+                      peg$fail(peg$c106);
                     }
                   }
                   if (s10 !== peg$FAILED) {
                     while (s10 !== peg$FAILED) {
                       s9.push(s10);
-                      if (peg$c96.test(input.charAt(peg$currPos))) {
+                      if (peg$c105.test(input.charAt(peg$currPos))) {
                         s10 = input.charAt(peg$currPos);
                         peg$currPos++;
                       } else {
                         s10 = peg$FAILED;
                         if (peg$silentFails === 0) {
-                          peg$fail(peg$c97);
+                          peg$fail(peg$c106);
                         }
                       }
                     }
@@ -4894,18 +5284,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     s8 = s9;
                   }
                   if (s8 !== peg$FAILED) {
-                    if (input.substr(peg$currPos, 2) === peg$c98) {
-                      s9 = peg$c98;
+                    if (input.substr(peg$currPos, 2) === peg$c107) {
+                      s9 = peg$c107;
                       peg$currPos += 2;
                     } else {
                       s9 = peg$FAILED;
                       if (peg$silentFails === 0) {
-                        peg$fail(peg$c99);
+                        peg$fail(peg$c108);
                       }
                     }
                     if (s9 !== peg$FAILED) {
                       peg$savedPos = s4;
-                      s5 = peg$c100(s6, s8);
+                      s5 = peg$c109(s6, s8);
                       s4 = s5;
                     } else {
                       peg$currPos = s4;
@@ -4931,36 +5321,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               s3.push(s4);
               s4 = peg$currPos;
               if (input.charCodeAt(peg$currPos) === 91) {
-                s5 = peg$c90;
+                s5 = peg$c99;
                 peg$currPos++;
               } else {
                 s5 = peg$FAILED;
                 if (peg$silentFails === 0) {
-                  peg$fail(peg$c91);
+                  peg$fail(peg$c100);
                 }
               }
               if (s5 !== peg$FAILED) {
                 s6 = peg$currPos;
                 s7 = [];
-                if (peg$c92.test(input.charAt(peg$currPos))) {
+                if (peg$c101.test(input.charAt(peg$currPos))) {
                   s8 = input.charAt(peg$currPos);
                   peg$currPos++;
                 } else {
                   s8 = peg$FAILED;
                   if (peg$silentFails === 0) {
-                    peg$fail(peg$c93);
+                    peg$fail(peg$c102);
                   }
                 }
                 if (s8 !== peg$FAILED) {
                   while (s8 !== peg$FAILED) {
                     s7.push(s8);
-                    if (peg$c92.test(input.charAt(peg$currPos))) {
+                    if (peg$c101.test(input.charAt(peg$currPos))) {
                       s8 = input.charAt(peg$currPos);
                       peg$currPos++;
                     } else {
                       s8 = peg$FAILED;
                       if (peg$silentFails === 0) {
-                        peg$fail(peg$c93);
+                        peg$fail(peg$c102);
                       }
                     }
                   }
@@ -4973,37 +5363,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   s6 = s7;
                 }
                 if (s6 !== peg$FAILED) {
-                  if (input.substr(peg$currPos, 2) === peg$c94) {
-                    s7 = peg$c94;
+                  if (input.substr(peg$currPos, 2) === peg$c103) {
+                    s7 = peg$c103;
                     peg$currPos += 2;
                   } else {
                     s7 = peg$FAILED;
                     if (peg$silentFails === 0) {
-                      peg$fail(peg$c95);
+                      peg$fail(peg$c104);
                     }
                   }
                   if (s7 !== peg$FAILED) {
                     s8 = peg$currPos;
                     s9 = [];
-                    if (peg$c96.test(input.charAt(peg$currPos))) {
+                    if (peg$c105.test(input.charAt(peg$currPos))) {
                       s10 = input.charAt(peg$currPos);
                       peg$currPos++;
                     } else {
                       s10 = peg$FAILED;
                       if (peg$silentFails === 0) {
-                        peg$fail(peg$c97);
+                        peg$fail(peg$c106);
                       }
                     }
                     if (s10 !== peg$FAILED) {
                       while (s10 !== peg$FAILED) {
                         s9.push(s10);
-                        if (peg$c96.test(input.charAt(peg$currPos))) {
+                        if (peg$c105.test(input.charAt(peg$currPos))) {
                           s10 = input.charAt(peg$currPos);
                           peg$currPos++;
                         } else {
                           s10 = peg$FAILED;
                           if (peg$silentFails === 0) {
-                            peg$fail(peg$c97);
+                            peg$fail(peg$c106);
                           }
                         }
                       }
@@ -5016,18 +5406,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       s8 = s9;
                     }
                     if (s8 !== peg$FAILED) {
-                      if (input.substr(peg$currPos, 2) === peg$c98) {
-                        s9 = peg$c98;
+                      if (input.substr(peg$currPos, 2) === peg$c107) {
+                        s9 = peg$c107;
                         peg$currPos += 2;
                       } else {
                         s9 = peg$FAILED;
                         if (peg$silentFails === 0) {
-                          peg$fail(peg$c99);
+                          peg$fail(peg$c108);
                         }
                       }
                       if (s9 !== peg$FAILED) {
                         peg$savedPos = s4;
-                        s5 = peg$c100(s6, s8);
+                        s5 = peg$c109(s6, s8);
                         s4 = s5;
                       } else {
                         peg$currPos = s4;
@@ -5051,25 +5441,44 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
             }
             if (s3 !== peg$FAILED) {
-              s4 = peg$currPos;
-              s5 = peg$parseINLINE();
-              if (s5 === peg$FAILED) {
-                s5 = null;
-              }
-              if (s5 !== peg$FAILED) {
-                s4 = input.substring(s4, peg$currPos);
-              } else {
-                s4 = s5;
+              s4 = peg$parsefig_struct();
+              if (s4 === peg$FAILED) {
+                s4 = peg$currPos;
+                s5 = peg$currPos;
+                s6 = peg$parseINLINE();
+                if (s6 === peg$FAILED) {
+                  s6 = null;
+                }
+                if (s6 !== peg$FAILED) {
+                  s5 = input.substring(s5, peg$currPos);
+                } else {
+                  s5 = s6;
+                }
+                if (s5 !== peg$FAILED) {
+                  s6 = peg$parseNEWLINE();
+                  if (s6 !== peg$FAILED) {
+                    peg$savedPos = s4;
+                    s5 = peg$c110(s3, s5);
+                    s4 = s5;
+                  } else {
+                    peg$currPos = s4;
+                    s4 = peg$FAILED;
+                  }
+                } else {
+                  peg$currPos = s4;
+                  s4 = peg$FAILED;
+                }
               }
               if (s4 !== peg$FAILED) {
-                s5 = peg$parseNEWLINE();
-                if (s5 !== peg$FAILED) {
-                  s6 = peg$currPos;
+                s5 = peg$currPos;
+                s6 = peg$parseINDENT();
+                if (s6 !== peg$FAILED) {
                   s7 = peg$parseINDENT();
                   if (s7 !== peg$FAILED) {
-                    s8 = peg$parseINDENT();
-                    if (s8 !== peg$FAILED) {
-                      s9 = [];
+                    s8 = [];
+                    s9 = peg$currPos;
+                    s10 = peg$parsefig_struct();
+                    if (s10 === peg$FAILED) {
                       s10 = peg$currPos;
                       s11 = peg$currPos;
                       s12 = peg$parseINLINE();
@@ -5082,7 +5491,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         s12 = peg$parseNEWLINE();
                         if (s12 !== peg$FAILED) {
                           peg$savedPos = s10;
-                          s11 = peg$c101(s3, s4, s11);
+                          s11 = peg$c111(s3, s4, s11);
                           s10 = s11;
                         } else {
                           peg$currPos = s10;
@@ -5092,9 +5501,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         peg$currPos = s10;
                         s10 = peg$FAILED;
                       }
-                      if (s10 !== peg$FAILED) {
-                        while (s10 !== peg$FAILED) {
-                          s9.push(s10);
+                    }
+                    if (s10 !== peg$FAILED) {
+                      peg$savedPos = s9;
+                      s10 = peg$c112(s3, s4, s10);
+                    }
+                    s9 = s10;
+                    if (s9 !== peg$FAILED) {
+                      while (s9 !== peg$FAILED) {
+                        s8.push(s9);
+                        s9 = peg$currPos;
+                        s10 = peg$parsefig_struct();
+                        if (s10 === peg$FAILED) {
                           s10 = peg$currPos;
                           s11 = peg$currPos;
                           s12 = peg$parseINLINE();
@@ -5107,7 +5525,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                             s12 = peg$parseNEWLINE();
                             if (s12 !== peg$FAILED) {
                               peg$savedPos = s10;
-                              s11 = peg$c101(s3, s4, s11);
+                              s11 = peg$c111(s3, s4, s11);
                               s10 = s11;
                             } else {
                               peg$currPos = s10;
@@ -5118,59 +5536,61 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                             s10 = peg$FAILED;
                           }
                         }
-                      } else {
-                        s9 = peg$FAILED;
+                        if (s10 !== peg$FAILED) {
+                          peg$savedPos = s9;
+                          s10 = peg$c112(s3, s4, s10);
+                        }
+                        s9 = s10;
+                      }
+                    } else {
+                      s8 = peg$FAILED;
+                    }
+                    if (s8 !== peg$FAILED) {
+                      s9 = [];
+                      s10 = peg$parseNEWLINE();
+                      while (s10 !== peg$FAILED) {
+                        s9.push(s10);
+                        s10 = peg$parseNEWLINE();
                       }
                       if (s9 !== peg$FAILED) {
-                        s10 = [];
-                        s11 = peg$parseNEWLINE();
-                        while (s11 !== peg$FAILED) {
-                          s10.push(s11);
-                          s11 = peg$parseNEWLINE();
-                        }
+                        s10 = peg$parseDEDENT();
                         if (s10 !== peg$FAILED) {
                           s11 = peg$parseDEDENT();
                           if (s11 !== peg$FAILED) {
-                            s12 = peg$parseDEDENT();
-                            if (s12 !== peg$FAILED) {
-                              peg$savedPos = s6;
-                              s7 = peg$c102(s3, s4, s9);
-                              s6 = s7;
-                            } else {
-                              peg$currPos = s6;
-                              s6 = peg$FAILED;
-                            }
+                            peg$savedPos = s5;
+                            s6 = peg$c113(s3, s4, s8);
+                            s5 = s6;
                           } else {
-                            peg$currPos = s6;
-                            s6 = peg$FAILED;
+                            peg$currPos = s5;
+                            s5 = peg$FAILED;
                           }
                         } else {
-                          peg$currPos = s6;
-                          s6 = peg$FAILED;
+                          peg$currPos = s5;
+                          s5 = peg$FAILED;
                         }
                       } else {
-                        peg$currPos = s6;
-                        s6 = peg$FAILED;
+                        peg$currPos = s5;
+                        s5 = peg$FAILED;
                       }
                     } else {
-                      peg$currPos = s6;
-                      s6 = peg$FAILED;
+                      peg$currPos = s5;
+                      s5 = peg$FAILED;
                     }
                   } else {
-                    peg$currPos = s6;
-                    s6 = peg$FAILED;
+                    peg$currPos = s5;
+                    s5 = peg$FAILED;
                   }
-                  if (s6 === peg$FAILED) {
-                    s6 = null;
-                  }
-                  if (s6 !== peg$FAILED) {
-                    peg$savedPos = s0;
-                    s1 = peg$c103(s3, s4, s6);
-                    s0 = s1;
-                  } else {
-                    peg$currPos = s0;
-                    s0 = peg$FAILED;
-                  }
+                } else {
+                  peg$currPos = s5;
+                  s5 = peg$FAILED;
+                }
+                if (s5 === peg$FAILED) {
+                  s5 = null;
+                }
+                if (s5 !== peg$FAILED) {
+                  peg$savedPos = s0;
+                  s1 = peg$c114(s3, s4, s5);
+                  s0 = s1;
                 } else {
                   peg$currPos = s0;
                   s0 = peg$FAILED;
@@ -5193,23 +5613,64 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
         if (s0 === peg$FAILED) {
           s0 = peg$currPos;
-          if (input.charCodeAt(peg$currPos) === 45) {
-            s1 = peg$c88;
-            peg$currPos++;
+          s1 = peg$currPos;
+          peg$silentFails++;
+          s2 = peg$currPos;
+          s3 = peg$currPos;
+          s4 = peg$parseNEXTINLINE();
+          if (s4 !== peg$FAILED) {
+            s3 = input.substring(s3, peg$currPos);
+          } else {
+            s3 = s4;
+          }
+          if (s3 !== peg$FAILED) {
+            peg$savedPos = peg$currPos;
+            s4 = peg$c115(s3);
+            if (s4) {
+              s4 = void 0;
+            } else {
+              s4 = peg$FAILED;
+            }
+            if (s4 !== peg$FAILED) {
+              s3 = [s3, s4];
+              s2 = s3;
+            } else {
+              peg$currPos = s2;
+              s2 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s2;
+            s2 = peg$FAILED;
+          }
+          peg$silentFails--;
+          if (s2 !== peg$FAILED) {
+            peg$currPos = s1;
+            s1 = void 0;
           } else {
             s1 = peg$FAILED;
-            if (peg$silentFails === 0) {
-              peg$fail(peg$c89);
-            }
           }
           if (s1 !== peg$FAILED) {
-            s2 = peg$parse_();
+            if (input.charCodeAt(peg$currPos) === 45) {
+              s2 = peg$c97;
+              peg$currPos++;
+            } else {
+              s2 = peg$FAILED;
+              if (peg$silentFails === 0) {
+                peg$fail(peg$c98);
+              }
+            }
             if (s2 !== peg$FAILED) {
-              s3 = peg$parseNEWLINE();
+              s3 = peg$parse_();
               if (s3 !== peg$FAILED) {
-                peg$savedPos = s0;
-                s1 = peg$c104();
-                s0 = s1;
+                s4 = peg$parseNEWLINE();
+                if (s4 !== peg$FAILED) {
+                  peg$savedPos = s0;
+                  s1 = peg$c116();
+                  s0 = s1;
+                } else {
+                  peg$currPos = s0;
+                  s0 = peg$FAILED;
+                }
               } else {
                 peg$currPos = s0;
                 s0 = peg$FAILED;
@@ -5227,7 +5688,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c87);
+            peg$fail(peg$c96);
           }
         }
 
@@ -5294,7 +5755,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     }
                     if (s7 !== peg$FAILED) {
                       peg$savedPos = s0;
-                      s1 = peg$c106(s4, s5, s6, s7);
+                      s1 = peg$c118(s4, s5, s6, s7);
                       s0 = s1;
                     } else {
                       peg$currPos = s0;
@@ -5328,7 +5789,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c105);
+            peg$fail(peg$c117);
           }
         }
 
@@ -5340,13 +5801,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         peg$silentFails++;
         s0 = peg$currPos;
-        if (input.substr(peg$currPos, 20) === peg$c108) {
-          s1 = peg$c108;
+        if (input.substr(peg$currPos, 20) === peg$c120) {
+          s1 = peg$c120;
           peg$currPos += 20;
         } else {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c109);
+            peg$fail(peg$c121);
           }
         }
         if (s1 !== peg$FAILED) {
@@ -5363,7 +5824,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               s4 = peg$parseNEWLINE();
               if (s4 !== peg$FAILED) {
                 peg$savedPos = s0;
-                s1 = peg$c110(s3);
+                s1 = peg$c122(s3);
                 s0 = s1;
               } else {
                 peg$currPos = s0;
@@ -5385,7 +5846,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c107);
+            peg$fail(peg$c119);
           }
         }
 
@@ -5393,7 +5854,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       function peg$parsestyle() {
-        var s0, s1, s2;
+        var s0, s1, s2, s3, s4, s5, s6, s7;
 
         peg$silentFails++;
         s0 = peg$currPos;
@@ -5401,7 +5862,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         s2 = peg$parsetable();
         if (s2 !== peg$FAILED) {
           peg$savedPos = s1;
-          s2 = peg$c112(s2);
+          s2 = peg$c124(s2);
         }
         s1 = s2;
         if (s1 === peg$FAILED) {
@@ -5409,20 +5870,76 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           s2 = peg$parsefig();
           if (s2 !== peg$FAILED) {
             peg$savedPos = s1;
-            s2 = peg$c113(s2);
+            s2 = peg$c125(s2);
           }
           s1 = s2;
+          if (s1 === peg$FAILED) {
+            s1 = peg$currPos;
+            s2 = peg$parseINDENT();
+            if (s2 !== peg$FAILED) {
+              s3 = peg$parseINDENT();
+              if (s3 !== peg$FAILED) {
+                s4 = [];
+                s5 = peg$parselist();
+                if (s5 !== peg$FAILED) {
+                  while (s5 !== peg$FAILED) {
+                    s4.push(s5);
+                    s5 = peg$parselist();
+                  }
+                } else {
+                  s4 = peg$FAILED;
+                }
+                if (s4 !== peg$FAILED) {
+                  s5 = [];
+                  s6 = peg$parseNEWLINE();
+                  while (s6 !== peg$FAILED) {
+                    s5.push(s6);
+                    s6 = peg$parseNEWLINE();
+                  }
+                  if (s5 !== peg$FAILED) {
+                    s6 = peg$parseDEDENT();
+                    if (s6 !== peg$FAILED) {
+                      s7 = peg$parseDEDENT();
+                      if (s7 !== peg$FAILED) {
+                        peg$savedPos = s1;
+                        s2 = peg$c126(s4);
+                        s1 = s2;
+                      } else {
+                        peg$currPos = s1;
+                        s1 = peg$FAILED;
+                      }
+                    } else {
+                      peg$currPos = s1;
+                      s1 = peg$FAILED;
+                    }
+                  } else {
+                    peg$currPos = s1;
+                    s1 = peg$FAILED;
+                  }
+                } else {
+                  peg$currPos = s1;
+                  s1 = peg$FAILED;
+                }
+              } else {
+                peg$currPos = s1;
+                s1 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s1;
+              s1 = peg$FAILED;
+            }
+          }
         }
         if (s1 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c114(s1);
+          s1 = peg$c127(s1);
         }
         s0 = s1;
         peg$silentFails--;
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c111);
+            peg$fail(peg$c123);
           }
         }
 
@@ -5436,46 +5953,46 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         s0 = peg$currPos;
         s1 = peg$currPos;
         s2 = peg$currPos;
-        if (input.substr(peg$currPos, 2) === peg$c116) {
-          s3 = peg$c116;
+        if (input.substr(peg$currPos, 2) === peg$c129) {
+          s3 = peg$c129;
           peg$currPos += 2;
         } else {
           s3 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c117);
+            peg$fail(peg$c130);
           }
         }
         if (s3 === peg$FAILED) {
           if (input.charCodeAt(peg$currPos) === 27880) {
-            s3 = peg$c118;
+            s3 = peg$c131;
             peg$currPos++;
           } else {
             s3 = peg$FAILED;
             if (peg$silentFails === 0) {
-              peg$fail(peg$c119);
+              peg$fail(peg$c132);
             }
           }
         }
         if (s3 !== peg$FAILED) {
           s4 = [];
-          if (peg$c30.test(input.charAt(peg$currPos))) {
+          if (peg$c32.test(input.charAt(peg$currPos))) {
             s5 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s5 = peg$FAILED;
             if (peg$silentFails === 0) {
-              peg$fail(peg$c31);
+              peg$fail(peg$c33);
             }
           }
           while (s5 !== peg$FAILED) {
             s4.push(s5);
-            if (peg$c30.test(input.charAt(peg$currPos))) {
+            if (peg$c32.test(input.charAt(peg$currPos))) {
               s5 = input.charAt(peg$currPos);
               peg$currPos++;
             } else {
               s5 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c31);
+                peg$fail(peg$c33);
               }
             }
           }
@@ -5508,7 +6025,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
             if (s4 !== peg$FAILED) {
               peg$savedPos = s2;
-              s3 = peg$c120(s1, s4);
+              s3 = peg$c133(s1, s4);
               s2 = s3;
             } else {
               peg$currPos = s2;
@@ -5534,10 +6051,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   s9 = peg$currPos;
                   peg$silentFails++;
                   s10 = peg$currPos;
-                  s11 = peg$c121;
+                  s11 = peg$c70;
                   if (s11 !== peg$FAILED) {
                     peg$savedPos = peg$currPos;
-                    s12 = peg$c122(s1, s2);
+                    s12 = peg$c134(s1, s2);
                     if (s12) {
                       s12 = void 0;
                     } else {
@@ -5570,10 +6087,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       s11 = peg$currPos;
                       peg$silentFails++;
                       s12 = peg$currPos;
-                      s13 = peg$c121;
+                      s13 = peg$c70;
                       if (s13 !== peg$FAILED) {
                         peg$savedPos = peg$currPos;
-                        s14 = peg$c123(s1, s2, s10);
+                        s14 = peg$c135(s1, s2, s10);
                         if (s14) {
                           s14 = void 0;
                         } else {
@@ -5599,7 +6116,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       }
                       if (s11 !== peg$FAILED) {
                         peg$savedPos = s8;
-                        s9 = peg$c124(s1, s2, s10);
+                        s9 = peg$c136(s1, s2, s10);
                         s8 = s9;
                       } else {
                         peg$currPos = s8;
@@ -5618,10 +6135,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     s9 = peg$currPos;
                     peg$silentFails++;
                     s10 = peg$currPos;
-                    s11 = peg$c121;
+                    s11 = peg$c70;
                     if (s11 !== peg$FAILED) {
                       peg$savedPos = peg$currPos;
-                      s12 = peg$c125(s1, s2);
+                      s12 = peg$c137(s1, s2);
                       if (s12) {
                         s12 = void 0;
                       } else {
@@ -5646,13 +6163,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       s9 = peg$FAILED;
                     }
                     if (s9 !== peg$FAILED) {
-                      if (input.substr(peg$currPos, 5) === peg$c126) {
-                        s10 = peg$c126;
+                      if (input.substr(peg$currPos, 5) === peg$c75) {
+                        s10 = peg$c75;
                         peg$currPos += 5;
                       } else {
                         s10 = peg$FAILED;
                         if (peg$silentFails === 0) {
-                          peg$fail(peg$c127);
+                          peg$fail(peg$c76);
                         }
                       }
                       if (s10 !== peg$FAILED) {
@@ -5679,7 +6196,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         s10 = peg$parseNEWLINE();
                         if (s10 !== peg$FAILED) {
                           peg$savedPos = s8;
-                          s9 = peg$c128(s1, s2, s9);
+                          s9 = peg$c138(s1, s2, s9);
                           s8 = s9;
                         } else {
                           peg$currPos = s8;
@@ -5698,10 +6215,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       s9 = peg$currPos;
                       peg$silentFails++;
                       s10 = peg$currPos;
-                      s11 = peg$c121;
+                      s11 = peg$c70;
                       if (s11 !== peg$FAILED) {
                         peg$savedPos = peg$currPos;
-                        s12 = peg$c122(s1, s2);
+                        s12 = peg$c134(s1, s2);
                         if (s12) {
                           s12 = void 0;
                         } else {
@@ -5734,10 +6251,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                           s11 = peg$currPos;
                           peg$silentFails++;
                           s12 = peg$currPos;
-                          s13 = peg$c121;
+                          s13 = peg$c70;
                           if (s13 !== peg$FAILED) {
                             peg$savedPos = peg$currPos;
-                            s14 = peg$c123(s1, s2, s10);
+                            s14 = peg$c135(s1, s2, s10);
                             if (s14) {
                               s14 = void 0;
                             } else {
@@ -5763,7 +6280,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                           }
                           if (s11 !== peg$FAILED) {
                             peg$savedPos = s8;
-                            s9 = peg$c124(s1, s2, s10);
+                            s9 = peg$c136(s1, s2, s10);
                             s8 = s9;
                           } else {
                             peg$currPos = s8;
@@ -5782,10 +6299,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         s9 = peg$currPos;
                         peg$silentFails++;
                         s10 = peg$currPos;
-                        s11 = peg$c121;
+                        s11 = peg$c70;
                         if (s11 !== peg$FAILED) {
                           peg$savedPos = peg$currPos;
-                          s12 = peg$c125(s1, s2);
+                          s12 = peg$c137(s1, s2);
                           if (s12) {
                             s12 = void 0;
                           } else {
@@ -5810,13 +6327,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                           s9 = peg$FAILED;
                         }
                         if (s9 !== peg$FAILED) {
-                          if (input.substr(peg$currPos, 5) === peg$c126) {
-                            s10 = peg$c126;
+                          if (input.substr(peg$currPos, 5) === peg$c75) {
+                            s10 = peg$c75;
                             peg$currPos += 5;
                           } else {
                             s10 = peg$FAILED;
                             if (peg$silentFails === 0) {
-                              peg$fail(peg$c127);
+                              peg$fail(peg$c76);
                             }
                           }
                           if (s10 !== peg$FAILED) {
@@ -5843,7 +6360,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                             s10 = peg$parseNEWLINE();
                             if (s10 !== peg$FAILED) {
                               peg$savedPos = s8;
-                              s9 = peg$c128(s1, s2, s9);
+                              s9 = peg$c138(s1, s2, s9);
                               s8 = s9;
                             } else {
                               peg$currPos = s8;
@@ -5872,7 +6389,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                         s10 = peg$parseDEDENT();
                         if (s10 !== peg$FAILED) {
                           peg$savedPos = s4;
-                          s5 = peg$c129(s1, s2, s7);
+                          s5 = peg$c139(s1, s2, s7);
                           s4 = s5;
                         } else {
                           peg$currPos = s4;
@@ -5903,7 +6420,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               }
               if (s4 !== peg$FAILED) {
                 peg$savedPos = s0;
-                s1 = peg$c130(s1, s2, s4);
+                s1 = peg$c140(s1, s2, s4);
                 s0 = s1;
               } else {
                 peg$currPos = s0;
@@ -5925,7 +6442,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c115);
+            peg$fail(peg$c128);
+          }
+        }
+
+        return s0;
+      }
+
+      function peg$parsefig_struct() {
+        var s0, s1;
+
+        peg$silentFails++;
+        s0 = peg$currPos;
+        s1 = peg$parsefig();
+        if (s1 !== peg$FAILED) {
+          peg$savedPos = s0;
+          s1 = peg$c142(s1);
+        }
+        s0 = s1;
+        peg$silentFails--;
+        if (s0 === peg$FAILED) {
+          s1 = peg$FAILED;
+          if (peg$silentFails === 0) {
+            peg$fail(peg$c141);
           }
         }
 
@@ -5937,37 +6476,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         peg$silentFails++;
         s0 = peg$currPos;
-        if (input.substr(peg$currPos, 2) === peg$c132) {
-          s1 = peg$c132;
+        if (input.substr(peg$currPos, 2) === peg$c144) {
+          s1 = peg$c144;
           peg$currPos += 2;
         } else {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c133);
+            peg$fail(peg$c145);
           }
         }
         if (s1 !== peg$FAILED) {
           s2 = peg$parse__();
           if (s2 !== peg$FAILED) {
-            if (input.substr(peg$currPos, 6) === peg$c134) {
-              s3 = peg$c134;
+            if (input.substr(peg$currPos, 6) === peg$c146) {
+              s3 = peg$c146;
               peg$currPos += 6;
             } else {
               s3 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c135);
+                peg$fail(peg$c147);
               }
             }
             if (s3 !== peg$FAILED) {
               s4 = peg$parse_();
               if (s4 !== peg$FAILED) {
-                if (input.substr(peg$currPos, 2) === peg$c136) {
-                  s5 = peg$c136;
+                if (input.substr(peg$currPos, 2) === peg$c148) {
+                  s5 = peg$c148;
                   peg$currPos += 2;
                 } else {
                   s5 = peg$FAILED;
                   if (peg$silentFails === 0) {
-                    peg$fail(peg$c137);
+                    peg$fail(peg$c149);
                   }
                 }
                 if (s5 !== peg$FAILED) {
@@ -5984,7 +6523,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       s8 = peg$parseNEWLINE();
                       if (s8 !== peg$FAILED) {
                         peg$savedPos = s0;
-                        s1 = peg$c138(s7);
+                        s1 = peg$c150(s7);
                         s0 = s1;
                       } else {
                         peg$currPos = s0;
@@ -6022,7 +6561,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c131);
+            peg$fail(peg$c143);
           }
         }
 
@@ -6044,7 +6583,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c139);
+            peg$fail(peg$c151);
           }
         }
 
@@ -6059,35 +6598,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         s1 = peg$currPos;
         s2 = peg$currPos;
         s3 = peg$currPos;
-        if (input.substr(peg$currPos, 2) === peg$c141) {
-          s4 = peg$c141;
+        if (input.substr(peg$currPos, 2) === peg$c153) {
+          s4 = peg$c153;
           peg$currPos += 2;
         } else {
           s4 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c142);
+            peg$fail(peg$c154);
           }
         }
         if (s4 !== peg$FAILED) {
           s5 = [];
-          if (peg$c143.test(input.charAt(peg$currPos))) {
+          if (peg$c155.test(input.charAt(peg$currPos))) {
             s6 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s6 = peg$FAILED;
             if (peg$silentFails === 0) {
-              peg$fail(peg$c144);
+              peg$fail(peg$c156);
             }
           }
           while (s6 !== peg$FAILED) {
             s5.push(s6);
-            if (peg$c143.test(input.charAt(peg$currPos))) {
+            if (peg$c155.test(input.charAt(peg$currPos))) {
               s6 = input.charAt(peg$currPos);
               peg$currPos++;
             } else {
               s6 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c144);
+                peg$fail(peg$c156);
               }
             }
           }
@@ -6114,7 +6653,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             s5 = peg$parseROUND_PARENTHESES_INLINE();
             if (s5 !== peg$FAILED) {
               peg$savedPos = s3;
-              s4 = peg$c145(s2, s5);
+              s4 = peg$c157(s2, s5);
               s3 = s4;
             } else {
               peg$currPos = s3;
@@ -6130,24 +6669,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (s3 !== peg$FAILED) {
             s4 = peg$currPos;
             s5 = [];
-            if (peg$c143.test(input.charAt(peg$currPos))) {
+            if (peg$c155.test(input.charAt(peg$currPos))) {
               s6 = input.charAt(peg$currPos);
               peg$currPos++;
             } else {
               s6 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c144);
+                peg$fail(peg$c156);
               }
             }
             while (s6 !== peg$FAILED) {
               s5.push(s6);
-              if (peg$c143.test(input.charAt(peg$currPos))) {
+              if (peg$c155.test(input.charAt(peg$currPos))) {
                 s6 = input.charAt(peg$currPos);
                 peg$currPos++;
               } else {
                 s6 = peg$FAILED;
                 if (peg$silentFails === 0) {
-                  peg$fail(peg$c144);
+                  peg$fail(peg$c156);
                 }
               }
             }
@@ -6158,7 +6697,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
             if (s4 !== peg$FAILED) {
               peg$savedPos = s1;
-              s2 = peg$c146(s2, s3, s4);
+              s2 = peg$c158(s2, s3, s4);
               s1 = s2;
             } else {
               peg$currPos = s1;
@@ -6174,14 +6713,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
         if (s1 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c147(s1);
+          s1 = peg$c159(s1);
         }
         s0 = s1;
         peg$silentFails--;
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c140);
+            peg$fail(peg$c152);
           }
         }
 
@@ -6228,7 +6767,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     s8 = peg$parseDEDENT();
                     if (s8 !== peg$FAILED) {
                       peg$savedPos = s3;
-                      s4 = peg$c149(s1, s5, s6);
+                      s4 = peg$c161(s1, s5, s6);
                       s3 = s4;
                     } else {
                       peg$currPos = s3;
@@ -6255,7 +6794,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
             if (s3 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c150(s1, s3);
+              s1 = peg$c162(s1, s3);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -6273,7 +6812,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c148);
+            peg$fail(peg$c160);
           }
         }
 
@@ -6288,7 +6827,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         s1 = peg$parsetable_struct();
         if (s1 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c152(s1);
+          s1 = peg$c164(s1);
         }
         s0 = s1;
         if (s0 === peg$FAILED) {
@@ -6307,7 +6846,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c151);
+            peg$fail(peg$c163);
           }
         }
 
@@ -6322,35 +6861,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         s1 = peg$currPos;
         s2 = peg$currPos;
         s3 = peg$currPos;
-        if (input.substr(peg$currPos, 2) === peg$c154) {
-          s4 = peg$c154;
+        if (input.substr(peg$currPos, 2) === peg$c166) {
+          s4 = peg$c166;
           peg$currPos += 2;
         } else {
           s4 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c155);
+            peg$fail(peg$c167);
           }
         }
         if (s4 !== peg$FAILED) {
           s5 = [];
-          if (peg$c143.test(input.charAt(peg$currPos))) {
+          if (peg$c155.test(input.charAt(peg$currPos))) {
             s6 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s6 = peg$FAILED;
             if (peg$silentFails === 0) {
-              peg$fail(peg$c144);
+              peg$fail(peg$c156);
             }
           }
           while (s6 !== peg$FAILED) {
             s5.push(s6);
-            if (peg$c143.test(input.charAt(peg$currPos))) {
+            if (peg$c155.test(input.charAt(peg$currPos))) {
               s6 = input.charAt(peg$currPos);
               peg$currPos++;
             } else {
               s6 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c144);
+                peg$fail(peg$c156);
               }
             }
           }
@@ -6377,7 +6916,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             s5 = peg$parseROUND_PARENTHESES_INLINE();
             if (s5 !== peg$FAILED) {
               peg$savedPos = s3;
-              s4 = peg$c145(s2, s5);
+              s4 = peg$c157(s2, s5);
               s3 = s4;
             } else {
               peg$currPos = s3;
@@ -6392,30 +6931,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
           if (s3 !== peg$FAILED) {
             s4 = [];
-            if (peg$c143.test(input.charAt(peg$currPos))) {
+            if (peg$c155.test(input.charAt(peg$currPos))) {
               s5 = input.charAt(peg$currPos);
               peg$currPos++;
             } else {
               s5 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c144);
+                peg$fail(peg$c156);
               }
             }
             while (s5 !== peg$FAILED) {
               s4.push(s5);
-              if (peg$c143.test(input.charAt(peg$currPos))) {
+              if (peg$c155.test(input.charAt(peg$currPos))) {
                 s5 = input.charAt(peg$currPos);
                 peg$currPos++;
               } else {
                 s5 = peg$FAILED;
                 if (peg$silentFails === 0) {
-                  peg$fail(peg$c144);
+                  peg$fail(peg$c156);
                 }
               }
             }
             if (s4 !== peg$FAILED) {
               peg$savedPos = s1;
-              s2 = peg$c156(s2, s3, s4);
+              s2 = peg$c168(s2, s3, s4);
               s1 = s2;
             } else {
               peg$currPos = s1;
@@ -6431,14 +6970,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
         if (s1 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c147(s1);
+          s1 = peg$c159(s1);
         }
         s0 = s1;
         peg$silentFails--;
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c153);
+            peg$fail(peg$c165);
           }
         }
 
@@ -6485,7 +7024,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   s10 = peg$parsestyle_struct();
                   if (s10 !== peg$FAILED) {
                     peg$savedPos = s8;
-                    s9 = peg$c158(s1, s6, s10);
+                    s9 = peg$c170(s1, s6, s10);
                     s8 = s9;
                   } else {
                     peg$currPos = s8;
@@ -6512,7 +7051,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     s10 = peg$parsestyle_struct();
                     if (s10 !== peg$FAILED) {
                       peg$savedPos = s8;
-                      s9 = peg$c158(s1, s6, s10);
+                      s9 = peg$c170(s1, s6, s10);
                       s8 = s9;
                     } else {
                       peg$currPos = s8;
@@ -6525,7 +7064,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 }
                 if (s7 !== peg$FAILED) {
                   peg$savedPos = s5;
-                  s6 = peg$c159(s1, s6, s7);
+                  s6 = peg$c171(s1, s6, s7);
                   s5 = s6;
                 } else {
                   peg$currPos = s5;
@@ -6546,7 +7085,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   s7 = peg$parseDEDENT();
                   if (s7 !== peg$FAILED) {
                     peg$savedPos = s3;
-                    s4 = peg$c160(s1, s5);
+                    s4 = peg$c172(s1, s5);
                     s3 = s4;
                   } else {
                     peg$currPos = s3;
@@ -6569,7 +7108,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
             if (s3 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c161(s1, s3);
+              s1 = peg$c173(s1, s3);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -6587,7 +7126,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c157);
+            peg$fail(peg$c169);
           }
         }
 
@@ -6602,7 +7141,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         s1 = peg$parsetable_struct();
         if (s1 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c152(s1);
+          s1 = peg$c164(s1);
         }
         s0 = s1;
         if (s0 === peg$FAILED) {
@@ -6610,7 +7149,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           s1 = peg$parsefig();
           if (s1 !== peg$FAILED) {
             peg$savedPos = s0;
-            s1 = peg$c113(s1);
+            s1 = peg$c125(s1);
           }
           s0 = s1;
           if (s0 === peg$FAILED) {
@@ -6630,7 +7169,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c162);
+            peg$fail(peg$c174);
           }
         }
 
@@ -6646,25 +7185,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s1 !== peg$FAILED) {
           s2 = peg$currPos;
           s3 = peg$currPos;
-          if (peg$c164.test(input.charAt(peg$currPos))) {
+          if (peg$c176.test(input.charAt(peg$currPos))) {
             s4 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s4 = peg$FAILED;
             if (peg$silentFails === 0) {
-              peg$fail(peg$c165);
+              peg$fail(peg$c177);
             }
           }
           if (s4 !== peg$FAILED) {
             s5 = peg$parse_();
             if (s5 !== peg$FAILED) {
               if (input.charCodeAt(peg$currPos) === 21063) {
-                s6 = peg$c166;
+                s6 = peg$c178;
                 peg$currPos++;
               } else {
                 s6 = peg$FAILED;
                 if (peg$silentFails === 0) {
-                  peg$fail(peg$c167);
+                  peg$fail(peg$c179);
                 }
               }
               if (s6 !== peg$FAILED) {
@@ -6692,7 +7231,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             s4 = peg$parseROUND_PARENTHESES_INLINE();
             if (s4 !== peg$FAILED) {
               peg$savedPos = s3;
-              s4 = peg$c168(s2, s4);
+              s4 = peg$c180(s2, s4);
             }
             s3 = s4;
             if (s3 === peg$FAILED) {
@@ -6703,12 +7242,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               s5 = peg$parse_();
               if (s5 !== peg$FAILED) {
                 if (input.charCodeAt(peg$currPos) === 25220) {
-                  s6 = peg$c169;
+                  s6 = peg$c181;
                   peg$currPos++;
                 } else {
                   s6 = peg$FAILED;
                   if (peg$silentFails === 0) {
-                    peg$fail(peg$c170);
+                    peg$fail(peg$c182);
                   }
                 }
                 if (s6 !== peg$FAILED) {
@@ -6738,7 +7277,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 }
                 if (s5 !== peg$FAILED) {
                   peg$savedPos = s0;
-                  s1 = peg$c171(s2, s3, s4);
+                  s1 = peg$c183(s2, s3, s4);
                   s0 = s1;
                 } else {
                   peg$currPos = s0;
@@ -6764,7 +7303,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c163);
+            peg$fail(peg$c175);
           }
         }
 
@@ -6811,7 +7350,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 }
                 if (s4 !== peg$FAILED) {
                   peg$savedPos = s2;
-                  s3 = peg$c173(s1, s3, s4);
+                  s3 = peg$c185(s1, s3, s4);
                   s2 = s3;
                 } else {
                   peg$currPos = s2;
@@ -6825,7 +7364,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
           if (s2 !== peg$FAILED) {
             peg$savedPos = s0;
-            s1 = peg$c174(s1, s2);
+            s1 = peg$c186(s1, s2);
             s0 = s1;
           } else {
             peg$currPos = s0;
@@ -6839,7 +7378,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c172);
+            peg$fail(peg$c184);
           }
         }
 
@@ -6864,7 +7403,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
             if (s1 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c176(s1);
+              s1 = peg$c188(s1);
             }
             s0 = s1;
           }
@@ -6873,7 +7412,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c175);
+            peg$fail(peg$c187);
           }
         }
 
@@ -6909,14 +7448,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
         if (s1 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c178(s1);
+          s1 = peg$c190(s1);
         }
         s0 = s1;
         peg$silentFails--;
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c177);
+            peg$fail(peg$c189);
           }
         }
 
@@ -6937,7 +7476,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             s5 = peg$parseperiod_sentences();
             if (s5 !== peg$FAILED) {
               peg$savedPos = s3;
-              s4 = peg$c180(s1, s5);
+              s4 = peg$c192(s1, s5);
               s3 = s4;
             } else {
               peg$currPos = s3;
@@ -6956,7 +7495,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 s5 = peg$parseperiod_sentences();
                 if (s5 !== peg$FAILED) {
                   peg$savedPos = s3;
-                  s4 = peg$c180(s1, s5);
+                  s4 = peg$c192(s1, s5);
                   s3 = s4;
                 } else {
                   peg$currPos = s3;
@@ -6972,7 +7511,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
           if (s2 !== peg$FAILED) {
             peg$savedPos = s0;
-            s1 = peg$c181(s1, s2);
+            s1 = peg$c193(s1, s2);
             s0 = s1;
           } else {
             peg$currPos = s0;
@@ -6986,7 +7525,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c179);
+            peg$fail(peg$c191);
           }
         }
 
@@ -7021,25 +7560,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
           if (s2 !== peg$FAILED) {
             s3 = [];
-            if (peg$c183.test(input.charAt(peg$currPos))) {
+            if (peg$c195.test(input.charAt(peg$currPos))) {
               s4 = input.charAt(peg$currPos);
               peg$currPos++;
             } else {
               s4 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c184);
+                peg$fail(peg$c196);
               }
             }
             if (s4 !== peg$FAILED) {
               while (s4 !== peg$FAILED) {
                 s3.push(s4);
-                if (peg$c183.test(input.charAt(peg$currPos))) {
+                if (peg$c195.test(input.charAt(peg$currPos))) {
                   s4 = input.charAt(peg$currPos);
                   peg$currPos++;
                 } else {
                   s4 = peg$FAILED;
                   if (peg$silentFails === 0) {
-                    peg$fail(peg$c184);
+                    peg$fail(peg$c196);
                   }
                 }
               }
@@ -7065,7 +7604,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c182);
+            peg$fail(peg$c194);
           }
         }
 
@@ -7082,13 +7621,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s2 === peg$FAILED) {
           s2 = peg$parseDEDENT();
           if (s2 === peg$FAILED) {
-            if (peg$c186.test(input.charAt(peg$currPos))) {
+            if (peg$c198.test(input.charAt(peg$currPos))) {
               s2 = input.charAt(peg$currPos);
               peg$currPos++;
             } else {
               s2 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c187);
+                peg$fail(peg$c199);
               }
             }
           }
@@ -7099,13 +7638,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (s2 === peg$FAILED) {
             s2 = peg$parseDEDENT();
             if (s2 === peg$FAILED) {
-              if (peg$c186.test(input.charAt(peg$currPos))) {
+              if (peg$c198.test(input.charAt(peg$currPos))) {
                 s2 = input.charAt(peg$currPos);
                 peg$currPos++;
               } else {
                 s2 = peg$FAILED;
                 if (peg$silentFails === 0) {
-                  peg$fail(peg$c187);
+                  peg$fail(peg$c199);
                 }
               }
             }
@@ -7115,7 +7654,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           s2 = peg$parseINLINE();
           if (s2 !== peg$FAILED) {
             peg$savedPos = s0;
-            s1 = peg$c188(s2);
+            s1 = peg$c200(s2);
             s0 = s1;
           } else {
             peg$currPos = s0;
@@ -7129,7 +7668,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c185);
+            peg$fail(peg$c197);
           }
         }
 
@@ -7140,20 +7679,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var s0, s1;
 
         peg$silentFails++;
-        if (peg$c190.test(input.charAt(peg$currPos))) {
+        if (peg$c202.test(input.charAt(peg$currPos))) {
           s0 = input.charAt(peg$currPos);
           peg$currPos++;
         } else {
           s0 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c191);
+            peg$fail(peg$c203);
           }
         }
         peg$silentFails--;
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c189);
+            peg$fail(peg$c201);
           }
         }
 
@@ -7188,13 +7727,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
           if (s2 !== peg$FAILED) {
             s3 = [];
-            if (peg$c193.test(input.charAt(peg$currPos))) {
+            if (peg$c205.test(input.charAt(peg$currPos))) {
               s4 = input.charAt(peg$currPos);
               peg$currPos++;
             } else {
               s4 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c194);
+                peg$fail(peg$c206);
               }
             }
             if (s4 === peg$FAILED) {
@@ -7203,13 +7742,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             if (s4 !== peg$FAILED) {
               while (s4 !== peg$FAILED) {
                 s3.push(s4);
-                if (peg$c193.test(input.charAt(peg$currPos))) {
+                if (peg$c205.test(input.charAt(peg$currPos))) {
                   s4 = input.charAt(peg$currPos);
                   peg$currPos++;
                 } else {
                   s4 = peg$FAILED;
                   if (peg$silentFails === 0) {
-                    peg$fail(peg$c194);
+                    peg$fail(peg$c206);
                   }
                 }
                 if (s4 === peg$FAILED) {
@@ -7238,7 +7777,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c192);
+            peg$fail(peg$c204);
           }
         }
 
@@ -7246,7 +7785,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       function peg$parsePERIOD_SENTENCE_FRAGMENT() {
-        var s0, s1, s2, s3, s4, s5;
+        var s0, s1, s2, s3, s4, s5, s6;
 
         peg$silentFails++;
         s0 = peg$currPos;
@@ -7273,14 +7812,45 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
           if (s2 !== peg$FAILED) {
             s3 = [];
-            if (peg$c196.test(input.charAt(peg$currPos))) {
-              s4 = input.charAt(peg$currPos);
-              peg$currPos++;
+            s4 = peg$currPos;
+            s5 = peg$currPos;
+            peg$silentFails++;
+            if (input.substr(peg$currPos, 13) === peg$c208) {
+              s6 = peg$c208;
+              peg$currPos += 13;
             } else {
-              s4 = peg$FAILED;
+              s6 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c197);
+                peg$fail(peg$c209);
               }
+            }
+            peg$silentFails--;
+            if (s6 === peg$FAILED) {
+              s5 = void 0;
+            } else {
+              peg$currPos = s5;
+              s5 = peg$FAILED;
+            }
+            if (s5 !== peg$FAILED) {
+              if (peg$c210.test(input.charAt(peg$currPos))) {
+                s6 = input.charAt(peg$currPos);
+                peg$currPos++;
+              } else {
+                s6 = peg$FAILED;
+                if (peg$silentFails === 0) {
+                  peg$fail(peg$c211);
+                }
+              }
+              if (s6 !== peg$FAILED) {
+                s5 = [s5, s6];
+                s4 = s5;
+              } else {
+                peg$currPos = s4;
+                s4 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s4;
+              s4 = peg$FAILED;
             }
             if (s4 === peg$FAILED) {
               s4 = peg$parsePARENTHESES_INLINE();
@@ -7288,14 +7858,45 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             if (s4 !== peg$FAILED) {
               while (s4 !== peg$FAILED) {
                 s3.push(s4);
-                if (peg$c196.test(input.charAt(peg$currPos))) {
-                  s4 = input.charAt(peg$currPos);
-                  peg$currPos++;
+                s4 = peg$currPos;
+                s5 = peg$currPos;
+                peg$silentFails++;
+                if (input.substr(peg$currPos, 13) === peg$c208) {
+                  s6 = peg$c208;
+                  peg$currPos += 13;
                 } else {
-                  s4 = peg$FAILED;
+                  s6 = peg$FAILED;
                   if (peg$silentFails === 0) {
-                    peg$fail(peg$c197);
+                    peg$fail(peg$c209);
                   }
+                }
+                peg$silentFails--;
+                if (s6 === peg$FAILED) {
+                  s5 = void 0;
+                } else {
+                  peg$currPos = s5;
+                  s5 = peg$FAILED;
+                }
+                if (s5 !== peg$FAILED) {
+                  if (peg$c210.test(input.charAt(peg$currPos))) {
+                    s6 = input.charAt(peg$currPos);
+                    peg$currPos++;
+                  } else {
+                    s6 = peg$FAILED;
+                    if (peg$silentFails === 0) {
+                      peg$fail(peg$c211);
+                    }
+                  }
+                  if (s6 !== peg$FAILED) {
+                    s5 = [s5, s6];
+                    s4 = s5;
+                  } else {
+                    peg$currPos = s4;
+                    s4 = peg$FAILED;
+                  }
+                } else {
+                  peg$currPos = s4;
+                  s4 = peg$FAILED;
                 }
                 if (s4 === peg$FAILED) {
                   s4 = peg$parsePARENTHESES_INLINE();
@@ -7306,12 +7907,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
             if (s3 !== peg$FAILED) {
               if (input.charCodeAt(peg$currPos) === 12290) {
-                s4 = peg$c198;
+                s4 = peg$c212;
                 peg$currPos++;
               } else {
                 s4 = peg$FAILED;
                 if (peg$silentFails === 0) {
-                  peg$fail(peg$c199);
+                  peg$fail(peg$c213);
                 }
               }
               if (s4 === peg$FAILED) {
@@ -7359,12 +7960,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
         if (s0 === peg$FAILED) {
           if (input.charCodeAt(peg$currPos) === 12290) {
-            s0 = peg$c198;
+            s0 = peg$c212;
             peg$currPos++;
           } else {
             s0 = peg$FAILED;
             if (peg$silentFails === 0) {
-              peg$fail(peg$c199);
+              peg$fail(peg$c213);
             }
           }
         }
@@ -7372,7 +7973,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c195);
+            peg$fail(peg$c207);
           }
         }
 
@@ -7435,7 +8036,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c200);
+            peg$fail(peg$c214);
           }
         }
 
@@ -7453,6 +8054,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             s0 = peg$parseCURLY_BRACKETS_INLINE();
             if (s0 === peg$FAILED) {
               s0 = peg$parseSQUARE_PARENTHESES_INLINE();
+              if (s0 === peg$FAILED) {
+                s0 = peg$parsequote_struct();
+              }
             }
           }
         }
@@ -7460,7 +8064,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c201);
+            peg$fail(peg$c215);
           }
         }
 
@@ -7472,13 +8076,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         peg$silentFails++;
         s0 = peg$currPos;
-        if (peg$c203.test(input.charAt(peg$currPos))) {
+        if (peg$c217.test(input.charAt(peg$currPos))) {
           s1 = input.charAt(peg$currPos);
           peg$currPos++;
         } else {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c204);
+            peg$fail(peg$c218);
           }
         }
         if (s1 !== peg$FAILED) {
@@ -7501,18 +8105,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             s2 = s3;
           }
           if (s2 !== peg$FAILED) {
-            if (peg$c205.test(input.charAt(peg$currPos))) {
+            if (peg$c219.test(input.charAt(peg$currPos))) {
               s3 = input.charAt(peg$currPos);
               peg$currPos++;
             } else {
               s3 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c206);
+                peg$fail(peg$c220);
               }
             }
             if (s3 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c207(s1, s2, s3);
+              s1 = peg$c221(s1, s2, s3);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -7530,7 +8134,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c202);
+            peg$fail(peg$c216);
           }
         }
 
@@ -7542,13 +8146,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         peg$silentFails++;
         s0 = peg$currPos;
-        if (peg$c209.test(input.charAt(peg$currPos))) {
+        if (peg$c223.test(input.charAt(peg$currPos))) {
           s1 = input.charAt(peg$currPos);
           peg$currPos++;
         } else {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c210);
+            peg$fail(peg$c224);
           }
         }
         if (s1 !== peg$FAILED) {
@@ -7571,18 +8175,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             s2 = s3;
           }
           if (s2 !== peg$FAILED) {
-            if (peg$c211.test(input.charAt(peg$currPos))) {
+            if (peg$c225.test(input.charAt(peg$currPos))) {
               s3 = input.charAt(peg$currPos);
               peg$currPos++;
             } else {
               s3 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c212);
+                peg$fail(peg$c226);
               }
             }
             if (s3 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c207(s1, s2, s3);
+              s1 = peg$c221(s1, s2, s3);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -7600,7 +8204,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c208);
+            peg$fail(peg$c222);
           }
         }
 
@@ -7612,13 +8216,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         peg$silentFails++;
         s0 = peg$currPos;
-        if (peg$c214.test(input.charAt(peg$currPos))) {
+        if (peg$c228.test(input.charAt(peg$currPos))) {
           s1 = input.charAt(peg$currPos);
           peg$currPos++;
         } else {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c215);
+            peg$fail(peg$c229);
           }
         }
         if (s1 !== peg$FAILED) {
@@ -7641,18 +8245,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             s2 = s3;
           }
           if (s2 !== peg$FAILED) {
-            if (peg$c216.test(input.charAt(peg$currPos))) {
+            if (peg$c230.test(input.charAt(peg$currPos))) {
               s3 = input.charAt(peg$currPos);
               peg$currPos++;
             } else {
               s3 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c217);
+                peg$fail(peg$c231);
               }
             }
             if (s3 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c207(s1, s2, s3);
+              s1 = peg$c221(s1, s2, s3);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -7670,7 +8274,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c213);
+            peg$fail(peg$c227);
           }
         }
 
@@ -7682,25 +8286,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         peg$silentFails++;
         s0 = peg$currPos;
-        if (peg$c219.test(input.charAt(peg$currPos))) {
+        if (peg$c233.test(input.charAt(peg$currPos))) {
           s1 = input.charAt(peg$currPos);
           peg$currPos++;
         } else {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c220);
+            peg$fail(peg$c234);
           }
         }
         if (s1 !== peg$FAILED) {
           s2 = peg$currPos;
           s3 = [];
-          if (peg$c221.test(input.charAt(peg$currPos))) {
+          if (peg$c235.test(input.charAt(peg$currPos))) {
             s4 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s4 = peg$FAILED;
             if (peg$silentFails === 0) {
-              peg$fail(peg$c222);
+              peg$fail(peg$c236);
             }
           }
           if (s4 === peg$FAILED) {
@@ -7708,13 +8312,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
           while (s4 !== peg$FAILED) {
             s3.push(s4);
-            if (peg$c221.test(input.charAt(peg$currPos))) {
+            if (peg$c235.test(input.charAt(peg$currPos))) {
               s4 = input.charAt(peg$currPos);
               peg$currPos++;
             } else {
               s4 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c222);
+                peg$fail(peg$c236);
               }
             }
             if (s4 === peg$FAILED) {
@@ -7727,18 +8331,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             s2 = s3;
           }
           if (s2 !== peg$FAILED) {
-            if (peg$c223.test(input.charAt(peg$currPos))) {
+            if (peg$c237.test(input.charAt(peg$currPos))) {
               s3 = input.charAt(peg$currPos);
               peg$currPos++;
             } else {
               s3 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c224);
+                peg$fail(peg$c238);
               }
             }
             if (s3 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c207(s1, s2, s3);
+              s1 = peg$c221(s1, s2, s3);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -7756,7 +8360,149 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c218);
+            peg$fail(peg$c232);
+          }
+        }
+
+        return s0;
+      }
+
+      function peg$parsequote_struct() {
+        var s0, s1, s2, s3, s4, s5, s6;
+
+        peg$silentFails++;
+        s0 = peg$currPos;
+        if (input.substr(peg$currPos, 13) === peg$c208) {
+          s1 = peg$c208;
+          peg$currPos += 13;
+        } else {
+          s1 = peg$FAILED;
+          if (peg$silentFails === 0) {
+            peg$fail(peg$c209);
+          }
+        }
+        if (s1 !== peg$FAILED) {
+          s2 = peg$currPos;
+          s3 = [];
+          s4 = peg$currPos;
+          s5 = peg$currPos;
+          peg$silentFails++;
+          if (input.substr(peg$currPos, 14) === peg$c240) {
+            s6 = peg$c240;
+            peg$currPos += 14;
+          } else {
+            s6 = peg$FAILED;
+            if (peg$silentFails === 0) {
+              peg$fail(peg$c241);
+            }
+          }
+          peg$silentFails--;
+          if (s6 === peg$FAILED) {
+            s5 = void 0;
+          } else {
+            peg$currPos = s5;
+            s5 = peg$FAILED;
+          }
+          if (s5 !== peg$FAILED) {
+            if (input.length > peg$currPos) {
+              s6 = input.charAt(peg$currPos);
+              peg$currPos++;
+            } else {
+              s6 = peg$FAILED;
+              if (peg$silentFails === 0) {
+                peg$fail(peg$c0);
+              }
+            }
+            if (s6 !== peg$FAILED) {
+              s5 = [s5, s6];
+              s4 = s5;
+            } else {
+              peg$currPos = s4;
+              s4 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s4;
+            s4 = peg$FAILED;
+          }
+          while (s4 !== peg$FAILED) {
+            s3.push(s4);
+            s4 = peg$currPos;
+            s5 = peg$currPos;
+            peg$silentFails++;
+            if (input.substr(peg$currPos, 14) === peg$c240) {
+              s6 = peg$c240;
+              peg$currPos += 14;
+            } else {
+              s6 = peg$FAILED;
+              if (peg$silentFails === 0) {
+                peg$fail(peg$c241);
+              }
+            }
+            peg$silentFails--;
+            if (s6 === peg$FAILED) {
+              s5 = void 0;
+            } else {
+              peg$currPos = s5;
+              s5 = peg$FAILED;
+            }
+            if (s5 !== peg$FAILED) {
+              if (input.length > peg$currPos) {
+                s6 = input.charAt(peg$currPos);
+                peg$currPos++;
+              } else {
+                s6 = peg$FAILED;
+                if (peg$silentFails === 0) {
+                  peg$fail(peg$c0);
+                }
+              }
+              if (s6 !== peg$FAILED) {
+                s5 = [s5, s6];
+                s4 = s5;
+              } else {
+                peg$currPos = s4;
+                s4 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s4;
+              s4 = peg$FAILED;
+            }
+          }
+          if (s3 !== peg$FAILED) {
+            s2 = input.substring(s2, peg$currPos);
+          } else {
+            s2 = s3;
+          }
+          if (s2 !== peg$FAILED) {
+            if (input.substr(peg$currPos, 14) === peg$c240) {
+              s3 = peg$c240;
+              peg$currPos += 14;
+            } else {
+              s3 = peg$FAILED;
+              if (peg$silentFails === 0) {
+                peg$fail(peg$c241);
+              }
+            }
+            if (s3 !== peg$FAILED) {
+              peg$savedPos = s0;
+              s1 = peg$c221(s1, s2, s3);
+              s0 = s1;
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+        peg$silentFails--;
+        if (s0 === peg$FAILED) {
+          s1 = peg$FAILED;
+          if (peg$silentFails === 0) {
+            peg$fail(peg$c239);
           }
         }
 
@@ -7768,36 +8514,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         peg$silentFails++;
         s0 = peg$currPos;
-        if (input.substr(peg$currPos, 13) === peg$c226) {
-          s1 = peg$c226;
+        if (input.substr(peg$currPos, 13) === peg$c243) {
+          s1 = peg$c243;
           peg$currPos += 13;
         } else {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c227);
+            peg$fail(peg$c244);
           }
         }
         if (s1 !== peg$FAILED) {
           s2 = [];
-          if (peg$c228.test(input.charAt(peg$currPos))) {
+          if (peg$c245.test(input.charAt(peg$currPos))) {
             s3 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s3 = peg$FAILED;
             if (peg$silentFails === 0) {
-              peg$fail(peg$c229);
+              peg$fail(peg$c246);
             }
           }
           if (s3 !== peg$FAILED) {
             while (s3 !== peg$FAILED) {
               s2.push(s3);
-              if (peg$c228.test(input.charAt(peg$currPos))) {
+              if (peg$c245.test(input.charAt(peg$currPos))) {
                 s3 = input.charAt(peg$currPos);
                 peg$currPos++;
               } else {
                 s3 = peg$FAILED;
                 if (peg$silentFails === 0) {
-                  peg$fail(peg$c229);
+                  peg$fail(peg$c246);
                 }
               }
             }
@@ -7805,18 +8551,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             s2 = peg$FAILED;
           }
           if (s2 !== peg$FAILED) {
-            if (input.substr(peg$currPos, 2) === peg$c230) {
-              s3 = peg$c230;
+            if (input.substr(peg$currPos, 2) === peg$c247) {
+              s3 = peg$c247;
               peg$currPos += 2;
             } else {
               s3 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c231);
+                peg$fail(peg$c248);
               }
             }
             if (s3 !== peg$FAILED) {
               peg$savedPos = s0;
-              s1 = peg$c232(s2);
+              s1 = peg$c249(s2);
               s0 = s1;
             } else {
               peg$currPos = s0;
@@ -7834,7 +8580,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c225);
+            peg$fail(peg$c242);
           }
         }
 
@@ -7845,20 +8591,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var s0, s1;
 
         peg$silentFails++;
-        if (input.substr(peg$currPos, 8) === peg$c234) {
-          s0 = peg$c234;
+        if (input.substr(peg$currPos, 8) === peg$c251) {
+          s0 = peg$c251;
           peg$currPos += 8;
         } else {
           s0 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c235);
+            peg$fail(peg$c252);
           }
         }
         peg$silentFails--;
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c233);
+            peg$fail(peg$c250);
           }
         }
 
@@ -7869,24 +8615,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var s0, s1;
 
         s0 = [];
-        if (peg$c236.test(input.charAt(peg$currPos))) {
+        if (peg$c253.test(input.charAt(peg$currPos))) {
           s1 = input.charAt(peg$currPos);
           peg$currPos++;
         } else {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c237);
+            peg$fail(peg$c254);
           }
         }
         while (s1 !== peg$FAILED) {
           s0.push(s1);
-          if (peg$c236.test(input.charAt(peg$currPos))) {
+          if (peg$c253.test(input.charAt(peg$currPos))) {
             s1 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s1 = peg$FAILED;
             if (peg$silentFails === 0) {
-              peg$fail(peg$c237);
+              peg$fail(peg$c254);
             }
           }
         }
@@ -7899,25 +8645,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         peg$silentFails++;
         s0 = [];
-        if (peg$c236.test(input.charAt(peg$currPos))) {
+        if (peg$c253.test(input.charAt(peg$currPos))) {
           s1 = input.charAt(peg$currPos);
           peg$currPos++;
         } else {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c237);
+            peg$fail(peg$c254);
           }
         }
         if (s1 !== peg$FAILED) {
           while (s1 !== peg$FAILED) {
             s0.push(s1);
-            if (peg$c236.test(input.charAt(peg$currPos))) {
+            if (peg$c253.test(input.charAt(peg$currPos))) {
               s1 = input.charAt(peg$currPos);
               peg$currPos++;
             } else {
               s1 = peg$FAILED;
               if (peg$silentFails === 0) {
-                peg$fail(peg$c237);
+                peg$fail(peg$c254);
               }
             }
           }
@@ -7928,7 +8674,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c238);
+            peg$fail(peg$c255);
           }
         }
 
@@ -7940,26 +8686,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         peg$silentFails++;
         s0 = peg$currPos;
-        if (peg$c240.test(input.charAt(peg$currPos))) {
+        if (peg$c257.test(input.charAt(peg$currPos))) {
           s1 = input.charAt(peg$currPos);
           peg$currPos++;
         } else {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c241);
+            peg$fail(peg$c258);
           }
         }
         if (s1 === peg$FAILED) {
           s1 = null;
         }
         if (s1 !== peg$FAILED) {
-          if (peg$c242.test(input.charAt(peg$currPos))) {
+          if (peg$c259.test(input.charAt(peg$currPos))) {
             s2 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s2 = peg$FAILED;
             if (peg$silentFails === 0) {
-              peg$fail(peg$c243);
+              peg$fail(peg$c260);
             }
           }
           if (s2 !== peg$FAILED) {
@@ -8009,7 +8755,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (s0 === peg$FAILED) {
           s1 = peg$FAILED;
           if (peg$silentFails === 0) {
-            peg$fail(peg$c239);
+            peg$fail(peg$c256);
           }
         }
 
@@ -8059,6 +8805,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return EL;
       }();
 
+      var indent_memo = options.indent_memo;
+
       var indent_depth = 0;
 
       var base_indent_stack = [];
@@ -8085,7 +8833,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         11: 'Subitem10Sentence'
       };
 
-      var indent_memo = options.indent_memo;
+      var list_depth = 0;
+
+      var list_tags = {
+        0: 'List', 1: 'Sublist1', 2: 'Sublist2', 3: 'Sublist3'
+      };
 
       var article_group_type_chars = "編章節款目";
 

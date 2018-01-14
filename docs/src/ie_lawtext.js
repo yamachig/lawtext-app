@@ -153,12 +153,16 @@ Lawtext.Context.prototype.set = function (key, value) {
 };
 
 Lawtext.render_law = function (template_name, law) {
-    return nunjucks.render(template_name, {
+    var rendered = nunjucks.render(template_name, {
         law: law,
         "print": console.log,
         "context": new Lawtext.Context(),
         "annotate_html": Lawtext.annotate_html
     });
+    if (template_name === "lawtext") {
+        rendered = rendered.replace(/(\r?\n\r?\n)(?:\r?\n)+/g, "$1");
+    }
+    return rendered;
 };
 
 Lawtext.Data = Backbone.Model.extend({
