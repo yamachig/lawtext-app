@@ -2825,7 +2825,9 @@
           frame.set("paragraph_item", l_paragraph_item);
           frame.set("article", l_article);
           frame.set("first_paragraph", kwargs.hasOwnProperty("first_paragraph") ? kwargs["first_paragraph"] : 0);
-          var t_55 = "";t_55 += "<div class=\"paragraph-item\">";
+          var t_55 = "";t_55 += "<div class=\"paragraph-item paragraph-item-";
+          t_55 += runtime.suppressValue(runtime.memberLookup(l_paragraph_item, "tag"), env.opts.autoescape);
+          t_55 += "\">";
           frame = frame.push();
           var t_58 = runtime.memberLookup(l_paragraph_item, "children");
           if (t_58) {
