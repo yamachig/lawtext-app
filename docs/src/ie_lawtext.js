@@ -1,67 +1,106 @@
 'use strict';
 
-if (!String.prototype.startsWith) {
-    String.prototype.startsWith = function (searchString, position) {
-        position = position || 0;
-        return this.indexOf(searchString, position) === position;
-    };
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function em(input) {
+    var emSize = parseFloat($("body").css("font-size"));
+    return emSize * input;
 }
 
 var Lawtext = Lawtext || {};
 
 Lawtext.element_to_json = function (el) {
     var children = [];
-    for (var i = 0; i < el.childNodes.length; i++) {
-        var node = el.childNodes[i];
-        if (node.nodeType == Node.TEXT_NODE) {
-            var text = node.nodeValue.trim();
-            if (text) {
-                children.push(text);
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = el.childNodes[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var node = _step.value;
+
+            if (node.nodeType === Node.TEXT_NODE) {
+                var text = node.nodeValue.trim();
+                if (text) {
+                    children.push(text);
+                }
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+                children.push(Lawtext.element_to_json(node));
+            } else {
+                console.log(node);
             }
-        } else if (node.nodeType == Node.ELEMENT_NODE) {
-            children.push(Lawtext.element_to_json(node));
-        } else {
-            console.log(node);
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
         }
     }
+
     var attr = {};
-    for (var i = 0; i < el.attributes.length; i++) {
-        var at = el.attributes[i];
-        attr[at.name] = at.value;
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
+
+    try {
+        for (var _iterator2 = el.attributes[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var at = _step2.value;
+
+            attr[at.name] = at.value;
+        }
+    } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                _iterator2.return();
+            }
+        } finally {
+            if (_didIteratorError2) {
+                throw _iteratorError2;
+            }
+        }
     }
-    return {
-        tag: el.tagName,
-        attr: attr,
-        children: children
-    };
+
+    return new Lawtext.EL(el.tagName, attr, children);
 };
 
-Lawtext.LawNameItem = function (law_name, law_no, promulgation_date) {
-    var self = this;
-    self.law_name = law_name;
-    self.law_no = law_no;
-    self.promulgation_date = promulgation_date;
-};
+Lawtext.LawNameItem = function () {
+    function _class(law_name, law_no, promulgation_date) {
+        _classCallCheck(this, _class);
+
+        this.law_name = law_name;
+        this.law_no = law_no;
+        this.promulgation_date = promulgation_date;
+    }
+
+    return _class;
+}();
 
 Lawtext.law_name_data = [];
 
-Lawtext.load_law_name_data = function () {
-    var deferred = new $.Deferred();
-    $.get("http://elaws.e-gov.go.jp/api/1/lawlists/1").done(function (root) {
-        Lawtext.law_name_data = _.each(root.getElementsByTagName('LawNameListInfo'), function (el) {
-            var law_name = el.getElementsByTagName('LawName')[0].text;
-            var law_no = el.getElementsByTagName('LawNo')[0].text;
-            var promulgation_date = el.getElementsByTagName('PromulgationDate')[0].text;
-            return new Lawtext.LawNameItem(law_name, law_no, promulgation_date);
-        });
-        deferred.resolve();
-    });
-    return deferred.promise();
-};
-
 Lawtext.xml_to_json = function (xml) {
     var parser = new DOMParser();
-    var dom = parser.parseFromString(xml, 'text/xml');
+    var dom = parser.parseFromString(xml, "text/xml");
     return Lawtext.element_to_json(dom.documentElement);
 };
 
@@ -69,69 +108,89 @@ Lawtext.restructure_table = function (table) {
     var new_table_children = [];
     var rowspan_state = {};
     var colspan_value = {};
-    _(table['children']).each(function (row) {
+    var _iteratorNormalCompletion3 = true;
+    var _didIteratorError3 = false;
+    var _iteratorError3 = undefined;
 
-        if (row['tag'] != 'TableRow') {
-            new_table_children.push(row);
-            return;
-        }
-        var new_row_children = [];
-        var c = 0;
-        var ci = 0;
-        while (true) {
+    try {
+        for (var _iterator3 = table.children[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+            var row = _step3.value;
 
-            var rss = rowspan_state[c] || 0;
-            if (rss) {
-                var colspan = colspan_value[c] || 0;
-                new_row_children.push({
-                    tag: 'TableColumnMerged',
-                    attr: colspan ? {
-                        'colspan': colspan
-                    } : {},
-                    children: []
-                });
-                rowspan_state[c] = rss - 1;
-                if (colspan) {
-                    c += colspan - 1;
+            if (row.tag !== "TableRow") {
+                new_table_children.push(row);
+                return;
+            }
+            var new_row_children = [];
+            var c = 0;
+            var ci = 0;
+            while (true) {
+
+                var rss = rowspan_state[c] || 0;
+                if (rss) {
+                    var _colspan = colspan_value[c] || 0;
+                    new_row_children.push({
+                        tag: "TableColumnMerged",
+                        attr: _colspan ? {
+                            colspan: _colspan
+                        } : {},
+                        children: []
+                    });
+                    rowspan_state[c] = rss - 1;
+                    if (_colspan) {
+                        c += _colspan - 1;
+                    }
+                    c += 1;
+                    continue;
+                }
+
+                if (ci >= row.children.length) {
+                    break;
+                }
+
+                var column = row.children[ci];
+                new_row_children.push(column);
+                if (column.tag !== "TableColumn") {
+                    ci += 1;
+                    continue;
+                }
+
+                var colspan = Number(column.attr.colspan || 0);
+                if (column.attr.rowspan !== undefined) {
+                    var rowspan = Number(column.attr.rowspan);
+                    rowspan_state[c] = rowspan - 1;
+                    colspan_value[c] = colspan;
+                    if (colspan) {
+                        c += colspan - 1;
+                    }
                 }
                 c += 1;
-                continue;
-            }
-
-            if (ci >= row['children'].length) {
-                break;
-            }
-
-            var column = row['children'][ci];
-            new_row_children.push(column);
-            if (column['tag'] != 'TableColumn') {
                 ci += 1;
-                continue;
             }
 
-            var colspan = Number(column['attr']['colspan'] || 0);
-            if (_(column['attr']).has('rowspan')) {
-                var rowspan = Number(column['attr']['rowspan']);
-                rowspan_state[c] = rowspan - 1;
-                colspan_value[c] = colspan;
-                if (colspan) {
-                    c += colspan - 1;
-                }
-            }
-            c += 1;
-            ci += 1;
+            new_table_children.push({
+                tag: row.tag,
+                attr: row.attr,
+                children: new_row_children
+            });
         }
-
-        new_table_children.push({
-            tag: row['tag'],
-            attr: row['attr'],
-            children: new_row_children
-        });
-    });
+    } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                _iterator3.return();
+            }
+        } finally {
+            if (_didIteratorError3) {
+                throw _iteratorError3;
+            }
+        }
+    }
 
     var ret = {
-        tag: table['tag'],
-        attr: table['attr'],
+        tag: table.tag,
+        attr: table.attr,
         children: new_table_children
     };
 
@@ -139,17 +198,58 @@ Lawtext.restructure_table = function (table) {
 };
 
 Lawtext.Context = function () {
-    var self = this;
-    self.data = {};
-};
-Lawtext.Context.prototype.get = function (key) {
-    var self = this;
-    return self.data[key];
-};
-Lawtext.Context.prototype.set = function (key, value) {
-    var self = this;
-    self.data[key] = value;
-    return "";
+    function _class2() {
+        _classCallCheck(this, _class2);
+
+        this.data = {};
+    }
+
+    _createClass(_class2, [{
+        key: "get",
+        value: function get(key) {
+            return this.data[key];
+        }
+    }, {
+        key: "set",
+        value: function set(key, value) {
+            this.data[key] = value;
+            return "";
+        }
+    }]);
+
+    return _class2;
+}();
+
+Lawtext.annotate = function (el) {
+    if (typeof el === "string" || el instanceof String) {
+        return el;
+    }
+
+    var child_str = el.children.map(function (child) {
+        return Lawtext.annotate(child);
+    }).join("");
+
+    if (el.tag === "____Declaration") {
+        return "<span class=\"lawtext-analyzed lawtext-analyzed-declaration\" lawtext_declaration_index=\"" + el.attr.declaration_index + "\">" + child_str + "</span>";
+    } else if (el.tag === "____VarRef") {
+        return "<span class=\"lawtext-analyzed lawtext-analyzed-varref\" lawtext_declaration_index=\"" + el.attr.ref_declaration_index + "\">" + child_str + "</span>";
+    } else if (el.tag === "____LawNum") {
+        return "<a class=\"lawtext-analyzed lawtext-analyzed-lawnum\" href=\"#" + child_str + "\" target=\"_blank\">" + child_str + "</a>";
+    } else if (el.tag === "__Parentheses") {
+        return "<span class=\"lawtext-analyzed lawtext-analyzed-parentheses\" lawtext_parentheses_type=\"" + el.attr.type + "\" data-lawtext-parentheses-depth=\"" + el.attr.depth + "\">" + child_str + "</span>";
+    } else if (el.tag === "__PStart") {
+        return "<span class=\"lawtext-analyzed lawtext-analyzed-start-parenthesis\" lawtext_parentheses_type=\"" + el.attr.type + "\">" + child_str + "</span>";
+    } else if (el.tag === "__PContent") {
+        return "<span class=\"lawtext-analyzed lawtext-analyzed-parentheses-content\" lawtext_parentheses_type=\"" + el.attr.type + "\">" + child_str + "</span>";
+    } else if (el.tag === "__PEnd") {
+        return "<span class=\"lawtext-analyzed lawtext-analyzed-end-parenthesis\" lawtext_parentheses_type=\"" + el.attr.type + "\">" + child_str + "</span>";
+    } else if (el.tag === "__MismatchStartParenthesis") {
+        return "<span class=\"lawtext-analyzed lawtext-analyzed-mismatch-start-parenthesis\">" + child_str + "</span>";
+    } else if (el.tag === "__MismatchEndParenthesis") {
+        return "<span class=\"lawtext-analyzed lawtext-analyzed-mismatch-end-parenthesis\">" + child_str + "</span>";
+    } else {
+        return child_str;
+    }
 };
 
 Lawtext.render_law = function (template_name, law) {
@@ -157,7 +257,7 @@ Lawtext.render_law = function (template_name, law) {
         law: law,
         "print": console.log,
         "context": new Lawtext.Context(),
-        "annotate_html": Lawtext.annotate_html
+        "annotate": Lawtext.annotate
     });
     if (template_name === "lawtext") {
         rendered = rendered.replace(/(\r?\n\r?\n)(?:\r?\n)+/g, "$1");
@@ -165,527 +265,972 @@ Lawtext.render_law = function (template_name, law) {
     return rendered;
 };
 
-Lawtext.Data = Backbone.Model.extend({
-    defaults: {
-        "law": null,
-        "opening_file": false,
-        "law_search_key": null
-    },
+Lawtext.render_elements_fragment = function (elements) {
+    var rendered = nunjucks.render("htmlfragment.html", {
+        elements: elements,
+        "print": console.log,
+        "context": new Lawtext.Context(),
+        "annotate": Lawtext.annotate
+    });
+    return rendered;
+};
 
-    initialize: function initialize(options) {
-        var self = this;
+Lawtext.analyze_xml = function (el) {
+    if (typeof el === 'string' || el instanceof String) {
+        return el;
+    }
+    if (["Sentence", "EnactStatement"].indexOf(el.tag) >= 0) {
+        if (el.text) {
+            el.children = Lawtext.parse(el.text, { startRule: "INLINE" });
+        }
+    } else {
+        var _iteratorNormalCompletion4 = true;
+        var _didIteratorError4 = false;
+        var _iteratorError4 = undefined;
 
-        self.open_file_input = $('<input>').attr({
-            type: 'file',
-            accept: 'text/plain,application/xml'
-        }).css({ display: 'none' });
-        $("body").append(self.open_file_input);
-        self.open_file_input.change(function (e) {
-            self.open_file_input_change(e);
-        });
-    },
+        try {
+            for (var _iterator4 = el.children[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                var child = _step4.value;
 
-    open_file: function open_file() {
-        var self = this;
-
-        self.open_file_input.click();
-    },
-
-    open_file_input_change: function open_file_input_change(evt) {
-        var self = this;
-
-        self.set({ opening_file: true });
-
-        var file = evt.target.files[0];
-        if (file === null) return;
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $(evt.target).val('');
-            var div = $('<div>');
-            var text = e.target.result;
-            self.load_law_text(text);
-            self.set({ law_search_key: null });
-            self.trigger("file-loaded");
-        };
-        reader.readAsText(file);
-    },
-
-    invoke_error: function invoke_error(title, body_el) {
-        var self = this;
-
-        self.trigger("error", title, body_el);
-    },
-
-    load_law_text: function load_law_text(text) {
-        var self = this;
-
-        var div = $('<div>');
-        var law = null;
-        if (/^(?:<\?xml|<Law)/.test(text.trim())) {
-            law = Lawtext.xml_to_json(text);
-        } else {
+                Lawtext.analyze_xml(child);
+            }
+        } catch (err) {
+            _didIteratorError4 = true;
+            _iteratorError4 = err;
+        } finally {
             try {
-                law = Lawtext.parse(text, { startRule: "start" });
-            } catch (err) {
-                var err_str = err.__str__();
-                var pre = $("<pre>").css({ "white-space": "pre-wrap" }).css({ "line-height": "1.2em" }).css({ "padding": "1em 0" }).html(err_str);
-                self.invoke_error("読み込んだLawtextにエラーがあります", pre[0]);
-                law = null;
+                if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                    _iterator4.return();
+                }
+            } finally {
+                if (_didIteratorError4) {
+                    throw _iteratorError4;
+                }
             }
         }
-        if (law) {
-            self.set({ opening_file: false, law: law });
-        } else {
-            self.set({ opening_file: false });
+    }
+};
+
+Lawtext.Data = function (_Backbone$Model) {
+    _inherits(_class3, _Backbone$Model);
+
+    _createClass(_class3, [{
+        key: "defaults",
+        get: function get() {
+            return {
+                law: null,
+                opening_file: false,
+                law_search_key: null,
+                analysis: null
+            };
         }
-    },
+    }]);
 
-    search_law: function search_law(law_search_key) {
-        var self = this;
+    function _class3() {
+        _classCallCheck(this, _class3);
 
-        self.set({ opening_file: true });
-        setTimeout(function () {
-            self.search_law_inner(law_search_key);
-        }, 30);
-    },
+        var _this = _possibleConstructorReturn(this, (_class3.__proto__ || Object.getPrototypeOf(_class3)).apply(this, arguments));
 
-    search_law_inner: function search_law_inner(law_search_key) {
-        var self = this;
+        _this.open_file_input = $("<input>").attr({
+            type: "file",
+            accept: "text/plain,application/xml"
+        }).css({ display: "none" });
+        $("body").append(_this.open_file_input);
+        _this.open_file_input.change(function (e) {
+            _this.open_file_input_change(e);
+        });
 
-        var load_law_num = function load_law_num(lawnum) {
+        $(window).resize(_.throttle(function () {
+            _this.trigger("window-resize");
+        }, 300));
+        return _this;
+    }
 
-            var law_data = localStorage ? localStorage.getItem("law_for:" + lawnum) : null;
-            if (law_data) {
-                law_data = JSON.parse(law_data);
-                var datetime = new Date(law_data.datetime);
+    _createClass(_class3, [{
+        key: "open_file",
+        value: function open_file() {
+            this.open_file_input.click();
+        }
+    }, {
+        key: "open_file_input_change",
+        value: function open_file_input_change(evt) {
+            var _this2 = this;
+
+            this.set({ opening_file: true });
+
+            var file = evt.target.files[0];
+            if (file === null) return;
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $(evt.target).val("");
+                var div = $("<div>");
+                var text = e.target.result;
+                _this2.load_law_text(text, true);
+                _this2.set({ law_search_key: null });
+                _this2.trigger("file-loaded");
+            };
+            reader.readAsText(file);
+        }
+    }, {
+        key: "invoke_error",
+        value: function invoke_error(title, body_el) {
+            this.trigger("error", title, body_el);
+        }
+    }, {
+        key: "load_law_text",
+        value: function load_law_text(text, analyze_xml) {
+            var div = $("<div>");
+            var law = null;
+            if (/^(?:<\?xml|<Law)/.test(text.trim())) {
+                law = Lawtext.xml_to_json(text);
+                if (analyze_xml) {
+                    Lawtext.analyze_xml(law);
+                }
+            } else {
+                try {
+                    law = Lawtext.parse(text, { startRule: "start" });
+                } catch (err) {
+                    var err_str = err.toString();
+                    var pre = $("<pre>").css({ "white-space": "pre-wrap" }).css({ "line-height": "1.2em" }).css({ "padding": "1em 0" }).html(err_str);
+                    this.invoke_error("読み込んだLawtextにエラーがあります", pre[0]);
+                    law = null;
+                }
+            }
+            if (law) {
+                this.set({ opening_file: false, law: law });
+            } else {
+                this.set({ opening_file: false });
+            }
+        }
+    }, {
+        key: "search_law",
+        value: function search_law(law_search_key) {
+            var _this3 = this;
+
+            this.set({ opening_file: true });
+            setTimeout(function () {
+                _this3.search_law_inner(law_search_key);
+            }, 30);
+        }
+    }, {
+        key: "search_law_inner",
+        value: function search_law_inner(law_search_key) {
+            var _this4 = this;
+
+            var load_law_num = function load_law_num(lawnum) {
+
+                var law_data = localStorage ? localStorage.getItem("law_for:" + lawnum) : null;
+                if (law_data) {
+                    law_data = JSON.parse(law_data);
+                    var datetime = new Date(law_data.datetime);
+                    var now = new Date();
+                    var ms = now.getTime() - datetime.getTime();
+                    var days = ms / (1000 * 60 * 60 * 24);
+                    if (days < 1) {
+                        _this4.load_law_text(law_data.xml, true);
+                        return;
+                    }
+                }
+
+                fetch("https://lic857vlz1.execute-api.ap-northeast-1.amazonaws.com/prod/Lawtext-API?method=lawdata&lawnum=" + encodeURI(lawnum), {
+                    mode: "cors"
+                }).then(function (response) {
+                    return new Promise(function (resolve, reject) {
+                        response.text().then(function (text) {
+                            return resolve([response, text]);
+                        });
+                    });
+                }).then(function (_ref) {
+                    var _ref2 = _slicedToArray(_ref, 2),
+                        response = _ref2[0],
+                        text = _ref2[1];
+
+                    if (response.ok) {
+                        _this4.load_law_text(text, true);
+                        if (localStorage) {
+                            localStorage.setItem("law_for:" + lawnum, JSON.stringify({
+                                datetime: new Date().toISOString(),
+                                xml: text
+                            }));
+                        }
+                    } else {
+                        console.log(response);
+                        _this4.set({ opening_file: false });
+                        _this4.invoke_error("法令の読み込み中にエラーが発生しました", text);
+                    }
+                });
+            };
+
+            var law_num_data = localStorage ? localStorage.getItem("law_num_for:" + law_search_key) : null;
+            if (law_num_data) {
+                law_num_data = JSON.parse(law_num_data);
+                var datetime = new Date(law_num_data.datetime);
                 var now = new Date();
                 var ms = now.getTime() - datetime.getTime();
                 var days = ms / (1000 * 60 * 60 * 24);
                 if (days < 1) {
-                    self.load_law_text(law_data.xml);
+                    load_law_num(law_num_data.lawnum);
                     return;
                 }
             }
 
-            var url = "https://lic857vlz1.execute-api.ap-northeast-1.amazonaws.com/prod/Lawtext-API?method=lawdata&lawnum=";
-            url += encodeURI(lawnum);
-            $.get(url).done(function (data) {
-                var serializer = new XMLSerializer();
-                var xml = serializer.serializeToString(data);
-                self.load_law_text(xml);
+            var re_lawnum = /(?:明治|大正|昭和|平成)\S+年\S+第\S+号/;
+            var match = re_lawnum.exec(law_search_key);
+            if (match) {
+                var lawnum = match[0];
+                load_law_num(lawnum);
                 if (localStorage) {
-                    localStorage.setItem("law_for:" + lawnum, JSON.stringify({
+                    localStorage.setItem("law_num_for:" + law_search_key, JSON.stringify({
                         datetime: new Date().toISOString(),
-                        xml: xml
+                        lawnum: lawnum
                     }));
                 }
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR, textStatus, errorThrown);
-                self.set({ opening_file: false });
-                self.invoke_error("法令の読み込み中にエラーが発生しました", jqXHR.responseText);
-            });
-        };
-
-        var lawnum = null;
-
-        var law_num_data = localStorage ? localStorage.getItem("law_num_for:" + law_search_key) : null;
-        if (law_num_data) {
-            law_num_data = JSON.parse(law_num_data);
-            var datetime = new Date(law_num_data.datetime);
-            var now = new Date();
-            var ms = now.getTime() - datetime.getTime();
-            var days = ms / (1000 * 60 * 60 * 24);
-            if (days < 1) {
-                load_law_num(law_num_data.lawnum);
-                return;
-            }
-        }
-
-        var re_lawnum = /(?:明治|大正|昭和|平成)\S+年\S+第\S+号/;
-        var match = re_lawnum.exec(law_search_key);
-        if (match) {
-            lawnum = match[0];
-            load_law_num(lawnum);
-            if (localStorage) {
-                localStorage.setItem("law_num_for:" + law_search_key, JSON.stringify({
-                    datetime: new Date().toISOString(),
-                    lawnum: lawnum
-                }));
-            }
-        } else {
-            var url = "https://lic857vlz1.execute-api.ap-northeast-1.amazonaws.com/prod/Lawtext-API?method=lawnums&lawname=";
-            url += encodeURI(law_search_key);
-            $.get(url).done(function (data) {
-                if (data.length) {
-                    lawnum = data[0][1];
-                    load_law_num(lawnum);
-                    if (localStorage) {
-                        localStorage.setItem("law_num_for:" + law_search_key, JSON.stringify({
-                            datetime: new Date().toISOString(),
-                            lawnum: lawnum
-                        }));
+            } else {
+                fetch("https://lic857vlz1.execute-api.ap-northeast-1.amazonaws.com/prod/Lawtext-API?method=lawnums&lawname=" + encodeURI(law_search_key), {
+                    mode: "cors"
+                }).then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+                    if (data.length) {
+                        var _lawnum = data[0][1];
+                        load_law_num(_lawnum);
+                        if (localStorage) {
+                            localStorage.setItem("law_num_for:" + law_search_key, JSON.stringify({
+                                datetime: new Date().toISOString(),
+                                lawnum: _lawnum
+                            }));
+                        }
+                        return;
+                    } else {
+                        _this4.invoke_error("法令が見つかりません", "\u300C" + law_search_key + "\u300D\u3092\u691C\u7D22\u3057\u307E\u3057\u305F\u304C\u3001\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3067\u3057\u305F\u3002");
                     }
-                    return;
-                } else {
-                    self.invoke_error("法令が見つかりません", "「" + law_search_key + "」を検索しましたが、見つかりませんでした。");
+                    _this4.set({ opening_file: false });
+                });
+            }
+        }
+    }, {
+        key: "get_law_name",
+        value: function get_law_name() {
+            var law = this.get("law");
+            if (law === null) return;
+
+            var law_num = _(law.children).findWhere({ tag: "LawNum" });
+            var law_body = _(law.children).findWhere({ tag: "LawBody" });
+            var law_title = law_body && _(law_body.children).findWhere({ tag: "LawTitle" });
+
+            var s_law_num = law_num ? law_num.children[0] : "";
+            var s_law_title = law_title ? law_title.children[0] : "";
+            s_law_num = s_law_num && s_law_title ? "\uFF08" + s_law_num + "\uFF09" : s_law_num;
+
+            return s_law_title + s_law_num;
+        }
+    }, {
+        key: "download_docx",
+        value: function download_docx() {
+            var _this5 = this;
+
+            var law = this.get("law");
+            if (law === null) return;
+
+            var s_content_types = nunjucks.render("docx/[Content_Types].xml");
+            var s_rels = nunjucks.render("docx/_rels/.rels");
+            var s_document_rels = nunjucks.render("docx/word/_rels/document.xml.rels");
+            var s_document = nunjucks.render("docx/word/document.xml", {
+                law: law,
+                restructure_table: Lawtext.restructure_table,
+                print: console.log,
+                context: new Lawtext.Context()
+            });
+            var s_styles = nunjucks.render("docx/word/styles.xml");
+
+            var zip = new JSZip();
+            zip.file("[Content_Types].xml", s_content_types);
+            zip.file("_rels/.rels", s_rels);
+            zip.file("word/_rels/document.xml.rels", s_document_rels);
+            zip.file("word/document.xml", s_document);
+            zip.file("word/styles.xml", s_styles);
+            zip.generateAsync({
+                type: "uint8array",
+                compression: "DEFLATE",
+                compressionOptions: {
+                    level: 9
                 }
-                self.set({ opening_file: false });
+            }).then(function (buffer) {
+                var blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+                var law_name = _this5.get_law_name() || "lawtext_output";
+                saveAs(blob, law_name + ".docx");
             });
         }
-    },
+    }, {
+        key: "download_lawtext",
+        value: function download_lawtext() {
+            var law = this.get("law");
+            if (law === null) return;
 
-    get_law_name: function get_law_name() {
-        var self = this;
-
-        var law = self.get('law');
-        if (_(law).isNull()) return;
-
-        var law_num = _(law.children).findWhere({ tag: 'LawNum' });
-        var law_body = _(law.children).findWhere({ tag: 'LawBody' });
-        var law_title = law_body && _(law_body.children).findWhere({ tag: 'LawTitle' });
-
-        var s_law_num = law_num ? law_num.children[0] : "";
-        var s_law_title = law_title ? law_title.children[0] : "";
-        s_law_num = s_law_num && s_law_title ? "（" + s_law_num + "）" : s_law_num;
-
-        return s_law_title + s_law_num;
-    },
-
-    download_docx: function download_docx() {
-        var self = this;
-
-        var law = self.get('law');
-        if (_(law).isNull()) return;
-
-        var s_content_types = nunjucks.render('docx/[Content_Types].xml');
-        var s_rels = nunjucks.render('docx/_rels/.rels');
-        var s_document_rels = nunjucks.render('docx/word/_rels/document.xml.rels');
-        var s_document = nunjucks.render('docx/word/document.xml', {
-            law: law,
-            "restructure_table": Lawtext.restructure_table,
-            "print": console.log,
-            "context": new Lawtext.Context()
-        });
-        var s_styles = nunjucks.render('docx/word/styles.xml');
-
-        var zip = new JSZip();
-        zip.file('[Content_Types].xml', s_content_types);
-        zip.file('_rels/.rels', s_rels);
-        zip.file('word/_rels/document.xml.rels', s_document_rels);
-        zip.file('word/document.xml', s_document);
-        zip.file('word/styles.xml', s_styles);
-        zip.generateAsync({
-            type: "uint8array",
-            compression: "DEFLATE",
-            compressionOptions: {
-                level: 9
-            }
-        }).then(function (buffer) {
-            var blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
-            var law_name = self.get_law_name() || "lawtext_output";
-            saveAs(blob, law_name + ".docx");
-        });
-    },
-
-    download_lawtext: function download_lawtext() {
-        var self = this;
-
-        var law = self.get('law');
-        if (_(law).isNull()) return;
-
-        var s_lawtext = nunjucks.render('lawtext.j2', {
-            law: law,
-            "print": console.log,
-            "context": new Lawtext.Context()
-        });
-        var blob = new Blob([s_lawtext], { type: "text/plain" });
-        var law_name = self.get_law_name() || "lawtext_output";
-        saveAs(blob, law_name + ".law.txt");
-    },
-
-    download_xml: function download_xml() {
-        var self = this;
-
-        var law = self.get('law');
-        if (_(law).isNull()) return;
-
-        var s_lawtext = nunjucks.render('xml.xml', {
-            law: law,
-            "print": console.log,
-            "context": new Lawtext.Context()
-        });
-        var blob = new Blob([s_lawtext], { type: "application/xml" });
-        var law_name = self.get_law_name() || "lawtext_output";
-        saveAs(blob, law_name + ".xml");
-    }
-});
-
-Lawtext.SidebarView = Backbone.View.extend({
-    template: _.template(Lawtext.sidebar_view_template),
-    tagName: "div",
-    className: "lawtext-sidebar-view",
-
-    initialize: function initialize(options) {
-        var self = this;
-
-        self.data = options.data;
-        self.listenTo(self.data, "change:law change:opening_file", _.debounce(function () {
-            self.render();
-        }, 100));
-    },
-
-    render: function render(options) {
-        var self = this;
-
-        self.$el.html(self.template({
-            data: self.data.attributes
-        }));
-    }
-});
-
-Lawtext.HTMLpreviewView = Backbone.View.extend({
-    template: _.template(Lawtext.htmlpreview_view_template),
-    tagName: "div",
-    className: "lawtext-htmlpreview-view",
-
-    initialize: function initialize(options) {
-        var self = this;
-
-        self.data = options.data;
-        self.law_html = null;
-        self.analyzed = false;
-
-        self.listenTo(self.data, "change:law", self.law_change);
-        self.listenTo(self.data, "change:law change:opening_file", _.debounce(function () {
-            self.render();
-        }, 100));
-        self.listenTo(self.data, "scroll-to-law-anchor", self.scroll_to_law_anchor);
-    },
-
-    law_change: function law_change(options) {
-        var self = this;
-
-        self.law_html = null;
-        self.analyzed = false;
-    },
-
-    render: function render(options) {
-        var self = this;
-
-        var law = self.data.get('law');
-        if (!_(law).isNull() && _(self.law_html).isNull()) {
-            self.law_html = Lawtext.render_law('htmlfragment.html', law);
-            self.analyzed = true;
+            var s_lawtext = nunjucks.render("lawtext.j2", {
+                law: law,
+                print: console.log,
+                context: new Lawtext.Context()
+            });
+            var blob = new Blob([s_lawtext], { type: "text/plain" });
+            var law_name = this.get_law_name() || "lawtext_output";
+            saveAs(blob, law_name + ".law.txt");
         }
+    }, {
+        key: "download_xml",
+        value: function download_xml() {
+            var law = this.get("law");
+            if (law === null) return;
 
-        self.$el.html(self.template({
-            data: self.data.attributes,
-            law_html: self.law_html
-        }));
+            var s_lawtext = nunjucks.render("xml.xml", {
+                law: law,
+                print: console.log,
+                context: new Lawtext.Context()
+            });
+            var blob = new Blob([s_lawtext], { type: "application/xml" });
+            var law_name = this.get_law_name() || "lawtext_output";
+            saveAs(blob, law_name + ".xml");
+        }
+    }, {
+        key: "get_declaration",
+        value: function get_declaration(index) {
+            var analysis = this.get("analysis");
+            if (analysis === null) return null;
 
-        if (!self.analyzed) {
-            setTimeout(function () {
-                if (!_(law).isNull()) {
-                    law = _parse_decorate.analyze(law);
-                    self.law_html = Lawtext.render_law('htmlfragment.html', law);
-                    self.analyzed = true;
-                    self.$el.html(self.template({
-                        data: self.data.attributes,
-                        law_html: self.law_html
-                    }));
-                    self.process_law();
+            var declarations = analysis.declarations;
+            return declarations[index];
+        }
+    }]);
+
+    return _class3;
+}(Backbone.Model);
+
+Lawtext.SidebarView_template = _.template(Lawtext.sidebar_view_template);
+Lawtext.SidebarView = function (_Backbone$View) {
+    _inherits(_class4, _Backbone$View);
+
+    _createClass(_class4, [{
+        key: "tagName",
+        get: function get() {
+            return "div";
+        }
+    }, {
+        key: "className",
+        get: function get() {
+            return "lawtext-sidebar-view";
+        }
+    }]);
+
+    function _class4(options) {
+        _classCallCheck(this, _class4);
+
+        var _this6 = _possibleConstructorReturn(this, (_class4.__proto__ || Object.getPrototypeOf(_class4)).apply(this, arguments));
+
+        _this6.data = options.data;
+        _this6.listenTo(_this6.data, "change:law change:opening_file", _.debounce(function () {
+            _this6.render();
+        }, 100));
+        return _this6;
+    }
+
+    _createClass(_class4, [{
+        key: "render",
+        value: function render(options) {
+            this.$el.html(Lawtext.SidebarView_template({
+                data: this.data.attributes
+            }));
+        }
+    }]);
+
+    return _class4;
+}(Backbone.View);
+
+Lawtext.VarRefView_template = _.template("\n<span class=\"lawtext-varref-text\"><%= text %></span><span class=\"lawtext-varref-float-block\" style=\"display: none; height: 0;\">\n<div class=\"lawtext-varref-float-block-inner\">\n<div class=\"lawtext-varref-arrow\"></div>\n<div class=\"lawtext-varref-window\">\n</div>\n</div>\n</span>\n".trim());
+Lawtext.VarRefView = function (_Backbone$View2) {
+    _inherits(_class5, _Backbone$View2);
+
+    _createClass(_class5, [{
+        key: "tagName",
+        get: function get() {
+            return "span";
+        }
+    }, {
+        key: "className",
+        get: function get() {
+            return "lawtext-varref-view";
+        }
+    }, {
+        key: "events",
+        get: function get() {
+            return {
+                "click .lawtext-varref-text": "text_click"
+            };
+        }
+    }]);
+
+    function _class5(options) {
+        _classCallCheck(this, _class5);
+
+        var _this7 = _possibleConstructorReturn(this, (_class5.__proto__ || Object.getPrototypeOf(_class5)).apply(this, arguments));
+
+        _this7.data = options.data;
+        _this7.declaration_index = options.declaration_index;
+        _this7.text = options.text;
+
+        _this7.text_obj = null;
+        _this7.block_obj = null;
+        _this7.inner_obj = null;
+        _this7.arrow_obj = null;
+        _this7.window_obj = null;
+
+        _this7.rendered = false;
+
+        _this7.listenTo(_this7, "rendered", _this7.update_size);
+        _this7.listenTo(_this7.data, "window-resize", _this7.update_size);
+        return _this7;
+    }
+
+    _createClass(_class5, [{
+        key: "get_content",
+        value: function get_content() {
+            var declaration = this.data.get_declaration(this.declaration_index);
+            var container_stack = declaration.name_pos.env.container_stack;
+            var names = [];
+            var _iteratorNormalCompletion5 = true;
+            var _didIteratorError5 = false;
+            var _iteratorError5 = undefined;
+
+            try {
+                for (var _iterator5 = container_stack[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                    var container = _step5.value;
+
+                    if (container.tag === "EnactStatement") {
+                        names.push("制定文");
+                    } else if (container.tag === "Article") {
+                        var article_name = _(container.children).findWhere({ tag: "ArticleTitle" }).text;
+                        names.push(article_name);
+                    } else if (container.tag === "Paragraph") {
+                        var paragraph_num = _(container.children).findWhere({ tag: "ParagraphNum" }).text || "１";
+                        names.push(paragraph_num);
+                    } else if (["Item", "Subitem1", "Subitem2", "Subitem3", "Subitem4", "Subitem5", "Subitem6", "Subitem7", "Subitem8", "Subitem9", "Subitem10"].indexOf(container.tag) >= 0) {
+                        var item_title = _(container.children).findWhere({ tag: container.tag + "Title" }).text;
+                        names.push(item_title);
+                    } else if (container.tag === "Table") {
+                        var table_struct_title_el = _(container.children).findWhere({ tag: "TableStructTitle" });
+                        var table_struct_title = table_struct_title_el ? table_struct_title_el.text : "表";
+                        names.push(table_struct_title + "（抜粋）");
+                    }
                 }
-            }, 0);
-        } else {
-            self.process_law();
+            } catch (err) {
+                _didIteratorError5 = true;
+                _iteratorError5 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                        _iterator5.return();
+                    }
+                } finally {
+                    if (_didIteratorError5) {
+                        throw _iteratorError5;
+                    }
+                }
+            }
+
+            var closest_children = container_stack[container_stack.length - 1].children.filter(function (el) {
+                return ["ArticleTitle", "ParagraphNum", "ItemTitle", "Subitem1Title", "Subitem2Title", "Subitem3Title", "Subitem4Title", "Subitem5Title", "Subitem6Title", "Subitem7Title", "Subitem8Title", "Subitem9Title", "Subitem10Title", "SupplProvision"].indexOf(el.tag) < 0;
+            });
+            var fragment = Lawtext.render_elements_fragment(closest_children).trim();
+            return ("\n<div class=\"paragraph-item-body\"><span class=\"paragraph-item-num\">" + names.join("　") + "</span>\u3000" + fragment + "</div>\n").trim();
         }
-    },
+    }, {
+        key: "render",
+        value: function render() {
+            var _this8 = this;
 
-    scroll_to_law_anchor: function scroll_to_law_anchor(tag, name) {
-        var self = this;
+            this.$el.html(Lawtext.VarRefView_template({
+                data: this.data.attributes,
+                text: this.text
+            }));
+            this.text_obj = this.$(".lawtext-varref-text");
+            this.block_obj = this.$(".lawtext-varref-float-block");
+            this.inner_obj = this.$(".lawtext-varref-float-block-inner");
+            this.arrow_obj = this.$(".lawtext-varref-arrow");
+            this.window_obj = this.$(".lawtext-varref-window");
+            this.rendered = true;
 
-        self.$(".law-anchor").each(function () {
-            var obj = $(this);
-            if (obj.data('tag') == tag && obj.data('name') == name) {
-                $('html,body').animate({ scrollTop: obj.offset().top }, 'normal');
+            this.listenTo(this.block_obj, "transitionend", alert);
+            this.block_obj[0].addEventListener("transitionend", function () {
+                if (!_this8.is_open) _this8.block_obj.hide();
+            }, false);
+
+            this.trigger("rendered");
+        }
+    }, {
+        key: "update_window",
+        value: function update_window() {
+            this.window_obj.html(this.get_content());
+        }
+    }, {
+        key: "update_size",
+        value: function update_size() {
+            if (!this.rendered) return;
+
+            var text_left = this.text_obj.offset().left;
+            var window_left = this.window_obj.offset().left;
+            var rel_left = text_left - window_left;
+            var left = Math.max(rel_left, em(0.2));
+            this.arrow_obj.css({ "margin-left": left + "px" });
+
+            var inner_height = this.inner_obj.outerHeight();
+            this.block_obj.height(inner_height);
+        }
+    }, {
+        key: "text_click",
+        value: function text_click() {
+            if (this.is_open) {
+                this.block_obj.height(0);
+                this.is_open = false;
+            } else {
+                this.update_window();
+                this.block_obj.show();
+                this.update_size();
+                this.is_open = true;
             }
-        });
-    },
+        }
+    }, {
+        key: "is_open",
+        get: function get() {
+            return this.$el.hasClass("lawtext-varref-open");
+        },
+        set: function set(value) {
+            return this.$el.toggleClass("lawtext-varref-open", value);
+        }
+    }]);
 
-    process_law: function process_law() {
-        var self = this;
+    return _class5;
+}(Backbone.View);
 
-        self.$(".lawtext-analyzed").each(function () {
-            var obj = $(this);
+Lawtext.HTMLpreviewView_template = _.template(Lawtext.htmlpreview_view_template);
+Lawtext.HTMLpreviewView = function (_Backbone$View3) {
+    _inherits(_class6, _Backbone$View3);
 
-            if (obj.hasClass("lawtext-analyzed-lawnum")) {
-                var lawnum = obj.data('lawnum');
-                obj.replaceWith($("<a>").attr('href', '#' + lawnum).attr('target', '_blank').html(obj.html()));
-            }
-        });
+    _createClass(_class6, [{
+        key: "tagName",
+        get: function get() {
+            return "div";
+        }
+    }, {
+        key: "className",
+        get: function get() {
+            return "lawtext-htmlpreview-view";
+        }
+    }]);
+
+    function _class6(options) {
+        _classCallCheck(this, _class6);
+
+        var _this9 = _possibleConstructorReturn(this, (_class6.__proto__ || Object.getPrototypeOf(_class6)).apply(this, arguments));
+
+        _this9.data = options.data;
+        _this9.law_html = null;
+        _this9.analyzed = false;
+
+        _this9.listenTo(_this9.data, "change:law", _this9.law_change);
+        _this9.listenTo(_this9.data, "change:law change:opening_file", _.debounce(function () {
+            _this9.render();
+        }, 100));
+        _this9.listenTo(_this9.data, "scroll-to-law-anchor", _this9.scroll_to_law_anchor);
+
+        _this9.varref_views = [];
+        return _this9;
     }
-});
 
-Lawtext.MainView = Backbone.View.extend({
-    template: _.template(Lawtext.main_view_template),
-    tagName: "div",
-    className: "lawtext-main-view",
+    _createClass(_class6, [{
+        key: "law_change",
+        value: function law_change() {
+            this.law_html = null;
+            this.analyzed = false;
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            var law = this.data.get("law");
+            if (law !== null && this.law_html === null) {
+                var analysis = Lawtext.analyze(law);
+                this.law_html = Lawtext.render_law("htmlfragment.html", law);
+                this.analyzed = true;
+                this.data.set(_defineProperty({ analysis: analysis }, "analysis", analysis));
+            }
 
-    events: {
-        "click .lawtext-open-file-button": "open_file_button_click",
-        "click .lawtext-download-sample-lawtext-button": "download_sample_lawtext_button_click",
-        "click .search-law-button": "search_law_button_click",
-        "click .lawtext-download-docx-button": "download_docx_button_click",
-        "click .lawtext-download-lawtext-button": "download_lawtext_button_click",
-        "click .lawtext-download-xml-button": "download_xml_button_click",
-        "click .law-link": "law_link_click"
-    },
+            this.$el.html(Lawtext.HTMLpreviewView_template({
+                data: this.data.attributes,
+                law_html: this.law_html
+            }));
 
-    initialize: function initialize(options) {
-        var self = this;
+            this.varref_views = [];
+            var _iteratorNormalCompletion6 = true;
+            var _didIteratorError6 = false;
+            var _iteratorError6 = undefined;
 
-        self.data = options.data;
-        self.router = options.router;
+            try {
+                for (var _iterator6 = this.$(".lawtext-analyzed-varref")[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+                    var el = _step6.value;
 
-        self.sidebar_view = new Lawtext.SidebarView({
+                    var obj = $(el);
+                    var varref_view = new Lawtext.VarRefView({
+                        data: this.data,
+                        declaration_index: parseInt(obj.attr("lawtext_declaration_index"), 10),
+                        text: obj.text()
+                    });
+                    obj.replaceWith(varref_view.el);
+                    varref_view.render();
+                    this.varref_views.push(varref_view);
+                }
+            } catch (err) {
+                _didIteratorError6 = true;
+                _iteratorError6 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion6 && _iterator6.return) {
+                        _iterator6.return();
+                    }
+                } finally {
+                    if (_didIteratorError6) {
+                        throw _iteratorError6;
+                    }
+                }
+            }
+        }
+    }, {
+        key: "scroll_to_law_anchor",
+        value: function scroll_to_law_anchor(tag, name) {
+            var _iteratorNormalCompletion7 = true;
+            var _didIteratorError7 = false;
+            var _iteratorError7 = undefined;
+
+            try {
+                for (var _iterator7 = this.$(".law-anchor")[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+                    var el = _step7.value;
+
+                    var obj = $(el);
+                    if (obj.data("tag") === tag && obj.data("name") === name) {
+                        $("html,body").animate({ scrollTop: obj.offset().top }, "normal");
+                    }
+                }
+            } catch (err) {
+                _didIteratorError7 = true;
+                _iteratorError7 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion7 && _iterator7.return) {
+                        _iterator7.return();
+                    }
+                } finally {
+                    if (_didIteratorError7) {
+                        throw _iteratorError7;
+                    }
+                }
+            }
+        }
+    }]);
+
+    return _class6;
+}(Backbone.View);
+
+Lawtext.MainView_template = _.template(Lawtext.main_view_template);
+Lawtext.MainView = function (_Backbone$View4) {
+    _inherits(_class7, _Backbone$View4);
+
+    _createClass(_class7, [{
+        key: "tagName",
+        get: function get() {
+            return "div";
+        }
+    }, {
+        key: "className",
+        get: function get() {
+            return "lawtext-main-view";
+        }
+    }, {
+        key: "events",
+        get: function get() {
+            return {
+                "click .lawtext-open-file-button": "open_file_button_click",
+                "click .lawtext-download-sample-lawtext-button": "download_sample_lawtext_button_click",
+                "click .search-law-button": "search_law_button_click",
+                "click .lawtext-download-docx-button": "download_docx_button_click",
+                "click .lawtext-download-lawtext-button": "download_lawtext_button_click",
+                "click .lawtext-download-xml-button": "download_xml_button_click",
+                "click .law-link": "law_link_click",
+                "click .lawtext-analyzed-varref-text": "varref_text_click"
+            };
+        }
+    }]);
+
+    function _class7(options) {
+        _classCallCheck(this, _class7);
+
+        var _this10 = _possibleConstructorReturn(this, (_class7.__proto__ || Object.getPrototypeOf(_class7)).apply(this, arguments));
+
+        _this10.data = options.data;
+        _this10.router = options.router;
+
+        _this10.sidebar_view = new Lawtext.SidebarView({
             data: Lawtext.data
         });
-        self.htmlpreview_view = new Lawtext.HTMLpreviewView({
+        _this10.htmlpreview_view = new Lawtext.HTMLpreviewView({
             data: Lawtext.data
         });
 
-        self.listenTo(self.data, "change:law_search_key", self.law_search_key_change);
-        self.listenTo(self.data, "change:law", self.law_change);
-        self.listenTo(self.data, "error", self.onerror);
-    },
-
-    render: function render(options) {
-        var self = this;
-
-        self.sidebar_view.$el.detach();
-        self.htmlpreview_view.$el.detach();
-
-        self.$el.html(self.template({}));
-
-        self.$(".lawtext-sidebar-view-place").replaceWith(self.sidebar_view.el);
-        self.sidebar_view.render();
-        self.$(".lawtext-htmlpreview-view-place").replaceWith(self.htmlpreview_view.el);
-        self.htmlpreview_view.render();
-    },
-
-    search_law_button_click: function search_law_button_click(e) {
-        var self = this;
-        var obj = $(e.currentTarget);
-
-        var textbox = obj.parent().parent().find(".search-law-textbox");
-        var text = textbox.val().trim();
-
-        self.router.navigate(text, { trigger: true });
-
-        return false;
-    },
-
-    open_file_button_click: function open_file_button_click(e) {
-        var self = this;
-
-        self.data.open_file();
-    },
-
-    download_sample_lawtext_button_click: function download_sample_lawtext_button_click(e) {
-        var self = this;
-
-        var blob = new Blob([Lawtext.sample_lawtext], { type: "text/plain" });
-        saveAs(blob, "sample_lawtext.law.txt");
-    },
-
-    download_docx_button_click: function download_docx_button_click(e) {
-        var self = this;
-
-        self.data.download_docx();
-    },
-
-    download_lawtext_button_click: function download_lawtext_button_click(e) {
-        var self = this;
-
-        self.data.download_lawtext();
-    },
-
-    download_xml_button_click: function download_xml_button_click(e) {
-        var self = this;
-
-        self.data.download_xml();
-    },
-
-    law_link_click: function law_link_click(e) {
-        var self = this;
-        var obj = $(e.currentTarget);
-
-        self.data.trigger("scroll-to-law-anchor", obj.data("tag"), obj.data("name"));
-    },
-
-    law_search_key_change: function law_search_key_change() {
-        var self = this;
-
-        var law_search_key = self.data.get("law_search_key");
-
-        if (law_search_key) {
-            self.data.search_law(law_search_key);
-        }
-    },
-
-    law_change: function law_change() {
-        var self = this;
-
-        var law = self.data.get("law");
-        var law_search_key = self.data.get("law_search_key");
-
-        if (law && law_search_key) {
-            var law_body = _(law.children).findWhere({ tag: "LawBody" });
-            var law_title = _(law_body.children).findWhere({ tag: "LawTitle" });
-            document.title = law_title.children[0] + " | Lawtext";
-        } else {
-            document.title = "Lawtext";
-        }
-    },
-
-    onerror: function onerror(title, body_el) {
-        var self = this;
-
-        var modal = self.$("#errorModal");
-        modal.find(".modal-title").html(title);
-        modal.find(".modal-body").html(body_el);
-        modal.modal("show");
+        _this10.listenTo(_this10.data, "change:law_search_key", _this10.law_search_key_change);
+        _this10.listenTo(_this10.data, "change:law", _this10.law_change);
+        _this10.listenTo(_this10.data, "error", _this10.onerror);
+        return _this10;
     }
-});
 
-Lawtext.Router = Backbone.Router.extend({
-    routes: {
-        ":law_search_key": "law",
-        "": "index"
-    },
+    _createClass(_class7, [{
+        key: "render",
+        value: function render() {
+            this.sidebar_view.$el.detach();
+            this.htmlpreview_view.$el.detach();
 
-    initialize: function initialize(options) {
-        var self = this;
+            this.$el.html(Lawtext.MainView_template({}));
 
-        self.data = options.data;
+            this.$(".lawtext-sidebar-view-place").replaceWith(this.sidebar_view.el);
+            this.sidebar_view.render();
+            this.$(".lawtext-htmlpreview-view-place").replaceWith(this.htmlpreview_view.el);
+            this.htmlpreview_view.render();
+        }
+    }, {
+        key: "search_law_button_click",
+        value: function search_law_button_click(e) {
+            var obj = $(e.currentTarget);
 
-        self.listenTo(self.data, "file-loaded", function () {
-            self.navigate("", { trigger: false });
+            var textbox = obj.parent().parent().find(".search-law-textbox");
+            var text = textbox.val().trim();
+
+            this.router.navigate(text, { trigger: true });
+
+            return false;
+        }
+    }, {
+        key: "open_file_button_click",
+        value: function open_file_button_click(e) {
+            this.data.open_file();
+        }
+    }, {
+        key: "download_sample_lawtext_button_click",
+        value: function download_sample_lawtext_button_click(e) {
+            var blob = new Blob([Lawtext.sample_lawtext], { type: "text/plain" });
+            saveAs(blob, "sample_lawtext.law.txt");
+        }
+    }, {
+        key: "download_docx_button_click",
+        value: function download_docx_button_click(e) {
+            this.data.download_docx();
+        }
+    }, {
+        key: "download_lawtext_button_click",
+        value: function download_lawtext_button_click(e) {
+            this.data.download_lawtext();
+        }
+    }, {
+        key: "download_xml_button_click",
+        value: function download_xml_button_click(e) {
+            this.data.download_xml();
+        }
+    }, {
+        key: "law_link_click",
+        value: function law_link_click(e) {
+            var obj = $(e.currentTarget);
+            this.data.trigger("scroll-to-law-anchor", obj.data("tag"), obj.data("name"));
+        }
+    }, {
+        key: "law_search_key_change",
+        value: function law_search_key_change() {
+            var law_search_key = this.data.get("law_search_key");
+            if (law_search_key) {
+                this.data.search_law(law_search_key);
+            }
+        }
+    }, {
+        key: "law_change",
+        value: function law_change() {
+            var law = this.data.get("law");
+            var law_search_key = this.data.get("law_search_key");
+
+            if (law && law_search_key) {
+                var law_body = _(law.children).findWhere({ tag: "LawBody" });
+                var law_title = _(law_body.children).findWhere({ tag: "LawTitle" });
+                document.title = law_title.children[0] + " | Lawtext";
+            } else {
+                document.title = "Lawtext";
+            }
+        }
+    }, {
+        key: "onerror",
+        value: function onerror(title, body_el) {
+            var modal = this.$("#errorModal");
+            modal.find(".modal-title").html(title);
+            modal.find(".modal-body").html(body_el);
+            modal.modal("show");
+        }
+    }, {
+        key: "varref_text_click",
+        value: function varref_text_click(e) {
+            var obj = $(e.currentTarget);
+
+            var varref = obj.closest(".lawtext-analyzed-varref");
+            var is_open = varref.hasClass("lawtext-analyzed-varref-open");
+
+            var parent_div = varref.closest("div");
+
+            var _iteratorNormalCompletion8 = true;
+            var _didIteratorError8 = false;
+            var _iteratorError8 = undefined;
+
+            try {
+                for (var _iterator8 = parent_div.find(".lawtext-analyzed-varref.lawtext-analyzed-varref-open")[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+                    var _el2 = _step8.value;
+
+                    var _varref = $(_el2);
+                    var _parent_div = _varref.closest("div");
+                    if (!parent_div[0].isEqualNode(_parent_div[0])) return;
+                    var _arr = $(_varref.find(".lawtext-analyzed-varref-arrow")[0]);
+                    var _win = $(_varref.find(".lawtext-analyzed-varref-window")[0]);
+                    _varref.removeClass("lawtext-analyzed-varref-open");
+                    _arr.hide();
+                    _win.slideUp(200);
+                }
+            } catch (err) {
+                _didIteratorError8 = true;
+                _iteratorError8 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion8 && _iterator8.return) {
+                        _iterator8.return();
+                    }
+                } finally {
+                    if (_didIteratorError8) {
+                        throw _iteratorError8;
+                    }
+                }
+            }
+
+            if (!is_open) {
+                var arr = $(varref.find(".lawtext-analyzed-varref-arrow")[0]);
+                var win = $(varref.find(".lawtext-analyzed-varref-window")[0]);
+                var is_empty = win.hasClass("lawtext-analyzed-varref-empty");
+                if (is_empty) {
+                    var decl_index = varref.attr("lawtext_declaration_index");
+                    var decl = self.$(".lawtext-analyzed-declaration[lawtext_declaration_index=\"" + decl_index + "\"]");
+                    var decl_container = decl.closest(".article,.enact-statement").clone();
+                    var _iteratorNormalCompletion9 = true;
+                    var _didIteratorError9 = false;
+                    var _iteratorError9 = undefined;
+
+                    try {
+                        for (var _iterator9 = decl_container.find(".lawtext-analyzed-declaration[lawtext_declaration_index]")[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+                            var el = _step9.value;
+
+                            var _obj = $(el);
+                            _obj.removeAttr("lawtext_declaration_index");
+                        }
+                    } catch (err) {
+                        _didIteratorError9 = true;
+                        _iteratorError9 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion9 && _iterator9.return) {
+                                _iterator9.return();
+                            }
+                        } finally {
+                            if (_didIteratorError9) {
+                                throw _iteratorError9;
+                            }
+                        }
+                    }
+
+                    var _iteratorNormalCompletion10 = true;
+                    var _didIteratorError10 = false;
+                    var _iteratorError10 = undefined;
+
+                    try {
+                        for (var _iterator10 = decl_container.find(".lawtext-analyzed-varref-window")[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+                            var _el = _step10.value;
+
+                            var _obj2 = $(_el);
+                            _obj2.html();
+                            _obj2.addClass("lawtext-analyzed-varref-empty");
+                        }
+                    } catch (err) {
+                        _didIteratorError10 = true;
+                        _iteratorError10 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion10 && _iterator10.return) {
+                                _iterator10.return();
+                            }
+                        } finally {
+                            if (_didIteratorError10) {
+                                throw _iteratorError10;
+                            }
+                        }
+                    }
+
+                    win.html(decl_container);
+                    win.removeClass("lawtext-analyzed-varref-empty");
+                }
+                varref.addClass("lawtext-analyzed-varref-open");
+                arr.show();
+                win.slideDown(200);
+            }
+        }
+    }]);
+
+    return _class7;
+}(Backbone.View);
+
+Lawtext.Router = function (_Backbone$Router) {
+    _inherits(_class8, _Backbone$Router);
+
+    _createClass(_class8, [{
+        key: "routes",
+        get: function get() {
+            return {
+                ":law_search_key": "law",
+                "": "index"
+            };
+        }
+    }]);
+
+    function _class8(options) {
+        _classCallCheck(this, _class8);
+
+        var _this11 = _possibleConstructorReturn(this, (_class8.__proto__ || Object.getPrototypeOf(_class8)).apply(this, arguments));
+
+        _this11.data = options.data;
+
+        _this11.listenTo(_this11.data, "file-loaded", function () {
+            _this11.navigate("", { trigger: false });
         });
-    },
-
-    law: function law(law_search_key) {
-        var self = this;
-
-        self.data.set({ law_search_key: law_search_key });
-    },
-
-    index: function index() {
-        var self = this;
-
-        self.data.set({ law_search_key: null, law: null });
+        return _this11;
     }
-});
+
+    _createClass(_class8, [{
+        key: "law",
+        value: function law(law_search_key) {
+            this.data.set({ law_search_key: law_search_key });
+        }
+    }, {
+        key: "index",
+        value: function index() {
+            this.data.set({ law_search_key: null, law: null });
+        }
+    }]);
+
+    return _class8;
+}(Backbone.Router);
 
 $(function () {
 

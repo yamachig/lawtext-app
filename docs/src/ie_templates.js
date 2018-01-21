@@ -1698,96 +1698,102 @@
             frame.set("caller", kwargs.caller);
           }
           frame.set("el", l_el);
-          var t_193 = "";if (!l_el) {
-            ;
-          } else {
-            if (!runtime.memberLookup(l_el, "tag")) {
-              t_193 += runtime.suppressValue(env.getFilter("escape").call(context, l_el), env.opts.autoescape);
+          var t_193 = "";if (runtime.contextOrFrameLookup(context, frame, "with_control_el") || runtime.memberLookup(runtime.memberLookup(l_el, "tag"), 0) != "_") {
+            if (!l_el) {
               ;
             } else {
-              t_193 += "<";
-              t_193 += runtime.suppressValue(runtime.memberLookup(l_el, "tag"), env.opts.autoescape);
-              frame = frame.push();
-              var t_196 = env.getFilter("dictsort").call(context, runtime.memberLookup(l_el, "attr"));
-              if (t_196) {
-                var t_194;
-                if (runtime.isArray(t_196)) {
-                  var t_195 = t_196.length;
-                  for (t_194 = 0; t_194 < t_196.length; t_194++) {
-                    var t_197 = t_196[t_194][0];
-                    frame.set("key", t_196[t_194][0]);
-                    var t_198 = t_196[t_194][1];
-                    frame.set("value", t_196[t_194][1]);
-                    frame.set("loop.index", t_194 + 1);
-                    frame.set("loop.index0", t_194);
-                    frame.set("loop.revindex", t_195 - t_194);
-                    frame.set("loop.revindex0", t_195 - t_194 - 1);
-                    frame.set("loop.first", t_194 === 0);
-                    frame.set("loop.last", t_194 === t_195 - 1);
-                    frame.set("loop.length", t_195);
-                    t_193 += runtime.suppressValue(" ", env.opts.autoescape);
-                    t_193 += runtime.suppressValue(t_197, env.opts.autoescape);
-                    t_193 += "=\"";
-                    t_193 += runtime.suppressValue(t_198, env.opts.autoescape);
-                    t_193 += "\"";
-                    ;
-                  }
-                } else {
-                  t_194 = -1;
-                  var t_195 = runtime.keys(t_196).length;
-                  for (var t_199 in t_196) {
-                    t_194++;
-                    var t_200 = t_196[t_199];
-                    frame.set("key", t_199);
-                    frame.set("value", t_200);
-                    frame.set("loop.index", t_194 + 1);
-                    frame.set("loop.index0", t_194);
-                    frame.set("loop.revindex", t_195 - t_194);
-                    frame.set("loop.revindex0", t_195 - t_194 - 1);
-                    frame.set("loop.first", t_194 === 0);
-                    frame.set("loop.last", t_194 === t_195 - 1);
-                    frame.set("loop.length", t_195);
-                    t_193 += runtime.suppressValue(" ", env.opts.autoescape);
-                    t_193 += runtime.suppressValue(t_199, env.opts.autoescape);
-                    t_193 += "=\"";
-                    t_193 += runtime.suppressValue(t_200, env.opts.autoescape);
-                    t_193 += "\"";
-                    ;
-                  }
-                }
-              }
-              frame = frame.pop();
-              t_193 += ">";
-              frame = frame.push();
-              var t_203 = runtime.memberLookup(l_el, "children");
-              if (t_203) {
-                var t_202 = t_203.length;
-                for (var t_201 = 0; t_201 < t_203.length; t_201++) {
-                  var t_204 = t_203[t_201];
-                  frame.set("child", t_204);
-                  frame.set("loop.index", t_201 + 1);
-                  frame.set("loop.index0", t_201);
-                  frame.set("loop.revindex", t_202 - t_201);
-                  frame.set("loop.revindex0", t_202 - t_201 - 1);
-                  frame.set("loop.first", t_201 === 0);
-                  frame.set("loop.last", t_201 === t_202 - 1);
-                  frame.set("loop.length", t_202);
-                  if (!runtime.memberLookup(t_204, "tag")) {
-                    t_193 += runtime.suppressValue(t_204, env.opts.autoescape);
-                    ;
+              if (!runtime.memberLookup(l_el, "tag")) {
+                t_193 += runtime.suppressValue(env.getFilter("escape").call(context, l_el), env.opts.autoescape);
+                ;
+              } else {
+                t_193 += "<";
+                t_193 += runtime.suppressValue(runtime.memberLookup(l_el, "tag"), env.opts.autoescape);
+                frame = frame.push();
+                var t_196 = env.getFilter("dictsort").call(context, runtime.memberLookup(l_el, "attr"));
+                if (t_196) {
+                  var t_194;
+                  if (runtime.isArray(t_196)) {
+                    var t_195 = t_196.length;
+                    for (t_194 = 0; t_194 < t_196.length; t_194++) {
+                      var t_197 = t_196[t_194][0];
+                      frame.set("key", t_196[t_194][0]);
+                      var t_198 = t_196[t_194][1];
+                      frame.set("value", t_196[t_194][1]);
+                      frame.set("loop.index", t_194 + 1);
+                      frame.set("loop.index0", t_194);
+                      frame.set("loop.revindex", t_195 - t_194);
+                      frame.set("loop.revindex0", t_195 - t_194 - 1);
+                      frame.set("loop.first", t_194 === 0);
+                      frame.set("loop.last", t_194 === t_195 - 1);
+                      frame.set("loop.length", t_195);
+                      t_193 += runtime.suppressValue(" ", env.opts.autoescape);
+                      t_193 += runtime.suppressValue(t_197, env.opts.autoescape);
+                      t_193 += "=\"";
+                      t_193 += runtime.suppressValue(t_198, env.opts.autoescape);
+                      t_193 += "\"";
+                      ;
+                    }
                   } else {
-                    t_193 += runtime.suppressValue((lineno = 773, colno = 22, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element_raw"), "m_element_raw", context, [t_204])), env.opts.autoescape);
+                    t_194 = -1;
+                    var t_195 = runtime.keys(t_196).length;
+                    for (var t_199 in t_196) {
+                      t_194++;
+                      var t_200 = t_196[t_199];
+                      frame.set("key", t_199);
+                      frame.set("value", t_200);
+                      frame.set("loop.index", t_194 + 1);
+                      frame.set("loop.index0", t_194);
+                      frame.set("loop.revindex", t_195 - t_194);
+                      frame.set("loop.revindex0", t_195 - t_194 - 1);
+                      frame.set("loop.first", t_194 === 0);
+                      frame.set("loop.last", t_194 === t_195 - 1);
+                      frame.set("loop.length", t_195);
+                      t_193 += runtime.suppressValue(" ", env.opts.autoescape);
+                      t_193 += runtime.suppressValue(t_199, env.opts.autoescape);
+                      t_193 += "=\"";
+                      t_193 += runtime.suppressValue(t_200, env.opts.autoescape);
+                      t_193 += "\"";
+                      ;
+                    }
+                  }
+                }
+                frame = frame.pop();
+                t_193 += ">";
+                frame = frame.push();
+                var t_203 = runtime.memberLookup(l_el, "children");
+                if (t_203) {
+                  var t_202 = t_203.length;
+                  for (var t_201 = 0; t_201 < t_203.length; t_201++) {
+                    var t_204 = t_203[t_201];
+                    frame.set("child", t_204);
+                    frame.set("loop.index", t_201 + 1);
+                    frame.set("loop.index0", t_201);
+                    frame.set("loop.revindex", t_202 - t_201);
+                    frame.set("loop.revindex0", t_202 - t_201 - 1);
+                    frame.set("loop.first", t_201 === 0);
+                    frame.set("loop.last", t_201 === t_202 - 1);
+                    frame.set("loop.length", t_202);
+                    if (!runtime.memberLookup(t_204, "tag")) {
+                      t_193 += runtime.suppressValue(t_204, env.opts.autoescape);
+                      ;
+                    } else {
+                      t_193 += runtime.suppressValue((lineno = 776, colno = 22, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element_raw"), "m_element_raw", context, [t_204])), env.opts.autoescape);
+                      ;
+                    }
                     ;
                   }
-                  ;
                 }
+                frame = frame.pop();
+                t_193 += "</";
+                t_193 += runtime.suppressValue(runtime.memberLookup(l_el, "tag"), env.opts.autoescape);
+                t_193 += ">";
+                ;
               }
-              frame = frame.pop();
-              t_193 += "</";
-              t_193 += runtime.suppressValue(runtime.memberLookup(l_el, "tag"), env.opts.autoescape);
-              t_193 += ">";
               ;
             }
+            ;
+          } else {
+            t_193 += runtime.suppressValue(runtime.memberLookup(l_el, "text"), env.opts.autoescape);
             ;
           }
           ;
@@ -1845,11 +1851,11 @@
                     ;
                   } else {
                     if (runtime.memberLookup(t_210, "tag") == "Ruby") {
-                      t_206 += runtime.suppressValue((lineno = 801, colno = 17, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_ruby_run"), "m_ruby_run", context, [t_210, l_emphasis])), env.opts.autoescape);
+                      t_206 += runtime.suppressValue((lineno = 809, colno = 17, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_ruby_run"), "m_ruby_run", context, [t_210, l_emphasis])), env.opts.autoescape);
                       ;
                     } else {
                       if (runtime.memberLookup(t_210, "tag") == "QuoteStruct") {
-                        t_206 += runtime.suppressValue((lineno = 803, colno = 25, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_quote_struct_run"), "m_quote_struct_run", context, [t_210])), env.opts.autoescape);
+                        t_206 += runtime.suppressValue((lineno = 811, colno = 25, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_quote_struct_run"), "m_quote_struct_run", context, [t_210])), env.opts.autoescape);
                         ;
                       } else {
                         t_206 += "\r\n  <w:r>";
@@ -1858,7 +1864,7 @@
                           ;
                         }
                         t_206 += "\r\n    <w:t>";
-                        t_206 += runtime.suppressValue((lineno = 809, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_210])), env.opts.autoescape);
+                        t_206 += runtime.suppressValue((lineno = 817, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_210])), env.opts.autoescape);
                         t_206 += "</w:t>\r\n  </w:r>";
                         ;
                       }
@@ -1988,7 +1994,7 @@
                     ;
                   }
                   t_212 += "\r\n    <w:t>";
-                  t_212 += runtime.suppressValue((lineno = 856, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_228])), env.opts.autoescape);
+                  t_212 += runtime.suppressValue((lineno = 864, colno = 19, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_228])), env.opts.autoescape);
                   t_212 += "</w:t>\r\n  </w:r>";
                   ;
                 }
@@ -2005,7 +2011,7 @@
         context.addExport("m_ruby_run");
         context.setVariable("m_ruby_run", macro_t_211);
         output += "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<w:document xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\">\r\n  <w:body>";
-        output += runtime.suppressValue((lineno = 865, colno = 10, runtime.callWrap(macro_t_1, "m_law", context, [runtime.contextOrFrameLookup(context, frame, "law")])), env.opts.autoescape);
+        output += runtime.suppressValue((lineno = 873, colno = 10, runtime.callWrap(macro_t_1, "m_law", context, [runtime.contextOrFrameLookup(context, frame, "law")])), env.opts.autoescape);
         output += "</w:body>\r\n</w:document>\r\n";
         if (parentTemplate) {
           parentTemplate.rootRenderFunc(env, context, frame, runtime, cb);
@@ -4096,8 +4102,8 @@
             frame.set("caller", kwargs.caller);
           }
           frame.set("el", l_el);
-          var t_204 = "";if (runtime.contextOrFrameLookup(context, frame, "annotate_html")) {
-            t_204 += runtime.suppressValue(env.getFilter("safe").call(context, (lineno = 638, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "annotate_html"), "annotate_html", context, [(lineno = 638, colno = 29, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text_raw"), "m_text_raw", context, [l_el]))]))), env.opts.autoescape);
+          var t_204 = "";if (runtime.contextOrFrameLookup(context, frame, "annotate")) {
+            t_204 += runtime.suppressValue(env.getFilter("safe").call(context, (lineno = 638, colno = 13, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "annotate"), "annotate", context, [l_el]))), env.opts.autoescape);
             ;
           } else {
             t_204 += runtime.suppressValue((lineno = 640, colno = 15, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_text_raw"), "m_text_raw", context, [l_el])), env.opts.autoescape);
@@ -4171,9 +4177,89 @@
         });
         context.addExport("m_text_raw");
         context.setVariable("m_text_raw", macro_t_205);
-        output += "<div class=\"law\">";
-        output += runtime.suppressValue((lineno = 673, colno = 6, runtime.callWrap(macro_t_1, "m_law", context, [runtime.contextOrFrameLookup(context, frame, "law")])), env.opts.autoescape);
-        output += "</div>\r\n\r\n";
+        if (runtime.contextOrFrameLookup(context, frame, "elements")) {
+          output += "\r\n  ";
+          frame = frame.push();
+          var t_213 = runtime.contextOrFrameLookup(context, frame, "elements");
+          if (t_213) {
+            var t_212 = t_213.length;
+            for (var t_211 = 0; t_211 < t_213.length; t_211++) {
+              var t_214 = t_213[t_211];
+              frame.set("el", t_214);
+              frame.set("loop.index", t_211 + 1);
+              frame.set("loop.index0", t_211);
+              frame.set("loop.revindex", t_212 - t_211);
+              frame.set("loop.revindex0", t_212 - t_211 - 1);
+              frame.set("loop.first", t_211 === 0);
+              frame.set("loop.last", t_211 === t_212 - 1);
+              frame.set("loop.length", t_212);
+              if (runtime.inOperator(runtime.memberLookup(t_214, "tag"), ["ParagraphSentence", "ItemSentence", "Subitem1Sentence", "Subitem2Sentence", "Subitem3Sentence", "Subitem4Sentence", "Subitem5Sentence", "Subitem6Sentence", "Subitem7Sentence", "Subitem8Sentence", "Subitem9Sentence", "Subitem10Sentence"])) {
+                output += runtime.suppressValue((lineno = 677, colno = 32, runtime.callWrap(macro_t_76, "m_paragraph_item_sentence", context, [t_214])), env.opts.autoescape);
+                ;
+              } else {
+                if (runtime.inOperator(runtime.memberLookup(t_214, "tag"), ["Item", "Subitem1", "Subitem2", "Subitem3", "Subitem4", "Subitem5", "Subitem6", "Subitem7", "Subitem8", "Subitem9", "Subitem10"])) {
+                  output += runtime.suppressValue((lineno = 684, colno = 23, runtime.callWrap(macro_t_54, "m_paragraph_item", context, [t_214])), env.opts.autoescape);
+                  ;
+                } else {
+                  if (runtime.memberLookup(t_214, "tag") == "TableStruct") {
+                    output += runtime.suppressValue((lineno = 686, colno = 21, runtime.callWrap(macro_t_88, "m_table_struct", context, [t_214])), env.opts.autoescape);
+                    ;
+                  } else {
+                    if (runtime.memberLookup(t_214, "tag") == "StyleStruct") {
+                      output += runtime.suppressValue((lineno = 688, colno = 21, runtime.callWrap(macro_t_112, "m_style_struct", context, [t_214])), env.opts.autoescape);
+                      ;
+                    } else {
+                      if (runtime.memberLookup(t_214, "tag") == "List") {
+                        output += runtime.suppressValue((lineno = 690, colno = 13, runtime.callWrap(macro_t_152, "m_list", context, [t_214])), env.opts.autoescape);
+                        ;
+                      } else {
+                        if (runtime.memberLookup(t_214, "tag") == "Sentence") {
+                          output += runtime.suppressValue((lineno = 692, colno = 13, runtime.callWrap(macro_t_203, "m_text", context, [t_214])), env.opts.autoescape);
+                          ;
+                        } else {
+                          if (runtime.memberLookup(t_214, "tag") == "Column") {
+                            if (runtime.memberLookup(runtime.contextOrFrameLookup(context, frame, "loop"), "first")) {
+                              output += "<span class=\"first-column\">";
+                              output += runtime.suppressValue((lineno = 695, colno = 44, runtime.callWrap(macro_t_82, "m_column", context, [t_214])), env.opts.autoescape);
+                              output += "</span>";
+                              ;
+                            } else {
+                              output += runtime.suppressValue((lineno = 697, colno = 17, runtime.callWrap(macro_t_82, "m_column", context, [t_214])), env.opts.autoescape);
+                              ;
+                            }
+                            if (!runtime.memberLookup(runtime.contextOrFrameLookup(context, frame, "loop"), "last")) {
+                              output += runtime.suppressValue("　", env.opts.autoescape);
+                              ;
+                            }
+                            ;
+                          } else {
+                            output += runtime.suppressValue((lineno = 703, colno = 13, runtime.callWrap(macro_t_203, "m_text", context, [t_214])), env.opts.autoescape);
+                            ;
+                          }
+                          ;
+                        }
+                        ;
+                      }
+                      ;
+                    }
+                    ;
+                  }
+                  ;
+                }
+                ;
+              }
+              ;
+            }
+          }
+          frame = frame.pop();
+          ;
+        }
+        if (runtime.contextOrFrameLookup(context, frame, "law")) {
+          output += "\r\n<div class=\"law\">";
+          output += runtime.suppressValue((lineno = 710, colno = 6, runtime.callWrap(macro_t_1, "m_law", context, [runtime.contextOrFrameLookup(context, frame, "law")])), env.opts.autoescape);
+          output += "</div>";
+          ;
+        }
         if (parentTemplate) {
           parentTemplate.rootRenderFunc(env, context, frame, runtime, cb);
         } else {
@@ -5827,96 +5913,102 @@
             frame.set("caller", kwargs.caller);
           }
           frame.set("el", l_el);
-          var t_204 = "";if (!l_el) {
-            ;
-          } else {
-            if (!runtime.memberLookup(l_el, "tag")) {
-              t_204 += runtime.suppressValue(l_el, env.opts.autoescape);
+          var t_204 = "";if (runtime.contextOrFrameLookup(context, frame, "with_control_el") || runtime.memberLookup(runtime.memberLookup(l_el, "tag"), 0) != "_") {
+            if (!l_el) {
               ;
             } else {
-              t_204 += "<";
-              t_204 += runtime.suppressValue(runtime.memberLookup(l_el, "tag"), env.opts.autoescape);
-              frame = frame.push();
-              var t_207 = env.getFilter("dictsort").call(context, runtime.memberLookup(l_el, "attr"));
-              if (t_207) {
-                var t_205;
-                if (runtime.isArray(t_207)) {
-                  var t_206 = t_207.length;
-                  for (t_205 = 0; t_205 < t_207.length; t_205++) {
-                    var t_208 = t_207[t_205][0];
-                    frame.set("key", t_207[t_205][0]);
-                    var t_209 = t_207[t_205][1];
-                    frame.set("value", t_207[t_205][1]);
-                    frame.set("loop.index", t_205 + 1);
-                    frame.set("loop.index0", t_205);
-                    frame.set("loop.revindex", t_206 - t_205);
-                    frame.set("loop.revindex0", t_206 - t_205 - 1);
-                    frame.set("loop.first", t_205 === 0);
-                    frame.set("loop.last", t_205 === t_206 - 1);
-                    frame.set("loop.length", t_206);
-                    t_204 += runtime.suppressValue(" ", env.opts.autoescape);
-                    t_204 += runtime.suppressValue(t_208, env.opts.autoescape);
-                    t_204 += "=\"";
-                    t_204 += runtime.suppressValue(t_209, env.opts.autoescape);
-                    t_204 += "\"";
-                    ;
-                  }
-                } else {
-                  t_205 = -1;
-                  var t_206 = runtime.keys(t_207).length;
-                  for (var t_210 in t_207) {
-                    t_205++;
-                    var t_211 = t_207[t_210];
-                    frame.set("key", t_210);
-                    frame.set("value", t_211);
-                    frame.set("loop.index", t_205 + 1);
-                    frame.set("loop.index0", t_205);
-                    frame.set("loop.revindex", t_206 - t_205);
-                    frame.set("loop.revindex0", t_206 - t_205 - 1);
-                    frame.set("loop.first", t_205 === 0);
-                    frame.set("loop.last", t_205 === t_206 - 1);
-                    frame.set("loop.length", t_206);
-                    t_204 += runtime.suppressValue(" ", env.opts.autoescape);
-                    t_204 += runtime.suppressValue(t_210, env.opts.autoescape);
-                    t_204 += "=\"";
-                    t_204 += runtime.suppressValue(t_211, env.opts.autoescape);
-                    t_204 += "\"";
-                    ;
-                  }
-                }
-              }
-              frame = frame.pop();
-              t_204 += ">";
-              frame = frame.push();
-              var t_214 = runtime.memberLookup(l_el, "children");
-              if (t_214) {
-                var t_213 = t_214.length;
-                for (var t_212 = 0; t_212 < t_214.length; t_212++) {
-                  var t_215 = t_214[t_212];
-                  frame.set("child", t_215);
-                  frame.set("loop.index", t_212 + 1);
-                  frame.set("loop.index0", t_212);
-                  frame.set("loop.revindex", t_213 - t_212);
-                  frame.set("loop.revindex0", t_213 - t_212 - 1);
-                  frame.set("loop.first", t_212 === 0);
-                  frame.set("loop.last", t_212 === t_213 - 1);
-                  frame.set("loop.length", t_213);
-                  if (!runtime.memberLookup(t_215, "tag")) {
-                    t_204 += runtime.suppressValue(t_215, env.opts.autoescape);
-                    ;
+              if (!runtime.memberLookup(l_el, "tag")) {
+                t_204 += runtime.suppressValue(l_el, env.opts.autoescape);
+                ;
+              } else {
+                t_204 += "<";
+                t_204 += runtime.suppressValue(runtime.memberLookup(l_el, "tag"), env.opts.autoescape);
+                frame = frame.push();
+                var t_207 = env.getFilter("dictsort").call(context, runtime.memberLookup(l_el, "attr"));
+                if (t_207) {
+                  var t_205;
+                  if (runtime.isArray(t_207)) {
+                    var t_206 = t_207.length;
+                    for (t_205 = 0; t_205 < t_207.length; t_205++) {
+                      var t_208 = t_207[t_205][0];
+                      frame.set("key", t_207[t_205][0]);
+                      var t_209 = t_207[t_205][1];
+                      frame.set("value", t_207[t_205][1]);
+                      frame.set("loop.index", t_205 + 1);
+                      frame.set("loop.index0", t_205);
+                      frame.set("loop.revindex", t_206 - t_205);
+                      frame.set("loop.revindex0", t_206 - t_205 - 1);
+                      frame.set("loop.first", t_205 === 0);
+                      frame.set("loop.last", t_205 === t_206 - 1);
+                      frame.set("loop.length", t_206);
+                      t_204 += runtime.suppressValue(" ", env.opts.autoescape);
+                      t_204 += runtime.suppressValue(t_208, env.opts.autoescape);
+                      t_204 += "=\"";
+                      t_204 += runtime.suppressValue(t_209, env.opts.autoescape);
+                      t_204 += "\"";
+                      ;
+                    }
                   } else {
-                    t_204 += runtime.suppressValue((lineno = 607, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_215])), env.opts.autoescape);
+                    t_205 = -1;
+                    var t_206 = runtime.keys(t_207).length;
+                    for (var t_210 in t_207) {
+                      t_205++;
+                      var t_211 = t_207[t_210];
+                      frame.set("key", t_210);
+                      frame.set("value", t_211);
+                      frame.set("loop.index", t_205 + 1);
+                      frame.set("loop.index0", t_205);
+                      frame.set("loop.revindex", t_206 - t_205);
+                      frame.set("loop.revindex0", t_206 - t_205 - 1);
+                      frame.set("loop.first", t_205 === 0);
+                      frame.set("loop.last", t_205 === t_206 - 1);
+                      frame.set("loop.length", t_206);
+                      t_204 += runtime.suppressValue(" ", env.opts.autoescape);
+                      t_204 += runtime.suppressValue(t_210, env.opts.autoescape);
+                      t_204 += "=\"";
+                      t_204 += runtime.suppressValue(t_211, env.opts.autoescape);
+                      t_204 += "\"";
+                      ;
+                    }
+                  }
+                }
+                frame = frame.pop();
+                t_204 += ">";
+                frame = frame.push();
+                var t_214 = runtime.memberLookup(l_el, "children");
+                if (t_214) {
+                  var t_213 = t_214.length;
+                  for (var t_212 = 0; t_212 < t_214.length; t_212++) {
+                    var t_215 = t_214[t_212];
+                    frame.set("child", t_215);
+                    frame.set("loop.index", t_212 + 1);
+                    frame.set("loop.index0", t_212);
+                    frame.set("loop.revindex", t_213 - t_212);
+                    frame.set("loop.revindex0", t_213 - t_212 - 1);
+                    frame.set("loop.first", t_212 === 0);
+                    frame.set("loop.last", t_212 === t_213 - 1);
+                    frame.set("loop.length", t_213);
+                    if (!runtime.memberLookup(t_215, "tag")) {
+                      t_204 += runtime.suppressValue(t_215, env.opts.autoescape);
+                      ;
+                    } else {
+                      t_204 += runtime.suppressValue((lineno = 610, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_215])), env.opts.autoescape);
+                      ;
+                    }
                     ;
                   }
-                  ;
                 }
+                frame = frame.pop();
+                t_204 += "</";
+                t_204 += runtime.suppressValue(runtime.memberLookup(l_el, "tag"), env.opts.autoescape);
+                t_204 += ">";
+                ;
               }
-              frame = frame.pop();
-              t_204 += "</";
-              t_204 += runtime.suppressValue(runtime.memberLookup(l_el, "tag"), env.opts.autoescape);
-              t_204 += ">";
               ;
             }
+            ;
+          } else {
+            t_204 += runtime.suppressValue(runtime.memberLookup(l_el, "text"), env.opts.autoescape);
             ;
           }
           ;
@@ -5959,10 +6051,10 @@
                     ;
                   } else {
                     if (runtime.memberLookup(t_221, "tag") == "QuoteStruct") {
-                      t_217 += runtime.suppressValue((lineno = 625, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_quote_struct"), "m_quote_struct", context, [t_221])), env.opts.autoescape);
+                      t_217 += runtime.suppressValue((lineno = 633, colno = 21, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_quote_struct"), "m_quote_struct", context, [t_221])), env.opts.autoescape);
                       ;
                     } else {
-                      t_217 += runtime.suppressValue((lineno = 627, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_221])), env.opts.autoescape);
+                      t_217 += runtime.suppressValue((lineno = 635, colno = 16, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element"), "m_element", context, [t_221])), env.opts.autoescape);
                       ;
                     }
                     ;
@@ -5981,7 +6073,7 @@
         });
         context.addExport("m_text");
         context.setVariable("m_text", macro_t_216);
-        output += runtime.suppressValue((lineno = 640, colno = 6, runtime.callWrap(macro_t_3, "m_law", context, [runtime.contextOrFrameLookup(context, frame, "law")])), env.opts.autoescape);
+        output += runtime.suppressValue((lineno = 648, colno = 6, runtime.callWrap(macro_t_3, "m_law", context, [runtime.contextOrFrameLookup(context, frame, "law")])), env.opts.autoescape);
         if (parentTemplate) {
           parentTemplate.rootRenderFunc(env, context, frame, runtime, cb);
         } else {
@@ -6020,59 +6112,62 @@
               t_2 += runtime.suppressValue(l_el, env.opts.autoescape);
               ;
             } else {
-              t_2 += "<";
-              t_2 += runtime.suppressValue(runtime.memberLookup(l_el, "tag"), env.opts.autoescape);
-              frame = frame.push();
-              var t_5 = env.getFilter("dictsort").call(context, runtime.memberLookup(l_el, "attr"));
-              if (t_5) {
-                var t_3;
-                if (runtime.isArray(t_5)) {
-                  var t_4 = t_5.length;
-                  for (t_3 = 0; t_3 < t_5.length; t_3++) {
-                    var t_6 = t_5[t_3][0];
-                    frame.set("key", t_5[t_3][0]);
-                    var t_7 = t_5[t_3][1];
-                    frame.set("value", t_5[t_3][1]);
-                    frame.set("loop.index", t_3 + 1);
-                    frame.set("loop.index0", t_3);
-                    frame.set("loop.revindex", t_4 - t_3);
-                    frame.set("loop.revindex0", t_4 - t_3 - 1);
-                    frame.set("loop.first", t_3 === 0);
-                    frame.set("loop.last", t_3 === t_4 - 1);
-                    frame.set("loop.length", t_4);
-                    t_2 += runtime.suppressValue(" ", env.opts.autoescape);
-                    t_2 += runtime.suppressValue(t_6, env.opts.autoescape);
-                    t_2 += "=\"";
-                    t_2 += runtime.suppressValue(t_7, env.opts.autoescape);
-                    t_2 += "\"";
-                    ;
-                  }
-                } else {
-                  t_3 = -1;
-                  var t_4 = runtime.keys(t_5).length;
-                  for (var t_8 in t_5) {
-                    t_3++;
-                    var t_9 = t_5[t_8];
-                    frame.set("key", t_8);
-                    frame.set("value", t_9);
-                    frame.set("loop.index", t_3 + 1);
-                    frame.set("loop.index0", t_3);
-                    frame.set("loop.revindex", t_4 - t_3);
-                    frame.set("loop.revindex0", t_4 - t_3 - 1);
-                    frame.set("loop.first", t_3 === 0);
-                    frame.set("loop.last", t_3 === t_4 - 1);
-                    frame.set("loop.length", t_4);
-                    t_2 += runtime.suppressValue(" ", env.opts.autoescape);
-                    t_2 += runtime.suppressValue(t_8, env.opts.autoescape);
-                    t_2 += "=\"";
-                    t_2 += runtime.suppressValue(t_9, env.opts.autoescape);
-                    t_2 += "\"";
-                    ;
+              if (runtime.contextOrFrameLookup(context, frame, "with_control_el") || runtime.memberLookup(runtime.memberLookup(l_el, "tag"), 0) != "_") {
+                t_2 += "<";
+                t_2 += runtime.suppressValue(runtime.memberLookup(l_el, "tag"), env.opts.autoescape);
+                frame = frame.push();
+                var t_5 = env.getFilter("dictsort").call(context, runtime.memberLookup(l_el, "attr"));
+                if (t_5) {
+                  var t_3;
+                  if (runtime.isArray(t_5)) {
+                    var t_4 = t_5.length;
+                    for (t_3 = 0; t_3 < t_5.length; t_3++) {
+                      var t_6 = t_5[t_3][0];
+                      frame.set("key", t_5[t_3][0]);
+                      var t_7 = t_5[t_3][1];
+                      frame.set("value", t_5[t_3][1]);
+                      frame.set("loop.index", t_3 + 1);
+                      frame.set("loop.index0", t_3);
+                      frame.set("loop.revindex", t_4 - t_3);
+                      frame.set("loop.revindex0", t_4 - t_3 - 1);
+                      frame.set("loop.first", t_3 === 0);
+                      frame.set("loop.last", t_3 === t_4 - 1);
+                      frame.set("loop.length", t_4);
+                      t_2 += runtime.suppressValue(" ", env.opts.autoescape);
+                      t_2 += runtime.suppressValue(t_6, env.opts.autoescape);
+                      t_2 += "=\"";
+                      t_2 += runtime.suppressValue(env.getFilter("escape").call(context, t_7), env.opts.autoescape);
+                      t_2 += "\"";
+                      ;
+                    }
+                  } else {
+                    t_3 = -1;
+                    var t_4 = runtime.keys(t_5).length;
+                    for (var t_8 in t_5) {
+                      t_3++;
+                      var t_9 = t_5[t_8];
+                      frame.set("key", t_8);
+                      frame.set("value", t_9);
+                      frame.set("loop.index", t_3 + 1);
+                      frame.set("loop.index0", t_3);
+                      frame.set("loop.revindex", t_4 - t_3);
+                      frame.set("loop.revindex0", t_4 - t_3 - 1);
+                      frame.set("loop.first", t_3 === 0);
+                      frame.set("loop.last", t_3 === t_4 - 1);
+                      frame.set("loop.length", t_4);
+                      t_2 += runtime.suppressValue(" ", env.opts.autoescape);
+                      t_2 += runtime.suppressValue(t_8, env.opts.autoescape);
+                      t_2 += "=\"";
+                      t_2 += runtime.suppressValue(env.getFilter("escape").call(context, t_9), env.opts.autoescape);
+                      t_2 += "\"";
+                      ;
+                    }
                   }
                 }
+                frame = frame.pop();
+                t_2 += ">";
+                ;
               }
-              frame = frame.pop();
-              t_2 += ">";
               frame = frame.push();
               var t_12 = runtime.memberLookup(l_el, "children");
               if (t_12) {
@@ -6091,16 +6186,19 @@
                     t_2 += runtime.suppressValue(t_13, env.opts.autoescape);
                     ;
                   } else {
-                    t_2 += runtime.suppressValue((lineno = 12, colno = 22, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element_raw"), "m_element_raw", context, [t_13])), env.opts.autoescape);
+                    t_2 += runtime.suppressValue((lineno = 16, colno = 22, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "m_element_raw"), "m_element_raw", context, [t_13])), env.opts.autoescape);
                     ;
                   }
                   ;
                 }
               }
               frame = frame.pop();
-              t_2 += "</";
-              t_2 += runtime.suppressValue(runtime.memberLookup(l_el, "tag"), env.opts.autoescape);
-              t_2 += ">";
+              if (runtime.contextOrFrameLookup(context, frame, "with_control_el") || runtime.memberLookup(runtime.memberLookup(l_el, "tag"), 0) != "_") {
+                t_2 += "</";
+                t_2 += runtime.suppressValue(runtime.memberLookup(l_el, "tag"), env.opts.autoescape);
+                t_2 += ">";
+                ;
+              }
               ;
             }
             ;
@@ -6112,7 +6210,7 @@
         context.addExport("m_element_raw");
         context.setVariable("m_element_raw", macro_t_1);
         output += "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-        output += runtime.suppressValue((lineno = 20, colno = 14, runtime.callWrap(macro_t_1, "m_element_raw", context, [runtime.contextOrFrameLookup(context, frame, "law")])), env.opts.autoescape);
+        output += runtime.suppressValue((lineno = 28, colno = 14, runtime.callWrap(macro_t_1, "m_element_raw", context, [runtime.contextOrFrameLookup(context, frame, "law")])), env.opts.autoescape);
         if (parentTemplate) {
           parentTemplate.rootRenderFunc(env, context, frame, runtime, cb);
         } else {
