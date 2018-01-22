@@ -705,7 +705,7 @@ Lawtext.VarRefView = function (_Backbone$View2) {
                     var container = _step5.value;
 
                     if (container.tag === "EnactStatement") {
-                        names.push("制定文");
+                        names.push("（制定文）");
                     } else if (container.tag === "Article") {
                         var article_name = _(container.children).findWhere({ tag: "ArticleTitle" }).text;
                         names.push(article_name);
@@ -740,7 +740,7 @@ Lawtext.VarRefView = function (_Backbone$View2) {
                 return ["ArticleTitle", "ParagraphNum", "ItemTitle", "Subitem1Title", "Subitem2Title", "Subitem3Title", "Subitem4Title", "Subitem5Title", "Subitem6Title", "Subitem7Title", "Subitem8Title", "Subitem9Title", "Subitem10Title", "SupplProvision"].indexOf(el.tag) < 0;
             });
             var fragment = Lawtext.render_elements_fragment(closest_children).trim();
-            return ("\n<div class=\"paragraph-item-body\"><span class=\"paragraph-item-num\">" + names.join("　") + "</span>\u3000" + fragment + "</div>\n").trim();
+            return ("\n<div class=\"paragraph-item-body\"><span class=\"paragraph-item-num\">" + names.join("／") + "</span>\u3000" + fragment + "</div>\n").trim();
         }
     }, {
         key: "render",

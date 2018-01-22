@@ -91,7 +91,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (ignore_span_tag.indexOf(el.tag) >= 0) return;
 
         var env = _env.copy();
-        env.parents.push(el);
 
         var is_mixed = false;
         var _iteratorNormalCompletion = true;
@@ -130,6 +129,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           el.attr.span_index = spans.length;
           spans.push(new Span(spans.length, el, env));
         } else {
+          env.parents.push(el);
           var is_container = container_tags.indexOf(el.tag) >= 0;
           if (is_container) {
             env.container_stack.push(el);
@@ -429,6 +429,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var variable_references = [];
 
       var detect = function detect(span) {
+        var parent = span.env.parents[span.env.parents.length - 1];
+        if (parent.tag === "__PContent" && parent.attr.type === "square") return;
         var ret = [];
         var _iteratorNormalCompletion5 = true;
         var _didIteratorError5 = false;
