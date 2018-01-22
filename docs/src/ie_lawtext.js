@@ -445,6 +445,22 @@ Lawtext.Data = function (_Backbone$Model) {
                         response = _ref2[0],
                         text = _ref2[1];
 
+                    return new Promise(function (resolve, reject) {
+                        if (response.ok && !/^(?:<\?xml|<Law)/.test(text.trim())) {
+                            JSZip.loadAsync(text, { base64: true }).then(function (zip) {
+                                return zip.file("body.xml").async("string");
+                            }).then(function (xml) {
+                                return resolve([response, xml]);
+                            });
+                        } else {
+                            resolve([response, text]);
+                        }
+                    });
+                }).then(function (_ref3) {
+                    var _ref4 = _slicedToArray(_ref3, 2),
+                        response = _ref4[0],
+                        text = _ref4[1];
+
                     if (response.ok) {
                         _this4.load_law_text(text, true);
                         if (localStorage) {
@@ -474,7 +490,7 @@ Lawtext.Data = function (_Backbone$Model) {
                 }
             }
 
-            var re_lawnum = /(?:明治|大正|昭和|平成)\S+年\S+第\S+号/;
+            var re_lawnum = /^(?:明治|大正|昭和|平成)[元〇一二三四五六七八九十]+年(?:\S+?第[〇一二三四五六七八九十百千]+号|人事院規則[〇一二三四五六七八九―]+|[一二三四五六七八九十]+月[一二三四五六七八九十]+日内閣総理大臣決定)$/;
             var match = re_lawnum.exec(law_search_key);
             if (match) {
                 var lawnum = match[0];

@@ -249,7 +249,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         if (!(start_span.el.tag === "__PStart" && start_span.el.attr.type === "round")) return;
 
-        var match = lawnum_span.text.match(/^(?:明治|大正|昭和|平成)[一二三四五六七八九十]+年\S+?第[一二三四五六七八九十百千]+号/);
+        var match = lawnum_span.text.match(/^(?:明治|大正|昭和|平成)[元〇一二三四五六七八九十]+年\S+?第[〇一二三四五六七八九十百千]+号/);
         if (!match) return;
 
         var law_num = match[0];
