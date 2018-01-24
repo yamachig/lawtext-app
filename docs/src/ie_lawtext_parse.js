@@ -290,7 +290,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             return declaration;
           }
-        } else if (law_num.length < lawnum_span.text.length && lawnum_span.text[law_num.length] == "。" && lawnum_span.index + 5 <= spans.length) {
+        } else if (law_num.length < lawnum_span.text.length && lawnum_span.text[law_num.length] == "。" && lawnum_span.index + 5 < spans.length) {
           var _spans$slice3 = spans.slice(lawnum_span.index + 1, lawnum_span.index + 5),
               _spans$slice4 = _slicedToArray(_spans$slice3, 4),
               name_start_span = _spans$slice4[0],
@@ -325,6 +325,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             _name_pos);
 
             name_span.new_declarations.push(_declaration);
+            lawname_span.el.replace_span(lawname_text_index, lawname_text_index + lawname_length, new EL("____DeclarationVal", {}, [law_name]));
             name_span.el.replace_span(0, name_span.text.length, _declaration);
             lawnum_span.el.replace_span(0, law_num.length, lawnum_el);
             return _declaration;
@@ -332,10 +333,53 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       };
 
+      var detect_name = function detect_name(spans, span_index) {
+        if (spans.length < span_index + 5) return;
+
+        var _spans$slice5 = spans.slice(span_index, span_index + 5),
+            _spans$slice6 = _slicedToArray(_spans$slice5, 5),
+            name_before_span = _spans$slice6[0],
+            name_start_span = _spans$slice6[1],
+            name_span = _spans$slice6[2],
+            name_end_span = _spans$slice6[3],
+            name_after_span = _spans$slice6[4];
+
+        var scope_match = name_before_span.text.match(/(以下)?(?:([^。]+?)において)?$/);
+        var name_after_match = name_after_span.text.match(/^という。/);
+        if (scope_match && name_start_span.el.tag === "__PStart" && name_start_span.el.attr.type === "square" && name_end_span.el.tag === "__PEnd" && name_end_span.el.attr.type === "square" && name_after_match) {
+          var following = scope_match[1] !== undefined;
+          var scope_text = scope_match[2] || null;
+
+          var scope = [[{
+            span_index: name_after_span.index,
+            text_index: name_after_match[0].length
+          }, {
+            span_index: spans.length,
+            text_index: 0
+          }]];
+
+          var name_pos = new Pos(name_span, // span
+          name_span.index, // span_index
+          0, // text_index
+          name_span.text.length, // length
+          name_span.env);
+
+          var declaration = new ____Declaration("LawName", // type
+          name_span.text, // name
+          null, // value
+          scope, // scope
+          name_pos);
+
+          name_span.new_declarations.push(declaration);
+          name_span.el.replace_span(0, name_span.text.length, declaration);
+          return declaration;
+        }
+      };
+
       var declarations = [];
 
       for (var span_index = 0; span_index < spans.length; span_index++) {
-        var declaration = detect_lawname(spans, span_index);
+        var declaration = detect_lawname(spans, span_index) || detect_name(spans, span_index);
         if (declaration) {
           declaration.attr.declaration_index = declarations.length;
           declarations.push(declaration);
@@ -413,7 +457,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         }
 
-        decls.sort(function (_ref) {
+        decls = _(decls).sortBy(function (_ref) {
           var _ref2 = _slicedToArray(_ref, 2),
               decl = _ref2[1];
 
@@ -547,29 +591,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       set_active_declarations(spans, declarations);
       var variable_references = detect_variable_references(law, spans);
 
-      console.error(spans.length + " spans detected.");
-      console.error(containers.length + " containers detected.");
+      // console.error(`${spans.length} spans detected.`);
+      // console.error(`${containers.length} containers detected.`);
       // console.error(declarations);
-      for (var span_index = 0; span_index < spans.length; span_index++) {
-        var span = spans[span_index];
-        console.error(span_index + " <" + span.el.tag + "> \"" + span.text.slice(0, 30) + "\"" + (span.text.length > 30 ? " …" : ""));
+      // for(let span_index = 0; span_index < spans.length; span_index++) {
+      //     let span = spans[span_index];
+      //     console.error(`${span_index} <${span.el.tag}> "${span.text.slice(0,30)}"${span.text.length > 30 ? " …" : ""}`);
 
-        if (span.new_declarations.length) {
-          console.error("    " + span.new_declarations.map(function (declaration) {
-            return declaration.type + " " + declaration.name + " = " + declaration.value;
-          }).join(", "));
-        }
+      //     if(span.new_declarations.length) {
+      //         console.error(`    ${span.new_declarations.map(declaration => {
+      //             return `${declaration.type} ${declaration.name} = ${declaration.value}`;
+      //         }).join(", ")}`);
+      //     }
 
-        // console.error(`    ${span.active_declarations.map([text_scope,declaration] => {
-        //     let s = [];
-        //     for(let [start, end] of declaration.scope) {
-        //         s.push(`[${start.span_index},${end.span_index})`);
-        //     }
-        //     return s.join("+");
-        // }).join(", ")}`);
+      // console.error(`    ${span.active_declarations.map([text_scope,declaration] => {
+      //     let s = [];
+      //     for(let [start, end] of declaration.scope) {
+      //         s.push(`[${start.span_index},${end.span_index})`);
+      //     }
+      //     return s.join("+");
+      // }).join(", ")}`);
 
-        console.error();
-      }
+      //     console.error();
+      // }
       return {
         declarations: declarations
       };
@@ -680,8 +724,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       function parse(text, options) {
 
-        console.error("\\\\\\\\\\ parse start \\\\\\\\\\");
-        var t0 = new Date().getTime();
+        // console.error("\\\\\\\\\\ parse start \\\\\\\\\\");
+        // let t0 = (new Date()).getTime();
 
         var _lex = lex(text),
             _lex2 = _slicedToArray(_lex, 3),
@@ -695,9 +739,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           options = Object.assign({ indent_memo: indent_memo, startRule: "start" }, options);
           var parsed = parser.parse(lexed, options);
 
-          var t1 = new Date().getTime();
-          console.error("/////  parse end  /////");
-          console.error("( " + Math.round((t1 - t0) / lines_count * 1000) + " \u03BCs/line  =  " + (t1 - t0) + " ms / " + lines_count + " lines )");
+          // let t1 = (new Date()).getTime();
+          // console.error(`/////  parse end  /////`);
+          // console.error(`( ${Math.round((t1 - t0) / lines_count * 1000)} μs/line  =  ${t1 - t0} ms / ${lines_count} lines )`);
         } catch (e) {
           console.error("##### parse error #####");
           if (e.location) {
@@ -711,12 +755,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       function analyze(law) {
 
-        console.error("\\\\\\\\\\ analyze start \\\\\\\\\\");
-        var t0 = new Date().getTime();
+        // console.error("\\\\\\\\\\ analyze start \\\\\\\\\\");
+        // let t0 = (new Date()).getTime();
         var analysis = analyzer.analyze(law);
-        var t1 = new Date().getTime();
-        console.error("/////  analyze end  /////");
-        console.error("(" + (t1 - t0) + " ms total)");
+        // let t1 = (new Date()).getTime();
+        // console.error(`/////  analyze end  /////`);
+        // console.error(`(${t1 - t0} ms total)`);
         return analysis;
       }
 

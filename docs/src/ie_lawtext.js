@@ -756,7 +756,9 @@ Lawtext.VarRefView = function (_Backbone$View2) {
                 return ["ArticleTitle", "ParagraphNum", "ItemTitle", "Subitem1Title", "Subitem2Title", "Subitem3Title", "Subitem4Title", "Subitem5Title", "Subitem6Title", "Subitem7Title", "Subitem8Title", "Subitem9Title", "Subitem10Title", "SupplProvision"].indexOf(el.tag) < 0;
             });
             var fragment = Lawtext.render_elements_fragment(closest_children).trim();
-            return ("\n<div class=\"paragraph-item-body\"><span class=\"paragraph-item-num\">" + names.join("／") + "</span>\u3000" + fragment + "</div>\n").trim();
+            var ret = $("\n<div class=\"paragraph-item-body\"><span class=\"paragraph-item-num\">" + names.join("／") + "</span>\u3000" + fragment + "</div>\n");
+            ret.find(".lawtext-analyzed-declaration[lawtext_declaration_index=\"" + this.declaration_index + "\"]").css({ "font-weight": "bold" });
+            return ret;
         }
     }, {
         key: "render",
@@ -784,7 +786,8 @@ Lawtext.VarRefView = function (_Backbone$View2) {
     }, {
         key: "update_window",
         value: function update_window() {
-            this.window_obj.html(this.get_content());
+            this.window_obj.empty();
+            this.window_obj.append(this.get_content());
         }
     }, {
         key: "update_size",
