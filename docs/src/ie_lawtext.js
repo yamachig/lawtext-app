@@ -311,6 +311,142 @@ Lawtext.analyze_xml = function (el) {
     }
 };
 
+Lawtext.get_law_range = function (orig_law, range) {
+    var s_pos = range.start;
+    var e_pos = range.end;
+
+    var law = new Lawtext.EL(orig_law.tag, orig_law.attr);
+    var orig_law_body = orig_law.children.find(function (el) {
+        return el.tag == "LawBody";
+    });
+    var law_body = new Lawtext.EL(orig_law_body.tag, orig_law_body.attr);
+    law.append(law_body);
+
+    var in_container_range = false;
+    var in_item_range = false;
+
+    var find_els = function find_els(el, tag) {
+        if (!(el instanceof Lawtext.EL)) return [];
+        if (el.tag === tag) return [el];
+        var ret = [];
+        var _iteratorNormalCompletion5 = true;
+        var _didIteratorError5 = false;
+        var _iteratorError5 = undefined;
+
+        try {
+            for (var _iterator5 = el.children[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                var child = _step5.value;
+
+                ret = ret.concat(find_els(child, tag));
+            }
+        } catch (err) {
+            _didIteratorError5 = true;
+            _iteratorError5 = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                    _iterator5.return();
+                }
+            } finally {
+                if (_didIteratorError5) {
+                    throw _iteratorError5;
+                }
+            }
+        }
+
+        return ret;
+    };
+
+    var _iteratorNormalCompletion6 = true;
+    var _didIteratorError6 = false;
+    var _iteratorError6 = undefined;
+
+    try {
+        for (var _iterator6 = orig_law_body.children[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+            var toplevel = _step6.value;
+
+            if (!in_container_range && toplevel.tag === s_pos.container_tag && (toplevel.tag !== "SupplProvision" || toplevel.attr.AmendLawNum === s_pos.container_id)) {
+                in_container_range = true;
+            }
+
+            var container_children = [];
+
+            if (in_container_range && e_pos.item_tag === "SupplProvisionLabel" && toplevel.tag === e_pos.container_tag && (toplevel.tag !== "SupplProvision" || toplevel.attr.AmendLawNum === e_pos.container_id)) {
+                in_container_range = false;
+            }
+
+            if (in_container_range) {
+
+                var items = find_els(toplevel, "Article");
+                if (items.length === 0) items = find_els(toplevel, "Paragraph");
+
+                var _iteratorNormalCompletion7 = true;
+                var _didIteratorError7 = false;
+                var _iteratorError7 = undefined;
+
+                try {
+                    for (var _iterator7 = items[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+                        var item = _step7.value;
+
+
+                        if (!in_item_range && (s_pos.item_tag === "SupplProvisionLabel" || item.tag === s_pos.item_tag && (!s_pos.item_id || item.attr.Num === s_pos.item_id))) {
+                            in_item_range = true;
+                        }
+
+                        if (in_item_range) {
+                            container_children.push(item);
+                        }
+
+                        if (in_item_range && item.tag === e_pos.item_tag && (!e_pos.item_id || item.attr.Num === e_pos.item_id)) {
+                            in_item_range = false;
+                        }
+                    }
+                } catch (err) {
+                    _didIteratorError7 = true;
+                    _iteratorError7 = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion7 && _iterator7.return) {
+                            _iterator7.return();
+                        }
+                    } finally {
+                        if (_didIteratorError7) {
+                            throw _iteratorError7;
+                        }
+                    }
+                }
+            }
+
+            if (container_children.length > 0) {
+                var suppl_provision_label = toplevel.children.find(function (el) {
+                    return el.tag === "SupplProvisionLabel";
+                });
+                if (suppl_provision_label) container_children.unshift(suppl_provision_label);
+                law_body.append(new Lawtext.EL(toplevel.tag, toplevel.attr, container_children));
+            }
+
+            if (in_container_range && toplevel.tag === e_pos.container_tag && (toplevel.tag !== "SupplProvision" || toplevel.attr.AmendLawNum === e_pos.container_id)) {
+                in_container_range = false;
+            }
+        }
+    } catch (err) {
+        _didIteratorError6 = true;
+        _iteratorError6 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion6 && _iterator6.return) {
+                _iterator6.return();
+            }
+        } finally {
+            if (_didIteratorError6) {
+                throw _iteratorError6;
+            }
+        }
+    }
+
+    return law;
+};
+
 Lawtext.Data = function (_Backbone$Model) {
     _inherits(_class3, _Backbone$Model);
 
@@ -542,11 +678,15 @@ Lawtext.Data = function (_Backbone$Model) {
         }
     }, {
         key: "download_docx",
-        value: function download_docx() {
+        value: function download_docx(range) {
             var _this5 = this;
 
             var law = this.get("law");
             if (law === null) return;
+
+            if (range) {
+                law = Lawtext.get_law_range(law, range);
+            }
 
             var s_content_types = nunjucks.render("docx/[Content_Types].xml");
             var s_rels = nunjucks.render("docx/_rels/.rels");
@@ -712,13 +852,13 @@ Lawtext.VarRefView = function (_Backbone$View2) {
             var declaration = this.data.get_declaration(this.declaration_index);
             var container_stack = declaration.name_pos.env.container_stack;
             var names = [];
-            var _iteratorNormalCompletion5 = true;
-            var _didIteratorError5 = false;
-            var _iteratorError5 = undefined;
+            var _iteratorNormalCompletion8 = true;
+            var _didIteratorError8 = false;
+            var _iteratorError8 = undefined;
 
             try {
-                for (var _iterator5 = container_stack[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-                    var container = _step5.value;
+                for (var _iterator8 = container_stack[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+                    var container = _step8.value;
 
                     if (container.tag === "EnactStatement") {
                         names.push("（制定文）");
@@ -738,16 +878,16 @@ Lawtext.VarRefView = function (_Backbone$View2) {
                     }
                 }
             } catch (err) {
-                _didIteratorError5 = true;
-                _iteratorError5 = err;
+                _didIteratorError8 = true;
+                _iteratorError8 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion5 && _iterator5.return) {
-                        _iterator5.return();
+                    if (!_iteratorNormalCompletion8 && _iterator8.return) {
+                        _iterator8.return();
                     }
                 } finally {
-                    if (_didIteratorError5) {
-                        throw _iteratorError5;
+                    if (_didIteratorError8) {
+                        throw _iteratorError8;
                     }
                 }
             }
@@ -887,13 +1027,13 @@ Lawtext.HTMLpreviewView = function (_Backbone$View3) {
             }));
 
             this.varref_views = [];
-            var _iteratorNormalCompletion6 = true;
-            var _didIteratorError6 = false;
-            var _iteratorError6 = undefined;
+            var _iteratorNormalCompletion9 = true;
+            var _didIteratorError9 = false;
+            var _iteratorError9 = undefined;
 
             try {
-                for (var _iterator6 = this.$(".lawtext-analyzed-varref")[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-                    var el = _step6.value;
+                for (var _iterator9 = this.$(".lawtext-analyzed-varref")[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+                    var el = _step9.value;
 
                     var obj = $(el);
                     var varref_view = new Lawtext.VarRefView({
@@ -906,16 +1046,16 @@ Lawtext.HTMLpreviewView = function (_Backbone$View3) {
                     this.varref_views.push(varref_view);
                 }
             } catch (err) {
-                _didIteratorError6 = true;
-                _iteratorError6 = err;
+                _didIteratorError9 = true;
+                _iteratorError9 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion6 && _iterator6.return) {
-                        _iterator6.return();
+                    if (!_iteratorNormalCompletion9 && _iterator9.return) {
+                        _iterator9.return();
                     }
                 } finally {
-                    if (_didIteratorError6) {
-                        throw _iteratorError6;
+                    if (_didIteratorError9) {
+                        throw _iteratorError9;
                     }
                 }
             }
@@ -923,13 +1063,13 @@ Lawtext.HTMLpreviewView = function (_Backbone$View3) {
     }, {
         key: "scroll_to_law_anchor",
         value: function scroll_to_law_anchor(tag, name) {
-            var _iteratorNormalCompletion7 = true;
-            var _didIteratorError7 = false;
-            var _iteratorError7 = undefined;
+            var _iteratorNormalCompletion10 = true;
+            var _didIteratorError10 = false;
+            var _iteratorError10 = undefined;
 
             try {
-                for (var _iterator7 = this.$(".law-anchor")[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-                    var el = _step7.value;
+                for (var _iterator10 = this.$(".law-anchor")[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+                    var el = _step10.value;
 
                     var obj = $(el);
                     if (obj.data("tag") === tag && obj.data("name") === name) {
@@ -937,16 +1077,16 @@ Lawtext.HTMLpreviewView = function (_Backbone$View3) {
                     }
                 }
             } catch (err) {
-                _didIteratorError7 = true;
-                _iteratorError7 = err;
+                _didIteratorError10 = true;
+                _iteratorError10 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion7 && _iterator7.return) {
-                        _iterator7.return();
+                    if (!_iteratorNormalCompletion10 && _iterator10.return) {
+                        _iterator10.return();
                     }
                 } finally {
-                    if (_didIteratorError7) {
-                        throw _iteratorError7;
+                    if (_didIteratorError10) {
+                        throw _iteratorError10;
                     }
                 }
             }
@@ -978,6 +1118,7 @@ Lawtext.MainView = function (_Backbone$View4) {
                 "click .lawtext-download-sample-lawtext-button": "download_sample_lawtext_button_click",
                 "click .search-law-button": "search_law_button_click",
                 "click .lawtext-download-docx-button": "download_docx_button_click",
+                "click .lawtext-download-docx-selected-button": "download_docx_selected_button_click",
                 "click .lawtext-download-lawtext-button": "download_lawtext_button_click",
                 "click .lawtext-download-xml-button": "download_xml_button_click",
                 "click .law-link": "law_link_click",
@@ -1044,6 +1185,44 @@ Lawtext.MainView = function (_Backbone$View4) {
             saveAs(blob, "sample_lawtext.law.txt");
         }
     }, {
+        key: "tobe_downloaded_range",
+        value: function tobe_downloaded_range() {
+            var selection = window.getSelection();
+
+            var get_pos = function get_pos(node) {
+                var el = $(node.parentNode);
+                var item_el = _(el.parents("[selection-id]")).last();
+                if (!item_el && el.attr("selection-id")) item_el = el[0];
+                if (!item_el) return null;
+                var m = item_el.getAttribute("selection-id").match(/([^_]+)(?:_([^_]+))?___([^_]+)(?:_([^_]+))?/);
+                return {
+                    container_tag: m[1],
+                    container_id: m[2] || null,
+                    item_tag: m[3],
+                    item_id: m[4] || null
+                };
+            };
+
+            var s_pos = get_pos(selection.anchorNode);
+            var e_pos = get_pos(selection.focusNode);
+            if (!s_pos || !e_pos) return null;
+
+            return {
+                start: s_pos,
+                end: e_pos
+            };
+        }
+    }, {
+        key: "download_docx_selected_button_click",
+        value: function download_docx_selected_button_click(e) {
+            var range = this.tobe_downloaded_range();
+            if (range) {
+                this.data.download_docx(range);
+            } else {
+                alert("選択範囲が取得できませんでした。");
+            }
+        }
+    }, {
         key: "download_docx_button_click",
         value: function download_docx_button_click(e) {
             this.data.download_docx();
@@ -1104,13 +1283,13 @@ Lawtext.MainView = function (_Backbone$View4) {
 
             var parent_div = varref.closest("div");
 
-            var _iteratorNormalCompletion8 = true;
-            var _didIteratorError8 = false;
-            var _iteratorError8 = undefined;
+            var _iteratorNormalCompletion11 = true;
+            var _didIteratorError11 = false;
+            var _iteratorError11 = undefined;
 
             try {
-                for (var _iterator8 = parent_div.find(".lawtext-analyzed-varref.lawtext-analyzed-varref-open")[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-                    var _el2 = _step8.value;
+                for (var _iterator11 = parent_div.find(".lawtext-analyzed-varref.lawtext-analyzed-varref-open")[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
+                    var _el2 = _step11.value;
 
                     var _varref = $(_el2);
                     var _parent_div = _varref.closest("div");
@@ -1122,16 +1301,16 @@ Lawtext.MainView = function (_Backbone$View4) {
                     _win.slideUp(200);
                 }
             } catch (err) {
-                _didIteratorError8 = true;
-                _iteratorError8 = err;
+                _didIteratorError11 = true;
+                _iteratorError11 = err;
             } finally {
                 try {
-                    if (!_iteratorNormalCompletion8 && _iterator8.return) {
-                        _iterator8.return();
+                    if (!_iteratorNormalCompletion11 && _iterator11.return) {
+                        _iterator11.return();
                     }
                 } finally {
-                    if (_didIteratorError8) {
-                        throw _iteratorError8;
+                    if (_didIteratorError11) {
+                        throw _iteratorError11;
                     }
                 }
             }
@@ -1144,55 +1323,55 @@ Lawtext.MainView = function (_Backbone$View4) {
                     var decl_index = varref.attr("lawtext_declaration_index");
                     var decl = self.$(".lawtext-analyzed-declaration[lawtext_declaration_index=\"" + decl_index + "\"]");
                     var decl_container = decl.closest(".article,.enact-statement").clone();
-                    var _iteratorNormalCompletion9 = true;
-                    var _didIteratorError9 = false;
-                    var _iteratorError9 = undefined;
+                    var _iteratorNormalCompletion12 = true;
+                    var _didIteratorError12 = false;
+                    var _iteratorError12 = undefined;
 
                     try {
-                        for (var _iterator9 = decl_container.find(".lawtext-analyzed-declaration[lawtext_declaration_index]")[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
-                            var el = _step9.value;
+                        for (var _iterator12 = decl_container.find(".lawtext-analyzed-declaration[lawtext_declaration_index]")[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
+                            var el = _step12.value;
 
                             var _obj = $(el);
                             _obj.removeAttr("lawtext_declaration_index");
                         }
                     } catch (err) {
-                        _didIteratorError9 = true;
-                        _iteratorError9 = err;
+                        _didIteratorError12 = true;
+                        _iteratorError12 = err;
                     } finally {
                         try {
-                            if (!_iteratorNormalCompletion9 && _iterator9.return) {
-                                _iterator9.return();
+                            if (!_iteratorNormalCompletion12 && _iterator12.return) {
+                                _iterator12.return();
                             }
                         } finally {
-                            if (_didIteratorError9) {
-                                throw _iteratorError9;
+                            if (_didIteratorError12) {
+                                throw _iteratorError12;
                             }
                         }
                     }
 
-                    var _iteratorNormalCompletion10 = true;
-                    var _didIteratorError10 = false;
-                    var _iteratorError10 = undefined;
+                    var _iteratorNormalCompletion13 = true;
+                    var _didIteratorError13 = false;
+                    var _iteratorError13 = undefined;
 
                     try {
-                        for (var _iterator10 = decl_container.find(".lawtext-analyzed-varref-window")[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
-                            var _el = _step10.value;
+                        for (var _iterator13 = decl_container.find(".lawtext-analyzed-varref-window")[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
+                            var _el = _step13.value;
 
                             var _obj2 = $(_el);
                             _obj2.html();
                             _obj2.addClass("lawtext-analyzed-varref-empty");
                         }
                     } catch (err) {
-                        _didIteratorError10 = true;
-                        _iteratorError10 = err;
+                        _didIteratorError13 = true;
+                        _iteratorError13 = err;
                     } finally {
                         try {
-                            if (!_iteratorNormalCompletion10 && _iterator10.return) {
-                                _iterator10.return();
+                            if (!_iteratorNormalCompletion13 && _iterator13.return) {
+                                _iterator13.return();
                             }
                         } finally {
-                            if (_didIteratorError10) {
-                                throw _iteratorError10;
+                            if (_didIteratorError13) {
+                                throw _iteratorError13;
                             }
                         }
                     }
