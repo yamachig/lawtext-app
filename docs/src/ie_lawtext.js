@@ -316,11 +316,26 @@ Lawtext.get_law_range = function (orig_law, range) {
     var e_pos = range.end;
 
     var law = new Lawtext.EL(orig_law.tag, orig_law.attr);
+
+    var orig_law_num = orig_law.children.find(function (el) {
+        return el.tag == "LawNum";
+    });
+    if (orig_law_num) {
+        law.append(orig_law_num);
+    }
+
     var orig_law_body = orig_law.children.find(function (el) {
         return el.tag == "LawBody";
     });
     var law_body = new Lawtext.EL(orig_law_body.tag, orig_law_body.attr);
     law.append(law_body);
+
+    var orig_law_title = orig_law_body.children.find(function (el) {
+        return el.tag == "LawTitle";
+    });
+    if (orig_law_title) {
+        law_body.append(orig_law_title);
+    }
 
     var in_container_range = false;
     var in_item_range = false;
