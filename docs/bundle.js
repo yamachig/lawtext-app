@@ -498,7 +498,7 @@ var support = __webpack_require__(51);
 var base64 = __webpack_require__(226);
 var nodejsUtils = __webpack_require__(125);
 var setImmediate = __webpack_require__(640);
-var external = __webpack_require__(96);
+var external = __webpack_require__(95);
 
 
 /**
@@ -981,7 +981,7 @@ var support = __webpack_require__(54);
 var base64 = __webpack_require__(244);
 var nodejsUtils = __webpack_require__(126);
 var setImmediate = __webpack_require__(671);
-var external = __webpack_require__(97);
+var external = __webpack_require__(96);
 
 
 /**
@@ -1573,7 +1573,7 @@ var NATIVE_WEAK_MAP = __webpack_require__(168);
 var isObject = __webpack_require__(6);
 var hide = __webpack_require__(21);
 var objectHas = __webpack_require__(19);
-var sharedKey = __webpack_require__(101);
+var sharedKey = __webpack_require__(100);
 var hiddenKeys = __webpack_require__(82);
 var WeakMap = __webpack_require__(4).WeakMap;
 var set, get, has;
@@ -1808,7 +1808,7 @@ __webpack_require__(72)('inspectSource', function (it) {
 // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
 var has = __webpack_require__(19);
 var toObject = __webpack_require__(14);
-var IE_PROTO = __webpack_require__(101)('IE_PROTO');
+var IE_PROTO = __webpack_require__(100)('IE_PROTO');
 var CORRECT_PROTOTYPE_GETTER = __webpack_require__(133);
 var ObjectPrototype = Object.prototype;
 
@@ -2537,7 +2537,7 @@ var defineProperties = __webpack_require__(131);
 var enumBugKeys = __webpack_require__(130);
 var html = __webpack_require__(173);
 var documentCreateElement = __webpack_require__(127);
-var IE_PROTO = __webpack_require__(101)('IE_PROTO');
+var IE_PROTO = __webpack_require__(100)('IE_PROTO');
 var PROTOTYPE = 'prototype';
 var Empty = function () { /* empty */ };
 
@@ -2666,7 +2666,7 @@ if (__webpack_require__(8)) {
   var $export = __webpack_require__(0);
   var TYPED_ARRAYS_CONSTRUCTORS_REQUIRES_WRAPPERS = __webpack_require__(146);
   var ArrayBufferViewCore = __webpack_require__(11);
-  var ArrayBufferModule = __webpack_require__(116);
+  var ArrayBufferModule = __webpack_require__(115);
   var anInstance = __webpack_require__(47);
   var createPropertyDescriptor = __webpack_require__(56);
   var hide = __webpack_require__(21);
@@ -6278,7 +6278,7 @@ var __spread = (this && this.__spread) || function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var util_1 = __webpack_require__(67);
 var xmldom_1 = __webpack_require__(622);
-var std = __webpack_require__(94);
+var std = __webpack_require__(121);
 exports.wait = function (ms) {
     return new Promise(function (resolve) { return setTimeout(resolve, ms); });
 };
@@ -7363,7 +7363,7 @@ var objectKeys = Object.keys || function (obj) {
 module.exports = Duplex;
 
 /*<replacement>*/
-var util = __webpack_require__(95);
+var util = __webpack_require__(94);
 util.inherits = __webpack_require__(68);
 /*</replacement>*/
 
@@ -7542,7 +7542,7 @@ module.exports = function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 var requireObjectCoercible = __webpack_require__(26);
-var whitespace = '[' + __webpack_require__(112) + ']';
+var whitespace = '[' + __webpack_require__(111) + ']';
 var ltrim = RegExp('^' + whitespace + whitespace + '*');
 var rtrim = RegExp(whitespace + whitespace + '*$');
 
@@ -8405,417 +8405,6 @@ module.exports = function (it) {
 /* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.isLaw = function (obj) {
-    return obj.tag === "Law";
-};
-exports.isLawNum = function (obj) {
-    return obj.tag === "LawNum";
-};
-exports.isLawBody = function (obj) {
-    return obj.tag === "LawBody";
-};
-exports.isLawTitle = function (obj) {
-    return obj.tag === "LawTitle";
-};
-exports.isEnactStatement = function (obj) {
-    return obj.tag === "EnactStatement";
-};
-exports.isTOC = function (obj) {
-    return obj.tag === "TOC";
-};
-exports.isTOCLabel = function (obj) {
-    return obj.tag === "TOCLabel";
-};
-exports.isTOCPreambleLabel = function (obj) {
-    return obj.tag === "TOCPreambleLabel";
-};
-exports.isTOCPart = function (obj) {
-    return obj.tag === "TOCPart";
-};
-exports.isTOCChapter = function (obj) {
-    return obj.tag === "TOCChapter";
-};
-exports.isTOCSection = function (obj) {
-    return obj.tag === "TOCSection";
-};
-exports.isTOCSubsection = function (obj) {
-    return obj.tag === "TOCSubsection";
-};
-exports.isTOCDivision = function (obj) {
-    return obj.tag === "TOCDivision";
-};
-exports.isTOCArticle = function (obj) {
-    return obj.tag === "TOCArticle";
-};
-exports.isTOCSupplProvision = function (obj) {
-    return obj.tag === "TOCSupplProvision";
-};
-exports.isTOCAppdxTableLabel = function (obj) {
-    return obj.tag === "TOCAppdxTableLabel";
-};
-exports.isArticleRange = function (obj) {
-    return obj.tag === "ArticleRange";
-};
-exports.isPreamble = function (obj) {
-    return obj.tag === "Preamble";
-};
-exports.isMainProvision = function (obj) {
-    return obj.tag === "MainProvision";
-};
-exports.isPart = function (obj) {
-    return obj.tag === "Part";
-};
-exports.isPartTitle = function (obj) {
-    return obj.tag === "PartTitle";
-};
-exports.isChapter = function (obj) {
-    return obj.tag === "Chapter";
-};
-exports.isChapterTitle = function (obj) {
-    return obj.tag === "ChapterTitle";
-};
-exports.isSection = function (obj) {
-    return obj.tag === "Section";
-};
-exports.isSectionTitle = function (obj) {
-    return obj.tag === "SectionTitle";
-};
-exports.isSubsection = function (obj) {
-    return obj.tag === "Subsection";
-};
-exports.isSubsectionTitle = function (obj) {
-    return obj.tag === "SubsectionTitle";
-};
-exports.isDivision = function (obj) {
-    return obj.tag === "Division";
-};
-exports.isDivisionTitle = function (obj) {
-    return obj.tag === "DivisionTitle";
-};
-exports.isArticle = function (obj) {
-    return obj.tag === "Article";
-};
-exports.isArticleTitle = function (obj) {
-    return obj.tag === "ArticleTitle";
-};
-exports.isArticleCaption = function (obj) {
-    return obj.tag === "ArticleCaption";
-};
-exports.isParagraph = function (obj) {
-    return obj.tag === "Paragraph";
-};
-exports.isParagraphCaption = function (obj) {
-    return obj.tag === "ParagraphCaption";
-};
-exports.isParagraphNum = function (obj) {
-    return obj.tag === "ParagraphNum";
-};
-exports.isParagraphSentence = function (obj) {
-    return obj.tag === "ParagraphSentence";
-};
-exports.isSupplNote = function (obj) {
-    return obj.tag === "SupplNote";
-};
-exports.isAmendProvision = function (obj) {
-    return obj.tag === "AmendProvision";
-};
-exports.isAmendProvisionSentence = function (obj) {
-    return obj.tag === "AmendProvisionSentence";
-};
-exports.isNewProvision = function (obj) {
-    return obj.tag === "NewProvision";
-};
-exports.isClass = function (obj) {
-    return obj.tag === "Class";
-};
-exports.isClassTitle = function (obj) {
-    return obj.tag === "ClassTitle";
-};
-exports.isClassSentence = function (obj) {
-    return obj.tag === "ClassSentence";
-};
-exports.isItem = function (obj) {
-    return obj.tag === "Item";
-};
-exports.isItemTitle = function (obj) {
-    return obj.tag === "ItemTitle";
-};
-exports.isItemSentence = function (obj) {
-    return obj.tag === "ItemSentence";
-};
-exports.isSubitem1 = function (obj) {
-    return obj.tag === "Subitem1";
-};
-exports.isSubitem1Title = function (obj) {
-    return obj.tag === "Subitem1Title";
-};
-exports.isSubitem1Sentence = function (obj) {
-    return obj.tag === "Subitem1Sentence";
-};
-exports.isSubitem2 = function (obj) {
-    return obj.tag === "Subitem2";
-};
-exports.isSubitem2Title = function (obj) {
-    return obj.tag === "Subitem2Title";
-};
-exports.isSubitem2Sentence = function (obj) {
-    return obj.tag === "Subitem2Sentence";
-};
-exports.isSubitem3 = function (obj) {
-    return obj.tag === "Subitem3";
-};
-exports.isSubitem3Title = function (obj) {
-    return obj.tag === "Subitem3Title";
-};
-exports.isSubitem3Sentence = function (obj) {
-    return obj.tag === "Subitem3Sentence";
-};
-exports.isSubitem4 = function (obj) {
-    return obj.tag === "Subitem4";
-};
-exports.isSubitem4Title = function (obj) {
-    return obj.tag === "Subitem4Title";
-};
-exports.isSubitem4Sentence = function (obj) {
-    return obj.tag === "Subitem4Sentence";
-};
-exports.isSubitem5 = function (obj) {
-    return obj.tag === "Subitem5";
-};
-exports.isSubitem5Title = function (obj) {
-    return obj.tag === "Subitem5Title";
-};
-exports.isSubitem5Sentence = function (obj) {
-    return obj.tag === "Subitem5Sentence";
-};
-exports.isSubitem6 = function (obj) {
-    return obj.tag === "Subitem6";
-};
-exports.isSubitem6Title = function (obj) {
-    return obj.tag === "Subitem6Title";
-};
-exports.isSubitem6Sentence = function (obj) {
-    return obj.tag === "Subitem6Sentence";
-};
-exports.isSubitem7 = function (obj) {
-    return obj.tag === "Subitem7";
-};
-exports.isSubitem7Title = function (obj) {
-    return obj.tag === "Subitem7Title";
-};
-exports.isSubitem7Sentence = function (obj) {
-    return obj.tag === "Subitem7Sentence";
-};
-exports.isSubitem8 = function (obj) {
-    return obj.tag === "Subitem8";
-};
-exports.isSubitem8Title = function (obj) {
-    return obj.tag === "Subitem8Title";
-};
-exports.isSubitem8Sentence = function (obj) {
-    return obj.tag === "Subitem8Sentence";
-};
-exports.isSubitem9 = function (obj) {
-    return obj.tag === "Subitem9";
-};
-exports.isSubitem9Title = function (obj) {
-    return obj.tag === "Subitem9Title";
-};
-exports.isSubitem9Sentence = function (obj) {
-    return obj.tag === "Subitem9Sentence";
-};
-exports.isSubitem10 = function (obj) {
-    return obj.tag === "Subitem10";
-};
-exports.isSubitem10Title = function (obj) {
-    return obj.tag === "Subitem10Title";
-};
-exports.isSubitem10Sentence = function (obj) {
-    return obj.tag === "Subitem10Sentence";
-};
-exports.isSentence = function (obj) {
-    return obj.tag === "Sentence";
-};
-exports.isColumn = function (obj) {
-    return obj.tag === "Column";
-};
-exports.isSupplProvision = function (obj) {
-    return obj.tag === "SupplProvision";
-};
-exports.isSupplProvisionLabel = function (obj) {
-    return obj.tag === "SupplProvisionLabel";
-};
-exports.isSupplProvisionAppdxTable = function (obj) {
-    return obj.tag === "SupplProvisionAppdxTable";
-};
-exports.isSupplProvisionAppdxTableTitle = function (obj) {
-    return obj.tag === "SupplProvisionAppdxTableTitle";
-};
-exports.isSupplProvisionAppdxStyle = function (obj) {
-    return obj.tag === "SupplProvisionAppdxStyle";
-};
-exports.isSupplProvisionAppdxStyleTitle = function (obj) {
-    return obj.tag === "SupplProvisionAppdxStyleTitle";
-};
-exports.isSupplProvisionAppdx = function (obj) {
-    return obj.tag === "SupplProvisionAppdx";
-};
-exports.isAppdxTable = function (obj) {
-    return obj.tag === "AppdxTable";
-};
-exports.isAppdxTableTitle = function (obj) {
-    return obj.tag === "AppdxTableTitle";
-};
-exports.isAppdxNote = function (obj) {
-    return obj.tag === "AppdxNote";
-};
-exports.isAppdxNoteTitle = function (obj) {
-    return obj.tag === "AppdxNoteTitle";
-};
-exports.isAppdxStyle = function (obj) {
-    return obj.tag === "AppdxStyle";
-};
-exports.isAppdxStyleTitle = function (obj) {
-    return obj.tag === "AppdxStyleTitle";
-};
-exports.isAppdxFormat = function (obj) {
-    return obj.tag === "AppdxFormat";
-};
-exports.isAppdxFormatTitle = function (obj) {
-    return obj.tag === "AppdxFormatTitle";
-};
-exports.isAppdx = function (obj) {
-    return obj.tag === "Appdx";
-};
-exports.isArithFormulaNum = function (obj) {
-    return obj.tag === "ArithFormulaNum";
-};
-exports.isArithFormula = function (obj) {
-    return obj.tag === "ArithFormula";
-};
-exports.isAppdxFig = function (obj) {
-    return obj.tag === "AppdxFig";
-};
-exports.isAppdxFigTitle = function (obj) {
-    return obj.tag === "AppdxFigTitle";
-};
-exports.isTableStruct = function (obj) {
-    return obj.tag === "TableStruct";
-};
-exports.isTableStructTitle = function (obj) {
-    return obj.tag === "TableStructTitle";
-};
-exports.isTable = function (obj) {
-    return obj.tag === "Table";
-};
-exports.isTableRow = function (obj) {
-    return obj.tag === "TableRow";
-};
-exports.isTableHeaderRow = function (obj) {
-    return obj.tag === "TableHeaderRow";
-};
-exports.isTableHeaderColumn = function (obj) {
-    return obj.tag === "TableHeaderColumn";
-};
-exports.isTableColumn = function (obj) {
-    return obj.tag === "TableColumn";
-};
-exports.isFigStruct = function (obj) {
-    return obj.tag === "FigStruct";
-};
-exports.isFigStructTitle = function (obj) {
-    return obj.tag === "FigStructTitle";
-};
-exports.isFig = function (obj) {
-    return obj.tag === "Fig";
-};
-exports.isNoteStruct = function (obj) {
-    return obj.tag === "NoteStruct";
-};
-exports.isNoteStructTitle = function (obj) {
-    return obj.tag === "NoteStructTitle";
-};
-exports.isNote = function (obj) {
-    return obj.tag === "Note";
-};
-exports.isStyleStruct = function (obj) {
-    return obj.tag === "StyleStruct";
-};
-exports.isStyleStructTitle = function (obj) {
-    return obj.tag === "StyleStructTitle";
-};
-exports.isStyle = function (obj) {
-    return obj.tag === "Style";
-};
-exports.isFormatStruct = function (obj) {
-    return obj.tag === "FormatStruct";
-};
-exports.isFormatStructTitle = function (obj) {
-    return obj.tag === "FormatStructTitle";
-};
-exports.isFormat = function (obj) {
-    return obj.tag === "Format";
-};
-exports.isRelatedArticleNum = function (obj) {
-    return obj.tag === "RelatedArticleNum";
-};
-exports.isRemarks = function (obj) {
-    return obj.tag === "Remarks";
-};
-exports.isRemarksLabel = function (obj) {
-    return obj.tag === "RemarksLabel";
-};
-exports.isList = function (obj) {
-    return obj.tag === "List";
-};
-exports.isListSentence = function (obj) {
-    return obj.tag === "ListSentence";
-};
-exports.isSublist1 = function (obj) {
-    return obj.tag === "Sublist1";
-};
-exports.isSublist1Sentence = function (obj) {
-    return obj.tag === "Sublist1Sentence";
-};
-exports.isSublist2 = function (obj) {
-    return obj.tag === "Sublist2";
-};
-exports.isSublist2Sentence = function (obj) {
-    return obj.tag === "Sublist2Sentence";
-};
-exports.isSublist3 = function (obj) {
-    return obj.tag === "Sublist3";
-};
-exports.isSublist3Sentence = function (obj) {
-    return obj.tag === "Sublist3Sentence";
-};
-exports.isQuoteStruct = function (obj) {
-    return obj.tag === "QuoteStruct";
-};
-exports.isRuby = function (obj) {
-    return obj.tag === "Ruby";
-};
-exports.isRt = function (obj) {
-    return obj.tag === "Rt";
-};
-exports.isLine = function (obj) {
-    return obj.tag === "Line";
-};
-exports.isSup = function (obj) {
-    return obj.tag === "Sup";
-};
-exports.isSub = function (obj) {
-    return obj.tag === "Sub";
-};
-
-
-/***/ }),
-/* 95 */
-/***/ (function(module, exports, __webpack_require__) {
-
 /* WEBPACK VAR INJECTION */(function(Buffer) {// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -8927,7 +8516,7 @@ function objectToString(o) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(52).Buffer))
 
 /***/ }),
-/* 96 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8953,7 +8542,7 @@ module.exports = {
 
 
 /***/ }),
-/* 97 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8979,7 +8568,7 @@ module.exports = {
 
 
 /***/ }),
-/* 98 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9013,7 +8602,7 @@ if (true) {
 
 
 /***/ }),
-/* 99 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9123,7 +8712,7 @@ module.exports = hoistNonReactStatics;
 
 
 /***/ }),
-/* 100 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9175,7 +8764,7 @@ module.exports = invariant;
 
 
 /***/ }),
-/* 101 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var shared = __webpack_require__(72)('keys');
@@ -9187,14 +8776,14 @@ module.exports = function (key) {
 
 
 /***/ }),
-/* 102 */
+/* 101 */
 /***/ (function(module, exports) {
 
 exports.f = Object.getOwnPropertySymbols;
 
 
 /***/ }),
-/* 103 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9210,7 +8799,7 @@ module.exports = __webpack_require__(5) || !__webpack_require__(3)(function () {
 
 
 /***/ }),
-/* 104 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ITERATOR = __webpack_require__(10)('iterator');
@@ -9252,7 +8841,7 @@ module.exports = function (exec, SKIP_CLOSING) {
 
 
 /***/ }),
-/* 105 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9311,7 +8900,7 @@ addToUnscopables('entries');
 
 
 /***/ }),
-/* 106 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isObject = __webpack_require__(6);
@@ -9327,7 +8916,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 107 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9342,11 +8931,11 @@ module.exports = function (S, index, unicode) {
 
 
 /***/ }),
-/* 108 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var classof = __webpack_require__(40);
-var regexpExec = __webpack_require__(109);
+var regexpExec = __webpack_require__(108);
 
 // `RegExpExec` abstract operation
 // https://tc39.github.io/ecma262/#sec-regexpexec
@@ -9370,7 +8959,7 @@ module.exports = function (R, S) {
 
 
 /***/ }),
-/* 109 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9432,7 +9021,7 @@ module.exports = patchedExec;
 
 
 /***/ }),
-/* 110 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9441,7 +9030,7 @@ var hide = __webpack_require__(21);
 var redefine = __webpack_require__(28);
 var fails = __webpack_require__(3);
 var wellKnownSymbol = __webpack_require__(10);
-var regexpExec = __webpack_require__(109);
+var regexpExec = __webpack_require__(108);
 
 var SPECIES = wellKnownSymbol('species');
 
@@ -9532,7 +9121,7 @@ module.exports = function (KEY, length, exec, sham) {
 
 
 /***/ }),
-/* 111 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var global = __webpack_require__(4);
@@ -9542,7 +9131,7 @@ module.exports = navigator && navigator.userAgent || '';
 
 
 /***/ }),
-/* 112 */
+/* 111 */
 /***/ (function(module, exports) {
 
 // a string of all valid unicode whitespaces
@@ -9551,7 +9140,7 @@ module.exports = '\u0009\u000A\u000B\u000C\u000D\u0020\u00A0\u1680\u2000\u2001\u
 
 
 /***/ }),
-/* 113 */
+/* 112 */
 /***/ (function(module, exports) {
 
 var nativeExpm1 = Math.expm1;
@@ -9569,7 +9158,7 @@ module.exports = (!nativeExpm1
 
 
 /***/ }),
-/* 114 */
+/* 113 */
 /***/ (function(module, exports) {
 
 module.exports = function (exec) {
@@ -9582,7 +9171,7 @@ module.exports = function (exec) {
 
 
 /***/ }),
-/* 115 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9596,7 +9185,7 @@ var iterate = __webpack_require__(17);
 var anInstance = __webpack_require__(47);
 var isObject = __webpack_require__(6);
 var fails = __webpack_require__(3);
-var checkCorrectnessOfIteration = __webpack_require__(104);
+var checkCorrectnessOfIteration = __webpack_require__(103);
 var setToStringTag = __webpack_require__(43);
 var inheritIfRequired = __webpack_require__(140);
 
@@ -9686,7 +9275,7 @@ module.exports = function (CONSTRUCTOR_NAME, wrapper, common, IS_MAP, IS_WEAK) {
 
 
 /***/ }),
-/* 116 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9985,7 +9574,7 @@ exports[DATA_VIEW] = $DataView;
 
 
 /***/ }),
-/* 117 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10006,7 +9595,7 @@ module.exports = function (/* ...elements */) {
 
 
 /***/ }),
-/* 118 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10038,7 +9627,7 @@ module.exports = function from(source /* , mapFn, thisArg */) {
 
 
 /***/ }),
-/* 119 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10053,7 +9642,7 @@ module.exports = function of() {
 
 
 /***/ }),
-/* 120 */
+/* 119 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10083,7 +9672,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var memoize_one__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(164);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(35);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(98);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(97);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _emotion_is_prop_valid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(269);
 
@@ -12525,7 +12114,7 @@ if (false) {}
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(66)))
 
 /***/ }),
-/* 121 */
+/* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12605,7 +12194,7 @@ var analyzer = __webpack_require__(214);
 var parser_wrapper_1 = __webpack_require__(624);
 var renderer = __webpack_require__(625);
 var lawtext_1 = __webpack_require__(666);
-var std = __webpack_require__(94);
+var std = __webpack_require__(121);
 var util = __webpack_require__(69);
 var actions_1 = __webpack_require__(149);
 var lawdata = __webpack_require__(667);
@@ -13049,6 +12638,417 @@ exports.downloadSampleLawtext = function (dispatch) { return __awaiter(_this, vo
 
 
 /***/ }),
+/* 121 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isLaw = function (obj) {
+    return obj.tag === "Law";
+};
+exports.isLawNum = function (obj) {
+    return obj.tag === "LawNum";
+};
+exports.isLawBody = function (obj) {
+    return obj.tag === "LawBody";
+};
+exports.isLawTitle = function (obj) {
+    return obj.tag === "LawTitle";
+};
+exports.isEnactStatement = function (obj) {
+    return obj.tag === "EnactStatement";
+};
+exports.isTOC = function (obj) {
+    return obj.tag === "TOC";
+};
+exports.isTOCLabel = function (obj) {
+    return obj.tag === "TOCLabel";
+};
+exports.isTOCPreambleLabel = function (obj) {
+    return obj.tag === "TOCPreambleLabel";
+};
+exports.isTOCPart = function (obj) {
+    return obj.tag === "TOCPart";
+};
+exports.isTOCChapter = function (obj) {
+    return obj.tag === "TOCChapter";
+};
+exports.isTOCSection = function (obj) {
+    return obj.tag === "TOCSection";
+};
+exports.isTOCSubsection = function (obj) {
+    return obj.tag === "TOCSubsection";
+};
+exports.isTOCDivision = function (obj) {
+    return obj.tag === "TOCDivision";
+};
+exports.isTOCArticle = function (obj) {
+    return obj.tag === "TOCArticle";
+};
+exports.isTOCSupplProvision = function (obj) {
+    return obj.tag === "TOCSupplProvision";
+};
+exports.isTOCAppdxTableLabel = function (obj) {
+    return obj.tag === "TOCAppdxTableLabel";
+};
+exports.isArticleRange = function (obj) {
+    return obj.tag === "ArticleRange";
+};
+exports.isPreamble = function (obj) {
+    return obj.tag === "Preamble";
+};
+exports.isMainProvision = function (obj) {
+    return obj.tag === "MainProvision";
+};
+exports.isPart = function (obj) {
+    return obj.tag === "Part";
+};
+exports.isPartTitle = function (obj) {
+    return obj.tag === "PartTitle";
+};
+exports.isChapter = function (obj) {
+    return obj.tag === "Chapter";
+};
+exports.isChapterTitle = function (obj) {
+    return obj.tag === "ChapterTitle";
+};
+exports.isSection = function (obj) {
+    return obj.tag === "Section";
+};
+exports.isSectionTitle = function (obj) {
+    return obj.tag === "SectionTitle";
+};
+exports.isSubsection = function (obj) {
+    return obj.tag === "Subsection";
+};
+exports.isSubsectionTitle = function (obj) {
+    return obj.tag === "SubsectionTitle";
+};
+exports.isDivision = function (obj) {
+    return obj.tag === "Division";
+};
+exports.isDivisionTitle = function (obj) {
+    return obj.tag === "DivisionTitle";
+};
+exports.isArticle = function (obj) {
+    return obj.tag === "Article";
+};
+exports.isArticleTitle = function (obj) {
+    return obj.tag === "ArticleTitle";
+};
+exports.isArticleCaption = function (obj) {
+    return obj.tag === "ArticleCaption";
+};
+exports.isParagraph = function (obj) {
+    return obj.tag === "Paragraph";
+};
+exports.isParagraphCaption = function (obj) {
+    return obj.tag === "ParagraphCaption";
+};
+exports.isParagraphNum = function (obj) {
+    return obj.tag === "ParagraphNum";
+};
+exports.isParagraphSentence = function (obj) {
+    return obj.tag === "ParagraphSentence";
+};
+exports.isSupplNote = function (obj) {
+    return obj.tag === "SupplNote";
+};
+exports.isAmendProvision = function (obj) {
+    return obj.tag === "AmendProvision";
+};
+exports.isAmendProvisionSentence = function (obj) {
+    return obj.tag === "AmendProvisionSentence";
+};
+exports.isNewProvision = function (obj) {
+    return obj.tag === "NewProvision";
+};
+exports.isClass = function (obj) {
+    return obj.tag === "Class";
+};
+exports.isClassTitle = function (obj) {
+    return obj.tag === "ClassTitle";
+};
+exports.isClassSentence = function (obj) {
+    return obj.tag === "ClassSentence";
+};
+exports.isItem = function (obj) {
+    return obj.tag === "Item";
+};
+exports.isItemTitle = function (obj) {
+    return obj.tag === "ItemTitle";
+};
+exports.isItemSentence = function (obj) {
+    return obj.tag === "ItemSentence";
+};
+exports.isSubitem1 = function (obj) {
+    return obj.tag === "Subitem1";
+};
+exports.isSubitem1Title = function (obj) {
+    return obj.tag === "Subitem1Title";
+};
+exports.isSubitem1Sentence = function (obj) {
+    return obj.tag === "Subitem1Sentence";
+};
+exports.isSubitem2 = function (obj) {
+    return obj.tag === "Subitem2";
+};
+exports.isSubitem2Title = function (obj) {
+    return obj.tag === "Subitem2Title";
+};
+exports.isSubitem2Sentence = function (obj) {
+    return obj.tag === "Subitem2Sentence";
+};
+exports.isSubitem3 = function (obj) {
+    return obj.tag === "Subitem3";
+};
+exports.isSubitem3Title = function (obj) {
+    return obj.tag === "Subitem3Title";
+};
+exports.isSubitem3Sentence = function (obj) {
+    return obj.tag === "Subitem3Sentence";
+};
+exports.isSubitem4 = function (obj) {
+    return obj.tag === "Subitem4";
+};
+exports.isSubitem4Title = function (obj) {
+    return obj.tag === "Subitem4Title";
+};
+exports.isSubitem4Sentence = function (obj) {
+    return obj.tag === "Subitem4Sentence";
+};
+exports.isSubitem5 = function (obj) {
+    return obj.tag === "Subitem5";
+};
+exports.isSubitem5Title = function (obj) {
+    return obj.tag === "Subitem5Title";
+};
+exports.isSubitem5Sentence = function (obj) {
+    return obj.tag === "Subitem5Sentence";
+};
+exports.isSubitem6 = function (obj) {
+    return obj.tag === "Subitem6";
+};
+exports.isSubitem6Title = function (obj) {
+    return obj.tag === "Subitem6Title";
+};
+exports.isSubitem6Sentence = function (obj) {
+    return obj.tag === "Subitem6Sentence";
+};
+exports.isSubitem7 = function (obj) {
+    return obj.tag === "Subitem7";
+};
+exports.isSubitem7Title = function (obj) {
+    return obj.tag === "Subitem7Title";
+};
+exports.isSubitem7Sentence = function (obj) {
+    return obj.tag === "Subitem7Sentence";
+};
+exports.isSubitem8 = function (obj) {
+    return obj.tag === "Subitem8";
+};
+exports.isSubitem8Title = function (obj) {
+    return obj.tag === "Subitem8Title";
+};
+exports.isSubitem8Sentence = function (obj) {
+    return obj.tag === "Subitem8Sentence";
+};
+exports.isSubitem9 = function (obj) {
+    return obj.tag === "Subitem9";
+};
+exports.isSubitem9Title = function (obj) {
+    return obj.tag === "Subitem9Title";
+};
+exports.isSubitem9Sentence = function (obj) {
+    return obj.tag === "Subitem9Sentence";
+};
+exports.isSubitem10 = function (obj) {
+    return obj.tag === "Subitem10";
+};
+exports.isSubitem10Title = function (obj) {
+    return obj.tag === "Subitem10Title";
+};
+exports.isSubitem10Sentence = function (obj) {
+    return obj.tag === "Subitem10Sentence";
+};
+exports.isSentence = function (obj) {
+    return obj.tag === "Sentence";
+};
+exports.isColumn = function (obj) {
+    return obj.tag === "Column";
+};
+exports.isSupplProvision = function (obj) {
+    return obj.tag === "SupplProvision";
+};
+exports.isSupplProvisionLabel = function (obj) {
+    return obj.tag === "SupplProvisionLabel";
+};
+exports.isSupplProvisionAppdxTable = function (obj) {
+    return obj.tag === "SupplProvisionAppdxTable";
+};
+exports.isSupplProvisionAppdxTableTitle = function (obj) {
+    return obj.tag === "SupplProvisionAppdxTableTitle";
+};
+exports.isSupplProvisionAppdxStyle = function (obj) {
+    return obj.tag === "SupplProvisionAppdxStyle";
+};
+exports.isSupplProvisionAppdxStyleTitle = function (obj) {
+    return obj.tag === "SupplProvisionAppdxStyleTitle";
+};
+exports.isSupplProvisionAppdx = function (obj) {
+    return obj.tag === "SupplProvisionAppdx";
+};
+exports.isAppdxTable = function (obj) {
+    return obj.tag === "AppdxTable";
+};
+exports.isAppdxTableTitle = function (obj) {
+    return obj.tag === "AppdxTableTitle";
+};
+exports.isAppdxNote = function (obj) {
+    return obj.tag === "AppdxNote";
+};
+exports.isAppdxNoteTitle = function (obj) {
+    return obj.tag === "AppdxNoteTitle";
+};
+exports.isAppdxStyle = function (obj) {
+    return obj.tag === "AppdxStyle";
+};
+exports.isAppdxStyleTitle = function (obj) {
+    return obj.tag === "AppdxStyleTitle";
+};
+exports.isAppdxFormat = function (obj) {
+    return obj.tag === "AppdxFormat";
+};
+exports.isAppdxFormatTitle = function (obj) {
+    return obj.tag === "AppdxFormatTitle";
+};
+exports.isAppdx = function (obj) {
+    return obj.tag === "Appdx";
+};
+exports.isArithFormulaNum = function (obj) {
+    return obj.tag === "ArithFormulaNum";
+};
+exports.isArithFormula = function (obj) {
+    return obj.tag === "ArithFormula";
+};
+exports.isAppdxFig = function (obj) {
+    return obj.tag === "AppdxFig";
+};
+exports.isAppdxFigTitle = function (obj) {
+    return obj.tag === "AppdxFigTitle";
+};
+exports.isTableStruct = function (obj) {
+    return obj.tag === "TableStruct";
+};
+exports.isTableStructTitle = function (obj) {
+    return obj.tag === "TableStructTitle";
+};
+exports.isTable = function (obj) {
+    return obj.tag === "Table";
+};
+exports.isTableRow = function (obj) {
+    return obj.tag === "TableRow";
+};
+exports.isTableHeaderRow = function (obj) {
+    return obj.tag === "TableHeaderRow";
+};
+exports.isTableHeaderColumn = function (obj) {
+    return obj.tag === "TableHeaderColumn";
+};
+exports.isTableColumn = function (obj) {
+    return obj.tag === "TableColumn";
+};
+exports.isFigStruct = function (obj) {
+    return obj.tag === "FigStruct";
+};
+exports.isFigStructTitle = function (obj) {
+    return obj.tag === "FigStructTitle";
+};
+exports.isFig = function (obj) {
+    return obj.tag === "Fig";
+};
+exports.isNoteStruct = function (obj) {
+    return obj.tag === "NoteStruct";
+};
+exports.isNoteStructTitle = function (obj) {
+    return obj.tag === "NoteStructTitle";
+};
+exports.isNote = function (obj) {
+    return obj.tag === "Note";
+};
+exports.isStyleStruct = function (obj) {
+    return obj.tag === "StyleStruct";
+};
+exports.isStyleStructTitle = function (obj) {
+    return obj.tag === "StyleStructTitle";
+};
+exports.isStyle = function (obj) {
+    return obj.tag === "Style";
+};
+exports.isFormatStruct = function (obj) {
+    return obj.tag === "FormatStruct";
+};
+exports.isFormatStructTitle = function (obj) {
+    return obj.tag === "FormatStructTitle";
+};
+exports.isFormat = function (obj) {
+    return obj.tag === "Format";
+};
+exports.isRelatedArticleNum = function (obj) {
+    return obj.tag === "RelatedArticleNum";
+};
+exports.isRemarks = function (obj) {
+    return obj.tag === "Remarks";
+};
+exports.isRemarksLabel = function (obj) {
+    return obj.tag === "RemarksLabel";
+};
+exports.isList = function (obj) {
+    return obj.tag === "List";
+};
+exports.isListSentence = function (obj) {
+    return obj.tag === "ListSentence";
+};
+exports.isSublist1 = function (obj) {
+    return obj.tag === "Sublist1";
+};
+exports.isSublist1Sentence = function (obj) {
+    return obj.tag === "Sublist1Sentence";
+};
+exports.isSublist2 = function (obj) {
+    return obj.tag === "Sublist2";
+};
+exports.isSublist2Sentence = function (obj) {
+    return obj.tag === "Sublist2Sentence";
+};
+exports.isSublist3 = function (obj) {
+    return obj.tag === "Sublist3";
+};
+exports.isSublist3Sentence = function (obj) {
+    return obj.tag === "Sublist3Sentence";
+};
+exports.isQuoteStruct = function (obj) {
+    return obj.tag === "QuoteStruct";
+};
+exports.isRuby = function (obj) {
+    return obj.tag === "Ruby";
+};
+exports.isRt = function (obj) {
+    return obj.tag === "Rt";
+};
+exports.isLine = function (obj) {
+    return obj.tag === "Line";
+};
+exports.isSup = function (obj) {
+    return obj.tag === "Sup";
+};
+exports.isSub = function (obj) {
+    return obj.tag === "Sub";
+};
+
+
+/***/ }),
 /* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13403,7 +13403,7 @@ module.exports = function (key, value) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var getOwnPropertyNamesModule = __webpack_require__(57);
-var getOwnPropertySymbolsModule = __webpack_require__(102);
+var getOwnPropertySymbolsModule = __webpack_require__(101);
 var anObject = __webpack_require__(2);
 var Reflect = __webpack_require__(4).Reflect;
 
@@ -13600,7 +13600,7 @@ module.exports = function (Iterable, NAME, IteratorConstructor, next, DEFAULT, I
 /***/ (function(module, exports, __webpack_require__) {
 
 // helper for String#{startsWith, endsWith, includes}
-var isRegExp = __webpack_require__(106);
+var isRegExp = __webpack_require__(105);
 var requireObjectCoercible = __webpack_require__(26);
 
 module.exports = function (that, searchString, NAME) {
@@ -13655,7 +13655,7 @@ module.exports = ''.repeat || function repeat(count) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var fails = __webpack_require__(3);
-var whitespaces = __webpack_require__(112);
+var whitespaces = __webpack_require__(111);
 var non = '\u200B\u0085\u180E';
 
 // check that a method works with the correct list
@@ -13689,7 +13689,7 @@ module.exports = function (that, target, C) {
 
 var nativeParseInt = __webpack_require__(4).parseInt;
 var internalStringTrim = __webpack_require__(76);
-var whitespaces = __webpack_require__(112);
+var whitespaces = __webpack_require__(111);
 var hex = /^[-+]?0[xX]/;
 var FORCED = nativeParseInt(whitespaces + '08') !== 8 || nativeParseInt(whitespaces + '0x16') !== 22;
 
@@ -13813,7 +13813,7 @@ module.exports = {
 
 // `Map` constructor
 // https://tc39.github.io/ecma262/#sec-map-objects
-module.exports = __webpack_require__(115)('Map', function (get) {
+module.exports = __webpack_require__(114)('Map', function (get) {
   return function Map() { return get(this, arguments.length > 0 ? arguments[0] : undefined); };
 }, __webpack_require__(200), true);
 
@@ -13843,7 +13843,7 @@ var wrapper = function (get) {
 
 // `WeakMap` constructor
 // https://tc39.github.io/ecma262/#sec-weakmap-constructor
-var $WeakMap = module.exports = __webpack_require__(115)('WeakMap', wrapper, weak, true, true);
+var $WeakMap = module.exports = __webpack_require__(114)('WeakMap', wrapper, weak, true, true);
 
 // IE11 WeakMap frozen keys fix
 // We can't use feature detection because it crash some old IE builds
@@ -13897,7 +13897,7 @@ if (NATIVE_WEAK_MAP && IS_IE11) {
 /* eslint-disable no-new */
 var global = __webpack_require__(4);
 var fails = __webpack_require__(3);
-var checkCorrectnessOfIteration = __webpack_require__(104);
+var checkCorrectnessOfIteration = __webpack_require__(103);
 var NATIVE_ARRAY_BUFFER_VIEWS = __webpack_require__(11).NATIVE_ARRAY_BUFFER_VIEWS;
 var ArrayBuffer = global.ArrayBuffer;
 var Int8Array = global.Int8Array;
@@ -13923,7 +13923,7 @@ module.exports = !NATIVE_ARRAY_BUFFER_VIEWS || !fails(function () {
 
 "use strict";
 
-__webpack_require__(105);
+__webpack_require__(104);
 var USE_NATIVE_URL = __webpack_require__(207);
 var redefine = __webpack_require__(28);
 var redefineAll = __webpack_require__(64);
@@ -25398,7 +25398,7 @@ var Duplex;
 Writable.WritableState = WritableState;
 
 /*<replacement>*/
-var util = __webpack_require__(95);
+var util = __webpack_require__(94);
 util.inherits = __webpack_require__(68);
 /*</replacement>*/
 
@@ -26028,7 +26028,7 @@ Writable.prototype._destroy = function (err, cb) {
 "use strict";
 
 
-var external = __webpack_require__(96);
+var external = __webpack_require__(95);
 var DataWorker = __webpack_require__(229);
 var DataLengthProbe = __webpack_require__(230);
 var Crc32Probe = __webpack_require__(231);
@@ -26233,7 +26233,7 @@ module.exports = {
 "use strict";
 
 
-var external = __webpack_require__(97);
+var external = __webpack_require__(96);
 var DataWorker = __webpack_require__(247);
 var DataLengthProbe = __webpack_require__(248);
 var Crc32Probe = __webpack_require__(249);
@@ -27719,7 +27719,7 @@ module.exports.f = function getOwnPropertyNames(it) {
 
 // 19.1.2.1 Object.assign(target, source, ...)
 var objectKeys = __webpack_require__(73);
-var getOwnPropertySymbolsModule = __webpack_require__(102);
+var getOwnPropertySymbolsModule = __webpack_require__(101);
 var propertyIsEnumerableModule = __webpack_require__(79);
 var toObject = __webpack_require__(14);
 var IndexedObject = __webpack_require__(80);
@@ -28127,7 +28127,7 @@ module.exports = function (that, maxLength, fillString, left) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/zloirock/core-js/issues/280
-var userAgent = __webpack_require__(111);
+var userAgent = __webpack_require__(110);
 
 // eslint-disable-next-line unicorn/no-unsafe-regex
 module.exports = /Version\/10\.\d+(\.\d+)?( Mobile\/\w+)? Safari\//.test(userAgent);
@@ -28174,7 +28174,7 @@ defineIterator(String, 'String', function (iterated) {
 
 var nativeParseFloat = __webpack_require__(4).parseFloat;
 var internalStringTrim = __webpack_require__(76);
-var whitespaces = __webpack_require__(112);
+var whitespaces = __webpack_require__(111);
 var FORCED = 1 / nativeParseFloat(whitespaces + '-0') !== -Infinity;
 
 module.exports = FORCED ? function parseFloat(str) {
@@ -28276,7 +28276,7 @@ var global = __webpack_require__(4);
 var getOwnPropertyDescriptor = __webpack_require__(27).f;
 var classof = __webpack_require__(40);
 var macrotask = __webpack_require__(143).set;
-var userAgent = __webpack_require__(111);
+var userAgent = __webpack_require__(110);
 var MutationObserver = global.MutationObserver || global.WebKitMutationObserver;
 var process = global.process;
 var Promise = global.Promise;
@@ -28582,7 +28582,7 @@ module.exports = {
 
 // `Set` constructor
 // https://tc39.github.io/ecma262/#sec-set-objects
-module.exports = __webpack_require__(115)('Set', function (get) {
+module.exports = __webpack_require__(114)('Set', function (get) {
   return function Set() { return get(this, arguments.length > 0 ? arguments[0] : undefined); };
 }, __webpack_require__(200));
 
@@ -52485,7 +52485,7 @@ function _isUint8Array(obj) {
 /*</replacement>*/
 
 /*<replacement>*/
-var util = __webpack_require__(95);
+var util = __webpack_require__(94);
 util.inherits = __webpack_require__(68);
 /*</replacement>*/
 
@@ -53904,7 +53904,7 @@ module.exports = Transform;
 var Duplex = __webpack_require__(70);
 
 /*<replacement>*/
-var util = __webpack_require__(95);
+var util = __webpack_require__(94);
 util.inherits = __webpack_require__(68);
 /*</replacement>*/
 
@@ -54174,7 +54174,7 @@ var ConvertWorker = __webpack_require__(643);
 var GenericWorker = __webpack_require__(38);
 var base64 = __webpack_require__(226);
 var support = __webpack_require__(51);
-var external = __webpack_require__(96);
+var external = __webpack_require__(95);
 
 var NodejsStreamOutputAdapter = null;
 if (support.nodestream) {
@@ -55463,7 +55463,7 @@ var ConvertWorker = __webpack_require__(674);
 var GenericWorker = __webpack_require__(39);
 var base64 = __webpack_require__(244);
 var support = __webpack_require__(54);
-var external = __webpack_require__(97);
+var external = __webpack_require__(96);
 
 var NodejsStreamOutputAdapter = null;
 if (support.nodestream) {
@@ -56642,7 +56642,7 @@ module.exports = _typeof;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var redux_1 = __webpack_require__(160);
-var states_1 = __webpack_require__(121);
+var states_1 = __webpack_require__(120);
 ;
 exports.store = redux_1.createStore(redux_1.combineReducers({
     lawtextAppPage: states_1.LawtextAppPageReducer
@@ -56884,11 +56884,11 @@ var esm_extends = __webpack_require__(13);
 var objectWithoutPropertiesLoose = __webpack_require__(36);
 
 // EXTERNAL MODULE: ./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js
-var hoist_non_react_statics_cjs = __webpack_require__(99);
+var hoist_non_react_statics_cjs = __webpack_require__(98);
 var hoist_non_react_statics_cjs_default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics_cjs);
 
 // EXTERNAL MODULE: ./node_modules/invariant/browser.js
-var browser = __webpack_require__(100);
+var browser = __webpack_require__(99);
 var browser_default = /*#__PURE__*/__webpack_require__.n(browser);
 
 // EXTERNAL MODULE: ./node_modules/react-is/index.js
@@ -57659,7 +57659,7 @@ function createConnect(_temp) {
 }
 /* harmony default export */ var connect_connect = (createConnect());
 // EXTERNAL MODULE: ./node_modules/react-dom/index.js
-var react_dom = __webpack_require__(98);
+var react_dom = __webpack_require__(97);
 
 // CONCATENATED MODULE: ./node_modules/react-redux/es/utils/reactBatchedUpdates.js
 /* eslint-disable import/no-unresolved */
@@ -58747,7 +58747,7 @@ var react_is = __webpack_require__(71);
 var objectWithoutPropertiesLoose = __webpack_require__(36);
 
 // EXTERNAL MODULE: ./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js
-var hoist_non_react_statics_cjs = __webpack_require__(99);
+var hoist_non_react_statics_cjs = __webpack_require__(98);
 var hoist_non_react_statics_cjs_default = /*#__PURE__*/__webpack_require__.n(hoist_non_react_statics_cjs);
 
 // CONCATENATED MODULE: ./node_modules/react-router/esm/react-router.js
@@ -59878,7 +59878,7 @@ __webpack_require__(342);
 __webpack_require__(343);
 __webpack_require__(344);
 __webpack_require__(345);
-__webpack_require__(105);
+__webpack_require__(104);
 __webpack_require__(346);
 __webpack_require__(347);
 __webpack_require__(348);
@@ -60047,7 +60047,7 @@ var definePropertyModule = __webpack_require__(12);
 var propertyIsEnumerableModule = __webpack_require__(79);
 var hide = __webpack_require__(21);
 var objectKeys = __webpack_require__(73);
-var HIDDEN = __webpack_require__(101)('hidden');
+var HIDDEN = __webpack_require__(100)('hidden');
 var InternalStateModule = __webpack_require__(22);
 var SYMBOL = 'Symbol';
 var setInternalState = InternalStateModule.set;
@@ -60191,7 +60191,7 @@ if (!NATIVE_SYMBOL) {
   definePropertyModule.f = $defineProperty;
   getOwnPropertyDescriptorModule.f = $getOwnPropertyDescriptor;
   __webpack_require__(57).f = getOwnPropertyNamesExternal.f = $getOwnPropertyNames;
-  __webpack_require__(102).f = $getOwnPropertySymbols;
+  __webpack_require__(101).f = $getOwnPropertySymbols;
 
   if (DESCRIPTORS) {
     // https://github.com/tc39/proposal-Symbol-description
@@ -60301,7 +60301,7 @@ hiddenKeys[HIDDEN] = true;
 /***/ (function(module, exports, __webpack_require__) {
 
 var objectKeys = __webpack_require__(73);
-var getOwnPropertySymbolsModule = __webpack_require__(102);
+var getOwnPropertySymbolsModule = __webpack_require__(101);
 var propertyIsEnumerableModule = __webpack_require__(79);
 
 // all enumerable object keys, includes symbols
@@ -60846,7 +60846,7 @@ module.exports = String(test) !== '[object z]' ? function toString() {
 var toObject = __webpack_require__(14);
 var aFunction = __webpack_require__(7);
 var definePropertyModule = __webpack_require__(12);
-var FORCED = __webpack_require__(103);
+var FORCED = __webpack_require__(102);
 
 // `Object.prototype.__defineGetter__` method
 // https://tc39.github.io/ecma262/#sec-object.prototype.__defineGetter__
@@ -60868,7 +60868,7 @@ if (__webpack_require__(8)) {
 var toObject = __webpack_require__(14);
 var aFunction = __webpack_require__(7);
 var definePropertyModule = __webpack_require__(12);
-var FORCED = __webpack_require__(103);
+var FORCED = __webpack_require__(102);
 
 // `Object.prototype.__defineSetter__` method
 // https://tc39.github.io/ecma262/#sec-object.prototype.__defineSetter__
@@ -60891,7 +60891,7 @@ var toObject = __webpack_require__(14);
 var toPrimitive = __webpack_require__(41);
 var getPrototypeOf = __webpack_require__(29);
 var getOwnPropertyDescriptor = __webpack_require__(27).f;
-var FORCED = __webpack_require__(103);
+var FORCED = __webpack_require__(102);
 
 // `Object.prototype.__lookupGetter__` method
 // https://tc39.github.io/ecma262/#sec-object.prototype.__lookupGetter__
@@ -60919,7 +60919,7 @@ var toObject = __webpack_require__(14);
 var toPrimitive = __webpack_require__(41);
 var getPrototypeOf = __webpack_require__(29);
 var getOwnPropertyDescriptor = __webpack_require__(27).f;
-var FORCED = __webpack_require__(103);
+var FORCED = __webpack_require__(102);
 
 // `Object.prototype.__lookupSetter__` method
 // https://tc39.github.io/ecma262/#sec-object.prototype.__lookupSetter__
@@ -61004,7 +61004,7 @@ if (!(HAS_INSTANCE in FunctionPrototype)) {
 /* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var INCORRECT_ITERATION = !__webpack_require__(104)(function (iterable) {
+var INCORRECT_ITERATION = !__webpack_require__(103)(function (iterable) {
   Array.from(iterable);
 });
 
@@ -61786,11 +61786,11 @@ __webpack_require__(0)({ target: 'String', proto: true, forced: !CORRECT_IS_REGE
 var anObject = __webpack_require__(2);
 var toLength = __webpack_require__(9);
 var requireObjectCoercible = __webpack_require__(26);
-var advanceStringIndex = __webpack_require__(107);
-var regExpExec = __webpack_require__(108);
+var advanceStringIndex = __webpack_require__(106);
+var regExpExec = __webpack_require__(107);
 
 // @@match logic
-__webpack_require__(110)(
+__webpack_require__(109)(
   'match',
   1,
   function (MATCH, nativeMatch, maybeCallNative) {
@@ -61890,8 +61890,8 @@ var toObject = __webpack_require__(14);
 var toLength = __webpack_require__(9);
 var toInteger = __webpack_require__(32);
 var requireObjectCoercible = __webpack_require__(26);
-var advanceStringIndex = __webpack_require__(107);
-var regExpExec = __webpack_require__(108);
+var advanceStringIndex = __webpack_require__(106);
+var regExpExec = __webpack_require__(107);
 var max = Math.max;
 var min = Math.min;
 var floor = Math.floor;
@@ -61903,7 +61903,7 @@ var maybeToString = function (it) {
 };
 
 // @@replace logic
-__webpack_require__(110)(
+__webpack_require__(109)(
   'replace',
   2,
   function (REPLACE, nativeReplace, maybeCallNative) {
@@ -62024,10 +62024,10 @@ __webpack_require__(110)(
 var anObject = __webpack_require__(2);
 var requireObjectCoercible = __webpack_require__(26);
 var sameValue = __webpack_require__(178);
-var regExpExec = __webpack_require__(108);
+var regExpExec = __webpack_require__(107);
 
 // @@search logic
-__webpack_require__(110)(
+__webpack_require__(109)(
   'search',
   1,
   function (SEARCH, nativeSearch, maybeCallNative) {
@@ -62066,14 +62066,14 @@ __webpack_require__(110)(
 "use strict";
 
 
-var isRegExp = __webpack_require__(106);
+var isRegExp = __webpack_require__(105);
 var anObject = __webpack_require__(2);
 var requireObjectCoercible = __webpack_require__(26);
 var speciesConstructor = __webpack_require__(20);
-var advanceStringIndex = __webpack_require__(107);
+var advanceStringIndex = __webpack_require__(106);
 var toLength = __webpack_require__(9);
-var callRegExpExec = __webpack_require__(108);
-var regexpExec = __webpack_require__(109);
+var callRegExpExec = __webpack_require__(107);
+var regexpExec = __webpack_require__(108);
 var fails = __webpack_require__(3);
 var arrayPush = [].push;
 var min = Math.min;
@@ -62083,7 +62083,7 @@ var MAX_UINT32 = 0xFFFFFFFF;
 var SUPPORTS_Y = !fails(function () { return !RegExp(MAX_UINT32, 'y'); });
 
 // @@split logic
-__webpack_require__(110)(
+__webpack_require__(109)(
   'split',
   2,
   function (SPLIT, nativeSplit, maybeCallNative) {
@@ -62535,7 +62535,7 @@ var isForced = __webpack_require__(84);
 var inheritIfRequired = __webpack_require__(140);
 var defineProperty = __webpack_require__(12).f;
 var getOwnPropertyNames = __webpack_require__(57).f;
-var isRegExp = __webpack_require__(106);
+var isRegExp = __webpack_require__(105);
 var getFlags = __webpack_require__(75);
 var redefine = __webpack_require__(28);
 var fails = __webpack_require__(3);
@@ -62594,7 +62594,7 @@ __webpack_require__(63)('RegExp');
 "use strict";
 
 
-var regexpExec = __webpack_require__(109);
+var regexpExec = __webpack_require__(108);
 
 __webpack_require__(0)({ target: 'RegExp', proto: true, forced: /./.exec !== regexpExec }, {
   exec: regexpExec
@@ -63109,7 +63109,7 @@ __webpack_require__(0)({ target: 'Math', stat: true }, {
 /* 398 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var expm1 = __webpack_require__(113);
+var expm1 = __webpack_require__(112);
 var nativeCosh = Math.cosh;
 var abs = Math.abs;
 var E = Math.E;
@@ -63128,7 +63128,7 @@ __webpack_require__(0)({ target: 'Math', stat: true, forced: !nativeCosh || nati
 /* 399 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var expm1Implementation = __webpack_require__(113);
+var expm1Implementation = __webpack_require__(112);
 
 // `Math.expm1` method
 // https://tc39.github.io/ecma262/#sec-math.expm1
@@ -63257,7 +63257,7 @@ __webpack_require__(0)({ target: 'Math', stat: true }, { sign: __webpack_require
 /* 407 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var expm1 = __webpack_require__(113);
+var expm1 = __webpack_require__(112);
 var abs = Math.abs;
 var exp = Math.exp;
 var E = Math.E;
@@ -63280,7 +63280,7 @@ __webpack_require__(0)({ target: 'Math', stat: true, forced: FORCED }, {
 /* 408 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var expm1 = __webpack_require__(113);
+var expm1 = __webpack_require__(112);
 var exp = Math.exp;
 
 // `Math.tanh` method
@@ -63486,15 +63486,15 @@ var aFunction = __webpack_require__(7);
 var anInstance = __webpack_require__(47);
 var classof = __webpack_require__(40);
 var iterate = __webpack_require__(17);
-var checkCorrectnessOfIteration = __webpack_require__(104);
+var checkCorrectnessOfIteration = __webpack_require__(103);
 var speciesConstructor = __webpack_require__(20);
 var task = __webpack_require__(143).set;
 var microtask = __webpack_require__(197);
 var promiseResolve = __webpack_require__(198);
 var hostReportErrors = __webpack_require__(199);
 var newPromiseCapabilityModule = __webpack_require__(92);
-var perform = __webpack_require__(114);
-var userAgent = __webpack_require__(111);
+var perform = __webpack_require__(113);
+var userAgent = __webpack_require__(110);
 var SPECIES = __webpack_require__(10)('species');
 var InternalStateModule = __webpack_require__(22);
 var isForced = __webpack_require__(84);
@@ -63860,7 +63860,7 @@ __webpack_require__(0)({ target: 'Promise', proto: true, real: true }, {
 
 // `WeakSet` constructor
 // https://tc39.github.io/ecma262/#sec-weakset-constructor
-__webpack_require__(115)('WeakSet', function (get) {
+__webpack_require__(114)('WeakSet', function (get) {
   return function WeakSet() { return get(this, arguments.length > 0 ? arguments[0] : undefined); };
 }, __webpack_require__(202), false, true);
 
@@ -63872,7 +63872,7 @@ __webpack_require__(115)('WeakSet', function (get) {
 "use strict";
 
 var ARRAY_BUFFER = 'ArrayBuffer';
-var ArrayBuffer = __webpack_require__(116)[ARRAY_BUFFER];
+var ArrayBuffer = __webpack_require__(115)[ARRAY_BUFFER];
 var NativeArrayBuffer = __webpack_require__(4)[ARRAY_BUFFER];
 
 // `ArrayBuffer` constructor
@@ -63904,7 +63904,7 @@ __webpack_require__(0)({ target: 'ArrayBuffer', stat: true, forced: !NATIVE_ARRA
 
 "use strict";
 
-var ArrayBufferModule = __webpack_require__(116);
+var ArrayBufferModule = __webpack_require__(115);
 var anObject = __webpack_require__(2);
 var toAbsoluteIndex = __webpack_require__(50);
 var toLength = __webpack_require__(9);
@@ -63947,7 +63947,7 @@ var NATIVE_ARRAY_BUFFER = __webpack_require__(11).NATIVE_ARRAY_BUFFER;
 // `DataView` constructor
 // https://tc39.github.io/ecma262/#sec-dataview-constructor
 __webpack_require__(0)({ global: true, forced: !NATIVE_ARRAY_BUFFER }, {
-  DataView: __webpack_require__(116).DataView
+  DataView: __webpack_require__(115).DataView
 });
 
 
@@ -64272,7 +64272,7 @@ ArrayBufferViewCore.exportProto('indexOf', function indexOf(searchElement /* , f
 
 "use strict";
 
-var ArrayIterators = __webpack_require__(105);
+var ArrayIterators = __webpack_require__(104);
 var Uint8Array = __webpack_require__(4).Uint8Array;
 var ArrayBufferViewCore = __webpack_require__(11);
 var ITERATOR = __webpack_require__(10)('iterator');
@@ -65229,7 +65229,7 @@ __webpack_require__(0)({ global: true }, {
 // https://github.com/tc39/proposal-promise-any
 var getBuiltIn = __webpack_require__(25);
 var newPromiseCapabilityModule = __webpack_require__(92);
-var perform = __webpack_require__(114);
+var perform = __webpack_require__(113);
 var iterate = __webpack_require__(17);
 var PROMISE_ANY_ERROR = 'No one promise resolved';
 
@@ -65742,7 +65742,7 @@ __webpack_require__(0)({ target: 'Map', stat: true, forced: __webpack_require__(
 
 "use strict";
 
-var collectionDeleteAll = __webpack_require__(117);
+var collectionDeleteAll = __webpack_require__(116);
 
 // `Map.prototype.deleteAll` method
 // https://github.com/tc39/proposal-collection-methods
@@ -66124,7 +66124,7 @@ __webpack_require__(0)({ target: 'Set', proto: true, real: true, forced: __webpa
 
 "use strict";
 
-var collectionDeleteAll = __webpack_require__(117);
+var collectionDeleteAll = __webpack_require__(116);
 
 // `Set.prototype.deleteAll` method
 // https://github.com/tc39/proposal-collection-methods
@@ -66334,7 +66334,7 @@ __webpack_require__(0)({ target: 'Set', proto: true, real: true, forced: __webpa
 
 "use strict";
 
-var collectionDeleteAll = __webpack_require__(117);
+var collectionDeleteAll = __webpack_require__(116);
 
 // `WeakMap.prototype.deleteAll` method
 // https://github.com/tc39/proposal-collection-methods
@@ -66371,7 +66371,7 @@ __webpack_require__(0)({ target: 'WeakSet', proto: true, real: true, forced: IS_
 
 "use strict";
 
-var collectionDeleteAll = __webpack_require__(117);
+var collectionDeleteAll = __webpack_require__(116);
 var IS_PURE = __webpack_require__(5);
 
 // `WeakSet.prototype.deleteAll` method
@@ -66404,7 +66404,7 @@ __webpack_require__(540);
 // `Map.from` method
 // https://tc39.github.io/proposal-setmap-offrom/#sec-map.from
 __webpack_require__(0)({ target: 'Map', stat: true }, {
-  from: __webpack_require__(118)
+  from: __webpack_require__(117)
 });
 
 
@@ -66415,7 +66415,7 @@ __webpack_require__(0)({ target: 'Map', stat: true }, {
 // `Map.of` method
 // https://tc39.github.io/proposal-setmap-offrom/#sec-map.of
 __webpack_require__(0)({ target: 'Map', stat: true }, {
-  of: __webpack_require__(119)
+  of: __webpack_require__(118)
 });
 
 
@@ -66426,7 +66426,7 @@ __webpack_require__(0)({ target: 'Map', stat: true }, {
 // `Set.from` method
 // https://tc39.github.io/proposal-setmap-offrom/#sec-set.from
 __webpack_require__(0)({ target: 'Set', stat: true }, {
-  from: __webpack_require__(118)
+  from: __webpack_require__(117)
 });
 
 
@@ -66437,7 +66437,7 @@ __webpack_require__(0)({ target: 'Set', stat: true }, {
 // `Set.of` method
 // https://tc39.github.io/proposal-setmap-offrom/#sec-set.of
 __webpack_require__(0)({ target: 'Set', stat: true }, {
-  of: __webpack_require__(119)
+  of: __webpack_require__(118)
 });
 
 
@@ -66448,7 +66448,7 @@ __webpack_require__(0)({ target: 'Set', stat: true }, {
 // `WeakMap.from` method
 // https://tc39.github.io/proposal-setmap-offrom/#sec-weakmap.from
 __webpack_require__(0)({ target: 'WeakMap', stat: true }, {
-  from: __webpack_require__(118)
+  from: __webpack_require__(117)
 });
 
 
@@ -66459,7 +66459,7 @@ __webpack_require__(0)({ target: 'WeakMap', stat: true }, {
 // `WeakMap.of` method
 // https://tc39.github.io/proposal-setmap-offrom/#sec-weakmap.of
 __webpack_require__(0)({ target: 'WeakMap', stat: true }, {
-  of: __webpack_require__(119)
+  of: __webpack_require__(118)
 });
 
 
@@ -66470,7 +66470,7 @@ __webpack_require__(0)({ target: 'WeakMap', stat: true }, {
 // `WeakSet.from` method
 // https://tc39.github.io/proposal-setmap-offrom/#sec-weakset.from
 __webpack_require__(0)({ target: 'WeakSet', stat: true }, {
-  from: __webpack_require__(118)
+  from: __webpack_require__(117)
 });
 
 
@@ -66481,7 +66481,7 @@ __webpack_require__(0)({ target: 'WeakSet', stat: true }, {
 // `WeakSet.of` method
 // https://tc39.github.io/proposal-setmap-offrom/#sec-weakset.of
 __webpack_require__(0)({ target: 'WeakSet', stat: true }, {
-  of: __webpack_require__(119)
+  of: __webpack_require__(118)
 });
 
 
@@ -66903,7 +66903,7 @@ __webpack_require__(559);
 // `Promise.try` method
 // https://github.com/tc39/proposal-promise-try
 var newPromiseCapabilityModule = __webpack_require__(92);
-var perform = __webpack_require__(114);
+var perform = __webpack_require__(113);
 
 __webpack_require__(0)({ target: 'Promise', stat: true }, {
   'try': function (callbackfn) {
@@ -67066,7 +67066,7 @@ __webpack_require__(568);
 "use strict";
 
 var requireObjectCoercible = __webpack_require__(26);
-var isRegExp = __webpack_require__(106);
+var isRegExp = __webpack_require__(105);
 var getRegExpFlags = __webpack_require__(75);
 var speciesConstructor = __webpack_require__(20);
 
@@ -67330,7 +67330,7 @@ __webpack_require__(581);
 // `Promise.allSettled` method
 // https://github.com/tc39/proposal-promise-allSettled
 var newPromiseCapabilityModule = __webpack_require__(92);
-var perform = __webpack_require__(114);
+var perform = __webpack_require__(113);
 var iterate = __webpack_require__(17);
 
 __webpack_require__(0)({ target: 'Promise', stat: true }, {
@@ -67418,7 +67418,7 @@ var classof = __webpack_require__(88);
 var getFlags = __webpack_require__(75);
 var hide = __webpack_require__(21);
 var speciesConstructor = __webpack_require__(20);
-var advanceStringIndex = __webpack_require__(107);
+var advanceStringIndex = __webpack_require__(106);
 var MATCH_ALL = __webpack_require__(10)('matchAll');
 var IS_PURE = __webpack_require__(5);
 var REGEXP_STRING = 'RegExp String';
@@ -67546,7 +67546,7 @@ for (var COLLECTION_NAME in DOMIterables) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var DOMIterables = __webpack_require__(212);
-var ArrayIteratorMethods = __webpack_require__(105);
+var ArrayIteratorMethods = __webpack_require__(104);
 var global = __webpack_require__(4);
 var hide = __webpack_require__(21);
 var wellKnownSymbol = __webpack_require__(10);
@@ -67615,7 +67615,7 @@ __webpack_require__(0)({ global: true, enumerable: true, noTargetGet: true }, {
 
 // ie9- setTimeout & setInterval additional parameters fix
 var global = __webpack_require__(4);
-var userAgent = __webpack_require__(111);
+var userAgent = __webpack_require__(110);
 var slice = [].slice;
 
 var MSIE = /MSIE .\./.test(userAgent); // <- dirty ie9- check
@@ -68174,7 +68174,7 @@ if (!self.fetch) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(1);
-var ReactDOM = __webpack_require__(98);
+var ReactDOM = __webpack_require__(97);
 var react_redux_1 = __webpack_require__(263);
 var react_router_dom_1 = __webpack_require__(264);
 __webpack_require__(609);
@@ -76044,7 +76044,7 @@ var react_redux_1 = __webpack_require__(263);
 var react_router_dom_1 = __webpack_require__(264);
 var actions_1 = __webpack_require__(149);
 var LawtextAppPage_1 = __webpack_require__(614);
-var states = __webpack_require__(121);
+var states = __webpack_require__(120);
 exports.mapDispatchToProps = function (dispatch) {
     return {
         modifyState: function (state) {
@@ -76202,8 +76202,8 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(1);
-var styled_components_1 = __webpack_require__(120);
-var states_1 = __webpack_require__(121);
+var styled_components_1 = __webpack_require__(119);
+var states_1 = __webpack_require__(120);
 var Sidebar_1 = __webpack_require__(696);
 var Viewer_1 = __webpack_require__(697);
 var SideBarDiv = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    position: fixed;\n    width: 280px;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    background-color: rgb(243, 243, 243);\n\n    display: flex;\n"], ["\n    position: fixed;\n    width: 280px;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    background-color: rgb(243, 243, 243);\n\n    display: flex;\n"])));
@@ -78061,7 +78061,7 @@ JSZip.loadAsync = function (content, options) {
     return new JSZip().loadAsync(content, options);
 };
 
-JSZip.external = __webpack_require__(96);
+JSZip.external = __webpack_require__(95);
 module.exports = JSZip;
 
 
@@ -79110,7 +79110,7 @@ module.exports = PassThrough;
 var Transform = __webpack_require__(225);
 
 /*<replacement>*/
-var util = __webpack_require__(95);
+var util = __webpack_require__(94);
 util.inherits = __webpack_require__(68);
 /*</replacement>*/
 
@@ -86837,7 +86837,7 @@ module.exports = NodejsStreamInputAdapter;
 "use strict";
 
 var utils = __webpack_require__(15);
-var external = __webpack_require__(96);
+var external = __webpack_require__(95);
 var utf8 = __webpack_require__(77);
 var utils = __webpack_require__(15);
 var ZipEntries = __webpack_require__(660);
@@ -102999,7 +102999,7 @@ var __read = (this && this.__read) || function (o, n) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var util_1 = __webpack_require__(67);
-var std = __webpack_require__(94);
+var std = __webpack_require__(121);
 var util_2 = __webpack_require__(69);
 var INDENT = "  ";
 var MARGIN = "　";
@@ -105241,7 +105241,7 @@ JSZip.loadAsync = function (content, options) {
     return new JSZip().loadAsync(content, options);
 };
 
-JSZip.external = __webpack_require__(97);
+JSZip.external = __webpack_require__(96);
 module.exports = JSZip;
 
 
@@ -113324,7 +113324,7 @@ module.exports = NodejsStreamInputAdapter;
 "use strict";
 
 var utils = __webpack_require__(16);
-var external = __webpack_require__(97);
+var external = __webpack_require__(96);
 var utf8 = __webpack_require__(78);
 var utils = __webpack_require__(16);
 var ZipEntries = __webpack_require__(691);
@@ -114119,8 +114119,7 @@ var __spread = (this && this.__spread) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(1);
-var styled_components_1 = __webpack_require__(120);
-var std = __webpack_require__(94);
+var styled_components_1 = __webpack_require__(119);
 var util_1 = __webpack_require__(69);
 var util_2 = __webpack_require__(67);
 var SidebarH1 = styled_components_1.default.h1(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    text-align: center;\n    margin-top: 1rem;\n    color: rgb(75, 75, 75);\n"], ["\n    text-align: center;\n    margin-top: 1rem;\n    color: rgb(75, 75, 75);\n"])));
@@ -114332,15 +114331,6 @@ var SidebarBody = /** @class */ (function (_super) {
                             paddingLeft: (indent + 2) + "em",
                         }, onClick: onClick, title: el.text }, el.text));
                 }
-                else if (el.tag === "Part" || el.tag === "Chapter" || el.tag === "Section" || el.tag === "Subsection" || el.tag === "Division" || el.tag === "Article" || el.tag === "Paragraph") {
-                    //
-                }
-                else if (std.isAppdxStyle(el)) {
-                    console.error("unexpected AppdxStyle! " + util_2.inspect(el));
-                }
-                else {
-                    util_1.assertNever(el);
-                }
             }
         }
         catch (e_2_1) { e_2 = { error: e_2_1 }; }
@@ -114362,12 +114352,9 @@ var SidebarBody = /** @class */ (function (_super) {
                 else if (el.tag === "Paragraph" || el.tag === "PartTitle" || el.tag === "ChapterTitle" || el.tag === "SectionTitle" || el.tag === "SubsectionTitle" || el.tag === "DivisionTitle") {
                     //
                 }
-                else if (std.isAppdxStyle(el)) {
-                    console.error("unexpected AppdxStyle! " + util_2.inspect(el));
-                    list.push.apply(list, __spread(this.processAppdxStyle(el, indent)));
-                }
                 else {
-                    util_1.assertNever(el);
+                    console.error("unexpected element! " + util_2.inspect(el));
+                    list.push.apply(list, __spread(this.processAnyLaw(el, indent)));
                 }
             }
         }
@@ -114509,6 +114496,20 @@ var SidebarBody = /** @class */ (function (_super) {
         }
         return null;
     };
+    SidebarBody.prototype.processAnyLaw = function (el, indent) {
+        var _this = this;
+        var list = [];
+        var titleEL = el.children.find(function (c) { return !util_2.isString(c) && c.tag.includes("Title"); }) || el;
+        if (titleEL) {
+            var onClick = function () {
+                _this.props.scrollLaw(el.id.toString());
+            };
+            list.push(React.createElement(TOCItemDiv, { key: el.id, style: {
+                    paddingLeft: (indent + 2) + "em",
+                }, onClick: onClick, title: titleEL.text }, titleEL.text));
+        }
+        return list;
+    };
     return SidebarBody;
 }(React.Component));
 var SidebarFooterDiv = styled_components_1.default.div(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n    flex-shrink: 0;\n    display: flex;\n    flex-direction: column;\n"], ["\n    flex-shrink: 0;\n    display: flex;\n    flex-direction: column;\n"])));
@@ -114581,7 +114582,7 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(1);
-var styled_components_1 = __webpack_require__(120);
+var styled_components_1 = __webpack_require__(119);
 var LawView_1 = __webpack_require__(698);
 var ViewerLoadingDiv = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    position: fixed;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 280px;\n    z-index: 100;\n\n    padding-top: 1rem;\n    text-align: center;\n"], ["\n    position: fixed;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 280px;\n    z-index: 100;\n\n    padding-top: 1rem;\n    text-align: center;\n"])));
 var ViewerLoading = /** @class */ (function (_super) {
@@ -114755,12 +114756,12 @@ var $ = __webpack_require__(148);
 var React = __webpack_require__(1);
 var react_animate_height_1 = __webpack_require__(699);
 var react_event_listener_1 = __webpack_require__(701);
-var styled_components_1 = __webpack_require__(120);
+var styled_components_1 = __webpack_require__(119);
 var util_1 = __webpack_require__(67);
-var std = __webpack_require__(94);
+var std = __webpack_require__(121);
 var util_2 = __webpack_require__(69);
 var index_1 = __webpack_require__(149);
-var states_1 = __webpack_require__(121);
+var states_1 = __webpack_require__(120);
 var store_1 = __webpack_require__(262);
 var MARGIN = "　";
 var em = function (input) {
@@ -116013,15 +116014,8 @@ var ArticleGroupComponent = /** @class */ (function (_super) {
                 if (child.tag === "PartTitle" || child.tag === "ChapterTitle" || child.tag === "SectionTitle" || child.tag === "SubsectionTitle" || child.tag === "DivisionTitle") {
                     ArticleGroupTitle = child;
                 }
-                else if (child.tag === "Part" || child.tag === "Chapter" || child.tag === "Section" || child.tag === "Subsection" || child.tag === "Division" || child.tag === "Article" || child.tag === "Paragraph") {
-                    ChildItems.push(child);
-                }
-                else if (std.isAppdxStyle(child)) {
-                    console.error("unexpected AppdxStyle! " + util_1.inspect(child));
-                    ChildItems.push(child);
-                }
                 else {
-                    util_2.assertNever(child);
+                    ChildItems.push(child);
                 }
             }
         }
@@ -116047,12 +116041,9 @@ var ArticleGroupComponent = /** @class */ (function (_super) {
                 else if (child.tag === "Part" || child.tag === "Chapter" || child.tag === "Section" || child.tag === "Subsection" || child.tag === "Division") {
                     blocks.push(React.createElement(ArticleGroupComponent, { el: child, indent: indent, key: child.id }));
                 }
-                else if (std.isAppdxStyle(child)) {
-                    console.error("unexpected AppdxStyle! " + util_1.inspect(child));
-                    blocks.push(React.createElement(AppdxStyleComponent, { el: child, indent: indent, key: child.id }));
-                }
                 else {
-                    util_2.assertNever(child);
+                    console.error("unexpected element! " + util_1.inspect(child));
+                    blocks.push(React.createElement(AnyLawComponent, { el: child, indent: indent, key: child.id }));
                 }
             }
         }
@@ -116123,6 +116114,10 @@ var ArticleComponent = /** @class */ (function (_super) {
                 else if (child.tag === "Paragraph") {
                     Paragraphs.push(child);
                 }
+                else if (std.isItem(child)) {
+                    console.error("unexpected element! " + util_1.inspect(child));
+                    Paragraphs.push(child);
+                }
                 else if (child.tag === "SupplNote") {
                     SupplNotes.push(child);
                 }
@@ -116189,6 +116184,10 @@ var ParagraphItemComponent = /** @class */ (function (_super) {
                 if (child.tag === "ParagraphCaption") {
                     ParagraphCaption = child;
                 }
+                else if (std.isArticleCaption(child)) {
+                    console.error("unexpected element! " + util_1.inspect(child));
+                    ParagraphCaption = child;
+                }
                 else if (child.tag === "ParagraphNum" || child.tag === "ItemTitle" || child.tag ===
                     "Subitem1Title" || child.tag === "Subitem2Title" || child.tag === "Subitem3Title" || child.tag === "Subitem4Title" || child.tag ===
                     "Subitem5Title" || child.tag === "Subitem6Title" || child.tag === "Subitem7Title" || child.tag === "Subitem8Title" || child.tag ===
@@ -116201,11 +116200,8 @@ var ParagraphItemComponent = /** @class */ (function (_super) {
                     "Subitem9Sentence" || child.tag === "Subitem10Sentence") {
                     ParagraphItemSentence = child;
                 }
-                else if (child.tag === "Item" || child.tag === "Subitem1" || child.tag === "Subitem2" || child.tag === "Subitem3" || child.tag === "Subitem4" || child.tag === "Subitem5" || child.tag === "Subitem6" || child.tag === "Subitem7" || child.tag === "Subitem8" || child.tag === "Subitem9" || child.tag === "Subitem10" || child.tag === "AmendProvision" || child.tag === "Class" || child.tag === "TableStruct" || child.tag === "FigStruct" || child.tag === "StyleStruct" || child.tag === "List") {
-                    Children.push(child);
-                }
                 else {
-                    util_2.assertNever(child);
+                    Children.push(child);
                 }
             }
         }
@@ -116250,7 +116246,7 @@ var ParagraphItemComponent = /** @class */ (function (_super) {
                     throw new util_2.NotImplementedError(child.tag);
                 }
                 else {
-                    util_2.assertNever(child);
+                    blocks.push(React.createElement(AnyLawComponent, { el: child, indent: indent, key: child.id }));
                 }
             }
         }
@@ -116329,7 +116325,7 @@ var TableStructComponent = /** @class */ (function (_super) {
                 var child = _c.value;
                 if (child.tag === "TableStructTitle") {
                     blocks.push(React.createElement("div", { style: { marginLeft: indent + "em" } },
-                        React.createElement(RunComponent, { els: child.children })));
+                        React.createElement(RunComponent, { els: child.children, key: child.id })));
                 }
                 else if (child.tag === "Table") {
                     blocks.push(React.createElement(TableComponent, { el: child, indent: indent, key: child.id }));
@@ -116570,10 +116566,10 @@ var NoteStyleFormatComponent = /** @class */ (function (_super) {
         var indent = this.props.indent;
         var blocks = [];
         try {
-            for (var _b = __values(el.children), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var child = _c.value;
-                if (util_1.isString(child)) {
-                    throw new util_2.NotImplementedError("string");
+            for (var _b = __values(el.children.entries()), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var _d = __read(_c.value, 2), i = _d[0], child = _d[1];
+                if (util_1.isString(child) || std.isLine(child) || std.isQuoteStruct(child) || std.isArithFormula(child) || std.isRuby(child) || std.isSup(child) || std.isSub(child) || isControl(child)) {
+                    blocks.push(React.createElement(RunComponent, { els: [child], key: util_1.isString(child) ? i : child.id }));
                 }
                 else if (std.isSentence(child)) {
                     blocks.push(React.createElement("div", { style: { marginLeft: indent + "em" }, key: child.id },
@@ -116761,8 +116757,8 @@ var ArithFormulaRunComponent = /** @class */ (function (_super) {
         try {
             for (var _b = __values(el.children.entries()), _c = _b.next(); !_c.done; _c = _b.next()) {
                 var _d = __read(_c.value, 2), i = _d[0], child = _d[1];
-                if (util_1.isString(child)) {
-                    blocks.push(React.createElement(NoMarginDiv, { key: i }, child));
+                if (util_1.isString(child) || std.isLine(child) || std.isQuoteStruct(child) || std.isArithFormula(child) || std.isRuby(child) || std.isSup(child) || std.isSub(child) || isControl(child)) {
+                    blocks.push(React.createElement(RunComponent, { els: [child], key: util_1.isString(child) ? i : child.id }));
                 }
                 else if (std.isFigStruct(child)) {
                     blocks.push(React.createElement(FigStructComponent, { el: child, indent: 0, key: child.id }));
@@ -116782,7 +116778,7 @@ var ArithFormulaRunComponent = /** @class */ (function (_super) {
                     blocks.push(React.createElement(RemarksComponent, { el: child, indent: 0, key: child.id }));
                 }
                 else {
-                    throw new util_2.NotImplementedError(child.tag);
+                    blocks.push(React.createElement(AnyLawComponent, { el: child, indent: 0, key: child.id }));
                 }
             }
         }
@@ -117003,7 +116999,7 @@ var RunComponent = /** @class */ (function (_super) {
                 runs.push(React.createElement("span", { key: i }, el.outerXML()));
             }
             else if (std.isArithFormula(el)) {
-                runs.push(React.createElement(ArithFormulaRunComponent, { el: el }));
+                runs.push(React.createElement(ArithFormulaRunComponent, { el: el, key: i }));
             }
             else if (std.isLine(el)) {
                 throw new util_2.NotImplementedError(el.tag);
