@@ -28233,7 +28233,7 @@ exports.download = function (_a, filenames, onProgress) {
                     _k.label = 3;
                 case 3:
                     _k.trys.push([3, 8, , 9]);
-                    return [4 /*yield*/, fetch("http://elaws.e-gov.go.jp/download/" + filename, {
+                    return [4 /*yield*/, fetch("https://elaws.e-gov.go.jp/download/" + filename, {
                             mode: "cors",
                         })];
                 case 4:
