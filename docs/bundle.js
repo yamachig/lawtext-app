@@ -50197,8 +50197,8 @@ var Loader = /** @class */ (function () {
                             var currentRatio = 0;
                             var currentMessage = "";
                             return function (ratio, message) {
-                                currentRatio = ratio || currentRatio;
-                                currentMessage = message || currentMessage;
+                                currentRatio = ratio !== null && ratio !== void 0 ? ratio : currentRatio;
+                                currentMessage = message !== null && message !== void 0 ? message : currentMessage;
                                 onProgress(currentRatio, currentMessage);
                             };
                         })();
@@ -50213,7 +50213,8 @@ var Loader = /** @class */ (function () {
                     case 2:
                         if (!!baseLawInfos_1_1.done) return [3 /*break*/, 5];
                         baseLawInfo = baseLawInfos_1_1.value;
-                        return [4 /*yield*/, this.getLawXmlByLawNum(baseLawInfo.LawNum)];
+                        progress(currentLength / baseLawInfos.length, baseLawInfo.LawNum + "\uFF1A" + baseLawInfo.LawTitle);
+                        return [4 /*yield*/, this.loadLawXMLByInfo(baseLawInfo)];
                     case 3:
                         xml = _b.sent();
                         if (xml === null) {
@@ -50224,7 +50225,6 @@ var Loader = /** @class */ (function () {
                         lawInfo.addReferencingLawNums(xml);
                         generator.add(lawInfo);
                         currentLength++;
-                        progress(currentLength / baseLawInfos.length, baseLawInfo.LawNum + "\uFF1A" + baseLawInfo.LawTitle);
                         _b.label = 4;
                     case 4:
                         baseLawInfos_1_1 = baseLawInfos_1.next();
