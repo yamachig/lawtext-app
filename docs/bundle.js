@@ -48576,10 +48576,17 @@ exports.lawtext = void 0;
 var lawdata = __importStar(__webpack_require__(27841));
 var temp_law_1 = __webpack_require__(44234);
 var query_1 = __webpack_require__(50946);
+var law_util_1 = __webpack_require__(50377);
 /**
  * ブラウザのコンソールから利用可能なオブジェクトです。
  */
 exports.lawtext = {
+    /**
+     * `Element` の親をさかのぼって条番号や項番号などの階層を取得します。
+     * @param el - 検索対象の `Element`
+     * @returns - 条番号などを羅列した配列
+     */
+    traceTitles: function (el) { return law_util_1.traceTitles(el); },
     /**
      * 法令XMLを新しいウィンドウのLawtextで表示します。
      * @param xml - 表示する法令XML
@@ -48638,6 +48645,77 @@ for (var key in globals_1.default) {
     // @ts-ignore
     window[key] = globals_1.default[key];
 }
+
+
+/***/ }),
+
+/***/ 50377:
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
+};
+var __values = (this && this.__values) || function(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.traceTitles = void 0;
+var traceTitles = function (el, _titles) {
+    var e_1, _a;
+    var _b;
+    if (_titles === void 0) { _titles = []; }
+    var titles = __spreadArray([], __read(_titles));
+    try {
+        for (var _c = __values(Array.from(el.children)), _d = _c.next(); !_d.done; _d = _c.next()) {
+            var child = _d.value;
+            if ((child.tagName.endsWith("Title") && child.tagName !== "LawTitle") ||
+                child.tagName.endsWith("Label") ||
+                (child.tagName.endsWith("Num") && child.tagName !== "LawNum" && child.tagName !== "RelatedArticleNum")) {
+                titles.unshift((_b = child.textContent) !== null && _b !== void 0 ? _b : "");
+            }
+        }
+    }
+    catch (e_1_1) { e_1 = { error: e_1_1 }; }
+    finally {
+        try {
+            if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
+        }
+        finally { if (e_1) throw e_1.error; }
+    }
+    var parent = el.parentElement;
+    if (!parent)
+        return titles;
+    return exports.traceTitles(parent, titles);
+};
+exports.traceTitles = traceTitles;
 
 
 /***/ }),
@@ -50479,10 +50557,12 @@ var symbolFinalyzeQueryItem = Symbol("symbolFinalyzeQueryItem");
 var symbolDoNotFinalize = Symbol("symbolDoNotFinalize");
 /**
  * The query object that represents a source list and a filtering criteria.
+ *
  * フィルタ条件と検索元リストを表すクエリオブジェクト。
  *
  * @example
  * A `Query` works as an async generator.
+ *
  * `Query` は async generator として使用できます。
  *
  * ```ts
@@ -50513,6 +50593,9 @@ var Query = /** @class */ (function () {
             throw util_1.assertNever(criteria);
         }
     }
+    Query.prototype.new = function (population, criteria) {
+        return new Query(population, criteria);
+    };
     Query.prototype[Symbol.asyncIterator] = function () {
         return __asyncGenerator(this, arguments, function _b() {
             var _c, _d, item, matched, e_1_1;
@@ -50569,11 +50652,15 @@ var Query = /** @class */ (function () {
     };
     /**
      * Apply a function for each filtered item.
+     *
      * フィルタ後の要素ごとに関数を実行します。
+     *
      * @param func - a function to be called for each filtered item <br/> 要素ごとに実行される関数
+     * @param criteria - an additional criteria applied after filtering / 関数実行後に適用するフィルタ条件
      * @returns - a new `Query` that yields items returned by `func` <br/> `func` の返り値を列挙する新しい `Query`
      */
-    Query.prototype.map = function (func) {
+    Query.prototype.map = function (func, criteria) {
+        if (criteria === void 0) { criteria = null; }
         // eslint-disable-next-line @typescript-eslint/no-this-alias
         var self = this;
         return new Query((function () {
@@ -50623,20 +50710,86 @@ var Query = /** @class */ (function () {
                     }
                 });
             });
-        })(), null);
+        })(), criteria);
+    };
+    /**
+     * Apply a function for each filtered item and iterate the merged object with the returned and original object.
+     *
+     * フィルタ後の要素ごとに関数を実行し、返り値と元の要素のプロパティをマージしたオブジェクトを列挙します。
+     *
+     * @param func - a function to be called for each filtered item <br/> 要素ごとに実行される関数
+     * @param criteria - an additional criteria applied after merge / マージ後に適用するフィルタ条件
+     * @returns - a new `Query` that yields merged objects <br/> マージされたオブジェクトを列挙する新しい `Query`
+     */
+    Query.prototype.assign = function (func, criteria) {
+        if (criteria === void 0) { criteria = null; }
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
+        var self = this;
+        return this.new((function () {
+            return __asyncGenerator(this, arguments, function () {
+                var self_2, self_2_1, item, value, e_3_1;
+                var e_3, _b;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            _c.trys.push([0, 8, 9, 14]);
+                            self_2 = __asyncValues(self);
+                            _c.label = 1;
+                        case 1: return [4 /*yield*/, __await(self_2.next())];
+                        case 2:
+                            if (!(self_2_1 = _c.sent(), !self_2_1.done)) return [3 /*break*/, 7];
+                            item = self_2_1.value;
+                            return [4 /*yield*/, __await(func(item))];
+                        case 3:
+                            value = _c.sent();
+                            if (value === undefined) {
+                                throw TypeError("Query.assign: the mapped function (" + func + ") returned an undefined. Please check the definition of the function. (First occurance: " + item + ")");
+                            }
+                            return [4 /*yield*/, __await(__assign(__assign({}, item), value))];
+                        case 4: return [4 /*yield*/, _c.sent()];
+                        case 5:
+                            _c.sent();
+                            _c.label = 6;
+                        case 6: return [3 /*break*/, 1];
+                        case 7: return [3 /*break*/, 14];
+                        case 8:
+                            e_3_1 = _c.sent();
+                            e_3 = { error: e_3_1 };
+                            return [3 /*break*/, 14];
+                        case 9:
+                            _c.trys.push([9, , 12, 13]);
+                            if (!(self_2_1 && !self_2_1.done && (_b = self_2.return))) return [3 /*break*/, 11];
+                            return [4 /*yield*/, __await(_b.call(self_2))];
+                        case 10:
+                            _c.sent();
+                            _c.label = 11;
+                        case 11: return [3 /*break*/, 13];
+                        case 12:
+                            if (e_3) throw e_3.error;
+                            return [7 /*endfinally*/];
+                        case 13: return [7 /*endfinally*/];
+                        case 14: return [2 /*return*/];
+                    }
+                });
+            });
+        })(), criteria);
     };
     /**
      * Apply an additional filter.
+     *
      * フィルタを追加します。
+     *
      * @param criteria - an additional criteria / 追加するフィルタ条件
      * @returns - a new `Query` that applies `criteria` to the filtered items of the original `Query` <br/> フィルタ後の項目を検索元とし、`criteria` を検索条件とする新しい `Query`
      */
     Query.prototype.filter = function (criteria) {
-        return new Query(this[Symbol.asyncIterator](), criteria);
+        return this.new(this[Symbol.asyncIterator](), criteria);
     };
     /**
      * Yield while `func` returns `true`.
+     *
      * `func` が `true` を返す間、列挙を続けます。
+     *
      * @param func - a function to be called for each filtered item. Returning `false` terminates the iteration. <br/>要素ごとに実行される関数。`false`を返すと列挙を停止します。
      * @param yieldLast - whether to return the item that caused `func` returned `false` <br/>`func`が`false`を返す要因となった要素を出力するかどうか
      * @returns - a new `Query` that yields while `func` returns `true`<br/>`func` が `true` を返す間列挙を続ける新しい `Query`
@@ -50645,20 +50798,20 @@ var Query = /** @class */ (function () {
         if (yieldLast === void 0) { yieldLast = false; }
         // eslint-disable-next-line @typescript-eslint/no-this-alias
         var self = this;
-        return new Query((function () {
+        return this.new((function () {
             return __asyncGenerator(this, arguments, function () {
-                var self_2, self_2_1, item, continuing, e_3_1;
-                var e_3, _b;
+                var self_3, self_3_1, item, continuing, e_4_1;
+                var e_4, _b;
                 return __generator(this, function (_c) {
                     switch (_c.label) {
                         case 0:
                             _c.trys.push([0, 12, 13, 18]);
-                            self_2 = __asyncValues(self);
+                            self_3 = __asyncValues(self);
                             _c.label = 1;
-                        case 1: return [4 /*yield*/, __await(self_2.next())];
+                        case 1: return [4 /*yield*/, __await(self_3.next())];
                         case 2:
-                            if (!(self_2_1 = _c.sent(), !self_2_1.done)) return [3 /*break*/, 11];
-                            item = self_2_1.value;
+                            if (!(self_3_1 = _c.sent(), !self_3_1.done)) return [3 /*break*/, 11];
+                            item = self_3_1.value;
                             return [4 /*yield*/, __await(func(item))];
                         case 3:
                             continuing = _c.sent();
@@ -50679,19 +50832,19 @@ var Query = /** @class */ (function () {
                         case 10: return [3 /*break*/, 1];
                         case 11: return [3 /*break*/, 18];
                         case 12:
-                            e_3_1 = _c.sent();
-                            e_3 = { error: e_3_1 };
+                            e_4_1 = _c.sent();
+                            e_4 = { error: e_4_1 };
                             return [3 /*break*/, 18];
                         case 13:
                             _c.trys.push([13, , 16, 17]);
-                            if (!(self_2_1 && !self_2_1.done && (_b = self_2.return))) return [3 /*break*/, 15];
-                            return [4 /*yield*/, __await(_b.call(self_2))];
+                            if (!(self_3_1 && !self_3_1.done && (_b = self_3.return))) return [3 /*break*/, 15];
+                            return [4 /*yield*/, __await(_b.call(self_3))];
                         case 14:
                             _c.sent();
                             _c.label = 15;
                         case 15: return [3 /*break*/, 17];
                         case 16:
-                            if (e_3) throw e_3.error;
+                            if (e_4) throw e_4.error;
                             return [7 /*endfinally*/];
                         case 17: return [7 /*endfinally*/];
                         case 18: return [2 /*return*/];
@@ -50702,17 +50855,19 @@ var Query = /** @class */ (function () {
     };
     /**
      * Yield until it reaches the maximum count.
+     *
      * 出力の最大件数を設定します。
+     *
      * @param max - the maximum count<br/>最大件数
      * @returns - a new `Query` that yields until it reaches the maximum count.<br/>最大件数に達するまで列挙を続ける新しい `Query`
      */
     Query.prototype.limit = function (max) {
         // eslint-disable-next-line @typescript-eslint/no-this-alias
         var self = this;
-        return new Query((function () {
+        return this.new((function () {
             return __asyncGenerator(this, arguments, function () {
-                var count, self_3, self_3_1, item, e_4_1;
-                var e_4, _b;
+                var count, self_4, self_4_1, item, e_5_1;
+                var e_5, _b;
                 return __generator(this, function (_c) {
                     switch (_c.label) {
                         case 0:
@@ -50724,12 +50879,12 @@ var Query = /** @class */ (function () {
                             _c.label = 3;
                         case 3:
                             _c.trys.push([3, 10, 11, 16]);
-                            self_3 = __asyncValues(self);
+                            self_4 = __asyncValues(self);
                             _c.label = 4;
-                        case 4: return [4 /*yield*/, __await(self_3.next())];
+                        case 4: return [4 /*yield*/, __await(self_4.next())];
                         case 5:
-                            if (!(self_3_1 = _c.sent(), !self_3_1.done)) return [3 /*break*/, 9];
-                            item = self_3_1.value;
+                            if (!(self_4_1 = _c.sent(), !self_4_1.done)) return [3 /*break*/, 9];
+                            item = self_4_1.value;
                             return [4 /*yield*/, __await(item)];
                         case 6: return [4 /*yield*/, _c.sent()];
                         case 7:
@@ -50741,19 +50896,19 @@ var Query = /** @class */ (function () {
                         case 8: return [3 /*break*/, 4];
                         case 9: return [3 /*break*/, 16];
                         case 10:
-                            e_4_1 = _c.sent();
-                            e_4 = { error: e_4_1 };
+                            e_5_1 = _c.sent();
+                            e_5 = { error: e_5_1 };
                             return [3 /*break*/, 16];
                         case 11:
                             _c.trys.push([11, , 14, 15]);
-                            if (!(self_3_1 && !self_3_1.done && (_b = self_3.return))) return [3 /*break*/, 13];
-                            return [4 /*yield*/, __await(_b.call(self_3))];
+                            if (!(self_4_1 && !self_4_1.done && (_b = self_4.return))) return [3 /*break*/, 13];
+                            return [4 /*yield*/, __await(_b.call(self_4))];
                         case 12:
                             _c.sent();
                             _c.label = 13;
                         case 13: return [3 /*break*/, 15];
                         case 14:
-                            if (e_4) throw e_4.error;
+                            if (e_5) throw e_5.error;
                             return [7 /*endfinally*/];
                         case 15: return [7 /*endfinally*/];
                         case 16: return [2 /*return*/];
@@ -50764,7 +50919,9 @@ var Query = /** @class */ (function () {
     };
     /**
      * Yield a property of each item.
+     *
      * 特定のプロパティの内容を一つ抜き出して列挙します。
+     *
      * @param key - the key of a property to be picked<br/>抜き出すプロパティのキー
      * @returns - a new `Query` that yields the picked property<br/>抜き出したプロパティの内容を列挙する新しい `Query`
      */
@@ -50773,7 +50930,9 @@ var Query = /** @class */ (function () {
     };
     /**
      * Pick properties of each item.
+     *
      * 特定のプロパティ以外のプロパティを削除したオブジェクトを列挙します。
+     *
      * @param keys - the keys of properties to be picked<br/>抜き出すプロパティのキー
      * @returns - a new `Query` that yields the objects with the picked properties<br/>プロパティを抜き出した新しいオブジェクトの内容を列挙する新しい `Query`
      */
@@ -50783,7 +50942,7 @@ var Query = /** @class */ (function () {
             keys[_i] = arguments[_i];
         }
         return this.map(function (item) {
-            var e_5, _b;
+            var e_6, _b;
             var picked = {};
             try {
                 for (var keys_1 = __values(keys), keys_1_1 = keys_1.next(); !keys_1_1.done; keys_1_1 = keys_1.next()) {
@@ -50791,24 +50950,27 @@ var Query = /** @class */ (function () {
                     picked[key] = item[key];
                 }
             }
-            catch (e_5_1) { e_5 = { error: e_5_1 }; }
+            catch (e_6_1) { e_6 = { error: e_6_1 }; }
             finally {
                 try {
                     if (keys_1_1 && !keys_1_1.done && (_b = keys_1.return)) _b.call(keys_1);
                 }
-                finally { if (e_5) throw e_5.error; }
+                finally { if (e_6) throw e_6.error; }
             }
             return picked;
         });
     };
-    /* eslint-disable tsdoc/syntax */
     /**
      * Generate an array from the `Query`. Running this function will invoke the whole iteration process of the `Query`.
+     *
      * `Query` から配列を生成します。この関数を実行すると `Query` の列挙を最後まで実行します。
-     * @param options.preserveCache - whether to suggest the `Query` to preserve the cached data for each item, which normally will be cleared after yield (default: `false`)<br/>`Query`にキャッシュされたデータを削除せずそのまま残すかどうかを指示します。
+     *
+     * @param options
+     *
+     * - `options.preserveCache <boolean>`: whether to suggest the `Query` to preserve the cached data for each item, which normally will be cleared after yield (default: `false`)<br/>`Query`にキャッシュされたデータを削除せずそのまま残すかどうかを指示します。
+     *
      * @returns - a `Promise` that resolves a generated array<br/>生成された配列を返す `Promise`
      */
-    /* eslint-enable tsdoc/syntax */
     Query.prototype.toArray = function (options) {
         if (options === void 0) { options = { preserveCache: false }; }
         return __awaiter(this, void 0, void 0, function () {
@@ -50832,13 +50994,15 @@ var Query = /** @class */ (function () {
     };
     /**
      * Invoke `func` for each filtered item. Running this function will invoke the whole iteration process of the `Query`.
+     *
      * 列挙された要素ごとに `func` を実行します。この関数を実行すると `Query` の列挙を最後まで実行します。
+     *
      * @param func - a function to be called for each item<br/>要素ごとに実行される関数
      */
     Query.prototype.forEach = function (func) {
-        var e_6, _b;
+        var e_7, _b;
         return __awaiter(this, void 0, void 0, function () {
-            var startTime, lastMessageTime, matchCount, _c, _d, item, now_1, e_6_1, now, msec;
+            var startTime, lastMessageTime, matchCount, _c, _d, item, now_1, e_7_1, now, msec;
             return __generator(this, function (_e) {
                 switch (_e.label) {
                     case 0:
@@ -50870,8 +51034,8 @@ var Query = /** @class */ (function () {
                     case 5: return [3 /*break*/, 2];
                     case 6: return [3 /*break*/, 13];
                     case 7:
-                        e_6_1 = _e.sent();
-                        e_6 = { error: e_6_1 };
+                        e_7_1 = _e.sent();
+                        e_7 = { error: e_7_1 };
                         return [3 /*break*/, 13];
                     case 8:
                         _e.trys.push([8, , 11, 12]);
@@ -50882,7 +51046,7 @@ var Query = /** @class */ (function () {
                         _e.label = 10;
                     case 10: return [3 /*break*/, 12];
                     case 11:
-                        if (e_6) throw e_6.error;
+                        if (e_7) throw e_7.error;
                         return [7 /*endfinally*/];
                     case 12: return [7 /*endfinally*/];
                     case 13:
@@ -50898,7 +51062,7 @@ var Query = /** @class */ (function () {
 }());
 exports.Query = Query;
 var getDefaultArgs = function (validators) {
-    var e_7, _b;
+    var e_8, _b;
     var ret = {};
     try {
         for (var _c = __values(Object.keys(validators)), _d = _c.next(); !_d.done; _d = _c.next()) {
@@ -50906,12 +51070,12 @@ var getDefaultArgs = function (validators) {
             ret[key] = validators[key].default();
         }
     }
-    catch (e_7_1) { e_7 = { error: e_7_1 }; }
+    catch (e_8_1) { e_8 = { error: e_8_1 }; }
     finally {
         try {
             if (_d && !_d.done && (_b = _c.return)) _b.call(_c);
         }
-        finally { if (e_7) throw e_7.error; }
+        finally { if (e_8) throw e_8.error; }
     }
     return ret;
 };
@@ -50981,7 +51145,7 @@ var BaseLawCriteria = /** @class */ (function () {
     BaseLawCriteria.prototype.match = function (item) {
         return __awaiter(this, void 0, void 0, function () {
             var matched, _b, _c, num, matched, _d, _e, num, xml, document_1, el;
-            var e_8, _f, e_9, _g;
+            var e_9, _f, e_10, _g;
             return __generator(this, function (_h) {
                 switch (_h.label) {
                     case 0:
@@ -51008,12 +51172,12 @@ var BaseLawCriteria = /** @class */ (function () {
                                     }
                                 }
                             }
-                            catch (e_8_1) { e_8 = { error: e_8_1 }; }
+                            catch (e_9_1) { e_9 = { error: e_9_1 }; }
                             finally {
                                 try {
                                     if (_c && !_c.done && (_f = _b.return)) _f.call(_b);
                                 }
-                                finally { if (e_8) throw e_8.error; }
+                                finally { if (e_9) throw e_9.error; }
                             }
                             if (!matched)
                                 return [2 /*return*/, false];
@@ -51029,12 +51193,12 @@ var BaseLawCriteria = /** @class */ (function () {
                                     }
                                 }
                             }
-                            catch (e_9_1) { e_9 = { error: e_9_1 }; }
+                            catch (e_10_1) { e_10 = { error: e_10_1 }; }
                             finally {
                                 try {
                                     if (_e && !_e.done && (_g = _d.return)) _g.call(_d);
                                 }
-                                finally { if (e_9) throw e_9.error; }
+                                finally { if (e_10) throw e_10.error; }
                             }
                             if (!matched)
                                 return [2 /*return*/, false];
@@ -51161,8 +51325,8 @@ exports.LawQueryItem = LawQueryItem;
 _a = symbolDoNotFinalize;
 function getLawQueryPopulationWithProgress(lawInfosOrPromise, loader) {
     return __asyncGenerator(this, arguments, function getLawQueryPopulationWithProgress_1() {
-        var startTime, lastMessageTime, yieldCount, lawInfos, _b, lawInfos_1, lawInfos_1_1, lawInfo, item, now, e_10_1, now, msec;
-        var e_10, _c;
+        var startTime, lastMessageTime, yieldCount, lawInfos, _b, lawInfos_1, lawInfos_1_1, lawInfo, item, now, e_11_1, now, msec;
+        var e_11, _c;
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
@@ -51216,14 +51380,14 @@ function getLawQueryPopulationWithProgress(lawInfosOrPromise, loader) {
                     return [3 /*break*/, 7];
                 case 13: return [3 /*break*/, 16];
                 case 14:
-                    e_10_1 = _d.sent();
-                    e_10 = { error: e_10_1 };
+                    e_11_1 = _d.sent();
+                    e_11 = { error: e_11_1 };
                     return [3 /*break*/, 16];
                 case 15:
                     try {
                         if (lawInfos_1_1 && !lawInfos_1_1.done && (_c = lawInfos_1.return)) _c.call(lawInfos_1);
                     }
-                    finally { if (e_10) throw e_10.error; }
+                    finally { if (e_11) throw e_11.error; }
                     return [7 /*endfinally*/];
                 case 16: return [3 /*break*/, 18];
                 case 17:
@@ -51237,29 +51401,31 @@ function getLawQueryPopulationWithProgress(lawInfosOrPromise, loader) {
     });
 }
 /**
- * Lawtext query の法令検索を行う {@link Query} の派生クラス。メンバーメソッドなどについては {@link Query} を参照してください。
+ * Lawtext query の法令検索を行う {@link Query} の派生クラス。ここに列挙されているもの以外のクラスメンバーについては {@link Query} を参照してください。
  */
 var LawQuery = /** @class */ (function (_super) {
     __extends(LawQuery, _super);
     function LawQuery(population, criteria) {
         var _this = this;
-        var casted = criteria;
         var this_criteria;
-        if (casted === null) {
-            this_criteria = casted;
+        if (criteria === null) {
+            this_criteria = criteria;
         }
-        else if ("match" in casted) {
-            this_criteria = casted;
+        else if ("match" in criteria) {
+            this_criteria = criteria;
         }
-        else if (typeof casted === "function") {
-            this_criteria = casted;
+        else if (typeof criteria === "function") {
+            this_criteria = criteria;
         }
         else {
-            this_criteria = new BaseLawCriteria(casted);
+            this_criteria = new BaseLawCriteria(criteria);
         }
         _this = _super.call(this, population, this_criteria) || this;
         return _this;
     }
+    LawQuery.prototype.new = function (population, criteria) {
+        return new LawQuery(population, criteria);
+    };
     LawQuery.fromFetchInfo = function (loader, criteria) {
         var _this = this;
         return new LawQuery(getLawQueryPopulationWithProgress((function () { return __awaiter(_this, void 0, void 0, function () {
@@ -51275,7 +51441,67 @@ var LawQuery = /** @class */ (function (_super) {
         }); }), loader), criteria);
     };
     LawQuery.prototype.filter = function (criteria) {
-        return new LawQuery(this[Symbol.asyncIterator](), criteria);
+        return this.new(this[Symbol.asyncIterator](), criteria);
+    };
+    LawQuery.prototype.assign = function (func, criteria) {
+        if (criteria === void 0) { criteria = null; }
+        return _super.prototype.assign.call(this, func, criteria);
+    };
+    /**
+     * 法令XMLのDOMを取得して追加したオブジェクトを列挙します。
+     * @param ensure - 法令XMLが取得できたもののみを列挙するかどうか（デフォルト: `true`）
+     * @returns - 法令XMLのDOMを `document` プロパティとして追加したオブジェクトを列挙する新しい `Query`
+     */
+    LawQuery.prototype.assignDocument = function (ensure) {
+        if (ensure === void 0) { ensure = true; }
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
+        var self = this;
+        return this.new((function () {
+            return __asyncGenerator(this, arguments, function () {
+                var self_5, self_5_1, item, document_2, e_12_1;
+                var e_12, _b;
+                return __generator(this, function (_c) {
+                    switch (_c.label) {
+                        case 0:
+                            _c.trys.push([0, 8, 9, 14]);
+                            self_5 = __asyncValues(self);
+                            _c.label = 1;
+                        case 1: return [4 /*yield*/, __await(self_5.next())];
+                        case 2:
+                            if (!(self_5_1 = _c.sent(), !self_5_1.done)) return [3 /*break*/, 7];
+                            item = self_5_1.value;
+                            return [4 /*yield*/, __await(item.getDocument())];
+                        case 3:
+                            document_2 = _c.sent();
+                            if (!(!ensure || document_2 !== null)) return [3 /*break*/, 6];
+                            return [4 /*yield*/, __await(__assign(__assign({}, item), { document: document_2 }))];
+                        case 4: return [4 /*yield*/, _c.sent()];
+                        case 5:
+                            _c.sent();
+                            _c.label = 6;
+                        case 6: return [3 /*break*/, 1];
+                        case 7: return [3 /*break*/, 14];
+                        case 8:
+                            e_12_1 = _c.sent();
+                            e_12 = { error: e_12_1 };
+                            return [3 /*break*/, 14];
+                        case 9:
+                            _c.trys.push([9, , 12, 13]);
+                            if (!(self_5_1 && !self_5_1.done && (_b = self_5.return))) return [3 /*break*/, 11];
+                            return [4 /*yield*/, __await(_b.call(self_5))];
+                        case 10:
+                            _c.sent();
+                            _c.label = 11;
+                        case 11: return [3 /*break*/, 13];
+                        case 12:
+                            if (e_12) throw e_12.error;
+                            return [7 /*endfinally*/];
+                        case 13: return [7 /*endfinally*/];
+                        case 14: return [2 /*return*/];
+                    }
+                });
+            });
+        })(), null);
     };
     return LawQuery;
 }(Query));
