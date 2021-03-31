@@ -37395,6 +37395,25 @@ module.exports = (function()
 
 /***/ }),
 
+/***/ 55733:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+/*!
+
+JSZip v3.6.0 - A JavaScript class for generating and reading zip files
+<http://stuartk.com/jszip>
+
+(c) 2009-2016 Stuart Knightley <stuart [at] stuartk.com>
+Dual licenced under the MIT license or GPLv3. See https://raw.github.com/Stuk/jszip/master/LICENSE.markdown.
+
+JSZip uses the library pako released under the MIT license :
+https://github.com/nodeca/pako/blob/master/LICENSE
+*/
+
+!function(e){if(true)module.exports=e();else {}}(function(){return function s(a,o,u){function h(r,e){if(!o[r]){if(!a[r]){var t=undefined;if(!e&&t)return require(r,!0);if(f)return f(r,!0);var n=new Error("Cannot find module '"+r+"'");throw n.code="MODULE_NOT_FOUND",n}var i=o[r]={exports:{}};a[r][0].call(i.exports,function(e){var t=a[r][1][e];return h(t||e)},i,i.exports,s,a,o,u)}return o[r].exports}for(var f=undefined,e=0;e<u.length;e++)h(u[e]);return h}({1:[function(l,t,n){(function(r){!function(e){"object"==typeof n&&void 0!==t?t.exports=e():("undefined"!=typeof window?window:void 0!==r?r:"undefined"!=typeof self?self:this).JSZip=e()}(function(){return function s(a,o,u){function h(t,e){if(!o[t]){if(!a[t]){var r="function"==typeof l&&l;if(!e&&r)return r(t,!0);if(f)return f(t,!0);var n=new Error("Cannot find module '"+t+"'");throw n.code="MODULE_NOT_FOUND",n}var i=o[t]={exports:{}};a[t][0].call(i.exports,function(e){return h(a[t][1][e]||e)},i,i.exports,s,a,o,u)}return o[t].exports}for(var f="function"==typeof l&&l,e=0;e<u.length;e++)h(u[e]);return h}({1:[function(l,t,n){(function(r){!function(e){"object"==typeof n&&void 0!==t?t.exports=e():("undefined"!=typeof window?window:void 0!==r?r:"undefined"!=typeof self?self:this).JSZip=e()}(function(){return function s(a,o,u){function h(t,e){if(!o[t]){if(!a[t]){var r="function"==typeof l&&l;if(!e&&r)return r(t,!0);if(f)return f(t,!0);var n=new Error("Cannot find module '"+t+"'");throw n.code="MODULE_NOT_FOUND",n}var i=o[t]={exports:{}};a[t][0].call(i.exports,function(e){return h(a[t][1][e]||e)},i,i.exports,s,a,o,u)}return o[t].exports}for(var f="function"==typeof l&&l,e=0;e<u.length;e++)h(u[e]);return h}({1:[function(l,t,n){(function(r){!function(e){"object"==typeof n&&void 0!==t?t.exports=e():("undefined"!=typeof window?window:void 0!==r?r:"undefined"!=typeof self?self:this).JSZip=e()}(function(){return function s(a,o,u){function h(t,e){if(!o[t]){if(!a[t]){var r="function"==typeof l&&l;if(!e&&r)return r(t,!0);if(f)return f(t,!0);var n=new Error("Cannot find module '"+t+"'");throw n.code="MODULE_NOT_FOUND",n}var i=o[t]={exports:{}};a[t][0].call(i.exports,function(e){return h(a[t][1][e]||e)},i,i.exports,s,a,o,u)}return o[t].exports}for(var f="function"==typeof l&&l,e=0;e<u.length;e++)h(u[e]);return h}({1:[function(l,t,n){(function(r){!function(e){"object"==typeof n&&void 0!==t?t.exports=e():("undefined"!=typeof window?window:void 0!==r?r:"undefined"!=typeof self?self:this).JSZip=e()}(function(){return function s(a,o,u){function h(t,e){if(!o[t]){if(!a[t]){var r="function"==typeof l&&l;if(!e&&r)return r(t,!0);if(f)return f(t,!0);var n=new Error("Cannot find module '"+t+"'");throw n.code="MODULE_NOT_FOUND",n}var i=o[t]={exports:{}};a[t][0].call(i.exports,function(e){return h(a[t][1][e]||e)},i,i.exports,s,a,o,u)}return o[t].exports}for(var f="function"==typeof l&&l,e=0;e<u.length;e++)h(u[e]);return h}({1:[function(l,t,n){(function(r){!function(e){"object"==typeof n&&void 0!==t?t.exports=e():("undefined"!=typeof window?window:void 0!==r?r:"undefined"!=typeof self?self:this).JSZip=e()}(function(){return function s(a,o,u){function h(t,e){if(!o[t]){if(!a[t]){var r="function"==typeof l&&l;if(!e&&r)return r(t,!0);if(f)return f(t,!0);var n=new Error("Cannot find module '"+t+"'");throw n.code="MODULE_NOT_FOUND",n}var i=o[t]={exports:{}};a[t][0].call(i.exports,function(e){return h(a[t][1][e]||e)},i,i.exports,s,a,o,u)}return o[t].exports}for(var f="function"==typeof l&&l,e=0;e<u.length;e++)h(u[e]);return h}({1:[function(e,t,r){"use strict";var c=e("./utils"),l=e("./support"),p="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";r.encode=function(e){for(var t,r,n,i,s,a,o,u=[],h=0,f=e.length,l=f,d="string"!==c.getTypeOf(e);h<e.length;)l=f-h,n=d?(t=e[h++],r=h<f?e[h++]:0,h<f?e[h++]:0):(t=e.charCodeAt(h++),r=h<f?e.charCodeAt(h++):0,h<f?e.charCodeAt(h++):0),i=t>>2,s=(3&t)<<4|r>>4,a=1<l?(15&r)<<2|n>>6:64,o=2<l?63&n:64,u.push(p.charAt(i)+p.charAt(s)+p.charAt(a)+p.charAt(o));return u.join("")},r.decode=function(e){var t,r,n,i,s,a,o=0,u=0;if("data:"===e.substr(0,"data:".length))throw new Error("Invalid base64 input, it looks like a data url.");var h,f=3*(e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"")).length/4;if(e.charAt(e.length-1)===p.charAt(64)&&f--,e.charAt(e.length-2)===p.charAt(64)&&f--,f%1!=0)throw new Error("Invalid base64 input, bad content length.");for(h=l.uint8array?new Uint8Array(0|f):new Array(0|f);o<e.length;)t=p.indexOf(e.charAt(o++))<<2|(i=p.indexOf(e.charAt(o++)))>>4,r=(15&i)<<4|(s=p.indexOf(e.charAt(o++)))>>2,n=(3&s)<<6|(a=p.indexOf(e.charAt(o++))),h[u++]=t,64!==s&&(h[u++]=r),64!==a&&(h[u++]=n);return h}},{"./support":30,"./utils":32}],2:[function(e,t,r){"use strict";var n=e("./external"),i=e("./stream/DataWorker"),s=e("./stream/Crc32Probe"),a=e("./stream/DataLengthProbe");function o(e,t,r,n,i){this.compressedSize=e,this.uncompressedSize=t,this.crc32=r,this.compression=n,this.compressedContent=i}o.prototype={getContentWorker:function(){var e=new i(n.Promise.resolve(this.compressedContent)).pipe(this.compression.uncompressWorker()).pipe(new a("data_length")),t=this;return e.on("end",function(){if(this.streamInfo.data_length!==t.uncompressedSize)throw new Error("Bug : uncompressed data size mismatch")}),e},getCompressedWorker:function(){return new i(n.Promise.resolve(this.compressedContent)).withStreamInfo("compressedSize",this.compressedSize).withStreamInfo("uncompressedSize",this.uncompressedSize).withStreamInfo("crc32",this.crc32).withStreamInfo("compression",this.compression)}},o.createWorkerFrom=function(e,t,r){return e.pipe(new s).pipe(new a("uncompressedSize")).pipe(t.compressWorker(r)).pipe(new a("compressedSize")).withStreamInfo("compression",t)},t.exports=o},{"./external":6,"./stream/Crc32Probe":25,"./stream/DataLengthProbe":26,"./stream/DataWorker":27}],3:[function(e,t,r){"use strict";var n=e("./stream/GenericWorker");r.STORE={magic:"\0\0",compressWorker:function(e){return new n("STORE compression")},uncompressWorker:function(){return new n("STORE decompression")}},r.DEFLATE=e("./flate")},{"./flate":7,"./stream/GenericWorker":28}],4:[function(e,t,r){"use strict";var n=e("./utils"),a=function(){for(var e,t=[],r=0;r<256;r++){e=r;for(var n=0;n<8;n++)e=1&e?3988292384^e>>>1:e>>>1;t[r]=e}return t}();t.exports=function(e,t){return void 0!==e&&e.length?"string"!==n.getTypeOf(e)?function(e,t,r){var n=a,i=0+r;e^=-1;for(var s=0;s<i;s++)e=e>>>8^n[255&(e^t[s])];return-1^e}(0|t,e,e.length):function(e,t,r){var n=a,i=0+r;e^=-1;for(var s=0;s<i;s++)e=e>>>8^n[255&(e^t.charCodeAt(s))];return-1^e}(0|t,e,e.length):0}},{"./utils":32}],5:[function(e,t,r){"use strict";r.base64=!1,r.binary=!1,r.dir=!1,r.createFolders=!0,r.date=null,r.compression=null,r.compressionOptions=null,r.comment=null,r.unixPermissions=null,r.dosPermissions=null},{}],6:[function(e,t,r){"use strict";var n;n="undefined"!=typeof Promise?Promise:e("lie"),t.exports={Promise:n}},{lie:37}],7:[function(e,t,r){"use strict";var n="undefined"!=typeof Uint8Array&&"undefined"!=typeof Uint16Array&&"undefined"!=typeof Uint32Array,i=e("pako"),s=e("./utils"),a=e("./stream/GenericWorker"),o=n?"uint8array":"array";function u(e,t){a.call(this,"FlateWorker/"+e),this._pako=null,this._pakoAction=e,this._pakoOptions=t,this.meta={}}r.magic="\b\0",s.inherits(u,a),u.prototype.processChunk=function(e){this.meta=e.meta,null===this._pako&&this._createPako(),this._pako.push(s.transformTo(o,e.data),!1)},u.prototype.flush=function(){a.prototype.flush.call(this),null===this._pako&&this._createPako(),this._pako.push([],!0)},u.prototype.cleanUp=function(){a.prototype.cleanUp.call(this),this._pako=null},u.prototype._createPako=function(){this._pako=new i[this._pakoAction]({raw:!0,level:this._pakoOptions.level||-1});var t=this;this._pako.onData=function(e){t.push({data:e,meta:t.meta})}},r.compressWorker=function(e){return new u("Deflate",e)},r.uncompressWorker=function(){return new u("Inflate",{})}},{"./stream/GenericWorker":28,"./utils":32,pako:38}],8:[function(e,t,r){"use strict";function I(e,t){var r,n="";for(r=0;r<t;r++)n+=String.fromCharCode(255&e),e>>>=8;return n}function i(e,t,r,n,i,s){var a,o,u=e.file,h=e.compression,f=s!==B.utf8encode,l=O.transformTo("string",s(u.name)),d=O.transformTo("string",B.utf8encode(u.name)),c=u.comment,p=O.transformTo("string",s(c)),m=O.transformTo("string",B.utf8encode(c)),_=d.length!==u.name.length,g=m.length!==c.length,v="",b="",w="",y=u.dir,k=u.date,x={crc32:0,compressedSize:0,uncompressedSize:0};t&&!r||(x.crc32=e.crc32,x.compressedSize=e.compressedSize,x.uncompressedSize=e.uncompressedSize);var S=0;t&&(S|=8),f||!_&&!g||(S|=2048);var z,E=0,C=0;y&&(E|=16),"UNIX"===i?(C=798,E|=((z=u.unixPermissions)||(z=y?16893:33204),(65535&z)<<16)):(C=20,E|=63&(u.dosPermissions||0)),a=k.getUTCHours(),a<<=6,a|=k.getUTCMinutes(),a<<=5,a|=k.getUTCSeconds()/2,o=k.getUTCFullYear()-1980,o<<=4,o|=k.getUTCMonth()+1,o<<=5,o|=k.getUTCDate(),_&&(v+="up"+I((b=I(1,1)+I(T(l),4)+d).length,2)+b),g&&(v+="uc"+I((w=I(1,1)+I(T(p),4)+m).length,2)+w);var A="";return A+="\n\0",A+=I(S,2),A+=h.magic,A+=I(a,2),A+=I(o,2),A+=I(x.crc32,4),A+=I(x.compressedSize,4),A+=I(x.uncompressedSize,4),A+=I(l.length,2),A+=I(v.length,2),{fileRecord:R.LOCAL_FILE_HEADER+A+l+v,dirRecord:R.CENTRAL_FILE_HEADER+I(C,2)+A+I(p.length,2)+"\0\0\0\0"+I(E,4)+I(n,4)+l+v+p}}var O=e("../utils"),s=e("../stream/GenericWorker"),B=e("../utf8"),T=e("../crc32"),R=e("../signature");function n(e,t,r,n){s.call(this,"ZipFileWorker"),this.bytesWritten=0,this.zipComment=t,this.zipPlatform=r,this.encodeFileName=n,this.streamFiles=e,this.accumulate=!1,this.contentBuffer=[],this.dirRecords=[],this.currentSourceOffset=0,this.entriesCount=0,this.currentFile=null,this._sources=[]}O.inherits(n,s),n.prototype.push=function(e){var t=e.meta.percent||0,r=this.entriesCount,n=this._sources.length;this.accumulate?this.contentBuffer.push(e):(this.bytesWritten+=e.data.length,s.prototype.push.call(this,{data:e.data,meta:{currentFile:this.currentFile,percent:r?(t+100*(r-n-1))/r:100}}))},n.prototype.openedSource=function(e){this.currentSourceOffset=this.bytesWritten,this.currentFile=e.file.name;var t=this.streamFiles&&!e.file.dir;if(t){var r=i(e,t,!1,this.currentSourceOffset,this.zipPlatform,this.encodeFileName);this.push({data:r.fileRecord,meta:{percent:0}})}else this.accumulate=!0},n.prototype.closedSource=function(e){this.accumulate=!1;var t,r=this.streamFiles&&!e.file.dir,n=i(e,r,!0,this.currentSourceOffset,this.zipPlatform,this.encodeFileName);if(this.dirRecords.push(n.dirRecord),r)this.push({data:(t=e,R.DATA_DESCRIPTOR+I(t.crc32,4)+I(t.compressedSize,4)+I(t.uncompressedSize,4)),meta:{percent:100}});else for(this.push({data:n.fileRecord,meta:{percent:0}});this.contentBuffer.length;)this.push(this.contentBuffer.shift());this.currentFile=null},n.prototype.flush=function(){for(var e=this.bytesWritten,t=0;t<this.dirRecords.length;t++)this.push({data:this.dirRecords[t],meta:{percent:100}});var r,n,i,s,a,o,u=this.bytesWritten-e,h=(r=this.dirRecords.length,n=u,i=e,s=this.zipComment,a=this.encodeFileName,o=O.transformTo("string",a(s)),R.CENTRAL_DIRECTORY_END+"\0\0\0\0"+I(r,2)+I(r,2)+I(n,4)+I(i,4)+I(o.length,2)+o);this.push({data:h,meta:{percent:100}})},n.prototype.prepareNextSource=function(){this.previous=this._sources.shift(),this.openedSource(this.previous.streamInfo),this.isPaused?this.previous.pause():this.previous.resume()},n.prototype.registerPrevious=function(e){this._sources.push(e);var t=this;return e.on("data",function(e){t.processChunk(e)}),e.on("end",function(){t.closedSource(t.previous.streamInfo),t._sources.length?t.prepareNextSource():t.end()}),e.on("error",function(e){t.error(e)}),this},n.prototype.resume=function(){return!!s.prototype.resume.call(this)&&(!this.previous&&this._sources.length?(this.prepareNextSource(),!0):this.previous||this._sources.length||this.generatedError?void 0:(this.end(),!0))},n.prototype.error=function(e){var t=this._sources;if(!s.prototype.error.call(this,e))return!1;for(var r=0;r<t.length;r++)try{t[r].error(e)}catch(e){}return!0},n.prototype.lock=function(){s.prototype.lock.call(this);for(var e=this._sources,t=0;t<e.length;t++)e[t].lock()},t.exports=n},{"../crc32":4,"../signature":23,"../stream/GenericWorker":28,"../utf8":31,"../utils":32}],9:[function(e,t,r){"use strict";var h=e("../compressions"),n=e("./ZipFileWorker");r.generateWorker=function(e,a,t){var o=new n(a.streamFiles,t,a.platform,a.encodeFileName),u=0;try{e.forEach(function(e,t){u++;var r=function(e,t){var r=e||t,n=h[r];if(!n)throw new Error(r+" is not a valid compression method !");return n}(t.options.compression,a.compression),n=t.options.compressionOptions||a.compressionOptions||{},i=t.dir,s=t.date;t._compressWorker(r,n).withStreamInfo("file",{name:e,dir:i,date:s,comment:t.comment||"",unixPermissions:t.unixPermissions,dosPermissions:t.dosPermissions}).pipe(o)}),o.entriesCount=u}catch(e){o.error(e)}return o}},{"../compressions":3,"./ZipFileWorker":8}],10:[function(e,t,r){"use strict";function n(){if(!(this instanceof n))return new n;if(arguments.length)throw new Error("The constructor with parameters has been removed in JSZip 3.0, please check the upgrade guide.");this.files={},this.comment=null,this.root="",this.clone=function(){var e=new n;for(var t in this)"function"!=typeof this[t]&&(e[t]=this[t]);return e}}(n.prototype=e("./object")).loadAsync=e("./load"),n.support=e("./support"),n.defaults=e("./defaults"),n.version="3.5.0",n.loadAsync=function(e,t){return(new n).loadAsync(e,t)},n.external=e("./external"),t.exports=n},{"./defaults":5,"./external":6,"./load":11,"./object":15,"./support":30}],11:[function(e,t,r){"use strict";var n=e("./utils"),i=e("./external"),o=e("./utf8"),u=e("./zipEntries"),s=e("./stream/Crc32Probe"),h=e("./nodejsUtils");function f(n){return new i.Promise(function(e,t){var r=n.decompressed.getContentWorker().pipe(new s);r.on("error",function(e){t(e)}).on("end",function(){r.streamInfo.crc32!==n.decompressed.crc32?t(new Error("Corrupted zip : CRC32 mismatch")):e()}).resume()})}t.exports=function(e,s){var a=this;return s=n.extend(s||{},{base64:!1,checkCRC32:!1,optimizedBinaryString:!1,createFolders:!1,decodeFileName:o.utf8decode}),h.isNode&&h.isStream(e)?i.Promise.reject(new Error("JSZip can't accept a stream when loading a zip file.")):n.prepareContent("the loaded zip file",e,!0,s.optimizedBinaryString,s.base64).then(function(e){var t=new u(s);return t.load(e),t}).then(function(e){var t=[i.Promise.resolve(e)],r=e.files;if(s.checkCRC32)for(var n=0;n<r.length;n++)t.push(f(r[n]));return i.Promise.all(t)}).then(function(e){for(var t=e.shift(),r=t.files,n=0;n<r.length;n++){var i=r[n];a.file(i.fileNameStr,i.decompressed,{binary:!0,optimizedBinaryString:!0,date:i.date,dir:i.dir,comment:i.fileCommentStr.length?i.fileCommentStr:null,unixPermissions:i.unixPermissions,dosPermissions:i.dosPermissions,createFolders:s.createFolders})}return t.zipComment.length&&(a.comment=t.zipComment),a})}},{"./external":6,"./nodejsUtils":14,"./stream/Crc32Probe":25,"./utf8":31,"./utils":32,"./zipEntries":33}],12:[function(e,t,r){"use strict";var n=e("../utils"),i=e("../stream/GenericWorker");function s(e,t){i.call(this,"Nodejs stream input adapter for "+e),this._upstreamEnded=!1,this._bindStream(t)}n.inherits(s,i),s.prototype._bindStream=function(e){var t=this;(this._stream=e).pause(),e.on("data",function(e){t.push({data:e,meta:{percent:0}})}).on("error",function(e){t.isPaused?this.generatedError=e:t.error(e)}).on("end",function(){t.isPaused?t._upstreamEnded=!0:t.end()})},s.prototype.pause=function(){return!!i.prototype.pause.call(this)&&(this._stream.pause(),!0)},s.prototype.resume=function(){return!!i.prototype.resume.call(this)&&(this._upstreamEnded?this.end():this._stream.resume(),!0)},t.exports=s},{"../stream/GenericWorker":28,"../utils":32}],13:[function(e,t,r){"use strict";var i=e("readable-stream").Readable;function n(e,t,r){i.call(this,t),this._helper=e;var n=this;e.on("data",function(e,t){n.push(e)||n._helper.pause(),r&&r(t)}).on("error",function(e){n.emit("error",e)}).on("end",function(){n.push(null)})}e("../utils").inherits(n,i),n.prototype._read=function(){this._helper.resume()},t.exports=n},{"../utils":32,"readable-stream":16}],14:[function(e,t,r){"use strict";t.exports={isNode:"undefined"!=typeof Buffer,newBufferFrom:function(e,t){if(Buffer.from&&Buffer.from!==Uint8Array.from)return Buffer.from(e,t);if("number"==typeof e)throw new Error('The "data" argument must not be a number');return new Buffer(e,t)},allocBuffer:function(e){if(Buffer.alloc)return Buffer.alloc(e);var t=new Buffer(e);return t.fill(0),t},isBuffer:function(e){return Buffer.isBuffer(e)},isStream:function(e){return e&&"function"==typeof e.on&&"function"==typeof e.pause&&"function"==typeof e.resume}}},{}],15:[function(e,t,r){"use strict";function s(e,t,r){var n,i=f.getTypeOf(t),s=f.extend(r||{},d);s.date=s.date||new Date,null!==s.compression&&(s.compression=s.compression.toUpperCase()),"string"==typeof s.unixPermissions&&(s.unixPermissions=parseInt(s.unixPermissions,8)),s.unixPermissions&&16384&s.unixPermissions&&(s.dir=!0),s.dosPermissions&&16&s.dosPermissions&&(s.dir=!0),s.dir&&(e=h(e)),s.createFolders&&(n=function(e){"/"===e.slice(-1)&&(e=e.substring(0,e.length-1));var t=e.lastIndexOf("/");return 0<t?e.substring(0,t):""}(e))&&g.call(this,n,!0);var a,o="string"===i&&!1===s.binary&&!1===s.base64;r&&void 0!==r.binary||(s.binary=!o),(t instanceof c&&0===t.uncompressedSize||s.dir||!t||0===t.length)&&(s.base64=!1,s.binary=!0,t="",s.compression="STORE",i="string"),a=t instanceof c||t instanceof l?t:m.isNode&&m.isStream(t)?new _(e,t):f.prepareContent(e,t,s.binary,s.optimizedBinaryString,s.base64);var u=new p(e,a,s);this.files[e]=u}function h(e){return"/"!==e.slice(-1)&&(e+="/"),e}var i=e("./utf8"),f=e("./utils"),l=e("./stream/GenericWorker"),a=e("./stream/StreamHelper"),d=e("./defaults"),c=e("./compressedObject"),p=e("./zipObject"),o=e("./generate"),m=e("./nodejsUtils"),_=e("./nodejs/NodejsStreamInputAdapter"),g=function(e,t){return t=void 0!==t?t:d.createFolders,e=h(e),this.files[e]||s.call(this,e,null,{dir:!0,createFolders:t}),this.files[e]};function u(e){return"[object RegExp]"===Object.prototype.toString.call(e)}var n={load:function(){throw new Error("This method has been removed in JSZip 3.0, please check the upgrade guide.")},forEach:function(e){var t,r,n;for(t in this.files)this.files.hasOwnProperty(t)&&(n=this.files[t],(r=t.slice(this.root.length,t.length))&&t.slice(0,this.root.length)===this.root&&e(r,n))},filter:function(r){var n=[];return this.forEach(function(e,t){r(e,t)&&n.push(t)}),n},file:function(e,t,r){if(1!==arguments.length)return e=this.root+e,s.call(this,e,t,r),this;if(u(e)){var n=e;return this.filter(function(e,t){return!t.dir&&n.test(e)})}var i=this.files[this.root+e];return i&&!i.dir?i:null},folder:function(r){if(!r)return this;if(u(r))return this.filter(function(e,t){return t.dir&&r.test(e)});var e=this.root+r,t=g.call(this,e),n=this.clone();return n.root=t.name,n},remove:function(r){r=this.root+r;var e=this.files[r];if(e||("/"!==r.slice(-1)&&(r+="/"),e=this.files[r]),e&&!e.dir)delete this.files[r];else for(var t=this.filter(function(e,t){return t.name.slice(0,r.length)===r}),n=0;n<t.length;n++)delete this.files[t[n].name];return this},generate:function(e){throw new Error("This method has been removed in JSZip 3.0, please check the upgrade guide.")},generateInternalStream:function(e){var t,r={};try{if((r=f.extend(e||{},{streamFiles:!1,compression:"STORE",compressionOptions:null,type:"",platform:"DOS",comment:null,mimeType:"application/zip",encodeFileName:i.utf8encode})).type=r.type.toLowerCase(),r.compression=r.compression.toUpperCase(),"binarystring"===r.type&&(r.type="string"),!r.type)throw new Error("No output type specified.");f.checkSupport(r.type),"darwin"!==r.platform&&"freebsd"!==r.platform&&"linux"!==r.platform&&"sunos"!==r.platform||(r.platform="UNIX"),"win32"===r.platform&&(r.platform="DOS");var n=r.comment||this.comment||"";t=o.generateWorker(this,r,n)}catch(e){(t=new l("error")).error(e)}return new a(t,r.type||"string",r.mimeType)},generateAsync:function(e,t){return this.generateInternalStream(e).accumulate(t)},generateNodeStream:function(e,t){return(e=e||{}).type||(e.type="nodebuffer"),this.generateInternalStream(e).toNodejsStream(t)}};t.exports=n},{"./compressedObject":2,"./defaults":5,"./generate":9,"./nodejs/NodejsStreamInputAdapter":12,"./nodejsUtils":14,"./stream/GenericWorker":28,"./stream/StreamHelper":29,"./utf8":31,"./utils":32,"./zipObject":35}],16:[function(e,t,r){t.exports=e("stream")},{stream:void 0}],17:[function(e,t,r){"use strict";var n=e("./DataReader");function i(e){n.call(this,e);for(var t=0;t<this.data.length;t++)e[t]=255&e[t]}e("../utils").inherits(i,n),i.prototype.byteAt=function(e){return this.data[this.zero+e]},i.prototype.lastIndexOfSignature=function(e){for(var t=e.charCodeAt(0),r=e.charCodeAt(1),n=e.charCodeAt(2),i=e.charCodeAt(3),s=this.length-4;0<=s;--s)if(this.data[s]===t&&this.data[s+1]===r&&this.data[s+2]===n&&this.data[s+3]===i)return s-this.zero;return-1},i.prototype.readAndCheckSignature=function(e){var t=e.charCodeAt(0),r=e.charCodeAt(1),n=e.charCodeAt(2),i=e.charCodeAt(3),s=this.readData(4);return t===s[0]&&r===s[1]&&n===s[2]&&i===s[3]},i.prototype.readData=function(e){if(this.checkOffset(e),0===e)return[];var t=this.data.slice(this.zero+this.index,this.zero+this.index+e);return this.index+=e,t},t.exports=i},{"../utils":32,"./DataReader":18}],18:[function(e,t,r){"use strict";var n=e("../utils");function i(e){this.data=e,this.length=e.length,this.index=0,this.zero=0}i.prototype={checkOffset:function(e){this.checkIndex(this.index+e)},checkIndex:function(e){if(this.length<this.zero+e||e<0)throw new Error("End of data reached (data length = "+this.length+", asked index = "+e+"). Corrupted zip ?")},setIndex:function(e){this.checkIndex(e),this.index=e},skip:function(e){this.setIndex(this.index+e)},byteAt:function(e){},readInt:function(e){var t,r=0;for(this.checkOffset(e),t=this.index+e-1;t>=this.index;t--)r=(r<<8)+this.byteAt(t);return this.index+=e,r},readString:function(e){return n.transformTo("string",this.readData(e))},readData:function(e){},lastIndexOfSignature:function(e){},readAndCheckSignature:function(e){},readDate:function(){var e=this.readInt(4);return new Date(Date.UTC(1980+(e>>25&127),(e>>21&15)-1,e>>16&31,e>>11&31,e>>5&63,(31&e)<<1))}},t.exports=i},{"../utils":32}],19:[function(e,t,r){"use strict";var n=e("./Uint8ArrayReader");function i(e){n.call(this,e)}e("../utils").inherits(i,n),i.prototype.readData=function(e){this.checkOffset(e);var t=this.data.slice(this.zero+this.index,this.zero+this.index+e);return this.index+=e,t},t.exports=i},{"../utils":32,"./Uint8ArrayReader":21}],20:[function(e,t,r){"use strict";var n=e("./DataReader");function i(e){n.call(this,e)}e("../utils").inherits(i,n),i.prototype.byteAt=function(e){return this.data.charCodeAt(this.zero+e)},i.prototype.lastIndexOfSignature=function(e){return this.data.lastIndexOf(e)-this.zero},i.prototype.readAndCheckSignature=function(e){return e===this.readData(4)},i.prototype.readData=function(e){this.checkOffset(e);var t=this.data.slice(this.zero+this.index,this.zero+this.index+e);return this.index+=e,t},t.exports=i},{"../utils":32,"./DataReader":18}],21:[function(e,t,r){"use strict";var n=e("./ArrayReader");function i(e){n.call(this,e)}e("../utils").inherits(i,n),i.prototype.readData=function(e){if(this.checkOffset(e),0===e)return new Uint8Array(0);var t=this.data.subarray(this.zero+this.index,this.zero+this.index+e);return this.index+=e,t},t.exports=i},{"../utils":32,"./ArrayReader":17}],22:[function(e,t,r){"use strict";var n=e("../utils"),i=e("../support"),s=e("./ArrayReader"),a=e("./StringReader"),o=e("./NodeBufferReader"),u=e("./Uint8ArrayReader");t.exports=function(e){var t=n.getTypeOf(e);return n.checkSupport(t),"string"!==t||i.uint8array?"nodebuffer"===t?new o(e):i.uint8array?new u(n.transformTo("uint8array",e)):new s(n.transformTo("array",e)):new a(e)}},{"../support":30,"../utils":32,"./ArrayReader":17,"./NodeBufferReader":19,"./StringReader":20,"./Uint8ArrayReader":21}],23:[function(e,t,r){"use strict";r.LOCAL_FILE_HEADER="PK",r.CENTRAL_FILE_HEADER="PK",r.CENTRAL_DIRECTORY_END="PK",r.ZIP64_CENTRAL_DIRECTORY_LOCATOR="PK",r.ZIP64_CENTRAL_DIRECTORY_END="PK",r.DATA_DESCRIPTOR="PK\b"},{}],24:[function(e,t,r){"use strict";var n=e("./GenericWorker"),i=e("../utils");function s(e){n.call(this,"ConvertWorker to "+e),this.destType=e}i.inherits(s,n),s.prototype.processChunk=function(e){this.push({data:i.transformTo(this.destType,e.data),meta:e.meta})},t.exports=s},{"../utils":32,"./GenericWorker":28}],25:[function(e,t,r){"use strict";var n=e("./GenericWorker"),i=e("../crc32");function s(){n.call(this,"Crc32Probe"),this.withStreamInfo("crc32",0)}e("../utils").inherits(s,n),s.prototype.processChunk=function(e){this.streamInfo.crc32=i(e.data,this.streamInfo.crc32||0),this.push(e)},t.exports=s},{"../crc32":4,"../utils":32,"./GenericWorker":28}],26:[function(e,t,r){"use strict";var n=e("../utils"),i=e("./GenericWorker");function s(e){i.call(this,"DataLengthProbe for "+e),this.propName=e,this.withStreamInfo(e,0)}n.inherits(s,i),s.prototype.processChunk=function(e){if(e){var t=this.streamInfo[this.propName]||0;this.streamInfo[this.propName]=t+e.data.length}i.prototype.processChunk.call(this,e)},t.exports=s},{"../utils":32,"./GenericWorker":28}],27:[function(e,t,r){"use strict";var n=e("../utils"),i=e("./GenericWorker");function s(e){i.call(this,"DataWorker");var t=this;this.dataIsReady=!1,this.index=0,this.max=0,this.data=null,this.type="",this._tickScheduled=!1,e.then(function(e){t.dataIsReady=!0,t.data=e,t.max=e&&e.length||0,t.type=n.getTypeOf(e),t.isPaused||t._tickAndRepeat()},function(e){t.error(e)})}n.inherits(s,i),s.prototype.cleanUp=function(){i.prototype.cleanUp.call(this),this.data=null},s.prototype.resume=function(){return!!i.prototype.resume.call(this)&&(!this._tickScheduled&&this.dataIsReady&&(this._tickScheduled=!0,n.delay(this._tickAndRepeat,[],this)),!0)},s.prototype._tickAndRepeat=function(){this._tickScheduled=!1,this.isPaused||this.isFinished||(this._tick(),this.isFinished||(n.delay(this._tickAndRepeat,[],this),this._tickScheduled=!0))},s.prototype._tick=function(){if(this.isPaused||this.isFinished)return!1;var e=null,t=Math.min(this.max,this.index+16384);if(this.index>=this.max)return this.end();switch(this.type){case"string":e=this.data.substring(this.index,t);break;case"uint8array":e=this.data.subarray(this.index,t);break;case"array":case"nodebuffer":e=this.data.slice(this.index,t)}return this.index=t,this.push({data:e,meta:{percent:this.max?this.index/this.max*100:0}})},t.exports=s},{"../utils":32,"./GenericWorker":28}],28:[function(e,t,r){"use strict";function n(e){this.name=e||"default",this.streamInfo={},this.generatedError=null,this.extraStreamInfo={},this.isPaused=!0,this.isFinished=!1,this.isLocked=!1,this._listeners={data:[],end:[],error:[]},this.previous=null}n.prototype={push:function(e){this.emit("data",e)},end:function(){if(this.isFinished)return!1;this.flush();try{this.emit("end"),this.cleanUp(),this.isFinished=!0}catch(e){this.emit("error",e)}return!0},error:function(e){return!this.isFinished&&(this.isPaused?this.generatedError=e:(this.isFinished=!0,this.emit("error",e),this.previous&&this.previous.error(e),this.cleanUp()),!0)},on:function(e,t){return this._listeners[e].push(t),this},cleanUp:function(){this.streamInfo=this.generatedError=this.extraStreamInfo=null,this._listeners=[]},emit:function(e,t){if(this._listeners[e])for(var r=0;r<this._listeners[e].length;r++)this._listeners[e][r].call(this,t)},pipe:function(e){return e.registerPrevious(this)},registerPrevious:function(e){if(this.isLocked)throw new Error("The stream '"+this+"' has already been used.");this.streamInfo=e.streamInfo,this.mergeStreamInfo(),this.previous=e;var t=this;return e.on("data",function(e){t.processChunk(e)}),e.on("end",function(){t.end()}),e.on("error",function(e){t.error(e)}),this},pause:function(){return!this.isPaused&&!this.isFinished&&(this.isPaused=!0,this.previous&&this.previous.pause(),!0)},resume:function(){if(!this.isPaused||this.isFinished)return!1;var e=this.isPaused=!1;return this.generatedError&&(this.error(this.generatedError),e=!0),this.previous&&this.previous.resume(),!e},flush:function(){},processChunk:function(e){this.push(e)},withStreamInfo:function(e,t){return this.extraStreamInfo[e]=t,this.mergeStreamInfo(),this},mergeStreamInfo:function(){for(var e in this.extraStreamInfo)this.extraStreamInfo.hasOwnProperty(e)&&(this.streamInfo[e]=this.extraStreamInfo[e])},lock:function(){if(this.isLocked)throw new Error("The stream '"+this+"' has already been used.");this.isLocked=!0,this.previous&&this.previous.lock()},toString:function(){var e="Worker "+this.name;return this.previous?this.previous+" -> "+e:e}},t.exports=n},{}],29:[function(e,t,r){"use strict";var h=e("../utils"),i=e("./ConvertWorker"),s=e("./GenericWorker"),f=e("../base64"),n=e("../support"),a=e("../external"),o=null;if(n.nodestream)try{o=e("../nodejs/NodejsStreamOutputAdapter")}catch(e){}function u(e,t,r){var n=t;switch(t){case"blob":case"arraybuffer":n="uint8array";break;case"base64":n="string"}try{this._internalType=n,this._outputType=t,this._mimeType=r,h.checkSupport(n),this._worker=e.pipe(new i(n)),e.lock()}catch(e){this._worker=new s("error"),this._worker.error(e)}}u.prototype={accumulate:function(e){return o=this,u=e,new a.Promise(function(t,r){var n=[],i=o._internalType,s=o._outputType,a=o._mimeType;o.on("data",function(e,t){n.push(e),u&&u(t)}).on("error",function(e){n=[],r(e)}).on("end",function(){try{var e=function(e,t,r){switch(e){case"blob":return h.newBlob(h.transformTo("arraybuffer",t),r);case"base64":return f.encode(t);default:return h.transformTo(e,t)}}(s,function(e,t){var r,n=0,i=null,s=0;for(r=0;r<t.length;r++)s+=t[r].length;switch(e){case"string":return t.join("");case"array":return Array.prototype.concat.apply([],t);case"uint8array":for(i=new Uint8Array(s),r=0;r<t.length;r++)i.set(t[r],n),n+=t[r].length;return i;case"nodebuffer":return Buffer.concat(t);default:throw new Error("concat : unsupported type '"+e+"'")}}(i,n),a);t(e)}catch(e){r(e)}n=[]}).resume()});var o,u},on:function(e,t){var r=this;return"data"===e?this._worker.on(e,function(e){t.call(r,e.data,e.meta)}):this._worker.on(e,function(){h.delay(t,arguments,r)}),this},resume:function(){return h.delay(this._worker.resume,[],this._worker),this},pause:function(){return this._worker.pause(),this},toNodejsStream:function(e){if(h.checkSupport("nodestream"),"nodebuffer"!==this._outputType)throw new Error(this._outputType+" is not supported by this method");return new o(this,{objectMode:"nodebuffer"!==this._outputType},e)}},t.exports=u},{"../base64":1,"../external":6,"../nodejs/NodejsStreamOutputAdapter":13,"../support":30,"../utils":32,"./ConvertWorker":24,"./GenericWorker":28}],30:[function(e,t,r){"use strict";if(r.base64=!0,r.array=!0,r.string=!0,r.arraybuffer="undefined"!=typeof ArrayBuffer&&"undefined"!=typeof Uint8Array,r.nodebuffer="undefined"!=typeof Buffer,r.uint8array="undefined"!=typeof Uint8Array,"undefined"==typeof ArrayBuffer)r.blob=!1;else{var n=new ArrayBuffer(0);try{r.blob=0===new Blob([n],{type:"application/zip"}).size}catch(e){try{var i=new(self.BlobBuilder||self.WebKitBlobBuilder||self.MozBlobBuilder||self.MSBlobBuilder);i.append(n),r.blob=0===i.getBlob("application/zip").size}catch(e){r.blob=!1}}}try{r.nodestream=!!e("readable-stream").Readable}catch(e){r.nodestream=!1}},{"readable-stream":16}],31:[function(e,t,s){"use strict";for(var o=e("./utils"),u=e("./support"),r=e("./nodejsUtils"),n=e("./stream/GenericWorker"),h=new Array(256),i=0;i<256;i++)h[i]=252<=i?6:248<=i?5:240<=i?4:224<=i?3:192<=i?2:1;function a(){n.call(this,"utf-8 decode"),this.leftOver=null}function f(){n.call(this,"utf-8 encode")}h[254]=h[254]=1,s.utf8encode=function(e){return u.nodebuffer?r.newBufferFrom(e,"utf-8"):function(e){var t,r,n,i,s,a=e.length,o=0;for(i=0;i<a;i++)55296==(64512&(r=e.charCodeAt(i)))&&i+1<a&&56320==(64512&(n=e.charCodeAt(i+1)))&&(r=65536+(r-55296<<10)+(n-56320),i++),o+=r<128?1:r<2048?2:r<65536?3:4;for(t=u.uint8array?new Uint8Array(o):new Array(o),i=s=0;s<o;i++)55296==(64512&(r=e.charCodeAt(i)))&&i+1<a&&56320==(64512&(n=e.charCodeAt(i+1)))&&(r=65536+(r-55296<<10)+(n-56320),i++),r<128?t[s++]=r:(r<2048?t[s++]=192|r>>>6:(r<65536?t[s++]=224|r>>>12:(t[s++]=240|r>>>18,t[s++]=128|r>>>12&63),t[s++]=128|r>>>6&63),t[s++]=128|63&r);return t}(e)},s.utf8decode=function(e){return u.nodebuffer?o.transformTo("nodebuffer",e).toString("utf-8"):function(e){var t,r,n,i,s=e.length,a=new Array(2*s);for(t=r=0;t<s;)if((n=e[t++])<128)a[r++]=n;else if(4<(i=h[n]))a[r++]=65533,t+=i-1;else{for(n&=2===i?31:3===i?15:7;1<i&&t<s;)n=n<<6|63&e[t++],i--;1<i?a[r++]=65533:n<65536?a[r++]=n:(n-=65536,a[r++]=55296|n>>10&1023,a[r++]=56320|1023&n)}return a.length!==r&&(a.subarray?a=a.subarray(0,r):a.length=r),o.applyFromCharCode(a)}(e=o.transformTo(u.uint8array?"uint8array":"array",e))},o.inherits(a,n),a.prototype.processChunk=function(e){var t=o.transformTo(u.uint8array?"uint8array":"array",e.data);if(this.leftOver&&this.leftOver.length){if(u.uint8array){var r=t;(t=new Uint8Array(r.length+this.leftOver.length)).set(this.leftOver,0),t.set(r,this.leftOver.length)}else t=this.leftOver.concat(t);this.leftOver=null}var n=function(e,t){var r;for((t=t||e.length)>e.length&&(t=e.length),r=t-1;0<=r&&128==(192&e[r]);)r--;return r<0?t:0===r?t:r+h[e[r]]>t?r:t}(t),i=t;n!==t.length&&(u.uint8array?(i=t.subarray(0,n),this.leftOver=t.subarray(n,t.length)):(i=t.slice(0,n),this.leftOver=t.slice(n,t.length))),this.push({data:s.utf8decode(i),meta:e.meta})},a.prototype.flush=function(){this.leftOver&&this.leftOver.length&&(this.push({data:s.utf8decode(this.leftOver),meta:{}}),this.leftOver=null)},s.Utf8DecodeWorker=a,o.inherits(f,n),f.prototype.processChunk=function(e){this.push({data:s.utf8encode(e.data),meta:e.meta})},s.Utf8EncodeWorker=f},{"./nodejsUtils":14,"./stream/GenericWorker":28,"./support":30,"./utils":32}],32:[function(e,t,o){"use strict";var u=e("./support"),h=e("./base64"),r=e("./nodejsUtils"),n=e("set-immediate-shim"),f=e("./external");function i(e){return e}function l(e,t){for(var r=0;r<e.length;++r)t[r]=255&e.charCodeAt(r);return t}o.newBlob=function(t,r){o.checkSupport("blob");try{return new Blob([t],{type:r})}catch(e){try{var n=new(self.BlobBuilder||self.WebKitBlobBuilder||self.MozBlobBuilder||self.MSBlobBuilder);return n.append(t),n.getBlob(r)}catch(e){throw new Error("Bug : can't construct the Blob.")}}};var s={stringifyByChunk:function(e,t,r){var n=[],i=0,s=e.length;if(s<=r)return String.fromCharCode.apply(null,e);for(;i<s;)"array"===t||"nodebuffer"===t?n.push(String.fromCharCode.apply(null,e.slice(i,Math.min(i+r,s)))):n.push(String.fromCharCode.apply(null,e.subarray(i,Math.min(i+r,s)))),i+=r;return n.join("")},stringifyByChar:function(e){for(var t="",r=0;r<e.length;r++)t+=String.fromCharCode(e[r]);return t},applyCanBeUsed:{uint8array:function(){try{return u.uint8array&&1===String.fromCharCode.apply(null,new Uint8Array(1)).length}catch(e){return!1}}(),nodebuffer:function(){try{return u.nodebuffer&&1===String.fromCharCode.apply(null,r.allocBuffer(1)).length}catch(e){return!1}}()}};function a(e){var t=65536,r=o.getTypeOf(e),n=!0;if("uint8array"===r?n=s.applyCanBeUsed.uint8array:"nodebuffer"===r&&(n=s.applyCanBeUsed.nodebuffer),n)for(;1<t;)try{return s.stringifyByChunk(e,r,t)}catch(e){t=Math.floor(t/2)}return s.stringifyByChar(e)}function d(e,t){for(var r=0;r<e.length;r++)t[r]=e[r];return t}o.applyFromCharCode=a;var c={};c.string={string:i,array:function(e){return l(e,new Array(e.length))},arraybuffer:function(e){return c.string.uint8array(e).buffer},uint8array:function(e){return l(e,new Uint8Array(e.length))},nodebuffer:function(e){return l(e,r.allocBuffer(e.length))}},c.array={string:a,array:i,arraybuffer:function(e){return new Uint8Array(e).buffer},uint8array:function(e){return new Uint8Array(e)},nodebuffer:function(e){return r.newBufferFrom(e)}},c.arraybuffer={string:function(e){return a(new Uint8Array(e))},array:function(e){return d(new Uint8Array(e),new Array(e.byteLength))},arraybuffer:i,uint8array:function(e){return new Uint8Array(e)},nodebuffer:function(e){return r.newBufferFrom(new Uint8Array(e))}},c.uint8array={string:a,array:function(e){return d(e,new Array(e.length))},arraybuffer:function(e){return e.buffer},uint8array:i,nodebuffer:function(e){return r.newBufferFrom(e)}},c.nodebuffer={string:a,array:function(e){return d(e,new Array(e.length))},arraybuffer:function(e){return c.nodebuffer.uint8array(e).buffer},uint8array:function(e){return d(e,new Uint8Array(e.length))},nodebuffer:i},o.transformTo=function(e,t){if(t=t||"",!e)return t;o.checkSupport(e);var r=o.getTypeOf(t);return c[r][e](t)},o.getTypeOf=function(e){return"string"==typeof e?"string":"[object Array]"===Object.prototype.toString.call(e)?"array":u.nodebuffer&&r.isBuffer(e)?"nodebuffer":u.uint8array&&e instanceof Uint8Array?"uint8array":u.arraybuffer&&e instanceof ArrayBuffer?"arraybuffer":void 0},o.checkSupport=function(e){if(!u[e.toLowerCase()])throw new Error(e+" is not supported by this platform")},o.MAX_VALUE_16BITS=65535,o.MAX_VALUE_32BITS=-1,o.pretty=function(e){var t,r,n="";for(r=0;r<(e||"").length;r++)n+="\\x"+((t=e.charCodeAt(r))<16?"0":"")+t.toString(16).toUpperCase();return n},o.delay=function(e,t,r){n(function(){e.apply(r||null,t||[])})},o.inherits=function(e,t){function r(){}r.prototype=t.prototype,e.prototype=new r},o.extend=function(){var e,t,r={};for(e=0;e<arguments.length;e++)for(t in arguments[e])arguments[e].hasOwnProperty(t)&&void 0===r[t]&&(r[t]=arguments[e][t]);return r},o.prepareContent=function(n,e,i,s,a){return f.Promise.resolve(e).then(function(n){return u.blob&&(n instanceof Blob||-1!==["[object File]","[object Blob]"].indexOf(Object.prototype.toString.call(n)))&&"undefined"!=typeof FileReader?new f.Promise(function(t,r){var e=new FileReader;e.onload=function(e){t(e.target.result)},e.onerror=function(e){r(e.target.error)},e.readAsArrayBuffer(n)}):n}).then(function(e){var t,r=o.getTypeOf(e);return r?("arraybuffer"===r?e=o.transformTo("uint8array",e):"string"===r&&(a?e=h.decode(e):i&&!0!==s&&(e=l(t=e,u.uint8array?new Uint8Array(t.length):new Array(t.length)))),e):f.Promise.reject(new Error("Can't read the data of '"+n+"'. Is it in a supported JavaScript type (String, Blob, ArrayBuffer, etc) ?"))})}},{"./base64":1,"./external":6,"./nodejsUtils":14,"./support":30,"set-immediate-shim":54}],33:[function(e,t,r){"use strict";var n=e("./reader/readerFor"),i=e("./utils"),s=e("./signature"),a=e("./zipEntry"),o=(e("./utf8"),e("./support"));function u(e){this.files=[],this.loadOptions=e}u.prototype={checkSignature:function(e){if(!this.reader.readAndCheckSignature(e)){this.reader.index-=4;var t=this.reader.readString(4);throw new Error("Corrupted zip or bug: unexpected signature ("+i.pretty(t)+", expected "+i.pretty(e)+")")}},isSignature:function(e,t){var r=this.reader.index;this.reader.setIndex(e);var n=this.reader.readString(4)===t;return this.reader.setIndex(r),n},readBlockEndOfCentral:function(){this.diskNumber=this.reader.readInt(2),this.diskWithCentralDirStart=this.reader.readInt(2),this.centralDirRecordsOnThisDisk=this.reader.readInt(2),this.centralDirRecords=this.reader.readInt(2),this.centralDirSize=this.reader.readInt(4),this.centralDirOffset=this.reader.readInt(4),this.zipCommentLength=this.reader.readInt(2);var e=this.reader.readData(this.zipCommentLength),t=o.uint8array?"uint8array":"array",r=i.transformTo(t,e);this.zipComment=this.loadOptions.decodeFileName(r)},readBlockZip64EndOfCentral:function(){this.zip64EndOfCentralSize=this.reader.readInt(8),this.reader.skip(4),this.diskNumber=this.reader.readInt(4),this.diskWithCentralDirStart=this.reader.readInt(4),this.centralDirRecordsOnThisDisk=this.reader.readInt(8),this.centralDirRecords=this.reader.readInt(8),this.centralDirSize=this.reader.readInt(8),this.centralDirOffset=this.reader.readInt(8),this.zip64ExtensibleData={};for(var e,t,r,n=this.zip64EndOfCentralSize-44;0<n;)e=this.reader.readInt(2),t=this.reader.readInt(4),r=this.reader.readData(t),this.zip64ExtensibleData[e]={id:e,length:t,value:r}},readBlockZip64EndOfCentralLocator:function(){if(this.diskWithZip64CentralDirStart=this.reader.readInt(4),this.relativeOffsetEndOfZip64CentralDir=this.reader.readInt(8),this.disksCount=this.reader.readInt(4),1<this.disksCount)throw new Error("Multi-volumes zip are not supported")},readLocalFiles:function(){var e,t;for(e=0;e<this.files.length;e++)t=this.files[e],this.reader.setIndex(t.localHeaderOffset),this.checkSignature(s.LOCAL_FILE_HEADER),t.readLocalPart(this.reader),t.handleUTF8(),t.processAttributes()},readCentralDir:function(){var e;for(this.reader.setIndex(this.centralDirOffset);this.reader.readAndCheckSignature(s.CENTRAL_FILE_HEADER);)(e=new a({zip64:this.zip64},this.loadOptions)).readCentralPart(this.reader),this.files.push(e);if(this.centralDirRecords!==this.files.length&&0!==this.centralDirRecords&&0===this.files.length)throw new Error("Corrupted zip or bug: expected "+this.centralDirRecords+" records in central dir, got "+this.files.length)},readEndOfCentral:function(){var e=this.reader.lastIndexOfSignature(s.CENTRAL_DIRECTORY_END);if(e<0)throw this.isSignature(0,s.LOCAL_FILE_HEADER)?new Error("Corrupted zip: can't find end of central directory"):new Error("Can't find end of central directory : is this a zip file ? If it is, see https://stuk.github.io/jszip/documentation/howto/read_zip.html");this.reader.setIndex(e);var t=e;if(this.checkSignature(s.CENTRAL_DIRECTORY_END),this.readBlockEndOfCentral(),this.diskNumber===i.MAX_VALUE_16BITS||this.diskWithCentralDirStart===i.MAX_VALUE_16BITS||this.centralDirRecordsOnThisDisk===i.MAX_VALUE_16BITS||this.centralDirRecords===i.MAX_VALUE_16BITS||this.centralDirSize===i.MAX_VALUE_32BITS||this.centralDirOffset===i.MAX_VALUE_32BITS){if(this.zip64=!0,(e=this.reader.lastIndexOfSignature(s.ZIP64_CENTRAL_DIRECTORY_LOCATOR))<0)throw new Error("Corrupted zip: can't find the ZIP64 end of central directory locator");if(this.reader.setIndex(e),this.checkSignature(s.ZIP64_CENTRAL_DIRECTORY_LOCATOR),this.readBlockZip64EndOfCentralLocator(),!this.isSignature(this.relativeOffsetEndOfZip64CentralDir,s.ZIP64_CENTRAL_DIRECTORY_END)&&(this.relativeOffsetEndOfZip64CentralDir=this.reader.lastIndexOfSignature(s.ZIP64_CENTRAL_DIRECTORY_END),this.relativeOffsetEndOfZip64CentralDir<0))throw new Error("Corrupted zip: can't find the ZIP64 end of central directory");this.reader.setIndex(this.relativeOffsetEndOfZip64CentralDir),this.checkSignature(s.ZIP64_CENTRAL_DIRECTORY_END),this.readBlockZip64EndOfCentral()}var r=this.centralDirOffset+this.centralDirSize;this.zip64&&(r+=20,r+=12+this.zip64EndOfCentralSize);var n=t-r;if(0<n)this.isSignature(t,s.CENTRAL_FILE_HEADER)||(this.reader.zero=n);else if(n<0)throw new Error("Corrupted zip: missing "+Math.abs(n)+" bytes.")},prepareReader:function(e){this.reader=n(e)},load:function(e){this.prepareReader(e),this.readEndOfCentral(),this.readCentralDir(),this.readLocalFiles()}},t.exports=u},{"./reader/readerFor":22,"./signature":23,"./support":30,"./utf8":31,"./utils":32,"./zipEntry":34}],34:[function(e,t,r){"use strict";var n=e("./reader/readerFor"),s=e("./utils"),i=e("./compressedObject"),a=e("./crc32"),o=e("./utf8"),u=e("./compressions"),h=e("./support");function f(e,t){this.options=e,this.loadOptions=t}f.prototype={isEncrypted:function(){return 1==(1&this.bitFlag)},useUTF8:function(){return 2048==(2048&this.bitFlag)},readLocalPart:function(e){var t,r;if(e.skip(22),this.fileNameLength=e.readInt(2),r=e.readInt(2),this.fileName=e.readData(this.fileNameLength),e.skip(r),-1===this.compressedSize||-1===this.uncompressedSize)throw new Error("Bug or corrupted zip : didn't get enough information from the central directory (compressedSize === -1 || uncompressedSize === -1)");if(null===(t=function(e){for(var t in u)if(u.hasOwnProperty(t)&&u[t].magic===e)return u[t];return null}(this.compressionMethod)))throw new Error("Corrupted zip : compression "+s.pretty(this.compressionMethod)+" unknown (inner file : "+s.transformTo("string",this.fileName)+")");this.decompressed=new i(this.compressedSize,this.uncompressedSize,this.crc32,t,e.readData(this.compressedSize))},readCentralPart:function(e){this.versionMadeBy=e.readInt(2),e.skip(2),this.bitFlag=e.readInt(2),this.compressionMethod=e.readString(2),this.date=e.readDate(),this.crc32=e.readInt(4),this.compressedSize=e.readInt(4),this.uncompressedSize=e.readInt(4);var t=e.readInt(2);if(this.extraFieldsLength=e.readInt(2),this.fileCommentLength=e.readInt(2),this.diskNumberStart=e.readInt(2),this.internalFileAttributes=e.readInt(2),this.externalFileAttributes=e.readInt(4),this.localHeaderOffset=e.readInt(4),this.isEncrypted())throw new Error("Encrypted zip are not supported");e.skip(t),this.readExtraFields(e),this.parseZIP64ExtraField(e),this.fileComment=e.readData(this.fileCommentLength)},processAttributes:function(){this.unixPermissions=null,this.dosPermissions=null;var e=this.versionMadeBy>>8;this.dir=!!(16&this.externalFileAttributes),0==e&&(this.dosPermissions=63&this.externalFileAttributes),3==e&&(this.unixPermissions=this.externalFileAttributes>>16&65535),this.dir||"/"!==this.fileNameStr.slice(-1)||(this.dir=!0)},parseZIP64ExtraField:function(e){if(this.extraFields[1]){var t=n(this.extraFields[1].value);this.uncompressedSize===s.MAX_VALUE_32BITS&&(this.uncompressedSize=t.readInt(8)),this.compressedSize===s.MAX_VALUE_32BITS&&(this.compressedSize=t.readInt(8)),this.localHeaderOffset===s.MAX_VALUE_32BITS&&(this.localHeaderOffset=t.readInt(8)),this.diskNumberStart===s.MAX_VALUE_32BITS&&(this.diskNumberStart=t.readInt(4))}},readExtraFields:function(e){var t,r,n,i=e.index+this.extraFieldsLength;for(this.extraFields||(this.extraFields={});e.index+4<i;)t=e.readInt(2),r=e.readInt(2),n=e.readData(r),this.extraFields[t]={id:t,length:r,value:n};e.setIndex(i)},handleUTF8:function(){var e=h.uint8array?"uint8array":"array";if(this.useUTF8())this.fileNameStr=o.utf8decode(this.fileName),this.fileCommentStr=o.utf8decode(this.fileComment);else{var t=this.findExtraFieldUnicodePath();if(null!==t)this.fileNameStr=t;else{var r=s.transformTo(e,this.fileName);this.fileNameStr=this.loadOptions.decodeFileName(r)}var n=this.findExtraFieldUnicodeComment();if(null!==n)this.fileCommentStr=n;else{var i=s.transformTo(e,this.fileComment);this.fileCommentStr=this.loadOptions.decodeFileName(i)}}},findExtraFieldUnicodePath:function(){var e=this.extraFields[28789];if(e){var t=n(e.value);return 1!==t.readInt(1)?null:a(this.fileName)!==t.readInt(4)?null:o.utf8decode(t.readData(e.length-5))}return null},findExtraFieldUnicodeComment:function(){var e=this.extraFields[25461];if(e){var t=n(e.value);return 1!==t.readInt(1)?null:a(this.fileComment)!==t.readInt(4)?null:o.utf8decode(t.readData(e.length-5))}return null}},t.exports=f},{"./compressedObject":2,"./compressions":3,"./crc32":4,"./reader/readerFor":22,"./support":30,"./utf8":31,"./utils":32}],35:[function(e,t,r){"use strict";function n(e,t,r){this.name=e,this.dir=r.dir,this.date=r.date,this.comment=r.comment,this.unixPermissions=r.unixPermissions,this.dosPermissions=r.dosPermissions,this._data=t,this._dataBinary=r.binary,this.options={compression:r.compression,compressionOptions:r.compressionOptions}}var s=e("./stream/StreamHelper"),i=e("./stream/DataWorker"),a=e("./utf8"),o=e("./compressedObject"),u=e("./stream/GenericWorker");n.prototype={internalStream:function(e){var t=null,r="string";try{if(!e)throw new Error("No output type specified.");var n="string"===(r=e.toLowerCase())||"text"===r;"binarystring"!==r&&"text"!==r||(r="string"),t=this._decompressWorker();var i=!this._dataBinary;i&&!n&&(t=t.pipe(new a.Utf8EncodeWorker)),!i&&n&&(t=t.pipe(new a.Utf8DecodeWorker))}catch(e){(t=new u("error")).error(e)}return new s(t,r,"")},async:function(e,t){return this.internalStream(e).accumulate(t)},nodeStream:function(e,t){return this.internalStream(e||"nodebuffer").toNodejsStream(t)},_compressWorker:function(e,t){if(this._data instanceof o&&this._data.compression.magic===e.magic)return this._data.getCompressedWorker();var r=this._decompressWorker();return this._dataBinary||(r=r.pipe(new a.Utf8EncodeWorker)),o.createWorkerFrom(r,e,t)},_decompressWorker:function(){return this._data instanceof o?this._data.getContentWorker():this._data instanceof u?this._data:new i(this._data)}};for(var h=["asText","asBinary","asNodeBuffer","asUint8Array","asArrayBuffer"],f=function(){throw new Error("This method has been removed in JSZip 3.0, please check the upgrade guide.")},l=0;l<h.length;l++)n.prototype[h[l]]=f;t.exports=n},{"./compressedObject":2,"./stream/DataWorker":27,"./stream/GenericWorker":28,"./stream/StreamHelper":29,"./utf8":31}],36:[function(e,f,t){(function(t){"use strict";var r,n,e=t.MutationObserver||t.WebKitMutationObserver;if(e){var i=0,s=new e(h),a=t.document.createTextNode("");s.observe(a,{characterData:!0}),r=function(){a.data=i=++i%2}}else if(t.setImmediate||void 0===t.MessageChannel)r="document"in t&&"onreadystatechange"in t.document.createElement("script")?function(){var e=t.document.createElement("script");e.onreadystatechange=function(){h(),e.onreadystatechange=null,e.parentNode.removeChild(e),e=null},t.document.documentElement.appendChild(e)}:function(){setTimeout(h,0)};else{var o=new t.MessageChannel;o.port1.onmessage=h,r=function(){o.port2.postMessage(0)}}var u=[];function h(){var e,t;n=!0;for(var r=u.length;r;){for(t=u,u=[],e=-1;++e<r;)t[e]();r=u.length}n=!1}f.exports=function(e){1!==u.push(e)||n||r()}}).call(this,void 0!==r?r:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{}],37:[function(e,t,r){"use strict";var i=e("immediate");function h(){}var f={},s=["REJECTED"],a=["FULFILLED"],n=["PENDING"];function o(e){if("function"!=typeof e)throw new TypeError("resolver must be a function");this.state=n,this.queue=[],this.outcome=void 0,e!==h&&c(this,e)}function u(e,t,r){this.promise=e,"function"==typeof t&&(this.onFulfilled=t,this.callFulfilled=this.otherCallFulfilled),"function"==typeof r&&(this.onRejected=r,this.callRejected=this.otherCallRejected)}function l(t,r,n){i(function(){var e;try{e=r(n)}catch(e){return f.reject(t,e)}e===t?f.reject(t,new TypeError("Cannot resolve promise with itself")):f.resolve(t,e)})}function d(e){var t=e&&e.then;if(e&&("object"==typeof e||"function"==typeof e)&&"function"==typeof t)return function(){t.apply(e,arguments)}}function c(t,e){var r=!1;function n(e){r||(r=!0,f.reject(t,e))}function i(e){r||(r=!0,f.resolve(t,e))}var s=p(function(){e(i,n)});"error"===s.status&&n(s.value)}function p(e,t){var r={};try{r.value=e(t),r.status="success"}catch(e){r.status="error",r.value=e}return r}(t.exports=o).prototype.finally=function(t){if("function"!=typeof t)return this;var r=this.constructor;return this.then(function(e){return r.resolve(t()).then(function(){return e})},function(e){return r.resolve(t()).then(function(){throw e})})},o.prototype.catch=function(e){return this.then(null,e)},o.prototype.then=function(e,t){if("function"!=typeof e&&this.state===a||"function"!=typeof t&&this.state===s)return this;var r=new this.constructor(h);return this.state!==n?l(r,this.state===a?e:t,this.outcome):this.queue.push(new u(r,e,t)),r},u.prototype.callFulfilled=function(e){f.resolve(this.promise,e)},u.prototype.otherCallFulfilled=function(e){l(this.promise,this.onFulfilled,e)},u.prototype.callRejected=function(e){f.reject(this.promise,e)},u.prototype.otherCallRejected=function(e){l(this.promise,this.onRejected,e)},f.resolve=function(e,t){var r=p(d,t);if("error"===r.status)return f.reject(e,r.value);var n=r.value;if(n)c(e,n);else{e.state=a,e.outcome=t;for(var i=-1,s=e.queue.length;++i<s;)e.queue[i].callFulfilled(t)}return e},f.reject=function(e,t){e.state=s,e.outcome=t;for(var r=-1,n=e.queue.length;++r<n;)e.queue[r].callRejected(t);return e},o.resolve=function(e){return e instanceof this?e:f.resolve(new this(h),e)},o.reject=function(e){var t=new this(h);return f.reject(t,e)},o.all=function(e){var r=this;if("[object Array]"!==Object.prototype.toString.call(e))return this.reject(new TypeError("must be an array"));var n=e.length,i=!1;if(!n)return this.resolve([]);for(var s=new Array(n),a=0,t=-1,o=new this(h);++t<n;)u(e[t],t);return o;function u(e,t){r.resolve(e).then(function(e){s[t]=e,++a!==n||i||(i=!0,f.resolve(o,s))},function(e){i||(i=!0,f.reject(o,e))})}},o.race=function(e){if("[object Array]"!==Object.prototype.toString.call(e))return this.reject(new TypeError("must be an array"));var t=e.length,r=!1;if(!t)return this.resolve([]);for(var n,i=-1,s=new this(h);++i<t;)n=e[i],this.resolve(n).then(function(e){r||(r=!0,f.resolve(s,e))},function(e){r||(r=!0,f.reject(s,e))});return s}},{immediate:36}],38:[function(e,t,r){"use strict";var n={};(0,e("./lib/utils/common").assign)(n,e("./lib/deflate"),e("./lib/inflate"),e("./lib/zlib/constants")),t.exports=n},{"./lib/deflate":39,"./lib/inflate":40,"./lib/utils/common":41,"./lib/zlib/constants":44}],39:[function(e,t,r){"use strict";var a=e("./zlib/deflate"),o=e("./utils/common"),u=e("./utils/strings"),i=e("./zlib/messages"),s=e("./zlib/zstream"),h=Object.prototype.toString,f=0,l=-1,d=0,c=8;function p(e){if(!(this instanceof p))return new p(e);this.options=o.assign({level:l,method:c,chunkSize:16384,windowBits:15,memLevel:8,strategy:d,to:""},e||{});var t=this.options;t.raw&&0<t.windowBits?t.windowBits=-t.windowBits:t.gzip&&0<t.windowBits&&t.windowBits<16&&(t.windowBits+=16),this.err=0,this.msg="",this.ended=!1,this.chunks=[],this.strm=new s,this.strm.avail_out=0;var r=a.deflateInit2(this.strm,t.level,t.method,t.windowBits,t.memLevel,t.strategy);if(r!==f)throw new Error(i[r]);if(t.header&&a.deflateSetHeader(this.strm,t.header),t.dictionary){var n;if(n="string"==typeof t.dictionary?u.string2buf(t.dictionary):"[object ArrayBuffer]"===h.call(t.dictionary)?new Uint8Array(t.dictionary):t.dictionary,(r=a.deflateSetDictionary(this.strm,n))!==f)throw new Error(i[r]);this._dict_set=!0}}function n(e,t){var r=new p(t);if(r.push(e,!0),r.err)throw r.msg||i[r.err];return r.result}p.prototype.push=function(e,t){var r,n,i=this.strm,s=this.options.chunkSize;if(this.ended)return!1;n=t===~~t?t:!0===t?4:0,"string"==typeof e?i.input=u.string2buf(e):"[object ArrayBuffer]"===h.call(e)?i.input=new Uint8Array(e):i.input=e,i.next_in=0,i.avail_in=i.input.length;do{if(0===i.avail_out&&(i.output=new o.Buf8(s),i.next_out=0,i.avail_out=s),1!==(r=a.deflate(i,n))&&r!==f)return this.onEnd(r),!(this.ended=!0);0!==i.avail_out&&(0!==i.avail_in||4!==n&&2!==n)||("string"===this.options.to?this.onData(u.buf2binstring(o.shrinkBuf(i.output,i.next_out))):this.onData(o.shrinkBuf(i.output,i.next_out)))}while((0<i.avail_in||0===i.avail_out)&&1!==r);return 4===n?(r=a.deflateEnd(this.strm),this.onEnd(r),this.ended=!0,r===f):2!==n||(this.onEnd(f),!(i.avail_out=0))},p.prototype.onData=function(e){this.chunks.push(e)},p.prototype.onEnd=function(e){e===f&&("string"===this.options.to?this.result=this.chunks.join(""):this.result=o.flattenChunks(this.chunks)),this.chunks=[],this.err=e,this.msg=this.strm.msg},r.Deflate=p,r.deflate=n,r.deflateRaw=function(e,t){return(t=t||{}).raw=!0,n(e,t)},r.gzip=function(e,t){return(t=t||{}).gzip=!0,n(e,t)}},{"./utils/common":41,"./utils/strings":42,"./zlib/deflate":46,"./zlib/messages":51,"./zlib/zstream":53}],40:[function(e,t,r){"use strict";var d=e("./zlib/inflate"),c=e("./utils/common"),p=e("./utils/strings"),m=e("./zlib/constants"),n=e("./zlib/messages"),i=e("./zlib/zstream"),s=e("./zlib/gzheader"),_=Object.prototype.toString;function a(e){if(!(this instanceof a))return new a(e);this.options=c.assign({chunkSize:16384,windowBits:0,to:""},e||{});var t=this.options;t.raw&&0<=t.windowBits&&t.windowBits<16&&(t.windowBits=-t.windowBits,0===t.windowBits&&(t.windowBits=-15)),!(0<=t.windowBits&&t.windowBits<16)||e&&e.windowBits||(t.windowBits+=32),15<t.windowBits&&t.windowBits<48&&0==(15&t.windowBits)&&(t.windowBits|=15),this.err=0,this.msg="",this.ended=!1,this.chunks=[],this.strm=new i,this.strm.avail_out=0;var r=d.inflateInit2(this.strm,t.windowBits);if(r!==m.Z_OK)throw new Error(n[r]);this.header=new s,d.inflateGetHeader(this.strm,this.header)}function o(e,t){var r=new a(t);if(r.push(e,!0),r.err)throw r.msg||n[r.err];return r.result}a.prototype.push=function(e,t){var r,n,i,s,a,o,u=this.strm,h=this.options.chunkSize,f=this.options.dictionary,l=!1;if(this.ended)return!1;n=t===~~t?t:!0===t?m.Z_FINISH:m.Z_NO_FLUSH,"string"==typeof e?u.input=p.binstring2buf(e):"[object ArrayBuffer]"===_.call(e)?u.input=new Uint8Array(e):u.input=e,u.next_in=0,u.avail_in=u.input.length;do{if(0===u.avail_out&&(u.output=new c.Buf8(h),u.next_out=0,u.avail_out=h),(r=d.inflate(u,m.Z_NO_FLUSH))===m.Z_NEED_DICT&&f&&(o="string"==typeof f?p.string2buf(f):"[object ArrayBuffer]"===_.call(f)?new Uint8Array(f):f,r=d.inflateSetDictionary(this.strm,o)),r===m.Z_BUF_ERROR&&!0===l&&(r=m.Z_OK,l=!1),r!==m.Z_STREAM_END&&r!==m.Z_OK)return this.onEnd(r),!(this.ended=!0);u.next_out&&(0!==u.avail_out&&r!==m.Z_STREAM_END&&(0!==u.avail_in||n!==m.Z_FINISH&&n!==m.Z_SYNC_FLUSH)||("string"===this.options.to?(i=p.utf8border(u.output,u.next_out),s=u.next_out-i,a=p.buf2string(u.output,i),u.next_out=s,u.avail_out=h-s,s&&c.arraySet(u.output,u.output,i,s,0),this.onData(a)):this.onData(c.shrinkBuf(u.output,u.next_out)))),0===u.avail_in&&0===u.avail_out&&(l=!0)}while((0<u.avail_in||0===u.avail_out)&&r!==m.Z_STREAM_END);return r===m.Z_STREAM_END&&(n=m.Z_FINISH),n===m.Z_FINISH?(r=d.inflateEnd(this.strm),this.onEnd(r),this.ended=!0,r===m.Z_OK):n!==m.Z_SYNC_FLUSH||(this.onEnd(m.Z_OK),!(u.avail_out=0))},a.prototype.onData=function(e){this.chunks.push(e)},a.prototype.onEnd=function(e){e===m.Z_OK&&("string"===this.options.to?this.result=this.chunks.join(""):this.result=c.flattenChunks(this.chunks)),this.chunks=[],this.err=e,this.msg=this.strm.msg},r.Inflate=a,r.inflate=o,r.inflateRaw=function(e,t){return(t=t||{}).raw=!0,o(e,t)},r.ungzip=o},{"./utils/common":41,"./utils/strings":42,"./zlib/constants":44,"./zlib/gzheader":47,"./zlib/inflate":49,"./zlib/messages":51,"./zlib/zstream":53}],41:[function(e,t,r){"use strict";var n="undefined"!=typeof Uint8Array&&"undefined"!=typeof Uint16Array&&"undefined"!=typeof Int32Array;r.assign=function(e){for(var t=Array.prototype.slice.call(arguments,1);t.length;){var r=t.shift();if(r){if("object"!=typeof r)throw new TypeError(r+"must be non-object");for(var n in r)r.hasOwnProperty(n)&&(e[n]=r[n])}}return e},r.shrinkBuf=function(e,t){return e.length===t?e:e.subarray?e.subarray(0,t):(e.length=t,e)};var i={arraySet:function(e,t,r,n,i){if(t.subarray&&e.subarray)e.set(t.subarray(r,r+n),i);else for(var s=0;s<n;s++)e[i+s]=t[r+s]},flattenChunks:function(e){var t,r,n,i,s,a;for(t=n=0,r=e.length;t<r;t++)n+=e[t].length;for(a=new Uint8Array(n),t=i=0,r=e.length;t<r;t++)s=e[t],a.set(s,i),i+=s.length;return a}},s={arraySet:function(e,t,r,n,i){for(var s=0;s<n;s++)e[i+s]=t[r+s]},flattenChunks:function(e){return[].concat.apply([],e)}};r.setTyped=function(e){e?(r.Buf8=Uint8Array,r.Buf16=Uint16Array,r.Buf32=Int32Array,r.assign(r,i)):(r.Buf8=Array,r.Buf16=Array,r.Buf32=Array,r.assign(r,s))},r.setTyped(n)},{}],42:[function(e,t,r){"use strict";var u=e("./common"),i=!0,s=!0;try{String.fromCharCode.apply(null,[0])}catch(e){i=!1}try{String.fromCharCode.apply(null,new Uint8Array(1))}catch(e){s=!1}for(var h=new u.Buf8(256),n=0;n<256;n++)h[n]=252<=n?6:248<=n?5:240<=n?4:224<=n?3:192<=n?2:1;function f(e,t){if(t<65537&&(e.subarray&&s||!e.subarray&&i))return String.fromCharCode.apply(null,u.shrinkBuf(e,t));for(var r="",n=0;n<t;n++)r+=String.fromCharCode(e[n]);return r}h[254]=h[254]=1,r.string2buf=function(e){var t,r,n,i,s,a=e.length,o=0;for(i=0;i<a;i++)55296==(64512&(r=e.charCodeAt(i)))&&i+1<a&&56320==(64512&(n=e.charCodeAt(i+1)))&&(r=65536+(r-55296<<10)+(n-56320),i++),o+=r<128?1:r<2048?2:r<65536?3:4;for(t=new u.Buf8(o),i=s=0;s<o;i++)55296==(64512&(r=e.charCodeAt(i)))&&i+1<a&&56320==(64512&(n=e.charCodeAt(i+1)))&&(r=65536+(r-55296<<10)+(n-56320),i++),r<128?t[s++]=r:(r<2048?t[s++]=192|r>>>6:(r<65536?t[s++]=224|r>>>12:(t[s++]=240|r>>>18,t[s++]=128|r>>>12&63),t[s++]=128|r>>>6&63),t[s++]=128|63&r);return t},r.buf2binstring=function(e){return f(e,e.length)},r.binstring2buf=function(e){for(var t=new u.Buf8(e.length),r=0,n=t.length;r<n;r++)t[r]=e.charCodeAt(r);return t},r.buf2string=function(e,t){var r,n,i,s,a=t||e.length,o=new Array(2*a);for(r=n=0;r<a;)if((i=e[r++])<128)o[n++]=i;else if(4<(s=h[i]))o[n++]=65533,r+=s-1;else{for(i&=2===s?31:3===s?15:7;1<s&&r<a;)i=i<<6|63&e[r++],s--;1<s?o[n++]=65533:i<65536?o[n++]=i:(i-=65536,o[n++]=55296|i>>10&1023,o[n++]=56320|1023&i)}return f(o,n)},r.utf8border=function(e,t){var r;for((t=t||e.length)>e.length&&(t=e.length),r=t-1;0<=r&&128==(192&e[r]);)r--;return r<0?t:0===r?t:r+h[e[r]]>t?r:t}},{"./common":41}],43:[function(e,t,r){"use strict";t.exports=function(e,t,r,n){for(var i=65535&e|0,s=e>>>16&65535|0,a=0;0!==r;){for(r-=a=2e3<r?2e3:r;s=s+(i=i+t[n++]|0)|0,--a;);i%=65521,s%=65521}return i|s<<16|0}},{}],44:[function(e,t,r){"use strict";t.exports={Z_NO_FLUSH:0,Z_PARTIAL_FLUSH:1,Z_SYNC_FLUSH:2,Z_FULL_FLUSH:3,Z_FINISH:4,Z_BLOCK:5,Z_TREES:6,Z_OK:0,Z_STREAM_END:1,Z_NEED_DICT:2,Z_ERRNO:-1,Z_STREAM_ERROR:-2,Z_DATA_ERROR:-3,Z_BUF_ERROR:-5,Z_NO_COMPRESSION:0,Z_BEST_SPEED:1,Z_BEST_COMPRESSION:9,Z_DEFAULT_COMPRESSION:-1,Z_FILTERED:1,Z_HUFFMAN_ONLY:2,Z_RLE:3,Z_FIXED:4,Z_DEFAULT_STRATEGY:0,Z_BINARY:0,Z_TEXT:1,Z_UNKNOWN:2,Z_DEFLATED:8}},{}],45:[function(e,t,r){"use strict";var o=function(){for(var e,t=[],r=0;r<256;r++){e=r;for(var n=0;n<8;n++)e=1&e?3988292384^e>>>1:e>>>1;t[r]=e}return t}();t.exports=function(e,t,r,n){var i=o,s=n+r;e^=-1;for(var a=n;a<s;a++)e=e>>>8^i[255&(e^t[a])];return-1^e}},{}],46:[function(e,t,r){"use strict";var u,d=e("../utils/common"),h=e("./trees"),c=e("./adler32"),p=e("./crc32"),n=e("./messages"),f=0,l=0,m=-2,i=2,_=8,s=286,a=30,o=19,g=2*s+1,v=15,b=3,w=258,y=w+b+1,k=42,x=113;function S(e,t){return e.msg=n[t],t}function z(e){return(e<<1)-(4<e?9:0)}function E(e){for(var t=e.length;0<=--t;)e[t]=0}function C(e){var t=e.state,r=t.pending;r>e.avail_out&&(r=e.avail_out),0!==r&&(d.arraySet(e.output,t.pending_buf,t.pending_out,r,e.next_out),e.next_out+=r,t.pending_out+=r,e.total_out+=r,e.avail_out-=r,t.pending-=r,0===t.pending&&(t.pending_out=0))}function A(e,t){h._tr_flush_block(e,0<=e.block_start?e.block_start:-1,e.strstart-e.block_start,t),e.block_start=e.strstart,C(e.strm)}function I(e,t){e.pending_buf[e.pending++]=t}function O(e,t){e.pending_buf[e.pending++]=t>>>8&255,e.pending_buf[e.pending++]=255&t}function B(e,t){var r,n,i=e.max_chain_length,s=e.strstart,a=e.prev_length,o=e.nice_match,u=e.strstart>e.w_size-y?e.strstart-(e.w_size-y):0,h=e.window,f=e.w_mask,l=e.prev,d=e.strstart+w,c=h[s+a-1],p=h[s+a];e.prev_length>=e.good_match&&(i>>=2),o>e.lookahead&&(o=e.lookahead);do{if(h[(r=t)+a]===p&&h[r+a-1]===c&&h[r]===h[s]&&h[++r]===h[s+1]){s+=2,r++;do{}while(h[++s]===h[++r]&&h[++s]===h[++r]&&h[++s]===h[++r]&&h[++s]===h[++r]&&h[++s]===h[++r]&&h[++s]===h[++r]&&h[++s]===h[++r]&&h[++s]===h[++r]&&s<d);if(n=w-(d-s),s=d-w,a<n){if(e.match_start=t,o<=(a=n))break;c=h[s+a-1],p=h[s+a]}}}while((t=l[t&f])>u&&0!=--i);return a<=e.lookahead?a:e.lookahead}function T(e){var t,r,n,i,s,a,o,u,h,f,l=e.w_size;do{if(i=e.window_size-e.lookahead-e.strstart,e.strstart>=l+(l-y)){for(d.arraySet(e.window,e.window,l,l,0),e.match_start-=l,e.strstart-=l,e.block_start-=l,t=r=e.hash_size;n=e.head[--t],e.head[t]=l<=n?n-l:0,--r;);for(t=r=l;n=e.prev[--t],e.prev[t]=l<=n?n-l:0,--r;);i+=l}if(0===e.strm.avail_in)break;if(a=e.strm,o=e.window,u=e.strstart+e.lookahead,f=void 0,(h=i)<(f=a.avail_in)&&(f=h),r=0===f?0:(a.avail_in-=f,d.arraySet(o,a.input,a.next_in,f,u),1===a.state.wrap?a.adler=c(a.adler,o,f,u):2===a.state.wrap&&(a.adler=p(a.adler,o,f,u)),a.next_in+=f,a.total_in+=f,f),e.lookahead+=r,e.lookahead+e.insert>=b)for(s=e.strstart-e.insert,e.ins_h=e.window[s],e.ins_h=(e.ins_h<<e.hash_shift^e.window[s+1])&e.hash_mask;e.insert&&(e.ins_h=(e.ins_h<<e.hash_shift^e.window[s+b-1])&e.hash_mask,e.prev[s&e.w_mask]=e.head[e.ins_h],e.head[e.ins_h]=s,s++,e.insert--,!(e.lookahead+e.insert<b)););}while(e.lookahead<y&&0!==e.strm.avail_in)}function R(e,t){for(var r,n;;){if(e.lookahead<y){if(T(e),e.lookahead<y&&t===f)return 1;if(0===e.lookahead)break}if(r=0,e.lookahead>=b&&(e.ins_h=(e.ins_h<<e.hash_shift^e.window[e.strstart+b-1])&e.hash_mask,r=e.prev[e.strstart&e.w_mask]=e.head[e.ins_h],e.head[e.ins_h]=e.strstart),0!==r&&e.strstart-r<=e.w_size-y&&(e.match_length=B(e,r)),e.match_length>=b)if(n=h._tr_tally(e,e.strstart-e.match_start,e.match_length-b),e.lookahead-=e.match_length,e.match_length<=e.max_lazy_match&&e.lookahead>=b){for(e.match_length--;e.strstart++,e.ins_h=(e.ins_h<<e.hash_shift^e.window[e.strstart+b-1])&e.hash_mask,r=e.prev[e.strstart&e.w_mask]=e.head[e.ins_h],e.head[e.ins_h]=e.strstart,0!=--e.match_length;);e.strstart++}else e.strstart+=e.match_length,e.match_length=0,e.ins_h=e.window[e.strstart],e.ins_h=(e.ins_h<<e.hash_shift^e.window[e.strstart+1])&e.hash_mask;else n=h._tr_tally(e,0,e.window[e.strstart]),e.lookahead--,e.strstart++;if(n&&(A(e,!1),0===e.strm.avail_out))return 1}return e.insert=e.strstart<b-1?e.strstart:b-1,4===t?(A(e,!0),0===e.strm.avail_out?3:4):e.last_lit&&(A(e,!1),0===e.strm.avail_out)?1:2}function D(e,t){for(var r,n,i;;){if(e.lookahead<y){if(T(e),e.lookahead<y&&t===f)return 1;if(0===e.lookahead)break}if(r=0,e.lookahead>=b&&(e.ins_h=(e.ins_h<<e.hash_shift^e.window[e.strstart+b-1])&e.hash_mask,r=e.prev[e.strstart&e.w_mask]=e.head[e.ins_h],e.head[e.ins_h]=e.strstart),e.prev_length=e.match_length,e.prev_match=e.match_start,e.match_length=b-1,0!==r&&e.prev_length<e.max_lazy_match&&e.strstart-r<=e.w_size-y&&(e.match_length=B(e,r),e.match_length<=5&&(1===e.strategy||e.match_length===b&&4096<e.strstart-e.match_start)&&(e.match_length=b-1)),e.prev_length>=b&&e.match_length<=e.prev_length){for(i=e.strstart+e.lookahead-b,n=h._tr_tally(e,e.strstart-1-e.prev_match,e.prev_length-b),e.lookahead-=e.prev_length-1,e.prev_length-=2;++e.strstart<=i&&(e.ins_h=(e.ins_h<<e.hash_shift^e.window[e.strstart+b-1])&e.hash_mask,r=e.prev[e.strstart&e.w_mask]=e.head[e.ins_h],e.head[e.ins_h]=e.strstart),0!=--e.prev_length;);if(e.match_available=0,e.match_length=b-1,e.strstart++,n&&(A(e,!1),0===e.strm.avail_out))return 1}else if(e.match_available){if((n=h._tr_tally(e,0,e.window[e.strstart-1]))&&A(e,!1),e.strstart++,e.lookahead--,0===e.strm.avail_out)return 1}else e.match_available=1,e.strstart++,e.lookahead--}return e.match_available&&(n=h._tr_tally(e,0,e.window[e.strstart-1]),e.match_available=0),e.insert=e.strstart<b-1?e.strstart:b-1,4===t?(A(e,!0),0===e.strm.avail_out?3:4):e.last_lit&&(A(e,!1),0===e.strm.avail_out)?1:2}function F(e,t,r,n,i){this.good_length=e,this.max_lazy=t,this.nice_length=r,this.max_chain=n,this.func=i}function N(){this.strm=null,this.status=0,this.pending_buf=null,this.pending_buf_size=0,this.pending_out=0,this.pending=0,this.wrap=0,this.gzhead=null,this.gzindex=0,this.method=_,this.last_flush=-1,this.w_size=0,this.w_bits=0,this.w_mask=0,this.window=null,this.window_size=0,this.prev=null,this.head=null,this.ins_h=0,this.hash_size=0,this.hash_bits=0,this.hash_mask=0,this.hash_shift=0,this.block_start=0,this.match_length=0,this.prev_match=0,this.match_available=0,this.strstart=0,this.match_start=0,this.lookahead=0,this.prev_length=0,this.max_chain_length=0,this.max_lazy_match=0,this.level=0,this.strategy=0,this.good_match=0,this.nice_match=0,this.dyn_ltree=new d.Buf16(2*g),this.dyn_dtree=new d.Buf16(2*(2*a+1)),this.bl_tree=new d.Buf16(2*(2*o+1)),E(this.dyn_ltree),E(this.dyn_dtree),E(this.bl_tree),this.l_desc=null,this.d_desc=null,this.bl_desc=null,this.bl_count=new d.Buf16(v+1),this.heap=new d.Buf16(2*s+1),E(this.heap),this.heap_len=0,this.heap_max=0,this.depth=new d.Buf16(2*s+1),E(this.depth),this.l_buf=0,this.lit_bufsize=0,this.last_lit=0,this.d_buf=0,this.opt_len=0,this.static_len=0,this.matches=0,this.insert=0,this.bi_buf=0,this.bi_valid=0}function U(e){var t;return e&&e.state?(e.total_in=e.total_out=0,e.data_type=i,(t=e.state).pending=0,t.pending_out=0,t.wrap<0&&(t.wrap=-t.wrap),t.status=t.wrap?k:x,e.adler=2===t.wrap?0:1,t.last_flush=f,h._tr_init(t),l):S(e,m)}function P(e){var t,r=U(e);return r===l&&((t=e.state).window_size=2*t.w_size,E(t.head),t.max_lazy_match=u[t.level].max_lazy,t.good_match=u[t.level].good_length,t.nice_match=u[t.level].nice_length,t.max_chain_length=u[t.level].max_chain,t.strstart=0,t.block_start=0,t.lookahead=0,t.insert=0,t.match_length=t.prev_length=b-1,t.match_available=0,t.ins_h=0),r}function L(e,t,r,n,i,s){if(!e)return m;var a=1;if(-1===t&&(t=6),n<0?(a=0,n=-n):15<n&&(a=2,n-=16),i<1||9<i||r!==_||n<8||15<n||t<0||9<t||s<0||4<s)return S(e,m);8===n&&(n=9);var o=new N;return(e.state=o).strm=e,o.wrap=a,o.gzhead=null,o.w_bits=n,o.w_size=1<<o.w_bits,o.w_mask=o.w_size-1,o.hash_bits=i+7,o.hash_size=1<<o.hash_bits,o.hash_mask=o.hash_size-1,o.hash_shift=~~((o.hash_bits+b-1)/b),o.window=new d.Buf8(2*o.w_size),o.head=new d.Buf16(o.hash_size),o.prev=new d.Buf16(o.w_size),o.lit_bufsize=1<<i+6,o.pending_buf_size=4*o.lit_bufsize,o.pending_buf=new d.Buf8(o.pending_buf_size),o.d_buf=1*o.lit_bufsize,o.l_buf=3*o.lit_bufsize,o.level=t,o.strategy=s,o.method=r,P(e)}u=[new F(0,0,0,0,function(e,t){var r=65535;for(r>e.pending_buf_size-5&&(r=e.pending_buf_size-5);;){if(e.lookahead<=1){if(T(e),0===e.lookahead&&t===f)return 1;if(0===e.lookahead)break}e.strstart+=e.lookahead,e.lookahead=0;var n=e.block_start+r;if((0===e.strstart||e.strstart>=n)&&(e.lookahead=e.strstart-n,e.strstart=n,A(e,!1),0===e.strm.avail_out))return 1;if(e.strstart-e.block_start>=e.w_size-y&&(A(e,!1),0===e.strm.avail_out))return 1}return e.insert=0,4===t?(A(e,!0),0===e.strm.avail_out?3:4):(e.strstart>e.block_start&&(A(e,!1),e.strm.avail_out),1)}),new F(4,4,8,4,R),new F(4,5,16,8,R),new F(4,6,32,32,R),new F(4,4,16,16,D),new F(8,16,32,32,D),new F(8,16,128,128,D),new F(8,32,128,256,D),new F(32,128,258,1024,D),new F(32,258,258,4096,D)],r.deflateInit=function(e,t){return L(e,t,_,15,8,0)},r.deflateInit2=L,r.deflateReset=P,r.deflateResetKeep=U,r.deflateSetHeader=function(e,t){return e&&e.state?2!==e.state.wrap?m:(e.state.gzhead=t,l):m},r.deflate=function(e,t){var r,n,i,s;if(!e||!e.state||5<t||t<0)return e?S(e,m):m;if(n=e.state,!e.output||!e.input&&0!==e.avail_in||666===n.status&&4!==t)return S(e,0===e.avail_out?-5:m);if(n.strm=e,r=n.last_flush,n.last_flush=t,n.status===k)if(2===n.wrap)e.adler=0,I(n,31),I(n,139),I(n,8),n.gzhead?(I(n,(n.gzhead.text?1:0)+(n.gzhead.hcrc?2:0)+(n.gzhead.extra?4:0)+(n.gzhead.name?8:0)+(n.gzhead.comment?16:0)),I(n,255&n.gzhead.time),I(n,n.gzhead.time>>8&255),I(n,n.gzhead.time>>16&255),I(n,n.gzhead.time>>24&255),I(n,9===n.level?2:2<=n.strategy||n.level<2?4:0),I(n,255&n.gzhead.os),n.gzhead.extra&&n.gzhead.extra.length&&(I(n,255&n.gzhead.extra.length),I(n,n.gzhead.extra.length>>8&255)),n.gzhead.hcrc&&(e.adler=p(e.adler,n.pending_buf,n.pending,0)),n.gzindex=0,n.status=69):(I(n,0),I(n,0),I(n,0),I(n,0),I(n,0),I(n,9===n.level?2:2<=n.strategy||n.level<2?4:0),I(n,3),n.status=x);else{var a=_+(n.w_bits-8<<4)<<8;a|=(2<=n.strategy||n.level<2?0:n.level<6?1:6===n.level?2:3)<<6,0!==n.strstart&&(a|=32),a+=31-a%31,n.status=x,O(n,a),0!==n.strstart&&(O(n,e.adler>>>16),O(n,65535&e.adler)),e.adler=1}if(69===n.status)if(n.gzhead.extra){for(i=n.pending;n.gzindex<(65535&n.gzhead.extra.length)&&(n.pending!==n.pending_buf_size||(n.gzhead.hcrc&&n.pending>i&&(e.adler=p(e.adler,n.pending_buf,n.pending-i,i)),C(e),i=n.pending,n.pending!==n.pending_buf_size));)I(n,255&n.gzhead.extra[n.gzindex]),n.gzindex++;n.gzhead.hcrc&&n.pending>i&&(e.adler=p(e.adler,n.pending_buf,n.pending-i,i)),n.gzindex===n.gzhead.extra.length&&(n.gzindex=0,n.status=73)}else n.status=73;if(73===n.status)if(n.gzhead.name){i=n.pending;do{if(n.pending===n.pending_buf_size&&(n.gzhead.hcrc&&n.pending>i&&(e.adler=p(e.adler,n.pending_buf,n.pending-i,i)),C(e),i=n.pending,n.pending===n.pending_buf_size)){s=1;break}s=n.gzindex<n.gzhead.name.length?255&n.gzhead.name.charCodeAt(n.gzindex++):0,I(n,s)}while(0!==s);n.gzhead.hcrc&&n.pending>i&&(e.adler=p(e.adler,n.pending_buf,n.pending-i,i)),0===s&&(n.gzindex=0,n.status=91)}else n.status=91;if(91===n.status)if(n.gzhead.comment){i=n.pending;do{if(n.pending===n.pending_buf_size&&(n.gzhead.hcrc&&n.pending>i&&(e.adler=p(e.adler,n.pending_buf,n.pending-i,i)),C(e),i=n.pending,n.pending===n.pending_buf_size)){s=1;break}s=n.gzindex<n.gzhead.comment.length?255&n.gzhead.comment.charCodeAt(n.gzindex++):0,I(n,s)}while(0!==s);n.gzhead.hcrc&&n.pending>i&&(e.adler=p(e.adler,n.pending_buf,n.pending-i,i)),0===s&&(n.status=103)}else n.status=103;if(103===n.status&&(n.gzhead.hcrc?(n.pending+2>n.pending_buf_size&&C(e),n.pending+2<=n.pending_buf_size&&(I(n,255&e.adler),I(n,e.adler>>8&255),e.adler=0,n.status=x)):n.status=x),0!==n.pending){if(C(e),0===e.avail_out)return n.last_flush=-1,l}else if(0===e.avail_in&&z(t)<=z(r)&&4!==t)return S(e,-5);if(666===n.status&&0!==e.avail_in)return S(e,-5);if(0!==e.avail_in||0!==n.lookahead||t!==f&&666!==n.status){var o=2===n.strategy?function(e,t){for(var r;;){if(0===e.lookahead&&(T(e),0===e.lookahead)){if(t===f)return 1;break}if(e.match_length=0,r=h._tr_tally(e,0,e.window[e.strstart]),e.lookahead--,e.strstart++,r&&(A(e,!1),0===e.strm.avail_out))return 1}return e.insert=0,4===t?(A(e,!0),0===e.strm.avail_out?3:4):e.last_lit&&(A(e,!1),0===e.strm.avail_out)?1:2}(n,t):3===n.strategy?function(e,t){for(var r,n,i,s,a=e.window;;){if(e.lookahead<=w){if(T(e),e.lookahead<=w&&t===f)return 1;if(0===e.lookahead)break}if(e.match_length=0,e.lookahead>=b&&0<e.strstart&&(n=a[i=e.strstart-1])===a[++i]&&n===a[++i]&&n===a[++i]){s=e.strstart+w;do{}while(n===a[++i]&&n===a[++i]&&n===a[++i]&&n===a[++i]&&n===a[++i]&&n===a[++i]&&n===a[++i]&&n===a[++i]&&i<s);e.match_length=w-(s-i),e.match_length>e.lookahead&&(e.match_length=e.lookahead)}if(e.match_length>=b?(r=h._tr_tally(e,1,e.match_length-b),e.lookahead-=e.match_length,e.strstart+=e.match_length,e.match_length=0):(r=h._tr_tally(e,0,e.window[e.strstart]),e.lookahead--,e.strstart++),r&&(A(e,!1),0===e.strm.avail_out))return 1}return e.insert=0,4===t?(A(e,!0),0===e.strm.avail_out?3:4):e.last_lit&&(A(e,!1),0===e.strm.avail_out)?1:2}(n,t):u[n.level].func(n,t);if(3!==o&&4!==o||(n.status=666),1===o||3===o)return 0===e.avail_out&&(n.last_flush=-1),l;if(2===o&&(1===t?h._tr_align(n):5!==t&&(h._tr_stored_block(n,0,0,!1),3===t&&(E(n.head),0===n.lookahead&&(n.strstart=0,n.block_start=0,n.insert=0))),C(e),0===e.avail_out))return n.last_flush=-1,l}return 4!==t?l:n.wrap<=0?1:(2===n.wrap?(I(n,255&e.adler),I(n,e.adler>>8&255),I(n,e.adler>>16&255),I(n,e.adler>>24&255),I(n,255&e.total_in),I(n,e.total_in>>8&255),I(n,e.total_in>>16&255),I(n,e.total_in>>24&255)):(O(n,e.adler>>>16),O(n,65535&e.adler)),C(e),0<n.wrap&&(n.wrap=-n.wrap),0!==n.pending?l:1)},r.deflateEnd=function(e){var t;return e&&e.state?(t=e.state.status)!==k&&69!==t&&73!==t&&91!==t&&103!==t&&t!==x&&666!==t?S(e,m):(e.state=null,t===x?S(e,-3):l):m},r.deflateSetDictionary=function(e,t){var r,n,i,s,a,o,u,h,f=t.length;if(!e||!e.state)return m;if(2===(s=(r=e.state).wrap)||1===s&&r.status!==k||r.lookahead)return m;for(1===s&&(e.adler=c(e.adler,t,f,0)),r.wrap=0,f>=r.w_size&&(0===s&&(E(r.head),r.strstart=0,r.block_start=0,r.insert=0),h=new d.Buf8(r.w_size),d.arraySet(h,t,f-r.w_size,r.w_size,0),t=h,f=r.w_size),a=e.avail_in,o=e.next_in,u=e.input,e.avail_in=f,e.next_in=0,e.input=t,T(r);r.lookahead>=b;){for(n=r.strstart,i=r.lookahead-(b-1);r.ins_h=(r.ins_h<<r.hash_shift^r.window[n+b-1])&r.hash_mask,r.prev[n&r.w_mask]=r.head[r.ins_h],r.head[r.ins_h]=n,n++,--i;);r.strstart=n,r.lookahead=b-1,T(r)}return r.strstart+=r.lookahead,r.block_start=r.strstart,r.insert=r.lookahead,r.lookahead=0,r.match_length=r.prev_length=b-1,r.match_available=0,e.next_in=o,e.input=u,e.avail_in=a,r.wrap=s,l},r.deflateInfo="pako deflate (from Nodeca project)"},{"../utils/common":41,"./adler32":43,"./crc32":45,"./messages":51,"./trees":52}],47:[function(e,t,r){"use strict";t.exports=function(){this.text=0,this.time=0,this.xflags=0,this.os=0,this.extra=null,this.extra_len=0,this.name="",this.comment="",this.hcrc=0,this.done=!1}},{}],48:[function(e,t,r){"use strict";t.exports=function(e,t){var r,n,i,s,a,o,u,h,f,l,d,c,p,m,_,g,v,b,w,y,k,x,S,z,E;r=e.state,n=e.next_in,z=e.input,i=n+(e.avail_in-5),s=e.next_out,E=e.output,a=s-(t-e.avail_out),o=s+(e.avail_out-257),u=r.dmax,h=r.wsize,f=r.whave,l=r.wnext,d=r.window,c=r.hold,p=r.bits,m=r.lencode,_=r.distcode,g=(1<<r.lenbits)-1,v=(1<<r.distbits)-1;e:do{p<15&&(c+=z[n++]<<p,p+=8,c+=z[n++]<<p,p+=8),b=m[c&g];t:for(;;){if(c>>>=w=b>>>24,p-=w,0==(w=b>>>16&255))E[s++]=65535&b;else{if(!(16&w)){if(0==(64&w)){b=m[(65535&b)+(c&(1<<w)-1)];continue t}if(32&w){r.mode=12;break e}e.msg="invalid literal/length code",r.mode=30;break e}y=65535&b,(w&=15)&&(p<w&&(c+=z[n++]<<p,p+=8),y+=c&(1<<w)-1,c>>>=w,p-=w),p<15&&(c+=z[n++]<<p,p+=8,c+=z[n++]<<p,p+=8),b=_[c&v];r:for(;;){if(c>>>=w=b>>>24,p-=w,!(16&(w=b>>>16&255))){if(0==(64&w)){b=_[(65535&b)+(c&(1<<w)-1)];continue r}e.msg="invalid distance code",r.mode=30;break e}if(k=65535&b,p<(w&=15)&&(c+=z[n++]<<p,(p+=8)<w&&(c+=z[n++]<<p,p+=8)),u<(k+=c&(1<<w)-1)){e.msg="invalid distance too far back",r.mode=30;break e}if(c>>>=w,p-=w,(w=s-a)<k){if(f<(w=k-w)&&r.sane){e.msg="invalid distance too far back",r.mode=30;break e}if(S=d,(x=0)===l){if(x+=h-w,w<y){for(y-=w;E[s++]=d[x++],--w;);x=s-k,S=E}}else if(l<w){if(x+=h+l-w,(w-=l)<y){for(y-=w;E[s++]=d[x++],--w;);if(x=0,l<y){for(y-=w=l;E[s++]=d[x++],--w;);x=s-k,S=E}}}else if(x+=l-w,w<y){for(y-=w;E[s++]=d[x++],--w;);x=s-k,S=E}for(;2<y;)E[s++]=S[x++],E[s++]=S[x++],E[s++]=S[x++],y-=3;y&&(E[s++]=S[x++],1<y&&(E[s++]=S[x++]))}else{for(x=s-k;E[s++]=E[x++],E[s++]=E[x++],E[s++]=E[x++],2<(y-=3););y&&(E[s++]=E[x++],1<y&&(E[s++]=E[x++]))}break}}break}}while(n<i&&s<o);n-=y=p>>3,c&=(1<<(p-=y<<3))-1,e.next_in=n,e.next_out=s,e.avail_in=n<i?i-n+5:5-(n-i),e.avail_out=s<o?o-s+257:257-(s-o),r.hold=c,r.bits=p}},{}],49:[function(e,t,r){"use strict";var I=e("../utils/common"),O=e("./adler32"),B=e("./crc32"),T=e("./inffast"),R=e("./inftrees"),D=1,F=2,N=0,U=-2,P=1,n=852,i=592;function L(e){return(e>>>24&255)+(e>>>8&65280)+((65280&e)<<8)+((255&e)<<24)}function s(){this.mode=0,this.last=!1,this.wrap=0,this.havedict=!1,this.flags=0,this.dmax=0,this.check=0,this.total=0,this.head=null,this.wbits=0,this.wsize=0,this.whave=0,this.wnext=0,this.window=null,this.hold=0,this.bits=0,this.length=0,this.offset=0,this.extra=0,this.lencode=null,this.distcode=null,this.lenbits=0,this.distbits=0,this.ncode=0,this.nlen=0,this.ndist=0,this.have=0,this.next=null,this.lens=new I.Buf16(320),this.work=new I.Buf16(288),this.lendyn=null,this.distdyn=null,this.sane=0,this.back=0,this.was=0}function a(e){var t;return e&&e.state?(t=e.state,e.total_in=e.total_out=t.total=0,e.msg="",t.wrap&&(e.adler=1&t.wrap),t.mode=P,t.last=0,t.havedict=0,t.dmax=32768,t.head=null,t.hold=0,t.bits=0,t.lencode=t.lendyn=new I.Buf32(n),t.distcode=t.distdyn=new I.Buf32(i),t.sane=1,t.back=-1,N):U}function o(e){var t;return e&&e.state?((t=e.state).wsize=0,t.whave=0,t.wnext=0,a(e)):U}function u(e,t){var r,n;return e&&e.state?(n=e.state,t<0?(r=0,t=-t):(r=1+(t>>4),t<48&&(t&=15)),t&&(t<8||15<t)?U:(null!==n.window&&n.wbits!==t&&(n.window=null),n.wrap=r,n.wbits=t,o(e))):U}function h(e,t){var r,n;return e?(n=new s,(e.state=n).window=null,(r=u(e,t))!==N&&(e.state=null),r):U}var f,l,d=!0;function j(e){if(d){var t;for(f=new I.Buf32(512),l=new I.Buf32(32),t=0;t<144;)e.lens[t++]=8;for(;t<256;)e.lens[t++]=9;for(;t<280;)e.lens[t++]=7;for(;t<288;)e.lens[t++]=8;for(R(D,e.lens,0,288,f,0,e.work,{bits:9}),t=0;t<32;)e.lens[t++]=5;R(F,e.lens,0,32,l,0,e.work,{bits:5}),d=!1}e.lencode=f,e.lenbits=9,e.distcode=l,e.distbits=5}function Z(e,t,r,n){var i,s=e.state;return null===s.window&&(s.wsize=1<<s.wbits,s.wnext=0,s.whave=0,s.window=new I.Buf8(s.wsize)),n>=s.wsize?(I.arraySet(s.window,t,r-s.wsize,s.wsize,0),s.wnext=0,s.whave=s.wsize):(n<(i=s.wsize-s.wnext)&&(i=n),I.arraySet(s.window,t,r-n,i,s.wnext),(n-=i)?(I.arraySet(s.window,t,r-n,n,0),s.wnext=n,s.whave=s.wsize):(s.wnext+=i,s.wnext===s.wsize&&(s.wnext=0),s.whave<s.wsize&&(s.whave+=i))),0}r.inflateReset=o,r.inflateReset2=u,r.inflateResetKeep=a,r.inflateInit=function(e){return h(e,15)},r.inflateInit2=h,r.inflate=function(e,t){var r,n,i,s,a,o,u,h,f,l,d,c,p,m,_,g,v,b,w,y,k,x,S,z,E=0,C=new I.Buf8(4),A=[16,17,18,0,8,7,9,6,10,5,11,4,12,3,13,2,14,1,15];if(!e||!e.state||!e.output||!e.input&&0!==e.avail_in)return U;12===(r=e.state).mode&&(r.mode=13),a=e.next_out,i=e.output,u=e.avail_out,s=e.next_in,n=e.input,o=e.avail_in,h=r.hold,f=r.bits,l=o,d=u,x=N;e:for(;;)switch(r.mode){case P:if(0===r.wrap){r.mode=13;break}for(;f<16;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}if(2&r.wrap&&35615===h){C[r.check=0]=255&h,C[1]=h>>>8&255,r.check=B(r.check,C,2,0),f=h=0,r.mode=2;break}if(r.flags=0,r.head&&(r.head.done=!1),!(1&r.wrap)||(((255&h)<<8)+(h>>8))%31){e.msg="incorrect header check",r.mode=30;break}if(8!=(15&h)){e.msg="unknown compression method",r.mode=30;break}if(f-=4,k=8+(15&(h>>>=4)),0===r.wbits)r.wbits=k;else if(k>r.wbits){e.msg="invalid window size",r.mode=30;break}r.dmax=1<<k,e.adler=r.check=1,r.mode=512&h?10:12,f=h=0;break;case 2:for(;f<16;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}if(r.flags=h,8!=(255&r.flags)){e.msg="unknown compression method",r.mode=30;break}if(57344&r.flags){e.msg="unknown header flags set",r.mode=30;break}r.head&&(r.head.text=h>>8&1),512&r.flags&&(C[0]=255&h,C[1]=h>>>8&255,r.check=B(r.check,C,2,0)),f=h=0,r.mode=3;case 3:for(;f<32;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}r.head&&(r.head.time=h),512&r.flags&&(C[0]=255&h,C[1]=h>>>8&255,C[2]=h>>>16&255,C[3]=h>>>24&255,r.check=B(r.check,C,4,0)),f=h=0,r.mode=4;case 4:for(;f<16;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}r.head&&(r.head.xflags=255&h,r.head.os=h>>8),512&r.flags&&(C[0]=255&h,C[1]=h>>>8&255,r.check=B(r.check,C,2,0)),f=h=0,r.mode=5;case 5:if(1024&r.flags){for(;f<16;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}r.length=h,r.head&&(r.head.extra_len=h),512&r.flags&&(C[0]=255&h,C[1]=h>>>8&255,r.check=B(r.check,C,2,0)),f=h=0}else r.head&&(r.head.extra=null);r.mode=6;case 6:if(1024&r.flags&&(o<(c=r.length)&&(c=o),c&&(r.head&&(k=r.head.extra_len-r.length,r.head.extra||(r.head.extra=new Array(r.head.extra_len)),I.arraySet(r.head.extra,n,s,c,k)),512&r.flags&&(r.check=B(r.check,n,c,s)),o-=c,s+=c,r.length-=c),r.length))break e;r.length=0,r.mode=7;case 7:if(2048&r.flags){if(0===o)break e;for(c=0;k=n[s+c++],r.head&&k&&r.length<65536&&(r.head.name+=String.fromCharCode(k)),k&&c<o;);if(512&r.flags&&(r.check=B(r.check,n,c,s)),o-=c,s+=c,k)break e}else r.head&&(r.head.name=null);r.length=0,r.mode=8;case 8:if(4096&r.flags){if(0===o)break e;for(c=0;k=n[s+c++],r.head&&k&&r.length<65536&&(r.head.comment+=String.fromCharCode(k)),k&&c<o;);if(512&r.flags&&(r.check=B(r.check,n,c,s)),o-=c,s+=c,k)break e}else r.head&&(r.head.comment=null);r.mode=9;case 9:if(512&r.flags){for(;f<16;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}if(h!==(65535&r.check)){e.msg="header crc mismatch",r.mode=30;break}f=h=0}r.head&&(r.head.hcrc=r.flags>>9&1,r.head.done=!0),e.adler=r.check=0,r.mode=12;break;case 10:for(;f<32;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}e.adler=r.check=L(h),f=h=0,r.mode=11;case 11:if(0===r.havedict)return e.next_out=a,e.avail_out=u,e.next_in=s,e.avail_in=o,r.hold=h,r.bits=f,2;e.adler=r.check=1,r.mode=12;case 12:if(5===t||6===t)break e;case 13:if(r.last){h>>>=7&f,f-=7&f,r.mode=27;break}for(;f<3;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}switch(r.last=1&h,f-=1,3&(h>>>=1)){case 0:r.mode=14;break;case 1:if(j(r),r.mode=20,6!==t)break;h>>>=2,f-=2;break e;case 2:r.mode=17;break;case 3:e.msg="invalid block type",r.mode=30}h>>>=2,f-=2;break;case 14:for(h>>>=7&f,f-=7&f;f<32;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}if((65535&h)!=(h>>>16^65535)){e.msg="invalid stored block lengths",r.mode=30;break}if(r.length=65535&h,f=h=0,r.mode=15,6===t)break e;case 15:r.mode=16;case 16:if(c=r.length){if(o<c&&(c=o),u<c&&(c=u),0===c)break e;I.arraySet(i,n,s,c,a),o-=c,s+=c,u-=c,a+=c,r.length-=c;break}r.mode=12;break;case 17:for(;f<14;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}if(r.nlen=257+(31&h),h>>>=5,f-=5,r.ndist=1+(31&h),h>>>=5,f-=5,r.ncode=4+(15&h),h>>>=4,f-=4,286<r.nlen||30<r.ndist){e.msg="too many length or distance symbols",r.mode=30;break}r.have=0,r.mode=18;case 18:for(;r.have<r.ncode;){for(;f<3;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}r.lens[A[r.have++]]=7&h,h>>>=3,f-=3}for(;r.have<19;)r.lens[A[r.have++]]=0;if(r.lencode=r.lendyn,r.lenbits=7,S={bits:r.lenbits},x=R(0,r.lens,0,19,r.lencode,0,r.work,S),r.lenbits=S.bits,x){e.msg="invalid code lengths set",r.mode=30;break}r.have=0,r.mode=19;case 19:for(;r.have<r.nlen+r.ndist;){for(;g=(E=r.lencode[h&(1<<r.lenbits)-1])>>>16&255,v=65535&E,!((_=E>>>24)<=f);){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}if(v<16)h>>>=_,f-=_,r.lens[r.have++]=v;else{if(16===v){for(z=_+2;f<z;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}if(h>>>=_,f-=_,0===r.have){e.msg="invalid bit length repeat",r.mode=30;break}k=r.lens[r.have-1],c=3+(3&h),h>>>=2,f-=2}else if(17===v){for(z=_+3;f<z;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}f-=_,k=0,c=3+(7&(h>>>=_)),h>>>=3,f-=3}else{for(z=_+7;f<z;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}f-=_,k=0,c=11+(127&(h>>>=_)),h>>>=7,f-=7}if(r.have+c>r.nlen+r.ndist){e.msg="invalid bit length repeat",r.mode=30;break}for(;c--;)r.lens[r.have++]=k}}if(30===r.mode)break;if(0===r.lens[256]){e.msg="invalid code -- missing end-of-block",r.mode=30;break}if(r.lenbits=9,S={bits:r.lenbits},x=R(D,r.lens,0,r.nlen,r.lencode,0,r.work,S),r.lenbits=S.bits,x){e.msg="invalid literal/lengths set",r.mode=30;break}if(r.distbits=6,r.distcode=r.distdyn,S={bits:r.distbits},x=R(F,r.lens,r.nlen,r.ndist,r.distcode,0,r.work,S),r.distbits=S.bits,x){e.msg="invalid distances set",r.mode=30;break}if(r.mode=20,6===t)break e;case 20:r.mode=21;case 21:if(6<=o&&258<=u){e.next_out=a,e.avail_out=u,e.next_in=s,e.avail_in=o,r.hold=h,r.bits=f,T(e,d),a=e.next_out,i=e.output,u=e.avail_out,s=e.next_in,n=e.input,o=e.avail_in,h=r.hold,f=r.bits,12===r.mode&&(r.back=-1);break}for(r.back=0;g=(E=r.lencode[h&(1<<r.lenbits)-1])>>>16&255,v=65535&E,!((_=E>>>24)<=f);){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}if(g&&0==(240&g)){for(b=_,w=g,y=v;g=(E=r.lencode[y+((h&(1<<b+w)-1)>>b)])>>>16&255,v=65535&E,!(b+(_=E>>>24)<=f);){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}h>>>=b,f-=b,r.back+=b}if(h>>>=_,f-=_,r.back+=_,r.length=v,0===g){r.mode=26;break}if(32&g){r.back=-1,r.mode=12;break}if(64&g){e.msg="invalid literal/length code",r.mode=30;break}r.extra=15&g,r.mode=22;case 22:if(r.extra){for(z=r.extra;f<z;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}r.length+=h&(1<<r.extra)-1,h>>>=r.extra,f-=r.extra,r.back+=r.extra}r.was=r.length,r.mode=23;case 23:for(;g=(E=r.distcode[h&(1<<r.distbits)-1])>>>16&255,v=65535&E,!((_=E>>>24)<=f);){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}if(0==(240&g)){for(b=_,w=g,y=v;g=(E=r.distcode[y+((h&(1<<b+w)-1)>>b)])>>>16&255,v=65535&E,!(b+(_=E>>>24)<=f);){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}h>>>=b,f-=b,r.back+=b}if(h>>>=_,f-=_,r.back+=_,64&g){e.msg="invalid distance code",r.mode=30;break}r.offset=v,r.extra=15&g,r.mode=24;case 24:if(r.extra){for(z=r.extra;f<z;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}r.offset+=h&(1<<r.extra)-1,h>>>=r.extra,f-=r.extra,r.back+=r.extra}if(r.offset>r.dmax){e.msg="invalid distance too far back",r.mode=30;break}r.mode=25;case 25:if(0===u)break e;if(c=d-u,r.offset>c){if((c=r.offset-c)>r.whave&&r.sane){e.msg="invalid distance too far back",r.mode=30;break}p=c>r.wnext?(c-=r.wnext,r.wsize-c):r.wnext-c,c>r.length&&(c=r.length),m=r.window}else m=i,p=a-r.offset,c=r.length;for(u<c&&(c=u),u-=c,r.length-=c;i[a++]=m[p++],--c;);0===r.length&&(r.mode=21);break;case 26:if(0===u)break e;i[a++]=r.length,u--,r.mode=21;break;case 27:if(r.wrap){for(;f<32;){if(0===o)break e;o--,h|=n[s++]<<f,f+=8}if(d-=u,e.total_out+=d,r.total+=d,d&&(e.adler=r.check=r.flags?B(r.check,i,d,a-d):O(r.check,i,d,a-d)),d=u,(r.flags?h:L(h))!==r.check){e.msg="incorrect data check",r.mode=30;break}f=h=0}r.mode=28;case 28:if(r.wrap&&r.flags){for(;f<32;){if(0===o)break e;o--,h+=n[s++]<<f,f+=8}if(h!==(4294967295&r.total)){e.msg="incorrect length check",r.mode=30;break}f=h=0}r.mode=29;case 29:x=1;break e;case 30:x=-3;break e;case 31:return-4;case 32:default:return U}return e.next_out=a,e.avail_out=u,e.next_in=s,e.avail_in=o,r.hold=h,r.bits=f,(r.wsize||d!==e.avail_out&&r.mode<30&&(r.mode<27||4!==t))&&Z(e,e.output,e.next_out,d-e.avail_out)?(r.mode=31,-4):(l-=e.avail_in,d-=e.avail_out,e.total_in+=l,e.total_out+=d,r.total+=d,r.wrap&&d&&(e.adler=r.check=r.flags?B(r.check,i,d,e.next_out-d):O(r.check,i,d,e.next_out-d)),e.data_type=r.bits+(r.last?64:0)+(12===r.mode?128:0)+(20===r.mode||15===r.mode?256:0),(0==l&&0===d||4===t)&&x===N&&(x=-5),x)},r.inflateEnd=function(e){if(!e||!e.state)return U;var t=e.state;return t.window&&(t.window=null),e.state=null,N},r.inflateGetHeader=function(e,t){var r;return e&&e.state?0==(2&(r=e.state).wrap)?U:((r.head=t).done=!1,N):U},r.inflateSetDictionary=function(e,t){var r,n=t.length;return e&&e.state?0!==(r=e.state).wrap&&11!==r.mode?U:11===r.mode&&O(1,t,n,0)!==r.check?-3:Z(e,t,n,n)?(r.mode=31,-4):(r.havedict=1,N):U},r.inflateInfo="pako inflate (from Nodeca project)"},{"../utils/common":41,"./adler32":43,"./crc32":45,"./inffast":48,"./inftrees":50}],50:[function(e,t,r){"use strict";var D=e("../utils/common"),F=[3,4,5,6,7,8,9,10,11,13,15,17,19,23,27,31,35,43,51,59,67,83,99,115,131,163,195,227,258,0,0],N=[16,16,16,16,16,16,16,16,17,17,17,17,18,18,18,18,19,19,19,19,20,20,20,20,21,21,21,21,16,72,78],U=[1,2,3,4,5,7,9,13,17,25,33,49,65,97,129,193,257,385,513,769,1025,1537,2049,3073,4097,6145,8193,12289,16385,24577,0,0],P=[16,16,16,16,17,17,18,18,19,19,20,20,21,21,22,22,23,23,24,24,25,25,26,26,27,27,28,28,29,29,64,64];t.exports=function(e,t,r,n,i,s,a,o){var u,h,f,l,d,c,p,m,_,g=o.bits,v=0,b=0,w=0,y=0,k=0,x=0,S=0,z=0,E=0,C=0,A=null,I=0,O=new D.Buf16(16),B=new D.Buf16(16),T=null,R=0;for(v=0;v<=15;v++)O[v]=0;for(b=0;b<n;b++)O[t[r+b]]++;for(k=g,y=15;1<=y&&0===O[y];y--);if(y<k&&(k=y),0===y)return i[s++]=20971520,i[s++]=20971520,o.bits=1,0;for(w=1;w<y&&0===O[w];w++);for(k<w&&(k=w),v=z=1;v<=15;v++)if(z<<=1,(z-=O[v])<0)return-1;if(0<z&&(0===e||1!==y))return-1;for(B[1]=0,v=1;v<15;v++)B[v+1]=B[v]+O[v];for(b=0;b<n;b++)0!==t[r+b]&&(a[B[t[r+b]]++]=b);if(c=0===e?(A=T=a,19):1===e?(A=F,I-=257,T=N,R-=257,256):(A=U,T=P,-1),v=w,d=s,S=b=C=0,f=-1,l=(E=1<<(x=k))-1,1===e&&852<E||2===e&&592<E)return 1;for(;;){for(p=v-S,_=a[b]<c?(m=0,a[b]):a[b]>c?(m=T[R+a[b]],A[I+a[b]]):(m=96,0),u=1<<v-S,w=h=1<<x;i[d+(C>>S)+(h-=u)]=p<<24|m<<16|_|0,0!==h;);for(u=1<<v-1;C&u;)u>>=1;if(0!==u?(C&=u-1,C+=u):C=0,b++,0==--O[v]){if(v===y)break;v=t[r+a[b]]}if(k<v&&(C&l)!==f){for(0===S&&(S=k),d+=w,z=1<<(x=v-S);x+S<y&&!((z-=O[x+S])<=0);)x++,z<<=1;if(E+=1<<x,1===e&&852<E||2===e&&592<E)return 1;i[f=C&l]=k<<24|x<<16|d-s|0}}return 0!==C&&(i[d+C]=v-S<<24|64<<16|0),o.bits=k,0}},{"../utils/common":41}],51:[function(e,t,r){"use strict";t.exports={2:"need dictionary",1:"stream end",0:"","-1":"file error","-2":"stream error","-3":"data error","-4":"insufficient memory","-5":"buffer error","-6":"incompatible version"}},{}],52:[function(e,t,r){"use strict";var o=e("../utils/common");function n(e){for(var t=e.length;0<=--t;)e[t]=0}var _=15,i=16,u=[0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,0],h=[0,0,0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13],a=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,7],f=[16,17,18,0,8,7,9,6,10,5,11,4,12,3,13,2,14,1,15],l=new Array(576);n(l);var d=new Array(60);n(d);var c=new Array(512);n(c);var p=new Array(256);n(p);var m=new Array(29);n(m);var g,v,b,w=new Array(30);function y(e,t,r,n,i){this.static_tree=e,this.extra_bits=t,this.extra_base=r,this.elems=n,this.max_length=i,this.has_stree=e&&e.length}function s(e,t){this.dyn_tree=e,this.max_code=0,this.stat_desc=t}function k(e){return e<256?c[e]:c[256+(e>>>7)]}function x(e,t){e.pending_buf[e.pending++]=255&t,e.pending_buf[e.pending++]=t>>>8&255}function S(e,t,r){e.bi_valid>i-r?(e.bi_buf|=t<<e.bi_valid&65535,x(e,e.bi_buf),e.bi_buf=t>>i-e.bi_valid,e.bi_valid+=r-i):(e.bi_buf|=t<<e.bi_valid&65535,e.bi_valid+=r)}function z(e,t,r){S(e,r[2*t],r[2*t+1])}function E(e,t){for(var r=0;r|=1&e,e>>>=1,r<<=1,0<--t;);return r>>>1}function C(e,t,r){var n,i,s=new Array(_+1),a=0;for(n=1;n<=_;n++)s[n]=a=a+r[n-1]<<1;for(i=0;i<=t;i++){var o=e[2*i+1];0!==o&&(e[2*i]=E(s[o]++,o))}}function A(e){var t;for(t=0;t<286;t++)e.dyn_ltree[2*t]=0;for(t=0;t<30;t++)e.dyn_dtree[2*t]=0;for(t=0;t<19;t++)e.bl_tree[2*t]=0;e.dyn_ltree[512]=1,e.opt_len=e.static_len=0,e.last_lit=e.matches=0}function I(e){8<e.bi_valid?x(e,e.bi_buf):0<e.bi_valid&&(e.pending_buf[e.pending++]=e.bi_buf),e.bi_buf=0,e.bi_valid=0}function O(e,t,r,n){var i=2*t,s=2*r;return e[i]<e[s]||e[i]===e[s]&&n[t]<=n[r]}function B(e,t,r){for(var n=e.heap[r],i=r<<1;i<=e.heap_len&&(i<e.heap_len&&O(t,e.heap[i+1],e.heap[i],e.depth)&&i++,!O(t,n,e.heap[i],e.depth));)e.heap[r]=e.heap[i],r=i,i<<=1;e.heap[r]=n}function T(e,t,r){var n,i,s,a,o=0;if(0!==e.last_lit)for(;n=e.pending_buf[e.d_buf+2*o]<<8|e.pending_buf[e.d_buf+2*o+1],i=e.pending_buf[e.l_buf+o],o++,0===n?z(e,i,t):(z(e,(s=p[i])+256+1,t),0!==(a=u[s])&&S(e,i-=m[s],a),z(e,s=k(--n),r),0!==(a=h[s])&&S(e,n-=w[s],a)),o<e.last_lit;);z(e,256,t)}function R(e,t){var r,n,i,s=t.dyn_tree,a=t.stat_desc.static_tree,o=t.stat_desc.has_stree,u=t.stat_desc.elems,h=-1;for(e.heap_len=0,e.heap_max=573,r=0;r<u;r++)0!==s[2*r]?(e.heap[++e.heap_len]=h=r,e.depth[r]=0):s[2*r+1]=0;for(;e.heap_len<2;)s[2*(i=e.heap[++e.heap_len]=h<2?++h:0)]=1,e.depth[i]=0,e.opt_len--,o&&(e.static_len-=a[2*i+1]);for(t.max_code=h,r=e.heap_len>>1;1<=r;r--)B(e,s,r);for(i=u;r=e.heap[1],e.heap[1]=e.heap[e.heap_len--],B(e,s,1),n=e.heap[1],e.heap[--e.heap_max]=r,e.heap[--e.heap_max]=n,s[2*i]=s[2*r]+s[2*n],e.depth[i]=(e.depth[r]>=e.depth[n]?e.depth[r]:e.depth[n])+1,s[2*r+1]=s[2*n+1]=i,e.heap[1]=i++,B(e,s,1),2<=e.heap_len;);e.heap[--e.heap_max]=e.heap[1],function(e,t){var r,n,i,s,a,o,u=t.dyn_tree,h=t.max_code,f=t.stat_desc.static_tree,l=t.stat_desc.has_stree,d=t.stat_desc.extra_bits,c=t.stat_desc.extra_base,p=t.stat_desc.max_length,m=0;for(s=0;s<=_;s++)e.bl_count[s]=0;for(u[2*e.heap[e.heap_max]+1]=0,r=e.heap_max+1;r<573;r++)p<(s=u[2*u[2*(n=e.heap[r])+1]+1]+1)&&(s=p,m++),u[2*n+1]=s,h<n||(e.bl_count[s]++,a=0,c<=n&&(a=d[n-c]),o=u[2*n],e.opt_len+=o*(s+a),l&&(e.static_len+=o*(f[2*n+1]+a)));if(0!==m){do{for(s=p-1;0===e.bl_count[s];)s--;e.bl_count[s]--,e.bl_count[s+1]+=2,e.bl_count[p]--,m-=2}while(0<m);for(s=p;0!==s;s--)for(n=e.bl_count[s];0!==n;)h<(i=e.heap[--r])||(u[2*i+1]!==s&&(e.opt_len+=(s-u[2*i+1])*u[2*i],u[2*i+1]=s),n--)}}(e,t),C(s,h,e.bl_count)}function D(e,t,r){var n,i,s=-1,a=t[1],o=0,u=7,h=4;for(0===a&&(u=138,h=3),t[2*(r+1)+1]=65535,n=0;n<=r;n++)i=a,a=t[2*(n+1)+1],++o<u&&i===a||(o<h?e.bl_tree[2*i]+=o:0!==i?(i!==s&&e.bl_tree[2*i]++,e.bl_tree[32]++):o<=10?e.bl_tree[34]++:e.bl_tree[36]++,s=i,h=(o=0)===a?(u=138,3):i===a?(u=6,3):(u=7,4))}function F(e,t,r){var n,i,s=-1,a=t[1],o=0,u=7,h=4;for(0===a&&(u=138,h=3),n=0;n<=r;n++)if(i=a,a=t[2*(n+1)+1],!(++o<u&&i===a)){if(o<h)for(;z(e,i,e.bl_tree),0!=--o;);else 0!==i?(i!==s&&(z(e,i,e.bl_tree),o--),z(e,16,e.bl_tree),S(e,o-3,2)):o<=10?(z(e,17,e.bl_tree),S(e,o-3,3)):(z(e,18,e.bl_tree),S(e,o-11,7));s=i,h=(o=0)===a?(u=138,3):i===a?(u=6,3):(u=7,4)}}n(w);var N=!1;function U(e,t,r,n){var i,s,a;S(e,0+(n?1:0),3),s=t,a=r,I(i=e),x(i,a),x(i,~a),o.arraySet(i.pending_buf,i.window,s,a,i.pending),i.pending+=a}r._tr_init=function(e){N||(function(){var e,t,r,n,i,s=new Array(_+1);for(n=r=0;n<28;n++)for(m[n]=r,e=0;e<1<<u[n];e++)p[r++]=n;for(p[r-1]=n,n=i=0;n<16;n++)for(w[n]=i,e=0;e<1<<h[n];e++)c[i++]=n;for(i>>=7;n<30;n++)for(w[n]=i<<7,e=0;e<1<<h[n]-7;e++)c[256+i++]=n;for(t=0;t<=_;t++)s[t]=0;for(e=0;e<=143;)l[2*e+1]=8,e++,s[8]++;for(;e<=255;)l[2*e+1]=9,e++,s[9]++;for(;e<=279;)l[2*e+1]=7,e++,s[7]++;for(;e<=287;)l[2*e+1]=8,e++,s[8]++;for(C(l,287,s),e=0;e<30;e++)d[2*e+1]=5,d[2*e]=E(e,5);g=new y(l,u,257,286,_),v=new y(d,h,0,30,_),b=new y(new Array(0),a,0,19,7)}(),N=!0),e.l_desc=new s(e.dyn_ltree,g),e.d_desc=new s(e.dyn_dtree,v),e.bl_desc=new s(e.bl_tree,b),e.bi_buf=0,e.bi_valid=0,A(e)},r._tr_stored_block=U,r._tr_flush_block=function(e,t,r,n){var i,s,a=0;0<e.level?(2===e.strm.data_type&&(e.strm.data_type=function(e){var t,r=4093624447;for(t=0;t<=31;t++,r>>>=1)if(1&r&&0!==e.dyn_ltree[2*t])return 0;if(0!==e.dyn_ltree[18]||0!==e.dyn_ltree[20]||0!==e.dyn_ltree[26])return 1;for(t=32;t<256;t++)if(0!==e.dyn_ltree[2*t])return 1;return 0}(e)),R(e,e.l_desc),R(e,e.d_desc),a=function(e){var t;for(D(e,e.dyn_ltree,e.l_desc.max_code),D(e,e.dyn_dtree,e.d_desc.max_code),R(e,e.bl_desc),t=18;3<=t&&0===e.bl_tree[2*f[t]+1];t--);return e.opt_len+=3*(t+1)+5+5+4,t}(e),i=e.opt_len+3+7>>>3,(s=e.static_len+3+7>>>3)<=i&&(i=s)):i=s=r+5,r+4<=i&&-1!==t?U(e,t,r,n):4===e.strategy||s===i?(S(e,2+(n?1:0),3),T(e,l,d)):(S(e,4+(n?1:0),3),function(e,t,r,n){var i;for(S(e,t-257,5),S(e,r-1,5),S(e,n-4,4),i=0;i<n;i++)S(e,e.bl_tree[2*f[i]+1],3);F(e,e.dyn_ltree,t-1),F(e,e.dyn_dtree,r-1)}(e,e.l_desc.max_code+1,e.d_desc.max_code+1,a+1),T(e,e.dyn_ltree,e.dyn_dtree)),A(e),n&&I(e)},r._tr_tally=function(e,t,r){return e.pending_buf[e.d_buf+2*e.last_lit]=t>>>8&255,e.pending_buf[e.d_buf+2*e.last_lit+1]=255&t,e.pending_buf[e.l_buf+e.last_lit]=255&r,e.last_lit++,0===t?e.dyn_ltree[2*r]++:(e.matches++,t--,e.dyn_ltree[2*(p[r]+256+1)]++,e.dyn_dtree[2*k(t)]++),e.last_lit===e.lit_bufsize-1},r._tr_align=function(e){var t;S(e,2,3),z(e,256,l),16===(t=e).bi_valid?(x(t,t.bi_buf),t.bi_buf=0,t.bi_valid=0):8<=t.bi_valid&&(t.pending_buf[t.pending++]=255&t.bi_buf,t.bi_buf>>=8,t.bi_valid-=8)}},{"../utils/common":41}],53:[function(e,t,r){"use strict";t.exports=function(){this.input=null,this.next_in=0,this.avail_in=0,this.total_in=0,this.output=null,this.next_out=0,this.avail_out=0,this.total_out=0,this.msg="",this.state=null,this.data_type=2,this.adler=0}},{}],54:[function(e,t,r){"use strict";t.exports="function"==typeof setImmediate?setImmediate:function(){var e=[].slice.apply(arguments);e.splice(1,0,0),setTimeout.apply(null,e)}},{}]},{},[10])(10)})}).call(this,void 0!==r?r:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{}]},{},[1])(1)})}).call(this,void 0!==r?r:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{}]},{},[1])(1)})}).call(this,void 0!==r?r:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{}]},{},[1])(1)})}).call(this,void 0!==r?r:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{}]},{},[1])(1)})}).call(this,"undefined"!=typeof __webpack_require__.g?__webpack_require__.g:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{}]},{},[1])(1)});
+
+/***/ }),
+
 /***/ 11166:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -44182,7 +44201,7 @@ function invariant(condition, message) {
 
 /***/ }),
 
-/***/ 8133:
+/***/ 56644:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -44278,189 +44297,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ensureFetch = exports.downloadSampleLawtext = exports.scrollLaw = exports.downloadXml = exports.downloadLawtext = exports.downloadDocx = exports.getLawName = exports.containerInfoOf = exports.tobeDownloadedRange = exports.displayLaw = exports.loadLawText = exports.invokeError = exports.ErrorModalID = exports.openFileInputChange = exports.openFile = exports.OpenFileInputName = void 0;
+exports.downloadXml = exports.downloadLawtext = exports.downloadDocx = exports.containerInfoOf = void 0;
 var jquery_1 = __importDefault(__webpack_require__(19755));
 var std = __importStar(__webpack_require__(76791));
-var analyzer = __importStar(__webpack_require__(71886));
 var util = __importStar(__webpack_require__(94620));
-var parser_wrapper_1 = __webpack_require__(78802);
-var lawdata = __importStar(__webpack_require__(27841));
 var renderer = __importStar(__webpack_require__(54291));
 var lawtext_1 = __importDefault(__webpack_require__(53021));
 var file_saver_1 = __webpack_require__(93162);
-var readFileAsText = function (file) {
-    var reader = new FileReader();
-    return new Promise(function (resolve, reject) {
-        reader.onerror = function () {
-            reader.abort();
-            reject(reader.error);
-        };
-        reader.onload = function () {
-            resolve(reader.result);
-        };
-        reader.readAsText(file);
-    });
-};
-exports.OpenFileInputName = "LawtextAppPage.OpenFileInput";
-var openFile = function () {
-    var els = document.getElementsByName(exports.OpenFileInputName);
-    if (els) {
-        els[0].click();
-    }
-};
-exports.openFile = openFile;
-var openFileInputChange = function (setState, event) { return __awaiter(void 0, void 0, void 0, function () {
-    var openFileInput, file, text;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                openFileInput = event.target;
-                file = openFileInput.files ? openFileInput.files[0] : null;
-                if (!file)
-                    return [2 /*return*/];
-                setState({ loadingLaw: true, loadingLawMessage: "ファイルを読み込んでいます..." });
-                console.log("openFileInputChange: Loading file");
-                return [4 /*yield*/, util.wait(30)];
-            case 1:
-                _a.sent();
-                return [4 /*yield*/, readFileAsText(file)];
-            case 2:
-                text = _a.sent();
-                openFileInput.value = "";
-                return [4 /*yield*/, exports.loadLawText(setState, text, true)];
-            case 3:
-                _a.sent();
-                setState({ lawSearchKey: "", loadingLaw: false, loadingLawMessage: "" });
-                return [2 /*return*/];
-        }
-    });
-}); };
-exports.openFileInputChange = openFileInputChange;
-exports.ErrorModalID = "LawtextAppPage.ErrorModal";
-var showErrorModal = function (title, bodyEl) {
-    var modalEl = document.getElementById(exports.ErrorModalID);
-    if (!modalEl)
-        return;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    var modal = jquery_1.default(modalEl);
-    modal.find(".modal-title").html(title);
-    modal.find(".modal-body").html(bodyEl);
-    modal.modal("show");
-};
-var invokeError = function (title, bodyEl) {
-    return showErrorModal(title, bodyEl);
-};
-exports.invokeError = invokeError;
-var loadLawText = function (setState, text, analyzeXml) { return __awaiter(void 0, void 0, void 0, function () {
-    var law, analysis, begin, err_1, errStr, pre, newState, lawBody, lawTitle;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                law = null;
-                analysis = null;
-                begin = Date.now();
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 6, , 7]);
-                if (!/^(?:<\?xml|<Law)/.test(text.trim())) return [3 /*break*/, 3];
-                setState({ loadingLawMessage: "法令XMLをパースしています..." });
-                console.log("loadLawText: Parse as XML");
-                return [4 /*yield*/, util.wait(30)];
-            case 2:
-                _a.sent();
-                law = util.xmlToJson(text);
-                if (analyzeXml) {
-                    analyzer.stdxmlToExt(law);
-                }
-                analysis = analyzer.analyze(law);
-                return [3 /*break*/, 5];
-            case 3:
-                setState({ loadingLawMessage: "Lawtextをパースしています..." });
-                console.log("loadLawText: Parse as Lawtext");
-                return [4 /*yield*/, util.wait(30)];
-            case 4:
-                _a.sent();
-                law = parser_wrapper_1.parse(text, { startRule: "start" });
-                analysis = analyzer.analyze(law);
-                _a.label = 5;
-            case 5: return [3 /*break*/, 7];
-            case 6:
-                err_1 = _a.sent();
-                console.log(err_1);
-                errStr = err_1.toString();
-                pre = jquery_1.default("<pre>")
-                    .css({ "white-space": "pre-wrap" })
-                    .css({ "line-height": "1.2em" })
-                    .css({ "padding": "1em 0" })
-                    .html(errStr);
-                exports.invokeError("読み込んだ法令データにエラーがあります", (pre[0]).outerHTML);
-                law = null;
-                return [3 /*break*/, 7];
-            case 7:
-                console.log("loadLawText: Parse end: " + (Date.now() - begin) + "ms");
-                newState = {};
-                if (law) {
-                    newState.law = law;
-                    newState.analysis = analysis;
-                    lawBody = law.children.find(function (el) { return el.tag === "LawBody"; });
-                    lawTitle = lawBody && lawBody.children.find(function (el) { return el.tag === "LawTitle"; });
-                    document.title = lawTitle ? lawTitle.text + " | Lawtext" : "Lawtext";
-                }
-                else {
-                    document.title = "Lawtext";
-                }
-                setState({ loadingLawMessage: "レンダリングしています..." });
-                console.log("loadLawText: Setting Law into State");
-                return [4 /*yield*/, util.wait(30)];
-            case 8:
-                _a.sent();
-                begin = Date.now();
-                setState(newState);
-                console.log("loadLawText: Render end: " + (Date.now() - begin) + "ms");
-                return [2 /*return*/, law];
-        }
-    });
-}); };
-exports.loadLawText = loadLawText;
-var displayLaw = function (origState, setState) { return __awaiter(void 0, void 0, void 0, function () {
-    var text, err_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                console.log("displayLaw(" + origState.lawSearchKey + ")");
-                if (origState.lawSearchKey === origState.lawSearchedKey)
-                    return [2 /*return*/];
-                if (!origState.lawSearchKey) {
-                    setState({ law: null, lawSearchedKey: origState.lawSearchKey });
-                    return [2 /*return*/];
-                }
-                setState({ loadingLaw: true, lawSearchedKey: origState.lawSearchKey, loadingLawMessage: "法令を検索しています..." });
-                console.log("displayLaw: Searching Law");
-                return [4 /*yield*/, util.wait(30)];
-            case 1:
-                _a.sent();
-                _a.label = 2;
-            case 2:
-                _a.trys.push([2, 5, , 6]);
-                return [4 /*yield*/, lawdata.loadLaw(origState.lawSearchKey)];
-            case 3:
-                text = _a.sent();
-                return [4 /*yield*/, exports.loadLawText(setState, text, true)];
-            case 4:
-                _a.sent();
-                return [3 /*break*/, 6];
-            case 5:
-                err_2 = _a.sent();
-                console.log(err_2);
-                exports.invokeError(err_2[0] || "エラー", err_2[1] || err_2.toString());
-                return [3 /*break*/, 6];
-            case 6:
-                setState({ loadingLaw: false, loadingLawMessage: "" });
-                return [2 /*return*/];
-        }
-    });
-}); };
-exports.displayLaw = displayLaw;
+var law_util_1 = __webpack_require__(50377);
 var tobeDownloadedRange = function () {
     var getPos = function (node) {
         if (!node.parentNode)
@@ -44496,7 +44340,6 @@ var tobeDownloadedRange = function () {
         end: ePos,
     };
 };
-exports.tobeDownloadedRange = tobeDownloadedRange;
 var containerInfoOf = function (el) {
     if (typeof el === "string") {
         return { tag: "", id: "" };
@@ -44627,22 +44470,12 @@ var getLawRange = function (origLaw, range) {
     }
     return law;
 };
-var getLawName = function (law) {
-    var lawNum = law.children.find(function (el) { return el.tag === "LawNum"; });
-    var lawBody = law.children.find(function (el) { return el.tag === "LawBody"; });
-    var lawTitle = lawBody && lawBody.children.find(function (el) { return el.tag === "LawTitle"; });
-    var sLawNum = lawNum ? lawNum.text : "";
-    var sLawTitle = lawTitle ? lawTitle.text : "";
-    sLawNum = (sLawNum && sLawTitle) ? ("\uFF08" + sLawNum + "\uFF09") : sLawNum;
-    return sLawTitle + sLawNum;
-};
-exports.getLawName = getLawName;
 var downloadDocx = function (law, downloadSelection) { return __awaiter(void 0, void 0, void 0, function () {
     var range, buffer, blob, lawName;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                range = downloadSelection ? exports.tobeDownloadedRange() : null;
+                range = downloadSelection ? tobeDownloadedRange() : null;
                 if (range) {
                     law = getLawRange(law, range);
                 }
@@ -44650,7 +44483,7 @@ var downloadDocx = function (law, downloadSelection) { return __awaiter(void 0, 
             case 1:
                 buffer = _a.sent();
                 blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
-                lawName = exports.getLawName(law) || "lawtext_output";
+                lawName = law_util_1.getLawTitleWithNum(law) || "lawtext_output";
                 file_saver_1.saveAs(blob, lawName + ".docx");
                 return [2 /*return*/];
         }
@@ -44662,7 +44495,7 @@ var downloadLawtext = function (law) { return __awaiter(void 0, void 0, void 0, 
     return __generator(this, function (_a) {
         sLawtext = lawtext_1.default(law);
         blob = new Blob([sLawtext], { type: "text/plain" });
-        lawName = exports.getLawName(law) || "lawtext_output";
+        lawName = law_util_1.getLawTitleWithNum(law) || "lawtext_output";
         file_saver_1.saveAs(blob, lawName + ".law.txt");
         return [2 /*return*/];
     });
@@ -44673,96 +44506,168 @@ var downloadXml = function (law) { return __awaiter(void 0, void 0, void 0, func
     return __generator(this, function (_a) {
         xml = renderer.renderXml(law);
         blob = new Blob([xml], { type: "application/xml" });
-        lawName = exports.getLawName(law) || "lawtext_output";
+        lawName = law_util_1.getLawTitleWithNum(law) || "lawtext_output";
         file_saver_1.saveAs(blob, lawName + ".xml");
         return [2 /*return*/];
     });
 }); };
 exports.downloadXml = downloadXml;
-var scrollToLawAnchor = function (id) {
-    var e_4, _a;
-    try {
-        for (var _b = __values(Array.from(document.getElementsByClassName("law-anchor"))), _c = _b.next(); !_c.done; _c = _b.next()) {
-            var el = _c.value;
-            if (el.dataset.el_id === id) {
-                // const rect = el.getBoundingClientRect();
-                // const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                // const newScrollTop = scrollTop + rect.top;
-                // document.body.scrollTop = newScrollTop;
-                // document.documentElement.scrollTop = newScrollTop;
-                var offset = jquery_1.default(el).offset();
-                if (offset)
-                    jquery_1.default("html,body").animate({ scrollTop: offset.top }, "normal");
-            }
-        }
-    }
-    catch (e_4_1) { e_4 = { error: e_4_1 }; }
-    finally {
-        try {
-            if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-        }
-        finally { if (e_4) throw e_4.error; }
-    }
-};
-var scrollLaw = 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function (id) {
-    return scrollToLawAnchor(id);
-};
-exports.scrollLaw = scrollLaw;
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-var sampleSampleXml = __webpack_require__(25687)/* .default */ .Z;
-var downloadSampleLawtext = function (setState) { return __awaiter(void 0, void 0, void 0, function () {
-    var law;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                setState({ loadingLaw: true });
-                return [4 /*yield*/, util.wait(30)];
-            case 1:
-                _a.sent();
-                return [4 /*yield*/, exports.loadLawText(setState, sampleSampleXml, true)];
-            case 2:
-                law = _a.sent();
-                if (!law) return [3 /*break*/, 4];
-                return [4 /*yield*/, exports.downloadLawtext(law)];
-            case 3:
-                _a.sent();
-                _a.label = 4;
-            case 4:
-                setState({ loadingLaw: false });
-                return [2 /*return*/];
-        }
-    });
-}); };
-exports.downloadSampleLawtext = downloadSampleLawtext;
-var ensureFetch = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var isFile, res, e_5;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                isFile = location.protocol === "file:";
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, fetch("./index.html", { method: "HEAD" })];
-            case 2:
-                res = _a.sent();
-                return [2 /*return*/, { isFile: isFile, canFetch: res.ok }];
-            case 3:
-                e_5 = _a.sent();
-                return [2 /*return*/, { isFile: isFile, canFetch: false }];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); };
-exports.ensureFetch = ensureFetch;
 
 
 /***/ }),
 
-/***/ 27841:
+/***/ 29084:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.onNavigated = void 0;
+var util = __importStar(__webpack_require__(94620));
+var common_1 = __webpack_require__(16953);
+var navigateLawData_1 = __webpack_require__(34659);
+var download_1 = __webpack_require__(56644);
+var jquery_1 = __importDefault(__webpack_require__(19755));
+var law_util_1 = __webpack_require__(50377);
+var showErrorModal_1 = __webpack_require__(87322);
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+var sampleSampleXml = __webpack_require__(25687)/* .default */ .Z;
+var onNavigated = function (lawSearchKey, setState) { return __awaiter(void 0, void 0, void 0, function () {
+    var onMessage, toDownloadSample, lawDataResult, errStr, pre, lawTitle;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                console.log("onNavigated(" + lawSearchKey + ")");
+                onMessage = function (message) { return setState({ loadingLawMessage: message }); };
+                if (!lawSearchKey) {
+                    console.log("onNavigated: detected the top page.");
+                    setState({ law: null, loadingLaw: false, loadingLawMessage: "" });
+                    return [2 /*return*/];
+                }
+                setState({ law: null, loadingLaw: true, loadingLawMessage: "法令を読み込んでいます..." });
+                toDownloadSample = (lawSearchKey.startsWith("(sample)"));
+                if (!toDownloadSample) return [3 /*break*/, 1];
+                onMessage("サンプル法令を読み込んでいます...");
+                console.log("onNavigated: loading the sample low...");
+                lawDataResult = common_1.toLawData({
+                    source: "file_xml",
+                    xml: sampleSampleXml,
+                });
+                return [3 /*break*/, 4];
+            case 1:
+                onMessage("法令を検索しています...");
+                console.log("onNavigated: searching law...");
+                return [4 /*yield*/, util.wait(30)];
+            case 2:
+                _a.sent();
+                return [4 /*yield*/, navigateLawData_1.navigateLawData(lawSearchKey, onMessage)];
+            case 3:
+                lawDataResult = _a.sent();
+                _a.label = 4;
+            case 4:
+                if (!lawDataResult.ok) {
+                    console.error("onNavigated: error during loading the law...");
+                    console.error(lawDataResult.error);
+                    errStr = lawDataResult.error.toString();
+                    pre = jquery_1.default("<pre>")
+                        .css({ "white-space": "pre-wrap" })
+                        .css({ "line-height": "1.2em" })
+                        .css({ "padding": "1em 0" })
+                        .html(errStr);
+                    showErrorModal_1.showErrorModal("法令の読み込み時にエラーが発生しました", (pre[0]).outerHTML);
+                    setState({ law: null, loadingLaw: false, loadingLawMessage: "" });
+                    return [2 /*return*/];
+                }
+                if (!(toDownloadSample && lawDataResult.ok)) return [3 /*break*/, 6];
+                onMessage("サンプル法令を保存しています...");
+                console.log("onNavigated: saving the sample low...");
+                return [4 /*yield*/, download_1.downloadLawtext(lawDataResult.lawData.el)];
+            case 5:
+                _a.sent();
+                _a.label = 6;
+            case 6:
+                lawTitle = law_util_1.getLawTitleWithNum(lawDataResult.lawData.el);
+                document.title = lawTitle ? lawTitle + " | Lawtext" : "Lawtext";
+                onMessage("レンダリングしています...");
+                console.log("onNavigated: setting law into state...");
+                return [4 /*yield*/, util.wait(30)];
+            case 7:
+                _a.sent();
+                setState({
+                    law: lawDataResult.lawData,
+                    loadingLaw: false,
+                    loadingLawMessage: "",
+                });
+                console.log("onNavigated: completed.");
+                return [2 /*return*/];
+        }
+    });
+}); };
+exports.onNavigated = onNavigated;
+
+
+/***/ }),
+
+/***/ 63895:
+/***/ (function(__unused_webpack_module, exports) {
 
 "use strict";
 
@@ -44802,6 +44707,58 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.readFileInput = exports.openFile = exports.OpenFileInputName = void 0;
+var readFileAsText = function (file) {
+    var reader = new FileReader();
+    return new Promise(function (resolve, reject) {
+        reader.onerror = function () {
+            reader.abort();
+            reject(reader.error);
+        };
+        reader.onload = function () {
+            resolve(reader.result);
+        };
+        reader.readAsText(file);
+    });
+};
+exports.OpenFileInputName = "LawtextAppPage.OpenFileInput";
+var openFile = function () {
+    var els = document.getElementsByName(exports.OpenFileInputName);
+    if (els) {
+        els[0].click();
+    }
+};
+exports.openFile = openFile;
+var readFileInput = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var openFileInput, file, text;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                openFileInput = document.getElementsByName(exports.OpenFileInputName).item(0);
+                if (!openFileInput)
+                    return [2 /*return*/, null];
+                file = openFileInput.files ? openFileInput.files[0] : null;
+                if (!file)
+                    return [2 /*return*/, null];
+                return [4 /*yield*/, readFileAsText(file)];
+            case 1:
+                text = _a.sent();
+                openFileInput.value = "";
+                return [2 /*return*/, text];
+        }
+    });
+}); };
+exports.readFileInput = readFileInput;
+
+
+/***/ }),
+
+/***/ 31529:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
 var __values = (this && this.__values) || function(o) {
     var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
     if (m) return m.call(o);
@@ -44817,305 +44774,57 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.loadLaw = exports.saveListJson = exports.storedLoader = exports.elawsLoader = void 0;
-var js_levenshtein_1 = __importDefault(__webpack_require__(39991));
-var FetchElawsLoader_1 = __webpack_require__(35823);
-var FetchStoredLoader_1 = __webpack_require__(69129);
-var temp_law_1 = __webpack_require__(44234);
-var _dataPath = "./data";
-exports.elawsLoader = new FetchElawsLoader_1.FetchElawsLoader();
-exports.storedLoader = new FetchStoredLoader_1.FetchStoredLoader(_dataPath);
-var saveListJson = function (onProgress) {
-    if (onProgress === void 0) { onProgress = function () { return undefined; }; }
-    return __awaiter(void 0, void 0, void 0, function () {
-        var progress, infos, e_1, list, json, blob;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    progress = (function () {
-                        var currentRatio = 0;
-                        var currentMessage = "";
-                        return function (ratio, message) {
-                            currentRatio = ratio || currentRatio;
-                            currentMessage = message || currentMessage;
-                            onProgress(currentRatio, currentMessage);
-                        };
-                    })();
-                    progress(0, "Loading CSV...");
-                    console.log("\nListing up XMLs...");
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, exports.storedLoader.loadBaseLawInfosFromCSV()];
-                case 2:
-                    infos = _a.sent();
-                    return [3 /*break*/, 4];
-                case 3:
-                    e_1 = _a.sent();
-                    console.error("CSV list cannot be fetched.");
-                    console.error(e_1.message, e_1.stack);
-                    return [2 /*return*/, null];
-                case 4:
-                    console.log("Processing " + infos.length + " XMLs...");
-                    return [4 /*yield*/, exports.storedLoader.makeLawListFromBaseLawInfos(infos)];
-                case 5:
-                    list = _a.sent();
-                    progress(undefined, "Generating json...");
-                    json = JSON.stringify(list);
-                    progress(undefined, "Saving json...");
-                    blob = new Blob([json], { type: "application/json" });
-                    return [2 /*return*/, blob];
+exports.scrollToLawAnchor = void 0;
+var jquery_1 = __importDefault(__webpack_require__(19755));
+var scrollToLawAnchor = function (id) {
+    var e_1, _a;
+    try {
+        for (var _b = __values(Array.from(document.getElementsByClassName("law-anchor"))), _c = _b.next(); !_c.done; _c = _b.next()) {
+            var el = _c.value;
+            if (el.dataset.el_id === id) {
+                // const rect = el.getBoundingClientRect();
+                // const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                // const newScrollTop = scrollTop + rect.top;
+                // document.body.scrollTop = newScrollTop;
+                // document.documentElement.scrollTop = newScrollTop;
+                var offset = jquery_1.default(el).offset();
+                if (offset)
+                    jquery_1.default("html,body").animate({ scrollTop: offset.top }, "normal");
             }
-        });
-    });
+        }
+    }
+    catch (e_1_1) { e_1 = { error: e_1_1 }; }
+    finally {
+        try {
+            if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+        }
+        finally { if (e_1) throw e_1.error; }
+    }
 };
-exports.saveListJson = saveListJson;
-var getLawXml = function (lawnum) { return __awaiter(void 0, void 0, void 0, function () {
-    var xml, _a, _b;
-    return __generator(this, function (_c) {
-        switch (_c.label) {
-            case 0: return [4 /*yield*/, getLawXmlStored(lawnum)];
-            case 1:
-                _b = (_c.sent());
-                if (_b) return [3 /*break*/, 3];
-                return [4 /*yield*/, getLawXmlCache(lawnum)];
-            case 2:
-                _b = (_c.sent());
-                _c.label = 3;
-            case 3:
-                _a = _b;
-                if (_a) return [3 /*break*/, 5];
-                return [4 /*yield*/, getLawXmlElaws(lawnum)];
-            case 4:
-                _a = (_c.sent());
-                _c.label = 5;
-            case 5:
-                xml = (_a);
-                if (localStorage) {
-                    try {
-                        localStorage.setItem("law_for:" + lawnum, JSON.stringify({
-                            datetime: new Date().toISOString(),
-                            xml: xml,
-                        }));
-                    }
-                    catch (e) {
-                        console.log(e);
-                        localStorage.clear();
-                    }
-                }
-                return [2 /*return*/, xml];
-        }
-    });
-}); };
-var getLawXmlCache = function (lawnum) { return __awaiter(void 0, void 0, void 0, function () {
-    var lawDataStr, lawData, datetime, now, ms, days;
-    return __generator(this, function (_a) {
-        console.log("getLawXmlCache(\"" + lawnum + "\")");
-        lawDataStr = localStorage ? localStorage.getItem("law_for:" + lawnum) : null;
-        if (lawDataStr) {
-            lawData = JSON.parse(lawDataStr);
-            datetime = new Date(lawData.datetime);
-            now = new Date();
-            ms = now.getTime() - datetime.getTime();
-            days = ms / (1000 * 60 * 60 * 24);
-            if (days < 1) {
-                return [2 /*return*/, lawData.xml];
-            }
-        }
-        return [2 /*return*/, null];
-    });
-}); };
-var getLawXmlStored = function (lawnum) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        console.log("getLawXmlStored(\"" + lawnum + "\")");
-        return [2 /*return*/, exports.storedLoader.getLawXmlByLawNum(lawnum)];
-    });
-}); };
-var getLawXmlElaws = function (lawnum) { return __awaiter(void 0, void 0, void 0, function () {
-    var xml, e_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                console.log("getLawXmlElaws(\"" + lawnum + "\")");
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, exports.elawsLoader.getLawXmlByLawNum(lawnum)];
-            case 2:
-                xml = _a.sent();
-                if (xml === null)
-                    throw new Error("法令XMLを読み込めませんでした");
-                return [2 /*return*/, xml];
-            case 3:
-                e_2 = _a.sent();
-                console.error(e_2);
-                throw [
-                    "法令の読み込み中にエラーが発生しました",
-                    e_2.message,
-                ];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); };
-var getLawnum = function (lawSearchKey) { return __awaiter(void 0, void 0, void 0, function () {
-    var reLawnum, match, lawnum, _a, _b, _c, i;
-    return __generator(this, function (_d) {
-        switch (_d.label) {
-            case 0:
-                reLawnum = /^(?:明治|大正|昭和|平成|令和)[元〇一二三四五六七八九十]+年(?:\S+?第[〇一二三四五六七八九十百千]+号|人事院規則[〇一二三四五六七八九―]+|[一二三四五六七八九十]+月[一二三四五六七八九十]+日内閣総理大臣決定|憲法)$/;
-                match = reLawnum.exec(lawSearchKey);
-                _c = (match && match[0]);
-                if (_c) return [3 /*break*/, 2];
-                return [4 /*yield*/, getLawnumCache(lawSearchKey)];
-            case 1:
-                _c = (_d.sent());
-                _d.label = 2;
-            case 2:
-                _b = _c;
-                if (_b) return [3 /*break*/, 4];
-                return [4 /*yield*/, getLawnumStored(lawSearchKey)];
-            case 3:
-                _b = (_d.sent());
-                _d.label = 4;
-            case 4:
-                _a = _b;
-                if (_a) return [3 /*break*/, 6];
-                return [4 /*yield*/, getLawnumRemote(lawSearchKey)];
-            case 5:
-                _a = (_d.sent());
-                _d.label = 6;
-            case 6:
-                lawnum = (_a);
-                if (localStorage) {
-                    for (i = 0; i < 5; i++) {
-                        try {
-                            localStorage.setItem("law_num_for:" + lawSearchKey, JSON.stringify({
-                                datetime: new Date().toISOString(),
-                                lawnum: lawnum,
-                            }));
-                        }
-                        catch (e) {
-                            console.log(e);
-                            localStorage.clear();
-                        }
-                    }
-                }
-                return [2 /*return*/, lawnum];
-        }
-    });
-}); };
-var getLawnumCache = function (lawSearchKey) { return __awaiter(void 0, void 0, void 0, function () {
-    var lawNumDataStr, lawNumData, datetime, now, ms, days;
-    return __generator(this, function (_a) {
-        console.log("getLawnumCache(\"" + lawSearchKey + "\")");
-        lawNumDataStr = localStorage ? localStorage.getItem("law_num_for:" + lawSearchKey) : null;
-        if (lawNumDataStr) {
-            lawNumData = JSON.parse(lawNumDataStr);
-            datetime = new Date(lawNumData.datetime);
-            now = new Date();
-            ms = now.getTime() - datetime.getTime();
-            days = ms / (1000 * 60 * 60 * 24);
-            if (days < 1) {
-                return [2 /*return*/, lawNumData.lawnum];
-            }
-        }
-        return [2 /*return*/, null];
-    });
-}); };
-var getLawnumStored = function (lawSearchKey) { return __awaiter(void 0, void 0, void 0, function () {
-    var lawInfos, partMatchMode, bestMatch, lawInfos_1, lawInfos_1_1, info, score;
-    var e_3, _a;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                console.log("getLawnumStored(\"" + lawSearchKey + "\")");
-                return [4 /*yield*/, exports.storedLoader.loadLawInfosStruct()];
-            case 1:
-                lawInfos = (_b.sent()).lawInfos;
-                console.log("started " + new Date().toISOString());
-                partMatchMode = false;
-                bestMatch = { score: Infinity, info: null };
-                try {
-                    for (lawInfos_1 = __values(lawInfos), lawInfos_1_1 = lawInfos_1.next(); !lawInfos_1_1.done; lawInfos_1_1 = lawInfos_1.next()) {
-                        info = lawInfos_1_1.value;
-                        if (info.LawTitle.includes(lawSearchKey)) {
-                            if (!partMatchMode) {
-                                partMatchMode = true;
-                                bestMatch.score = Infinity;
-                                bestMatch.info = null;
-                            }
-                        }
-                        else {
-                            if (partMatchMode)
-                                continue;
-                        }
-                        score = js_levenshtein_1.default(info.LawTitle.replace(/　抄$/, ""), lawSearchKey);
-                        if (score < bestMatch.score) {
-                            bestMatch.score = score;
-                            bestMatch.info = info;
-                        }
-                    }
-                }
-                catch (e_3_1) { e_3 = { error: e_3_1 }; }
-                finally {
-                    try {
-                        if (lawInfos_1_1 && !lawInfos_1_1.done && (_a = lawInfos_1.return)) _a.call(lawInfos_1);
-                    }
-                    finally { if (e_3) throw e_3.error; }
-                }
-                console.log("finished " + new Date().toISOString());
-                return [2 /*return*/, bestMatch.info && bestMatch.info.LawNum];
-        }
-    });
-}); };
-var getLawnumRemote = function (lawSearchKey) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, data;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                console.log("getLawnumRemote(\"" + lawSearchKey + "\")");
-                return [4 /*yield*/, fetch("https://lic857vlz1.execute-api.ap-northeast-1.amazonaws.com/prod/Lawtext-API?method=lawnums&lawname=" + encodeURI(lawSearchKey), {
-                        mode: "cors",
-                    })];
-            case 1:
-                response = _a.sent();
-                return [4 /*yield*/, response.json()];
-            case 2:
-                data = _a.sent();
-                if (data.length) {
-                    data.sort(function (a, b) { return a[0].length - b[0].length; });
-                    return [2 /*return*/, data[0][1]];
-                }
-                else {
-                    throw [
-                        "法令が見つかりません",
-                        "\u300C" + lawSearchKey + "\u300D\u3092\u691C\u7D22\u3057\u307E\u3057\u305F\u304C\u3001\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3067\u3057\u305F\u3002",
-                    ];
-                }
-                return [2 /*return*/];
-        }
-    });
-}); };
-var loadLaw = function (lawSearchKey) { return __awaiter(void 0, void 0, void 0, function () {
-    var temp_xml, lawnum, xml;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                temp_xml = temp_law_1.getTempLaw(lawSearchKey);
-                if (temp_xml !== null) {
-                    return [2 /*return*/, temp_xml];
-                }
-                return [4 /*yield*/, getLawnum(lawSearchKey)];
-            case 1:
-                lawnum = _a.sent();
-                return [4 /*yield*/, getLawXml(lawnum)];
-            case 2:
-                xml = _a.sent();
-                return [2 /*return*/, xml];
-        }
-    });
-}); };
-exports.loadLaw = loadLaw;
+exports.scrollToLawAnchor = scrollToLawAnchor;
+
+
+/***/ }),
+
+/***/ 87322:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.showErrorModal = exports.ErrorModalID = void 0;
+exports.ErrorModalID = "LawtextAppPage.ErrorModal";
+var showErrorModal = function (title, bodyEl) {
+    var modalEl = document.getElementById(exports.ErrorModalID);
+    if (!modalEl)
+        return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    var modal = $(modalEl);
+    modal.find(".modal-title").html(title);
+    modal.find(".modal-body").html(bodyEl);
+    modal.modal("show");
+};
+exports.showErrorModal = showErrorModal;
 
 
 /***/ }),
@@ -45126,16 +44835,21 @@ exports.loadLaw = loadLaw;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getTempLaw = exports.showLawXML = void 0;
-var showLawXML = function (xml) {
+exports.getTempLaw = exports.showLaw = exports.storeTempLaw = void 0;
+var storeTempLaw = function (text) {
     var id = "temp_law_" + Math.floor(Math.random() * 1000000000);
     localStorage.setItem("temp_law:" + id, JSON.stringify({
         datetime: new Date().toISOString(),
-        xml: xml,
+        text: text,
     }));
+    return id;
+};
+exports.storeTempLaw = storeTempLaw;
+var showLaw = function (text) {
+    var id = exports.storeTempLaw(text);
     window.open(location.protocol + "//" + location.host + location.pathname + "#" + id);
 };
-exports.showLawXML = showLawXML;
+exports.showLaw = showLaw;
 var getTempLaw = function (id) {
     var m = /^temp_law_(\d+)$/.exec(id);
     if (!m)
@@ -45144,8 +44858,8 @@ var getTempLaw = function (id) {
     if (json === null) {
         throw new Error("\u4E00\u6642\u30C7\u30FC\u30BF\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3067\u3057\u305F (id: " + id + ")");
     }
-    var xml = JSON.parse(json).xml;
-    return xml;
+    var text = JSON.parse(json).text;
+    return text;
 };
 exports.getTempLaw = getTempLaw;
 
@@ -45289,6 +45003,42 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 var __read = (this && this.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
     if (!m) return o;
@@ -45332,7 +45082,9 @@ var react_animate_height_1 = __importDefault(__webpack_require__(68133));
 var styled_components_1 = __importStar(__webpack_require__(29163));
 var util_1 = __webpack_require__(94620);
 var std = __importStar(__webpack_require__(76791));
-var actions = __importStar(__webpack_require__(8133));
+var path_1 = __importDefault(__webpack_require__(26470));
+var loaders_1 = __webpack_require__(48618);
+var download_1 = __webpack_require__(56644);
 var MARGIN = "　";
 var em = function (input) {
     var emSize = parseFloat(jquery_1.default("body").css("font-size"));
@@ -45347,10 +45099,18 @@ var LawView = function (props) {
     }, [origSetState]);
     return (react_1.default.createElement(LawViewDiv, null,
         react_1.default.createElement(GlobalStyle, null),
-        origState.hasError && react_1.default.createElement(LawViewError, __assign({}, { origState: origState })),
-        origState.law && react_1.default.createElement(LawComponent, { el: origState.law, indent: 0, ls: { onError: onError, analysis: origState.analysis } })));
+        origState.hasError && react_1.default.createElement(LawViewError, __assign({}, props)),
+        origState.law && react_1.default.createElement(LawDataComponent, { lawData: origState.law, onError: onError })));
 };
 exports.LawView = LawView;
+var LawDataComponent = function (props) {
+    var lawData = props.lawData, onError = props.onError;
+    var ls = react_1.useMemo(function () { return ({
+        onError: onError,
+        lawData: lawData,
+    }); }, [onError, lawData]);
+    return react_1.default.createElement(LawComponent, { el: lawData.el, indent: 0, ls: ls });
+};
 var LawViewErrorDiv = styled_components_1.default.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n"], ["\n"])));
 var LawViewError = function (props) {
     var origState = props.origState;
@@ -45674,7 +45434,7 @@ var TOCComponent = withCatcher(function (props) {
         }
         finally { if (e_4) throw e_4.error; }
     }
-    return (react_1.default.createElement(TOCDiv, { "data-toplevel_container_info": JSON.stringify(actions.containerInfoOf(el)) }, blocks));
+    return (react_1.default.createElement(TOCDiv, { "data-toplevel_container_info": JSON.stringify(download_1.containerInfoOf(el)) }, blocks));
 });
 var isTOCItemComponentProps = function (props) {
     return props.el.tag === "TOCPart" || props.el.tag === "TOCPart" || props.el.tag === "TOCChapter" || props.el.tag === "TOCSection" || props.el.tag === "TOCSubsection" || props.el.tag === "TOCDivision" || props.el.tag === "TOCSupplProvision" || props.el.tag === "TOCArticle" || props.el.tag === "TOCAppdxTableLabel" || props.el.tag === "TOCPreambleLabel";
@@ -45831,7 +45591,7 @@ var AppdxTableComponent = withCatcher(function (props) {
         }
         finally { if (e_9) throw e_9.error; }
     }
-    return (react_1.default.createElement(AppdxTableDiv, { "data-toplevel_container_info": JSON.stringify(actions.containerInfoOf(el)) }, blocks));
+    return (react_1.default.createElement(AppdxTableDiv, { "data-toplevel_container_info": JSON.stringify(download_1.containerInfoOf(el)) }, blocks));
 });
 var AppdxStyleDiv = styled_components_1.default.div(templateObject_12 || (templateObject_12 = __makeTemplateObject(["\n    clear: both;\n    padding-top: 1em;\n"], ["\n    clear: both;\n    padding-top: 1em;\n"])));
 var AppdxStyleTitleDiv = styled_components_1.default.div(templateObject_13 || (templateObject_13 = __makeTemplateObject(["\n    font-weight: bold;\n"], ["\n    font-weight: bold;\n"])));
@@ -45897,7 +45657,7 @@ var AppdxStyleComponent = withCatcher(function (props) {
         }
         finally { if (e_11) throw e_11.error; }
     }
-    return (react_1.default.createElement(AppdxStyleDiv, { "data-toplevel_container_info": JSON.stringify(actions.containerInfoOf(el)) }, blocks));
+    return (react_1.default.createElement(AppdxStyleDiv, { "data-toplevel_container_info": JSON.stringify(download_1.containerInfoOf(el)) }, blocks));
 });
 var AppdxFormatDiv = styled_components_1.default.div(templateObject_14 || (templateObject_14 = __makeTemplateObject(["\n    clear: both;\n    padding-top: 1em;\n"], ["\n    clear: both;\n    padding-top: 1em;\n"])));
 var AppdxFormatTitleDiv = styled_components_1.default.div(templateObject_15 || (templateObject_15 = __makeTemplateObject(["\n    font-weight: bold;\n"], ["\n    font-weight: bold;\n"])));
@@ -45960,7 +45720,7 @@ var AppdxFormatComponent = withCatcher(function (props) {
         }
         finally { if (e_13) throw e_13.error; }
     }
-    return (react_1.default.createElement(AppdxFormatDiv, { "data-toplevel_container_info": JSON.stringify(actions.containerInfoOf(el)) }, blocks));
+    return (react_1.default.createElement(AppdxFormatDiv, { "data-toplevel_container_info": JSON.stringify(download_1.containerInfoOf(el)) }, blocks));
 });
 var AppdxFigDiv = styled_components_1.default.div(templateObject_16 || (templateObject_16 = __makeTemplateObject(["\n    clear: both;\n    padding-top: 1em;\n"], ["\n    clear: both;\n    padding-top: 1em;\n"])));
 var AppdxFigTitleDiv = styled_components_1.default.div(templateObject_17 || (templateObject_17 = __makeTemplateObject(["\n    font-weight: bold;\n"], ["\n    font-weight: bold;\n"])));
@@ -46023,7 +45783,7 @@ var AppdxFigComponent = withCatcher(function (props) {
         }
         finally { if (e_15) throw e_15.error; }
     }
-    return (react_1.default.createElement(AppdxFigDiv, { "data-toplevel_container_info": JSON.stringify(actions.containerInfoOf(el)) }, blocks));
+    return (react_1.default.createElement(AppdxFigDiv, { "data-toplevel_container_info": JSON.stringify(download_1.containerInfoOf(el)) }, blocks));
 });
 var AppdxNoteDiv = styled_components_1.default.div(templateObject_18 || (templateObject_18 = __makeTemplateObject(["\n    clear: both;\n    padding-top: 1em;\n"], ["\n    clear: both;\n    padding-top: 1em;\n"])));
 var AppdxNoteTitleDiv = styled_components_1.default.div(templateObject_19 || (templateObject_19 = __makeTemplateObject(["\n    font-weight: bold;\n"], ["\n    font-weight: bold;\n"])));
@@ -46092,7 +45852,7 @@ var AppdxNoteComponent = withCatcher(function (props) {
         }
         finally { if (e_17) throw e_17.error; }
     }
-    return (react_1.default.createElement(AppdxNoteDiv, { "data-toplevel_container_info": JSON.stringify(actions.containerInfoOf(el)) }, blocks));
+    return (react_1.default.createElement(AppdxNoteDiv, { "data-toplevel_container_info": JSON.stringify(download_1.containerInfoOf(el)) }, blocks));
 });
 var AppdxDiv = styled_components_1.default.div(templateObject_20 || (templateObject_20 = __makeTemplateObject(["\n    clear: both;\n    padding-top: 1em;\n"], ["\n    clear: both;\n    padding-top: 1em;\n"])));
 var AppdxTitleDiv = styled_components_1.default.div(templateObject_21 || (templateObject_21 = __makeTemplateObject(["\n    font-weight: bold;\n"], ["\n    font-weight: bold;\n"])));
@@ -46156,7 +45916,7 @@ var AppdxComponent = withCatcher(function (props) {
         }
         finally { if (e_19) throw e_19.error; }
     }
-    return (react_1.default.createElement(AppdxDiv, { "data-toplevel_container_info": JSON.stringify(actions.containerInfoOf(el)) }, blocks));
+    return (react_1.default.createElement(AppdxDiv, { "data-toplevel_container_info": JSON.stringify(download_1.containerInfoOf(el)) }, blocks));
 });
 var SupplProvisionAppdxTableDiv = styled_components_1.default.div(templateObject_22 || (templateObject_22 = __makeTemplateObject(["\n    clear: both;\n    padding-top: 1em;\n"], ["\n    clear: both;\n    padding-top: 1em;\n"])));
 var SupplProvisionAppdxTableTitleDiv = styled_components_1.default.div(templateObject_23 || (templateObject_23 = __makeTemplateObject(["\n    font-weight: bold;\n"], ["\n    font-weight: bold;\n"])));
@@ -46416,7 +46176,7 @@ var SupplProvisionComponent = withCatcher(function (props) {
         }
         finally { if (e_27) throw e_27.error; }
     }
-    return (react_1.default.createElement("div", { className: "law-anchor", "data-el_id": el.id.toString(), "data-toplevel_container_info": JSON.stringify(actions.containerInfoOf(el)) }, blocks));
+    return (react_1.default.createElement("div", { className: "law-anchor", "data-el_id": el.id.toString(), "data-toplevel_container_info": JSON.stringify(download_1.containerInfoOf(el)) }, blocks));
 });
 var isArticleGroupComponentProps = function (props) { return props.el.tag === "MainProvision" || props.el.tag === "Part" || props.el.tag === "Chapter" || props.el.tag === "Section" || props.el.tag === "Subsection" || props.el.tag === "Division"; };
 var ArticleGroupComponent = withCatcher(function (props) {
@@ -46473,7 +46233,7 @@ var ArticleGroupComponent = withCatcher(function (props) {
         }
         finally { if (e_29) throw e_29.error; }
     }
-    return (el.tag === "MainProvision" ? (react_1.default.createElement("div", { "data-toplevel_container_info": JSON.stringify(actions.containerInfoOf(el)) }, blocks)) : (react_1.default.createElement("div", { className: "law-anchor", "data-el_id": el.id.toString(), key: el.id }, blocks)));
+    return (el.tag === "MainProvision" ? (react_1.default.createElement("div", { "data-toplevel_container_info": JSON.stringify(download_1.containerInfoOf(el)) }, blocks)) : (react_1.default.createElement("div", { className: "law-anchor", "data-el_id": el.id.toString(), key: el.id }, blocks)));
 });
 var ArticleGroupTitleDiv = styled_components_1.default.div(templateObject_28 || (templateObject_28 = __makeTemplateObject(["\n    clear: both;\n    font-weight: bold;\n    padding-top: 1em;\n"], ["\n    clear: both;\n    font-weight: bold;\n    padding-top: 1em;\n"])));
 var isArticleGroupTitleComponentProps = function (props) { return props.el.tag === "PartTitle" || props.el.tag === "ChapterTitle" || props.el.tag === "SectionTitle" || props.el.tag === "SubsectionTitle" || props.el.tag === "DivisionTitle"; };
@@ -46559,7 +46319,7 @@ var ArticleComponent = withCatcher(function (props) {
         }
         finally { if (e_31) throw e_31.error; }
     }
-    return (react_1.default.createElement(ArticleDiv, { className: "law-anchor", "data-el_id": el.id.toString(), "data-container_info": JSON.stringify(actions.containerInfoOf(el)) }, blocks));
+    return (react_1.default.createElement(ArticleDiv, { className: "law-anchor", "data-el_id": el.id.toString(), "data-container_info": JSON.stringify(download_1.containerInfoOf(el)) }, blocks));
 });
 var ParagraphDiv = styled_components_1.default.div(templateObject_30 || (templateObject_30 = __makeTemplateObject(["\n    clear: both;\n    border-left: 0.2em solid transparent;\n    padding-left: 0.8em;\n    margin-left: -1em;\n    transition: border-left-color 0.3s;\n    &:hover{\n        border-left-color: rgba(255, 166, 0, 0.5);\n    }\n"], ["\n    clear: both;\n    border-left: 0.2em solid transparent;\n    padding-left: 0.8em;\n    margin-left: -1em;\n    transition: border-left-color 0.3s;\n    &:hover{\n        border-left-color: rgba(255, 166, 0, 0.5);\n    }\n"])));
 var ItemDiv = styled_components_1.default.div(templateObject_31 || (templateObject_31 = __makeTemplateObject(["\n    clear: both;\n"], ["\n    clear: both;\n"])));
@@ -46660,7 +46420,7 @@ var ParagraphItemComponent = withCatcher(function (props) {
             return react_1.default.createElement(ParagraphDiv, { className: "paragraph-item-" + el.tag }, blocks);
         }
         else {
-            return (react_1.default.createElement(ParagraphDiv, { "data-container_info": JSON.stringify(actions.containerInfoOf(el)), className: "paragraph-item-" + el.tag }, blocks));
+            return (react_1.default.createElement(ParagraphDiv, { "data-container_info": JSON.stringify(download_1.containerInfoOf(el)), className: "paragraph-item-" + el.tag }, blocks));
         }
     }
     else {
@@ -47140,18 +46900,76 @@ var FigStructComponent = withCatcher(function (props) {
 });
 var isFigRunComponentProps = function (props) { return props.el.tag === "Fig"; };
 var FigRunComponent = withCatcher(function (props) {
-    var el = props.el;
+    var el = props.el, lawData = props.ls.lawData;
+    var _a = __read(react_1.default.useState({
+        blobUrl: null,
+    }), 2), state = _a[0], setState = _a[1];
+    react_1.default.useEffect(function () {
+        var cleaners = [];
+        if (lawData.source === "elaws" && lawData.pict) {
+            var blob = lawData.pict.get(el.attr.src);
+            if (blob) {
+                var blobUrl_1 = URL.createObjectURL(blob);
+                setState(function (prev) { return (__assign(__assign({}, prev), { blobUrl: blobUrl_1 })); });
+                cleaners.push(function () { return URL.revokeObjectURL(blobUrl_1); });
+            }
+        }
+        else if (lawData.source === "stored") {
+            (function () { return __awaiter(void 0, void 0, void 0, function () {
+                var url, res, blob, blobUrl;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            url = path_1.default.join(loaders_1.storedLoader.lawdataPath, lawData.lawPath, el.attr.src);
+                            return [4 /*yield*/, fetch(url)];
+                        case 1:
+                            res = _a.sent();
+                            if (!res.ok)
+                                return [2 /*return*/];
+                            return [4 /*yield*/, res.blob()];
+                        case 2:
+                            blob = _a.sent();
+                            blobUrl = URL.createObjectURL(blob);
+                            setState(function (prev) { return (__assign(__assign({}, prev), { blobUrl: blobUrl })); });
+                            cleaners.push(function () { return URL.revokeObjectURL(blobUrl); });
+                            return [2 /*return*/];
+                    }
+                });
+            }); })();
+        }
+        return function () {
+            var e_46, _a;
+            try {
+                for (var cleaners_1 = __values(cleaners), cleaners_1_1 = cleaners_1.next(); !cleaners_1_1.done; cleaners_1_1 = cleaners_1.next()) {
+                    var cleaner = cleaners_1_1.value;
+                    cleaner();
+                }
+            }
+            catch (e_46_1) { e_46 = { error: e_46_1 }; }
+            finally {
+                try {
+                    if (cleaners_1_1 && !cleaners_1_1.done && (_a = cleaners_1.return)) _a.call(cleaners_1);
+                }
+                finally { if (e_46) throw e_46.error; }
+            }
+        };
+    }, [lawData, el, setState]);
     if (el.children.length > 0) {
         throw new util_1.NotImplementedError(el.outerXML());
     }
-    return react_1.default.createElement("span", null,
-        "[",
-        el.attr.src,
-        "]");
+    if (state.blobUrl !== null) {
+        return react_1.default.createElement("img", { src: state.blobUrl, style: { maxWidth: "100%" } });
+    }
+    else {
+        return react_1.default.createElement("span", null,
+            "[",
+            el.attr.src,
+            "]");
+    }
 });
 var isAmendProvisionComponentProps = function (props) { return props.el.tag === "AmendProvision"; };
 var AmendProvisionComponent = withCatcher(function (props) {
-    var e_46, _a, e_47, _b;
+    var e_47, _a, e_48, _b;
     var el = props.el;
     var indent = props.indent;
     var blocks = [];
@@ -47163,18 +46981,18 @@ var AmendProvisionComponent = withCatcher(function (props) {
             }
             else if (child.tag === "NewProvision") {
                 try {
-                    for (var _e = (e_47 = void 0, __values(child.children)), _f = _e.next(); !_f.done; _f = _e.next()) {
+                    for (var _e = (e_48 = void 0, __values(child.children)), _f = _e.next(); !_f.done; _f = _e.next()) {
                         var subchild = _f.value;
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         blocks.push(react_1.default.createElement(AnyLawComponent, __assign({}, { el: subchild, indent: indent + 1 }, { key: subchild.id })));
                     }
                 }
-                catch (e_47_1) { e_47 = { error: e_47_1 }; }
+                catch (e_48_1) { e_48 = { error: e_48_1 }; }
                 finally {
                     try {
                         if (_f && !_f.done && (_b = _e.return)) _b.call(_e);
                     }
-                    finally { if (e_47) throw e_47.error; }
+                    finally { if (e_48) throw e_48.error; }
                 }
             }
             else {
@@ -47182,12 +47000,12 @@ var AmendProvisionComponent = withCatcher(function (props) {
             }
         }
     }
-    catch (e_46_1) { e_46 = { error: e_46_1 }; }
+    catch (e_47_1) { e_47 = { error: e_47_1 }; }
     finally {
         try {
             if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
         }
-        finally { if (e_46) throw e_46.error; }
+        finally { if (e_47) throw e_47.error; }
     }
     return react_1.default.createElement(react_1.default.Fragment, null, blocks);
 });
@@ -47293,7 +47111,7 @@ var isControl = function (obj) {
     return !(typeof obj === "string" || obj instanceof String) && obj.isControl;
 };
 var getInnerRun = function (el, ls) {
-    var e_48, _a;
+    var e_49, _a;
     var ChildItems = [];
     try {
         for (var _b = __values(el.children), _c = _b.next(); !_c.done; _c = _b.next()) {
@@ -47306,12 +47124,12 @@ var getInnerRun = function (el, ls) {
             }
         }
     }
-    catch (e_48_1) { e_48 = { error: e_48_1 }; }
+    catch (e_49_1) { e_49 = { error: e_49_1 }; }
     finally {
         try {
             if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
         }
-        finally { if (e_48) throw e_48.error; }
+        finally { if (e_49) throw e_49.error; }
     }
     return react_1.default.createElement(RunComponent, { els: ChildItems, ls: ls });
 };
@@ -47428,9 +47246,9 @@ var ____VarRefComponent = withCatcher(function (props) {
                 react_1.default.createElement(VarRefView, { el: props.el, ls: props.ls })))))));
 });
 var VarRefView = withCatcher(function (props) {
-    var e_49, _a;
+    var e_50, _a;
     var el = props.el;
-    var analysis = props.ls.analysis;
+    var analysis = props.ls.lawData.analysis;
     if (!analysis)
         return null;
     var declarationIndex = Number(el.attr.ref_declaration_index);
@@ -47514,12 +47332,12 @@ var VarRefView = withCatcher(function (props) {
             _loop_1(container);
         }
     }
-    catch (e_49_1) { e_49 = { error: e_49_1 }; }
+    catch (e_50_1) { e_50 = { error: e_50_1 }; }
     finally {
         try {
             if (containerStack_1_1 && !containerStack_1_1.done && (_a = containerStack_1.return)) _a.call(containerStack_1);
         }
-        finally { if (e_49) throw e_49.error; }
+        finally { if (e_50) throw e_50.error; }
     }
     var declElTitleTag = titleTags
         .find(function (s) { return Boolean(s) && s.startsWith(lastContainerEl.tag); });
@@ -47559,7 +47377,7 @@ var ____LawNumComponent = withCatcher(function (props) {
 var GlobalStyle = styled_components_1.createGlobalStyle(templateObject_43 || (templateObject_43 = __makeTemplateObject(["\n.lawtext-varref-open .lawtext-varref-text {\n    background-color: rgba(127, 127, 127, 0.15);\n    border-bottom: 1px solid rgb(40, 167, 69);\n}\n\n.lawtext-varref-text:hover {\n    background-color: rgb(255, 249, 160);\n    border-bottom: 1px solid rgb(40, 167, 69);\n}\n\n.lawtext-analyzed-parentheses\n{\n    transition: background-color 0.3s;\n}\n\n.lawtext-analyzed-parentheses:hover,\n.paragraph-item-Paragraph:hover .lawtext-analyzed-parentheses\n{\n    background-color: hsla(60, 100%, 50%, 0.1);\n}\n\n.lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"1\"]:hover,\n.paragraph-item-Paragraph:hover .lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"1\"]\n{\n    background-color: hsla(60, 100%, 50%, 0.1);\n}\n\n.lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"2\"]:hover,\n.paragraph-item-Paragraph:hover .lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"2\"]\n{\n    background-color: hsla(30, 100%, 50%, 0.1);\n}\n\n.lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"3\"]:hover,\n.paragraph-item-Paragraph:hover .lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"3\"]\n{\n    background-color: hsla(0, 100%, 50%, 0.1);\n}\n\n.lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"4\"]:hover,\n.paragraph-item-Paragraph:hover .lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"4\"]\n{\n    background-color: hsl(330, 100%, 50%, 0.1);\n}\n\n.lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"5\"]:hover,\n.paragraph-item-Paragraph:hover .lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"5\"]\n{\n    background-color: hsl(300, 100%, 50%, 0.1);\n}\n\n.lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"6\"]:hover,\n.paragraph-item-Paragraph:hover .lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"6\"]\n{\n    background-color: hsl(270, 100%, 50%, 0.1);\n}\n\n.lawtext-analyzed-start-parenthesis,\n.lawtext-analyzed-end-parenthesis\n{\n    border: 1px solid transparent;\n    margin: -1px;\n    transition: border-color 0.3s;\n}\n\n.lawtext-analyzed-parentheses:hover\n    > .lawtext-analyzed-start-parenthesis,\n.lawtext-analyzed-parentheses:hover\n    > .lawtext-analyzed-end-parenthesis\n{\n    border-color: gray;\n}\n\n.lawtext-analyzed-parentheses-content[data-lawtext_parentheses_type=\"square\"] {\n    color: rgb(158, 79, 0);\n}\n"], ["\n.lawtext-varref-open .lawtext-varref-text {\n    background-color: rgba(127, 127, 127, 0.15);\n    border-bottom: 1px solid rgb(40, 167, 69);\n}\n\n.lawtext-varref-text:hover {\n    background-color: rgb(255, 249, 160);\n    border-bottom: 1px solid rgb(40, 167, 69);\n}\n\n.lawtext-analyzed-parentheses\n{\n    transition: background-color 0.3s;\n}\n\n.lawtext-analyzed-parentheses:hover,\n.paragraph-item-Paragraph:hover .lawtext-analyzed-parentheses\n{\n    background-color: hsla(60, 100%, 50%, 0.1);\n}\n\n.lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"1\"]:hover,\n.paragraph-item-Paragraph:hover .lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"1\"]\n{\n    background-color: hsla(60, 100%, 50%, 0.1);\n}\n\n.lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"2\"]:hover,\n.paragraph-item-Paragraph:hover .lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"2\"]\n{\n    background-color: hsla(30, 100%, 50%, 0.1);\n}\n\n.lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"3\"]:hover,\n.paragraph-item-Paragraph:hover .lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"3\"]\n{\n    background-color: hsla(0, 100%, 50%, 0.1);\n}\n\n.lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"4\"]:hover,\n.paragraph-item-Paragraph:hover .lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"4\"]\n{\n    background-color: hsl(330, 100%, 50%, 0.1);\n}\n\n.lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"5\"]:hover,\n.paragraph-item-Paragraph:hover .lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"5\"]\n{\n    background-color: hsl(300, 100%, 50%, 0.1);\n}\n\n.lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"6\"]:hover,\n.paragraph-item-Paragraph:hover .lawtext-analyzed-parentheses[data-lawtext_parentheses_depth=\"6\"]\n{\n    background-color: hsl(270, 100%, 50%, 0.1);\n}\n\n.lawtext-analyzed-start-parenthesis,\n.lawtext-analyzed-end-parenthesis\n{\n    border: 1px solid transparent;\n    margin: -1px;\n    transition: border-color 0.3s;\n}\n\n.lawtext-analyzed-parentheses:hover\n    > .lawtext-analyzed-start-parenthesis,\n.lawtext-analyzed-parentheses:hover\n    > .lawtext-analyzed-end-parenthesis\n{\n    border-color: gray;\n}\n\n.lawtext-analyzed-parentheses-content[data-lawtext_parentheses_type=\"square\"] {\n    color: rgb(158, 79, 0);\n}\n"])));
 var ParenthesesSpan = styled_components_1.default.span(templateObject_44 || (templateObject_44 = __makeTemplateObject(["\n"], ["\n"])));
 var __ParenthesesComponent = withCatcher(function (props) {
-    var e_50, _a;
+    var e_51, _a;
     var el = props.el;
     var blocks = [];
     try {
@@ -47582,12 +47400,12 @@ var __ParenthesesComponent = withCatcher(function (props) {
             }
         }
     }
-    catch (e_50_1) { e_50 = { error: e_50_1 }; }
+    catch (e_51_1) { e_51 = { error: e_51_1 }; }
     finally {
         try {
             if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
         }
-        finally { if (e_50) throw e_50.error; }
+        finally { if (e_51) throw e_51.error; }
     }
     return (react_1.default.createElement(ParenthesesSpan, { className: "lawtext-analyzed-parentheses", "data-lawtext_parentheses_type": el.attr.type, "data-lawtext_parentheses_depth": el.attr.depth }, blocks));
 });
@@ -47641,6 +47459,42 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -47651,28 +47505,49 @@ var styled_components_1 = __importDefault(__webpack_require__(29163));
 var Sidebar_1 = __webpack_require__(12661);
 var LawtextAppPageState_1 = __webpack_require__(65244);
 var Viewer_1 = __webpack_require__(71181);
-var actions_1 = __webpack_require__(8133);
-var react_router_1 = __webpack_require__(5977);
+var onNavigated_1 = __webpack_require__(29084);
+var openFile_1 = __webpack_require__(63895);
+var showErrorModal_1 = __webpack_require__(87322);
+var temp_law_1 = __webpack_require__(44234);
 var SideBarDiv = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    position: fixed;\n    width: 280px;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    background-color: rgb(243, 243, 243);\n\n    display: flex;\n"], ["\n    position: fixed;\n    width: 280px;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    background-color: rgb(243, 243, 243);\n\n    display: flex;\n"])));
 var ViewerDiv = styled_components_1.default.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    margin-left: 280px;\n"], ["\n    margin-left: 280px;\n"])));
 var HiddenInput = styled_components_1.default.input(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n    display: none;\n"], ["\n    display: none;\n"])));
 var LawtextAppPage = function () {
-    var lawSearchKey = react_router_1.useParams().lawSearchKey;
-    var stateStruct = LawtextAppPageState_1.useLawtextAppPageState(lawSearchKey !== null && lawSearchKey !== void 0 ? lawSearchKey : "");
-    var origState = stateStruct.origState, setState = stateStruct.setState;
+    var stateStruct = LawtextAppPageState_1.useLawtextAppPageState();
+    var setState = stateStruct.setState, history = stateStruct.history, lawSearchKey = stateStruct.lawSearchKey;
     react_1.default.useEffect(function () {
         document.title = "Lawtext";
     }, []);
     react_1.default.useEffect(function () {
-        actions_1.displayLaw(origState, setState);
-    }, [origState, setState]);
+        onNavigated_1.onNavigated(lawSearchKey, setState);
+    }, [lawSearchKey, setState]);
+    var inputChanged = function () { return __awaiter(void 0, void 0, void 0, function () {
+        var text, id;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    setState({ loadingLaw: true, loadingLawMessage: "ファイルを読み込んでいます..." });
+                    console.log("openFileInputChange: Loading file");
+                    return [4 /*yield*/, openFile_1.readFileInput()];
+                case 1:
+                    text = _a.sent();
+                    if (!text) {
+                        setState({ loadingLaw: false, loadingLawMessage: "" });
+                        return [2 /*return*/];
+                    }
+                    id = temp_law_1.storeTempLaw(text);
+                    history.push("/" + id);
+                    return [2 /*return*/];
+            }
+        });
+    }); };
     return (react_1.default.createElement("div", null,
-        react_1.default.createElement(HiddenInput, { name: actions_1.OpenFileInputName, type: "file", accept: "text/plain,application/xml", onChange: function (e) { return actions_1.openFileInputChange(setState, e); } }),
+        react_1.default.createElement(HiddenInput, { name: openFile_1.OpenFileInputName, type: "file", accept: "text/plain,application/xml", onChange: inputChanged }),
         react_1.default.createElement(SideBarDiv, null,
             react_1.default.createElement(Sidebar_1.Sidebar, __assign({}, stateStruct))),
         react_1.default.createElement(ViewerDiv, null,
             react_1.default.createElement(Viewer_1.Viewer, __assign({}, stateStruct))),
-        react_1.default.createElement("div", { className: "modal fade", id: actions_1.ErrorModalID, role: "dialog", "aria-labelledby": "errorModalLabel", "aria-hidden": "true" },
+        react_1.default.createElement("div", { className: "modal fade", id: showErrorModal_1.ErrorModalID, role: "dialog", "aria-labelledby": "errorModalLabel", "aria-hidden": "true" },
             react_1.default.createElement("div", { className: "modal-dialog", role: "document" },
                 react_1.default.createElement("div", { className: "modal-content" },
                     react_1.default.createElement("div", { className: "modal-header" },
@@ -47705,25 +47580,6 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __read = (this && this.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
     if (!m) return o;
@@ -47740,30 +47596,34 @@ var __read = (this && this.__read) || function (o, n) {
     }
     return ar;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.useLawtextAppPageState = void 0;
-var react_1 = __importStar(__webpack_require__(67294));
+var react_1 = __importDefault(__webpack_require__(67294));
+var react_router_1 = __webpack_require__(5977);
+var react_router_2 = __webpack_require__(5977);
 var initialState = {
     law: null,
     loadingLaw: false,
     loadingLawMessage: "",
-    lawSearchedKey: "",
-    analysis: null,
     hasError: false,
     errors: [],
 };
-var useLawtextAppPageState = function (lawSearchKey) {
-    var _a = __read(react_1.default.useState(__assign(__assign({}, initialState), { lawSearchKey: lawSearchKey })), 2), state = _a[0], origSetState = _a[1];
+var useLawtextAppPageState = function () {
+    var lawSearchKey = react_router_2.useParams().lawSearchKey;
+    var _a = __read(react_1.default.useState(initialState), 2), state = _a[0], origSetState = _a[1];
     var setState = react_1.default.useCallback(function (newState) {
         origSetState(function (prevState) { return (__assign(__assign({}, prevState), newState)); });
     }, [origSetState]);
-    react_1.useEffect(function () {
-        origSetState(function (prevState) { return (__assign(__assign({}, prevState), { lawSearchKey: lawSearchKey })); });
-    }, [lawSearchKey]);
+    var history = react_router_1.useHistory();
     return {
         origState: state,
         origSetState: origSetState,
         setState: setState,
+        history: history,
+        lawSearchKey: lawSearchKey !== null && lawSearchKey !== void 0 ? lawSearchKey : "",
     };
 };
 exports.useLawtextAppPageState = useLawtextAppPageState;
@@ -47790,25 +47650,6 @@ var __assign = (this && this.__assign) || function () {
         return t;
     };
     return __assign.apply(this, arguments);
-};
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
 };
 var __read = (this && this.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
@@ -47839,15 +47680,14 @@ exports.Sidebar = void 0;
 var react_1 = __importDefault(__webpack_require__(67294));
 var styled_components_1 = __importDefault(__webpack_require__(29163));
 var util_1 = __webpack_require__(94620);
-var react_router_1 = __webpack_require__(5977);
-var actions = __importStar(__webpack_require__(8133));
+var download_1 = __webpack_require__(56644);
+var openFile_1 = __webpack_require__(63895);
+var scroll_1 = __webpack_require__(31529);
 var SidebarH1 = styled_components_1.default.h1(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    text-align: center;\n    margin-top: 1rem;\n    color: rgb(75, 75, 75);\n"], ["\n    text-align: center;\n    margin-top: 1rem;\n    color: rgb(75, 75, 75);\n"])));
 var SidebarHeadDiv = styled_components_1.default.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    flex-grow: 0;\n    margin-bottom: 1rem;\n"], ["\n    flex-grow: 0;\n    margin-bottom: 1rem;\n"])));
 var SidebarHead = function (props) {
-    var _a;
-    var origState = props.origState;
-    var _b = __read(react_1.default.useState((_a = origState.lawSearchKey) !== null && _a !== void 0 ? _a : ""), 2), editingKey = _b[0], setEditingKey = _b[1];
-    var history = react_router_1.useHistory();
+    var origState = props.origState, history = props.history, lawSearchKey = props.lawSearchKey;
+    var _a = __read(react_1.default.useState(lawSearchKey), 2), editingKey = _a[0], setEditingKey = _a[1];
     var handleSearchSubmit = function (event) {
         event.preventDefault();
         history.push("/" + editingKey);
@@ -47855,24 +47695,24 @@ var SidebarHead = function (props) {
     var lawSearchKeyOnChange = function (e) {
         setEditingKey(e.target.value);
     };
-    var downloadLawtext = function () {
+    var downloadLawtextClick = function () {
         if (origState.law) {
-            actions.downloadLawtext(origState.law);
+            download_1.downloadLawtext(origState.law.el);
         }
     };
-    var downloadXml = function () {
+    var downloadXmlClick = function () {
         if (origState.law) {
-            actions.downloadXml(origState.law);
+            download_1.downloadXml(origState.law.el);
         }
     };
-    var downloadDocxAll = function () {
+    var downloadDocxAllClick = function () {
         if (origState.law) {
-            actions.downloadDocx(origState.law, false);
+            download_1.downloadDocx(origState.law.el, false);
         }
     };
-    var downloadDocxSelection = function () {
+    var downloadDocxSelectionClick = function () {
         if (origState.law) {
-            actions.downloadDocx(origState.law, true);
+            download_1.downloadDocx(origState.law.el, true);
         }
     };
     return (react_1.default.createElement(SidebarHeadDiv, null,
@@ -47881,7 +47721,7 @@ var SidebarHead = function (props) {
                 react_1.default.createElement("a", { href: location.protocol + "//" + location.host + location.pathname + location.search, style: { color: "inherit" } }, "Lawtext")),
             !origState.loadingLaw &&
                 react_1.default.createElement("div", { className: "list-group", style: { textAlign: "center" } },
-                    react_1.default.createElement("button", { onClick: actions.openFile, className: "list-group-item list-group-item-sm list-group-item-action", style: { fontSize: "0.8em", padding: "0.5em" } }, "\u6CD5\u4EE4\u30D5\u30A1\u30A4\u30EB\u3092\u958B\u304F"),
+                    react_1.default.createElement("button", { onClick: openFile_1.openFile, className: "list-group-item list-group-item-sm list-group-item-action", style: { fontSize: "0.8em", padding: "0.5em" } }, "\u6CD5\u4EE4\u30D5\u30A1\u30A4\u30EB\u3092\u958B\u304F"),
                     react_1.default.createElement("form", { className: "list-group-item list-group-item-sm", style: { fontSize: "0.8em", padding: 0 }, onSubmit: handleSearchSubmit },
                         react_1.default.createElement("div", { className: "input-group" },
                             react_1.default.createElement("input", { name: "lawSearchKey", onChange: lawSearchKeyOnChange, className: "form-control form-control-sm search-law-textbox", style: {
@@ -47901,18 +47741,18 @@ var SidebarHead = function (props) {
                         } }, "\u4FDD\u5B58\uFF1A"),
                     react_1.default.createElement("div", null,
                         react_1.default.createElement("span", { className: "btn-group btn-group-sm" },
-                            react_1.default.createElement("button", { onClick: downloadDocxAll, className: "btn btn-outline-primary" }, "Word"),
-                            react_1.default.createElement("button", { onClick: downloadLawtext, className: "btn btn-outline-primary" }, "Lawtext"),
-                            react_1.default.createElement("button", { onClick: downloadXml, className: "btn btn-outline-primary" }, "\u6CD5\u4EE4XML")),
+                            react_1.default.createElement("button", { onClick: downloadDocxAllClick, className: "btn btn-outline-primary" }, "Word"),
+                            react_1.default.createElement("button", { onClick: downloadLawtextClick, className: "btn btn-outline-primary" }, "Lawtext"),
+                            react_1.default.createElement("button", { onClick: downloadXmlClick, className: "btn btn-outline-primary" }, "\u6CD5\u4EE4XML")),
                         react_1.default.createElement("span", { className: "btn-group btn-group-sm", style: { marginTop: "0.2rem" } },
-                            react_1.default.createElement("button", { onClick: downloadDocxSelection, className: "btn btn-outline-primary", style: { padding: "0 8px" } }, "Word\uFF08\u9078\u629E\u3057\u305F\u6761\u306E\u307F\uFF09")))))));
+                            react_1.default.createElement("button", { onClick: downloadDocxSelectionClick, className: "btn btn-outline-primary", style: { padding: "0 8px" } }, "Word\uFF08\u9078\u629E\u3057\u305F\u6761\u306E\u307F\uFF09")))))));
 };
 var SidebarBodyDiv = styled_components_1.default.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n    flex-grow: 1;\n    display: flex;\n    flex-direction: column;\n"], ["\n    flex-grow: 1;\n    display: flex;\n    flex-direction: column;\n"])));
 var TOCItemDiv = styled_components_1.default.div(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n    text-indent: -1em;\n    overflow-x: hidden;\n    overflow-y: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    cursor: pointer;\n    &:hover {\n        background-color: rgba(255, 255, 255, .8);\n    }\n"], ["\n    text-indent: -1em;\n    overflow-x: hidden;\n    overflow-y: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    cursor: pointer;\n    &:hover {\n        background-color: rgba(255, 255, 255, .8);\n    }\n"])));
 var LawNavDiv = styled_components_1.default.div(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n    flex-grow: 1;\n    flex-basis: 0;\n    overflow-y: auto;\n    border-top: 1px solid #d6d6d6;\n    border-bottom: 1px solid #d6d6d6;\n    padding: 0.4rem 0;\n    font-size: 0.75em;\n"], ["\n    flex-grow: 1;\n    flex-basis: 0;\n    overflow-y: auto;\n    border-top: 1px solid #d6d6d6;\n    border-bottom: 1px solid #d6d6d6;\n    padding: 0.4rem 0;\n    font-size: 0.75em;\n"])));
 var NavLawTitle = function (props) {
     var onClick = function () {
-        actions.scrollLaw(props.lawTitle.id.toString());
+        scroll_1.scrollToLawAnchor(props.lawTitle.id.toString());
     };
     return (react_1.default.createElement(TOCItemDiv, { key: props.lawTitle.id, style: {
             paddingLeft: (props.indent + 2) + "em",
@@ -47920,7 +47760,7 @@ var NavLawTitle = function (props) {
 };
 var NavEnactStatement = function (props) {
     var onClick = function () {
-        actions.scrollLaw(props.enactStatement.id.toString());
+        scroll_1.scrollToLawAnchor(props.enactStatement.id.toString());
     };
     return (react_1.default.createElement(TOCItemDiv, { key: props.enactStatement.id, style: {
             paddingLeft: (props.indent + 2) + "em",
@@ -47928,7 +47768,7 @@ var NavEnactStatement = function (props) {
 };
 var NavPreamble = function (props) {
     var onClick = function () {
-        actions.scrollLaw(props.preamble.id.toString());
+        scroll_1.scrollToLawAnchor(props.preamble.id.toString());
     };
     return (react_1.default.createElement(TOCItemDiv, { key: props.preamble.id, style: {
             paddingLeft: (props.indent + 2) + "em",
@@ -47937,7 +47777,7 @@ var NavPreamble = function (props) {
 var NavTOC = function (props) {
     var tocLabel = props.toc.children.find(function (el) { return el.tag === "TOCLabel"; });
     var onClick = function () {
-        actions.scrollLaw(props.toc.id.toString());
+        scroll_1.scrollToLawAnchor(props.toc.id.toString());
     };
     return tocLabel ? (react_1.default.createElement(TOCItemDiv, { key: props.toc.id, style: {
             paddingLeft: (props.indent + 2) + "em",
@@ -47953,7 +47793,7 @@ var NavArticleGroup = function (props) {
         }
         else if (el.tag === "Paragraph" || el.tag === "PartTitle" || el.tag === "ChapterTitle" || el.tag === "SectionTitle" || el.tag === "SubsectionTitle" || el.tag === "DivisionTitle") {
             var onClick = function () {
-                actions.scrollLaw(props.articleGroup.id.toString());
+                scroll_1.scrollToLawAnchor(props.articleGroup.id.toString());
             };
             return (react_1.default.createElement(TOCItemDiv, { key: el.id, style: {
                     paddingLeft: (props.indent + 2) + "em",
@@ -47980,7 +47820,7 @@ var NavArticle = function (props) {
             text += (appendText[0] === "（" ? "" : "　") + appendText;
         }
         var onClick = function () {
-            actions.scrollLaw(props.article.id.toString());
+            scroll_1.scrollToLawAnchor(props.article.id.toString());
         };
         return (react_1.default.createElement(TOCItemDiv, { key: props.article.id, style: {
                 paddingLeft: (props.indent + 2) + "em",
@@ -47998,7 +47838,7 @@ var NavSupplProvision = function (props) {
         // eslint-disable-next-line no-irregular-whitespace
         var text = (name_2 + (amendLawNum ? ("（" + amendLawNum + "）") : "")).replace(/[\s　]+/, "");
         var onClick = function () {
-            actions.scrollLaw(props.supplProvision.id.toString());
+            scroll_1.scrollToLawAnchor(props.supplProvision.id.toString());
         };
         return (react_1.default.createElement(TOCItemDiv, { key: props.supplProvision.id, style: {
                 paddingLeft: (props.indent + 2) + "em",
@@ -48012,7 +47852,7 @@ var NavAppdxTable = function (props) {
     var appdxTableTitle = props.appdxTable.children.find(function (el) { return el.tag === "AppdxTableTitle"; });
     if (appdxTableTitle) {
         var onClick = function () {
-            actions.scrollLaw(props.appdxTable.id.toString());
+            scroll_1.scrollToLawAnchor(props.appdxTable.id.toString());
         };
         return (react_1.default.createElement(TOCItemDiv, { key: props.appdxTable.id, style: {
                 paddingLeft: (props.indent + 2) + "em",
@@ -48026,7 +47866,7 @@ var NavAppdxStyle = function (props) {
     var appdxStyleTitle = props.appdxStyle.children.find(function (el) { return el.tag === "AppdxStyleTitle"; });
     if (appdxStyleTitle) {
         var onClick = function () {
-            actions.scrollLaw(props.appdxStyle.id.toString());
+            scroll_1.scrollToLawAnchor(props.appdxStyle.id.toString());
         };
         return (react_1.default.createElement(TOCItemDiv, { key: props.appdxStyle.id, style: {
                 paddingLeft: (props.indent + 2) + "em",
@@ -48040,7 +47880,7 @@ var NavAppdxFig = function (props) {
     var AppdxFigTitle = props.appdxFig.children.find(function (el) { return el.tag === "AppdxFigTitle"; });
     if (AppdxFigTitle) {
         var onClick = function () {
-            actions.scrollLaw(props.appdxFig.id.toString());
+            scroll_1.scrollToLawAnchor(props.appdxFig.id.toString());
         };
         return (react_1.default.createElement(TOCItemDiv, { key: props.appdxFig.id, style: {
                 paddingLeft: (props.indent + 2) + "em",
@@ -48054,7 +47894,7 @@ var NavAppdxFormat = function (props) {
     var appdxFormatTitle = props.appdxFig.children.find(function (el) { return el.tag === "AppdxFormatTitle"; });
     if (appdxFormatTitle) {
         var onClick = function () {
-            actions.scrollLaw(props.appdxFig.id.toString());
+            scroll_1.scrollToLawAnchor(props.appdxFig.id.toString());
         };
         return (react_1.default.createElement(TOCItemDiv, { key: props.appdxFig.id, style: {
                 paddingLeft: (props.indent + 2) + "em",
@@ -48068,7 +47908,7 @@ var NavAppdxNote = function (props) {
     var appdxNoteTitle = props.appdxFig.children.find(function (el) { return el.tag === "AppdxNoteTitle"; });
     if (appdxNoteTitle) {
         var onClick = function () {
-            actions.scrollLaw(props.appdxFig.id.toString());
+            scroll_1.scrollToLawAnchor(props.appdxFig.id.toString());
         };
         return (react_1.default.createElement(TOCItemDiv, { key: props.appdxFig.id, style: {
                 paddingLeft: (props.indent + 2) + "em",
@@ -48082,7 +47922,7 @@ var NavAppdx = function (props) {
     var ArithFormulaNum = props.appdxFig.children.find(function (el) { return el.tag === "ArithFormulaNum"; });
     if (ArithFormulaNum) {
         var onClick = function () {
-            actions.scrollLaw(props.appdxFig.id.toString());
+            scroll_1.scrollToLawAnchor(props.appdxFig.id.toString());
         };
         return (react_1.default.createElement(TOCItemDiv, { key: props.appdxFig.id, style: {
                 paddingLeft: (props.indent + 2) + "em",
@@ -48096,7 +47936,7 @@ var NavAnyLaw = function (props) {
     var titleEL = props.el.children.find(function (c) { return typeof c !== "string" && c.tag.includes("Title"); }) || props.el;
     if (titleEL) {
         var onClick = function () {
-            actions.scrollLaw(props.el.id.toString());
+            scroll_1.scrollToLawAnchor(props.el.id.toString());
         };
         return (react_1.default.createElement(TOCItemDiv, { key: props.el.id, style: {
                 paddingLeft: (props.indent + 2) + "em",
@@ -48172,10 +48012,10 @@ var SidebarFooter = function () {
 };
 var SidebarDiv = styled_components_1.default.div(templateObject_7 || (templateObject_7 = __makeTemplateObject(["\n    width: 100%;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n"], ["\n    width: 100%;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n"])));
 var Sidebar = function (props) {
-    var origState = props.origState;
+    var _a, _b;
     return (react_1.default.createElement(SidebarDiv, null,
-        react_1.default.createElement(SidebarHead, __assign({}, { origState: origState })),
-        react_1.default.createElement(SidebarBody, { law: origState.law }),
+        react_1.default.createElement(SidebarHead, __assign({}, props)),
+        react_1.default.createElement(SidebarBody, { law: (_b = (_a = props.origState.law) === null || _a === void 0 ? void 0 : _a.el) !== null && _b !== void 0 ? _b : null }),
         react_1.default.createElement(SidebarFooter, null)));
 };
 exports.Sidebar = Sidebar;
@@ -48283,9 +48123,9 @@ exports.Viewer = void 0;
 var react_1 = __importStar(__webpack_require__(67294));
 var styled_components_1 = __importDefault(__webpack_require__(29163));
 var LawView_1 = __webpack_require__(75151);
-var actions = __importStar(__webpack_require__(8133));
-var react_router_1 = __webpack_require__(5977);
-var lawdata_1 = __webpack_require__(27841);
+var saveListJson_1 = __webpack_require__(14127);
+var loaders_1 = __webpack_require__(48618);
+var openFile_1 = __webpack_require__(63895);
 var ViewerLoadingDiv = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    /* position: fixed;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 280px; */\n    z-index: 100;\n    min-height: 100vh;\n    padding: 3em 0;\n\n    padding-top: 1rem;\n    text-align: center;\n"], ["\n    /* position: fixed;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 280px; */\n    z-index: 100;\n    min-height: 100vh;\n    padding: 3em 0;\n\n    padding-top: 1rem;\n    text-align: center;\n"])));
 var ViewerLoading = function (props) {
     return (react_1.default.createElement(ViewerLoadingDiv, null,
@@ -48294,40 +48134,44 @@ var ViewerLoading = function (props) {
 };
 var ViewerWelcomeDiv = styled_components_1.default.div(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n    /* position: fixed;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 280px; */\n    z-index: 100;\n    min-height: 100vh;\n    padding: 3em 0;\n\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: stretch;\n"], ["\n    /* position: fixed;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 280px; */\n    z-index: 100;\n    min-height: 100vh;\n    padding: 3em 0;\n\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: stretch;\n"])));
 var ViewerWelcome = function (props) {
-    var _a;
-    var origState = props.origState, setState = props.setState;
-    var _b = __read(react_1.default.useState((_a = origState.lawSearchKey) !== null && _a !== void 0 ? _a : ""), 2), editingKey = _b[0], setEditingKey = _b[1];
-    var history = react_router_1.useHistory();
+    var history = props.history, lawSearchKey = props.lawSearchKey;
+    var _a = __read(react_1.default.useState(lawSearchKey), 2), editingKey = _a[0], setEditingKey = _a[1];
     var lawSearchKeyInputRef = react_1.default.useRef(null);
     var handleSearchSubmit = function (event) {
         event.preventDefault();
         history.push("/" + editingKey);
     };
-    var _c = __read(react_1.default.useState(null), 2), fetchAbility = _c[0], setFetchAbility = _c[1];
+    var _b = __read(react_1.default.useState(null), 2), fetchAbility = _b[0], setFetchAbility = _b[1];
     react_1.useEffect(function () {
         var input = lawSearchKeyInputRef.current;
         if (input) {
             input.focus();
         }
+        var unmounted = false;
         (function () { return __awaiter(void 0, void 0, void 0, function () {
             var ffa;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, actions.ensureFetch()];
+                    case 0: return [4 /*yield*/, loaders_1.ensureFetch()];
                     case 1:
                         ffa = _a.sent();
+                        if (unmounted)
+                            return [2 /*return*/];
                         setFetchAbility(ffa);
                         return [2 /*return*/];
                 }
             });
         }); })();
+        return function () {
+            unmounted = true;
+        };
     }, []);
     var lawSearchKeyOnChange = function (e) {
         setEditingKey(e.target.value);
     };
     var downloadSampleLawtextOnClick = function (e) {
         e.preventDefault();
-        actions.downloadSampleLawtext(setState);
+        history.push("/(sample)");
     };
     return (react_1.default.createElement(ViewerWelcomeDiv, null,
         react_1.default.createElement("div", null,
@@ -48346,7 +48190,7 @@ var ViewerWelcome = function (props) {
             react_1.default.createElement("div", { className: "container-fluid" },
                 react_1.default.createElement("div", { style: { textAlign: "center" } },
                     react_1.default.createElement("p", { className: "text-primary", style: { marginBottom: "1em" } }, "\u307E\u305F\u306F"),
-                    react_1.default.createElement("button", { onClick: actions.openFile, className: "lawtext-open-file-button btn btn-outline-primary" }, "\u6CD5\u4EE4\u30D5\u30A1\u30A4\u30EB\u3092\u958B\u304F")),
+                    react_1.default.createElement("button", { onClick: openFile_1.openFile, className: "lawtext-open-file-button btn btn-outline-primary" }, "\u6CD5\u4EE4\u30D5\u30A1\u30A4\u30EB\u3092\u958B\u304F")),
                 react_1.default.createElement("div", { className: "text-muted", style: { marginTop: "1em" } },
                     react_1.default.createElement("p", { style: { textAlign: "center" } }, "\u6CD5\u4EE4\u30D5\u30A1\u30A4\u30EB\u304C\u3042\u308A\u307E\u305B\u3093\u304B\uFF1F"),
                     react_1.default.createElement("ul", null,
@@ -48386,7 +48230,7 @@ var ListJsonDownloader = function () {
             var blob;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, lawdata_1.saveListJson(function (progress, message) { return replaceState(function (prev) { return (__assign(__assign({}, prev), { progress: progress, message: message })); }); })];
+                    case 0: return [4 /*yield*/, saveListJson_1.saveListJson(function (progress, message) { return replaceState(function (prev) { return (__assign(__assign({}, prev), { progress: progress, message: message })); }); })];
                     case 1:
                         blob = _a.sent();
                         replaceState(function (prev) { return (__assign(__assign({}, prev), { processing: false, progress: 1, message: "完了しました", blob: blob, blobURL: URL.createObjectURL(blob) })); });
@@ -48427,7 +48271,7 @@ var DataDirInfoToggle = function () {
             var csvExists;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, lawdata_1.storedLoader.listCSVExists()];
+                    case 0: return [4 /*yield*/, loaders_1.storedLoader.listCSVExists()];
                     case 1:
                         csvExists = _a.sent();
                         setState({ csvExists: csvExists, csvChecking: false });
@@ -48460,7 +48304,7 @@ var DataDirInfoToggle = function () {
             var jsonExists;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, lawdata_1.storedLoader.listJsonExists()];
+                    case 0: return [4 /*yield*/, loaders_1.storedLoader.listJsonExists()];
                     case 1:
                         jsonExists = _a.sent();
                         setState({ jsonExists: jsonExists, jsonChecking: false });
@@ -48548,35 +48392,16 @@ var templateObject_1, templateObject_2, templateObject_3;
 /***/ }),
 
 /***/ 95888:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.lawtext = void 0;
-var lawdata = __importStar(__webpack_require__(27841));
 var temp_law_1 = __webpack_require__(44234);
 var query_1 = __webpack_require__(50946);
 var law_util_1 = __webpack_require__(50377);
+var loaders_1 = __webpack_require__(48618);
 /**
  * ブラウザのコンソールから利用可能なオブジェクトです。
  */
@@ -48588,10 +48413,10 @@ exports.lawtext = {
      */
     traceTitles: function (el) { return law_util_1.traceTitles(el); },
     /**
-     * 法令XMLを新しいウィンドウのLawtextで表示します。
-     * @param xml - 表示する法令XML
+     * 法令XMLまたは Lawtext を新しいウィンドウの Lawtext app で表示します。
+     * @param text - 表示する法令XMLまたは Lawtext
      */
-    showLawXML: function (xml) { return temp_law_1.showLawXML(xml); },
+    showLaw: function (text) { return temp_law_1.showLaw(text); },
     /**
      * 保存されたオフライン用データを用いてLawtext queryを実行します。
      * @param criteria - 法令のフィルタに用いる {@link LawCriteriaArgs}。`null` を設定するとフィルタを行わず全ての項目を列挙します。
@@ -48599,7 +48424,7 @@ exports.lawtext = {
      */
     query: function (criteria) {
         if (criteria === void 0) { criteria = null; }
-        return query_1.LawQuery.fromFetchInfo(lawdata.storedLoader, criteria);
+        return query_1.LawQuery.fromFetchInfo(loaders_1.storedLoader, criteria);
     },
     /**
      * e-Gov 法令APIを用いてLawtext queryを実行します。
@@ -48609,7 +48434,7 @@ exports.lawtext = {
     queryViaAPI: function (criteria) {
         if (criteria === void 0) { criteria = null; }
         console.warn("クエリの実行に e-Gov 法令API を使用します。時間がかかる場合があります。");
-        return query_1.LawQuery.fromFetchInfo(lawdata.elawsLoader, criteria);
+        return query_1.LawQuery.fromFetchInfo(loaders_1.elawsLoader, criteria);
     },
 };
 exports.default = {
@@ -48687,7 +48512,7 @@ var __values = (this && this.__values) || function(o) {
     throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.traceTitles = void 0;
+exports.getLawTitleWithNum = exports.traceTitles = void 0;
 var traceTitles = function (el, _titles) {
     var e_1, _a;
     var _b;
@@ -48716,6 +48541,652 @@ var traceTitles = function (el, _titles) {
     return exports.traceTitles(parent, titles);
 };
 exports.traceTitles = traceTitles;
+var getLawTitleWithNum = function (law) {
+    var lawNum = law.children.find(function (el) { return el.tag === "LawNum"; });
+    var lawBody = law.children.find(function (el) { return el.tag === "LawBody"; });
+    var lawTitle = lawBody && lawBody.children.find(function (el) { return el.tag === "LawTitle"; });
+    var sLawNum = lawNum ? lawNum.text : "";
+    var sLawTitle = lawTitle ? lawTitle.text : "";
+    sLawNum = (sLawNum && sLawTitle) ? ("\uFF08" + sLawNum + "\uFF09") : sLawNum;
+    return sLawTitle + sLawNum;
+};
+exports.getLawTitleWithNum = getLawTitleWithNum;
+
+
+/***/ }),
+
+/***/ 16953:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.toLawData = exports.isFileLawtextLawDataProps = exports.isTempLawtextLawDataProps = exports.isFileXMLLawDataProps = exports.isTempXMLLawDataProps = exports.isElawsLawDataProps = exports.isStoredLawDataProps = void 0;
+var analyzer = __importStar(__webpack_require__(71886));
+var util = __importStar(__webpack_require__(94620));
+var parser_wrapper_1 = __webpack_require__(78802);
+var isStoredLawDataProps = function (props) {
+    return props.source === "stored";
+};
+exports.isStoredLawDataProps = isStoredLawDataProps;
+var isElawsLawDataProps = function (props) {
+    return props.source === "elaws";
+};
+exports.isElawsLawDataProps = isElawsLawDataProps;
+var isTempXMLLawDataProps = function (props) {
+    return props.source === "temp_xml";
+};
+exports.isTempXMLLawDataProps = isTempXMLLawDataProps;
+var isFileXMLLawDataProps = function (props) {
+    return props.source === "file_xml";
+};
+exports.isFileXMLLawDataProps = isFileXMLLawDataProps;
+var isTempLawtextLawDataProps = function (props) {
+    return props.source === "temp_lawtext";
+};
+exports.isTempLawtextLawDataProps = isTempLawtextLawDataProps;
+var isFileLawtextLawDataProps = function (props) {
+    return props.source === "file_lawtext";
+};
+exports.isFileLawtextLawDataProps = isFileLawtextLawDataProps;
+var toLawData = function (props) {
+    var _props = props;
+    try {
+        if (exports.isStoredLawDataProps(_props) || exports.isElawsLawDataProps(_props) || exports.isTempXMLLawDataProps(_props) || exports.isFileXMLLawDataProps(_props)) {
+            var el = util.xmlToJson(_props.xml);
+            analyzer.stdxmlToExt(el);
+            var analysis = analyzer.analyze(el);
+            return {
+                ok: true,
+                lawData: __assign(__assign({}, _props), { el: el,
+                    analysis: analysis }),
+            };
+        }
+        else if (exports.isTempLawtextLawDataProps(_props) || exports.isFileLawtextLawDataProps(_props)) {
+            var el = parser_wrapper_1.parse(_props.lawtext, { startRule: "start" });
+            var analysis = analyzer.analyze(el);
+            return {
+                ok: true,
+                lawData: __assign(__assign({}, _props), { el: el,
+                    analysis: analysis }),
+            };
+        }
+        else {
+            throw util.assertNever(_props);
+        }
+    }
+    catch (origError) {
+        var error = new Error("\u8AAD\u307F\u8FBC\u3093\u3060\u6CD5\u4EE4\u30C7\u30FC\u30BF\u306B\u30A8\u30E9\u30FC\u304C\u3042\u308A\u307E\u3059: " + origError);
+        error.stack = error.stack + "\n    Original Error:\n    " + origError.stack + "\n    ";
+        return {
+            ok: false,
+            error: error,
+        };
+    }
+};
+exports.toLawData = toLawData;
+
+
+/***/ }),
+
+/***/ 48618:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ensureFetch = exports.storedLoader = exports.elawsLoader = void 0;
+var FetchElawsLoader_1 = __webpack_require__(35823);
+var FetchStoredLoader_1 = __webpack_require__(69129);
+var _dataPath = "./data";
+exports.elawsLoader = new FetchElawsLoader_1.FetchElawsLoader();
+exports.storedLoader = new FetchStoredLoader_1.FetchStoredLoader(_dataPath);
+var ensureFetch = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var isFile, res, e_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                isFile = location.protocol === "file:";
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, fetch("./index.html", { method: "HEAD" })];
+            case 2:
+                res = _a.sent();
+                return [2 /*return*/, { isFile: isFile, canFetch: res.ok }];
+            case 3:
+                e_1 = _a.sent();
+                return [2 /*return*/, { isFile: isFile, canFetch: false }];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
+exports.ensureFetch = ensureFetch;
+
+
+/***/ }),
+
+/***/ 34659:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.navigateLawData = void 0;
+var temp_law_1 = __webpack_require__(44234);
+var elaws_api_1 = __webpack_require__(79598);
+var jszip_1 = __importDefault(__webpack_require__(55733));
+var path_1 = __importDefault(__webpack_require__(26470));
+var common_1 = __webpack_require__(16953);
+var loaders_1 = __webpack_require__(48618);
+var searchLawNum_1 = __webpack_require__(89825);
+var navigateLawData = function (lawSearchKey, onMessage) { return __awaiter(void 0, void 0, void 0, function () {
+    var text, lawnum, lawInfo, xml, _a, _b, elawsLawData, pict, zip, _c, _d, _i, relPath, _e, _f, _g, error_1;
+    return __generator(this, function (_h) {
+        switch (_h.label) {
+            case 0:
+                text = temp_law_1.getTempLaw(lawSearchKey);
+                if (text !== null) {
+                    if (/^(?:<\?xml|<Law)/.test(text.trim())) {
+                        onMessage("法令XMLをパースしています...");
+                        return [2 /*return*/, common_1.toLawData({
+                                source: "temp_xml",
+                                xml: text,
+                            })];
+                    }
+                    else {
+                        onMessage("Lawtextをパースしています...");
+                        return [2 /*return*/, common_1.toLawData({
+                                source: "temp_lawtext",
+                                lawtext: text,
+                            })];
+                    }
+                }
+                onMessage("法令番号を検索しています...");
+                return [4 /*yield*/, searchLawNum_1.searchLawnum(lawSearchKey)];
+            case 1:
+                lawnum = _h.sent();
+                if (!lawnum) {
+                    return [2 /*return*/, {
+                            ok: false,
+                            error: new Error("\u300C" + lawSearchKey + "\u300D\u3092\u691C\u7D22\u3057\u307E\u3057\u305F\u304C\u3001\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3067\u3057\u305F\u3002"),
+                        }];
+                }
+                _h.label = 2;
+            case 2:
+                _h.trys.push([2, 6, , 7]);
+                onMessage("保存されている法令情報を探しています...");
+                return [4 /*yield*/, loaders_1.storedLoader.getLawInfoByLawNum(lawnum)];
+            case 3:
+                lawInfo = _h.sent();
+                if (!lawInfo)
+                    throw null;
+                onMessage("保存されている法令XMLの取得を試みています...");
+                _a = lawInfo;
+                if (!_a) return [3 /*break*/, 5];
+                return [4 /*yield*/, loaders_1.storedLoader.loadLawXMLByInfo(lawInfo)];
+            case 4:
+                _a = (_h.sent());
+                _h.label = 5;
+            case 5:
+                xml = _a;
+                if (!xml)
+                    throw null;
+                onMessage("法令XMLをパースしています...");
+                return [2 /*return*/, common_1.toLawData({
+                        source: "stored",
+                        xml: xml,
+                        lawPath: lawInfo.Path,
+                    })];
+            case 6:
+                _b = _h.sent();
+                return [3 /*break*/, 7];
+            case 7:
+                _h.trys.push([7, 13, , 14]);
+                onMessage("e-Gov 法令APIから法令XMLを取得しています...");
+                return [4 /*yield*/, elaws_api_1.fetchLawData(lawnum)];
+            case 8:
+                elawsLawData = _h.sent();
+                pict = null;
+                if (!elawsLawData.imageData) return [3 /*break*/, 12];
+                onMessage("画像情報を読み込んでいます...");
+                pict = new Map();
+                zip = new jszip_1.default(elawsLawData.imageData);
+                _c = [];
+                for (_d in zip.files)
+                    _c.push(_d);
+                _i = 0;
+                _h.label = 9;
+            case 9:
+                if (!(_i < _c.length)) return [3 /*break*/, 12];
+                relPath = _c[_i];
+                _f = (_e = pict).set;
+                _g = [path_1.default.join("./pict", relPath)];
+                return [4 /*yield*/, zip.files[relPath].async("blob")];
+            case 10:
+                _f.apply(_e, _g.concat([_h.sent()]));
+                _h.label = 11;
+            case 11:
+                _i++;
+                return [3 /*break*/, 9];
+            case 12:
+                onMessage("法令XMLをパースしています...");
+                return [2 /*return*/, common_1.toLawData({
+                        source: "elaws",
+                        xml: elawsLawData.xml,
+                        pict: pict,
+                    })];
+            case 13:
+                error_1 = _h.sent();
+                return [2 /*return*/, {
+                        ok: false,
+                        error: error_1,
+                    }];
+            case 14: return [2 /*return*/];
+        }
+    });
+}); };
+exports.navigateLawData = navigateLawData;
+
+
+/***/ }),
+
+/***/ 14127:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.saveListJson = void 0;
+var loaders_1 = __webpack_require__(48618);
+var saveListJson = function (onProgress) {
+    if (onProgress === void 0) { onProgress = function () { return undefined; }; }
+    return __awaiter(void 0, void 0, void 0, function () {
+        var progress, infos, e_1, list, json, blob;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    progress = (function () {
+                        var currentRatio = 0;
+                        var currentMessage = "";
+                        return function (ratio, message) {
+                            currentRatio = ratio || currentRatio;
+                            currentMessage = message || currentMessage;
+                            onProgress(currentRatio, currentMessage);
+                        };
+                    })();
+                    progress(0, "Loading CSV...");
+                    console.log("\nListing up XMLs...");
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, loaders_1.storedLoader.loadBaseLawInfosFromCSV()];
+                case 2:
+                    infos = _a.sent();
+                    return [3 /*break*/, 4];
+                case 3:
+                    e_1 = _a.sent();
+                    console.error("CSV list cannot be fetched.");
+                    console.error(e_1.message, e_1.stack);
+                    return [2 /*return*/, null];
+                case 4:
+                    console.log("Processing " + infos.length + " XMLs...");
+                    return [4 /*yield*/, loaders_1.storedLoader.makeLawListFromBaseLawInfos(infos)];
+                case 5:
+                    list = _a.sent();
+                    progress(undefined, "Generating json...");
+                    json = JSON.stringify(list);
+                    progress(undefined, "Saving json...");
+                    blob = new Blob([json], { type: "application/json" });
+                    return [2 /*return*/, blob];
+            }
+        });
+    });
+};
+exports.saveListJson = saveListJson;
+
+
+/***/ }),
+
+/***/ 89825:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __values = (this && this.__values) || function(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.searchLawnum = void 0;
+var js_levenshtein_1 = __importDefault(__webpack_require__(39991));
+var loaders_1 = __webpack_require__(48618);
+var searchLawnum = function (lawSearchKey) { return __awaiter(void 0, void 0, void 0, function () {
+    var reLawnum, match, lawnum, _a, _b, _c, i;
+    return __generator(this, function (_d) {
+        switch (_d.label) {
+            case 0:
+                reLawnum = /^(?:明治|大正|昭和|平成|令和)[元〇一二三四五六七八九十]+年(?:\S+?第[〇一二三四五六七八九十百千]+号|人事院規則[〇一二三四五六七八九―]+|[一二三四五六七八九十]+月[一二三四五六七八九十]+日内閣総理大臣決定|憲法)$/;
+                match = reLawnum.exec(lawSearchKey);
+                _c = (match && match[0]);
+                if (_c) return [3 /*break*/, 2];
+                return [4 /*yield*/, getLawnumCache(lawSearchKey)];
+            case 1:
+                _c = (_d.sent());
+                _d.label = 2;
+            case 2:
+                _b = _c;
+                if (_b) return [3 /*break*/, 4];
+                return [4 /*yield*/, getLawnumStored(lawSearchKey)];
+            case 3:
+                _b = (_d.sent());
+                _d.label = 4;
+            case 4:
+                _a = _b;
+                if (_a) return [3 /*break*/, 6];
+                return [4 /*yield*/, getLawnumRemote(lawSearchKey)];
+            case 5:
+                _a = (_d.sent());
+                _d.label = 6;
+            case 6:
+                lawnum = (_a);
+                if (lawnum && localStorage) {
+                    for (i = 0; i < 5; i++) {
+                        try {
+                            localStorage.setItem("law_num_for:" + lawSearchKey, JSON.stringify({
+                                datetime: new Date().toISOString(),
+                                lawnum: lawnum,
+                            }));
+                        }
+                        catch (e) {
+                            console.log(e);
+                            localStorage.clear();
+                        }
+                    }
+                }
+                return [2 /*return*/, lawnum];
+        }
+    });
+}); };
+exports.searchLawnum = searchLawnum;
+var getLawnumCache = function (lawSearchKey) { return __awaiter(void 0, void 0, void 0, function () {
+    var lawNumDataStr, lawNumData, datetime, now, ms, days;
+    return __generator(this, function (_a) {
+        console.log("getLawnumCache(\"" + lawSearchKey + "\")");
+        lawNumDataStr = localStorage ? localStorage.getItem("law_num_for:" + lawSearchKey) : null;
+        if (lawNumDataStr) {
+            lawNumData = JSON.parse(lawNumDataStr);
+            datetime = new Date(lawNumData.datetime);
+            now = new Date();
+            ms = now.getTime() - datetime.getTime();
+            days = ms / (1000 * 60 * 60 * 24);
+            if (days < 1) {
+                return [2 /*return*/, lawNumData.lawnum];
+            }
+        }
+        return [2 /*return*/, null];
+    });
+}); };
+var getLawnumStored = function (lawSearchKey) { return __awaiter(void 0, void 0, void 0, function () {
+    var lawInfos, partMatchMode, bestMatch, lawInfos_1, lawInfos_1_1, info, score, _a;
+    var e_1, _b;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
+            case 0:
+                _c.trys.push([0, 2, , 3]);
+                console.log("getLawnumStored(\"" + lawSearchKey + "\")");
+                return [4 /*yield*/, loaders_1.storedLoader.loadLawInfosStruct()];
+            case 1:
+                lawInfos = (_c.sent()).lawInfos;
+                console.log("started " + new Date().toISOString());
+                partMatchMode = false;
+                bestMatch = { score: Infinity, info: null };
+                try {
+                    for (lawInfos_1 = __values(lawInfos), lawInfos_1_1 = lawInfos_1.next(); !lawInfos_1_1.done; lawInfos_1_1 = lawInfos_1.next()) {
+                        info = lawInfos_1_1.value;
+                        if (info.LawTitle.includes(lawSearchKey)) {
+                            if (!partMatchMode) {
+                                partMatchMode = true;
+                                bestMatch.score = Infinity;
+                                bestMatch.info = null;
+                            }
+                        }
+                        else {
+                            if (partMatchMode)
+                                continue;
+                        }
+                        score = js_levenshtein_1.default(info.LawTitle.replace(/　抄$/, ""), lawSearchKey);
+                        if (score < bestMatch.score) {
+                            bestMatch.score = score;
+                            bestMatch.info = info;
+                        }
+                    }
+                }
+                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                finally {
+                    try {
+                        if (lawInfos_1_1 && !lawInfos_1_1.done && (_b = lawInfos_1.return)) _b.call(lawInfos_1);
+                    }
+                    finally { if (e_1) throw e_1.error; }
+                }
+                console.log("finished " + new Date().toISOString());
+                return [2 /*return*/, bestMatch.info && bestMatch.info.LawNum];
+            case 2:
+                _a = _c.sent();
+                return [2 /*return*/, null];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+var getLawnumRemote = function (lawSearchKey) { return __awaiter(void 0, void 0, void 0, function () {
+    var response, data;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                console.log("getLawnumRemote(\"" + lawSearchKey + "\")");
+                return [4 /*yield*/, fetch("https://lic857vlz1.execute-api.ap-northeast-1.amazonaws.com/prod/Lawtext-API?method=lawnums&lawname=" + encodeURI(lawSearchKey), {
+                        mode: "cors",
+                    })];
+            case 1:
+                response = _a.sent();
+                return [4 /*yield*/, response.json()];
+            case 2:
+                data = _a.sent();
+                if (data.length) {
+                    data.sort(function (a, b) { return a[0].length - b[0].length; });
+                    return [2 /*return*/, data[0][1]];
+                }
+                return [2 /*return*/, null];
+        }
+    });
+}); };
 
 
 /***/ }),
@@ -49788,19 +50259,6 @@ var FetchElawsLoader = /** @class */ (function (_super) {
             });
         });
     };
-    FetchElawsLoader.prototype.getLawXmlByLawNum = function (lawNum) {
-        return __awaiter(this, void 0, void 0, function () {
-            var lawData;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, elaws_api_1.fetchLawData(lawNum)];
-                    case 1:
-                        lawData = _a.sent();
-                        return [2 /*return*/, lawData.xml];
-                }
-            });
-        });
-    };
     return FetchElawsLoader;
 }(common_1.Loader));
 exports.FetchElawsLoader = FetchElawsLoader;
@@ -50151,7 +50609,7 @@ var Loader = /** @class */ (function () {
             });
         });
     };
-    Loader.prototype.getLawXmlByLawNum = function (lawNum) {
+    Loader.prototype.getLawInfoByLawNum = function (lawNum) {
         return __awaiter(this, void 0, void 0, function () {
             var lawListByLawnum, lawInfos, lawInfos_1, lawInfos_1_1, lawInfo;
             var e_1, _a;
@@ -50169,7 +50627,7 @@ var Loader = /** @class */ (function () {
                             for (lawInfos_1 = __values(lawInfos), lawInfos_1_1 = lawInfos_1.next(); !lawInfos_1_1.done; lawInfos_1_1 = lawInfos_1.next()) {
                                 lawInfo = lawInfos_1_1.value;
                                 if (lawInfo.Enforced) {
-                                    return [2 /*return*/, this.loadLawXMLByInfo(lawInfo)];
+                                    return [2 /*return*/, lawInfo];
                                 }
                             }
                         }
@@ -50180,7 +50638,7 @@ var Loader = /** @class */ (function () {
                             }
                             finally { if (e_1) throw e_1.error; }
                         }
-                        return [2 /*return*/, this.loadLawXMLByInfo(lawInfos[0])];
+                        return [2 /*return*/, lawInfos[0]];
                 }
             });
         });
@@ -50545,11 +51003,12 @@ var __read = (this && this.__read) || function (o, n) {
     }
     return ar;
 };
-var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LawQuery = exports.LawQueryItem = exports.BaseLawCriteria = exports.Query = void 0;
+var elaws_api_1 = __webpack_require__(79598);
 var util_1 = __webpack_require__(94620);
 var lawinfo_1 = __webpack_require__(60657);
+var FetchElawsLoader_1 = __webpack_require__(35823);
 // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-member-access
 var DOMParser = (__webpack_require__.g["window"] && window.DOMParser) || __webpack_require__(15620).DOMParser;
 var domParser = new DOMParser();
@@ -50597,49 +51056,49 @@ var Query = /** @class */ (function () {
         return new Query(population, criteria);
     };
     Query.prototype[Symbol.asyncIterator] = function () {
-        return __asyncGenerator(this, arguments, function _b() {
-            var _c, _d, item, matched, e_1_1;
-            var e_1, _e;
-            return __generator(this, function (_f) {
-                switch (_f.label) {
+        return __asyncGenerator(this, arguments, function _a() {
+            var _b, _c, item, matched, e_1_1;
+            var e_1, _d;
+            return __generator(this, function (_e) {
+                switch (_e.label) {
                     case 0:
                         if (!(this.criteria === null)) return [3 /*break*/, 3];
                         return [5 /*yield**/, __values(__asyncDelegator(__asyncValues(this.population)))];
-                    case 1: return [4 /*yield*/, __await.apply(void 0, [_f.sent()])];
+                    case 1: return [4 /*yield*/, __await.apply(void 0, [_e.sent()])];
                     case 2:
-                        _f.sent();
+                        _e.sent();
                         return [3 /*break*/, 17];
                     case 3:
-                        _f.trys.push([3, 11, 12, 17]);
-                        _c = __asyncValues(this.population);
-                        _f.label = 4;
-                    case 4: return [4 /*yield*/, __await(_c.next())];
+                        _e.trys.push([3, 11, 12, 17]);
+                        _b = __asyncValues(this.population);
+                        _e.label = 4;
+                    case 4: return [4 /*yield*/, __await(_b.next())];
                     case 5:
-                        if (!(_d = _f.sent(), !_d.done)) return [3 /*break*/, 10];
-                        item = _d.value;
+                        if (!(_c = _e.sent(), !_c.done)) return [3 /*break*/, 10];
+                        item = _c.value;
                         return [4 /*yield*/, __await(this.criteria.match(item))];
                     case 6:
-                        matched = _f.sent();
+                        matched = _e.sent();
                         if (!matched)
                             return [3 /*break*/, 9];
                         return [4 /*yield*/, __await(item)];
-                    case 7: return [4 /*yield*/, _f.sent()];
+                    case 7: return [4 /*yield*/, _e.sent()];
                     case 8:
-                        _f.sent();
-                        _f.label = 9;
+                        _e.sent();
+                        _e.label = 9;
                     case 9: return [3 /*break*/, 4];
                     case 10: return [3 /*break*/, 17];
                     case 11:
-                        e_1_1 = _f.sent();
+                        e_1_1 = _e.sent();
                         e_1 = { error: e_1_1 };
                         return [3 /*break*/, 17];
                     case 12:
-                        _f.trys.push([12, , 15, 16]);
-                        if (!(_d && !_d.done && (_e = _c.return))) return [3 /*break*/, 14];
-                        return [4 /*yield*/, __await(_e.call(_c))];
+                        _e.trys.push([12, , 15, 16]);
+                        if (!(_c && !_c.done && (_d = _b.return))) return [3 /*break*/, 14];
+                        return [4 /*yield*/, __await(_d.call(_b))];
                     case 13:
-                        _f.sent();
-                        _f.label = 14;
+                        _e.sent();
+                        _e.label = 14;
                     case 14: return [3 /*break*/, 16];
                     case 15:
                         if (e_1) throw e_1.error;
@@ -50666,41 +51125,41 @@ var Query = /** @class */ (function () {
         return new Query((function () {
             return __asyncGenerator(this, arguments, function () {
                 var self_1, self_1_1, item, value, e_2_1;
-                var e_2, _b;
-                return __generator(this, function (_c) {
-                    switch (_c.label) {
+                var e_2, _a;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
                         case 0:
-                            _c.trys.push([0, 8, 9, 14]);
+                            _b.trys.push([0, 8, 9, 14]);
                             self_1 = __asyncValues(self);
-                            _c.label = 1;
+                            _b.label = 1;
                         case 1: return [4 /*yield*/, __await(self_1.next())];
                         case 2:
-                            if (!(self_1_1 = _c.sent(), !self_1_1.done)) return [3 /*break*/, 7];
+                            if (!(self_1_1 = _b.sent(), !self_1_1.done)) return [3 /*break*/, 7];
                             item = self_1_1.value;
                             return [4 /*yield*/, __await(func(item))];
                         case 3:
-                            value = _c.sent();
+                            value = _b.sent();
                             if (value === undefined) {
                                 throw TypeError("Query.map: the mapped function (" + func + ") returned an undefined. Please check the definition of the function. (First occurance: " + item + ")");
                             }
                             return [4 /*yield*/, __await(value)];
-                        case 4: return [4 /*yield*/, _c.sent()];
+                        case 4: return [4 /*yield*/, _b.sent()];
                         case 5:
-                            _c.sent();
-                            _c.label = 6;
+                            _b.sent();
+                            _b.label = 6;
                         case 6: return [3 /*break*/, 1];
                         case 7: return [3 /*break*/, 14];
                         case 8:
-                            e_2_1 = _c.sent();
+                            e_2_1 = _b.sent();
                             e_2 = { error: e_2_1 };
                             return [3 /*break*/, 14];
                         case 9:
-                            _c.trys.push([9, , 12, 13]);
-                            if (!(self_1_1 && !self_1_1.done && (_b = self_1.return))) return [3 /*break*/, 11];
-                            return [4 /*yield*/, __await(_b.call(self_1))];
+                            _b.trys.push([9, , 12, 13]);
+                            if (!(self_1_1 && !self_1_1.done && (_a = self_1.return))) return [3 /*break*/, 11];
+                            return [4 /*yield*/, __await(_a.call(self_1))];
                         case 10:
-                            _c.sent();
-                            _c.label = 11;
+                            _b.sent();
+                            _b.label = 11;
                         case 11: return [3 /*break*/, 13];
                         case 12:
                             if (e_2) throw e_2.error;
@@ -50728,41 +51187,41 @@ var Query = /** @class */ (function () {
         return this.new((function () {
             return __asyncGenerator(this, arguments, function () {
                 var self_2, self_2_1, item, value, e_3_1;
-                var e_3, _b;
-                return __generator(this, function (_c) {
-                    switch (_c.label) {
+                var e_3, _a;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
                         case 0:
-                            _c.trys.push([0, 8, 9, 14]);
+                            _b.trys.push([0, 8, 9, 14]);
                             self_2 = __asyncValues(self);
-                            _c.label = 1;
+                            _b.label = 1;
                         case 1: return [4 /*yield*/, __await(self_2.next())];
                         case 2:
-                            if (!(self_2_1 = _c.sent(), !self_2_1.done)) return [3 /*break*/, 7];
+                            if (!(self_2_1 = _b.sent(), !self_2_1.done)) return [3 /*break*/, 7];
                             item = self_2_1.value;
                             return [4 /*yield*/, __await(func(item))];
                         case 3:
-                            value = _c.sent();
+                            value = _b.sent();
                             if (value === undefined) {
                                 throw TypeError("Query.assign: the mapped function (" + func + ") returned an undefined. Please check the definition of the function. (First occurance: " + item + ")");
                             }
                             return [4 /*yield*/, __await(__assign(__assign({}, item), value))];
-                        case 4: return [4 /*yield*/, _c.sent()];
+                        case 4: return [4 /*yield*/, _b.sent()];
                         case 5:
-                            _c.sent();
-                            _c.label = 6;
+                            _b.sent();
+                            _b.label = 6;
                         case 6: return [3 /*break*/, 1];
                         case 7: return [3 /*break*/, 14];
                         case 8:
-                            e_3_1 = _c.sent();
+                            e_3_1 = _b.sent();
                             e_3 = { error: e_3_1 };
                             return [3 /*break*/, 14];
                         case 9:
-                            _c.trys.push([9, , 12, 13]);
-                            if (!(self_2_1 && !self_2_1.done && (_b = self_2.return))) return [3 /*break*/, 11];
-                            return [4 /*yield*/, __await(_b.call(self_2))];
+                            _b.trys.push([9, , 12, 13]);
+                            if (!(self_2_1 && !self_2_1.done && (_a = self_2.return))) return [3 /*break*/, 11];
+                            return [4 /*yield*/, __await(_a.call(self_2))];
                         case 10:
-                            _c.sent();
-                            _c.label = 11;
+                            _b.sent();
+                            _b.label = 11;
                         case 11: return [3 /*break*/, 13];
                         case 12:
                             if (e_3) throw e_3.error;
@@ -50801,47 +51260,47 @@ var Query = /** @class */ (function () {
         return this.new((function () {
             return __asyncGenerator(this, arguments, function () {
                 var self_3, self_3_1, item, continuing, e_4_1;
-                var e_4, _b;
-                return __generator(this, function (_c) {
-                    switch (_c.label) {
+                var e_4, _a;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
                         case 0:
-                            _c.trys.push([0, 12, 13, 18]);
+                            _b.trys.push([0, 12, 13, 18]);
                             self_3 = __asyncValues(self);
-                            _c.label = 1;
+                            _b.label = 1;
                         case 1: return [4 /*yield*/, __await(self_3.next())];
                         case 2:
-                            if (!(self_3_1 = _c.sent(), !self_3_1.done)) return [3 /*break*/, 11];
+                            if (!(self_3_1 = _b.sent(), !self_3_1.done)) return [3 /*break*/, 11];
                             item = self_3_1.value;
                             return [4 /*yield*/, __await(func(item))];
                         case 3:
-                            continuing = _c.sent();
+                            continuing = _b.sent();
                             if (!continuing) return [3 /*break*/, 6];
                             return [4 /*yield*/, __await(item)];
-                        case 4: return [4 /*yield*/, _c.sent()];
+                        case 4: return [4 /*yield*/, _b.sent()];
                         case 5:
-                            _c.sent();
+                            _b.sent();
                             return [3 /*break*/, 10];
                         case 6:
                             if (!yieldLast) return [3 /*break*/, 9];
                             return [4 /*yield*/, __await(item)];
-                        case 7: return [4 /*yield*/, _c.sent()];
+                        case 7: return [4 /*yield*/, _b.sent()];
                         case 8:
-                            _c.sent();
-                            _c.label = 9;
+                            _b.sent();
+                            _b.label = 9;
                         case 9: return [3 /*break*/, 11];
                         case 10: return [3 /*break*/, 1];
                         case 11: return [3 /*break*/, 18];
                         case 12:
-                            e_4_1 = _c.sent();
+                            e_4_1 = _b.sent();
                             e_4 = { error: e_4_1 };
                             return [3 /*break*/, 18];
                         case 13:
-                            _c.trys.push([13, , 16, 17]);
-                            if (!(self_3_1 && !self_3_1.done && (_b = self_3.return))) return [3 /*break*/, 15];
-                            return [4 /*yield*/, __await(_b.call(self_3))];
+                            _b.trys.push([13, , 16, 17]);
+                            if (!(self_3_1 && !self_3_1.done && (_a = self_3.return))) return [3 /*break*/, 15];
+                            return [4 /*yield*/, __await(_a.call(self_3))];
                         case 14:
-                            _c.sent();
-                            _c.label = 15;
+                            _b.sent();
+                            _b.label = 15;
                         case 15: return [3 /*break*/, 17];
                         case 16:
                             if (e_4) throw e_4.error;
@@ -50867,45 +51326,45 @@ var Query = /** @class */ (function () {
         return this.new((function () {
             return __asyncGenerator(this, arguments, function () {
                 var count, self_4, self_4_1, item, e_5_1;
-                var e_5, _b;
-                return __generator(this, function (_c) {
-                    switch (_c.label) {
+                var e_5, _a;
+                return __generator(this, function (_b) {
+                    switch (_b.label) {
                         case 0:
                             if (!(max <= 0)) return [3 /*break*/, 2];
                             return [4 /*yield*/, __await(void 0)];
-                        case 1: return [2 /*return*/, _c.sent()];
+                        case 1: return [2 /*return*/, _b.sent()];
                         case 2:
                             count = 0;
-                            _c.label = 3;
+                            _b.label = 3;
                         case 3:
-                            _c.trys.push([3, 10, 11, 16]);
+                            _b.trys.push([3, 10, 11, 16]);
                             self_4 = __asyncValues(self);
-                            _c.label = 4;
+                            _b.label = 4;
                         case 4: return [4 /*yield*/, __await(self_4.next())];
                         case 5:
-                            if (!(self_4_1 = _c.sent(), !self_4_1.done)) return [3 /*break*/, 9];
+                            if (!(self_4_1 = _b.sent(), !self_4_1.done)) return [3 /*break*/, 9];
                             item = self_4_1.value;
                             return [4 /*yield*/, __await(item)];
-                        case 6: return [4 /*yield*/, _c.sent()];
+                        case 6: return [4 /*yield*/, _b.sent()];
                         case 7:
-                            _c.sent();
+                            _b.sent();
                             count++;
                             if (count >= max)
                                 return [3 /*break*/, 9];
-                            _c.label = 8;
+                            _b.label = 8;
                         case 8: return [3 /*break*/, 4];
                         case 9: return [3 /*break*/, 16];
                         case 10:
-                            e_5_1 = _c.sent();
+                            e_5_1 = _b.sent();
                             e_5 = { error: e_5_1 };
                             return [3 /*break*/, 16];
                         case 11:
-                            _c.trys.push([11, , 14, 15]);
-                            if (!(self_4_1 && !self_4_1.done && (_b = self_4.return))) return [3 /*break*/, 13];
-                            return [4 /*yield*/, __await(_b.call(self_4))];
+                            _b.trys.push([11, , 14, 15]);
+                            if (!(self_4_1 && !self_4_1.done && (_a = self_4.return))) return [3 /*break*/, 13];
+                            return [4 /*yield*/, __await(_a.call(self_4))];
                         case 12:
-                            _c.sent();
-                            _c.label = 13;
+                            _b.sent();
+                            _b.label = 13;
                         case 13: return [3 /*break*/, 15];
                         case 14:
                             if (e_5) throw e_5.error;
@@ -50942,7 +51401,7 @@ var Query = /** @class */ (function () {
             keys[_i] = arguments[_i];
         }
         return this.map(function (item) {
-            var e_6, _b;
+            var e_6, _a;
             var picked = {};
             try {
                 for (var keys_1 = __values(keys), keys_1_1 = keys_1.next(); !keys_1_1.done; keys_1_1 = keys_1.next()) {
@@ -50953,7 +51412,7 @@ var Query = /** @class */ (function () {
             catch (e_6_1) { e_6 = { error: e_6_1 }; }
             finally {
                 try {
-                    if (keys_1_1 && !keys_1_1.done && (_b = keys_1.return)) _b.call(keys_1);
+                    if (keys_1_1 && !keys_1_1.done && (_a = keys_1.return)) _a.call(keys_1);
                 }
                 finally { if (e_6) throw e_6.error; }
             }
@@ -50975,8 +51434,8 @@ var Query = /** @class */ (function () {
         if (options === void 0) { options = { preserveCache: false }; }
         return __awaiter(this, void 0, void 0, function () {
             var arr;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
                         arr = [];
                         return [4 /*yield*/, this.forEach(function (item) {
@@ -50986,7 +51445,7 @@ var Query = /** @class */ (function () {
                                 arr.push(item);
                             })];
                     case 1:
-                        _b.sent();
+                        _a.sent();
                         return [2 /*return*/, arr];
                 }
             });
@@ -51000,28 +51459,28 @@ var Query = /** @class */ (function () {
      * @param func - a function to be called for each item<br/>要素ごとに実行される関数
      */
     Query.prototype.forEach = function (func) {
-        var e_7, _b;
+        var e_7, _a;
         return __awaiter(this, void 0, void 0, function () {
-            var startTime, lastMessageTime, matchCount, _c, _d, item, now_1, e_7_1, now, msec;
-            return __generator(this, function (_e) {
-                switch (_e.label) {
+            var startTime, lastMessageTime, matchCount, _b, _c, item, now_1, e_7_1, now, msec;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
                     case 0:
                         startTime = new Date();
                         lastMessageTime = startTime;
                         matchCount = 0;
-                        _e.label = 1;
+                        _d.label = 1;
                     case 1:
-                        _e.trys.push([1, 7, 8, 13]);
-                        _c = __asyncValues(this);
-                        _e.label = 2;
-                    case 2: return [4 /*yield*/, _c.next()];
+                        _d.trys.push([1, 7, 8, 13]);
+                        _b = __asyncValues(this);
+                        _d.label = 2;
+                    case 2: return [4 /*yield*/, _b.next()];
                     case 3:
-                        if (!(_d = _e.sent(), !_d.done)) return [3 /*break*/, 6];
-                        item = _d.value;
+                        if (!(_c = _d.sent(), !_c.done)) return [3 /*break*/, 6];
+                        item = _c.value;
                         matchCount++;
                         return [4 /*yield*/, func(item)];
                     case 4:
-                        _e.sent();
+                        _d.sent();
                         now_1 = new Date();
                         if (now_1.getTime() - lastMessageTime.getTime() > 1000) {
                             console.info("Query progress:\t\u231B running...\t(" + matchCount.toString().padStart(4, " ") + " matches\tin " + (now_1.getTime() - startTime.getTime()) + " msec)");
@@ -51030,20 +51489,20 @@ var Query = /** @class */ (function () {
                         if (typeof item === "object" && symbolFinalyzeQueryItem in item) {
                             item[symbolFinalyzeQueryItem]();
                         }
-                        _e.label = 5;
+                        _d.label = 5;
                     case 5: return [3 /*break*/, 2];
                     case 6: return [3 /*break*/, 13];
                     case 7:
-                        e_7_1 = _e.sent();
+                        e_7_1 = _d.sent();
                         e_7 = { error: e_7_1 };
                         return [3 /*break*/, 13];
                     case 8:
-                        _e.trys.push([8, , 11, 12]);
-                        if (!(_d && !_d.done && (_b = _c.return))) return [3 /*break*/, 10];
-                        return [4 /*yield*/, _b.call(_c)];
+                        _d.trys.push([8, , 11, 12]);
+                        if (!(_c && !_c.done && (_a = _b.return))) return [3 /*break*/, 10];
+                        return [4 /*yield*/, _a.call(_b)];
                     case 9:
-                        _e.sent();
-                        _e.label = 10;
+                        _d.sent();
+                        _d.label = 10;
                     case 10: return [3 /*break*/, 12];
                     case 11:
                         if (e_7) throw e_7.error;
@@ -51062,18 +51521,18 @@ var Query = /** @class */ (function () {
 }());
 exports.Query = Query;
 var getDefaultArgs = function (validators) {
-    var e_8, _b;
+    var e_8, _a;
     var ret = {};
     try {
-        for (var _c = __values(Object.keys(validators)), _d = _c.next(); !_d.done; _d = _c.next()) {
-            var key = _d.value;
+        for (var _b = __values(Object.keys(validators)), _c = _b.next(); !_c.done; _c = _b.next()) {
+            var key = _c.value;
             ret[key] = validators[key].default();
         }
     }
     catch (e_8_1) { e_8 = { error: e_8_1 }; }
     finally {
         try {
-            if (_d && !_d.done && (_b = _c.return)) _b.call(_c);
+            if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
         }
         finally { if (e_8) throw e_8.error; }
     }
@@ -51135,8 +51594,8 @@ var BaseLawCriteria = /** @class */ (function () {
             }
         }
         if (invalidKeys.length > 0) {
-            throw new TypeError("LawCriteria: invalid key(s): " + invalidKeys.map(function (_b) {
-                var _c = __read(_b, 2), key = _c[0], message = _c[1];
+            throw new TypeError("LawCriteria: invalid key(s): " + invalidKeys.map(function (_a) {
+                var _b = __read(_a, 2), key = _b[0], message = _b[1];
                 return "\"" + key + "\" (" + message + ")";
             }).join(", "));
         }
@@ -51144,10 +51603,10 @@ var BaseLawCriteria = /** @class */ (function () {
     }
     BaseLawCriteria.prototype.match = function (item) {
         return __awaiter(this, void 0, void 0, function () {
-            var matched, _b, _c, num, matched, _d, _e, num, xml, document_1, el;
-            var e_9, _f, e_10, _g;
-            return __generator(this, function (_h) {
-                switch (_h.label) {
+            var matched, _a, _b, num, matched, _c, _d, num, xml, document_1, el;
+            var e_9, _e, e_10, _f;
+            return __generator(this, function (_g) {
+                switch (_g.label) {
                     case 0:
                         if (this.args.LawID !== undefined && !this.args.LawID.exec(item.LawID))
                             return [2 /*return*/, false];
@@ -51164,8 +51623,8 @@ var BaseLawCriteria = /** @class */ (function () {
                         if (this.args.ReferencingLawNum !== undefined) {
                             matched = false;
                             try {
-                                for (_b = __values(item.ReferencingLawNums), _c = _b.next(); !_c.done; _c = _b.next()) {
-                                    num = _c.value;
+                                for (_a = __values(item.ReferencingLawNums), _b = _a.next(); !_b.done; _b = _a.next()) {
+                                    num = _b.value;
                                     if (this.args.ReferencingLawNum.exec(num)) {
                                         matched = true;
                                         break;
@@ -51175,7 +51634,7 @@ var BaseLawCriteria = /** @class */ (function () {
                             catch (e_9_1) { e_9 = { error: e_9_1 }; }
                             finally {
                                 try {
-                                    if (_c && !_c.done && (_f = _b.return)) _f.call(_b);
+                                    if (_b && !_b.done && (_e = _a.return)) _e.call(_a);
                                 }
                                 finally { if (e_9) throw e_9.error; }
                             }
@@ -51185,8 +51644,8 @@ var BaseLawCriteria = /** @class */ (function () {
                         if (this.args.ReferencedLawNum !== undefined) {
                             matched = false;
                             try {
-                                for (_d = __values(item.ReferencedLawNums), _e = _d.next(); !_e.done; _e = _d.next()) {
-                                    num = _e.value;
+                                for (_c = __values(item.ReferencedLawNums), _d = _c.next(); !_d.done; _d = _c.next()) {
+                                    num = _d.value;
                                     if (this.args.ReferencedLawNum.exec(num)) {
                                         matched = true;
                                         break;
@@ -51196,7 +51655,7 @@ var BaseLawCriteria = /** @class */ (function () {
                             catch (e_10_1) { e_10 = { error: e_10_1 }; }
                             finally {
                                 try {
-                                    if (_e && !_e.done && (_g = _d.return)) _g.call(_d);
+                                    if (_d && !_d.done && (_f = _c.return)) _f.call(_c);
                                 }
                                 finally { if (e_10) throw e_10.error; }
                             }
@@ -51206,26 +51665,26 @@ var BaseLawCriteria = /** @class */ (function () {
                         if (!(this.args.xml !== undefined)) return [3 /*break*/, 2];
                         return [4 /*yield*/, item.getXML()];
                     case 1:
-                        xml = _h.sent();
+                        xml = _g.sent();
                         if (xml === null || !this.args.xml.exec(xml))
                             return [2 /*return*/, false];
-                        _h.label = 2;
+                        _g.label = 2;
                     case 2:
                         if (!(this.args.document !== undefined)) return [3 /*break*/, 4];
                         return [4 /*yield*/, item.getDocument()];
                     case 3:
-                        document_1 = _h.sent();
+                        document_1 = _g.sent();
                         if (document_1 === null || !this.args.document(document_1))
                             return [2 /*return*/, false];
-                        _h.label = 4;
+                        _g.label = 4;
                     case 4:
                         if (!(this.args.el !== undefined)) return [3 /*break*/, 6];
                         return [4 /*yield*/, item.getEl()];
                     case 5:
-                        el = _h.sent();
+                        el = _g.sent();
                         if (el === null || !this.args.el(el))
                             return [2 /*return*/, false];
-                        _h.label = 6;
+                        _g.label = 6;
                     case 6: return [2 /*return*/, true];
                 }
             });
@@ -51239,11 +51698,7 @@ var LawQueryItem = /** @class */ (function (_super) {
     function LawQueryItem() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.loader = null;
-        _this._cache = {
-            xml: null,
-            document: null,
-            el: null,
-        };
+        _this._cache = LawQueryItem.initialCache();
         _this[_a] = false;
         return _this;
     }
@@ -51256,19 +51711,27 @@ var LawQueryItem = /** @class */ (function (_super) {
     };
     LawQueryItem.prototype.getXML = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _b;
+            var elawsLawData, _b;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
-                        if (!(this._cache.xml === null)) return [3 /*break*/, 2];
+                        if (!(this._cache.xml === null)) return [3 /*break*/, 4];
                         if (this.loader === null)
                             throw Error("Loader not specified");
+                        if (!(this.loader instanceof FetchElawsLoader_1.FetchElawsLoader)) return [3 /*break*/, 2];
+                        return [4 /*yield*/, elaws_api_1.fetchLawData(this.LawID)];
+                    case 1:
+                        elawsLawData = _c.sent();
+                        this._cache.xml = elawsLawData.xml;
+                        this._cache.imageData = elawsLawData.imageData;
+                        return [3 /*break*/, 4];
+                    case 2:
                         _b = this._cache;
                         return [4 /*yield*/, this.loader.loadLawXMLByInfo(this)];
-                    case 1:
+                    case 3:
                         _b.xml = _c.sent();
-                        _c.label = 2;
-                    case 2: return [2 /*return*/, this._cache.xml];
+                        _c.label = 4;
+                    case 4: return [2 /*return*/, this._cache.xml];
                 }
             });
         });
@@ -51314,15 +51777,23 @@ var LawQueryItem = /** @class */ (function (_super) {
     LawQueryItem.prototype[symbolFinalyzeQueryItem] = function () {
         if (this[symbolDoNotFinalize])
             return;
-        this._cache = { xml: null, document: null, el: null };
+        this._cache = LawQueryItem.initialCache();
     };
     LawQueryItem.prototype.toString = function () {
         return this.LawID + " " + (this.Enforced ? "" : "【未施行】") + this.LawNum + "\u300C" + this.LawTitle + "\u300D";
     };
+    var _a;
+    _a = symbolDoNotFinalize;
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    LawQueryItem.initialCache = function () { return ({
+        imageData: null,
+        xml: null,
+        document: null,
+        el: null,
+    }); };
     return LawQueryItem;
 }(lawinfo_1.LawInfo));
 exports.LawQueryItem = LawQueryItem;
-_a = symbolDoNotFinalize;
 function getLawQueryPopulationWithProgress(lawInfosOrPromise, loader) {
     return __asyncGenerator(this, arguments, function getLawQueryPopulationWithProgress_1() {
         var startTime, lastMessageTime, yieldCount, lawInfos, _b, lawInfos_1, lawInfos_1_1, lawInfo, item, now, e_11_1, now, msec;
@@ -51563,7 +52034,7 @@ var __values = (this && this.__values) || function(o) {
     throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.fetchAllXMLZip = exports.fetchLawData = exports.LawData = exports.fetchLawNameList = exports.LawNameListInfo = exports.fetchElaws = exports.allXMLZipURL = exports.lawdataURL = exports.lawlistsURL = void 0;
+exports.fetchAllXMLZip = exports.fetchLawData = exports.ElawsLawData = exports.fetchLawNameList = exports.LawNameListInfo = exports.fetchElaws = exports.allXMLZipURL = exports.lawdataURL = exports.lawlistsURL = void 0;
 var util_1 = __webpack_require__(94620);
 var fetch = (__webpack_require__.g["window"] && window.fetch) || __webpack_require__(98225);
 // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-member-access
@@ -51578,7 +52049,7 @@ exports.allXMLZipURL = "https://elaws.e-gov.go.jp/download?file_section=1&only_x
 var fetchElaws = function (url, retry) {
     if (retry === void 0) { retry = 5; }
     return __awaiter(void 0, void 0, void 0, function () {
-        var response, text, doc, elResult, elCode, msg, ret;
+        var text, response, e_1, doc, elResult, elCode, msg, ret;
         var _a, _b, _c;
         return __generator(this, function (_d) {
             switch (_d.label) {
@@ -51586,28 +52057,39 @@ var fetchElaws = function (url, retry) {
                     if (retry <= 0) {
                         throw Error("fetchElaws(): Failed after retries");
                     }
+                    _d.label = 1;
+                case 1:
+                    _d.trys.push([1, 4, , 5]);
                     return [4 /*yield*/, fetch(url, {
                             mode: "cors",
                         })];
-                case 1:
+                case 2:
                     response = _d.sent();
                     if (!response.ok)
                         throw Error(response.statusText);
                     return [4 /*yield*/, response.text()];
-                case 2:
+                case 3:
                     text = _d.sent();
+                    return [3 /*break*/, 5];
+                case 4:
+                    e_1 = _d.sent();
+                    console.error(e_1);
+                    console.error("request URL: " + url);
+                    console.error("remaining retries: " + (retry - 1));
+                    return [2 /*return*/, exports.fetchElaws(url, retry - 1)];
+                case 5:
                     doc = domParser.parseFromString(text, "text/xml");
                     elResult = (_a = doc.getElementsByTagName("DataRoot").item(0)) === null || _a === void 0 ? void 0 : _a.getElementsByTagName("Result").item(0);
                     elCode = elResult === null || elResult === void 0 ? void 0 : elResult.getElementsByTagName("Code").item(0);
-                    if (!!elCode) return [3 /*break*/, 5];
+                    if (!!elCode) return [3 /*break*/, 8];
                     console.log("request URL: " + url);
                     console.log("remaining retries: " + (retry - 1));
                     return [4 /*yield*/, new Promise(function (r) { return setTimeout(r, 1000); })];
-                case 3:
+                case 6:
                     _d.sent();
                     return [4 /*yield*/, exports.fetchElaws(url, retry - 1)];
-                case 4: return [2 /*return*/, _d.sent()];
-                case 5:
+                case 7: return [2 /*return*/, _d.sent()];
+                case 8:
                     if (elCode.textContent !== "0") {
                         msg = (_b = elResult === null || elResult === void 0 ? void 0 : elResult.getElementsByTagName("Message").item(0)) === null || _b === void 0 ? void 0 : _b.textContent;
                         console.log("request URL: " + url);
@@ -51636,7 +52118,7 @@ var LawNameListInfo = /** @class */ (function () {
 exports.LawNameListInfo = LawNameListInfo;
 var fetchLawNameList = function () { return __awaiter(void 0, void 0, void 0, function () {
     var elApplData, lawNameList, _a, _b, el;
-    var e_1, _c;
+    var e_2, _c;
     var _d, _e, _f, _g, _h, _j, _k, _l;
     return __generator(this, function (_m) {
         switch (_m.label) {
@@ -51650,33 +52132,33 @@ var fetchLawNameList = function () { return __awaiter(void 0, void 0, void 0, fu
                         lawNameList.push(new LawNameListInfo((_e = (_d = el.getElementsByTagName("LawId").item(0)) === null || _d === void 0 ? void 0 : _d.textContent) !== null && _e !== void 0 ? _e : "", (_g = (_f = el.getElementsByTagName("LawName").item(0)) === null || _f === void 0 ? void 0 : _f.textContent) !== null && _g !== void 0 ? _g : "", (_j = (_h = el.getElementsByTagName("LawNo").item(0)) === null || _h === void 0 ? void 0 : _h.textContent) !== null && _j !== void 0 ? _j : "", (_l = (_k = el.getElementsByTagName("PromulgationDate").item(0)) === null || _k === void 0 ? void 0 : _k.textContent) !== null && _l !== void 0 ? _l : ""));
                     }
                 }
-                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                catch (e_2_1) { e_2 = { error: e_2_1 }; }
                 finally {
                     try {
                         if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
                     }
-                    finally { if (e_1) throw e_1.error; }
+                    finally { if (e_2) throw e_2.error; }
                 }
                 return [2 /*return*/, lawNameList];
         }
     });
 }); };
 exports.fetchLawNameList = fetchLawNameList;
-var LawData = /** @class */ (function () {
-    function LawData(lawID, law, imageData, _xml) {
+var ElawsLawData = /** @class */ (function () {
+    function ElawsLawData(lawID, law, imageData, _xml) {
         if (_xml === void 0) { _xml = null; }
         this.lawID = lawID;
         this.law = law;
         this.imageData = imageData;
         this._xml = _xml;
     }
-    LawData.prototype.getXml = function () {
+    ElawsLawData.prototype.getXml = function () {
         var doc = this.law.ownerDocument.implementation.createDocument("", "", null);
         doc.appendChild(doc.createProcessingInstruction("xml", "version=\"1.0\" encoding=\"UTF-8\""));
         doc.appendChild(this.law);
         return xmlSerializer.serializeToString(doc);
     };
-    Object.defineProperty(LawData.prototype, "xml", {
+    Object.defineProperty(ElawsLawData.prototype, "xml", {
         get: function () {
             this._xml = this._xml === null ? this.getXml() : this._xml;
             return this._xml;
@@ -51684,9 +52166,9 @@ var LawData = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    return LawData;
+    return ElawsLawData;
 }());
-exports.LawData = LawData;
+exports.ElawsLawData = ElawsLawData;
 var fetchLawData = function (lawIDOrLawNum) { return __awaiter(void 0, void 0, void 0, function () {
     var elApplData, law, elImageData, imageData;
     var _a, _b, _c;
@@ -51704,7 +52186,7 @@ var fetchLawData = function (lawIDOrLawNum) { return __awaiter(void 0, void 0, v
                 }
                 elImageData = elApplData.getElementsByTagName("ImageData").item(0);
                 imageData = elImageData ? util_1.decodeBase64(elImageData.innerHTML) : null;
-                return [2 /*return*/, new LawData((_c = (_b = elApplData.getElementsByTagName("LawId").item(0)) === null || _b === void 0 ? void 0 : _b.textContent) !== null && _c !== void 0 ? _c : "", law, imageData)];
+                return [2 /*return*/, new ElawsLawData((_c = (_b = elApplData.getElementsByTagName("LawId").item(0)) === null || _b === void 0 ? void 0 : _b.textContent) !== null && _c !== void 0 ? _c : "", law, imageData)];
         }
     });
 }); };
@@ -51738,7 +52220,7 @@ exports.fetchAllXMLZip = fetchAllXMLZip;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LAWNUM_TABLE = void 0;
 exports.LAWNUM_TABLE = {};
-var LAWNUM_TABLE_RAW = "1155394051dbdff918284eed817be9fd810578464c10acd38b0e09a4763e702ab457d6034d3d0e50599d4d4a189df061c035979f761923b6f60035f0fb4505702d19f02245fc4d22f18e5f10dca29a96055e4874422cd249d80977b4d5205a210aac18d4a450f2b13a48e91806e447a24c4215c405ea08c51058515c1b05407153408e2725150e60c02842e0d75e9b170ddaee20949a6a32027de413c056f0baf80797fe9c804c7f600a0bf333d442ef1c8b331ccf82eaa17010051c1aa12b8d807954d7d3052f5c4511cc9e846b0a74ce5b203668219826b9231c222a96d4d319eba73f31ca5d6b8f0ff208c36076d33e6703acc552c217cd76af09b45decd0ae28929105f3da180039246dc0035fda72607bdf391c06ae922ae1a5a5e7950d810db3b0e8398c3f1a0bdd42c1c5bdcb4d272044046053e8ce660482751c81931cbe5003ccf5b1f059408951074e6e05a094ea01b6178e8309e043ef00ec053e4c98d090445e230544b227b13b75d2232ac8862491b42283241a5125ed419c5cd01a1eed4054b0565e819d093893d280b5d5a4e325060755507cdf048d1ca9cfdf2099def29807556ce120e94deb390334376bb04ba4e42405c0282ab058e01c9003e08c6c803d998053038c6db71038f81e7d2533624ce050a2c56d0a64a97c5058f9cdc72afba1a5b2544d055d041bdab8f04bdb7497072878bdc1443037dc05fd033b204594824b2f54abecf06341e49703e58847617f320a7605c2d876415ca957f806e0653601aac570c0356c31a55030670e6405e473d2d356d4ee842b647431b0832f1aba1bbd60a01057e131cb2f153606c0695ba2cc05ca2fd04060f80e471508a22980537c1013076cc0af306203ab6f0d1f72a3705748195b092b010d808b1280673fa00cb9627b9cdfbd716c4ba6903b1515770578957872a3fc8e2007cda4a29053abeb9408a0b87b61f378a56c1b11b48f80373b6ad1470d892b42358af9a316392786605e04b95d051d6dd2604698659704129eeff08af13bf40db9bd4664102149e537690be370791499960f9a5f57b06c40bf6304aa1d18e06c9e79970c166218a05e1b40ab054952f660dcfedda40db561b6e11ed3969905f2dfe22080cf2ad506a3ebfca06d03473505d74db18056d9d3f80d901101a073a38adc0f0c9497f07871b8350d2d2da0e0325dede20766d780405dc2610317c5db34905a0f847004eaf34cf0439d8fec08c15eaa90a8167fae086ae46da06080a1f11308c4a1a10f90c5410336da7ac0560b9d21039b9af5a0758759f903dab6c6a0b3f689ae03e297e3d10f54e3b007baa9a8305a4d978c03576ae21030e6292509886fbdd0abea8052065841f4705cbcecbf05cb7e2ec0634a1f541718a11021486793bf18ddd95020e042b4ac08fc302dc0883abe6008a240dec111dd06170b791b25410e80f6eb087f444760d8607ba41caf6baee05c7396a507053614f13bf217090f1d7da5405909770e0dca0f0d02969dbd4404c1603e505702c53708a9c563d0322b870b07c6d098b15254d19805861640307bc34ac40abc66a9c11a565e8f05267629d1896b7b150a3b6cdaf061f4a97711d5abf35053d5ca100d30dbd4b04c70bc7a06196835a034ab51c203c7a4b9d05ec03d07087030ee8115b5a19904df625fa07eff5e6f05003d3e90434f6d970d4378cb7069d16fa006f69b9e322b70c7b40b535bc000b101e25a1790fa02a137d031d30f46b12a60b0565b6a3055f61210f15ac5a20ff2b69dc0f254be5712d992213051e25eef0308840470697b80fa0f868c74e0e5ba1ffa0a58a576c080b2028108caff9de057ebc1b022274c38026c347478083c53b8709fbce8420fb440baa0aec4276a04db507981622e102605ac5716730e9aa8361c13232990f0ff2a250520f55a20548406770c2bafae5063b07b4c0f24014a604ac64269030993ea213c5b7b9d0f7eecf6806832caa9037c09ae507c256b9603298b43f05bbc26fb0699fdc5a056c4f82603e59f80505121eb621de122c160dc123ee209c98fc2d108a0e9d3036cdc34216540d3ff03aca8d5e0572e9e2c0564fc07f042d766a204ede89d107562cfbc07c2b1d2208783baaf08f73985306ca87aeb06130296c0344f740c07fcb31880f38b44c60fc57aa440832985b9048f77b8b0f6ffb173089ed335107a374c2c06df0e4910da85118e093b6d7960945b7f8e0ddcff80a361f603b01bc311eae06c0ea3ab096a97e9827c6be65e036849b4406ae872c216322111c03ce90e9512bd4996e0901365e60f46996cd059a5a21b0d83b2c5e0d8820ccb1e0ff8bab2759c201b0605ea6531d9f5e960050216f6d084e91c3f17c1dcf141208e2b9105730b13c15ed0747e0c264bc3007545ae530f6fddf0c084aac1a40560d6310070f53ecb061e1f00b0ebe9a39607c4e60230816661b20f6b737de078aeeda405ea3ae0905514879a08d99ea21065ffb4180986b04ef0adbe7c570ad7adab7054802d96107363ef5033ec596307031d8e6221703bfb05767250108e5fe7df050278780094e54d7711bc24e810733f540e0858206d608dee8306042592f970505bde940aca479400f0fcbae206c4fed150317e2ca3068cf042c10b9eb0100cb0ded4808269919e03f01ae4304183fd5f2152cd5c20a7b5c6f72ef11212330e39b9ed073964d5f1bcad72700808c1e1e1f416a2ac069d7d4682a7c783bd140b092b80869c7fa32a84ad11a1996fbae01f598de7f2545960541ef12f44d13a2b450d582b84936560f56eae5551d279e54f0be26857881205858a904c9b1038f5d8b551dfb22f4b57028ec6e8bbad186b8dddf1c52992719f52c5057980dd8be3b62aeb3302f4bf9fd21956048475b069178564050bf226a4aa35201c082173e050628c3d2b038cfe82512be4382b0767811ac175e084eb1f1d164fa056853d951028e1d4d0910a59280c569087409a66b97407e6acc0903b8537d106940a2266b5713a6403334ff1a08466f18b0418c34b8089260f7007949d4e00a3f3d82d46a96abeb230f0e72c19dab4e2a08bf83ae812b06af0b0e4b23162106b98d4107b4e6a06061409c650ab199da11680a84e8071436cb50aa2cd58121f02c1e10913b88310b6ced0050766c7432115c0f5c813c52b17b03eac2f4e0b85317d21995d8cef164a08f751fe64a0411b9509044045f479e10c1a4641a0d7daefcf06ebf0ec2088cd658f0b275d81d0993e841013b67726f077d3706134aecd55c26404f6f91d5f0b901091fc2bed068d0256f065eeadc50443109ea0c292159131e20da7907560208b0701ebded1e9f29b6e06ef83e560ac7779a507fffd25e0716966b620af9449f1115c70c21c2dbe72d05938bfa013a78f90f1f6b527cb0adae1d2825710c4b51c87502b010f21f7b72c62e82701b7f3c85c0508e1b5f0f3483a4403af6635d186ef5f0810d04585104c78befe1b4754e07072766df0053a98ebf0cab60471159a1f6de1b6f574790bf00f0162cec02cfc07abb7ff907d883d7f0af900f9f22ed37bc4191611e9e2d9d07f8e0882c9a561270fd73f33db8e5ff0e9d8b0a51f70c684005d52d25603e69dcaf0402e4ab2065a33e0113a9e50c412a3881910d434b3352c652a3e719548f74e4a44866a508b492f231767e5cdd0dfb9f88716636e88107b8223c22f7c5c0591c4d51aef4580e7ab30aa1b321e0790fd18e09cab50561fadbf2061b950cbd9061e4077c16c7c224e05aaeeb1609756399b063f9ae0a093f9ae0a0917a8d7606f9e8b842151c9adf1cfd8374605b7322d3030efbeb00e37e2c91066e826c81a2b72ddc03363925e0985d6006176c28f6c055ccbaa20e316a88d050158d7304b3d29910c74b1f6405b50887b11ca0194334b933bcb26f7c107912b63a3cd05f2d527a25fbe5c1d19933ea56162e0170c13935b79e1564a222117062d16d1747aff1e080e672e704c5878cf06285d68d07cf7b47b1aa34e4870591665e50b81c8d160d32338af080104e3708efbae6617d63d992170224f920458399090a7efb10114747dfc91635e6e571d2627e4a0c299cd5513c7b9b2c3bee0be7322bbd7ebe056c0479007a0cf1dd04cd92bb0193e57b601174ccc8819d9cdfaa090d3a8c403333eb490f687ad9c0b0e705eb064bb16780810cc3641910cc36419bfa147c07bd13d2208bb69206184db79890ddff88c204d5c09e3185e84f890878505081bf40ac0413b28f6d705d0137cf1e5ab167816a3f30f20a76bef512f3f99ec6087ee190f0a442b9270fae7edfc08a4b7e4d041eca78a1382c280e21e8462f00ae05597307c09f75a0d8cbc3f7057f0357b0d74ceec3155783cd503e4b81d8034b31a6e05025f12208ea170f10363dbaca066f6ade406e513bcd06d5a13ce0ffb2cc3705092c87409a7b815505dddb70e057c092850bc96dccd0a54e63551894dadab1feee88e5044d93dd9089d51f8407bce0bb9241a1d73505372934a077f3390104c40c42a0e3e4cfc60515f6f02100bd77c806ca0408f1f316a348048a219d11574c4ba50b0ba22050b49cc2e70b20f578607ecc75781a643bfc221cc29ce30a9c64eff1ffa5c17a10e7c9ba10ecbafa001100f3cf31050a14df056a53ca71831d1e410d31042311cdb96b27086bf9af908efeb14e1548cd0610910b2d880ad19ebc622fbbd562086a6c9720c8c70c5907a4aba8f07ec2d85f072f3246516ad2dd4f05cf192780e2f98bba0b68260452271139371383768d2094f950490a088819d3a9ddc1830e590187f07b2787f808760ca8e1a5de6cbe0bb7e080723ec2fa3b12791a5b01a54ec8a918c8a927e0b963efb409d9c7c131277bff460d26123f210d52eb570ddbc052e050d7a4ee1907d324a27ebb726c06c5546fa0520b8b430990d1d662c034ba721c4501768074dfc6380ed1f7d7a07326facf09dda465718a56c4f70f67c32c30f524bb3226d64dcd621427f3c7252f9507220ef340cd0976f878610dc7321c0eacf99fc123818a3e1fa59bee80a6e2942d23d8ae30507408cc130859f29fe03070926b06ebc80410538b4a2304d11007b04ca4548b09a51ed1b1b1ca19f53984f3e99138e3bbfb08b67a7771205e2acd13ed795d00932db913185828f530d70d9a5205aa2089f479c2b77708cfb6a1506bf23ef91712228ba1089c152914dabb40c0f1fc18f80a5f52fb507f472dea1972ac75e0a33cbd6f138eed2461fc3790ed09b7945c80465f7c8410959ef6b08bc00fe62b9cba4bd07a9fe403060563dad19ef4663427ce54b7f0a0bc113d16c588f9c04e8c95a90672d252d1390bff1a0e3f2bd84110baceb3125eada720bd2b0576072dccb4021392322e18fac62da2795cd97a111ff2839281d0eb5a212f932522009257a616ef22ac40ae6a27ea0402d42a32167530840f73500090952fa3781a48255bf124d47d4305ae5f93306c2421f61cf655f1711f3e8e00098038e3008114070307dac243e05f9dbcc9082e0ff1105e43da04218b66e2a10877c12d065d106af24ca9363305c5643430abb64a5d15efa9c4c0ff126c6d094d3f7ee0e8b611e030fdc542b433ae424a12e8e7500281c3703c1e2bd3ac9139c2ae291d7b493190ecea186b066cd7d071505f0b4523f9038ce044f932be0549f5ed00a010b35e10839c6e40ead8209e0be99d4c51214017cb07749138a06537bf440def913e2052480be6127b10f221028063081857c91b20999bf4122b65b3faa077ade99f23869cab31e645ba0112f3c1ca00d0e8a5831089322cb078c228ab1494eef77147e61a7909bb7d78f05c96fdea17efcefc9055789ada0d77c354b0db2bc1131fbd78baf1a2e8bd8d0bdaf994706f4d18c64b4c6fe9b12e9143231ec79716f0525e83561d66f6f1309ad418fb07a2c42da05be7c6e90a6b77501176e836890dac66ec00bcd58c251534f6e5a1254c70d1070dd4a1d0958c2c4c1148b70bf2177893870bce68bb41efcc0a1f098c92f2d0bd28e5d90b460563a078ae7df60f217eedf0761c561906d0a0f5f08794ab6a0b0a7ff14393da693c1f41c8659074b42db1040cf519113116394722657a86919ca011dd0e6d3cebb0ae96f9af17aafd14c1fbb587850d0d6985a0b41244b531c5d891c05a2e23bf0f7acc15129692c17a094fcb8342337f14540f7c37ee50da1019fc10277469a0a64598bf1606c313d15b519ca60bdf774980ba3475dd08d9c0e212ade31a5409cb89c83112e63b71053b15b5e08351c7d10c910bc0b1781618f707550414c1546bbe3e050b7729007f4cbee1207f7fa5b0c50eb560097a8fa1b1fe575c310ed01f14015b584a420c80d211c13e540e790f67988bf12eb338070fd36e7de155002a4e16f8bd5650e830610c0b81b2d0305cfc1bc725c5302d316829c466119ed1cd0428e008c1172d738dd0edd97e88255a86ab72d61f756716a36d1051d69d07822a5d5407c07dfecedb2570de3f60bad890e212992f94511b8b84320c869d203060626393121ff7e9e15f2d878805db13f741473e452a2b8e9703513c090fa90c867f7530d955216043fef790c153bdf6ab0ec4b905b0e27dd2e014fe6e0a3050ba545e0b382968a167b79bc9168d616620380985aa138ae75cb20212fb095a464f2f610662031e1f32caa61162ba31a80f7e9f0562377c5d550bcbb17eb2b157e5f10d92f4fe618635e37605a1efe7822ed3cbb417010f7c248f2a73812147563b11181cf2de1d95c97ed17ec9e00b1b8866ca80379167e0216449dea159ff5ec70d1b09d0d34159a0f847ce94de61698855e5320d7c9190a45d72af0f6392e611bb9a7abe04a2779df043295a8704b39f39925354744d316460dc715af6eb1f0575a2e0026392e9340b7be061d057e354350cbfb29da065b00e2811acec77f076d1064e22e6dd2c5123a7c65d15b391f090ae209fb824b38ee1421c08d86d21d5947870f94df1191375d03f92538a30e117e2469131384443ac19036c4950bd895e533332ab2760e43caf340d7a5baa7053f59fb609e583e1a1a34b01b909fdf65670dec4f9892240faa31194e957d113eb2931725581a5b306f9b31a3070c1578307deee52e09bda420e12ce229a330374d64609961dfd70ffc08032309657ed9268183c322b6ce01fb10d27ca4619235666535eb74a3d1cf14d80a05f3339e13e1fa7f67120ca8b57052e474041b6f9c5ff19d6d95572565468e70ca12fc4e2189d8f980dc12a9ec0c458c99d0e4eba90a0e0c1118512d66931505a7a0ee9040c291f0182a40086238e96be82249ea41f1c5a55cce1378918070a60fcb1709c3a8628053b7435b059291ac826d3e4f0615513b8f31c2e7029f11d2411cb09cb20c8a166118c9b11824dd811c3d47e6216d2cee684147484d912925d409170628331068675cea16828d92611a6eb97618562a0a72f4722e9104c1ee87212e8aa2f52662d942a16c705ec1210beb838052c4f3293b51adb981138d83840e12af98311949964610bb8e41a06f6f8301034a2109916ee24fcb2618361d60469673c914d015de91b16339982e5c770e419268317c2077c8503178027f6b121d031e428a6c092512156932314c4d1f8a1d3da51141e5f687ec164c8cc480c1753abb0cc40d85c1f67c74702190e956f16737e347135349f3307f2cb5ec1c8165e6e14b07d76a2924597d9245f9691715f81af881a8d6372b05d429ee005f378cc038e46ed4705fb1d4d41048aabd82439febae16589f8c523d3cb8c7337ce7146153eb575f2d42d78600e58edc7f1c5cfa5b42446fa25d0afb776fb16b73bed70692ae925199dafe931fbe4e62f46ce1ef57145fca0c713fc64d513e928a0bf2102ea4580c041486d289f88dd421f947666128b3a91d1582d8f182d480b36417786b67d144da1ceb158ad0be50768dd4de17777cc26048787dda0bc0de02d1b06c56d811d59b2d21bcd639dd07e5c662609a43428f0e3f57f0a246d8bf8e168a1285204571fe4e1087d7e502084776e41123c20731372d66db12addb70a2157bff3923bd472b11406bd1761fded603d20bac16b218e194a8505ec2cf4427e9b9f2020c35644015bdc817b19b41094d0f78d2eef103fb433f1ff1dc91c34ef18c0e07486b2780f961fb461e9e6adad27cd3c9ca053d2b1450b0ae497f1221205d9266f97bba289371a50057c541110858fa34008148d01e060e5e05e1646dab790a0e8978320d3fb1010c8cd50f9139c9b60725b1822451274af1f3218d2ced823fa970b8245019848129341f920af4fbcbe17651536103c85b7d80aafdea3f1204068e70fcf13be90cd77032a1630038070a912a88a1e8bad3d20c43ac5dc19bd0549e1ab559cea18a3a64f61036a4fd606b966deb15483e9f310beb18a9260d1da67183d78a42184ccd033267d7f3880e1f188a6184bef8810dba204091887834ce0ae3276fa198b98ee91447811b60a0832f78264eea10e24bc158140fd3c5ec107941d8590bf7c45d4116fb2b7c22bd6e34506650858908a4596440619dc6d5061d839390688b9469086da92fe08ec50a43086cd740c064ae72ac066ae7e060eb31027f087a15bfe0929755e80bf922423183235c291a09140c81d40c210d20312c9e4079165ca908dd5c4140cee9c7c4127c918281de08ca93129428d42193c21cdf185bf9d461e047e4e80c2329dce0b452420a17df4c4e61953edef50c8d803df12f9e6eff0e5198c180e525093112549461a11d04850f0d3e20c6b0c73b44900df9b3ec6140117dd510f1562b3109c115f0052b78bfa1418a3c0316a2c39bf16d079fff0e25f69f312c77a26f1619ea0ce187f9537912afcaba912035e56b122c43c8d0cad933160ea3dbb070e039874b1597858830f5e24ea915d6d4c3814200b6350efdc5fc812bf8671e11cb1ba3c0f8a4a61c0fed8863c35861a2211836269ff23b273c9708d6e674e08454c9861bfd577151bc41e3b604fc6da011ee69095b066b7434d2536b618b12b01a7880e7e7d87114a94f15f0e61f7cef17870a8f70eae4ecd617d15f92c15aa7eace151d34f1a104b8727b0c2d34d6d13d40ec4d15169d7ee19ac2eafa18321fc6d0976c8bdb1d6cd208513b927d451e90cdf0b1bd7b8c5e133d3b9dd13b96b708163bf93c2156c810752dd8f04a62313e7a6b1826144ae11409f7541a09d99a415e21fb3109e7967091520ec6001e48331e71db6fb5aa193e533c30ff46655d162161fd00780df69e05c27a240074a49d3d12cae5d750e38d875723fbe914714ec20a1c09e43b4bf1dd6e1bd61ee758fcf14e70dba625737f68317277f61532b4fdaaa07c86853f114f0c5b52df83919923a4c01ec21feac3de091a8c46315113c4ba0cee8f8920a151a0480e79ff1f3071b2a614171cf78c509bad046319fe64685200eca97308bd856be0a942409f0d9374fe4147a6a64615a3f41e812d804cfa18f613dea16eaf32011cc91deed132a0f8582ed449b8705aff04751bd1d4a500f5f41f190e4c697790794fea160f2a0112d0f6db87b4191abb9e60d0fca64f11e32b7f90dab3104a1a1d762321bf3fa6c611abda4da0733571f217e974ddb0ef89b35b21fbac46105bc0a3d311cdd2d4d07208478b101bf69a70f3fc5baf13a7573f2129680b021643905ba0f0a99b55109e6f2f419d49a5d91392a77e40dcc65a13171a70f360f397152c09dc8c8a116b8b3f8f104b96c380c6bb44560a283b89c0d0c6f61b12f7adae12d05c937923cc25d9718844f8d90b796a4dd0b96f4ec12509f11ce0facdb1f610385611207650ed0b193a4b8190dc6f34121674074d9118c2f7d413e35d91e0de3437ef1c65da03c30cb283e625f017f7b11be3fd9f0f63cce8b2266be3c50de707bea05f0e09520cfdb0e361774747bf23ef473251171026fd14ec239550763f9730094c6c1b90bc70de05181a043bc0a0f5217503af0b8ff1e81b3f1e417d749882d9271d6525bc5867121dfa63fb25c4e13031b76ee03a05b3376960f11ef76512bbd4e9f03b7377f4079d3c7f529531ddcb1b48590c4185bad8a109fecc9cc16aa980e210932866210dbcac8c0caa8d03516e167f3a034ea48ac34eaa7c221b3a196c21f3a196c21f505c73a1cf037f002635625f515c592a3613693101606d60cded0809ecb4c15ca0060c16c74d39c1c44dfdbf158f91dbb237c2833914904adf1041cc0fae0981eea41085f53e8f19f8a07fb2042a46272b77eae0d1f5c64d5821f330872123f4edc305bb836b52f8aa9f6e0eef4095e0a5cbcf49107d266f51cad750be1558274da16550f40c058294b6511caf01ef2334558cf0f30f8303164d7029a17625e46703b6dddf00a2b0b78234e6e5e912c13156a106ef40eda0956faa22217c7fd910952329d11cd7424a21d802957d20d0d8fc112c4f12282befcefa6211c2f15014c56642a18e9afb7f170a3ea3242a428738183e806ad1e9f44b1d14ecff1b106ac53078107c4e6411349e12b104220781e214ed066519bcb36010b490f31807b1a1b841a532252e1e6ac8e491c812ce16078c5a4db1fc8405c61af5c19160db088dd0030b7554e0996963c418a276da2052afd6ed2baac410b21e36c4710a555e8ae1216b2bae05734af8b1758fdc4a13e1a85651fb915e6c14936c08d2317bd4ce201ea6d651321fdaa51f428177010b1ef8f01646c620d03bf991ed23937bf2a1408053890d20537070e5969f8f0d430c9800bd5ce3aa167126412175e69ec10d3dafab620e8b8a580d606b65c05f595ad113f40ef560a7c4f4b91fbb7ed121e0df7e150783b4d2b07b1406cd23bb851461c182f207054e08ecd1d1e190bd2200ecbb0219c49a1b3d652a61b18b0734fe179fe989f15cc291691dd6549501f73eb96b18709b77822421157c05190e0ff0865e8f840395188ef187e7fc2c142ccf3050c87b4a9124da7d32424a403ed620101a3e8151986f1113676fab2141999c081226caaba1eccdfdc625332b07d2a3b25c053268d5af713c38a13d169c270291ebb5060c2985e3bed092b19a9406facef040f52ca58e0c84d6b4b0abf9b46c17b99703a1005ad1122e69052130d4ab199b0d3cbec3033e51479a0e9fda5691c20308e723168bf1438ed474d41be0337520792b0638207202a8526a09131e22a139d631a316db8e1382baee316413257518f5d625520fdb2b2430a5b2df80e5a6177b302e5590f1534292cd47b0251c14ee185d6b2e4e9516f2a2bbbe3a393bc22d31a4c2fba51596dc2750b29764631f4eef06130d085ffc2650e0e880b5749f590f0736f1b2b6fe2b291f6a82ec51c684a0742a236b6c62629a20241cce1be6607becbc1224ab0ead5073c6cf431dc8525b620c145228269974c861d85cdab40dd2603990766038a70bb25d3070780dad491f44290281da8f43060ff914ab61057a383b40c3dede11d9628aa910ae0e546199975bb11de3a0af448d4c81231e7aaed5a1fe415e731905a673d14e288e0d2a4d5eb033b11b0c420f109b67e0d1b4d6b30633282f11de4b22a5172aa9d1e0bdf79ced18bd9f6f31154800b51b2ff83bc20c1269681f8277cbc1115fe6280bedfe08941008920d1d7b7a64a1891355320e3c059b10a239f7f70bd9652342f3d0a3af0a700f11715b218a5e12bb370eb10b4b3cb21ade2546f1aded0e291d731a35a214c615b91398220022b6c6fed122f94c6940f502281a212f3c4290f512188d1fa23d63d1eb5a103510908796c1bcf8752916f44d20311236ee5b1af5addc02d2b41fe50a6f773e005a9494261afdc265013be69d3e28263712b12e2b12b318a9953ad13df92fb81c30011720db955c77116f01cef0757b1fe8265087ed153948077208bf4a99c24976562311697e7780ead4a97e0a7cc4619093446daa0eb364cc019b1dfb851f4f6773b0d45fc2f906ce173fe0eed16eac0691c673d14ca60d59127994931135589dc70a18962f93bd40a36406561b29a04409fc3b074171c1b170632cda25688830414f89c9a727a43dbb30a85111e52821added0c92590ae07a9ef1840b4aa46ba0ea7e41390ba3ebf7f0da598c231ebeac5f9205f6f17d39852ad081126e792c1a860f1af2b375520e1bfa1702d0c2fc456309475f88519e1724b825bf1bbb818f1f72f315375c98d1331c1ba9164a3fdb0118f48992164d2091b1f87e38f706baebbd810db18f9e2e56e074622009be381113b9eff128495e342a5ca09201e23db74217a8257e11f8abbda124383489913f46845a0bfb6fb181dbf7a4b71834c92541e458e3b82114cc9aa2327360630c3e652330faa743b410b18568e1ac8520812346b50330875d0f010deb5cb65169c9ed710561700831e7b01a2b0ac97233d56275b33007630f7e71194d0b8011eb7d8e41b23490e00803db6325e3e944f20a8e29778171cf060907f775d792c7d2e2571c6aea7eb073c07f9718318c0cc151b33ad1154bd131d1b970172811c43a5e014be0372b0eb6326851c448a47c2339163091e152392d29635806a2944d7a1324636d449271f6af8c3cf0a831820ecbd604140126c851891d14c225443a84f13b8980ef2989917b1241e1d7e212e4d5c601b5798e1e10f0b19540adea16f42e863a8ef0764643700852f14c0179e2f8ce113ef70590ea605a381bd35033415acaa69121cebb48f1bd70d9ee1eb5fbfee2159dfae816ec1dd3f29789460d1ba3f11b04e32a6ce02293e01de20665105a21b3a9b4418a1ef87229ec3bea51e307ed5417bc8ca8f16c8619ca168d26b9915e38684b28734978b1effb998815b69fc3a154e2af6f150d1ce840868f89f30acedcd050c4832cca0a16704030477b7b9c07b6c81be23ee2a53a07944846709d94f1152e3eaead108304124c071c1497c0a72da8c729be1abdc1099230ec0942afb6c08f451ad911ed7b35234e30d82652199a4c208bd59d071d798d3c908c0eb4be08c555156090bbd53429d59f75e10aa985641af9ba44a14a39f099080915ef2084c81c920628662a408081f16908dd8df2809e058b5a0658026f3345ca81b115d79ba540986531331097396c10bb11c55a0875d0e52171d5fb67120af676e14ab216f6092f116c806a50f39506d6434e91df00ca760857fd7671831e491108f12f4740615eff7a084d55e4307ce43815067cb0008073f741830ad74a24f1b6c5b54124d125c3007e0044331080cf63914a24fe761ca9b5bc31abe26dcf077fc260106a318a6808fe1b9fb075f8035d30c8210a21955711bb0b02d27950872afac309c47c3e80d199ac71203c0ba2f087699ada16ff953a7068fdb065119cd0ac60d1cb40de143bf724a1249d952807fe8cc820acd4560407e10a64006e315aad0af264c9e0c288f9f60a7c0d9940962e49e108da2fb9c0882410ea0cc20cdfc0695f98de05d3dcf8c095614ac80f48f7e890a66a4b93155e667e6076e1e4e30b392f485166ffb44e1a86af70933a8a599a0a19594410715ea7ab0d168fba70831cfd040a7c7d1a4073095e2f06c418a7d0805100130c2c1c331065ff9fda10d6a05b405e1319e62501034db08eacc139064fa5002133ed59e4275b9724e2afeb250c24910aeed07073980208a7ab4db273e631511cfa4a2b911007bb4424aab459a0be86adc9081e5a9f3260bf12352603adf0922bc94d060b9a3c520583dce46c5930388f0571de1a2725575f98f105705f1e0a7ec09d259ab67da8594b7fdaa0ab24de730841edef20f1e39a482dab72cd10c6b56e8d0c699673515b419ab808cff0bd608476b6630b90f83cb0bd818c9c09ac3836129cb8e69b13e937c930ed45e391064b3ce800a841680b0af15c8fb06768a52e1c908289e1bb2d9778063bf0a3606c41867f21007d9db088945b420879653a909e07ab5606c5f7780384f8f2480c02e853d16a437a6a0efc4ca7b0ec130eec1c403f0700c36418c009e89f07b0a757992808797138d07de20ca01151bb5bc0c42b6a5214dbcede50958c0b5e2248a9c120ff97fb790d62b2d7b070004fb41204403890bd9a705e094521f1e2a894a59707f370d25067153c080d9705adb07fa325490b34c0ff10bd8cfc4f0803bfcd207e00202a09e55df1c085efc1a7086effbbb0801ecd8620b8dd9562bb23f5d80ab8eadbc0a07485f15763ba09b06d1bd651096f239372b084078420e08171c087d7fffc09dc9c3d328cba564213e4d943f0ad4458b70b0981d1408135da1506d4557c10d25eb06c2060d9c7c2082291c0208af292e2093f95201f79a754820f63d23a20d8e964c1f47041202048341ef1f10fecca23a7f20d12074bec482067dc7f11ac175bcb20c3743120dc3743120ddb1d095127eda90d08d122ec62f26be5550a75f4843123cd30de2e6102bfe3028fff1a2e0c5bdc61378dbe9716c0c680406463076a0661684fd08c3a08df1520021dc086fffb250799a6f9206e0d6ac30643cceb31204b9e1e0b62f8ce208e8308bc15846601e10b52fe3a0b3fbff130e14e6c5b0ac673f7711511770a07bea74cd0a7109cc316466d50c0710e151f0a0fd52451360b8df919ff4aa6107bc3edfc080af9cae0a7c860265713483d00ac2d802209eec2b7809fd8d5991b281ff7709208251d19b6cee420cb6cf25a26e870ce208e5574d40d4c024ed219c31d811866bb2ee0c4ce687e22c38cb3524615d0f911a5cb9c20c842c27632d8bed86074e076720965b094216c5c0e7a068d979af14f9118f7149e08b47202b30fed1ad463d5a1fff5c8f00793cc6e60d40aed7c0811b11090cfb685940676306bc186476da70833b795011f3d17f21a0610d091a4cc2a6408ed6f91c0a222825c1cadccb0409e6bd4ca0a58e4b77072d623470b238ecb10864698930e85cdf8c25bd0997c0f3815c4517f756f490dc378ebb3c720f5691300552a80f6c61958080b148232004658b31043db4e7078ec2d6c1f3eebbeb0b72acf0c0b2c171b20719390aa17e255f79117516b311c213efed0763ad82a25d2a701e0a3345788080ea63291a940dcbf1d3d799be1ce71da8a09d7f2f8b06eee26430778fb5761aab817f00ebad624f127522e220d4e1f7161fc8c1e910b86390940989bb57e118f52f0e07815b47d1023ec1600a85aec051278da0bf1bc5ca14208df1c4fe09da8a4a40dfaa246721ed9a51011cec04a2107285e4116cd414880a960f88812cafaebe0b58037e207d10435209b1c127e1a74edadd475fc19330bca010e90aca010e90a8df699e1c6eb1faf23cfbdc3c1697ed0c410a89280810adca12007dc62f1807ee6377a0884a57ed18b0fd9960869290ce123c6b25806adecf9c1e4aab4e70ea2c34741b747bde813a9fa2330c38fc19c1b97c917308967bd346efa6a73915902c89222b928e6f06b8e09c50848f86b706f7cbd3406fdfabde0a4703df905eaa36f705c70cf4307611555505b9077164066eb0e20a41c2ce80b82db4651ab6ea1110a6285e8e1f9773c62145d3b6e1090f29e4b08a5c983d25834ccd80bca1f808138f5a217223f50538070f0c5e906364d2b30e2ab161e0e8e554ea0c77abcd00e4090fda08d6e15ce33517604324f6f51ff05b5433c2134f0d70413b5d8e9d0882bd0be0c6cb3b280dbbe4f7d10501ba6c0a96e8e1125057b09d0b7e9b6200f4515ce3144c83b7f11612279718c67e0550686c71d408dababb11f96120b4265ae9a280a1323ab10ab5e645125ead1cb90b7e37d070bb4168c00a8ae6e6715499e8041653805c80eb9402cd0975802820c6bc04e42f9568ef528a9a2a011d2ef7d391d52fe99b0a1633fce16b14b5c221dcc01ba185b625b0349abde691571b245107f523e0a0cb97bfaa2536277a71db5719b008ab6b6e54e2416e88202cebdab0a750c71813b64e5450f32cec0c0ccfc800e0cacd3b6e11a6c176b1bee3b9be0652f1bcd0afec550029458e4010da0d15870af68e13511d0562414119560ff1d1d734fc24408461f0a97c943d2f643ca4506b29b2600bbfef50c094767fbd060dd118913dd8a5760e779269507a942f0a07414b5e845a96f0ca06f00a429221dfb3d322eda85a3096ff4edf0be15578e1645f0bb709de9d3760ce11df963e9f0c0182e228be1e0872c37ba0650c14220e1a258a111dd6159b2dbd2bebf1542780a82c82f8c1e156ed91aa3b008b54e3c46cbf420a189a9020819c366118ed9f3f01051a76d72f5efad200881fb58b0940a43711b2a6d21f10f7aca5c0ee2932290eb2d9db10c91aa9e9177d7866d1389b06fc0d486ff4019c0055100cb5c038616c90d0d92769c83422bda53b0b1cdc578cb2aad41e5e230e32ab00dc44566a10fba2dcf2ecdaf94359868ebaa10f4350561afbdc8c309d00af170b55e57a513d61e417084d0b9f50d0cab08e0b238bcd127a78423607bbaf1c909f39471e165cc2ae00ef77e8163c764c7720760edeb2192e762f50dc4d0fd10d6d79b290c875151e2305dc3730a1980eda2a4d476dc2bfa46e7a118e88bca24d6773bb14296d26b20eb9c6aa1d1ea34fa084217613247449afd1573d991112f2eec8a14dc7721308dd213601f5a158f71e5ab71a420c55c53020257eed52115d2baf21c6a212c20480c27e2594a588b213e22f73204bd21d71b2a54b680810933bd087580e561734b59cd08ebe5ea10be04fb380a771fc033ea58a9343eb74222f27a9a22690c978c0700960fd56b08d23c91108d7b22d0140a770dc0d88aec5c188228c8109dbfc5cb120f9d3d80cde4529d0dc4ebeb42374655ce33e60d5bf118cd372f21d4143990a43f3dcd13e0fc8b6275938ffc148f7754a153e577b02e6213078246bd5d6a0cc13d251086ee33070ae5719741038a59800e8f829340aa6330c40ecb496341d58f605d0d07a69120b7e42a3518214b5fa1e2b95c3e05f95d2e8153529e2607ea2a6213f60fcba20ce03a0fd085a46aa90844841b9101e626570ab3c34521748d8dda0e5e8131515f94417e08d0d25710990f91201a8e6aea34ee7f78411a9103ab50a581b637062fbee4f189663442081cc8b5a135d7165921df676d70dd77af0d07aeabc130e0fea93918e70543413ed130e80e21ab2e539f0a4cea268dc18fa0a5cadf47431984ce71537efcbb1ef39aa7e1e356d2c92cd8d606c2097dc1a71e66fc8dc1f8102d361d7eb4c3a1d66ef0cb1efac797e20b28e1341eeed47451f8cbf0471e966f4a71e85a06c21ddd1de1f253fe3af01e52372901eee48dfa1b9fa28e02022b28cc1bdf828dc265797c340cdbbda130b55005af2140a3213200e9c10f1d98d96a80e807e7d8239f74f6e19c89468d082a73e6b0b27da1130eb043894122728be30c913e05e0af63c51245809f4ef0d80192102581285e7092bf51250bf010f140e6b39a2b2555a4e4b0a2983fe20aa316385309ca6206153e17e9d2248642bb10d9316652159cac4f2cc76b9f526d701c150c881d75834e06a334104ae72c009e2090761263f915a0d17594880864f82880e28a48490b784b7bb0ee8364150809b45fe0dbf21cd609bed094008cf1d2ed1427913143e705afd818b7ce14b282b2073118d2a28bd169f0eabb3946de4180894fffa50fa5ea008133fdc3652bd0f3b7525f568dd80b9b66d710a20fa85f0939ad8d008667bf74125466a5d234696f321594f715a0a3a0f06c09ed032f20a5ad1df622645a4160f15cea140c250c1bd11fa5349a11b1a0d6c195e78b6e089ec3698124ab4cc12b026014416bfb2efa1997b7f520af0595f416b1f0b70152d1170f0891cddb90c0304a4b0e7ae7de8079ce9e970df83c84514bd2a7e72d8b34862118a2455120ad5b3c230706a19a28779a831198a1524b1511d07211c90830c92049d6a6d0ed45d7b00f99cf72c091069a8817635107e0998bc9c9465b145bf0e92e475b0b05c0251084e9bbec187af2df03340fdb6d159f14a2b08ca587370aeff68ee0f5919da017846e0660ed968a92239eb69ea198369ebc16766ad8416d6ae1990bb12d44f3c7dc5fcc3c1b3d5140505bbc5626f03367a2e7720a2b1edcd72590e7283f182b6dfae7f08c59636519b40150d0dc3d574005552ae371b94af8f013d59099b271e724c6226335576199706a3e19efc937008e88dabb3f520347e3f3089bb324327d31d1052cea5f464dd715522d6c11660690d475c144544f460a17c5bdd08083cf3f506e1e3ce10e3ecdea2d629e9dc07dd9ddce11dfe06ed24756436912ef83cba21696993d071cc78d930bb892d2071163b5906b70544d3563186ef0ca96e3e10ce53227a19fe79c5f13327ff6e150e109591772f04d908bc054141a3d567333299ad0ad08d08fab809173711c1be6452dd0fd3a50fa5110f6c4714ce8a49c0ea4ae67d56ddacc940aaf6b0da33bbf33140de242246118dc19dd2099f24eb2686b00c2266da506324c7764c5160c1e56636dc118d61efc8fd2608f862eef3a8c99dda2f6afa40c1ebec90b412d2fd6811de4db00a1a27a8475165538d7e44553375b0cc0060ab350f5f3321f2a3b4cd1d0ddb50c1ef737f5516e31e6241968f69e73a5a194a02f1b9d23b0ccca127319f06089915b5d6b9b2e4fc07e93104714860d7f31fab276891ccf25d2956b60e052b0ab10c9176e20afafebe40aaa5c89a097ebfcfe160941b4115b2852740f470919f3a83325822fabb817f1e4d1a4e01b7309a690865f7b7811241806507eb066f608dfcc167251a0cbbf1bf9a560e0625905011f9906e9e135d93b262dcdf93a138960a1661f809e1051bca6d94620168aa2a3822961a84407aa867255d35f2f247e3927f24398aaae16a502f561f372d0ab38ade6f5b2d91e480b1aabe84f21f45c48001d4999f431438b844e18ef86b1214b06bbd60c10f88e508a6af9210783235de12d6369421957e248b0ded17a670d6f1a95719fc2f468082c218a4077cfd3912d853561b38fa0a1991943e2b81094aad73a24ffba1313294508620e6ab8e58099e6a2c518caced531d043d78d149d66c7e196a8345308f24ed8b15285f67212247acb409ad1439c1e9d78f5017de3f6ed38ef72ed52d62442b0233c944cd07020298d07154482a1a5901a103a5a89e211e63f8c1d1ede61d61369fdf6c909d6bf90b23020bcb015ba5d0d62dd7024b005325c371148b28cbf310fe3dbb19bca11c31c9e79bb01663ac0db22e28789e2d64ba3ab381b0ce8e1fbafdd5807412c36e12814d36817a0577d930d3a11cf19803ca193abbc084e272b533b719f00ca5614d151ca406064e4370b89b37081eec7479e094881a2c19f81655e07a2fd5cf08dbe5d63168a2d49829f5fdc8b3b5f65ef713bfec77419ade3f6a2750ee43b524aa72863491678b53820637a82d1f7c8ed1ee7da1e619b59e3220859763231c512e51320a5689a520f5ff26b22a7f30d9086a93c0f0d4795e590a377110d0bd8ab7f80b92b1dfa0c519bed02b8a9d65041890cc481697ef9c82468dbcc90f52224364c9c98e093e3411a7234dd2fc3c333eb203c32feb9d5931bad245a245d66760173cff6062cc74e62530b2533281873c3a911847b91321a65e649e216457d993883a36702dfc44444278e2e4f1156de75a60e7f840060be40825f283c9333f3af68291c08ae6982709cece7801e84e7b3035ad9099020ed7ad4827bf2579c1e81a85f10966a7ecc1693d99e214048dbf307c4d8edf1e3ae9a403610899e60c7e8c1251932b20ba08b2a061214494aabf383e8e7592d7e0973122b64b3d72edeecfb416e471c0524c9383a507bef0d1d427fe1367093ea6b5b1612e20ba245853587404d7c5fb2d234f86c2a237e0cf0dfed3b760a883efdf332c597b52269ad95e0c62f9fed3864696e576b0b5de017ef4f3af38d7348602a0885e9f187a3e28513d9c7eac3748a42100980ec43d1d8e4a9881cca867f00a6031de515cf4ef9112995b0792b185fc9a298eadf440851c16e00b28b57ad1920e2fd208c4a17e90f284e742166b2a4ee0fd8083fe38b3105852ae74806f1597bc1d215c068f901a83465d715a62943d27bc6918812410c80009b91606f0a66642870d08eac151bafbe52618c0020301bae10b310cad151b60d7372e0c157c0ac3d1c429ceb9069c5cc380ffc8c716506c0665e50b522d49067185e73292bf56ec14e5c4f050823ac3821de818cf013bf5dbc6292be2e9419ce76de91b4cb0a45244e3f5561949d681130a63bf0213a1ffe481c20925de2e58c45bf392a9db432b0c534d311cceff7b0d6bce7f117733fe0b3a0c180c825c936b0820d2c810f0f4fe49404251979011b53002371da9849ec0a2a7ce424b2b58a4c47b701ba61b074377b10c365a1b1b6217d1f16e5fd9680bb5547151138f7b4813da636e80beec3b0a4310f177317d1c91f7387b18eca2eef785bc1425b5dae1e59ce01c0937f54f119096b94425e0510ce481d832b82469bb4bb10b551f2308bbc51ea0a1f878d319b9dd38636e245f322824c8ec50fd3ed5640bde3ab633c417927d06e21336d087f747d712b2f066d481cf0ad31f9db06280bfb5d24a21f18f6ff3702e68dd207b9d7fa231cc4e4f0af01e6c50a488ab0c0a95beaf10da019b3209539eac11defae14c084133a8406a9de87f1ad1b4cd7087657b900926e2e510808c64b406cf9093808a9c39d2085af52580991f8d7c089f97fc911abe5182062a827780698c95fe0810849c6068efdcee0681994e5088a826730b27781e4099819bc608db0cc4b3f7b2bb830924d385506ae7fd890c486dd1606ecc47a10eac3845e06c6f7231086b0ee3e08bb8641d0807277920b3d2fd9708957d9e0089739c1a0b76e68140809fee130c5730ec309f9e6d84064bed1880f71809b608cd2101b08a93e6412e557c1ff0a0078798078e5c02c168ad8ce916246bdac201f824730bb730c9016ca0ce3c30866f15a157d67c6d45e56cf4637bb9e4cf11939717f0f4509059132fe21191113bc395180d0664c1746aa2e9280ccd4442061a79f72d1895fe21f6393e2715e312ddb2013e99eb2678010cf0fd4a76df3a79a031e2f7265adc1e54594fd1b2529f611a4c60be330dc3ae901301499392e8cf79f34e5ef29eb174786f80213a96e631bc4103521840a6f53218a9d09c08df2357418488955d145dc092106d3a3fdb0a9957a4c2cc7d1da00ae79bbcd247a24fd3065ae91990724dbf99215d1a0281d93d0c8d082936a6c1530bb2da1cac1fb6a346957ffe156447c0e26fa5398c0cd9faa3d0b3941a0207d8a66141e96d73f50a4b744fe1c17a0bae377707d090c1d8d325175dc52770814c5ab6357c1d808182b5799f3086256c453ccfd0cf55aa3bfe32e1af60fc0bbbadb9e3f365d88e08a6644541782eda830cdb559ff2b01c23bd0c5ab44011ac7066d1166de746c1e06d1ac91cbd255f7204c98d61229204deb24e89dd3225bdd99ab4577e69610c8ba93280a98105640be046af51fd724ad31224eef961efb7881b08a71581d1293ef05017b75271c22306c0472327ea7fb0d3fe24ca25e3a32ab0f2b4b1721b5f0c50615c96420a1a17a7baa1eb0f18281174f7edc1a42dd9ba3016df26a09cba96994a655cff02e43ba36a1b6d9fb7e0c1943de02337c03311d62d4e5e0ff333e6b1331bb3c81739ae54508e62fe9618b65f56f3fe271b7e3f24e52564178121647f48c051442aa564cf0e5ddc6910eef6260129c8dd3363365c707c30394dac21e9f34c4a084860f06191308cfd29b44846b271b072851f0175a2519849c73f220059e910fb6fba9d1fc6035a72a789eb6c0d360917b11eac60b912a4b756e16273e72e1422d7b0313a1005190fe3b61b4169b999a80ab827ad41d03dce8a164a7612d3255b78190d8af4c0e1b46ec3b50a0e2ef5e10851438a23e41a34634666df47104fa10af25b0473e12532b6ef024e10957f303de2e1722c693766148a7a3f60cee1f10e12b72bad12034f0dd342e18a95549651539814dc88df810ce72bf10aa68d9d622c405b492de94f65823c041bb90c60c4a4b121cce51710021a61840c1d154808002970e10b52021527e7def652f0ca7f8314800bed936948ac121938c5f5d1306c84461c69a28ea19e6b996a28e76fbe9128674ff9144d5439f311314ba218189d9d3402c3e2e4300fa3bc214a991ab42cc3e5ead0e508ae3d22fe6343d15b70de9a43c1b738648bf501973f27542954372d46ae1069e1a8a1e4325e6a1041e2aba602b3b0e814320a86931a5e277c378b1ee810ac204476181635e462685e83303de89727a1fa65fad137e31e2f61e115222571531c65b2917ed3b4589e48f3426496f3012bf16cefa08aaa28243c1d30da14434b33d74573ba02910df81d161917832130ac339f0913476f3f2067cfa028236ed3217317135866446f58f7222318f51629c170a3206d3addd30798bffc3263805e3405449438a1f54a2ed62e54c80a726719329f0ad5bae5b1603f9ea638aa7c080129b22ba31c0263b2533606de7332285cb6b2b1997e230dd27852c25f30e03615531e99508be752000b86b7b3b2eb9f73ea456860829167428b060943354181e06702fa4027a6c083cba7c36d0c715ff772264bb7441995c76561f2c129342ca570d760d4ab63e417de3222707639c8272b04ae065265fb88591342c3b9a14d6ef86628a9cf4ea15c022a9c2a61dfbe719313d33d4c4d587090a2cbb2952f28e0f0715ae19d260a7692320413f51b582dec64ce009b9d309c06c09b20b27f2ed9d72b1fc80731f3f314ac2eb5f99da0a7a5d7e524988859a2b95781e61563d271918b54621b3a22c1f1e2d6a1ace945534f894097fea7133e09ec7f93e39a38bc11bc7c7993ea23da9d3eb9e4a6d0fd28cc6634e4ac8691888083011967db98b47f2d6ea20953acb3f1bc059d6809d46bb182180139380d41421461a79fdfa90aadff64019315ece7140b443382759f3a8445306a23f3acae90762370217e21e8cb750109e78f05b43d8531ae30b6a5cd90aa34950b1c0087dc71bba189150c05b5b5931ae492cb07fb0ee812e253f7f712d88c36d1714364342cf6e375f4157fdb5e120b3f9fe0985eb6ad0aec43f181b458afa60974a95cb59bee655b2fe0109ae154d284df2d0751aa30ddc1f46b45ff4f473194dd5657224ef886f2360e3f03223adcc73227a4e99206202b2a30920d56af265a1b5942dda645aa14aaddfee2402a2dc2190b715bb13957f2fd32e7bfbb743f8fcf34198f2190f24f5866d3452c2c6831bb63877a17e70c52f3cdb0a9b72a93cc8dd17db3c99506f180ddb27fc277b81268b80bd21a95d61f1ce5f6d31087d3d5ec32990fe161e5b4d2b02410bbb1e1063482fa0ce3e35882580c0b0b205ec25470e32d858d1a593105f1608f2bcc2c539d05c153307da21f5daf777208f9894521406e15b265415fec2c614a9e4196a45b281566411ff25f482a12224e605a71e1fe376010b92a2e208ea2568f28ff4baae0a98fca37250c19b291c81013b8107ed70b50e9ce96c7228ddc3d122a0d88261a6466fb3095fb65083043cecc6107a0fd912be765ee028143e2e827f08f5f62274addc725dd2a52a15f2c23c91bae64b470a72c877d064f2cc841b844b1b728a66e60918f348af42775292b70b14d1af0141e5d356101a05a180de4531b4278cc578415f24c8b4244fded8c1118867c60cc8540a02b43025e535df7516b3317d688f06a4a50963f8e19d8645fff5ba60a735ccd616b8533b91f9d5514e26ecf55ce389827dfe078d9ae90119cd070207c9d695d09265f167360b5a9861341168133c4c5edb4426960b7443d0d29b821305d1c333ebb6e73237449f7a0fbc1ff540a6659e2c2df8d88330a3daeb94075746a8d20dba8e8c23d1b05e814aa976f80dc8df49a2d6524deb211236e8e1dfe442252f6ac28cb1a0292aeb19b442d6b1601e3e4e342fa5d9f42a08f3882c3a395fa13f25189e0d4bd8f82331c1948033e06dfb5552da3b86095a138f2234b7b5c73e770ec9a29ddc27223e81cf2751784191501b633a1875138c5cdd4a0f78c8723dcdc71e1b03b273f101143cf111b76de1c31f0579fe2856df7ab269226e772172dbef42d1036d6115d4ab8093d8ede64e22e510896336bb49e6337a4b90239dcd580e428148c6f320cd5ff133c6bb7ba3358521052094b54b133f87cbf634887d891307dcfb242a8964b4d18584a6585078995b92ccc4d753205a8d390194f962f129a0e18d92d63bb4930e43b61e54b66f14e44e8ea29fc319803b88446398b9c48246e2fa0e7a9f7220a584d2e80a6aca0b048f14638c13ba226f83e91ffe3c407fb49974c085649557fec3306794a06a7f31e74b7574cca7105d1d51ddb51202ab1c4d1f38dc38d44f2105e9995bee37a32d9bb994205f444580d55a0944454117fdf282f35d8c0b9199419167253de50bca7129922797abb7276c349e03979e98704b5d1ceb420bea831624e9528521069cecfa115ef2a7459358d72f2908b722b0601dfe2b12847426e0d35b998f0d2c880731ce43919e07422a4b908cd6672b06f3a1bbb642a1ee44170ca71912660685ee2d97fc66e27b19d182365ec515e0e3d4b86a9abe53fe63f91ec70047138748e3385b783c228de95171d68cb97d0865adc3e42551ddc445a1f359e4119e8eed44a060f5f0d91d2b1b0b8cc14c80ba6827350864cae160bdcac08e1c555b64e4845d3b5b20f8371660b5076a313a7fcff61157928f1513b993e540af72c96129205579f2b36ac1a5236d047cb0628ec4cd185b709e31bf267bae3ad0672f23e832c7971ef2140bb2d0c6885a0a9c83384141e4bce029926ce2713a6b40342201b011118bd80bec2755acec91d0c53753213e8d8da13fd0f97442fd42df746424554c191fed4ef1e1b5f05c31859d8403001d6f2244c16bde81de3397fc0da06d5e53f265718d109ff165f27a29bae72cdb510780ba8a591040b6dd6a50b39254412bb23865232db6e666148fd741014fc4a7bb2d26a244038b16019a2feaed3eb0cbc58ec241e5c341642812de0624c3f3ebd306ea96140988a56a02a2c5fd3039477c1651fd727ed61d9ed8f560ef259bc411c68d85b0e6ecc5ee25b1e999c17c99602408624c85024cca490c24100b39f0c02ca2100d5bc6baf4672eec350ddb2dfd40d92f754623a81b90916d42fffd286b6161916b9ba95645d951e89211b3333b118561c3f100f8e0720e1e668eb1a9b4e122363e59a0615b0d645f0eb6adc5323d9240af2183e56fe1082396b25bd9f900c1f9d467c33f9fb4ab00df086dcd15f62b7f72ca6ffc211ba870f7a2dc68e18b557d86b3e075bcd6d6099275e050edef47d2422d4d5b242af4bfba179c8e366467e73a6e0e6925a292e73d571114a45165c1127966cb11924a5f81137f4c571195d14140fdba58b80fb814705117831e5017315ee911b3914baf1bafde89c28015955e30c52d7a20e2f6e85624046743744585d4bb19a85781542d96761c112f3ed2b27cb07a3c085a255b3456aedac27f0dd9f5d44366681d884a41bd0706625d4c2d2f5ffda3c1c0d2e243fa572302756aac8e16b43ef600ad92402b4a1d6d47d1c663c6390f371a0820f9bfa1383d434eb013c3d98ffe19af626ee35be0402636bcd534317d08d1b5380acf54c1969f3c1218ce3c8f6295789d6c22c950a2e3e516a455310d54f152d4de944d406b9130229fe1efa6426cfb7683ea97c6f22eb369ca72ead3a6902c0e0ae231a0578c1f2f9ed8e4826270687e3137b05190d4e86e920ed391a2c21538755325a7f65713750c13103dc7a5a2e095fb2344439e7c0b52cf6e23f34b14cdac332dcb364e3e178d577215349e41537e7bfe645266adfc3294921643a8d5488b0ec89559b2af977a82149686f3524aa02b523baceabc72913a6de42d6016d4811c07aa444286045b429a7d58e22184614e50ba5c7fad0a3032ca80d6e7a41a44162a29f1762bc76624b3541250976d590044a6409fb0a93e6ea01bfab832f20a08959326b71475941debd88b1ff98a2ad20c62b79f22502901c1462ae5a12dd70e62b1b8873e7341daf7e150b627336621f2307fe33041db9b2f35650580dd9e21c90def92c2030b8fb18133b8a372e427d4de821412815d52d276197f33eeb1bce33cc93ce110690d68d3597f51c81b3baf3eb0ac151c2d3e7f722ff2c8f377e31670314de39dbed32f25456f9234412f396f308172cb72c9cf64a226684a9ed37a622bd61b6f969094271330662862a4678085873b82162c5611b3b2a44ff32c764ef6c276326fd5162d56b990fef3f4a72ba71958e1560f3cbd0a5de3fd4424c48cfe0b9918adf43ff609873427d8db43122afb12030d74d990e5eaa1ae0cf20a76521c876f3b43b5e031208b0119fa3f3f956d714359720f13687fd672a0243ba32ef041b2845d181e6629618c8b52ba61cd4e1a3ea0ce20f16893d718d55919d0aca22f2d40636aa4b24b33a0782704ce96c2c2b3445a3d175a9c32ce9325602819756693c11caf0c257c47ccf2f18d102a328b5f959516e3730e22c95c6001f1c6da881da4083073d00df7cc1d09ed43825653423b21a69bdb517d6609221cf24e5841cf22659406c0ca17a1e28317ce28a687b9c11cb574811ed96a787057e865ba1ba994cdc2da81e33e1d3f9279718e91487f07825e1b5152ac0b14265c0897e102c5d15b290676e6030b8dc3f05168509272c0f533990875ca2192937d9d5e1288d0931220aa7cb6304018e780539a1cee28382b99817337e08a1ffaf83621d859a93b0a87cfeb7303bfa84f060915ec5122ae1e373019713b81eb411e4e03ed3a7ff0fccdb9f117af1cd9e215f885ed080ef0a5a3122209af33a9f8d740b96f6b6b1e41b488d05bced7ba2bf772b5708eb0d1a4051886f090c0f3a3680d3f446e33b0f5142728e311fc73bc004c3a34320c54b073a0562f209de03d20ee45b52807bc0e1050a2ce91f40ca42a1020dbbec5110981e7dde1e8e49a270688555790aa78221608fd9f2a12b535211908ec81039364f8acf425c262eb1340c1ba6026b66894707eac19b60931d7e95260150e960b5ad5f43368837f5025480bc3025f1e96b2090b9564418bc244e4080a096342fac181091bc5d6ee30976f667c2025c9e901fd6da36508fe7c6e80fab745a6219a0b70c331debed714fe5e1e20717072a70dcb0b4331f07ea1fc2ebe001f224fc123681ff0ac1d71f52aef1a1d97e62690917ff6850ab61776907fbe05750ca2bfdd50eb6add3a0c9a5ed1d14d1efa3604530eae40c29d3fb71f43cef642baf6e37b37c8aa8283243642d01ca133f5b1f58ee89131c32aef314a0182ea07e2208b9063b0bb44060962c1b062d4efcc06505f6f60d66fcd340cbacd39b1e6f7a8713914a60210961e3096071127d541ed879085071650f8321dea7edf0a8c0d66e0d2c96e3808fd0eb8b09a9c538333b83d37c0d23aa5f20dbf9d0ad11da01430332321c430da05b2c40670c160c06a074adb06b14b38939c623b0948d7cba582315993ab2490892850cbc12ddd0ade9acd01ba088eff0d5ff4c3c27be611393c47b0bc20947b0bc2097b9c85e1149e4cf5063aa5e901055868740bbf412483256a341b22a98bccd3a3917e7d3851d28670d63c8f490f8269a3911fb42b9f3931f66d33dc964e390b84a95c20dd8782b50e1e3f9f030c8207b6337039c7a13d7cd7460aaec2cee0ba1ca7c509af93f0d32962f62e09264b8e63b5ba89ca0e15afdbb386ce4ca40de05d82a467267e6b2348154b209f959c6f07dc55e9843a4338e20823449e10bd47613207a5c35c846032b6370722af0d709205cc3309fe2712709982c8cc43d064fce345fe2c99075f4938009bb01f190819fcdab51093a340512b766073b7baf5c50b41ce108090973a9b09fe22bec113bf555d09db5d6481009a3940095656f2608af3c8df09538454c0853ed6760e31dd7aa11d2accb10764ee0e2095f80ae713d909a5f0902585160d77a536a17bc1d61507241f13207a1208b909a8bae8e07d5f3be40b2a190dc267aa54c71fbd7990c133c73e7f0f5e84f9a19bc44a9211e43a0bf1f1d02ea515ceda5931b448e2e110cb5c4301449c94b70829a5bfe0fc11a68e075ee875b08a8a9a560a404d47b096cf04561256ed64515358d56412b15ef3908e49a0320a10dd18d2b901228d103c8b56007d9a00d50916b408e241f730ef071f5b3170937ff0460716f14171ceaf4847084e6b8c30b58dbb50164aca4b008581d7da3f8fd627208a3e370e131c075e619dd4dd0a0eac05dd92be88b09f0aa28a8a512b9e798c078d7838a09f0e93a40c849b36a08abc3f4131e1be91215fa9cef40e1ead87f0d1d4c8ba0c64c0a9d09e7d838f0a11dd69e08b836bbf0de8e5de915ea0512a099d8e8ed11f7f6f2c11ee6b2b907641244c1313b6400172b99f2d0902ada3107817f51e09dd25a740cec55c530ae1326f509aab0fa40704bc43921daaef830b5ebfd910721eb08d0b9149b3a114af7ca90e8a49de811005846a082e186fc174a8998e188476e480a84bb5160d58ab67617e50d1a62aa81e77808d1604db0ac3c0bcd0984f5ee6061aeddb309c090bd007dff12a4076b209e6068babbdc098a311c409ec1c6840e647a3920ad873d730d779824124bc543d9079f480e309885a85207aba3be3319a2446409fb5065c13e683ea218d58513206de250ae2716f796d0b9654f930ec31cfd40c77ccf480ce4841f60dfde4b1918322733e095cac73e10eb321890ddf83b470c8db01f00ac17ba2c0a056546d0cc5730a4291d6ebae08b225c53091c09b4e0b840fd1413f9c82900a97c8c2418dfebeb10e4e9b6a30e25c89730b93bfa6a0bb5c7d85094443048253791f5b344d6f6140b5f9b9e20ffd63e520781062280c939a6590c096d98207b50439e0e78a9c7212e7dee660ec86b45f0bc86b45f0bee2430d0966028130c07beaf1105c3d3dc082435be218d356cc40ad79adb509e6393161568e9f09099d389df2229e0d7c09768b0840f7179fbb12dad92f00923144481c3835d670efe1b4d21c923c2810f66d690c07a46d93a105afc7a010d8926b409daaf84d12f4f2dbf08f075ae4079a403901d2789b871e1aec7b708a94dfde0981d39480e9bb48f40ae92e43608a4c542516f516c360e78c09c213d9e5dc73af644bd00b111cc420cb833f6e138a3c0710e21c82680ffe292fb17180e39e0b5b341441678ae5c8152485d8d0cadce8140a82952f80c64c60ce11d4d8ba412f4c6804102a202e006a9cb15c5affd9c160b28c873912bae46420dccc62f613e1ac34d0aa2405010690ee7870b1dd49f14afed927c16b666a6f07dedf9380d14432870777461e6097e05289096810fc40ce7eb1870dfd66e1709cd8b5b50c83dbe680bb86c0572e07da72c0b76576360bfea57600d8ed6b231f13e354b07f9cf11c1503765450b95a66b3077b9b2541a6db9dcf0623e68390f30165ee095f3d26009eb003d3116b31b84105a7b3c118c61b39c1789928270f14e57df0b37eae7704bac0bfb0ff3934780cc9d2af40a6d198c70f40af9dc0af064d1908a9175d4063efd3ef0bf7bb2b80bd2da8340bedcb1d52fb68a807281aa37f9097b694c016be60efa0da8bec03298b2ae0625ac46ead12c2936a809d19ef123a505ae160a8cf81923454b2fec10cea6be012874b77215d4b65da0727c1a3508be4913215bfa31600642fed52118dbfed30abea63960f50ac32f095e407a70b99b6f4321a26385d0bb3794390b63674c13c74c1e103e16bc2800efc174b3345295ed30b296a65b0fc0f493208c82183219fc49bc60c8d3f66a06977b145085c8237a21cf0eb430f4c2c1aa0cc8c6d45196606e25097ba9a1708258ff3e0d148146f2e4907e6e154138dd023ea5dbe71cadc95ce1f01f2ba20832d944b07f28c7c50b48e0f0c0bf9a1eae3085eed70067ebb9f31051cb71c1c4285a541777ce0c316d525a310a1e760984b12bc31e16dbab0041934d4cb204846f35606a9fd6cd0d91619d32f92329f613b584aa8168baf87b0c5ceefc60915a82350c0436fc90706b73bd0cbc6beec090a066192f7689b0724de38b4b0e1421c2821d27a4730e13c6ba30bcd4b4d40bee672851292a347706762c2ac0bd5f8eff19222b2ea0c5f17cc70cd2aba4b149f5b6f1080ad5e0a0bdba3da411e1ebbb8207fa023e126920b52093f11883081362f930e662d38d0e8963dbf0a7debe9708b1f36d51430c479c09eb8bda80a1dab35e065fc40440ed76cf3a200db4a9b0c8cc1352233f1058429ea87c5413f39c9d90e0ea4c980d3c734ad09bcd4c5612a03f3c010399b5800dfe47fbd2a5522c2b204a3166d1a5dd29f00cd8c5af00db2d4cdd0763b2937108107a600d72d826d1549abfb209d8cf0cc09ebb5c6806eee4c8a08132332107b722c54187af67dd25c4362c50669e1e2f074b009840e04bb99b0c337a1d8077ab35e6257a7c4bb3957ef37c09c1f652f0a1e6371a37d939f970e1964e971b93055650afa89c6a127a838fb0b2c4c54a0a61e153b1db0296bb0c7cb6251112ab53d72511f77eb11c88abf90e4ffa08d1eaf3dd8412daba97f3fa9b132d178f1174f0ec6d90d413f62709c0fa6ca7cc18c1fea3f090b025860a52520b234854e42408c1d05d606156e7240c16cfd610fddedea0107c688730d026b2c00c1bca4871d560015d166e3b4bf123f9142219dd0c7530b6e4274909f3ccc730a36b043b1bb4da2ad18916aabe1b171f7a00fa8249830784f2ebb10cd187cc131fd6aa058de4b7431be651608095f00a470f251797306fc922c1095e3cf4521d36ddae0d0f137c625266ef380fc6eab490c336d96e20a0a5ef326a5c03e70cc036a620bc59cecb082cc5acb0da04adf7137ffb26923686665011b68c16a17d8bc5fc12cc9ee9922b4045990e593a43d0aa1f483d1c4b8c63f100fbfd43197058f7f16be71ae7083a7402c0e486318c138ea16760c58e73380455dc28008abf4fab0b77fe56b121cde4a204b13741210c080eda0d2c0254e09eda3d400c17cfe45113e793c515d0eef3f27264350a19346198f134ae7af90e817c5f20a1cbb7ce0ffa335de0dcd8a0df09c7f431d0c4b491de406cf97703304694ed1c65479600eea122d318d540af20cb882e800bf5236b60d94f41a90b0e386f31b804f6bf141d8078a1ed6a550609797e90507cf28bc4071aa6565073e0f9d009ab6f5fe099fbeb700bafeefc709adaf87c083fe3be30bd3a9520099457f2e0ae5cac7d09048ea050c2eb1344116d06f6708010661a0b29bdbcd084af0d251bb72e66b0f0f468dd15f4f68600a16bb0d6081e1d8e90edd6e7211335d7e9b22331ac6a094a649e114acb216f194db442b0e18ead9507f7492462344a3d6b08cf3420d0f1300f9609f37e873129d1cb6a0c9ab4d7e0748e3fc40f4992e071d048c3711413066aa0c007f9610aa4d1a6f148fbaea214a6077370af82967b12d297cfb10aa59b16098a0f611165fe7e5711a38b0840b63fa0981c5aa5f4726c7a383f1652ad4030a03b1482082edfeeb0a54f4ef81056d7dcc0cdd2dfde123404934271bb3d470d4d9348d1a7fa564207f9d9d8a10ebf1f7f2de60c2ee085975df4090f24e2109be3ec5309b8df223101360544232ea55fb09c2f61e024f6e44802017ced4a1517340f126b2a6f2433ec953d222e121f85163c678210b8fa4e2e0b7718f4c0874046cc17d82c6a30aceb59451014eb7db0f8ea12750ff92287a0b1870ada0bf370c93068410c6c0d19433c01eed665ba1c6ca654b1179831c91b29858c934da9d9eb1141fbee6196a20cb51a6b5e2690c6596094167c1850a0eb2ec646306af0a1c08f0cf3d209f54d7e628baa1c4611b20aad236a8c557109de108bf16013c55f20a3d12561ccf45f791501344e614809fb5a17b4a9b512051afa610d5b2ac4d0616da856121fd5fc7175b3f6bd156c9ed930d2cc7b381f2cc7b381f7ca9a401ec3f0f131c7aeae500b5f837fe1034e913d06d8a08de12f5ad79c0a12098bb0a29abdbd15c4541c40ea59257a0921e89582847ef79309678965813f9d9c200c156276d1a0100a7e10a6cf03d12acd370a2d4a1b3d52c62a74ad22ff58ba70a8828f560d988ac67094dcefca16869d1a813503ea66133d02f810a8cfad930b5c6677c25c2dbd14247a7b1b810950f2ad15635e88413b6c7df51120969201093ca8402b5b959e9132a55c271a80bdaa615ec4e4421a57d6ae40eea1f9f10786a172c2a7acb2340865dcf011293811d90841431ce14e2e9cb322d82203c0b77b2f2d0fad52dd00f1d9b1870a50890d21f7f9bb660806495bc08529813917172596c31314169e0ce9aeb0515e7e38bb0a9a1ac1c08a3355dc085c90f521ba47334c160d1aea015c711f721b4ac347c043f5594e0d058a9430906379051683fd3c4064129db22448a737223108f7a2116a9ce4e15d4b5d1409b0504988efa5b7c7094f3ef2e17e7b5e1c0a43260c311d2d775f0f9a9d33d131be9c820cbfa399c1300e4f72215eebdf10b5fc87e40caa635dd141d85e6b101b71e9b1871e8cd40612957a00a3da8df90638aa5880ab1a88431f5f61cd90ac13abb70ecb38eab0dabac39914848582b237d6a27c17035d4a1316dca1a70d94a99831617cc9aa1b4d667f213edc4c1911ab7ebc12b7bf385f1ddc7a7d41c0cda0851a3f8b8df1dfb6e05b1a8b8f4f1108bb21d607894aa522e873b6180b468d0092fb93b3010a1f34ae20e5d242e31b5f9ef2114121d5310cd2196e00acce54470a8c9a0800897a9e66097cd62100a2f2b3d517be027fa15b5562633196dd4511aab635fc085f261232ec9fb526185c51fa20edd2b53b0d88835150a64e4aee1267f6cbd1c4473abf106c30190151ab1cc01e99b6d8f08e1f2f4008d2594d013edb30a825a0a869620c8cb9901711b69250f98355cf1699b8b2017180c6b50c0c1d91d0c737765c5216e129a10c4c16ef0e041192c0e912299807604fcec1a87c66942e9791cdc19f05d9e01f81ceccc0c8ef02de211323b810c6f9b2f42de82873f38b9eab5d0eae04d5f095ed8275230a34cdd09fd25498177c5da020cb86e76e0d25e9586108986edf19868e7cc2ddab93185336fa5f908ec7ab4c09abd90000bf579f27196bdc31409a5ab0ed0676b785513f9561570dc1036a80a8aaaf740bd3c7c2a09d424aa011eff6c6d2f3aa76dd0744f653c1c5bba7c03469bbd2d09f4d8f5d28cdc5ec10bbfb9b551b23460ec236a5c2180fbe79d9f1061687e116b40e85b0a0aa4403098eccbd61257594340b0126b1a1a933e4b00e286ca0e10dde479b09ff3b6bd0ee18396c09063ac7916c64810f168b95f8912ec63b1208e1598d011443b5bd17a52f3d10fbd1ecd3192ecffea0d9ffe76a12ea69af3271e64e8f0920c1a531512d8d46123b2f63e0837c494e0935a90a611205573e2efed374f1853ab5850bc2131b508268f0320b4b459010adaf4ac52f51c08c40b38cd814094c365321695bbd5c15447e90718447e907187c4de941995851dd2e0b3432926cc5ac8e0fc78131c2e587f88b09dd9178d1525ddf4e1b8070d4a1bb4d2ec80d391d3e00abca25a84f995a28d0e8aec4fc1b4421c9b11b88142b1bb916ca109da278360c0c8cc920b1ff338616b63ce951484f39c30e064fbc708ee3bebe207242b4b19dfed15d0fcbccf8a12fe2f00214f7c63ee1c4b4bb2a2a166339b437bb764216936701318bf00de817dc6a61f1e664acae25ce227421b42843ff1b676efb022ac36c5425626f1711d4c8907d1f8cd137a1ff8fcc031d6a290ec24a62439f1d29447260f68ebe271ee2ac7f21663aeafa1cac2dcd0209b74b871c0a85c621e3c9d8bc1c2c1e1cf239c13363092eb0293241ad03220b5de86e70fa9730573211fbd1a0e267f36a15a18778b103e36dad13d9d45642f9a193f610e6bd9070d1bd1f16323b759bd0cd9a392508d5236b80eaf12e43098309d7d077b5acbb08c7059260c9fa77430a612362f0b1fcf9500726458790b180ffd5096636c62207f3d7aa2a98988de0a4706dd31227865a62222d253b11208a7530da1e1e88121b17be70a509194209379d09f26853a6e820144f8791d9a765930f44f213f192a08026162612d8b1049aaa2a187ede53946474244e1631f263e172ffe7b51aff078fe0b6792d2a14b57d08c0d2165f4b1f10faebd123bd07b7154dbcff411d9b27371b7e235022277583260f592b9b617d96a1360a7f2385227ec4bb0b1ae4af9e80d55d6daf2b3e3f52c3f24e5bac114b5e0ad359d33cd211e243aaa12f8d987e18bd454e90b7d3433516d0271cc112c1a1700e7e899430e8e4c72609ea7e08b24f357a16150ea5389185bf17590cfd464e51aa73da5c097e6ed9e19b7ebe9f0e3ead2d30bb3fb9171178b7cb2243a31a1e0997339a6147cd063d10001bdbd1948434b00f653a4441aeded9e90d8e065e32022ed399202d26ab207779e598191119bbc16f0285d70dcb8d6dc174c9e97009f65167f0811757d40888a5f46142db77de145eac2121a9512fea14ab501570d083ef610b47a77410fbd4ff751297506970a375fd3c095f36afd1511f51590c4efc20e0c80ea26220507d55023a5d5a44230272caf084733f14154fbf5460be9b0b7a1971c822c104d0932b12f0d1fba0b043355021a804ef91db5539bf195b1b7aa1fc6310232496131e34a120ee961a65d1ba9067457623148c1a00612654a55123e69fbd12ecfa9c6113c20b7d208081b4e110231a8910801b604338fd0e2cc302803c42188e05bd01354bff261a300f38b179288ce02119abd4828b5542ce1923c7e14303a2274d190ff77f7158d9497e13e461e582207ded9a154abb6131a00db7ee1d84b3a171c743ed751689986a40f063429814be22ab80eee97ba82fd462d1b188fab1e916ac04bcc09bc8255e0f814312c0b13b7fe60b1d662510eb5f268222480c7c92707b6c4315b8477dc2f0adc00b21832e1f10baac1afe225be3e6d2ec4314dd1c0c26739190323d713196fd62129dc123a80d740a9580ed89a4bf0e4ba02da147b1f0f22d4b2f6e31b187bfc82b81f94632a67a5e0f1d81d85820f5e1dba70a52582ee0c84429c40c4b85b090fb31472b1864231ed47321d0dc19a7fea9d198539e1c1608729f9159b64ba409de81f116343c909b0e5a7ffea28c6f261f0c2b8881d3fa8e5b111f4d316f216c5d309e1c0e225d71ce9ab21b159327a161557b318c04904177118479fa3e224f104681427ed734093d80ef60fcbd715322c515d9c06399183d100279bf71a73d6d6117621a7031849e0f7e1a49e0f7e1a09f546639fdf6e9a312bc70730cd84c3761799bb9d52b649360b37df72af10808baa3b1d82125a608e2501eb31182cbdc21b54d1c72fc4e34bc07528764712ee177a614417e5cd31c54fac70fc4949be24074449014afe6b121400c61f20a007071b19e485fb10d849b4b416d5fc84f1b1a5984b23bfc02ea17e6e129b40b063cf3214a9b5cf0a489cf030a490f99f2f0fd1019093d5f2fe1a2a7e788120d72cdd1e94b0e431279a8206414c8b9b941b2c96ad3a6d9a4402ecf44c2d105329a780a2ee1a643183c2713132cc473408aa1619330501e63b36a1cba882206c598a30feb0d7816fbf6d2238bd36d52115fd83a30a7533d6b0c5958c730a1771f840996c02380956e450b07bb5c4430b57538ba17ec816a20c66aaa9a0a740eaf90e65abd780be451cfd1861d041c0d3915b330c6dc444b21bb9377808d29504313482f52b1b8cc189e0b71412580aa7c8a1f2866c8bc30858b20fa2b0c50e1a3232a9a421cc924bd027d7034b8079080bba0c191bb1518839936c2ab2a344014069cb022046585c023c8560691875ea07a088e46d570d8ce9f2f0a7fdd2873e22c33b11570af62310068b4cd0722a7693061781b4209b0be052071d674f40ca6d8ecd1bf6786c10f0a807a308fe82be92ee768927090b23b2f1427ed3443fa9c960a0a7e957f40fcdf0f9f10835980207582fec60b9a6a9dc0b6c74f0d156b8f3e00b4e518f70752b90f40a04dc17618b198b6322394f2c6129456d911d1c81f550c01055900fa9dd5901878df7150fb348e2325ed424c720864a6882adfccda61e966edc711fd2a63208ff444ba234a6ea5429318c6672558b47fb37dee94660c1af7b430a692c87b13145a15b27634c17116b7bd99212f97fe0d149fe20bc179a1fc623b32d6eee0b102350e0c75d65b9204a406790d65419a90ba87a543291973d0f0eeb9f8a11fc346179338c8eed71a45fbe221136ecfe709d8342a0082c6151d09609cba709662cf920964c626e06afb33c514ffec18c0960377531488c56b11d1594a433104f0f5e17a84f7401e78bf3241e50e48560b8a420ee144acc144117a388e8161c428ea172892bd421fdbeae613745217716c82ab933e6e9f3b1263ce5f011a3be05d10d6d91ddd2540ff21b12636fd711157b95ad286ee764b0d1f23f4f1722a01ab0bf057f410be5cc84917780b2b50b8f6953a0af98fbb20e634e2cd0f70d2cdc0b516dee516ecd5ffc195b5f3bb1675003831046bbcb61d051dd980a15e7b401f409be5d25a9df62b09d48b7221dd7d61e00888f198a104aea0d12e08ddfc03c295822b0939215851eabb1f0220eac9e1a123c7d6bb20255122a14d020c081c4a7665112ae16670264685f3c0a4b3142507f8c124c125aa1ded11a7244b51051ebc581f297c9761eefa80943374c28270a5d6042e1e5829473070767ac52712543e61793d7bd40c2317e871e12632621c6692ce01f83df6b11a9e1dc950ed054d980de05b7a00f93f3a1c15dc99a8a4aa44701e4e69500b10a6ef43dd235b566ac13974fa22192d09e650d723651e2316353e312f1661021678deb991e50c9dd60d3ea19290c13cea5f198c8b65b08a052f0c1625c62921e0a124a20d51eea4e0da5777151a96ca79b27911467d139e945621b1a875b7081bb149c20b2604351a853c0c233b6080151c9bf7f403dd9261e41eac798e60a9328d840e696a39d2df7a28e627a6fb2b425f0f37962b05298bd3614785102a1e538671ac50c2711233b3a2f0c5b7cf333089aee422aff3823b307de5a022d4fc82fa2b2eb81f41b137c74d2f4518e7b0e4629e9e0b26a4e171e0dc3f3533bf430b10ae80880b1100d9980159b43a35129c4fb0826c6566a220c8204f0193ce42591814750b6231d07d8732d016f561b679d9871b9e07fc308d84644a180a2bfec1c7c33e7017fa3569e0f8081daf1ffa283103ba701c41200df0eb032240f2f7162b04b3b3d4f5016f2d5d4125c173912482061e9c9453279f1cc31f51d19352de00783c1c7468c31131fcacd529953e47415090568a1976be5ac15a7814d00e7b9dd342088ba66933a0d64e51387376dd1dbfffe9739fddff181a4bd6f7d147fd935e0ec410c252f543dd9d3b186233019ef5508830277e1eb099165f9712b38826324ead4b4218e78c53320ce94d641ae516ba5284f54e8c1f556d8101adc7495223e3ac1cf0a376bdde2e989303607ca93cc90b656c62e0719a15f43099be6b01fa4577aa117f2df9322087c18b1ec1d00ff433bd882d10df4c6f2316ce5fdb160854b4819aa4a81933beca8260e32cb24d10f746994206e9c91a1e8dc70d713c5909a618c156c3f1e86ee7ad1ac128abe17faf9ad74a319ffa720a0f61b90e1c696726d071feba1af60e91f28cbb165c23b9e17b315daf2fab0a21083551ab4e66801a44b85d2136ff6a1028c8ecfc91c0e5957f07dafc89a21d815f67124547672371ae59c21cfe65dbb091c41b500b6e76ea512bb17c9009bf94c2a19e5272ce0b8b1e79019ba15313206e1e85a30f8ec26809636ebea239108c453aa323b5f235cdead12252a5d7e169923362105985da424dfd7c6c24684390f25c40b8291e7af78fc3606948560ece72fe3072bf2bb81b396dfe72975d145b148a999c42568f09c918d592852220ae491d2f025022046d676e8920bb4347327001d78b113c23f141b7df4732171d31365195f6b76621cf0a47317f351ef43bdabd204166ba8d0a224da821025650a51a14e0236b8235881fb421bac5d500ff7c1e8409dc0b7982e26ccbca3c2a814950982f8c500c24db73124934118034060e73d121bbbcc11f8ec82f415862a6fa129b8016208702204812a216cef253843ac70c8edb4cb0ae635b810b195d7ce0beb08c920baa4aaae0e642d99a2e88ba1d91ab688bc815dd3e137227922f0a20efe35e423148d04c37177f2bb31899cf7850ae720702eeb51e6436887f67917f2dd33a25a6916c1467de2483082fe799d1adb331142398bd7d21730eb7c81a5cb68e722d2891251743cc324236af32bf345e970cc21b44882634fe6dfe20838fdb692bfe657f31e88c587527c0708c9146c5334618e435b1433eeeb5be1c1d211b914c25a2fe15f092bb61566481851557ef974127aaed582398ca6d91a1fe17a11d3e1844e1d3257e6076d09914720c95225e27db7297a22d080bc22f7143f1541c5aa9ea3c40e2ae927a0255423ed289333382a532780aeb20e371854a140f0dbd2d2350e10492450be0ef474148e6019d0ff921ca11ffbc54831750a5f8c1d7f2561d2b1b446a7138b82f4f1be479b56112f66fb72bd5085dc07c9893102ac3c91b41cb16c7660b5a73b7608d627de708e6b20f70bb216e0d1c7ad95110ce7598e8206902f1d22d061c231a8db5d7d09da65e77183feea9610fbded0f12077529b33ee3d7440d206d0de2391ef90a118d29127244b78ab7173b470760634c04e72990aa6ee0fc93d80109f8300eb0db58b9d927636770552cbbd73446f2db3c784c27d23f5a4aa87d04dde63c8b5a0ad72c57f5cea8a48b14e21ac61e68feab58933e4d575ee85e3356b1dc207525aeca2356e4aab06588135f6c58c0e15f6532327408650940ed357f062c247767851b2733c50b3f819c460c0759d8245e711c3d343717de49247f23673e15277df664755f1ea0b7385fe971511b99e73599c642380b6f2b5c682543921b8e739de025d35683c0244e64d5b303bc6e841b54e99821686ee56f2f444a2bb30078e8b50a20b339e18719ce571e69c6aa80a94b198e0eec702250bb8b4e7708ebbbe301c871838e1cb9d2e3b30df25337306696691284a9832b3dc35ced23f29e4113285763cac215eed4c732aedca0a0cd927d9a15d38475e0d21d30c41934cfc480ea8293a31d06559a1242ae08eb1665c20cd1d59a5d191a8b8ad4a0810ae4283502066bf07822698f060920de31c168c9e119553949907a095ba11ec23cecf2ccdc6c2a131c253c9202c7bf2b2e513fd8b08eeb361a1463a73801cc643a2e0ceccbb0f235cdebff1a6b9e2e00fa75b97d3212cc8641ad61ab3e1c75edea21914ccf92096a3566424479c79c1d6ebe934188189ebd2bae3e94116b19ce5c0df35bea3367542a0914ac8af8321660934d23b210bef1da79e84e15a381e84122c668870efe8d4f30e3fc22b4318483cfa0ea862dc3444b7b028233ee2ede1a46f0fba0abf3e9e02fc014f280be1ab85114b32bb6c1c7f3a6b41e0f6fe2823d874ce530ab584bb1df4c6f5e2e973d3e9272dd955d3148665262d7579f8434f8fbd7f1c82fd3a512dcef17a236307ac329948c62413cc59dab0641a6a160832fef7e12b3534d50b6aba33125849a5fc29356186a10b93b976391af604b1033fb49d200a1f6462a6e6127b1eb9ca7f528bbb131318eff2965308e2575830977e98923316b14c2efbf42d6112adefc60f8c7610b26f544ae2157b0e4e4161064bab360f890dc200ed8b7d27a67e74b264968e202c0cbacae301e788bc2c65cbcbc1d2aa291e215fdea081109aa6c71a5cca6dd12e4ceb2b3d99b439e1104e6c6938e190dd52ea8e9d6619fce7e4e2e8d91c802cf54ff2c3821dd9fe22d80c55f1b048250021c9f59441f310c40a1d049f92d06f3f566a3f7575a9c2799f8bd820501c03021200450409e72916817b1e5a38188d630541146bd29f15ab6201f2366464650c835deca5501312f20bafd0b7e30e8beafe0b6c28ddd2741ac20533e65fded1ca0280a41352a62e510e27c5e914500863119c9cb49f2e01784a13901da6013452e528c10bf800972617b2c3c3135c218d0f08f5e1e11327999114fa434c910827acc322964d052388eee96c0734ee3943c741c81527b7cb9db16235d9301a221963a08b079d8711e9033732fca8b4c71ee48d4cf0f9fe4f93106d621f90b3d2ba8e1677bd1e30ef11602115916954027bf4ced823fe5e5ef22d5a3f5133c2a87645d15a44e70f2c20ac82bbccb59409181ee7a1e236d6e922348cc6631a86f0101a534fb6e0d59c12d81a3fcb8b819361a2061831c04a808b2047f3071185b56073f874341d1798bc809cee8f950996adaaa0b0cef72109585fee809ca5e52009b0da5c40989cfac7078447dc2092a3922b0d23769640b31c7e960bf3f781509f8ab81509ab4f0cc09b1d94f609cff8d690a1dfe3c40971612630b3fc839d07f8a4f9b077ea2d33078e2bd3b075bfeaab09acca1860bff52d78091ab1a2209fdcf92009eb58a950d034a6770926be4a11fee8712a073e413e4095ea10b7123b232a60e4aca97a0b79b35f10e556ebbd0c0668a6116b67efd507af200fd0958ce7880994303a45747bd1091600287e933b82741a138f766922736b3602289a74d702ace163422ec802d992a4a57f99241e038ff3198cc8392a8f3c36821b7a087219452e77022f296c181ff04f7542065c65fd36c6561b552536701417f88ce44289ead745119989014121207f501320c302e1bf10280e1bd9d6f9a1431a4a9f465f531fa385a2277634c91a1b233e4241792f463bd0f1d09ec58d3238118ce31e832658494a1d374371b561222d445f1a537ec7c7b5432b0eea337ee1fb8233b621c46222686400341d6d4ab311ea58b938ff48cab34239cc4a33b31ba8f311412e8331ac0ecfa3d27a091c2e0530ab23a8bd179d317d420b82f127cf532f186d66131f131294373ede3ef310a266b531467ec912f3a8f0cf327ec20cf2caa29fd331b3fa282332431767338e12dc82f306a97b3c6fdd523341445c3b3373da6a93915a53e733c9b4d10342e5ddbc5398f01d71f23c5b0237020d708303f53e881944e2837264bd9a1e24726c76c093addd9a2a0bb05352a353107522106c969246fd2f0323a6cdf9f252ef99dc257a87d07255006d1029b4a83ce3194b84042595a2285235372b91245efbe222549878bd1e70e2cd42036418ab33b65e4a3314ae27201fa89c0f433b37f16b2866e5d9431846d52b49b7494243757d2f141af6f6460224aa1b110f6ffc6a939f7f97a326400d21f526b30d6c144b6c37321500681b1350a696417e437d091725f7b9b174449c611366e602811922907e132a7144b14453d48919dc7287624b52b8eb0eb770289154141862239eb35080c81948d520133503d47d70dccb2a31969f924e6fa67c2ca3a0802429a31dbe1ea1f9886110eeafb31c2f219502d4a019061e797a8c70d4137f2b223f900c021617f8261574bba352ff3b25693ac99352a19a591b0c0ba6d37901e87b079c129cd37c31e200afef15200afef15ed6ab9121fcf4b220e6647b4d1d542b2570b7477fae25d346ed11807a94e20d343bae732d170e9e437e6d9041fc90a31812db67dba1ed165ddc34814d361108ea7d5a34accd22838ec15c4027d3da4010fcbc289d12efea57e34c266b0c39e09d77521a8f8dd6355793077113cccaf627c8abe461212ba30744acaa7b0246bef9b6391a8b3f429c559042207a60cd91266df31e15ad7d5ec1e0d46f18081c42cf336502e1cc244ee3aea31815dc36161e63ffe3153efed10d2f5530c1909e3727145dd1ec534c10cfd30876838a413bcf9c9d0faadd68f415e7d0de537424a36078796ba507b0cc8e8061c44c7118bb2e68631e6a931522dcfc89149ae2ff1b207b40f36152acfa842ab5ba528228332a3f223d71fc73329b7d791fb64a6bd2f97e731f35a41d731102a39b6e203b5f00237c0f58981c1f8d20d144ea5aa30de6ee86616a4998cc259a00f9f1c391f90b171bbe43f19363d1c91b66e555f09644a9c3183dfbac20d9b90cd911842096938ca864a22945d9ebc0f7ec27c9145410e040c16ad3f608204e30e0d6be9cc03fea7c60e203eedeb711533dbff46580393e44691dcc11f3e3703917b2095fe0ee46d87f0afa1fd53181ada9041a5dd2ec41014809ba12866c6a90f8c2751b0b18a15ba0dfc454110cf45b4100fe7bdc7f1343c591d1b9390b111841d865116fb3f0922fd16d2631f7b2e2e40b6c236241c2aafc7c2cad1e31f24056f4a31f82881971ea996fd1121ec87520705b109c13fae2fbf061993efc1e3bd76dd17245a4880d1fe752e2a040bdb820344be6e3139d4ee220143f69f27ce1112a1bf2e4ebe0ebbbce89167490e8c24865907f1af9ec1382867e871012821fd3d096b827822cd0571762a2904de01feb91a9f0d9771d242cae64f310c39c0b14257d5ee922890a620f13830974d1b3431b79147ac6755288b71b793ac6b9892144b212890dfb8d6ab2c183f94d231f0025f1cbfa4188180e1718c4238846a9180d606742737768292102c2dbc26dbe49cc33ef74fbd12c5f04f92ca8055bb11c1c46d10fc7231120ec8659d0222f28dec10a14a4f21a5f57b831a4bd9e4c23902fc110fea2a3fb14a09f63d3588a27aa0a24e4c9526a920e1e28db703540bb3a88f135ef6a1aa262c98cde1733f8bec09990e8d511f2f0f8c1dafacb800f280b6c222bf102bb12f5a9fd10a137f8e5121cec46f0b09b58420b149034a0ea976c552111346db259cadb6e4b944a5da204332fb71ccccb33e14bca24fe1fab56653200c522ab103901af92023cf13a17d5166e835dd6156532f15653435c5aea8925290eff52eea5a2e322107c8a9474c8de460cbeedc0639c32469b124cb1b07393f3ae641a08393942690bd5052778006c332f7e70452f315611773d899bc90eefaa4ea25fb7ac342603638a22eb03ee3f1960e9d2d29f288b2912c9d662b2047332862af4caa7f2987f533031abdc9332e711837f253b88b8f2960d664329efa83b913896f8f3274fc20c43290cd436379858a57168cba6401fb688413148c5584a19e86c3ae14dc5955d1bafed89415102f310144a237a61ec0d30d50b430dc53184a517f22e38accc415f28cc5714819150316e5855ba13df109132938a018d0d87ac3f826dfd64101e1fda6b626c59bfb9228eb80541975a3c840bebc55c2167bf5cbc1734321a614b50f1b1301324f3a2ee2ca9022e9374e67304985f0d22487607031acfca133cba10b77109202f903812ef97a2a68793e626a99ff3617e67b23227970ea0e276dba39a1201853b92ce81ece33267983cf0ec360b822eab472e60fdf86a410e06f82cf239d225e613e360c960d453870b3d26ec7ad1159fe6a11615d214a1a4c3ed8809a4363462b8b223222f1dd3536160145e742a66723b62851402e03e8ee3eec487df0bc025478ee203835c8238312855c24335f5ef6e2384f07c2356b419582cc85729c42ba36244187e4ba0b15584bfe208e30eea314416b513141fa384714927451c3847fb17b1c1735f8b0b3b1ef21159fa48bd4705023d22522f18851fb49a2e411f68a28f33012a90521567cf02123ef006e49dab78f0693f267113908795a02d54b4bdc512ae4604239b9b39820a6978c11e661857717588b19520d5353eb3fcd91c0c38b208a2a572d460b62ef1273de248fecf4633ac8a9a31622c575109bfedc7616c6a31ff375e352f23acf0f5e2102216c2f40a2afe4029bf6e2ef234bc46f7246ae723111fcd5156097102a4f071eb74d20aabba313129a7975a1add480d8127dc5daf2f184370f22623fcad0ecb57bbb1f832796f1c910c3652916f773c1ede870270b5b3be540c9a0ba050f4ce2ad90c0d81dc3080fad67f096f030dd22b7930a00b00db9af0ef15ee602c3efe43e2fb0d25b419f56a44507aba846e41bf085bc454aae1930b18564a9088515f772832611f820964836e26b1e973e23c6a950d0ad9132220903a33ac0764fc36b262c882c2083ed3dde0a59d88800be3efd040a17a151108d286b73087a7f7a508717613106ac01b7a13b03983624776ceba06ca33c231dc7775600a1939e72253b27a7421c3a2ff5290bca7ee36851a0b7098fc47963096ccc620b821ee7b1d78805fb1def1f64e15aede785530dffdba398511bbf2b73929453951e976e3d759b51239f08d2bc3846deca43163e7ec0361520df834e29ac163df811ca32cfa2e31c152c7bfff1d88fb4550fe12208b383d4335c4ce66b7fb1345ed83739720a95131ffcc5c62586996fd17f44f34a1cf13aee834b6325c5342bea6866c0417b7736cb96f8b3bb4a23e436c21219b3bf1035164ed1c8e0c2fb8a59d7207ba6b5610fa3bae61f7ad719d2079c9e4918039f29b3c40c809130abe11432389e8365453ca8bcf394cec8b2361a2681831d8d3f2d340dfeb004a8e6d84e0c2f3daf1265832bb723097c91a2f93126d0262a0c4c72da96c03b21a72c7fa0cd47c2c31ff12ceac199a027db2166ae87221dd2166b0982a1d5a177c523b9368dd3bc4350b228591ac12de69129d7c6511fbc5e5b31bbe3fdcc0b3e495ea0d4eb8ae01ba719870273ae21680d2db770b1df502b22340bb94fa6fd005e8d2762cc7bb1f6de2fa227032a64114dd1487d0e612a44320d6b8b610a962798609cf8fa03293eea0f62065b8623943e918cc217e84cbd65d58a78b0b5b6ffc636ec24d983817afc30352be92ce26c966b3e292dc180c3e047ae551390779a42915ec288216181dcc21f8902c2111785c221a767ceb8271caa1868f6a03959106a0395910955089f18a4ad2d4154d8b83b262b70e5b0b679e6aa0efb58dbf33f90b00935d0a333f0b8b71c2306a80e7863332d7d763b012f58408e26e4c513dd01a500daec8fde1a2ad6c030f0ddfda81c454a94b0fc0b312406c863cda06ace2683076d25dd230f217aa22f85fe95013347914d19e0e93bb20276cfc52c37468e11a7a5587e143843e321b2f5060c20e2905ce0d75c9fe44048b1c4b1ee9c96d739055effe4874b041d3230f29aa32b8520661d1d8410f2b65604f212a84c16b1950dcc103f115017a47162fce32056cfb4419caa42d4288bf90bc16fbf81f31a39fab5f1168a565909e715eeb1ba4c47612fbbb725c1c9628c3b21a7e83b5341d6eff2634aebc6a1f23434ee0929dbfb02c6abe64c18a6e880a1cd55f1c34458aee18122636b680e7da72d30fd1278be0f9c1b54a0daf5a3c40fecba63b2996851d014b4a05ff189100663116b6d9a9130b19af13b0b900df2f531e8e61908e82b5099b8c4cf13c22067f1c93806ef0a82bf3c51643c25e912908d54013e93a1741a3aeaeb9227db866313cbbdca822496c1cc3aa2fd2d034c39b2d0420751ef032b5c21aa12b6d19fd4ca7acdd92399d7a634c71523651ad6f79701dc129db81d7e88e6e1ab1648242e43c678a136a8687a1582780261966ce3e13ec2318aa12681e60c378fde0870f57be0de3711de8de34abffb6f3a084ea13328154a381be289e8a1ea4f7876454eefbd8429e7bba729271847c2675f69a529b0e09fd1de8c1c422d1f09a9c38883169d27f42d323120ba660a44a25c2c41e29dc8d8289bbd5e322a3820ee3093402751e3cc899e1e741fb7f45cb441c1296ec6a3b3c9f3a43809ff4212225f5bab0327f01768127ab95ffd20e341e7b4aaafc9ee1c0160271211436d9b23f61744637ab34b082fd02e75c0a53503301465e112c106c90f7d4b1756d2142219e2c613f523fa61507617d80cceb79e72866fca4814bc0464d127d54b1a0d7304a0b0f5144a690857121f5149a9ac340aaf77b7567d7080b729f1bf97f096a6eb4c4180ef22d28b206046308fb136c2311e813b110a82b7e0fa6ba196225ddd54f28f62db46247272ea61b07fe2cb1bca2214b180ef10560ddbf6fd51be815db723f7f83b92e24d74911dc8df0dd24eee98d83686dc3ea3010dcaaf0787f452d06124498027a1cf6ba2341dd9920905f1cdc0c34734503b903fdfa1be2b3d693ca80da7b237df48981abf278a20ff602922100923db6129fdabd1103a66f0629e5285241306495b91d14ba0db4d64eaaee1aadf15da1b168c3ba26445ab9f0a9c30aad332b1e18b099b3a1f02298205f1165e9962635afe696b2a345e79b1a27a3f2034be771f126359b5c5233fa8dc04d30fc43a4672ed6ae1c95f9a6b190ba4fe122bb272591a3b70d292645e10cd1832270c958099a10f34fdeb4f4209945b1017d9716161f4373b093d53e070522947844e21329cec513329cec513894fdce203778931216fe1de81a81e871b2b04838f219f4a08ab24ab838290d4fffaed0aa8f086d08aa43b2e17c74f995178c86b832a23168ff21959c98c33526dfbb17aa977c92c6517ee2419a824621a7eb186c2659073680eddb74c71623659b81cdd6c59b1753b4aea3d6a64a562de0b6df80e30ef0db1cf00dd782063e9aeb2a5dc987725a4c7b5c0c49b8d412e42b67ae278a58fed24f25cf6321452826f24fec6e8312e180cd30f99751581b2f2f3d41048578dd1018814a63671491c1280c508ee1343bcf1968c57dd25152d3764a87b7f1deb1ec18e0f809648e2b90e3b63fa9158c730be22f04239b14d086570191fb82882781a8df5104ec428712fcea09d17e2060820b62b6ed726c64b43c4fb4e20963d144135c18af2dd4d5051c03335022343112f7285a553abba631240fe8835736222afe12aeea6cd311d566f13157c4609314fb43e712372bd9c74aa827bee212b90d89428810d29553e0e92326de1901119ac34f561765769a45b9512a140b4c95325133701c3907e0142040e04ea7f62c70e666f4a623d0c94f22c7ec226829ce7333850265215ff02d1c11561f8e0286c902701e6c97ce61570f32d21562309a426360ec753111a82410b140fa32241313dc521c79eb683ad6c763d23fc4251723f860150217b1dd6626cb4cd482318e38072366ce638215398be514587d3750b70f712723f0a3b001cce66a2b2fdc5d34a236dd3f634d5c1ca9b2700a447c1abc18f26141bbdc2c078298941319f0fd885c80a27a6101fe42d8104d27c0b1736404650e18a64751edffa0652ccd2688a1568810312e295812b413fe976716625fdd720974c09f14a3dc75b2a664f6541289c572d11c9c702b16e79588c1056a91e81b3412423200151db7174dc0ed628de505202153c30721f3223aa52b0e6147a2ab0c6f901ef0d41c810e7e234a29185940c13494d3680fdf1136c282844e30371ded9023fa82164619d6bfa712ed32870f3534f16313186bc1380b2de44562b5a0aac51784c461232b63d6ab1e10830c934b3c54dc11f840dde2776a707a1edbd49ee1b6c6864c38df00f79262fa0036192ed1dc81f6efefa617155f34b141294a92205798d1720874150b0deb8cc2f20677541d0a104b5bd1c7e8de152f00fceed35a12753238d1a3b4d3abc97bc508b6ce28a2e576794f32c212ca80c59a9b2d3264041dc0d06bd0060eb2184b80db0b8cd015f5f765b1196f47e8428396bbe3dcf7943018a0682ec45fe4860d0a40d762946a64164624efd36380f2a0d78e23fdd84ef1536ba2381ed2ee32c3312dd0d111ab96d662428d9deb136d466ac22bfbed6c16fa8be3f238339e9f1d3c749f92cf121acd0cfc0415e0e30471720e1f7319e0f6615b080e366ff4a1791bd9c41386690e6118f2571931cb46c2c1eeeb5d84317f3edcb1a62fb2f53289663de36ce3e81f173384abc32c0440a02dfd2110214a00cead204e6b44032e1f624c121f153d70eec31c8c34f6341364f954f336345e0149a1f0eb8bca4816cf26c37f878c1f328b2c68e510cadad6291d0642b34f83d82552633bed83f3f936a01ce906ce809bfc39d7481cb452c4be30c344526429eb8670096fa0120f3756f0e127e42c1d59f20eb49621db1732282dbaa211e34c810e0c93f1c22e1e632c0d0a3f6f711fbe26f60fa2620990c676c3041049a23644410de62d3c08deafe2d5750d6d0fca93fe62385b7b9c1f7608e5e7658dddb83327275ef32beff5832eb52c629200c468be21ced38321f8567f55290e714c40f2e1f4152a22358e02bbb83692331ea3af5192a54de91b4a9c60309175dbc2213566ce62e60e3d1f22ba24725234d35d1a0c28a2f542427abf7e41f4bb1791794f124f15918988911f055af41f050de830f8e5cccd1ac5f63c71fa050dce1009a6173328a59f2e351ffd046327e16a39482152e151be439b292048dbede463448822491bd1f4c4dffd07664ee922a0e0b354bbbb4db1a941f12a68c61718a9badfa3a6e40bec21505a85f11ad0504c1abd2dc09240b016cb1ca009e0122e76ec7c449ce900a156d6fe1f38fb55bd91e0e7662938732b2474ff86b9844004d1e203c9ad86ce261f3db88145a19b1a4567ac5024c63bd1b321d6b49b547069c0754833aaaf70ea1077ea23a50c409123d7be9431b2ed68737bcb58652f2a594ee21190d1850f936a6dd322a0eef0460bf86b84c7471b0b1651f1f0132d61276b3ad510f3121a8a92e03399fc816167a2fcea187a8e69f3569bd1e71c6d38b14188e95a54362c822e940e996d2e32d1aa048322c769f4463e7fa1b3470c86ac36f542218111cc340622d4421cf1e1cfc9f7187563fa613bbf4a5b1c14495335c2bca0042a1fe29de1c84d01260d359b68e0da54ad8907162ba4a234c07a3b234d2fbba2e9614cd91c4eb88bc2e7627fa4217923b8525cbbee633e670dbd818f94bfd6223c8b14d3871fa7d7389ed2a9b28a205306138eea3f80f7476bd064f50315a36cf8e3d1320d3351574dce1eb42ebeefd321c8bcdc5012dc6db6e288c7a25b0fdd38817460576e623575e15b4162aaca2531e3af81d2b8ce5af22b6f40248277dbe90a39f57366924df4fc64238ad11ea239f33cd02d0cca8a21c885c99816e519ca642967bd463b59b8b1a2f61e939f2a6dd3bb7398aa9c103995c25932eb85d2cd2ee8472f7580e1b6a63be68dc9621612993f3375ae6d513a74d1d51d399feaf17f479b0211ba7d32e41007d88e3506b219930215ae90261ecfba02fd7f452727d7f4527279ca84bf20863f3490c563919339c7aa6290fe55aec707a6e117821c2857c63958ddc681f8e9cfbe2107da67710f505ca912d02fd681682369dd1e0d0b9b21626bed6a14db4869c47a2202c6254ee9b4d4648db2032e59f1b38195607d29331758cf62e66fb4221c359914d28e0cfb3006349adf622bd313d2264a9fe7c39bd4e1721671b51c850d4c0c191320bb799181931c1044b8bcba447bc2aaaa33fadb4e61ea046dc2688ac638514b1a4005218bfbb071d5b00e7a2716d70202c3b1b7ca30e423b372ed3de63212df9b2823be2fd052082dd508429e8c483933f2d9e1746742612417548c30127cf573c5232c0bc4d1fd57ef171ba8ec90a0efdd96d711f90ee321efa56fd43fc65c3ae1fb28458e1bbccd96a34469680c4621530273671cff82379c607fc14d3988ba255f2e3b9218fc17d31bb8a04d520d248b732f9f2e841465d6af172beb7ad2260d1924a11339eba05189fe3a9926c9af269478a1036565f6038c2312bffa333f1b8131937d493537282b0b73d29e8c07241ebf3e6253ae30876c56f5b29151a9e96b041db1ffb7518329c258175a5dd892120d75e816da27cf81c77750a6185e2eaf1271c4cdc8182081b3311862a53c1bf3da4ea1eb702a2313c4b82a328f65240234b94958642a2cb41422670addc2353547bb66513e2032e18b1eca1b765b1da15c20e65147f90970113587650e1b3239ee22afc995d314c9f21a014136d70d35b3d9bf60d7e2db96148dd7e022552e73541290d12c51802b813d0accb67f811da341bf2dac2423f23904184b18e66a8032780991f0467d804701094e2efe2b65a46cd2e93e17e1481df2cbd159d0b86c181462a7221a9f08c12ea41ca8f3cc1bb1443fe4f88342c69fb162557ffb8df1955d7d2120fea5dbb0cca7e1a70e3e32eff3a4c78b16206c61c072577cf07d251583a7218c80e88a12fb20e0d0fb36bb562050164ae18559e2a42041a4b1e32193a1ac4a2b3343b1b411029e2c65bd1f50e3f763103d2f12fa52d8bb0909362fa1e2317c8bba1435c074e061de470b73284bc03a6277e9bd5116b56df9b32e5613651b954d3a42351eb55923d13025f1b8e592ab59cba2ce70f99e4a8d1dc4fd9d718e15a4091bb585f0d1da640c4315522694e4df116d50335f7c8053a2b7c721289da1b3c10c4932871896c53e26f823d4422faf8d57035c8d672c28586c7c931c32fe6a12b9b985218562f92c2a0bce0ea0e0434267216ab5c924dd0684c664f2c555408112a0f72e7fbe59029b8d273138c0894971638e19771f86b098621316f5690dfb6ac942ac9497de435cc418d5973b6b2106e07d3236be153494228ec94a51b2df38e81edd4a8b72c8c5de3e30fc59c5e24a67b6f61d3cc8ac81f208122e2bcea7c2c241d4ea0323ae0a2192ab10a12b09758f3500c94845694f7fb644b1d229fd3a0b08fdf011da01b59221fcaf3ca2b9ec367c2e1c7aa76098f2033b247975e9f0dcd1bbcd468ffeba12fb99dab8156df7cfa0a69d0f960848ac94511a37de5d2a8fd896e182e2029d2cecabecf31576cda65584d62a848fb8e9c3202a1474f4e67f96f81492c632f1209417c5109557a9016369878d1b0b3b9001989cc34414b29044c19acbe34f2b570d577269d982f618a874f2a125885cbf34f02da191229de1b341193d3bc1a96cbd94121e8ef085760513c52bcb5bba04bb0db1251460fc26b7fdc0bf4712b5f31fe0ec618f330740e070910ba6534b4e2ec70c13dfc060be19105dd532aa035dba2baf4adbd247d2ac532ef3c7f9c2811be383336563856232fd96082d81eccf02209a74ba1d412c93d0c64524c9136a31017115153fa53ac827fca0f4e245e5418b0d76b10d70a6b52bc9ee4f63349b4b4113e9fc82415331ff882705e7a9e1aec5ca7e0bfe53e831ad197ea43d2e5783b121790d140fb6e34fa2cfcb2c251acc4c9470b0c97b063844eee1e42e7d90d432c847e5d300c2a13d185378c9a142eb1b940e8f8f36f3485726db1e632bbdf22839ddb92f8a6dcf51335809a610c697b880d97e7caf19c721fae0ae4a7bec434c3306b1a7d53f0436deadea068dcf2b5126e76c6b22d26d343b0ea1816b31724e248b10ac3754348c8027e0460dc3c79268f44d3d1472d95132ea857cb72574ca45027255b02315951df6b471454c6e4b90736b10fe7f8230338c437330bdfe4314603034e2a19ada80eb2f0b76dea5484f8d2f108fc5e762182293e31073d172617fa993513e7edb5603e55044253e4aff8e93c5895b9608a1793660eae495621a5d7c0981e6be90b6114edfba2316de9b853469d18b81710ab2fe11a1f176126c19ce0d227f8e51b162de209113323a8fa268ce81113bc1557324a03dcf43126f8cf222f25713603a43b01d34e8d79a883a91addc5495b22735228e56d3a25320bedf0eb4feae046f8883981d830030510a01da952304157d308db671ef1350740cd225c2b8cf0e3b69c01102ffa09413abb70d23523c798e3bf9cebfa1b207b7aa3664253c5182753da81a940190944bbf10091d030603b4350caf7c4a3c6c8362dc05564426d4cfd1a254514ecd48cb01c691b0149bde146fb3b9f16fa96411224c823c146dacc46e2ba7ebc1733f24988d2efa820c531620080b2915c37914a976dea842ca271bd212b2d89d30422197336c6671994e54ec3c70e71a1065400fc2a14392ac0e4e388bcfb7c21f56baf364d0555b40be4058ff093c2bef00bc688c1f0a5fe0b0131266c7813bc929a704745dd33a2a204dff220d9e1f7c2d927c6420b09a80f31261dee6a12e082e930976a16491ce982cfb27ad22f8f308198b5455524a98b13fed4f2915dbbe31f21c6d99ac1ab9be80e2dc51b45e5381c560609a7739fc17567e66635687c2690ca0d17be45fd889f422eb0f3fc2db748d0713252a80530071364915096e3c91fda6368e0e3c8b4a22c620d78c1f5ea5cd633ced23761908614c92d371ad740cf1d7be828748f6a045d1f2c1117fea7fca5f28cef801505dd226396e608ba1528de2d41c657806b3599bf49125b474ffa521378ef043582e05846ef95b181c7b36d1a1a0f7f44e2cbf068703fcdc54ec411cd9de11d0bd12251c416289613f2ef7b50b70924d4176e2eff0168723059234f198f220db453a31a330c14516421411721214f1fe306d590011a3a2028c1edcd0837270a1211e2ec603e0a21617423d1c8cbf43e18241d8f60ee8f76930a5f9d8a71ad3e17fc0a5aac691479a0eeb2290c1945146619a5f22a98aa6330872400202dad384ce41885763935f7a3ff6426a580ef3df277ee328338ad513728b13262fbeea18d17fa877cf23e0dc8223037150dc2b1fa0950561bcae893c310d4a01609465a51cab267081955292db155dcf0ac29f6a2b590b34d74ac3149db22632d08ee6e32e38600028abf827f2f16660fc218a97ce3437f78f883464b519b23c3f25721f8053678396767f1e1f3fe04de28e264f4a0ff7819380c97990270ff015b4a16c69feca2e0df2c7e0e96e91b624aa944282263cbe8c152dc8403147c8d9a630c6730f8108a1c6e419226d343107de24ff22bf9ac9214e78e1120fc2e641825ba300f6104d835e921e7db378190e0bad8204e13eb48f36d95cb0cab5ed480e5e759a41ab5260531471c08ca2d37ea8ea2d940945f25905a2a12cb6f691a2c04add82311c42a272c33dd1362d9b5dde62ca0c48b026947f75d33e2bc77e299533989072babb31653be5b1937f188e3523b76af634bbf911683479644a51c727b50e26f83358f122a4b11e1b638c0022774a3284228bf43bb1ab7489141f9d888c25b7d4ef65243e510df279934bda527e135ca1c067a0c0508220f912120a59da36e7fb23a216339bd419d10ef4057781b0334eaf1c7f410581f6d20f79acaf4106719c6f11874bfa411337df0315168740e12e336d9b29b7505271065e30011720c9ef3195c6b3041797cb8aa0e6973dba1ebed556d1e551ec07279fa0d521ace979aa20ad9f0f520bc5d47d28dca10451231ce7240dbca663a2a020084919fd9816f0fe7f339322405abe919e82a03c121dcf074231b6a4fd0e1410b3c0a73483fc1952036d81a9f254f81f11599041bc35a216124a567f21807f2f9d0feeb43e11f6a019c929dbfb32e14d929c421dcd6081f0b19d073c16b7630c42033779b91265e0cc3190aca5270ed351eb00f2965a6b10aaae8d00a846627c38fe36c4415c41a6b1139438d4126564f9b413bb52a4c204d9ca2f2445638a52e15c155f1bc30326315aba6a762156e4f8b10139e6e01b46cf9be27fd4571c142daa247451032bd6111032bd6161032bd61235449431a5d42ed12bd23ec561db4b1c6f2840249950e47e061515f3fcaa6271e9d24c13fdce89529ae842992424050480df1ef7e408f1071f02bf9a53781530510291717a71be152c4e593115fb28650ebc8b5491109199b9306c5e6fc41e87967e10121b78915b4930e9150ee79df1f2241dc10965185e43a79488931fc8d580f1a";
+var LAWNUM_TABLE_RAW = "1155394051dbdff918284eed817be9fd810578464c10acd38b0e09a4763e702ab457d6034d3d0e50599d4d4a189df061c0323b6f60035979f76195f0fb4505702d19f02245fc4d22f18e5f10dca29a96055e4874422cd249d80977b4d5205a210aac18d4a450f2b13a48e91806e447a24ea08c5105407153408c4215c4058515c1b05e2725150e60c02842e0d75e9b170ddaee20949a6a32027de413c056f0baf80797fe9c804c7f600a0bf333d442ef1c8b331ccf82eaa17010051c1aa12b8d807954d7d3052f5c4511cc9e846b0a74ce5b203668219826b9231c222a96d4d319a5d6b8f0feba73f31cf208c36076d33e6703acc552c217cd76af09b45decd0ae28929105f3da180039246dc0035fda72607bdf391c06ae922ae1a5a5e7950d810db3b0e8398c3f1a0bdd42c1c5bdcb4d272044046053e8ce660482751c81931cbe5003ccf5b1f059408951074e6e05a094ea01b6178e8309e043ef00ec053e4c98d090445e230544b227b13b75d2232ac8862491b42283241a5125ed419c5cd01a1eed4054b0565e819d093893d280b5d5a4e325060755507cdf048d1ca9cfdf2099def29807556ce120e34376bb0494deb3903ba4e42405c0282ab058e01c9003e08c6c803d998053038c6db710333624ce058f81e7d250a2c56d0a64a97c5058f9cdc72afba1a5b2544d055d041bdab8f04bdb74970743037dc052878bdc14594824b2ffd033b20454abecf06341e49703e58847617ca957f806e0653601af320a7605c2d876415ac570c0356c31a55030670e6405e473d2d356d4ee842b647431b0832f1aba1bbd60a01057e131cb2f153606c0695ba2cc05ca2fd04060f80e471537c10130708a2298056cc0af306203ab6f0d1f72a3705748195b092b010d808b1280673fa00cb9627b9cdfbd716c4ba6903b1515770578957872a3fc8e2007cda4a29053abeb9408a0b87b61f378a56c1b11b48f80373b6ad1470d892b42358af9a316392786605e04b95d051d6dd2604698659704129eeff08af13bf40db9bd4664102149e537690be370791499960f9a5f57b06c40bf6304aa1d18e06c9e79970c166218a05e1b40ab054952f660dcfedda40ded3969905b561b6e11f2dfe22080cf2ad506a3ebfca06d03473505d74db18053a38adc0f6d9d3f80d901101a070c9497f07871b8350ddc26103172d2da0e0325dede20766d780405a0f847004c5db34905eaf34cf0439d8fec086ae46da06080a1f11308c4a1a10c15eaa90a8167fae08f90c5410336da7ac0560b9d21039b9af5a0758759f903dab6c6a0b3f689ae03e297e3d10baa9a8305f54e3b007a4d978c03886fbdd0a5841f4705576ae21030e6292509bea805206cbcecbf05cb7e2ec0634a1f541718a11021486793bf18ddd95020e042b4ac08fc302dc0883abe6008a240dec111dd06170b791b25410e80f6eb087f444760d8607ba41caf6baee05c7396a507053614f13bf217090f1d7da5405909770e0dca0f0d02969dbd4404c1603e505a9c563d03702c5370822b870b07861640307c6d098b15bc34ac40a254d19805bc66a9c11267629d18a565e8f0596b7b150ad5abf35051f4a977113d5ca100d3b6cdaf0630dbd4b04c70bc7a06196835a034ab51c203c7a4b9d05ec03d07087030ee811eff5e6f055b5a19904003d3e90434f6d970ddf625fa079d16fa0064378cb706f69b9e322b70c7b40b535bc000b101e25a1790fa02a137d031d30f46b12a60b0565b6a3015ac5a20f55f61210ff2b69dc0f254be5712d992213051e25eef0308840470697b80fa0f868c74e0e5ba1ffa0a58a576c080b2028108caff9de057ebc1b022274c38026c34747808ec4276a043c53b8709db507981622e102605ac5716730fbce8420fb440baa0ae9aa8361c13232990f0ff2a250520f55a20548406770c2bafae50624014a6043b07b4c0fc5b7b9d0f0993ea213ac64269037eecf6806832caa9037c09ae507c256b9603298b43f056c4f82603bbc26fb0699fdc5a05e59f80505121eb621dc123ee209c98fc2d10e122c160d8a0e9d3036cdc34216540d3ff03aca8d5e0572e9e2c0564fc07f042d766a204ede89d107c2b1d2208562cfbc07783baaf08f73985306ca87aeb06130296c0344f740c07fcb31880f38b44c60fc57aa440832985b9048f77b8b0f6ffb173089ed335107a374c2c06df0e4910da85118e093b6d7960945b7f8e0ddcff80a361f603b01bc311eae06c0ea3ab096a97e9827c6be65e03ae872c2166849b4406322111c03ce90e9512bd4996e0901365e60f46996cd059a5a21b0d83b2c5e0d8820ccb1e0ff8bab2759c201b0605ea6531d9f5e960050216f6d08730b13c15c1dcf14124e91c3f1708e2b9105ed0747e0c264bc3007545ae530f6fddf0c084aac1a40560d6310070f53ecb061e1f00b0ebe9a39607c4e60230816661b20fd99ea2106ea3ae09056b737de075ffb4180986b04ef0a8aeeda405514879a08dbe7c570ad7adab7054802d96107363ef5033ec596307031d8e622e5fe7df057672501081703bfb050278780094e54d7711bc24e810733f540e08dee83060458206d6082592f970505bde940aca479400f0fcbae206c4fed150317e2ca3068cf042c10b9eb0100cb0ded4808269919e03f01ae4304183fd5f2152cd5c20a7b5c6f72ef11212330e39b9ed073964d5f1bcad72700808c1e1e1f0b092b808416a2ac069d7d4682a7c783bd1469c7fa32a84ad11a1996fbae01f598de7f2545960541ef12f44d13a2b450d581dfb22f4b57028ec6e8dddf1c528bbad186b992719f522b8493656a904c9b10f0be268570f56eae5538f5d8b5551d279e54881205858c5057980dd8be3b62aeb3302f4bf9fd21956048475b06917856405a35201c080bf226a4a2173e050628c3d2b03be4382b0767811ac178cfe825125e084eb1f1d164fa056853d951028e1d4d0910a59280c569087409a66b97407e6acc0903940a2266bb8537d1065713a6403334ff1a08466f18b0418c34b808949d4e00a9260f70073f3d82d46a96abeb230f0e72c19dab4e2a08bf83ae812b06af0b0e4b23162106b98d4107b4e6a06061409c650ab199da11680a84e8071436cb50aa2cd58121f02c1e10913b88310b6ced0050766c7432115c0f5c813c52b17b03eac2f4e0b85317d21995d8cef164a08f751fe64a0411b9509044045f479e10c1a4641a0d7daefcf06ebf0ec2088cd658f0b275d81d0993e841013b67726f07aecd55c267d3706134404f6f91d43109ea0c2921591315eeadc5048d0256f065f0b901091fc2bed06e20da7907560208b0701ebded1eef83e560a9f29b6e06c7779a507fffd25e0716966b620af9449f112dbe72d0515c70c21c938bfa013a78f90f1f6b527cb0adae1d2825710c4b51c87502b010f21f7b72c62e82701b08e1b5f0f7f3c85c053483a4403af6635d186ef5f0810d04585104c78befe1b4754e07073a98ebf0c2766df005ab60471159a1f6de1b6f574790bf00f0162cec02cfc07d883d7f0aabb7ff907f900f9f22ed37bc4199d07f8e081611e9e2d70fd73f3382c9a5612db8e5ff0e9d8b0a51f70c684005d52d25603e69dcaf045a33e011302e4ab206a9e50c412a3881910d434b3352c652a3e719548f74e4a44866a508b492f231767e5cdd0dfb9f88716636e88107b8223c22f7c5c0591c4d51aef4580e7ab30aa1b321e0790fd18e09cab50561fadbf2061b950cbd9061e4077c16c7c224e05aaeeb1609756399b063f9ae0a093f9ae0a0917a8d7606f9e8b842151c9adf1cfd8374605b7322d3030efbeb00e37e2c91066e826c81a2b72ddc03363925e0985d6006176c28f6c055ccbaa20e316a88d050158d730474b1f6405b3d29910cb50887b11ca0194334b933bcb26f7c107912b63a3cd05f2d527a25fbe5c1d19933ea56162e0170c13935b79e1564a222117062d16d170e672e70447aff1e08c5878cf06285d68d07cf7b47b1aa34e4870591665e50b81c8d160d32338af080104e3708efbae66170224f9204d63d9921758399090a747dfc9167efb1011435e6e571d2627e4a0c299cd5513ee0be7322c7b9b2c3bbbd7ebe056c0479007a0cf1dd04cd92bb0193e57b601174ccc8819d9cdfaa090d3a8c403333eb490f687ad9c0b0e705eb064bb16780810cc3641910cc36419bfa147c07bd13d2208bb69206184db79890ddff88c204d5c09e3185e84f890878505081bf40ac0413b28f6d7055ab167816a3f30f20a76bef512fd0137cf1e3f99ec6087ee190f0a442b9270fae7edfc08a4b7e4d041eca78a1382c280e21e8462f00ae05597307c09f75a0d8cbc3f7057f0357b0d74ceec3155783cd503ea170f1034b31a6e0563dbaca06e4b81d8036f6ade406e513bcd06025f12208fb2cc3705d5a13ce0f092c87409a7b815505dddb70e057c092850bc96dccd0a54e63551894dadab1f4d93dd9089d51f8407eee88e504bce0bb9241a1d73505372934a077f3390104c40c42a0e3e4cfc60515f6f02100bd77c806ca0408f1f316a348048a219d11574c4ba50b49cc2e70b0ba22050b20f578607ecc75781a643bfc221cc29ce30a9c64eff1ffa5c17a10e7c9ba10ecbafa001100f3cf31050a14df056a53ca71831d1e410d31042311cdb96b27086bf9af908efeb14e1510b2d880a48cd06109d19ebc622fbbd562086a6c9720c8c70c5907a4aba8f07ec2d85f072f3246516ad2dd4f05cf192780e2f98bba0b68260452271139371383768d2094f950490a088819d3a9ddc1830e590187f07b2787f808760ca8e1a5de6cbe0bb7e080723ec2fa3b12791a5b01a54ec8a918c8a927e0b963efb409d9c7c131277bff460d26123f210d52eb570ddbc052e050d7a4ee1907d324a27ebb726c06c5546fa0520b8b430990d1d662c034ba721c4501768074dfc6380ed1f7d7a07326facf09dda465718a56c4f70f67c32c30f524bb3226d64dcd621427f3c7252f9507220ef340cd0976f878610dc7321c0eacf99fc123818a3e1fa59bee80a6e2942d23d8ae30507408cc130859f29fe03070926b06ebc80410538b4a2304d11007b04ca4548b09a51ed1b1b1ca19f5398e3bbfb0884f3e9913b67a7771205e2acd13ed795d00932db913185828f530d70d9a5205aa2089f479c2b77708cfb6a1506bf23ef91712228ba1089c152914dabb40c0f1fc18f80af472dea195f52fb50772ac75e0ac3790ed0933cbd6f13959ef6b088eed2461fb7945c80465f7c8410bc00fe62b9cba4bd07a9fe403060563dad19ef4663427ce54b7f0a0bc113d16c588f9c04e8c95a90672d252d1390bff1a0e3f2bd84110baceb3125eada720bd2b0576072dccb4021392322e1895cd97a111d0eb5a21fac62da271ff283928ef22ac40ae6a27ea042f932522009257a61602d42a32167530840f73500090952fa3781a48255bf12ae5f933064d47d4305c2421f61cf655f1711f3e8e00098038e3008114070307dac243e05f9dbcc9082e0ff1105e43da04218b66e2a10877c12d065d106af24ca9363305c5643430abb64a5d15efa9c4c0ff126c6d094d3f7ee0e8b611e030fdc542b433ae424a12e8e7500281c3703c1e2bd3ac9139c2ae291d7b493190e6cd7d0715cea186b0605f0b4523f9038ce044f932be0549f5ed00a010b35e10ad8209e0b839c6e40ee99d4c51214017cb07749138a06537bf440def913e2052480be6127b10f221028063081865b3faa0799bf4122b57c91b2097ade99f23869cab31e0e8a58310f3c1ca00d645ba011289322cb078c228ab1494eef77147e61a7909c96fdea17bb7d78f05efcefc9055789ada0db2bc1131f77c354b0dbd78baf1a2e8bd8d0bdaf994706f4d18c64b4c6fe9b12e9143231ec79716f0525e83561d66f6f1309ad418fb07a2c42da05be7c6e90a6b77501176e836890dac66ec00bcd58c251534f6e5a1254c70d1070dd4a1d0958c2c4c1148b70bf2177893870bce68bb41efcc0a1f098c92f2d0bd28e5d90b460563a078ae7df60f217eedf0761c561906d0a0f5f080a7ff1439794ab6a0b3da693c1f41c8659074b42db1040cf519113116394722657a86919ca011dd0e6d3cebb0ae96f9af17aafd14c1fbb587850d0d6985a0b41244b531c5d891c05a2e23bf0f7acc15129692c17a094fcb8342337f14540f7c37ee50da1019fc10277469a0a64598bf1606c313d15b519ca60bdf774980ba3475dd08d9c0e212ade31a5409cb89c83112e63b71053b15b5e08351c7d10c910bc0b1781618f707550414c1546bbe3e050b7729007f4cbee1207f7fa5b0c50eb560097a8fa1b1fe575c310ed01f14015b584a420ce540e790f80d211c1367988bf12eb338070fd36e7de155002a4e16f8bd5650e830610c0b81b2d0305cfc1bc725c5302d316829c466119ed1cd0428e008c1172d738dd0edd97e88255a86ab72d61f756716a36d1051d5d5407c0769d07822adfecedb2570de3f60bad890e212992f94511b8b84320c869d203060626393121ff7e9e15f2d878805db13f741473e452a2b8e9703513c090fa90c867f7530d955216043fef790c153bdf6ab0ec4b905b0e27dd2e014fe6e0a3050ba545e0b382968a167b79bc9168d616620380985aa138ae75cb20212fb095a662031e1f464f2f61032caa61162ba31a80f7e9f05623cbb17eb2b77c5d550b157e5f10d92f4fe618635e37605a1efe7822ed3cbb417010f7c248f2a73812147563b11181cf2de1d95c97ed17ec9e00b1b8866ca80379167e0216449dea159ff5ec70d1b09d0d34159a0f847ce94de61698855e5320d7c9190a45d72af0f6392e611bb9a7abe04a2779df043295a8704b39f39925354744d316460dc715af6eb1f0575a2e0026392e9340b7be061d057e354350cbfb29da065b00e2811acec77f076d1064e22e6dd2c5123a7c65d15b391f090ae209fb824b38ee1421c08d86d21d5947870f94df1191375d03f925e2469131338a30e11784443ac19036c4950bd895e533332ab2760e43caf340d7a5baa7053f59fb609e583e1a1a34b01b909fdf65670dec4f9892240faa31194e957d113eb2931725581a5b3060c1578307bda420e12f9b31a307deee52e09ce229a330374d64609961dfd70f9657ed926fc08032308183c322b6ce01fb10d27ca4619235666535eb74a3d1cf14d80a05f3339e13e1fa7f67122e474041b0ca8b57056f9c5ff19d6d95572565468e70ca12fc4e2189d8f980dc12a9ec0c458c99d0e4eba90a0e0c1118512d66931505a7a0ee9040c291f0188e96be8222a400862349ea41f1c5a55cce1378918070a60fcb1709c3a8628059291ac8263b7435b05d3e4f0615513b8f31c2e7029f11d2411cb09cb20c8a166118c9b11824dd811c3d47e6216d2cee6841925d4091747484d9120628331068675cea16828d92611562a0a72fa6eb976184722e9104c1ee87212e8aa2f52662d942a16c705ec1210beb838052c4f3293b51adb981194996461038d83840e12af98311bb8e41a06f6f8301034a2109916ee24fcb2618361d60469673c914d015de91b16339982e5c770e419268317c2077c8503171d031e428a6c0925128027f6b121569323143da51141e5f687ec16c4d1f8a1d4c8cc480c1753abb0cc40d85c1f67c74702190e956f16737e347135349f3307f2cb5ec1c8165e6e14b07d76a2924597d9245f9691715f81af881a8d6372b05d429ee005f378cc038fb1d4d410e46ed470548aabd82439febae16589f8c523d3cb8c7337ce7146153eb575f2d46fa25d0a5cfa5b424fb776fb1642d78600e58edc7f1cb73bed70692ae925199dafe931fbe4e62f46ce1ef57145fca0c713fc64d513e928a0bf2102ea4580c041486d289f88dd421f947666128b3a91d1582d8f182d480b36417786b67d144da1ceb158ad0be50768dd4de17777cc26048787dda0bc0de02d1b06c56d811d59b2d21bcd639dd07e5c662609a43428f0e3f57f0a246d8bf8e168a1285204571fe4e1087d7e502023c20731384776e411addb70a2172d66db1257bff392306bd1761fbd472b114ded603d20bac16b218e194a8505ec2cf4427e9b9f2020c35644015bdc817b19b41094d0f78d2eef103fb433f1ff1dc91c34ef18c0e07486b2780f961fb461e9e6adad27cd3c9ca053d2b1450b0ae497f1221205d9266f97bba289371a50057c541110858fa34008148d01e060e5e05e1646dab790a0e89783208cd50f913d3fb1010c9c9b60725b1822451274af1f3218d2ced823fa970b8245019848129341f920af4fbcbe17651536103c85b7d80a04068e70fafdea3f12cf13be90cd77032a1630038070a912a88a1e8bad3d20c43ac5dc19bd0549e1ab559cea18a3a64f610b966deb1536a4fd606483e9f310beb18a9260d1da67183d78a42184ccd033267d7f3880e1f188a6184bef8810dba204091887834ce0ae3276fa198b98ee91447811b60a0832f7826bc158140f4eea10e24d3c5ec107941d8590bf7c45d4116fb2b7c22bd6e3450688b94690819dc6d506650858908a459644066da92fe08ec50a43081d83939066cd740c064ae72ac067a15bfe096ae7e060e29755e80bb31027f083235c291af9224231809140c81d40c210d20312c9e407dd5c4140c9165ca908ee9c7c4127c918281de08ca93129428d42193c21cdf185bf9d461e2329dce0b047e4e80c452420a17df4c4e61953edef50c8d803df125250931129c115f00518a3c03162b78bfa14f9e6eff0ea2c39bf16d079fff0ef9b3ec614d04850f0d3e20c6b0c0117dd510f1562b31073b44900d5198c180e549461a112c43c8d0cafcaba912ad933160ea3dbb070e039874b15035e56b12c77a26f1625f69f31219ea0ce187f95379125e24ea91597858830ffdc5fc812bf8671e11d6d4c3814cb1ba3c0f8a4a61c0f200b6350eed8863c35861a2211836269ff23b273c9708d6e674e08454c9861bfd577151bc41e3b604fc6da011ee69095b066b7434d2536b618b12b01a7880e7e7d87114a94f15f0e61f7cef17870a8f70ed15f92c151d34f1a10ae4ecd617aa7eace154b8727b0c2d34d6d13d40ec4d15ac2eafa18169d7ee19321fc6d0976c8bdb1d6cd208513b927d451e3d3b9dd1390cdf0b1bb96b70816d7b8c5e133bf93c2156c810752dd8f04a62313e7a6b1826144ae11409f7541a09d99a415e21fb3109e7967091548331e71d20ec6001eb6fb5aa193e533c30f2161fd007f46655d1680df69e05c27a240074a49d3d12cae5d750e38d875723fbe914714e43b4bf1dec20a1c09d6e1bd61ee758fcf14e70dba625737f68317277f61532b4fdaaa07c86853f114f0c5b52df83919923a4c01ec21feac3de091a8c46315113c4ba0c151a0480eee8f8920a79ff1f3071b2a614171cf78c509bad046319fe64685200eca97308bd856be0a942409f0d9374fe4147a6a64615a3f41e812d804cfa18eaf32011cf613dea16c91deed132a0f8582ed449b8705aff04751b5f41f190ed1d4a500f4c697790794fea160f2a0112d0f1abb9e60d6db87b4190fca64f11e32b7f90df3fa6c6111d762321bab3104a1aabda4da07208478b101bf69a70f33571f217f89b35b21e974ddb0ebc0a3d311cdd2d4d07fbac461053fc5baf139e6f2f4190a99b5510a7573f212d49a5d9139680b021692a77e40d43905ba0fcc65a13171a70f360fb8b3f8f10397152c094b96c380c6bb44560adc8c8a116283b89c0d0c6f61b12f7adae12d844f8d90b05c937923cc25d9718796a4dd0b96f4ec12509f11ce0facdb1f6103856112073a4b8190d650ed0b19c6f34121674074d9118c2f7d413e35d91e0de3437ef1c65da03c30cb283e62563cce8b22f017f7b11be3fd9f0f66be3c50df0e09520ce707bea05fdb0e3617ef4732511ec239550763f97300974747bf2371026fd144c6c1b90bc70de05181a043bc0a0f5217503af0b8ff1e7d749882d81b3f1e419271d6525bc5867121dfa63fb25c4e13031b76ee03a05b3376960f11ef765129d3c7f529bbd4e9f03531ddcb1bb7377f40748590c4185bad8a109aa980e210fecc9cc1693286621035625f515693101606d60cded08c592a361309ecb4c153a196c21f3a196c21f4ea48ac34dbcac8c0c505c73a1caa8d03516f037f0026e167f3a03eaa7c221bca0060c16c74d39c1c44dfdbf158f91dbb237c2833914904adf1041cc0fae0981eea41085f53e8f19f8a07fb2042a46272b77eae0d1f5c64d5821f330872123f4edc305bb836b52f8aa9f6e0eef4095e0a5cbcf49107d266f51cad750be1558274da16550f40c058294b6511caf01ef2334558cf0f30f8303164d7029a17625e46703b6dddf00a2b0b78234e6e5e912c13156a106ef40eda0956faa22217c7fd910952329d11cd7424a21d802957d20d0d8fc112c4f12282b1c2f15014efcefa621c56642a18e9afb7f170a3ea32423e806ad1ea428738189f44b1d14ecff1b106ac53078107c4e64113220781e2149e12b104bcb36010b4ed066519b1a1b841a490f31807532252e1e6ac8e491c812ce16078c5a4db1fc8405c61ab088dd003f5c19160d0b7554e0996963c418a276da2052afd6ed2be36c4710a555e8ae12aac410b2116b2bae0558fdc4a13734af8b17b915e6c14e1a85651f936c08d2317bd4ce201ea6d651321fdaa51f428177010b1ef8f01646c620d03bf991ed2308053890d937bf2a14d5ce3aa165969f8f0d20537070e712641217430c9800b5e69ec10d3dafab620e8b8a580d606b65c05f595ad1137c4f4b91f0df7e1507f40ef560abb7ed121e83b4d2b07b1406cd23bb851461c182f207054e08ecd1d1e190bd2200ecbb0219c49a1b3d652a61b18b0734fe179fe989f15cc291691dd6549501f73eb96b18421157c05709b77822190e0ff0865e8f840395188ef187e7fc2c142ccf3050c87b4a9124da7d32424101a3e8151986f1113a403ed620676fab2141999c081226caaba1eccdfdc625332b07d2a3b25c053268d5af7139c270291ec38a13d16bb5060c2985e3bed092b19a9406facef040f52ca58e0c84d6b4b0abf9b46c17b99703a1005ad1122e69052130d4ab199b0d3cbec3033e51479a0e9fda5691c168bf143820308e723ed474d41be0337520792b0638207202a8526a09131e2282baee316a139d631a316db8e13413257518f5d625520fdb2b2430a5b2df80e5a6177b302e5590f1534292cd47b0251c14ee185d6b2e4e9516f2a2bbbe3a393bc22d31a4c2fba51596dc2750b29764631f4eef06130d085ffc2650e0e880b5749f590f0736f1b2b6a82ec51c236b6c6266fe2b291f684a0742a29a20241cce1be6607ab0ead507becbc12243c6cf431dc8525b620c1452282685cdab40d9974c861dd2603990766038a70bb25d3070780dad491f44290281da8f43060ff914ab61057a383b40c3dede11d9628aa9109975bb11dae0e54619d4c81231e7aaed5a1fe415e7319e3a0af44805a673d14e288e0d2a4d5eb033b11b0c420f109b67e0d1b4d6b30633282f11de4b22a5172aa9d1e0bdf79ced18bd9f6f31154800b51bc1269681f2ff83bc2015fe6280b8277cbc11edfe08941008920d1d7b7a64a1891355320e3c059b10ad9652342f239f7f70b3d0a3af0ab218a5e12b4b3cb21a700f11715bb370eb10de2546f1aded0e291d731a35a214c615b91398220022b6c6fed122502281a21f94c6940f2f3c4290f512188d1fa23d63d1eb5a103510908796c1b236ee5b1acf8752916f5addc02df44d203112b41fe50a6f773e005a9494261afdc265013be69d3e28e2b12b318263712b12a9953ad13df92fb81c30011720db955c77116f01cef075087ed15357b1fe826948077208bf4a99c249765623117cc461909697e7780ead4a97e0a4f6773b0d3446daa0eb1dfb851fb364cc01945fc2f906ce173fe0eed16eac0691c673d14ca60d59127994931135589dc70a18962f93bd40a36406561b29a04409fc3b074171c1b170632cda2568883041485111e528f89c9a72721added0ca43dbb30a92590ae074aa46ba0ea7e41390ba9ef1840ba3ebf7f0da598c231e852ad0811beac5f92026e792c1a5f6f17d39375520e1b860f1af2bfa1702d0c2fc456309475f88519e1724b825bf1bbb818f1f72f315375c98d1331c1ba9164a3fdb0118f48992164d2091b1f87e38f706baebbd810db18f9e2e56e074622009be381113b9eff128495e342a5ca09201e23db74217a8257e11f8abbda124383489913f46845a0bfb6fb181dbf7a4b71834c92541e458e3b82127360630c14cc9aa233e652330faa743b410b18568e1a46b50330875d0f010dc85208123eb5cb65169c9ed710561700831e7b01a2b0ac97233d56630f7e711275b3300794d0b8011eb7d8e41b23490e00803db6325e3e944f20a8e2977817f775d792c1cf0609077d2e2571c6aea7eb07318c0cc153c07f97181b33ad1154bd131d1b970172811c43a5e014be0372b0eb6326851c448a47c2339163091e152392d29636d44927635806a2944d7a13241f6af8c3cf0a831820ecbd604140126c851891d14c225443a84f13b8980ef2989917b1241e1d7e212e4d5c601b5798e1e10f0b19540adea16f42e863a8ef076464370089e2f8ce1152f14c0173ef70590ea605a381bd35033415acaa69121cebb48f1bd70d9ee1eb5fbfee2159dfae816789460d1bec1dd3f29a3f11b04e32a6ce02293e01de20b3a9b4418665105a21a1ef87229ec3bea51e307ed5417bc8ca8f16c8619ca168d26b9915e38684b28734978b1effb998815b69fc3a154e2af6f150d1ce840868f89f30acedcd050c4832cca0a167040304b6c81be23ee2a53a07304124c0777b7b9c079448467093eaead108d94f1152e1c1497c0a72da8c729be1abdc1099230ec0942afb6c08f451ad911ed7b35234e30d82652bd59d071d199a4c208798d3c908c0eb4be08c555156090bbd53429d59f75e10aa985641af9ba44a14a39f099080915ef2084c81c920628662a408081f16908dd8df2809e058b5a0658026f3345ca81b115d79ba540986531331097396c10bb11c55a0875d0e52171d5fb67120af676e14ab216f6092f116c806a50f39506d6434e91df00ca760857fd7671831e491108f12f4740615eff7a084d55e4307ce43815067cb0008073f741830ad74a24f1b6c5b54124d125c3007e0044331080cf63914a24fe761ca9b5bc31abe26dcf077fc260106a318a6808fe1b9fb075f8035d30c8210a21955711bb0b02d27950872afac309c47c3e80d199ac71203c0ba2f087699ada16ff953a7068fdb065119cd0ac60d1cb40de143bf724a1249d952807fe8cc820acd4560407e10a64006e315aad0af264c9e0c288f9f60a7c0d9940962e49e108da2fb9c0882410ea0cc20cdfc0695f98de05d3dcf8c095614ac80f48f7e890a66a4b93155e667e6076e1e4e30b392f485166ffb44e1a86af70933a8a599a0a1959441077c7d1a40715ea7ab0d3095e2f06168fba70831cfd040ac418a7d0805100130c2c1c331065ff9fda10d6a05b405e1319e62501034db08eacc139064fa5002133ed59e4275b9724e2afeb250c24910aeed07007bb4424fa4a2b911a7ab4db270739802083e631511caab459a0be86adc9081e5a9f3260bf12352603adf092230388f057bc94d060b9a3c520583dce46c591de1a2725575f98f105705f1e0a7ec09d259ab67da8594b7fdaa0ab24de730841edef20f1e39a482dab72cd10c6b56e8d0c699673515b419ab808cff0bd608476b6630b90f83cb0bd818c9c09ac3836129cb8e69b13d45e39106e937c930e4b3ce800a841680b0af15c8fb06768a52e1c908289e1bb2d9778063bf0a3606c41867f21007d9db088945b420879653a909e07ab5606c5f7780384f8f2480c02e853d16a437a6a0efc4ca7b0ec130eec1c403f0700c36418c009e89f07b0a757992808797138d07de20ca01151bb5bc0c42b6a5214dbcede50958c0b5e2248a9c120ff97fb790d62b2d7b079705adb07d8cfc4f0834c0ff10b03bfcd207fa325490be00202a096effbbb084521f1e2a0004fb412894a5970704403890bf370d25067153c080dd9a705e0901ecd86205efc1a708e55df1c08b8dd9562bb23f5d80ab8eadbc0a07485f15763ba09b066f239372bd1bd65109084078420e08171c087d7fffc09dc9c3d328cba564213e4d943f0a0981d1408135da1506d4458b70bd4557c10d25eb06c2093f95201f82291c02060d9c7c2074bec482067dc7f11ac175bcb2079a75482048341ef1f10fecca23f63d23a20a7f20d120d8e964c1f4704120208af292e20c3743120dc3743120ddb1d095127eda90d08d122ec62f26be5550a75f4843123cd30de2e6102bfe3028fff1a2e0c5bdc61378dbe9716c0c680406463076a06c3a08df1561684fd0820021dc086fffb250799a6f9206e0d6ac30643cceb31204b9e1e0b62f8ce208e8308bc15846601e10b52fe3a0b3fbff130e14e6c5b0ac673f7711511770a07bea74cd0a7109cc316466d50c0710e151f0a0fd52451360b8df919ff4aa6107bc3edfc080af9cae0a7c860265713483d00ac2d802209eec2b7809fd8d5991b281ff7709208251d19b6cee420cb6cf25a26e870ce208e5574d40d4c024ed219c31d811866bb2ee0c4ce687e22c38cb3524615d0f911a5cb9c20c842c27632d8bed86074e076720965b094216c5c0e7a068d979af14f9118f7142b30fed1a9e08b4720d463d5a1fff5c8f00793cc6e60d40aed7c0811b11090cfb685940676306bc1833b7950116476da708f3d17f21a0610d091a4cc2a6408ed6f91c0a222825c1ce6bd4ca0aadccb040958e4b77072d623470b238ecb10864698930e85cdf8c25bd0997c0ff756f490d3815c4517c378ebb3c720f5691300552a80f6c61958080b148232004658b31043db4e7078ec2d6c1f3eebbeb0b72acf0c0b2c171b20719390aa17e255f7911213efed077516b311c63ad82a25d2a701e0a3345788080ea63291a940dcbf1d3d799be1ce71da8a09d7f2f8b06eee26430778fb5761aab817f00e7522e220dbad624f124e1f7161fc8c1e910b86390940989bb57e118f52f0e07815b47d1023ec1600a85aec0512df1c4fe0978da0bf1bc5ca14208da8a4a40dfaa246721ed9a51011cec04a2107285e4116cd414880a960f88812cafaebe0bd1043520958037e207b1c127e1a74edadd475fc19330bca010e90aca010e90a8df699e1c6eb1faf23cfbdc3c1697ed0c410a89280810adca12007dc62f1807ee6377a0884a57ed1869290ce12b0fd996083c6b258064aab4e70eadecf9c1ea2c34741b747bde813a9fa2330c38fc19c1b97c917308967bd346efa6a73915902c89222fdfabde0ab8e09c508b928e6f0648f86b706f7cbd34064703df905eaa36f705611555505c70cf4307b9077164066eb0e20a41c2ce80b82db4651ab6ea1110a6285e8e1f9773c62145d3b6e1090f29e4b08a5c983d25ca1f80813834ccd80b8f5a217223f50538070f0c5e906364d2b30e2ab161e0e8e554ea0c77abcd00e4090fda08d6e15ce33517604324f6f51ff05b5433c2134f0d70413b5d8e9d0882bd0be0c6cb3b280dbbe4f7d10501ba6c0a96e8e1125057b09d0b7e9b6200f4515ce3144c83b7f11612279718c67e0550686c71d408dababb11f96120b4265ae9a280a1323ab10ab5e645125ead1cb90b7e37d070bb4168c00a8ae6e6715499e8041653805c80eb9402cd096bc04e42f75802820c9568ef528a9a2a011d2ef7d391d52fe99b0a1633fce16b14b5c221dcc01ba185b625b0349abde691571b245107f523e0a0cb97bfaa2536277a71db5719b008ab6b6e54e2416e88202cebdab0a750c71813b64e5450f32cec0c0ccfc800e0cacd3b6e11a6c176b1bee3b9be0652f1bcd0afec550029458e4010da0d15870af68e13511d0562414119560ff1d1d734fc24408461f0a97c943d2f643ca4506b29b2600bbfef50c094767fbd060dd118913dd8a5760e779269507a942f0a07414b5e845a96f0ca06f00a429221dfb3d322eda85a309e15578e166ff4edf0b45f0bb709de9d3760ce11df963e9f0c0182e228be1e0872c37ba0650c14220e1a258a111dd6159b2dbd2bebf1542780a82c82f8c1e156ed91aa3b46cbf420a008b54e3c189a9020819c366118ed9f3f01051a76d72f5efad200881fb58b0940a43711b2a6d21f10b2d9db10cf7aca5c0ee2932290e91aa9e9177d7866d1389b06fc0d486ff4019b5c038616c0055100cc90d0d92769c83422bda53b0b1cdc578cb2aad41e5e230e32ab00dc44566a10fba2dcf2ecdaf94359868ebaa10f4350561afbdc8c309d00af170b55e57a513d61e417084d0b9f50d0cab08e0b238bcd127a78423607bbaf1c909f39471e165cc2ae00ef77e8163c764c7720760edeb2192e762f50d6d79b290cc4d0fd10d875151e2305dc3730a4d476dc2b1980eda2afa46e7a118e88bca24d6773bb14296d26b20eb9c6aa1d1ea34fa084217613247449afd1573d991112f2eec8a14dc7721308dd213601f257eed5215a158f71e94a588b213e22f732015d2baf21480c27e25c6a212c205ab71a420c55c530204bd21d71b2a54b680810933bd087580e561734b59cd08ebe5ea10be04fb380a771fc033ea58a9343eb74222f27a9a22690c978c0700960fd56b08d23c91108d7b22d0140a770dc0d88aec5c188228c8109dbfc5cb120f9d3d80cde4529d0dc4ebeb42374655ce33e60d5bf118cd372f21d4143990a43f3dcd13e0fc8b6275938ffc148f7754a153e577b02e6213078246bd5d6a0cc13d251086ee33070ae5719741038a59800e8f829340aa6330c40ecb496341d58f605d0d07a69120b7e42a3518214b5fa1e2b95c3e05f95d2e8153529e2607ea2a6213f60fcba20ce03a0fd085a46aa90844841b9101e626570ab3c34521748d8dda0e5e8131515f94417e08d0d25710990f91201a8e6aea34ee7f78411a9103ab50a581b637062fbee4f189663442081cc8b5a135d7165921df676d70dd77af0d07aeabc130e0fea93918e70543413ed130e80e21ab2e5398dc18fa0af0a4cea265cadf47431984ce71537efcbb1e356d2c92cf39aa7e1ed8d606c2097dc1a71e66fc8dc1f8102d361deed47451f8cbf0471e966f4a71eb28e1341e66ef0cb1efac797e207eb4c3a1d85a06c21d3fe3af01e52372901edd1de1f25ee48dfa1b9fa28e02022b28cc1bdf828dc265797c340cdbbda130b55005af210e9c10f1d40a32132098d96a80e807e7d8239f74f6e19c89468d082a73e6b0b27da1130eb043894122728be30c913e05e0af63c51245809f4ef0d80192102581285e7092bf51250bf010f140e6b39a2b2555a4e4b0a2983fe20aa316385309ca6206153e17e9d2248642bb10d9316652159cac4f2cc76b9f526d701c150c881d75834e06a334104ae72c009e2090761263f915a0d17594880864f82880e28a48490b784b7bb0ee8364150809b45fe0dbf21cd609bed094008cf1d2ed1427913143e705afd818b7ce14b282b2073118d2a28bd169f0eabb3946de4180894fffa50fa5ea008133fdc3652bd0f3b7525f568dd80b9b66d710a20fa85f0939ad8d008667bf74125466a5d234696f321594f715a0a3a0f06c09ed032f20a5ad1df622645a4160f15cea140c250c1bd11fa5349a11b1a0d6c195e78b6e089ec3698124ab4cc12b026014416bfb2efa1997b7f520af0595f416b1f0b70152d1170f0891cddb90c0304a4b0e7ae7de8079ce9e970df83c84514bd2a7e72d8b34862118a2455120ad5b3c230706a19a28779a831198a1524b1511d07211c90830c92049d6a6d0ed45d7b00f99cf72c091069a8817635107e0998bc9c9465b145bf0e92e475b0b05c0251084e9bbec187af2df03340fdb6d159f14a2b08ca587370aeff68ee0f5919da017846e0660ed968a92239eb69ea198369ebc16766ad8416d6ae1990b7dc5fcc3cb12d44f3c1b3d5140505bbc56267720a2b1ef03367a2e7283f182bdcd72590e6dfae7f08c59636519b40150d0dc3d574005552ae371b94af8f013d59099b271e724c6226335576199706a3e19efc937008e88dabb3f520347e3f3089bb324327d31d1052cea5f464dd7155224544f460a17c5bdd08d6c11660690d475c14083cf3f506e1e3ce10e3ecdea2d629e9dc07dd9ddce11dfe06ed24756436912ef83cba21696993d071cc78d930bb892d2071163b5906b70544d35a96e3e10c63186ef0ce53227a19fe79c5f13327ff6e150e109591772f04d908bc054141a3d567333299ad0ad08d08fab809e6452dd0f173711c1bd3a50fa5110f6c4714ce8a49c0ea4ae67d56ddacc940aaf6b0da33bbf33140de2422461199f24eb2686b00c2268dc19dd206da506324c7764c5160c1e56636fc8fd2608dc118d61ef862eef3a8c99dda2f6afa40c1ebec90b412d2fd6811de4db00a1a27a8475165538d7e44553375b0cc0060ab350f5f3321f0ddb50c1e2a3b4cd1df737f551668f69e73ae31e624195a194a02f1b9d23b0ccca127319f06089915b5d6b9b2e4fc07e93104714860d7f31fab276891ccf25d2956b60e052b0ab10c9176e20aaa5c89a09fafebe40a7ebfcfe160941b4115b2852740f470919f3a83325822fabb817f1e4d1a4e01b7309a690865f7b7811241806507eb066f608dfcc167251a0cbbf1bf9a560e0625905011f9906e9e135d93b262d960a1661fcdf93a138809e1051bca6d94620168aa2a3822961a8445d35f2f2407aa867257e3927f24398aaae16a502f561f372d0ab38ade6f5b2d91e480b1aabe84f21f45c48001d4999f431438b844e18ef86b1214b06bbd60c10f88e508a6af9210783235de12d6369421957e248b0ded17a670d6f1a95719fc2f468082c218a4077cfd3912d853561b38fa0a1991943e2b81094aad73a24ffba1313294508620e6ab8e58099e6a2c518caced531d043d78d149d66c7e196a8345308f24ed8b15285f67212247acb409ad1439c1e9d78f5017ef72ed52dde3f6ed3862442b0233c944cd07020298d07154482a1a5901a103a5a89e211ede61d61369fdf6c90963f8c1d1ed6bf90b23020bcb015ba5d0d62dd7024b005325c371148b28cbf31bca11c31c0fe3dbb199e79bb01663ac0db22e28789e2d64ba3ab381b0ce8e1fbafdd5807412c36e12814d36817a0577d930d3a11cf19803ca193a2b533b719bbc084e27f00ca5614d151ca406064e4370b89b37081eec7479e094881a2c19f81655e07a2fd5cf08dbe5d63168a2d49829f5fdc8b3b5f65ef713bfec77419ade3f6a2750ee43b524aa72863491678b53820637a82d1f7c8ed1ee7da1e619b59e3220859763231c512e51320a5689a520f5ff26b22a7f30d9086a93c0f0d377110d0b4795e590ad8ab7f80b92b1dfa0c519bed02b8a9d65041890cc481697ef9c82468dbcc90fdd2fc3c3352224364c3eb203c32feb9d59319c98e093e3411a7234bad245a245d66760173cff6062cc74e62530b2533281873c3a911847b91321a65e649e216457d993883a36702dfc44444278e2e4f1156de75a60e7f840060be40825f283c9333f3af68291c08ae6982709cece7801e84e7b3035ad9099020ed7ad4827bf2579c1e81a85f10966a7ecc1693d99e214048dbf307c4d8edf1e3ae9a403610899e60c7e8c1251932b20ba08b2a061214494aabf383e8e7592d7e0973122b64b3d72edeecfb416e471c0524c9383a507bef0d1d427fe1367093ea6b5b1612e20ba245853587404d7c5fb2d234f86c2a237e0cf0dfed3b760a883efdf3369ad95e0c2c597b52262f9fed3864696e576ef4f3af38b0b5de017d7348602a0885e9f187a3e28513d9c7eac3748a42100980ec43d1d8e4a9881cca867f00a6031de515995b0792bcf4ef9112185fc9a298eadf440851c16e00b28b57ad1920e2fd208284e74216c4a17e90f6b2a4ee0fd8083fe38b3105852ae74806f15c068f901a97bc1d21583465d715bc6918812a62943d27410c80009b91606f0a66642870d08eac151bafbe52618c0020301bae10b310cad151b60d7372e0c157c0ac3d1c429ceb9069c5cc380ffc8c716506c0665e50b522d49067185e73292bf56ec14e5c4f050823ac3821de818cf013bf5dbc6292be2e9419ce76de91b49d6811304e3f556194cb0a4524a63bf0213a1ffe481c20925de2e58c45bf392a9db432b0c534d311cceff7b0d6bce7f117733fe0b3a0c180c825c936b0820d2c810f0f4fe49404251979011b53002371d2a7ce424b2b58a4c47a9849ec0ab701ba61b074377b10c365a1b1b6217d1f16e5fd9680bb5547151138f7b4813da636e80beec3b0a4310f177317d1c91f7387b18eca2eef785bc1425b5dae1e59ce01c0937f54f119096b944251f878d319b551f230869bb4bb10bbc51ea0ae0510ce481d832b824b9dd38636e245f322824c8ec50fd3ed5640bde3ab633c417927d067f747d712f18f6ff37fb5d24a2102e68dd207b9d7fa239db06280bb2f066d481cf0ad31fe21336d0881994e5087b2bb83098a826730b27781e40924d385506ae7fd890c9819bc608db0cc4b3f539eac11d95beaf10d1cc4e4f0aefae14c08f01e6c50a4133a8406a9de87f1a488ab0c0aa019b3209d1b4cd7085af525809cf90938087657b900991f8d7c0826e2e51089f97fc911abe51820608c64b406a9c39d208486dd160607277920b6b0ee3e08ecc47a10e3d2fd9708ac3845e06957d9e0089739c1a0bc6f723108bb8641d0876e681408f9e6d840671809b60809fee130ccd2101b085730ec3094bed1880f2a827780698c95fe0810849c6068efdcee06a93e6412e557c1ff0a0078798078e5c02c168ad8ce916246bdac201f824730bb730c9016ca0ce3c30866f15a157d67c6d45e56cf4637bb9e4cf11939717f0f4509059132fe21191113bc395180d0664c1746aa2e9280ccd4442061a79f72d1895fe21fe312ddb206393e271513e99eb26d4a76df3a78010cf0f79a031e2f7265adc1e2529f611a54594fd1b4c60be330dc3ae901301499392e8cf79f34e5ef29eb174786f80213a96e631bc4103521840a6f53218a9d09c08df2357418488955d145dc092106d3a3fdb0a9957a4c2cc7d1da00ae79bbcd247a24fd3065ae9199072936a6c1593d0c8d0824dbf99215d1a0281d30bb2da1cac1fb6a346957ffe156447c0e26fa5398c0cd9faa3d0b3941a0207d8a66141e96d73f50a4b744fe1c1d8d3251717a0bae377707d090c5dc52770814c5ab6357c1d808182b5799f3086256c453ccfd0cf55aa3bfe32e1af60fc0bbbadb9e3f82eda830c365d88e08a66445417db559ff2b01c23bd0c5ab44011ac7066d1166de746c1e06d1ac91cbd255f7209204deb244c98d6122e89dd3225bdd99ab4577e69610c8ba93280a98105640be046af51fd724ad31224eef961efb7881b08a71581d1293ef05017b75271c22306c047233fe24ca25e3a32ab0f27ea7fb0d2b4b1721b5f0c50615c96420a1a17a7baa1eb0f18281174f7edc1a42dd9ba3016df26a09cba96994a655cff02e43ba36a1b6d9fb7e0c1943de02337c03311d62d4e5e0ff333e6b1339ae54508e62fe961831bb3c817e271b7e3fb65f56f3f24e52564178121647faa564cf0e48c0514425ddc6910eef6260129c8dd3363365c707c30394dac21e9f34c4a081308cfd294860f0619b44846b271b072851f0175a2519849c73f220059e910fc6035a72a789eb6c0db6fba9d1f360917b11eac60b912a4b756e16273e72e14a1005190f22d7b0313e3b61b4169b999a80a03dce8a16b827ad41d55b78190d4a7612d328af4c0e1b46ec3b50a0e2ef5e10851438a23e41a3463432b6ef024666df4710b0473e1254fa10af253de2e1722e10957f30c693766148a7a3f60cb72bad120ee1f10e1234f0dd342e18a95549dc88df810651539814ce72bf10ae94f65823c041bb90ca68d9d622c405b492d60c4a4b121cce51710021a61840c1d154808002970e10b52021527e7def652f800bed93638c5f5d130ca7f8314948ac121906c84461c69a28ea19e6b996a28e76fbe9128674ff9144d5439f311314ba218189d9d3402c3e2e4300fa3bc214a991ab42cc3e5ead0e508ae3d22fe6343d15b70de9a43c1b738648bf501973f27542954372d46ae1069e1a8a1e4325e6a1041e2aba602b3b0e814320a86931a5e277c378b1ee810ac204476181635e462685e83303de89727a1fa65fad137e31e2f61e11522257117ed3b458531c65b299e48f3426496f3012bf16cefa08aaa28243c1d30da14434b33d74573ba02910df81d161917832130ac339f09136ed321731476f3f2067135866447cfa028236f58f7222318f51629c170a3206d3addd30798bffc3263805e3405449438a1f54a2ed62e54c80a726719329f0ad5bae5b1603f9ea638aa7c080129b22ba31c0263b2533606de7332285cb6b2b1997e230dd27852c25f30e03615531e99508be752000bb9f73ea4586b7b3b2e6860829167428b060943354181e06702fa4027a6c083cba7c36d0c715ff772264bb7441995c76561fa570d760d2c129342c4ab63e417de3222707639c8272b04ae065265fb88591342c3b9a14d6ef86628a9cf4ea15c022a9c2a61dfbe719313d33d4c4d587090a2cbb2952f28e0f0715ae19d260a7692320413f51b582dec64ce009c09b20b27b9d309c06f2ed9d72b1fc80731f3f314ac2eb5f99da0a7a5d7e52495781e615988859a2b63d271918b54621b3a22c1f1e2d7fea7133ea23da9d3e39a38bc11b9e4a6d0f09ec7f93ebc7c7993e534f894096a1ace945d28cc6634e4ac8691888083011967db98b47f2d6ea20953acb3f1bd46bb1821c059d680980139380d41421461a79fdfa90aadff64019315ece7140b443382759f3a8445306a23f3acae90762370217e21e8cb750109e78f05b43d8531ae30b6a5cd90aa34950b1c0087dc71bba189150c05b5b5931ae492cb07fb0ee812e253f7f712d88c36d1714364342cf6e375f4157fdb5e120b3f9fe0985eb6ad0a458afa609ec43f181be0109ae1574a95cb59bee655b2fdc1f46b45ff4f473190751aa30d4d284df2d4dd5657224ef886f233adcc732260e3f03227a4e99206202b2a30920d56af265a1b5942dda645aa14aaddfee2402a2dc2190b715bb13957f2fd32e7bfbb743f8fcf34198f2190f24f5866d3452c2c6831bb63877a1793cc8dd17e70c52f3cdb0a9b72af180ddb27db3c99506fc277b81268b80bd21a95d61f1ce5f6d31087d3d5ec32990fe161e5b4d2b02410bbb1e1063482fa0ce3e35882580c0b0b205ec25470e32d858d1a593105f1608f2bcc2c539d05c155daf777203307da21f8f9894521406e15b265415fec2c614a9e41966411ff25f482a12224e605a71e6a45b28151fe376010b92a2e208ea2568f28ff4baae0a98fca37250c19b291c81013b8107ed70b50e9ce96c7228ddc3d122a0d88261a6466fb3095fb65083043cecc6107a0fd912be765ee028143e2e827f08f5f62274addc725dd2a52a15f2c23c91bae64b470a4f2cc841b72c877d06844b1b728a66e60918f348af42775292b70b1e5d3561014d1af0141a05a180de4531b427f24c8b4248cc5784154fded8c1118867c60cc8540a02b43025e535df7516b3317d688f06a4a50963f8e19d8645fff5ba60a735ccd616b8533b91f9d5514e26c9d695d09ecf55ce389827dfe078d9ae90119cd070207265f1673641168133c0b5a986134c5edb4426960b7443d0d29b821305d1c333ebb6e73237449f7a0fbc1ff540a6659e2c2d3daeb9407f8d88330adba8e8c235746a8d20d1b05e814aa976f80dc8df49a2d6524deb21fe442252f1236e8e1d0292aeb196ac28cb1ab442d6b162fa5d9f4201e3e4e34a08f3882c3a395fa13f25189e0d4bd8f82331c1948033e06dfb5552da3b86095a138f2234b7b5c73e770ec9a29ddc27223e81cf2751784191501b633a1875138c5cdd4a0f78c8723dcdc71e1b03b273f101143cf111b76de1c31f0579fe2856df7ab269226e772172dbef42d1036d6115d4ab8093d8ede64e22e510896336bb49e6338148c6f32c6bb7ba337a4b90239585210520dcd580e420cd5ff133f87cbf63494b54b133887d891307dcfb242a8964b4d18584a6585078995b92ccc4d753205a8d390194f962f129a0e18d92d63bb4930e43b61e54b66f14e44e9803b88448ea29fc316398b9c48246e2fa0e7a9f7220a584d2e80a6aca0b048f14638c13ba226f83e91ffe3c400856495577fb49974c4a06a7f31fec330679e74b7574cca7105d1d51ddb51202ab1c4d1f38dc38d44f2105e999d9bb994205bee37a325f444580d55a0944454117fdf282f35d8c0b9199419167253de50bca71299226c349e039797abb72779e98704bbea8316245d1ceb420e952852105ef2a745908b722b0601dfe2b12358d72f2969cecfa11847426e0d35b998f0de43919e07cd6672b062c880731c422a4b908f3a1bbb642a1ee44170ca71912660685ee2d97fc66e27b19d182365ec515e0e3d4b86a9abe53fe63f91ec70047138748e3385b783c228de95171d68cb97d0865adc3e42551ddc445a1f359e4119e8eed44a060f5f0d91d2b1b0b64cae160b8cc14c80ba68273508555b64e48dcac08e1c45d3b5b20f8371660b5076a313a7fcff61157928f1513b993e540af72c96129205579f2b36ac1a5236d047cb0628ec4cd185b709e31bf267bae3ad0672f23e832c7971ef2140bb2d0c6885a0a9c83384141e4bce029926ce2713a6b40342201b011118bd80bec2755acec91d0c53753213e8d8da13fd0f97442fd42df746424554c191fed4ef1e1b5f05c31859d8403001d6f2244c16bde81de3397fc0da06d5e53f265718d109ff165f27db510780ba29bae72ca8a591040b6dd6a50b39254412bb23865232db6e666148fd741014fc4a7bb2d26a244038b16019a2feaed3eb0cbc58ec241e5c3416426ea96140988a56a02a2c5fd3039812de0624c3f3ebd30477c1651fd727ed61d9ed8f560ef259bc411c68d85b0eb1e999c17624c850246ecc5ee25c99602408cca490c24100b39f0c02ca2100d5bc6baf4672eec350ddb2dfd40d92f754623a81b90916d42fffd286b6161916b9ba95645d951e89211b3333b118561c3f100f8e0720e1e668eb1a9b4e122363e59a0615b6adc5323b0d645f0ed9240af2183e56fe1082396b25bd9f900c1f9d467c33f9fb4ab00df086dcd15f62b7f72ca6ffc211ba870f7a2dc68e18b557d86b3e075bcd6d6099275e050e2d4d5b242def47d2429c8e36646af4bfba177e73a6e0e6925a292e37f4c571127966cb1173d57111495d14140fa45165c11dba58b80fb81470511924a5f8117831e5017315ee911b3914baf1bafde89c28015955e30c52d7a20e0467437442f6e85624585d4bb19d96761c11a857815422f3ed2b27cb07a3c085a255b345366681d880dd9f5d446aedac27f4a41bd0706625d4c2d2f5ffda3c1c0d2e243fa572302756aac8e16b43ef600ad92402b4a1d6d47d1c663c6390f371a0820f9bfa1383d434eb013c3d98ffe19af626ee35be0402636bcd534317d08d1b5380acf54c1969f3c1218ce3c8f6295789d6c22c950a2e3e516a455310d54f152d4de944d406b9130229fe1efa6426cfb7683eb369ca72ea97c6f22ead3a6902c0e0ae231a0578c1f2f9ed8e4826270687e3137b05190d4e86e920ed391a2c21538755325a7f65713750c13103dc7a5a2e095fb2344439e7c0b52cdcb364e3e14cdac332f6e23f34b178d577215349e41537e7bfe645266adfc3294921643a8d5488b0ec89559b2af977a82149686f3524aa02b523baceabc72913a6de42d6016d4811c07aa444286045b429a7d58e22184614e50ba5c7fad0a3032ca80d6e7a41a44162a29f1762bc76624b3541250976d590044a6409fb0afab832f2093e6ea01ba08959326b71475941f98a2ad20debd88b1fc62b79f22502901c1462ae5a12dd70e62b1b8873e7341daf7e150b627336621f2307fe33041db9b2f35650580dd9e21c90def92c2030b8fb18133b8a372e427d4de821412815d52d276197f33eeb1bce33cc93ce110690d68d3597f51c81b3baf3eb0ac151c2d3e7f722ff2c8f377e31670314de39dbed32f25456f9234412f396f308172cb72c9cf64a226684a9ed37a622bd61b6f969094271330662862a4678085873b82162c5611b3b2a44ff32c764ef6c276326fd5162d56b990fef3f4a72ba71958e1560f3cbd0a5de3fd4424c48cfe0b9918adf43ff609873427d8db43122afb12030d74d990e5eaa1ae0cf20a76521c876f3b43b5e031208b0119fa3f3f956d714359720f13687fd672a0243ba32ef041b2845d181e6629618c8b52ba61cd4e1a3ea0ce20f16893d718d55919d0aca22f2d40636aa4b24b33a0782704ce96c2c2b3445a3d175a9c32ce9325602811caf0c2519756693c7c47ccf2f18d102a328b5f959516e3730e22c95c6001f1c6da881d00df7cc1d09ed43825a4083073d653423b21a69bdb517d6609221cf24e5841cf22659406c0ca17a1e28317ce28a687b9c11cb574811ed96a787057e865ba1ba994cdc2da81e33e1d3f9279718e91487f07825e1b5152ac0b14265c0897e102c5d15b290676e6030b8dc3f05168509272c0f533990875ca2192937d9d5e1288d0931220aa7cb6304018e780539a1cee28382b99817337e08a1ffaf83621d859a93b0a87cfeb7303bfa84f060915ec5122ae1e373019713b81eb411e4e03ed3a7ff0fccdb9f117af1cd9e215f885ed080ef0a5a3122209af33a9f8d740b96f6b6b1e41b488d05bced7ba2bf772b5708eb0d1a4051886f090c0f3a3680d3f446e33b0f5142728c004c3a34e311fc73b320c54b073a0562f209de03d20ee45b52807bc0e1050a2ce91f40ca42a1020dbbec5110981e7dde1e8e49a270688555790aa78221608fd9f2a12b535211908ec8103936c262eb1344f8acf4250c1ba6026b66894707eac19b60931d7e95260150e960b5ad5f4336480bc30258837f5025f1e96b2090b9564418bc244e4080a096342fac181091bc5d6ee30925c9e901f76f667c20d6da36508fe7c6e80fab745a6219a0b70c331debed714fe5e1e20717072a70dcb0b4331fbe001f22407ea1fc2efc123681ff0ac1d71f52aef1a1d97e626909fbe05750c17ff6850ab61776907b6add3a0ca2bfdd50e9a5ed1d14d1efa3604530eae40c29d3fb71f43cef642baf6e37b37c8aa8283243642d01ca133f5b1f58ee89131c32aef314a0182ea070962c1b062d4efcc063b0bb4406e2208b906505f6f60d66fcd340cbacd39b1e6f7a8713914a60210961e3096071127d541ed879085071650f8321dea7edf0a8c0d66e0d2c96e3808fd0eb8b09a9c538333b83d37c0d23aa5f20dbf9d0ad11da01430332321c430da05b2c40670c160c06a074adb06b14b38939c623b0948d7cba582315993ab2490892850cbc12ddd0ade9acd01ba088eff0d5ff4c3c27be611393c47b0bc20947b0bc2097b9c85e1149e4cf5063aa5e901055868740bbf412483256a341b22a98bccd3a3917e7d3851d28670d63c8f490f8269a3911fb42b9f3931f66d33dc964e390b84a95c20dd8782b50e1e3f9f030c8207b6337039c7a13d7cd7460aa1ca7c509aec2cee0baf93f0d32962f62e09264b8e63b5ba89ca0e15afdbb386ce4ca40de05d82a467267e6b2348154b209f959c6f07dc55e984323449e10ba4338e208d47613207a5c35c846032b6370722af0d709205cc3309fe2712709982c8cc43d064fce345f49380095fe2c9907bb01f190819fcdab51093a340512b766073b7baf5c50b41ce108090973a9b09fe22bec113bf555d09db5d6481009a394009af3c8df095656f2608538454c0853ed6760e31dd7aa11d2accb10764ee0e2095f80ae713d909a5f0902585160d77a536a17bc1d61507241f13207a1208b909a8bae8e07d5f3be40b2a190dc267aa54c71fbd7990c133c73e7f0f5e84f9a19bc44a9211e43a0bf1f1d02ea515ceda5931bcb5c4301449c94b70829a5bfe0f5ee875b08c11a68e07448e2e110a8a9a560a404d47b096cf04561256ed64515358d56412b15ef390810dd18d2be49a0320a901228d103c8b56007d9a00d50916b408e241f730ef071f5b3170937ff0460716f14171ceaf4847084e6b8c30b58dbb50164aca4b008581d7da3f8fd6272081c075e619a3e370e13dd4dd0a0eac05dd92be88b09f0a8d7838a09b9e798c07a28a8a512f0e93a40cabc3f4131e1be91215849b36a08fa9cef40e1ead87f0d1d4c8ba0c64c0a9d09e7d838f0a11dd69e08b836bbf0de8e5de915ea0512a099d8e8ed11f7f6f2c11ee6b2b907641244c1313b6400172b99f2d09817f51e0902ada3107dd25a740cec55c530ae1326f509aab0fa40704bc43921daaef830b5ebfd910721eb08d0b9149b3a114af7ca90e8a49de811005846a082e186fc174a8998e188476e480a84bb5160d58ab67617e50d1a62aa81e77808d1604db0ac3c0bcd0984f5ee606dff12a4071aeddb3096b209e606c090bd0078babbdc098a311c409ec1c6840e647a3920ad873d730d779824124bc543d907885a852079f480e309aba3be3319a2446409fb5065c13e683ea218d58513206de250ae2716f796d0bc31cfd40c9654f930e77ccf480ce4841f60dfde4b1918322733e095cac73e10eb321890ddf83b470c8db01f00a056546d0cc17ba2c0ac5730a4291d6ebae08b225c53091c09b4e0b840fd1413f9c82900a97c8c2418dfebeb10e4e9b6a30e25c89730b93bfa6a0bb5c7d85094443048253791f5b344d6f6140b5f9b9e20ffd63e520781062280c78a9c7212939a6590cb50439e0e096d98207e7dee660ec86b45f0bc86b45f0b66028130cee2430d0907beaf1105c3d3dc082435be218d356cc40ad79adb509e6393161568e9f09099d389df2229e0d7c09768b0840f7179fbb12dad92f0093835d670e923c2810ffe1b4d21c23144481c66d690c07a46d93a105afc7a010d8926b409daaf84d12f4f2dbf08f075ae4079a403901d2789b871e1aec7b708a94dfde0981d39480e9bb48f40ae92e4360878c09c213a4c542516d9e5dc73af516c360ef644bd00b111cc420c8a3c0710eb833f6e1321c82680ffe292fb17180e39e0b5b341441678ae5c8152485d8d0cadce8140a82952f80c64c60ce11d4d8ba412f4c6804102a202e006a9cb15c5affd9c160b28c873912bae46420dccc62f613e1ac34d0aa2405010690ee7870b1dd49f14afed927c16dedf9380db666a6f0714432870777461e6097e05289096810fc40ce7eb1870dfd66e1709cd8b5b50c83dbe680bb86c0572e07da72c0b76576360bfea57600d8ed6b231f13e354b07f9cf11c1503765450b95a66b3077b9b2541a6db9dcf0623e68390f5f3d2600930165ee09eb003d3116b31b84105a7b3c118c61b39c1737eae770414e57df0b89928270fbac0bfb0ff3934780cc9d2af40a6d198c70f40af9dc0af064d1908a9175d4063efd3ef0bf7bb2b80bd2da8340bedcb1d52fb68a807281aa37f9097b694c016be60efa0da8bec03298b2ae0625c2936a809ac46ead12d19ef123a505ae160a8cf81923454b2fec10cea6be012874b77215d4b65da0727c1a3508bfa316006be491321542fed52118dbfed30abea63960f50ac32f095e407a70b99b6f4321a26385d0b63674c13c74c1e103eb3794390b16bc2800efc174b3345295ed30bc0f493208296a65b0fc82183219fc49bc60c8d3f66a06977b145085c8237a21cf0eb430f4c2c1aa0cc8c6d45196606e25097ba9a1708258ff3e0d148146f2e4138dd023ea5dbe71c4907e6e15adc95ce1f01f2ba20832d944b07f28c7c50b48e0f0c0b7ebb9f31051cb71c1cf9a1eae304285a541785eed700677ce0c316d525a310a1e760984b12bc31e16dbab0041934d4cb204846f35606a9fd6cd0d91619d32f92329f613b584aa8168baf87b0c5ceefc60915a82350c0436fc90706b73bd0cbc6beec090a066192f7689b0724de38b4b0e1421c2821d27a4730e13c6ba30bcd4b4d40bee672851292a347706762c2ac0bd5f8eff19222b2ea0c5f17cc70cd2aba4b149f5b6f1080ad5e0a0bdba3da411e1ebbb8207fa023e126920b52093f11883081362f930e662d38d0e8963dbf0a7debe9708b1f36d51430c479c09eb8bda80a1dab35e065fc40440ed76cf3a200db4a9b0c8cc1352233f1058429ea87c5413f39c9d90e0ea4c980d3c734ad09bcd4c5612a03f3c010399b5800dfe47fbd2a5522c2b205dd29f00c4a3166d1ad8c5af00db2d4cdd0763b29371072d826d158107a600d49abfb209d8cf0cc09ebb5c6806eee4c8a08132332107b722c5418c4362c5067af67dd2569e1e2f074b009840e04bb99b0c337a1d8077ab35e62557ef37c09c1f652f0a7a7c4bb391e6371a37d939f970e1964e971b93055650afa89c6a127a838fb0b2c4c54a0a61e153b1db0296bb0c2ab53d7257cb62511111f77eb11c88abf90eaf3dd8412daba97f3fa9b132d174ffa08d1e8f1174f0ec6d90d413f62709c0fa6ca7cc18c1fea3f090b025860a52520b234854e42408c1d05d606156e7240c16cfd610fddedea0107c688730d026b2c00c1bca4871d560015d166e3b4bf123f9142219dd0c7530b6e4274909f3ccc730a36b043b1bb4da2ad18916aabe1b171f7a00fa8249830784f2ebb10cd187cc131fd6aa058de4b7431be651608095f00a470f251797306fc922c1095e3cf4521d36ddae0d0f137c625266ef380fc6eab490c336d96e20a0a5ef326a5c03e70cc036a620bc59cecb082cc5acb0da04adf7137ffb26923686665011b68c16a17d8bc5fc12cc9ee9922593a43d0ab4045990ea1f483d1c4b8c63f100fbfd43197058f7f16be71ae7083a7402c0e486318c138ea16760c58e73380455dc28008abf4fab0b77fe56b121cde4a204b13741210c080eda0d2c0254e09eda3d400c17cfe45113e793c515d0eef3f27264350a19346198f134ae7af90e817c5f20a1cbb7ce0fcd8a0df09fa335de0dc7f431d0c4b491de406cf97703304694ed1c65479600eea122d318d540af20cb882e800bf5236b60d94f41a90b0e386f31b804f6bf141d8078a1ed6a550609cf28bc4071aa656507797e90507ab6f5fe093e0f9d009afeefc7099fbeb700badaf87c083fe3be30bd3a9520099457f2e0ae5cac7d09048ea050c2eb1344116d06f6708010661a0b29bdbcd084af0d251bb72e66b0f0f468dd15f4f68600a16bb0d6081e1d8e90e35d7e9b22dd6e72113331ac6a094a649e114acb216f194db442b0e18ead9507f749246231300f960944a3d6b08cf3420d0ff37e873129d1cb6a0c9ab4d7e0748e3fc40f4992e071d048c3711413066aa0c007f9610aa4d1a6f148fbaea214a6077370af82967b12d297cfb108a0f61116aa59b16095fe7e5711a38b0840b63fa0981c5aa5f4726c7a383f1652ad4030a2edfeeb0a03b14820854f4ef81056d7dcc0cdd2dfde123404934271bb3d470d4d9348d1a7fa564207f9d9d8a10ebf1f7f2de60c2ee085975df4090f24e2109be3ec5309b8df223101360544232ea55fb09c2f61e024f6e44802017ced4a1517340f126b2a6f2433ec953d222e121f85163c678210b7718f4c088fa4e2e0b74046cc17d82c6a30aceb5945108ea12750f14eb7db0ff92287a0bf370c93061870ada0b8410c6c0d19433c01eed665ba1c6ca654b1179831c91b29858c934da9d9eb1141fbee6196a20cb51a6b5e2690c6596094167c1850a0eb2ec646306af0a1c08f0cf3d209f54d7e628baa1c4611b20aad236de108bf16a8c557109a3d12561c013c55f20cf45f791501344e614809fb5a17b4a9b512051afa610d5b2ac4d0616da856121fd5fc7175b3f6bd156c9ed930d2cc7b381f2cc7b381f7ca9a401ec3f0f131c7aeae500b5f837fe1034e913d06d8a08de1247ef79309a59257a0921e895828f5ad79c0a12098bb0ac4541c40e29abdbd15678965813f9d9c200c156276d1a0100a7e10a6cf03d12acd370a2d4a1b3d52c62a74ad228828f560dff58ba70a988ac67094dcefca16869d1a813503ea66138cfad930b3d02f810a5c6677c25c2dbd14247a7b1b810950f2ad15635e88413b6c7df51120969201093ca8402b5b959e9132a55c271a80bdaa615ec4e4421a57d6ae40eea1f9f1077acb2340893811d90865dcf011241431ce1486a172c2ad82203c0be2e9cb32277b2f2d0fad52dd00f1d9b1870a7f9bb660850890d21f06495bc08529813917172596c31314169e0ce9aeb0515a3355dc085c90f521be7e38bb0a9a1ac1c08a47334c160d1aea015c711f721b4ac347c043f5594e0d058a9430906379051683fd3c4064129db22448a737223108f7a2116a9ce4e15d4b5d1409b0504988efa5b7c7094f3ef2e17e7b5e1c0ad2d775f0f9a9d33d1343260c3111be9c820cbfa399c1300e4f72215eebdf10b5fc87e40caa635dd141d85e6b101b71e9b1871e8cd40638aa5880a5f61cd90a12957a00a3da8df906b1a88431fc13abb70ecb38eab0d7d6a27c17abac39914848582b23035d4a13194a9983166dca1a70d17cc9aa1b4d667f213edc4c1911ab7ebc12b7bf385f1ddc7a7d41c0cda0851afb6e05b1a3f8b8df1d8b8f4f1108bb21d607894aa522e873b6180b468d0092fb93b3010a1f34ae20e5d242e31b5f9ef2114121d5310cd2196e00acce54470a8c9a0800897a9e66097cd62100a2f2b3d517be027fa15b55626331ab635fc0896dd4511a5f261232ec9fb526185c51fa20e88835150add2b53b0d64e4aee1267f6cbd1c4473abf106c30190151ab1cc01e99b6d8f08d2594d013e1f2f4008edb30a825a0a869620c8cb9901711b69250f98355cf1699b8b2017180c6b50c0c1d91d0c737765c5216e129a10c4c16ef0e041192c0e91229980787c66942e9791cdc19604fcec1af05d9e01f81ceccc0c1323b810c8ef02de216f9b2f42de82873f38b9eab5d0eae04d5f095ed8275230a34cdd09fd25498177c5da020cb86e76e0d25e9586108986edf19868e7cc2ddab93185336fa5f908ec7ab4c09abd90000bf579f27196bdc31409a5ab0ed0676b785513f9561570dc1036a80a8aaaf740bd3c7c2a09d424aa011eff6c6d2f3aa76dd0744f653c1c5bba7c03469bbd2d09f4d8f5d28cdc5ec10bbfb9b551b23460ec236a5c2180fbe79d9f1061687e116b40e85b0a0aa4403098eccbd61257594340b0126b1a1a933e4b00edde479b09286ca0e10ff3b6bd0ee18396c09063ac7916c64810f168b95f8912ec63b1208e1598d011443b5bd17a52f3d10fbd1ecd3192ecffea0dea69af3279ffe76a121e64e8f0920c1a53153b2f63e0812d8d461237c494e0935a90a611205573e2efed374f1853ab5850bc2131b508268f0320bdaf4ac52f4b459010a38cd8140951c08c40b4c36532167c4de941995851dd2e95bbd5c15447e90718447e907180b3432926cc5ac8e0fc78131c2e587f88b09dd9178d1525ddf4e1b8070d4a1bb4d2ec80d391d3e00abca25a84f995a28d0e8aec4fc1b4421c9b11b88142b1bb916ca1091ff3386160c8cc920bda278360cb63ce951484f39c30e064fbc708ee3bebe207242b4b19dfed15d0fcbccf8a12fe2f00214166339b437bb764216f7c63ee1c4b4bb2a2a936701318bf00de817dc6a61f1e664acae25ce227421b676efb022626f1711dac36c542529447260f68ebe271e6a290ec24a62439f1d4c8907d1f8cd137a1ff8fcc031d42843ff1b3c9d8bc1ce2ac7f216ac2dcd0209b74b871c63aeafa1c0a85c621e2c1e1cf239c13363092eb0293241ad03220b5de86e70fa9730573211fbd1a0e267f36a15a18778b103e36dad13d9d45642f9a193f6108309d7d07d5236b80e3b759bd0c7b5acbb08d9a392508c7059260c9fa77430aaf12e4309612362f0b7f3d7aa2a180ffd50998988de0a1fcf950074706dd31226458790b6636c62201bd1f1632e6bd9070d27865a62222d253b11208a7530d1b17be70aa1e1e8812509194209379d09f26853a6e820144f8791d9a765930f44f213f192a08026162612d8b1049aaa2a187ede53946474244e1631f263e172ffe7b51aff078fe0b6792d2a14b57d08c0d2165f4b1f10faebd123bd07b7154dbcff411d9b27371b7e235022277583260f592b9b617d96a1360aec4bb0b1a7f2385227e4af9e80d3e3f52c3f55d6daf2b24e5bac114b5e0ad359d33cd211e243aaa12f8d987e18bd454e90b7d3433516d0271cc112c1a1700e7e899430eea7e08b24f357a16158e4c726090ea5389185bf17590cfd464e51aa73da5c09b7ebe9f0e7e6ed9e193ead2d30bb3fb9171178b7cb2243a31a1e0997339a6147cd063d10001bdbd1948434b00f653a4441aeded9e90d8e065e32022ed399202d26ab207779e598191119bbc16f0285d70dcb8d6dc174c9e97009f65167f0811757d40888a5f46142db77de145eac2121a9512fea14ab501570d083ef610b47a77410fbd4ff751297506970a375fd3c095f36afd1511f51590c4efc20e0c80ea26220507d55023a5d5a44230272caf084fbf5460b4733f1415e9b0b7a1971c822c10f0d1fba0b4d0932b12043355021b5539bf19a804ef91d5b1b7aa1fc6310232496131e34a120ee961a65d1ba9067457623148c1a00612654a55123e69fbd12ecfa9c6113c20b7d208081b4e110231a8910801b604338fd0e2cc302803c42188e05bd01354bff261a300f38b179288ce02119abd4828b5542ce198d9497e130ff77f71523c7e14303a2274d19e461e582207ded9a154abb6131a00db7ee1d84b3a171c743ed751689986a40f063429814be22ab80eee97ba82fd462d1b18ac04bcc098fab1e916bc8255e0f814312c0b13b7fe60b1d662510eb5f268222480c7c92707b6c4315b8477dc2f0adc00b21aac1afe22832e1f10b5be3e6d2ec4314dd1c0c26739190323d713196fd62129dc123a80d740a9580ed89a4bf0e4ba02da147b1f0f22d4b2f6e31b67a5e0f1d187bfc82b81f94632a81d85820f5e1dba70a52582ee0c84429c40c4b85b090fb31472b1864231ed47321d0dc19a7fea9d198539e1c1608729f9159b64ba409de81f116343c909b0e4d316f216c5d309e1c0e225d71ce9ab21b159327a1615c6f261f0c5a7ffea282b8881d3fa8e5b111f57b318c04904177118479fa3e224f104681427ed734093d80ef60fcbd715322c515d9c06399183d100279bf71a73d6d6117621a7031849e0f7e1a49e0f7e1a09f546639fdf6e9a312bc70730cd84c3761799bb9d52b649360b37df72af10808baa3b1d82125a608e2501eb31182cbdc21b54d1c72fc4e34bc07528764712ee177a614417e5cd31c54fac70fc4949be24074449014afe6b121400c61f20a007071b19e485fb10d849b4b416d5fc84f1b1a5984b23bfc02ea17e6e129b40b063cf3214a9b5cf0a489cf030a490f99f2f0fd1019093d5f2fe1a0d72cdd1e2a7e7881294b0e431279a8206414c8b9b941b2c96ad3a6d9a4402ecf44c2d105329a780a2ee1a64312cc47340883c27131306c598a30aa1619330501e63b36a1cba8822feb0d7816fbf6d2238bd36d52115fd83a30a7533d6b0c5958c730a1771f8409bb5c4430b96c02380957538ba1756e450b07ec816a20c66aaa9a0a740eaf90e65abd780be451cfd1861d041c0d3915b330c6dc444b21bb9377808d29504313482f52b1b8cc189e0b71412580aa7c8a1f2866c8bc30858b20fa2b0c50e1a3232a9a421cc924bd027d7034b8079080bba0c191bb1518839936c2ab2a344014069cb022046585c023c8560691875ea07a088e46d570d8ce9f2f0a7fdd2873e22c33b11570af62310068b4cd0722a7693061781b4209b0be052071d674f40ca6d8ecd1bf6786c10f0a807a308fe82be92ee7689270927ed3443f0b23b2f14a9c960a0a7e957f40fcdf0f9f10835980207582fec60b6b8f3e00b6c74f0d159a6a9dc0b4e518f70752b90f40a04dc17618b198b6322394f2c6129456d911d1c81f550c01055900fa9dd59018b348e232578df7150fed424c720dfccda61e864a6882a966edc711fd2a63208ff444ba234a6ea5429318c6672558b47fb37dee94660c1af7b430a692c87b13145a15b27634c17116b7bd99212f97fe0d149a1fc623b9fe20bc1732d6eee0b102350e0c75d65b9204a406790d65419a90ba87a543291973d0f0eeb9f8a11f8c8eed71ac3461793345fbe2211d8342a00836ecfe7092c6151d09609cba709662cf9209afb33c51464c626e06ffec18c0960377531488c56b11d1594a433104f0f5e17a84f7401e78bf3241e50e48560b8a420ee144acc144117a388e8161c428ea172892bd421fdbeae613745217716c82ab933e6e9f3b1263ce5f011a3be05d10d6d91ddd2540ff21b12636fd711157b95ad286ee764b0d1f23f4f1722a01ab0bf057f410be5cc849178f6953a0a780b2b50bf98fbb20e634e2cd0f70d2cdc0b516dee516ecd5ffc195b5f3bb1646bbcb61d750038310051dd980a15e7b401f409be5d25a9df62b09d48b7221dd7d61e00888f198a104aea0d12e08ddfc03c295822b0939215851eabb1f0220eac9e1a123c7d6bb20255122a14d020c081c4a7665112ae16670264685f3c0a4b3142507f8c124c125aa1ded11a7244b510efa8094335d6042e1e74c28270a51ebc581f297c9761e5829473070767ac52712543e61793d7bd40c2317e871e12632621c6692ce01f83df6b11a9e1dc950ee05b7a00fd054d980ddc99a8a4aa44701e4e93f3a1c1569500b10a6ef43dd235b566ac13974fa22192d09e650d723651e2316353e312f1661021678deb991e13cea5f1950c9dd60d3ea19290c8c8b65b08a052f0c1625c62921e0a124a20d51eea4e0da5777151a96ca79b27911467d139e945621b1a875b7081bb149c20b2604351a9bf7f403db6080151c853c0c233d9261e41eac798e60a9328d840e696a39d2df7a28e627a6fb2b425c50c2711214785102a33b3a2f0c1e538671a5b7cf333005298bd36f0f37962b7de5a022d89aee422aff3823b304fc82fa2b2eb81f41b137c74d2f4518e7b0e4629e9e0b26a4e171ebf430b10a0dc3f353300d998015e80880b119b43a35129c4fb0826c6566a220c8204f0193ce42591814750b6231d07d8732d016f561b679d9871b9e07fc308d84644a187c33e70170a2bfec1cfa3569e0f8081daf1fa701c4120fa283103b0df0eb032240f2f7162b04b3b3d4f5016f2d5d4125c173912482061e9c9453279f1cc31f51d19352de00783c1c7468c31131fcacd52976be5ac15953e47415090568a19a7814d00e7b9dd3420a0d64e51388ba6693387376dd1dbfffe9739fddff181a4bd6f7d147fd935e0ec410c252f543dd9d3b277e1eb09186233019ef55088309165f9712b38826324ead4b4218e78c53320ce94d641ae516ba5284f54e8c1f556d8101adc7495223e3ac1cf0a376bdde2e989303607ca93cc90b656c62e0719a15f43099be6b01fa4577aa117f2df9322087c18b1ec1d00ff433bd882d10df4c6f2316ce5fdb160854b4819beca8260ef74699420aa4a8193332cb24d106e9c91a1ec5909a6188dc70d713c156c3f1e86ee7ad1ac128abe17faf9ad74a319ffa720a0f61b90e1c696726d071feba1af60e91f28cbb165c23b9e17b315daf2fab0a21083551ab4e66801a44b85d213c8ecfc91c6ff6a10280e5957f07dafc89a21d815f67124547672371ae59c21cfe65dbb091c41b500b6e76ea512bb17c9009bf94c2a19e5272ce0b8b1e79019ba15313206e1e85a30f8ec26809636ebea239108c453aa323b5f235cdead12252a5d7e16992336210dfd7c6c24684390f255985da424c40b8291e7af78fc3606948560ece72fe3072bf2bb81b396dfe72975d145b148a999c42568f09c918d592852220ae491d2f025022046d676e8920bb4347327001d78b113c23f141b7df4732171d31365195f6b76621cf0a47317f351ef43bdabd204166ba8d0a224da821025650a51a14e0236b8235881fb421bac5d500ff7c1e8409dc0b7982e26ccbca3c2a814950982f8c500c24db73124934118034060e73d121bbbcc11f8ec82f415862a6fa127022048129b8016208a216cef253843ac70c8edb4cb0ae635b810b195d7ce0beb08c920baa4aaae0e642d99a2e88ba1d91a7922f0a20b688bc815dd3e13722efe35e423177f2bb31899cf7850148d04c37ae720702eeb51e6436887f67917f2dd33a25a6916c1467de2483082fe799d1adb331142398bd7d21730eb7c81a5cb68e722d2891251743cc324236af32bf345e970cc21b44882634fe6dfe20838fdb692bfe657f31e88c587527c0708c914e435b14336c5334618eeeb5be1c1d211b914c25a2fe1566481851557ef97412f092bb61598ca6d91a7aaed58231fe17a11d3e1844e1d3257e6076d09914720c95225e27db7297a22d080bc22f7143f1541c5aa9ea3c40e2ae927a0255423ed289333382a532780aeb20e3718bd2d2350e54a140f0d10492450be0ef474148e6019d0ff921ca11ffbc54831750a5f8c1d7f2561d2b1b446a7138b82f4f1be479b56112f66fb72bd5085dc07c9893102ad627de708c3c91b41cb16c7660be6b20f70bb216e0d1c5a73b76087ad95110ce7598e8206902f1d22d061c231a8db5d7d09da65e77183feea9610fbded0f12077529b33ee3d7440d206d0de2391ef90a118d291272434c04e72990aa6ee0f4b78ab7173b4707606c93d80109f8300eb0db58b9d92723673e15277df6647585fe971515f1ea0b731b99e7359f062c24779c460c0751c3d3437167851b2737de49247f3c50b3f819d8245e71e68feab588135f6c585aeca2356933e4d575c0e15f653ee85e33562327408650940ed357b1dc20752e4aab06589c642380b6f2b5c682739de025d543921b8ecbbd73446c27d23f5a636770552f2db3c7840ad72c57f4aa87d04dde63c8b5a5cea8a48b14e21ac6135683c0244e64d5b303bc6e841b54e99821686ee56f2f444a2bb30078e8b50a20b339e18719ce571e69c6aa80a94b198e0eec702250bb8b4e7708ebbbe301c871838e1cdf2533730b9d2e3b306696691285763cac21c35ced23f4a9832b3d29e411328aedca0a0c5eed4c732d927d9a15d38475e0d21d30c41934cfc480ea8293a31d2ae08eb1606559a12459a5d191a8b8ad4a0865c20cd1d10ae4283502066bf07822698f065539499070920de31c168c9e119a095ba11ec23cecf2ccdc6c2a131c253c9202c7bf2b2e513fd8b08eeb361a1463a73801cc643a2e0ceccbb0f235cdebff1a6b9e2e00fd61ab3e1c12cc8641a75edea21914ccf9209a75b97d326ebe934186a3566424ae3e94116479c79c1d8189ebd2bb19ce5c0df35bea3367542a0914ac8af8321660934d23a381e8412b210bef1da79e84e152c668870efe8d4f30e3fc22b4318483cfa0ea862dc3444b7b028233ee2ede1a46f0fba0abf3e9e02fc014f280be1ab85114b32bb6c1c7f3a6b41e0f6fe2823d874ce530ab584bb1df4c6f5e2e973d3e9272dd955d3148665262d7579f8434f8fbd7f1cdcef17a2382fd3a5126307ac329948c62413cc59dab0641a6a160832fef7e12b3534d50b6aba33125849a5fc29356186a10b93b976391af604b1033fb49d200a1f6462a6e6127b1eb9ca7f528bbb1313188e2575830eff296530977e98923316b14c2efbf42d6112adefc60f8c7610b260f890dc200ed8b7d277b0e4e416f544ae2150cbacae301064bab364968e202ca67e74b261e788bc2c65cbcbc1d2aa291e215fdea081109aa6c71a5cca6dd12e4ceb2b3d99b439e1104e6c6938e190dd52ea8e9d6619fce7e4e2ef54ff2c388d91c802c21dd9fe22d80c55f1bc9f59441f048250021310c40a1d049f92d067575a9c27f3f566a3f99f8bd820501c03021200450409e72916817b1e5a38188d630541146bd29f15ab6201f2366464650c835deca5501312f20bafd0b7e3041ac20533e8beafe0b6c28ddd27e65fded1ca0280a41350086311952a62e510e27c5e914c9cb49f2e01784a13901da6013452e528c10bf800972635c218d0f08f5e1e1117b2c3c31327999114fa434c910827acc322741c81527b7cb9db16964d0523834ee3943c8eee96c07235d9301ae9033732fb079d8711ca8b4c71ee48d4cf0f9fe4f9310221963a086d621f90b77bd1e30ef116021153d2ba8e16916954027fe5e5ef22bf4ced823d5a3f5133c2a87645d15a44e70fbccb59409181ee7a1e236d6e9222c20ac82b3fcb8b81959c12d81a348cc6631a86f0101a534fb6e0d361a2061831c04a8085bfeaab09acca1860b0cef72109585fee809ca5e520092a3922b0d89cfac707f3f781509cff8d690af8ab815091dfe3c40971612630bab4f0cc09b1d94f609b0da5c40923769640b31c7e960b8447dc209b2047f307fdcf92009eb58a950d26be4a11f034a67709ee8712a074aca97a0b5ea10b712af200fd093e413e40958ce7880979b35f10e0668a6116556ebbd0cb67efd5073b232a60e1185b56073f874341d1798bc80996adaaa0bcee8f95097ea2d33078e2bd3b073fc839d07f8a4f9b07ff52d78091ab1a220994303a45747bd1091600287e933b82741a1336b3602288f7669227ce163422e9a74d702ac802d992a4a57f99241e038ff3198cc8392ab7a0872198f3c36821452e77022f296c181ff04f7542065c65fd36c6561b552536701417f88ce44289ead74511998901412f10280e1b1207f501320c302e1bd9d6f9a142e5ddbc5398f01d71f5f531fa385a227763431a4a9f461d6d4ab31ac0ecfa3db31ba8f311ea58b93827a091c2eff48cab340530ab23a8bd179d31239cc4a331412e8331c91a1b23309ec58d32e4241792f463bd0f1d38118ce312b0eea337445f1a537e83265849ee1fb82334a1d37437b621c46222686400341b561222dec7c7b5437d420b82f467ec912f3ede3ef31127cf532f3a8f0cf32186d661317ec20cf2caa29fd331f131294370a266b5311445c3b33306a97b3cb3fa2823373da6a93924317673315a53e733c9b4d10348e12dc82f6fdd5233423c5b0237020d708303f53e8819106c96924a6cdf9f253531075226fd2f03237a87d07252ef99dc255006d102944e2837264bd9a1e243addd9a2a726c76c090bb05352a400d21f52f7f97a32670e2cd420b65e4a3314ae27201f36418ab3366e5d9431a89c0f433b37f16b28846d52b49b7494243757d2f141af6f6460224aa1b110f6b30d6c14e437d09174b6c37321500681b1325f7b9b1750a6964172a7144b14453d489194449c6113922907e1366e602811b4a83ce3194b84042595a22852349878bd1e5efbe22255372b91246ffc6a939dc7287624b52b8eb0eb770289154141862239eb35080c81948d520133503d47d70dccb2a31969f924e6fa67c2ca3a0802429a31dbe1ea1f9886110eeafb31c2f219502d4a019061e797a8c70d3f900c0214137f2b22617f8261574bba352ff3b25693ac99352a1987b079c12a591b0c0ba6d37901e9cd37c31e200afef15200afef15ed6ab9121fcf4b220e6647b4d1d542b2570b7477fae25d346ed11807a94e20dd170e9e43343bae7327e6d9041fc90a31812db67dba1ed165ddc34814d361108ea7d5a34accd22838ec15c4027d3da4010fcbc289d12efea57e34c266b0c39e09d77521a8f8dd6355793077113cccaf627c8abe461212ba30744acaa7b0246bef9b6391a8b3f429c5590422066df31e157a60cd912ad7d5ec1e0d46f18081c42cf336502e1cc244ee3aea31815dc36161e63ffe3153efed10d2f5530c1909e3727145dd1ec534c10cfd30876838a413bcf9c9d0f7424a36078796ba507b0cc8e806aadd68f415e7d0de53dcfc89149e6a931522ae2ff1b201c44c7118bb2e686317b40f3615b5ba528222acfa842a3d71fc7338332a3f2229b7d791f97e731f35b64a6bd2f2a39b6e20a41d73110c0f58981c3b5f002371f8d20d144ea5aa30de6ee86616a4998cc259a00f9f1c1bbe43f19391f90b17363d1c91b66e555f09644a9c3183dfbac20d9b90cd911842096938ca864a22945d9ebc0f7ec27c9145410e040c16ad3f608204e30e0d6be9cc03fea7c60e203eedeb711533dbff46580393e44691dcc11f3e3703917866c6a90f8c2751b0bfc454110c18a15ba0df45b4100fe7bdc7f13b2095fe0e1ada9041ae46d87f0afa1fd53185dd2ec41014809ba1243c591d1b9390b111841d865116fb3f0922fd16d2631f7b2e2e40b6c236241cad1e31f24056f4a31f82881971e2aafc7c2ca996fd11205b109c131ec875207fae2fbf061993efc1e3bd76dd17245a4880d1fe752e2a040bdb820344be6e3139d4ee220143f69f27ce1112a1bf2e4ebe0ebbbce89167490e8c24865907f1af9ec1382867e871012821fd3d09eb91a9f0d9771d242c6b827822cd0571762a2904de01fae64f310c39c0b142590a620f13830974d1b7d5ee92283431b791438846a9180e1718c42bfa4188184b212890dfb8d6ab2c7ac6755283776829218b71b793ac6b9892141f0025f1c183f94d230d6067427c5f04f92c902fc110f02c2dbc26ea2a3fb14a09f63d3588a27aa0a24e4c9526dbe49cc33ef74fbd122f28dec10a14a4f21a4bd9e4c235f57b831ac8659d022a8055bb11c7231120ec1c46d10fa920e1e28db703540bef6a1aa26b3a88f1352c98cde1733f8bec09990e8d511f2f0f8c1dafacb800f280b6c222bf102bb12f5a9fd10a137f8e5121cec46f0b09b58420b149034a0ea976c552111346db259cadb6e4b944a5da204332fb71ccccb33e14bca24fe1fab56653200c522ab103901af92023cf13a17d5166e835dd6156532c5aea8925f156534354c8de460cbeedc0639290eff52eea5a2e322107c8a947c32469b120839394264cb1b07393f3ae641af7e70452f31561177303638a22eb03ee3f1978006c33290bd50527efaa4ea25d899bc90efb7ac34263b88b8f2960d66432947332862af4caa7f29abdc9332e87f533031711837f2560e9d2d29f288b2912c9d662b204fc20c432efa83b91390cd43637896f8f3274a237a61e9858a5716e86c3ae14b68841314dc5955d1b8cba6401fafed894158c5584a19430dc531838accc4154a517f22e819150316f28cc5714e5855ba13c0d30d50b102f31014df109132938a018d0d87ac3f826dfd64101e1fda6b626c59bfb92275a3c840b8eb805419ebc55c2167bf5cbc1734321a6141324f3a2eb50f1b1309374e6730e2ca9022e4985f0d22487607031acfca133cba10b77109202f903812ef97a2a68793e626a99ff3617e67b23227970ea0e276dba39a1201853b92c67983cf0ee81ece332c360b822eab472e60fdf86a410e06f82cf239d225e61326ec7ad1159fe6a116e360c960d453870b3d15d214a1a4c3ed8809a4363462b8b223222f1dd3536160145e742a66723b62851402e03e8ee3eec48c85729c427df0bc025e30eea314584bfe208ba36244187e4ba0b1535c8238312855c24335f5ef6e2384f07c2356b419582c478ee20383b1ef2115927451c3847fb17b1c1735f8b0b9fa48bd47416b513141fa38471405023d22522f18851fb49a2e411f68a28f33012a90521567cf02123ef006e49dab78f0693f267113908795a02d54b4bdc512ae4604239b9b39820a6978c11e661857717588b19520cd91c0c38d5353eb3fb208a2a572d460b62ef1273de24ac8a9a3168fecf463322c575109bfedc76165e352f23ac6a31ff37cf0f5e2102216c2f40a2afe4029bf6e2ef234bc46f724fcd5156096ae7231111eb74d20a7102a4f07abba313129a7975a1add480d812184370f227dc5daf2f832796f1c623fcad0ecb57bbb1f910c3652916f773c1ede870270b4ce2ad90c5b3be540c9a0ba050f0d81dc3080fad67f096f030dd22b7930a00b00db9af0ef15ee602c3efe43e2ff56a44507b0d25b419aba846e41bf085bc454aae1930b18564a9088515f7728b1e973e23c6a950d0a03a33ac07d9132220932611f820964836e2664fc36b262c882c2083ed3dde0a717613106d286b730859d88800bac01b7a13e3efd040ab03983624776ceba0617a1511087a7f7a508ca33c231dc7775600a1939e72253b27a74210bca7ee36c3a2ff529851a0b7098fc47963096ccc620b821ee7b1d78805fb1def1f64e150dffdba398511bbf2b51e976e3d759b51239739294539f08d2bc38aede78553fa2e31c1546deca43163e7ec036e29ac163df811ca32c1520df8342c7bfff1de12208b3888fb4550fffcc5c625f44f34a1c86996fd17f13aee834e66b7fb1345ed837393d4335c4c720a95131c21219b3bf1035164ecb96f8b3bb4a23e436b6325c5342bea6866c0417b7736d1c8e0c2fb8a59d720fa3bae61f79c9e49187ba6b56107ad719d201a26818310dfeb004ad8d3f2d3440c809130abe114323039f29b3c3ca8bcf394cec8b23689e8365458e6d84e0c93126d0262a0c4c72d2f3daf126097c91a2f5832bb72366ae87221dd2166b0982a1d5a17a96c03b21a72c7fa0cd47c2c31f8dd3bc435f12ceac199a027db217c523b936c12de69120b228591a9d7c6511fbc5e5b31b3e495ea0dbe3fdcc0ba719870274eb8ae01b3ae21680d2db770b1df502b22340bb94fa6fd005e8d2762cc7bb1f6de2fa227dd1487d0e032a64114612a44320d6b8b610a962798609cf8fa03293eea0f62065b8623943e918cc217e84cbd65ec24d98382be92ce265b6ffc636c966b3e2917afc3035d58a78b0b2dc180c3e90779a429047ae551315ec288211caa1868f6181dcc21f8902c2111785c221a767ceb827955089f186a03959106a0395910a4ad2d4154d8b83b262b70e5b0b679e6aa0efb58dbf33f90b00935d0a333f0b8b71c230632d7d763ba80e78633012f58408e26e4c513dd01a500daec8fde1a0ddfda81c2ad6c030f454a94b0fc0b312406ace268307c863cda066d25dd230f217aa22f85fe95013347914d19e0e93bb20276cfc52c37468e11a7a5587e14e2905ce0d2f5060c203843e321be9c96d73975c9fe440055effe4848b1c4b1e74b041d3230f29aa32b8520661d1d8410f2b65604f212115017a47a84c16b1950dcc103f8bf90bc16caa42d428162fce32056cfb4419fbf81f31a68a56590939fab5f1129dbfb02ca7e83b5349628c3b21d55f1c344a6e880a1ce715eeb1ba4c47612fbbb725c1c1d6eff2634aebc6a1f23434ee096abe64c1858aee18122636b680e9c1b54a0d7da72d30faf5a3c40fecba63b29d1278be0f96851d0149100663116b6d9a913b4a05ff180b19af13b0b900df2f531e8e61908e82b5099b8c4cf1393806ef0ac22067f1c82bf3c51643c25e912908d54013e93a1741a3aeaeb9227db866313cbbdca8220751ef032496c1cc3aa2fd2d034c39b2d042b5c21aa12a7acdd923b6d19fd4c99d7a634cb1648242e43c678a13c129db81d7e88e6e1ad6f79701d71523651a6a8687a1582780261966ce3e13e11de8de34c2318aa12abffb6f3a681e60c37084ea13328fde0870f57be0de378154a381be289e8a1ea4f7876454eefbd8429e7bba729271847c26f42d323120ba660a4475f69a529e8c1c422d883169d27b0e09fd1d1f09a9c389bbd5e322a25c2c41e29dc8d828a3820ee3093402751e3cc899e1e741fb7f45cb441c1296ec6a3b3cab95ffd20f5bab03279f3a43809ff4212225e341e7b4af01768127aafc9ee1c0160271211436d9b23f61744637d02e75c0aab34b082f53503301465e112c106c90f7d4b1756d2142219e2c613f523fa61507617d80c7304a0b0fbc0464d1266fca4814ceb79e7287d54b1a0d5144a690857121f514d7080b729af77b7567f1bf97f099a9ac340a8fb136c235ddd54f286a6eb4c4180ef22d28b20604630a6ba1962211e813b110a82b7e0ff62db46247272ea61b07fe2cb1bca2214b18e815db723dbf6fd51b0ef10560df7f83b92e24d74911dc8df0dd24eee98d83686dc3ea3010dcaaf0787f452d0612449802741dd9920905f1cdc0ca1cf6ba23903fdfa1b34734503be2b3d693ca80da7b237df48981abf278a20ff602922100923db6129fdabd1103a66f0629e5285241306495b91d14ba0db4d64eaaee1a168c3ba26adf15da1b445ab9f0a9c30aad332b1e18b099b3a1f02298205f1165e9962635afe696b2a345e79b1a27a3f2034be771f126359b5c52330fc43a4672ed6ae1c3fa8dc04d95f9a6b190ba4fe1223b70d2926bb272591a32270c95845e10cd18099a10f349945b1017fdeb4f42053e0705224373b093dd9716161f947844e21329cec513329cec513894fdce203778931216fe1de81a81e871b2b04838f219f4a08ab24ab838290d4fffaed0aa8f086d08aa43b2e17c74f995178c86b832a23168ff21959c98c33526dfbb17aa977c92c6517ee2417eb186c269a824621a59073680eddb74c71623659b81c53b4aea3ddd6c59b176a64a562de0b6df80ef00dd782030ef0db1c63e9aeb2a5dc987725a4c7b5c0c49b8d412e42b67ae27452826f24f25cf63218a58fed24fec6e8312e180cd30f99751581b2f2f3d41048578dd1018814a63671491c1280c508ee13c18e0f80943bcf1968c57dd2515b7f1deb1e2d3764a87648e2b90e3b63fa9158c730be22f04239b14d0865701981a8df5101fb8288274ec428712fcea09d17e2060820b62b6ed726c64b43c4fb4e20963d144135c1822343112faf2dd4d5051c0333507285a553abba631240fe88357367c4609314d566f1315222afe12aeea6cd311fb43e712372bd9c74aa827bee212b90d89423e0e923268810d2955de1901119ac34f561765769a45b9512a140b4c95325133701c3907e0142040e04ea7f62c70e666f4a623d0c94f22c7ec226829ce7333850265215ff02d1c11561f8e0286c902701e6c97ce61570f32d21562309a426360ec753111a82410b140fa32247b1dd6626d6c763d23fc425172318e3807231313dc521c79eb683af86015021cb4cd482366ce63821587d3750b5398be51470f712723f0a3b001cce66a2b2fdc5d34a236dd3f634d5c1ca9b2700a447c1abc18f26141bbdc2c078298941319f0fd885c1fe42d81080a27a61036404650e4d27c0b17dffa0652c18a64751ecd2688a1568810312e295812b413fe976716625fdd720974c09f14a3dc75b2ae79588c10664f65412c9c702b1689c572d110151db7173412423204dc0ed628b0c6f901e0e6147a2a56a91e81b3223aa52b53c30721fde5052021f0d41c810e7e234a29185940c13494d3680fdf1136c282844e30371ded9023fa82164619d6bfa712ed32870f3534f16313186bc1380b2de44562b5a0aac51784c461232b63d6ab1e10830c934b3c54dc11f840dde2776a707a1e2ed1dc81f6efefa6172fa003619155f34b141294a92205798d1720eb8cc2f20874150b0d677541d0adbd49ee1bdf00f79266c6864c38104b5bd1c7e8de152fa1275323800fceed35d1a3b4d3abc97bc508b6ce28a2e576794f32c212ca80c59a9b2d3264041dc0d06bd0060eb2184b80df5f765b1196f47e842b0b8cd0158396bbe3dcf7943018a0682ec45fe4860d0a40d762946a64164624efd36380f2a0d78e23fdd84ef1536ba2381ed2ee32c336d466ac22ab96d662412dd0d11128d9deb13bfbed6c16fa8be3f238339e9f1d3c749f92cf121acd0cfc0415e0e1f7319e0f30471720e366ff4a1791bd9c4136615b080e86690e6118f2571931eeb5d8431cb46c2c1e7f3edcb1a62fb2f53289663de36ce3e81f173384abc32c0440a02dfd21102144e6b44032a00cead20e1f624c121f153d70eec31c8c34f6341364f954f336345e0149a1f0eb8bca4816cf26c37f878c1f328b2c68e510cadad6291d0642b34f83d82552633bed83f3f936a01ce906ce809bfc39d748e30c344521cb452c4b6429eb8670096fa0120f3756f0e127e42c1d59f20eb49621db1732282dbaa211e34c810e0c93f1c22e1e632c0d0a3f6f711fbe26f60fa2620990c676c3041049a23644410de62d3c08deafe2d5750d6d0fca93fe62385b7b9c1f7608e5e7658dddb83327275ef320c468be21beff5832eb52c62920ced38321f8567f55290e714c40f2e1f4152a22358e02b1ea3af5192a54de91bbb83692334a9c60309175dbc2213566ce62eba247252360e3d1f224d35d1a0c28a2f542427abf7e41f4bb1791794f124f15918988911c5f63c71ff055af41f050de830fa050dce108e5cccd1a09a6173328a59f2e357e16a39481ffd046322152e151be439b292048dbede46e922a0e0b344882249354bbbb4dffd07664e1bd1f4c4db1a941f12a68c61718bd2dc09240b016cb1cad0504c1aa9badfa3a6e40bec21505a85f11a009e0122e76ec7c449ce900a156d6fe1f38fb55bd91e0e7662938f86b98440732b2474f04d1e203c9ad86ce261f3db881463bd1b321d6b49b5475a19b1a4567ac5024c069c0754833aaaf70ea1077ea23a50c40912b2ed68737bcb58652f2a594ee21190d1850f3d7be9431936a6dd322a0eef0460bf86b84c7471b0b1651f1f0132d61276b3aa8a92e033d510f31212c822e940e996d2e32d1aa048322c769f4463e7fa1b3470c86ac36f542218117a2fcea187a8e69f3569bd1e71c6d38b141899fc816168e95a54361cc340622d4421cf1e1cfc9f718bbf4a5b1c7563fa61314495335c2bca0042a1fe29de1c84d01260d359b68e0da54ad8907162ba4a234c07a3b234d2fbba2e9614cd91c4eb88bc2e7627fa421670dbd8187923b8525cbbee633e3c8b14d38f94bfd62271fa7d7389ed2a9b28a205306138eea3f80ff50315a367476bd064cf8e3d132dce1eb42e0d33515748bcdc5012beefd321cdc6db6e288c7a25b0fdd38817460576e62352aaca2531e3af81d2b75e15b4166f40248278ce5af22bf573669247dbe90a39df4fc64238ad11ea230cca8a21c9f33cd02d885c99816e519ca642967bd463b59b8b1a2fb85d2cd2ee8472f75861e939f2a6dd3bb73995c25932e8aa9c10390e1b6a63b612993f33e68dc9621ba7d32e41007d88e3506b219930215ae9026d7f452727d7f4527271ecfba02f9ca84bf2075ae6d513399feaf17a74d1d51df479b0211863f3490c563919339c7aa6290fe55aec707a6e117821c2857c63958ddc681f8e9cfbe2107da67710f505ca912d02fd681682369dd1e0d0b9b216db4869c4726bed6a14a2202c6254ee9b4d4648db2032e59f1b38195607d29331758cf62e66fb4221c359914d28e0cfb3006349adf622bd313d22671b51c8504a9fe7c39d4c0c191320bb79918bd4e17216bc2aaaa33fadb4e61e1931c1044b8bcba447a046dc2688ac6385145b00e7a27b1a4005218bfbb071d3b1b7ca3016d70202ce423b372ed3de63212df9b2823be2fd052082dd508429e8c483933f2d9e1746742612417548c30127cf573c523d57ef171b2c0bc4d1fa8ec90a0efdd96d711f90ee321efa56fd43fbccd96a34469680c4621530273671cff82379c607fc14c65c3ae1fb28458e1bd3988ba255f2e3b9218fc17d31bb8a04d520d248b732f9f2e841465d6af172beb7ad2260d1924a11339eba05189fe3a9926c9af26947f6038c2312bffa333f8a10365651b8131937d493537282b0b73d29bf3e6253ae8c07241ee30876c56f5b29151a9e96b041db1ffb75185a5dd892177750a61820d75e816da27cf81c329c258172081b33115e2eaf1271c4cdc818862a53c1bf3da4ea1ec4b82a328b702a2313f65240234b94958642a2cb41422670addc2353547bb66513e2032e18b1eca1b765b1da15c20e65147f90970113587650e1b3239ee22a136d70d35b3d9bf60dfc995d314c9f21a0147e2db9614ac2423f2352e73541290d12c5188dd7e0225904184b18ccb67f811da341bf2d02b813d0ae66a8032780991f0467d804701094e2efe2b65a46cd2e1462a7221a9f08c12e1df2cbd159d0b86c1893e17e148a41ca8f3cc1bb1443fe4f88342c7ffb8df1969fb1625555d7d2120fea5dbb0cca7e1a70e3e32eff3a4c78b16206c61c072577cf07d251583a7218c80e88a12fb20e0d0fb36bb562050164ae18559e2a42041a4b1e322b3343b1b193a1ac4a411029e2c65bd1f50e2f12fa52d3f763103d8bb0909362fa1e2317c074e061dc8bba1435e470b73284bc03a6277e9bd5116b56df9b32e5613651b51eb55923d13025f1b954d3a4238e592ab59cba2ce70f99e4a8d1dc4fd9d718e15a4091ba640c4315b585f0d1d5f7c8053a522694e4df116d50332b7c721289da1b3c1096c53e26fc49328718823d4422faf8d57035c8d672c28586c7c931c32fe6a12b9b985218562f92c2a0bce0ea0e0434267216ab5c924dd0684c664f2c5554087fbe59029112a0f72eb8d273138c0894971638e19771f86b098621fb6ac942ac9497de435cc418d5973b6b2106316f5690de07d3236be153494228ec94a51b8c5de3e30fc59c5e242df38e81edd4a8b72ca67b6f61d208122e2b3cc8ac81f94845694f758f3500cae0a2192a1d4ea03237fb644b1d229fd3a0bcea7c2c24b10a12b099ec367c2efcaf3ca2b1c7aa760908fdf011da01b592218f2033b247975e9f0dcd1bbcd468ffeba12fb99dab8156df7cfa0a69d0f960848ac94511a37de5d2a8fd896e182e2029d2cecabecf31576cda6552a1474f4e84d62a848fb8e9c32092c632f1267f96f81409417c5109557a9016369878d1b0b3b90019acbe34f2b570d577269d982f618a874f2a1289cc34414b29044c19f02da19125885cbf3429de1b341193d3bc1a96cbd94121e8ef085760513c52bcb5bba04bb0db1251460fc26b7fdc0bf4712b5f31fe0e40e070910c618f3307ba6534b4e2ec70c13dfc060be19105dd532aa035dba2baf4adbd247d2ac532ef3c7f9c2811be383336a31017115153fa53a64524c91309a74ba1d6563856232fd96082d81eccf022412c93d0cc827fca0f4e245e5418b0d76b10c9ee4f633d70a6b52b49b4b4113fe53e831a331ff882705e7a9e1ae9fc82415ec5ca7e0bd197ea43d2e5783b121790d140fb6e34fa2cfcb2c251acc4c9470b0c97b063844eee1e42e7d90d432c847e5d302eb1b940e0c2a13d185378c9a148f8f36f3485726db1e632bbdf22839ddb92f8a6dcf51335809a61097e7caf19c697b880dc721fae0a4c3306b1ae4a7bec437d53f0436deadea068e76c6b22ddcf2b512626d343b0ea1816b31724e248b10ac3754348c8027e0460dc3c79268f44d3d1472d95132ea857cb72574ca45027255b02315951df6b471454c6e4be7f8230338c437330b90736b10fdfe4314603034e2a19ada80eb2f0b76dea5484f8d2f108fc5e762182293e3104aff8e93cfa993513e73d17261755044253e7edb5603e5895b96085d7c0981ea1793660eae495621a6be90b6114edfba2316de9b853469d18b81710ab2fe11a1f176126c19ce0d227f8e51b162de209113323a8fa268ce81113bc1557324a03dcf43126f8cf222f25713603a43b01d34e8d79a883a91addc5495b22735228e56d3a25320bedf0eb4feae046f8883981d830030510db671ef135c2b8cf0e3b69c011050740cd22a01da952304157d3082ffa09413abb70d23523c798e3b50caf7c4a030603b43207b7aa3664253c518bbf10091d2753da81a940190944f9cebfa1bd4cfd1a25c055644263c6c8362d4514ecd48cb01c691bfa96411220149bde146fb3b9f164c823c146dacc46e2ba7ebc1733f24988d2efa820c53115c37914a620080b29976dea842ca271bd212b2d89d30422197336c6671994e54ec3c70e71a1065400fc2a14392ac0e4e388bcfb7c21f56baf364d0555b40be4058ff093c2bef00bc688c1f0a5fe0b0131266c7813bc929a704745dd33a2a204dff220d9e1f7c2d927c6420b09a80f31261dee6a12e082e930976a16491ce982cfb27ad22f8f308198b5455524a98b13dbbe31f21fed4f2915c6d99ac1ab9be80e2dc51b45e5381c560609a7739fc17567e66635687c2690ca0d17be45fd889f422eb0f3fc2d252a80530b748d0713da6368e0e071364915096e3c91f3c8b4a22c620d78c1f5ea5cd633ced237619371ad740c08614c92df1d7be828748f6a045d1f2c1117fea7fca5f28cef801505dd226396e608ba1528de2d41c657806b3599bf49125b474ffa521378ef043582e05846ef95b181c7b36d1a1a0f7f44e2cbf068703fcdc54ec411cd9de11d0bd12251c416289613f2ef7b50b6e2eff01670924d4178723059234f198f220db453a31a330c14516421411721214f1fe306d590011a3a2028c1e0a1211e2e241d8f60ee8f76930adcd083727c603e0a21617423d1c8cbf43e185f9d8a71ad3e17fc0a5aac691479a0eeb2290c1945146619a5f22a98aa6330872400202dad384ce41885763935f277ee328f7a3ff6426a580ef3d338ad513728b13262fbeea18d17fa877cf23e0dc8223037150dc2b1fa0950561bcae893c310d4a016ab267081909465a51c55292db155dcf0ac29f6a2b590b34d74ac3149db22632d08ee6e32e38600028abf827f2f16660fc218a97ce3437f78f883464b519b23805367839c3f25721f6767f1e1f3fe04de28e264f4a0ff7819380c97990270ff015b4a16c69feca2e0df2c7e0e96e91b624aa944282263cbe8c152dc8403147c8d9a6308a1c6e419c6730f810bf9ac9214e78e1120f226d343107de24ff22c2e641825ba300f6104d835e9214e13eb48fe7db378190e0bad82036d95cb0cab5ed480e5e759a41ab5260531471c08ca2d940945f25905a2a12c37ea8ea2db6f691a2c04add82311c42a272c9b5dde62c33dd1362d947f75d33a0c48b026e2bc77e299533989072babb31653be5b1937f188e3523b76af634bbf911683479644a51c727b50e26f83358f122a4b11e1b638c0022774a3284228bf43bb1ab7489141f9d888c25b7d4ef65243e510df277e135ca1c9934bda52067a0c0508220f912120a59da36d10ef4057781b0334e6339bd419e7fb23a21af1c7f410581f6d20f79acaf4106719c6f11874bfa411337df0315168740e12e336d9b29b7505271065e30011720c9ef3195c6b3041797cb8aa0e6973dba1ebed556d1e551ec07279fa0d521ace979aa20ad9f0f520bc5d47d28dca10451231ce7240dbca663a2a020084919fd9816f0fe82a03c12e7f339322405abe9191dcf074231b6a4fd0e1410b3c0a73483fc1952036d81a9f254f81f11599041bc35a216124a567f21807f2f9d0feeb43e11f6a019c929dbfb32e14d929c421dcd6081f0b19d073c16b7630c42033779b91265e0cc319d351eb00f2965a6b100aca5270eaaae8d00a846627c38fe36c4415c41a6b1139438d4126564f9b413bb52a4c204d9ca2f2445638a52e15c155f1bc30326315aba6a762156e4f8b10139e6e01b46cf9be27fd4571c142daa247451032bd6161032bd6111032bd61235449431a5d42ed12bd23ec561db4b1c6f2840249950ef3fcaa62747e0615151e9d24c13fdce89529ae842992424050480df1ef7e408f1071f02bf9a53781530510291717a71be152c4e593115fb28650ebc8b5491109199b9306c5e6fc41e87967e10121b78915b4930e9150ee79df1f2241dc10965185e43a79488931fc8d580f1a";
 for (var i = 0; i < LAWNUM_TABLE_RAW.length; i += 9) {
     var key = parseInt(LAWNUM_TABLE_RAW.slice(i, i + 7), 16);
     var length_1 = parseInt(LAWNUM_TABLE_RAW.slice(i + 7, i + 9), 16);
