@@ -48629,6 +48629,17 @@ exports.getLawtextAppUrl = getLawtextAppUrl;
  */
 var query = function (criteria, options) {
     if (criteria === void 0) { criteria = null; }
+    if (location.hostname === "yamachig.github.io") {
+        console.error("lawtext.query() はダウンロード版Lawtextでオフライン用データを使用する場合に利用できます。Web版では lawtext.queryViaAPI() を使用してください。ダウンロード版Lawtextはこちら：");
+        console.error("https://yamachig.github.io/lawtext-app/#download/");
+    }
+    else {
+        loaders_1.storedLoader.listJsonExists().then(function (exists) {
+            if (!exists) {
+                console.error("list.jsonが見つかりません。オフライン用データが保存されているかどうかご確認ください。");
+            }
+        });
+    }
     return coreQuery.LawQuery.fromFetchInfo(loaders_1.storedLoader, criteria, options);
 };
 exports.query = query;
@@ -48640,7 +48651,8 @@ exports.query = query;
  */
 var queryViaAPI = function (criteria, options) {
     if (criteria === void 0) { criteria = null; }
-    console.warn("クエリの実行に e-Gov 法令API を使用します。時間がかかる場合があります。");
+    console.warn("クエリの実行に e-Gov 法令API を使用します。時間がかかる場合があります。ダウンロード版Lawtextでオフライン用データを使用することをご検討ください。ダウンロード版Lawtextはこちら：");
+    console.warn("https://yamachig.github.io/lawtext-app/#download/");
     return coreQuery.LawQuery.fromFetchInfo(loaders_1.elawsLoader, criteria, options);
 };
 exports.queryViaAPI = queryViaAPI;
