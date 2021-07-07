@@ -138,9 +138,14 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="core_src_data_query.query.html">Query</a>.<a href="core_src_data_query.query.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/2320fb7/src/data/query.ts#L663">core/src/data/query.ts:663</a></li>
+									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/50117ba/src/data/query.ts#L663">core/src/data/query.ts:663</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Instanciate a <code>Query</code>.</p>
+								</div>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -177,9 +182,15 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="core_src_data_query.query.html">Query</a>.<a href="core_src_data_query.query.html#assign">assign</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/2320fb7/src/data/query.ts#L722">core/src/data/query.ts:722</a></li>
+									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/50117ba/src/data/query.ts#L722">core/src/data/query.ts:722</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Apply a function for each filtered item and iterate the merged object with the returned and original object.</p>
+								</div>
+								<p>フィルタ後の要素ごとに関数を実行し、返り値と元の要素のプロパティをマージしたオブジェクトを列挙します。</p>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -217,6 +228,9 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="core_src_data_query.lawquery.html" class="tsd-signature-type" data-tsd-kind="Class">LawQuery</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">TItem</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul>
+								<li>a new <code>Query</code> that yields merged objects <br/> マージされたオブジェクトを列挙する新しい <code>Query</code></li>
+							</ul>
 						</li>
 					</ul>
 				</section>
@@ -230,7 +244,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/2320fb7/src/data/query.ts#L740">core/src/data/query.ts:740</a></li>
+									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/50117ba/src/data/query.ts#L740">core/src/data/query.ts:740</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -277,9 +291,15 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="core_src_data_query.query.html">Query</a>.<a href="core_src_data_query.query.html#filter">filter</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/2320fb7/src/data/query.ts#L715">core/src/data/query.ts:715</a></li>
+									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/50117ba/src/data/query.ts#L715">core/src/data/query.ts:715</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Apply an additional filter.</p>
+								</div>
+								<p>フィルタを追加します。</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -287,6 +307,9 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="core_src_data_query.lawquery.html" class="tsd-signature-type" data-tsd-kind="Class">LawQuery</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TItem</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<ul>
+								<li>a new <code>Query</code> that applies <code>criteria</code> to the filtered items of the original <code>Query</code> <br/> フィルタ後の項目を検索元とし、<code>criteria</code> を検索条件とする新しい <code>Query</code></li>
+							</ul>
 						</li>
 					</ul>
 				</section>
@@ -301,7 +324,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_src_data_query.query.html">Query</a>.<a href="core_src_data_query.query.html#foreach">forEach</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/2320fb7/src/data/query.ts#L352">core/src/data/query.ts:352</a></li>
+									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/50117ba/src/data/query.ts#L352">core/src/data/query.ts:352</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -352,7 +375,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_src_data_query.query.html">Query</a>.<a href="core_src_data_query.query.html#limit">limit</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/2320fb7/src/data/query.ts#L272">core/src/data/query.ts:272</a></li>
+									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/50117ba/src/data/query.ts#L272">core/src/data/query.ts:272</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -394,7 +417,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_src_data_query.query.html">Query</a>.<a href="core_src_data_query.query.html#map">map</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/2320fb7/src/data/query.ts#L124">core/src/data/query.ts:124</a></li>
+									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/50117ba/src/data/query.ts#L124">core/src/data/query.ts:124</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -469,7 +492,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_src_data_query.query.html">Query</a>.<a href="core_src_data_query.query.html#pick">pick</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/2320fb7/src/data/query.ts#L313">core/src/data/query.ts:313</a></li>
+									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/50117ba/src/data/query.ts#L313">core/src/data/query.ts:313</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -511,7 +534,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_src_data_query.query.html">Query</a>.<a href="core_src_data_query.query.html#property">property</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/2320fb7/src/data/query.ts#L301">core/src/data/query.ts:301</a></li>
+									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/50117ba/src/data/query.ts#L301">core/src/data/query.ts:301</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -553,7 +576,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_src_data_query.query.html">Query</a>.<a href="core_src_data_query.query.html#skip">skip</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/2320fb7/src/data/query.ts#L241">core/src/data/query.ts:241</a></li>
+									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/50117ba/src/data/query.ts#L241">core/src/data/query.ts:241</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -595,7 +618,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_src_data_query.query.html">Query</a>.<a href="core_src_data_query.query.html#toarray">toArray</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/2320fb7/src/data/query.ts#L334">core/src/data/query.ts:334</a></li>
+									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/50117ba/src/data/query.ts#L334">core/src/data/query.ts:334</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -635,7 +658,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="core_src_data_query.query.html">Query</a>.<a href="core_src_data_query.query.html#while">while</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/2320fb7/src/data/query.ts#L208">core/src/data/query.ts:208</a></li>
+									<li>Defined in <a href="https://github.com/yamachig/Lawtext-core/blob/50117ba/src/data/query.ts#L208">core/src/data/query.ts:208</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
