@@ -1,228 +1,80 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Lawtext query</title>
-	<meta name="description" content="Documentation for Lawtext query">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
-	<script async src="assets/js/search.js" id="search-script"></script>
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="index.html" class="title">Lawtext query</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<h1>Lawtext query</h1>
-		</div>
-	</div>
-</header>
-<div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#lawtext-query-の使用方法" id="lawtext-query-の使用方法" style="color: inherit; text-decoration: none;">
-					<h1>Lawtext query の使用方法 </h1>
-				</a>
-				<p>Lawtext query は、ブラウザのコンソールとjavascriptを利用した高度な検索機能です。Lawtext query を使用すると、法令XMLの構造や正規表現を利用した法令検索ができます。</p>
-				<a href="#lawtext-query-の使用方法-1" id="lawtext-query-の使用方法-1" style="color: inherit; text-decoration: none;">
-					<h2>Lawtext query の使用方法</h2>
-				</a>
-				<ol>
-					<li><p>Lawtextの画面でブラウザのコンソールを開きます。</p>
-						<ul>
-							<li><p><a href="https://developer.chrome.com/docs/devtools/open/#console">Google Chrome の場合</a>（Windowsなど: Ctrl+Shift+J, Mac: Cmd+Option+J）</p>
-							</li>
-							<li><p><a href="https://developer.mozilla.org/docs/Tools/Web_Console/UI_Tour">Firefox の場合</a>（Windowsなど: Ctrl+Shift+K,Mac: Cmd+Option+K）</p>
-							</li>
-						</ul>
-					</li>
-					<li><p>コンソールに Lawtext query を使用する javascriptコードを入力して実行します。（<a href="#examples">コードの例</a>）</p>
-					</li>
-				</ol>
-				<a href="#検索に用いるデータの取得元" id="検索に用いるデータの取得元" style="color: inherit; text-decoration: none;">
-					<h2>検索に用いるデータの取得元</h2>
-				</a>
-				<p>Lawtext query の検索に用いるデータは、e-Gov 法令API とオフライン用データの2種類のどちらかを選択します。</p>
-				<ul>
-					<li><p><strong>e-Gov 法令API</strong>: <a href="modules/app_src_globals_lawtext.html#queryviaapi">lawtext.queryViaAPI()</a> を使用した場合は、e-Gov法令APIからデータを取得します。e-Gov 法令APIにアクセスできる環境があれば事前の準備なく利用できます。ただし、データをインターネット経由で毎回取得するため、実行に時間がかかる場合があります。</p>
-					</li>
-					<li><p><strong>オフライン用データ</strong>: <a href="modules/app_src_globals_lawtext.html#query">lawtext.query()</a> を使用した場合は、オフライン用データを利用します。ダウンロード版Lawtextでオフライン用データを保存している場合に使用できます。多くの場合、e-Gov 法令APIを使用する方法よりも高速です。</p>
-					</li>
-				</ul>
-				<a href="#lawtext-query-リファレンス" id="lawtext-query-リファレンス" style="color: inherit; text-decoration: none;">
-					<h2>Lawtext query リファレンス</h2>
-				</a>
-				<ul>
-					<li>法令の検索条件について: <a href="interfaces/core_src_data_query.lawcriteriaargs.html">LawCriteriaArgs</a></li>
-					<li>検索結果の制御について: <a href="classes/core_src_data_query.query.html">Query</a>, <a href="classes/core_src_data_query.lawquery.html">LawQuery</a></li>
-					<li>ブラウザのコンソールから利用できる <a href="modules/app_src_globals_lawtext.html">lawtext</a> オブジェクトについて: <a href="modules/app_src_globals_lawtext.html">lawtext</a></li>
-				</ul>
-				<a href="#lawtext-query-のコード例" id="lawtext-query-のコード例" style="color: inherit; text-decoration: none;">
-					<h2>Lawtext query のコード例<a name="examples"></a></h2>
-				</a>
-				<a href="#法令番号が正規表現-平成13年法律-にマッチする法令の法令番号と法令名を、順不同で10件表示" id="法令番号が正規表現-平成13年法律-にマッチする法令の法令番号と法令名を、順不同で10件表示" style="color: inherit; text-decoration: none;">
-					<h3>法令番号が正規表現 <code>/^平成.{1,3}年法律/</code> にマッチする法令の法令番号と法令名を、順不同で10件表示</h3>
-				</a>
-				<pre><code class="language-ts"><span style="color: #001080">lawtext</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">queryViaAPI</span><span style="color: #000000">({ </span><span style="color: #001080">LawNum:</span><span style="color: #811F3F"> /</span><span style="color: #EE0000">^</span><span style="color: #811F3F">平成.</span><span style="color: #000000">{1,3}</span><span style="color: #811F3F">年法律/</span><span style="color: #000000"> })</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">limit</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">)</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">toArray</span><span style="color: #000000">()</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">then</span><span style="color: #000000">(</span><span style="color: #001080">a</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">table</span><span style="color: #000000">(</span><span style="color: #001080">a</span><span style="color: #000000">, [</span><span style="color: #A31515">&quot;LawNum&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;LawTitle&quot;</span><span style="color: #000000">]));</span>
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Lawtext query</title><meta name="description" content="Documentation for Lawtext query"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">Lawtext query</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1> Lawtext query</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#lawtext-query-の使用方法" id="lawtext-query-の使用方法" style="color: inherit; text-decoration: none;">
+  <h1>Lawtext query の使用方法 </h1>
+</a>
+<p>Lawtext query は、ブラウザのコンソールとjavascriptを利用した高度な検索機能です。Lawtext query を使用すると、法令XMLの構造や正規表現を利用した法令検索ができます。</p>
+
+<a href="#lawtext-query-の使用方法-1" id="lawtext-query-の使用方法-1" style="color: inherit; text-decoration: none;">
+  <h2>Lawtext query の使用方法</h2>
+</a>
+<ol>
+<li><p>Lawtextの画面でブラウザのコンソールを開きます。</p>
+<ul>
+<li><p><a href="https://developer.chrome.com/docs/devtools/open/#console">Google Chrome の場合</a>（Windowsなど: Ctrl+Shift+J, Mac: Cmd+Option+J）</p>
+</li>
+<li><p><a href="https://developer.mozilla.org/docs/Tools/Web_Console/UI_Tour">Firefox の場合</a>（Windowsなど: Ctrl+Shift+K,Mac: Cmd+Option+K）</p>
+</li>
+</ul>
+</li>
+<li><p>コンソールに Lawtext query を使用する javascriptコードを入力して実行します。（<a href="#examples">コードの例</a>）</p>
+</li>
+</ol>
+
+<a href="#検索に用いるデータの取得元" id="検索に用いるデータの取得元" style="color: inherit; text-decoration: none;">
+  <h2>検索に用いるデータの取得元</h2>
+</a>
+<p>Lawtext query の検索に用いるデータは、e-Gov 法令API とオフライン用データの2種類のどちらかを選択します。</p>
+<ul>
+<li><p><strong>e-Gov 法令API</strong>: <a href="modules/lawtext.html#queryViaAPI">lawtext.queryViaAPI()</a> を使用した場合は、e-Gov法令APIからデータを取得します。e-Gov 法令APIにアクセスできる環境があれば事前の準備なく利用できます。ただし、データをインターネット経由で毎回取得するため、実行に時間がかかる場合があります。</p>
+</li>
+<li><p><strong>オフライン用データ</strong>: <a href="modules/lawtext.html#query">lawtext.query()</a> を使用した場合は、オフライン用データを利用します。ダウンロード版Lawtextでオフライン用データを保存している場合に使用できます。多くの場合、e-Gov 法令APIを使用する方法よりも高速です。</p>
+</li>
+</ul>
+
+<a href="#lawtext-query-リファレンス" id="lawtext-query-リファレンス" style="color: inherit; text-decoration: none;">
+  <h2>Lawtext query リファレンス</h2>
+</a>
+<ul>
+<li>法令の検索条件について: <a href="interfaces/coreQuery.LawCriteriaArgs.html">LawCriteriaArgs</a></li>
+<li>検索結果の制御について: <a href="classes/coreQuery.Query.html">Query</a>, <a href="classes/coreQuery.LawQuery.html">LawQuery</a></li>
+<li>ブラウザのコンソールから利用できる {@link app/src/globals/lawtext | lawtext} オブジェクトについて: {@link app/src/globals/lawtext | lawtext}</li>
+</ul>
+
+<a href="#lawtext-query-のコード例" id="lawtext-query-のコード例" style="color: inherit; text-decoration: none;">
+  <h2>Lawtext query のコード例<a name="examples"></a></h2>
+</a>
+
+<a href="#法令番号が正規表現-平成13年法律-にマッチする法令の法令番号と法令名を、順不同で10件表示" id="法令番号が正規表現-平成13年法律-にマッチする法令の法令番号と法令名を、順不同で10件表示" style="color: inherit; text-decoration: none;">
+  <h3>法令番号が正規表現 <code>/^平成.{1,3}年法律/</code> にマッチする法令の法令番号と法令名を、順不同で10件表示</h3>
+</a>
+<pre><code class="language-ts"><span class="hl-0">lawtext</span><br/><span class="hl-1">    .</span><span class="hl-2">queryViaAPI</span><span class="hl-1">({ </span><span class="hl-0">LawNum:</span><span class="hl-3"> /</span><span class="hl-4">^</span><span class="hl-3">平成.</span><span class="hl-5">{1,3}</span><span class="hl-3">年法律/</span><span class="hl-1"> })</span><br/><span class="hl-1">    .</span><span class="hl-2">limit</span><span class="hl-1">(</span><span class="hl-6">10</span><span class="hl-1">)</span><br/><span class="hl-1">    .</span><span class="hl-2">toArray</span><span class="hl-1">()</span><br/><span class="hl-1">    .</span><span class="hl-2">then</span><span class="hl-1">(</span><span class="hl-0">a</span><span class="hl-1"> </span><span class="hl-7">=&gt;</span><span class="hl-1"> </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">table</span><span class="hl-1">(</span><span class="hl-0">a</span><span class="hl-1">, [</span><span class="hl-8">&quot;LawNum&quot;</span><span class="hl-1">, </span><span class="hl-8">&quot;LawTitle&quot;</span><span class="hl-1">]));</span>
 </code></pre>
-				<a href="#ltenactstatementgtタグを含む法律を順不同で10件検索し、見つかり次第タグの内容を出力" id="ltenactstatementgtタグを含む法律を順不同で10件検索し、見つかり次第タグの内容を出力" style="color: inherit; text-decoration: none;">
-					<h3>&lt;EnactStatement&gt;タグを含む法律を順不同で10件検索し、見つかり次第タグの内容を出力</h3>
-				</a>
-				<p><a href="classes/core_src_data_query.lawquery.html#assigndocument">.assignDocument()</a> によりXMLのDOMを順次取得するため時間がかかります。</p>
-				<pre><code class="language-ts"><span style="color: #001080">lawtext</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">queryViaAPI</span><span style="color: #000000">({ </span><span style="color: #001080">LawNum:</span><span style="color: #811F3F"> /</span><span style="color: #EE0000">^</span><span style="color: #811F3F">.</span><span style="color: #000000">{3,5}</span><span style="color: #811F3F">年法律/</span><span style="color: #000000"> })</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">assignDocument</span><span style="color: #000000">()</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">assign</span><span style="color: #000000">(</span><span style="color: #001080">law</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> ({</span>
-<span style="color: #000000">        </span><span style="color: #001080">els:</span><span style="color: #000000"> </span><span style="color: #267F99">Array</span><span style="color: #000000">.</span><span style="color: #795E26">from</span><span style="color: #000000">(</span><span style="color: #001080">law</span><span style="color: #000000">.</span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">getElementsByTagName</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;EnactStatement&quot;</span><span style="color: #000000">)),</span>
-<span style="color: #000000">    }))</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">filter</span><span style="color: #000000">(</span><span style="color: #001080">law</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">law</span><span style="color: #000000">.</span><span style="color: #001080">els</span><span style="color: #000000">.</span><span style="color: #001080">length</span><span style="color: #000000"> &gt; </span><span style="color: #098658">0</span><span style="color: #000000">)</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">limit</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">)</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">forEach</span><span style="color: #000000">(</span><span style="color: #001080">law</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">group</span><span style="color: #000000">(</span><span style="color: #A31515">`📘 </span><span style="color: #0000FF">${</span><span style="color: #001080">law</span><span style="color: #000000FF">.</span><span style="color: #001080">LawTitle</span><span style="color: #0000FF">}</span><span style="color: #A31515">（</span><span style="color: #0000FF">${</span><span style="color: #001080">law</span><span style="color: #000000FF">.</span><span style="color: #001080">LawNum</span><span style="color: #0000FF">}</span><span style="color: #A31515">）`</span><span style="color: #000000">);</span>
-<span style="color: #000000">        </span><span style="color: #AF00DB">for</span><span style="color: #000000"> (</span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">el</span><span style="color: #000000"> </span><span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #001080">law</span><span style="color: #000000">.</span><span style="color: #001080">els</span><span style="color: #000000">) {</span>
-<span style="color: #000000">            </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">el</span><span style="color: #000000">.</span><span style="color: #001080">outerHTML</span><span style="color: #000000">);</span>
-<span style="color: #000000">        }</span>
-<span style="color: #000000">        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">lawtext</span><span style="color: #000000">.</span><span style="color: #795E26">getLawtextAppUrl</span><span style="color: #000000">(</span><span style="color: #001080">law</span><span style="color: #000000">));</span>
-<span style="color: #000000">        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">groupEnd</span><span style="color: #000000">();</span>
-<span style="color: #000000">    })</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">then</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;✓ completed.&quot;</span><span style="color: #000000">);</span>
+
+<a href="#ltenactstatementgtタグを含む法律を順不同で10件検索し、見つかり次第タグの内容を出力" id="ltenactstatementgtタグを含む法律を順不同で10件検索し、見つかり次第タグの内容を出力" style="color: inherit; text-decoration: none;">
+  <h3>&lt;EnactStatement&gt;タグを含む法律を順不同で10件検索し、見つかり次第タグの内容を出力</h3>
+</a>
+<p><a href="classes/coreQuery.LawQuery.html#assignDocument">.assignDocument()</a> によりXMLのDOMを順次取得するため時間がかかります。</p>
+<pre><code class="language-ts"><span class="hl-0">lawtext</span><br/><span class="hl-1">    .</span><span class="hl-2">queryViaAPI</span><span class="hl-1">({ </span><span class="hl-0">LawNum:</span><span class="hl-3"> /</span><span class="hl-4">^</span><span class="hl-3">.</span><span class="hl-5">{3,5}</span><span class="hl-3">年法律/</span><span class="hl-1"> })</span><br/><span class="hl-1">    .</span><span class="hl-2">assignDocument</span><span class="hl-1">()</span><br/><span class="hl-1">    .</span><span class="hl-2">assign</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1"> </span><span class="hl-7">=&gt;</span><span class="hl-1"> ({</span><br/><span class="hl-1">        </span><span class="hl-0">els:</span><span class="hl-1"> </span><span class="hl-9">Array</span><span class="hl-1">.</span><span class="hl-2">from</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1">.</span><span class="hl-0">document</span><span class="hl-1">.</span><span class="hl-2">getElementsByTagName</span><span class="hl-1">(</span><span class="hl-8">&quot;EnactStatement&quot;</span><span class="hl-1">)),</span><br/><span class="hl-1">    }))</span><br/><span class="hl-1">    .</span><span class="hl-2">filter</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1"> </span><span class="hl-7">=&gt;</span><span class="hl-1"> </span><span class="hl-0">law</span><span class="hl-1">.</span><span class="hl-0">els</span><span class="hl-1">.</span><span class="hl-0">length</span><span class="hl-1"> &gt; </span><span class="hl-6">0</span><span class="hl-1">)</span><br/><span class="hl-1">    .</span><span class="hl-2">limit</span><span class="hl-1">(</span><span class="hl-6">10</span><span class="hl-1">)</span><br/><span class="hl-1">    .</span><span class="hl-2">forEach</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1"> </span><span class="hl-7">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">group</span><span class="hl-1">(</span><span class="hl-8">`📘 </span><span class="hl-7">${</span><span class="hl-0">law</span><span class="hl-10">.</span><span class="hl-0">LawTitle</span><span class="hl-7">}</span><span class="hl-8">（</span><span class="hl-7">${</span><span class="hl-0">law</span><span class="hl-10">.</span><span class="hl-0">LawNum</span><span class="hl-7">}</span><span class="hl-8">）`</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-11">for</span><span class="hl-1"> (</span><span class="hl-7">const</span><span class="hl-1"> </span><span class="hl-12">el</span><span class="hl-1"> </span><span class="hl-7">of</span><span class="hl-1"> </span><span class="hl-0">law</span><span class="hl-1">.</span><span class="hl-0">els</span><span class="hl-1">) {</span><br/><span class="hl-1">            </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">log</span><span class="hl-1">(</span><span class="hl-0">el</span><span class="hl-1">.</span><span class="hl-0">outerHTML</span><span class="hl-1">);</span><br/><span class="hl-1">        }</span><br/><span class="hl-1">        </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">log</span><span class="hl-1">(</span><span class="hl-0">lawtext</span><span class="hl-1">.</span><span class="hl-2">getLawtextAppUrl</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1">));</span><br/><span class="hl-1">        </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">groupEnd</span><span class="hl-1">();</span><br/><span class="hl-1">    })</span><br/><span class="hl-1">    .</span><span class="hl-2">then</span><span class="hl-1">(() </span><span class="hl-7">=&gt;</span><span class="hl-1"> </span><span class="hl-8">&quot;✓ completed.&quot;</span><span class="hl-1">);</span>
 </code></pre>
-				<a href="#ltfiggtタグを含む政令を順不同で10件検索し、見つかり次第法令内の位置を出力" id="ltfiggtタグを含む政令を順不同で10件検索し、見つかり次第法令内の位置を出力" style="color: inherit; text-decoration: none;">
-					<h3>&lt;Fig&gt;タグを含む政令を順不同で10件検索し、見つかり次第法令内の位置を出力</h3>
-				</a>
-				<p><a href="classes/core_src_data_query.lawquery.html#assigndocument">.assignDocument()</a> によりXMLのDOMを順次取得するため時間がかかります。</p>
-				<pre><code class="language-ts"><span style="color: #001080">lawtext</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">queryViaAPI</span><span style="color: #000000">({ </span><span style="color: #001080">LawNum:</span><span style="color: #811F3F"> /政令/</span><span style="color: #000000"> })</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">assignDocument</span><span style="color: #000000">()</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">assign</span><span style="color: #000000">(</span><span style="color: #001080">law</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> ({</span>
-<span style="color: #000000">        </span><span style="color: #001080">els:</span><span style="color: #000000"> </span><span style="color: #267F99">Array</span><span style="color: #000000">.</span><span style="color: #795E26">from</span><span style="color: #000000">(</span><span style="color: #001080">law</span><span style="color: #000000">.</span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">getElementsByTagName</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Fig&quot;</span><span style="color: #000000">)),</span>
-<span style="color: #000000">    }))</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">filter</span><span style="color: #000000">(</span><span style="color: #001080">law</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">law</span><span style="color: #000000">.</span><span style="color: #001080">els</span><span style="color: #000000">.</span><span style="color: #001080">length</span><span style="color: #000000"> &gt; </span><span style="color: #098658">0</span><span style="color: #000000">)</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">limit</span><span style="color: #000000">(</span><span style="color: #098658">10</span><span style="color: #000000">)</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">forEach</span><span style="color: #000000">(</span><span style="color: #001080">law</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">group</span><span style="color: #000000">(</span><span style="color: #A31515">`📘 </span><span style="color: #0000FF">${</span><span style="color: #001080">law</span><span style="color: #000000FF">.</span><span style="color: #001080">LawTitle</span><span style="color: #0000FF">}</span><span style="color: #A31515">（</span><span style="color: #0000FF">${</span><span style="color: #001080">law</span><span style="color: #000000FF">.</span><span style="color: #001080">LawNum</span><span style="color: #0000FF">}</span><span style="color: #A31515">）`</span><span style="color: #000000">);</span>
-<span style="color: #000000">        </span><span style="color: #AF00DB">for</span><span style="color: #000000"> (</span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">el</span><span style="color: #000000"> </span><span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #001080">law</span><span style="color: #000000">.</span><span style="color: #001080">els</span><span style="color: #000000">) {</span>
-<span style="color: #000000">            </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">lawtext</span><span style="color: #000000">.</span><span style="color: #795E26">traceTitles</span><span style="color: #000000">(</span><span style="color: #001080">el</span><span style="color: #000000">));</span>
-<span style="color: #000000">        }</span>
-<span style="color: #000000">        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">lawtext</span><span style="color: #000000">.</span><span style="color: #795E26">getLawtextAppUrl</span><span style="color: #000000">(</span><span style="color: #001080">law</span><span style="color: #000000">));</span>
-<span style="color: #000000">        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">groupEnd</span><span style="color: #000000">();</span>
-<span style="color: #000000">    })</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">then</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;✓ completed.&quot;</span><span style="color: #000000">);</span>
+
+<a href="#ltfiggtタグを含む政令を順不同で10件検索し、見つかり次第法令内の位置を出力" id="ltfiggtタグを含む政令を順不同で10件検索し、見つかり次第法令内の位置を出力" style="color: inherit; text-decoration: none;">
+  <h3>&lt;Fig&gt;タグを含む政令を順不同で10件検索し、見つかり次第法令内の位置を出力</h3>
+</a>
+<p><a href="classes/coreQuery.LawQuery.html#assignDocument">.assignDocument()</a> によりXMLのDOMを順次取得するため時間がかかります。</p>
+<pre><code class="language-ts"><span class="hl-0">lawtext</span><br/><span class="hl-1">    .</span><span class="hl-2">queryViaAPI</span><span class="hl-1">({ </span><span class="hl-0">LawNum:</span><span class="hl-3"> /政令/</span><span class="hl-1"> })</span><br/><span class="hl-1">    .</span><span class="hl-2">assignDocument</span><span class="hl-1">()</span><br/><span class="hl-1">    .</span><span class="hl-2">assign</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1"> </span><span class="hl-7">=&gt;</span><span class="hl-1"> ({</span><br/><span class="hl-1">        </span><span class="hl-0">els:</span><span class="hl-1"> </span><span class="hl-9">Array</span><span class="hl-1">.</span><span class="hl-2">from</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1">.</span><span class="hl-0">document</span><span class="hl-1">.</span><span class="hl-2">getElementsByTagName</span><span class="hl-1">(</span><span class="hl-8">&quot;Fig&quot;</span><span class="hl-1">)),</span><br/><span class="hl-1">    }))</span><br/><span class="hl-1">    .</span><span class="hl-2">filter</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1"> </span><span class="hl-7">=&gt;</span><span class="hl-1"> </span><span class="hl-0">law</span><span class="hl-1">.</span><span class="hl-0">els</span><span class="hl-1">.</span><span class="hl-0">length</span><span class="hl-1"> &gt; </span><span class="hl-6">0</span><span class="hl-1">)</span><br/><span class="hl-1">    .</span><span class="hl-2">limit</span><span class="hl-1">(</span><span class="hl-6">10</span><span class="hl-1">)</span><br/><span class="hl-1">    .</span><span class="hl-2">forEach</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1"> </span><span class="hl-7">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">group</span><span class="hl-1">(</span><span class="hl-8">`📘 </span><span class="hl-7">${</span><span class="hl-0">law</span><span class="hl-10">.</span><span class="hl-0">LawTitle</span><span class="hl-7">}</span><span class="hl-8">（</span><span class="hl-7">${</span><span class="hl-0">law</span><span class="hl-10">.</span><span class="hl-0">LawNum</span><span class="hl-7">}</span><span class="hl-8">）`</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-11">for</span><span class="hl-1"> (</span><span class="hl-7">const</span><span class="hl-1"> </span><span class="hl-12">el</span><span class="hl-1"> </span><span class="hl-7">of</span><span class="hl-1"> </span><span class="hl-0">law</span><span class="hl-1">.</span><span class="hl-0">els</span><span class="hl-1">) {</span><br/><span class="hl-1">            </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">log</span><span class="hl-1">(</span><span class="hl-0">lawtext</span><span class="hl-1">.</span><span class="hl-2">traceTitles</span><span class="hl-1">(</span><span class="hl-0">el</span><span class="hl-1">));</span><br/><span class="hl-1">        }</span><br/><span class="hl-1">        </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">log</span><span class="hl-1">(</span><span class="hl-0">lawtext</span><span class="hl-1">.</span><span class="hl-2">getLawtextAppUrl</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1">));</span><br/><span class="hl-1">        </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">groupEnd</span><span class="hl-1">();</span><br/><span class="hl-1">    })</span><br/><span class="hl-1">    .</span><span class="hl-2">then</span><span class="hl-1">(() </span><span class="hl-7">=&gt;</span><span class="hl-1"> </span><span class="hl-8">&quot;✓ completed.&quot;</span><span class="hl-1">);</span>
 </code></pre>
-				<a href="#正規表現-の意義味に定めるところによる-にマッチする文を含む本文タグを検索し、タグ内の文言が重複しないものを見つかり次第10件まで出力（途中経過を表示しない）" id="正規表現-の意義味に定めるところによる-にマッチする文を含む本文タグを検索し、タグ内の文言が重複しないものを見つかり次第10件まで出力（途中経過を表示しない）" style="color: inherit; text-decoration: none;">
-					<h3>正規表現 <code>/の意[義味].*に定めるところによる/</code> にマッチする文を含む本文タグを検索し、タグ内の文言が重複しないものを見つかり次第10件まで出力（途中経過を表示しない）</h3>
-				</a>
-				<p><a href="classes/core_src_data_query.lawquery.html#assigndocument">.assignDocument()</a> によりXMLのDOMを順次取得するため時間がかかります。</p>
-				<pre><code class="language-ts"><span style="color: #000000">(</span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">set</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Set</span><span style="color: #000000">();</span>
-<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #001080">lawtext</span>
-<span style="color: #000000">        .</span><span style="color: #795E26">queryViaAPI</span><span style="color: #000000">()</span>
-<span style="color: #000000">        .</span><span style="color: #795E26">assignDocument</span><span style="color: #000000">()</span>
-<span style="color: #000000">        .</span><span style="color: #795E26">while</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">set</span><span style="color: #000000">.</span><span style="color: #001080">size</span><span style="color: #000000"> &lt; </span><span style="color: #098658">10</span><span style="color: #000000">)</span>
-<span style="color: #000000">        .</span><span style="color: #795E26">forEach</span><span style="color: #000000">(</span><span style="color: #001080">law</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">            </span><span style="color: #AF00DB">for</span><span style="color: #000000"> (</span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">tag</span><span style="color: #000000"> </span><span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #001080">lawtext</span><span style="color: #000000">.</span><span style="color: #001080">coreUtil</span><span style="color: #000000">.</span><span style="color: #001080">paragraphItemSentenceTags</span><span style="color: #000000">) {</span>
-<span style="color: #000000">                </span><span style="color: #AF00DB">for</span><span style="color: #000000"> (</span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">el</span><span style="color: #000000"> </span><span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #267F99">Array</span><span style="color: #000000">.</span><span style="color: #795E26">from</span><span style="color: #000000">(</span><span style="color: #001080">law</span><span style="color: #000000">.</span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">getElementsByTagName</span><span style="color: #000000">(</span><span style="color: #001080">tag</span><span style="color: #000000">))) {</span>
-<span style="color: #000000">                    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">text</span><span style="color: #000000"> = (</span><span style="color: #001080">el</span><span style="color: #000000">.</span><span style="color: #001080">textContent</span><span style="color: #000000"> ?? </span><span style="color: #A31515">&quot;&quot;</span><span style="color: #000000">).</span><span style="color: #795E26">trim</span><span style="color: #000000">();</span>
-<span style="color: #000000">                    </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #811F3F">/の意</span><span style="color: #D16969">[</span><span style="color: #811F3F">義味</span><span style="color: #D16969">]</span><span style="color: #811F3F">.</span><span style="color: #000000">*</span><span style="color: #811F3F">に定めるところによる/</span><span style="color: #000000">.</span><span style="color: #795E26">exec</span><span style="color: #000000">(</span><span style="color: #001080">text</span><span style="color: #000000">) &amp;&amp; !</span><span style="color: #001080">set</span><span style="color: #000000">.</span><span style="color: #795E26">has</span><span style="color: #000000">(</span><span style="color: #001080">text</span><span style="color: #000000">)) {</span>
-<span style="color: #000000">                        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">group</span><span style="color: #000000">(</span><span style="color: #A31515">`【</span><span style="color: #0000FF">${</span><span style="color: #001080">law</span><span style="color: #000000FF">.</span><span style="color: #001080">LawTitle</span><span style="color: #0000FF">}</span><span style="color: #A31515">（</span><span style="color: #0000FF">${</span><span style="color: #001080">law</span><span style="color: #000000FF">.</span><span style="color: #001080">LawNum</span><span style="color: #0000FF">}</span><span style="color: #A31515">）</span><span style="color: #0000FF">${</span><span style="color: #001080">lawtext</span><span style="color: #000000FF">.</span><span style="color: #795E26">traceTitles</span><span style="color: #000000FF">(</span><span style="color: #001080">el</span><span style="color: #000000FF">).</span><span style="color: #795E26">join</span><span style="color: #000000FF">(</span><span style="color: #A31515">&quot;/&quot;</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">】`</span><span style="color: #000000">);</span>
-<span style="color: #000000">                        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`%c</span><span style="color: #0000FF">${</span><span style="color: #001080">text</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;color: navy;&quot;</span><span style="color: #000000">);</span>
-<span style="color: #000000">                        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">lawtext</span><span style="color: #000000">.</span><span style="color: #795E26">getLawtextAppUrl</span><span style="color: #000000">(</span><span style="color: #001080">law</span><span style="color: #000000">));</span>
-<span style="color: #000000">                        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">groupEnd</span><span style="color: #000000">();</span>
-<span style="color: #000000">                        </span><span style="color: #001080">set</span><span style="color: #000000">.</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #001080">text</span><span style="color: #000000">);</span>
-<span style="color: #000000">                    }</span>
-<span style="color: #000000">                }</span>
-<span style="color: #000000">            }</span>
-<span style="color: #000000">        })</span>
-<span style="color: #000000">        .</span><span style="color: #795E26">then</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;✓ completed.&quot;</span><span style="color: #000000">);</span>
-<span style="color: #000000">})();</span>
+
+<a href="#正規表現-の意義味に定めるところによる-にマッチする文を含む本文タグを検索し、タグ内の文言が重複しないものを見つかり次第10件まで出力（途中経過を表示しない）" id="正規表現-の意義味に定めるところによる-にマッチする文を含む本文タグを検索し、タグ内の文言が重複しないものを見つかり次第10件まで出力（途中経過を表示しない）" style="color: inherit; text-decoration: none;">
+  <h3>正規表現 <code>/の意[義味].*に定めるところによる/</code> にマッチする文を含む本文タグを検索し、タグ内の文言が重複しないものを見つかり次第10件まで出力（途中経過を表示しない）</h3>
+</a>
+<p><a href="classes/coreQuery.LawQuery.html#assignDocument">.assignDocument()</a> によりXMLのDOMを順次取得するため時間がかかります。</p>
+<pre><code class="language-ts"><span class="hl-1">(</span><span class="hl-7">async</span><span class="hl-1"> () </span><span class="hl-7">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-7">const</span><span class="hl-1"> </span><span class="hl-12">set</span><span class="hl-1"> = </span><span class="hl-7">new</span><span class="hl-1"> </span><span class="hl-9">Set</span><span class="hl-1">();</span><br/><span class="hl-1">    </span><span class="hl-11">return</span><span class="hl-1"> </span><span class="hl-0">lawtext</span><br/><span class="hl-1">        .</span><span class="hl-2">queryViaAPI</span><span class="hl-1">()</span><br/><span class="hl-1">        .</span><span class="hl-2">assignDocument</span><span class="hl-1">()</span><br/><span class="hl-1">        .</span><span class="hl-2">while</span><span class="hl-1">(() </span><span class="hl-7">=&gt;</span><span class="hl-1"> </span><span class="hl-0">set</span><span class="hl-1">.</span><span class="hl-0">size</span><span class="hl-1"> &lt; </span><span class="hl-6">10</span><span class="hl-1">)</span><br/><span class="hl-1">        .</span><span class="hl-2">forEach</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1"> </span><span class="hl-7">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">            </span><span class="hl-11">for</span><span class="hl-1"> (</span><span class="hl-7">const</span><span class="hl-1"> </span><span class="hl-12">tag</span><span class="hl-1"> </span><span class="hl-7">of</span><span class="hl-1"> </span><span class="hl-0">lawtext</span><span class="hl-1">.</span><span class="hl-0">lawUtil</span><span class="hl-1">.</span><span class="hl-0">paragraphItemSentenceTags</span><span class="hl-1">) {</span><br/><span class="hl-1">                </span><span class="hl-11">for</span><span class="hl-1"> (</span><span class="hl-7">const</span><span class="hl-1"> </span><span class="hl-12">el</span><span class="hl-1"> </span><span class="hl-7">of</span><span class="hl-1"> </span><span class="hl-9">Array</span><span class="hl-1">.</span><span class="hl-2">from</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1">.</span><span class="hl-0">document</span><span class="hl-1">.</span><span class="hl-2">getElementsByTagName</span><span class="hl-1">(</span><span class="hl-0">tag</span><span class="hl-1">))) {</span><br/><span class="hl-1">                    </span><span class="hl-7">const</span><span class="hl-1"> </span><span class="hl-12">text</span><span class="hl-1"> = (</span><span class="hl-0">el</span><span class="hl-1">.</span><span class="hl-0">textContent</span><span class="hl-1"> ?? </span><span class="hl-8">&quot;&quot;</span><span class="hl-1">).</span><span class="hl-2">trim</span><span class="hl-1">();</span><br/><span class="hl-1">                    </span><span class="hl-11">if</span><span class="hl-1"> (</span><span class="hl-3">/の意</span><span class="hl-13">[</span><span class="hl-3">義味</span><span class="hl-13">]</span><span class="hl-3">.</span><span class="hl-5">*</span><span class="hl-3">に定めるところによる/</span><span class="hl-1">.</span><span class="hl-2">exec</span><span class="hl-1">(</span><span class="hl-0">text</span><span class="hl-1">) &amp;&amp; !</span><span class="hl-0">set</span><span class="hl-1">.</span><span class="hl-2">has</span><span class="hl-1">(</span><span class="hl-0">text</span><span class="hl-1">)) {</span><br/><span class="hl-1">                        </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">group</span><span class="hl-1">(</span><span class="hl-8">`【</span><span class="hl-7">${</span><span class="hl-0">law</span><span class="hl-10">.</span><span class="hl-0">LawTitle</span><span class="hl-7">}</span><span class="hl-8">（</span><span class="hl-7">${</span><span class="hl-0">law</span><span class="hl-10">.</span><span class="hl-0">LawNum</span><span class="hl-7">}</span><span class="hl-8">）</span><span class="hl-7">${</span><span class="hl-0">lawtext</span><span class="hl-10">.</span><span class="hl-2">traceTitles</span><span class="hl-10">(</span><span class="hl-0">el</span><span class="hl-10">).</span><span class="hl-2">join</span><span class="hl-10">(</span><span class="hl-8">&quot;/&quot;</span><span class="hl-10">)</span><span class="hl-7">}</span><span class="hl-8">】`</span><span class="hl-1">);</span><br/><span class="hl-1">                        </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">log</span><span class="hl-1">(</span><span class="hl-8">`%c</span><span class="hl-7">${</span><span class="hl-0">text</span><span class="hl-7">}</span><span class="hl-8">`</span><span class="hl-1">, </span><span class="hl-8">&quot;color: navy;&quot;</span><span class="hl-1">);</span><br/><span class="hl-1">                        </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">log</span><span class="hl-1">(</span><span class="hl-0">lawtext</span><span class="hl-1">.</span><span class="hl-2">getLawtextAppUrl</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1">));</span><br/><span class="hl-1">                        </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">groupEnd</span><span class="hl-1">();</span><br/><span class="hl-1">                        </span><span class="hl-0">set</span><span class="hl-1">.</span><span class="hl-2">add</span><span class="hl-1">(</span><span class="hl-0">text</span><span class="hl-1">);</span><br/><span class="hl-1">                    }</span><br/><span class="hl-1">                }</span><br/><span class="hl-1">            }</span><br/><span class="hl-1">        })</span><br/><span class="hl-1">        .</span><span class="hl-2">then</span><span class="hl-1">(() </span><span class="hl-7">=&gt;</span><span class="hl-1"> </span><span class="hl-8">&quot;✓ completed.&quot;</span><span class="hl-1">);</span><br/><span class="hl-1">})();</span>
 </code></pre>
-			</div>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class=" ">
-						<a href="modules.html">Modules</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/app_src_globals_lawtext.html">app/src/globals/lawtext</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/core_src_data_query.html">core/src/data/query</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-			</ul>
-		</div>
-	</div>
-</footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
-<div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-</body>
-</html>
+
+<a href="#項番号がなくoldnum属性がtrueでない2以上の項のみからなる条を含む法律を順不同で10件検索し、見つかり次第条のタグの内容を出力" id="項番号がなくoldnum属性がtrueでない2以上の項のみからなる条を含む法律を順不同で10件検索し、見つかり次第条のタグの内容を出力" style="color: inherit; text-decoration: none;">
+  <h3>項番号がなくOldNum属性がtrueでない2以上の項のみからなる条を含む法律を順不同で10件検索し、見つかり次第条のタグの内容を出力</h3>
+</a>
+<p><a href="classes/coreQuery.LawQuery.html#assignDocument">.assignDocument()</a> によりXMLのDOMを順次取得するため時間がかかります。</p>
+<pre><code class="language-ts"><span class="hl-0">lawtext</span><br/><span class="hl-1">    .</span><span class="hl-2">queryViaAPI</span><span class="hl-1">({ </span><span class="hl-0">LawNum:</span><span class="hl-3"> /</span><span class="hl-4">^</span><span class="hl-3">.</span><span class="hl-5">{3,5}</span><span class="hl-3">年法律/</span><span class="hl-1"> })</span><br/><span class="hl-1">    .</span><span class="hl-2">assignDocument</span><span class="hl-1">()</span><br/><span class="hl-1">    .</span><span class="hl-2">assign</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1"> </span><span class="hl-7">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-7">const</span><span class="hl-1"> </span><span class="hl-12">articles</span><span class="hl-1"> = </span><span class="hl-9">Array</span><span class="hl-1">.</span><span class="hl-2">from</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1">.</span><span class="hl-0">document</span><span class="hl-1">.</span><span class="hl-2">getElementsByTagName</span><span class="hl-1">(</span><span class="hl-8">&quot;Article&quot;</span><span class="hl-1">));</span><br/><span class="hl-1">        </span><span class="hl-7">const</span><span class="hl-1"> </span><span class="hl-12">noNumPhsArticles</span><span class="hl-1"> = [];</span><br/><span class="hl-1">        </span><span class="hl-11">for</span><span class="hl-1"> (</span><span class="hl-7">const</span><span class="hl-1"> </span><span class="hl-12">article</span><span class="hl-1"> </span><span class="hl-7">of</span><span class="hl-1"> </span><span class="hl-0">articles</span><span class="hl-1">) {</span><br/><span class="hl-1">            </span><span class="hl-7">const</span><span class="hl-1"> </span><span class="hl-12">paragraphs</span><span class="hl-1"> = </span><span class="hl-9">Array</span><span class="hl-1">.</span><span class="hl-2">from</span><span class="hl-1">(</span><span class="hl-0">article</span><span class="hl-1">.</span><span class="hl-2">querySelectorAll</span><span class="hl-1">(</span><span class="hl-8">&quot;:scope &gt; Paragraph&quot;</span><span class="hl-1">));</span><br/><span class="hl-1">            </span><span class="hl-11">if</span><span class="hl-1"> (</span><span class="hl-0">paragraphs</span><span class="hl-1">.</span><span class="hl-0">length</span><span class="hl-1"> &gt;= </span><span class="hl-6">2</span><span class="hl-1"> &amp;&amp; </span><span class="hl-0">paragraphs</span><span class="hl-1">.</span><span class="hl-2">every</span><span class="hl-1">(</span><span class="hl-0">p</span><span class="hl-1"> </span><span class="hl-7">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">                </span><span class="hl-7">const</span><span class="hl-1"> </span><span class="hl-12">num</span><span class="hl-1"> = </span><span class="hl-0">p</span><span class="hl-1">.</span><span class="hl-2">querySelector</span><span class="hl-1">(</span><span class="hl-8">&quot;:scope &gt; ParagraphNum&quot;</span><span class="hl-1">);</span><br/><span class="hl-1">                </span><span class="hl-11">return</span><span class="hl-1"> </span><span class="hl-0">p</span><span class="hl-1">.</span><span class="hl-2">getAttribute</span><span class="hl-1">(</span><span class="hl-8">&quot;OldNum&quot;</span><span class="hl-1">) !== </span><span class="hl-8">&quot;true&quot;</span><span class="hl-1"> &amp;&amp; (!</span><span class="hl-0">num</span><span class="hl-1"> || !</span><span class="hl-0">num</span><span class="hl-1">.</span><span class="hl-0">innerHTML</span><span class="hl-1">);</span><br/><span class="hl-1">            })) </span><span class="hl-0">noNumPhsArticles</span><span class="hl-1">.</span><span class="hl-2">push</span><span class="hl-1">(</span><span class="hl-0">article</span><span class="hl-1">);</span><br/><span class="hl-1">        }</span><br/><span class="hl-1">        </span><span class="hl-11">return</span><span class="hl-1"> { </span><span class="hl-0">noNumPhsArticles</span><span class="hl-1"> };</span><br/><span class="hl-1">    })</span><br/><span class="hl-1">    .</span><span class="hl-2">filter</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1"> </span><span class="hl-7">=&gt;</span><span class="hl-1"> </span><span class="hl-0">law</span><span class="hl-1">.</span><span class="hl-0">noNumPhsArticles</span><span class="hl-1">.</span><span class="hl-0">length</span><span class="hl-1"> &gt; </span><span class="hl-6">0</span><span class="hl-1">)</span><br/><span class="hl-1">    .</span><span class="hl-2">limit</span><span class="hl-1">(</span><span class="hl-6">10</span><span class="hl-1">)</span><br/><span class="hl-1">    .</span><span class="hl-2">forEach</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1"> </span><span class="hl-7">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">group</span><span class="hl-1">(</span><span class="hl-8">`📘 </span><span class="hl-7">${</span><span class="hl-0">law</span><span class="hl-10">.</span><span class="hl-0">LawTitle</span><span class="hl-7">}</span><span class="hl-8">（</span><span class="hl-7">${</span><span class="hl-0">law</span><span class="hl-10">.</span><span class="hl-0">LawNum</span><span class="hl-7">}</span><span class="hl-8">）`</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-11">for</span><span class="hl-1"> (</span><span class="hl-7">const</span><span class="hl-1"> </span><span class="hl-12">article</span><span class="hl-1"> </span><span class="hl-7">of</span><span class="hl-1"> </span><span class="hl-0">law</span><span class="hl-1">.</span><span class="hl-0">noNumPhsArticles</span><span class="hl-1">) {</span><br/><span class="hl-1">            </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">log</span><span class="hl-1">(</span><span class="hl-0">article</span><span class="hl-1">.</span><span class="hl-0">outerHTML</span><span class="hl-1">);</span><br/><span class="hl-1">        }</span><br/><span class="hl-1">        </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">log</span><span class="hl-1">(</span><span class="hl-0">lawtext</span><span class="hl-1">.</span><span class="hl-2">getLawtextAppUrl</span><span class="hl-1">(</span><span class="hl-0">law</span><span class="hl-1">));</span><br/><span class="hl-1">        </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-2">groupEnd</span><span class="hl-1">();</span><br/><span class="hl-1">    })</span><br/><span class="hl-1">    .</span><span class="hl-2">then</span><span class="hl-1">(() </span><span class="hl-7">=&gt;</span><span class="hl-1"> </span><span class="hl-8">&quot;✓ completed.&quot;</span><span class="hl-1">);</span>
+</code></pre>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Modules</a></li><li class=" tsd-kind-module"><a href="modules/coreQuery.html">core<wbr/>Query</a></li><li class=" tsd-kind-module"><a href="modules/lawtext.html">lawtext</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li><li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li><li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
