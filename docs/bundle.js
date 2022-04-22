@@ -36738,21 +36738,19 @@ const onNavigated = async (lawSearchKey, origSetState) => {
     if (!lawSearchKey) {
         console.log("onNavigated: detected the top page.");
         origSetState(s => {
-            var _a;
-            const { law: oldLaw } = s;
-            if (oldLaw && ("xml" in oldLaw)) {
-                (_a = oldLaw.lawXMLStruct) === null || _a === void 0 ? void 0 : _a.clean();
-            }
+            // const { law: oldLaw } = s;
+            // if (oldLaw && ("xml" in oldLaw)) {
+            //     oldLaw.lawXMLStruct?.clean();
+            // }
             return Object.assign(Object.assign({}, s), { navigatedLawSearchKey: lawSearchKey, law: null, loadingLaw: false, viewerMessages: util.omit(s.viewerMessages, "loadingLaw") });
         });
         return;
     }
     origSetState(s => {
-        var _a;
-        const { law: oldLaw } = s;
-        if (oldLaw && ("xml" in oldLaw)) {
-            (_a = oldLaw.lawXMLStruct) === null || _a === void 0 ? void 0 : _a.clean();
-        }
+        // const { law: oldLaw } = s;
+        // if (oldLaw && ("xml" in oldLaw)) {
+        //     oldLaw.lawXMLStruct?.clean();
+        // }
         return Object.assign(Object.assign({}, s), { navigatedLawSearchKey: lawSearchKey, law: null, loadingLaw: true, viewerMessages: Object.assign(Object.assign({}, s.viewerMessages), { loadingLaw: "法令を読み込んでいます..." }) });
     });
     const toDownloadSample = (lawSearchKey.startsWith("(sample)"));
@@ -36799,11 +36797,10 @@ const onNavigated = async (lawSearchKey, origSetState) => {
     await util.wait(30);
     const start = new Date();
     origSetState(s => {
-        var _a;
-        const { law: oldLaw } = s;
-        if (oldLaw && ("xml" in oldLaw)) {
-            (_a = oldLaw.lawXMLStruct) === null || _a === void 0 ? void 0 : _a.clean();
-        }
+        // const { law: oldLaw } = s;
+        // if (oldLaw && ("xml" in oldLaw)) {
+        //     oldLaw.lawXMLStruct?.clean();
+        // }
         return Object.assign(Object.assign({}, s), { law: lawData, loadingLaw: false, viewerMessages: util.omit(s.viewerMessages, "loadingLaw") });
     });
     timing.updateComponents = (new Date()).getTime() - start.getTime();
@@ -36949,7 +36946,90 @@ exports.getTempLaw = getTempLaw;
 
 /***/ }),
 
-/***/ 1186:
+/***/ 26560:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DownloadPage = void 0;
+const react_1 = __importDefault(__webpack_require__(67294));
+const DownloadPage = () => {
+    react_1.default.useEffect(() => {
+        document.title = "ダウンロード | Lawtext";
+    }, []);
+    return (react_1.default.createElement("div", { className: "container", style: { paddingTop: "1em" } },
+        react_1.default.createElement("div", { className: "p-5 mb-4 bg-light rounded-3" },
+            react_1.default.createElement("h1", { className: "display-3" },
+                "Lawtext",
+                react_1.default.createElement("small", null, "\u3092\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9")),
+            react_1.default.createElement("p", { className: "lead" }, "Lawtext\u306EWeb\u30A2\u30D7\u30EA\u3092\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9\u3059\u308B\u3053\u3068\u3067\u3001\u30A4\u30F3\u30BF\u30FC\u30CD\u30C3\u30C8\u63A5\u7D9A\u304C\u306A\u3044\u74B0\u5883\u3067\u3082\u6CD5\u4EE4\u30D5\u30A1\u30A4\u30EB\u8868\u793A\u306A\u3069\u306E\u6A5F\u80FD\u3092\u5229\u7528\u3067\u304D\u307E\u3059\u3002"),
+            react_1.default.createElement("p", { className: "lead" },
+                react_1.default.createElement("a", { className: "btn btn-primary btn-lg", href: "media/Lawtext-app.zip", download: "Lawtext-app.zip", role: "button" }, "Lawtext\u3092\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9")),
+            react_1.default.createElement("p", null,
+                react_1.default.createElement("a", { href: "https://yamachig.github.io/lawtext-app/", target: "_blank", rel: "noreferrer" }, "Web\u7248Lawtext"))),
+        react_1.default.createElement("div", null,
+            react_1.default.createElement("h3", null, "\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9\u7248Lawtext\u306E\u4F7F\u7528\u65B9\u6CD5"),
+            react_1.default.createElement("h4", { className: "mt-5" }, "(\u65B9\u6CD51) index.html \u3092\u76F4\u63A5\u958B\u304F"),
+            react_1.default.createElement("p", null, "\u4E0A\u8A18\u30DC\u30BF\u30F3\u304B\u3089\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9\u7248Lawtext\uFF08Zip\u30D5\u30A1\u30A4\u30EB\uFF09\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9\u5F8C\u3001Zip\u30D5\u30A1\u30A4\u30EB\u3092\u5C55\u958B\u3057\u3001\u4E2D\u306B\u3042\u308Bindex.html\u3092\u958B\u3044\u3066\u304F\u3060\u3055\u3044\u3002\u30D6\u30E9\u30A6\u30B6\u304C\u8D77\u52D5\u3057\u3066\u3001Lawtext\u304C\u8868\u793A\u3055\u308C\u307E\u3059\u3002\u30A4\u30F3\u30B9\u30C8\u30FC\u30EB\u306F\u4E0D\u8981\u3067\u3059\u3002"),
+            react_1.default.createElement("table", { className: "table table-sm table-bordered", style: { width: "auto" } },
+                react_1.default.createElement("thead", null,
+                    react_1.default.createElement("tr", null,
+                        react_1.default.createElement("th", { colSpan: 2, style: { textAlign: "center" } }, "index.html \u3092\u76F4\u63A5\u958B\u304F\u5834\u5408\u306B\u5229\u7528\u3067\u304D\u308BLawtext\u306E\u6A5F\u80FD"))),
+                react_1.default.createElement("tbody", null,
+                    react_1.default.createElement("tr", null,
+                        react_1.default.createElement("th", null, "e-Gov\u6CD5\u4EE4API\u3092\u7528\u3044\u305F\u6CD5\u4EE4\u691C\u7D22\u30FB\u8868\u793A"),
+                        react_1.default.createElement("td", null, "\u25CB (e-Gov\u6CD5\u4EE4API\u306B\u30A2\u30AF\u30BB\u30B9\u3067\u304D\u308B\u74B0\u5883\u304C\u5FC5\u8981\u3067\u3059)")),
+                    react_1.default.createElement("tr", null,
+                        react_1.default.createElement("th", null, "\u6CD5\u4EE4XML\u3001Lawtext\u30D5\u30A1\u30A4\u30EB\u306E\u8868\u793A"),
+                        react_1.default.createElement("td", null, "\u25CB")),
+                    react_1.default.createElement("tr", null,
+                        react_1.default.createElement("th", null, "\u8868\u793A\u3057\u305F\u6CD5\u4EE4\u306EWord\u30D5\u30A1\u30A4\u30EB\u306A\u3069\u3078\u306E\u5909\u63DB"),
+                        react_1.default.createElement("td", null, "\u25CB")),
+                    react_1.default.createElement("tr", { className: "table-secondary" },
+                        react_1.default.createElement("th", null, "\u30AA\u30D5\u30E9\u30A4\u30F3\u7528\u30C7\u30FC\u30BF\u3092\u7528\u3044\u305F\u6CD5\u4EE4\u691C\u7D22\u30FB\u8868\u793A"),
+                        react_1.default.createElement("td", null, "\u00D7 (\u203B)")))),
+            react_1.default.createElement("p", null,
+                "(\u203B) \u30D5\u30A1\u30A4\u30EB\u3092\u76F4\u63A5\u958B\u304F\u65B9\u6CD5\u3067\u306F\u3001\u591A\u304F\u306E\u30D6\u30E9\u30A6\u30B6\u3067\u3001\u5236\u9650\uFF08",
+                react_1.default.createElement("a", { href: "https://developer.mozilla.org/ja/docs/Web/HTTP/CORS/Errors/CORSRequestNotHttp", target: "_blank", rel: "noreferrer" }, "\u4F8B"),
+                "\uFF09\u306B\u3088\u308A\u30AA\u30D5\u30E9\u30A4\u30F3\u7528\u30C7\u30FC\u30BF\u306B\u30A2\u30AF\u30BB\u30B9\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u305B\u3093\u3002\u30D6\u30E9\u30A6\u30B6\u306E\u8A2D\u5B9A\u306B\u3088\u308A\u30A2\u30AF\u30BB\u30B9\u304C\u53EF\u80FD\u3068\u306A\u308B\u5834\u5408\u304C\u3042\u308A\u307E\u3059\u3002"),
+            react_1.default.createElement("h4", { className: "mt-5" }, "(\u65B9\u6CD52) \u30ED\u30FC\u30AB\u30EBHTTP\u30B5\u30FC\u30D0\u3092\u7528\u3044\u3066\u958B\u304F"),
+            react_1.default.createElement("p", null,
+                "\u4E0A\u8A18\u30DC\u30BF\u30F3\u304B\u3089\u30AA\u30D5\u30E9\u30A4\u30F3\u7248Lawtext\uFF08Zip\u30D5\u30A1\u30A4\u30EB\uFF09\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9\u5F8C\u3001Zip\u30D5\u30A1\u30A4\u30EB\u3092\u5C55\u958B\u3057\u3001\u5C55\u958B\u5F8C\u306E\u30D5\u30A9\u30EB\u30C0\u3067\u30ED\u30FC\u30AB\u30EBHTTP\u30B5\u30FC\u30D0\u3092\u5B9F\u884C\u3057\u3066\u304F\u3060\u3055\u3044(",
+                react_1.default.createElement("a", { href: "https://developer.mozilla.org/docs/Learn/Common_questions/set_up_a_local_testing_server", target: "_blank", rel: "noreferrer" }, "\u30ED\u30FC\u30AB\u30EBHTTP\u30B5\u30FC\u30D0\u306E\u4F8B"),
+                ")\u3002\u8868\u793A\u3055\u308C\u305FLawtext\u306E\u753B\u9762\u4E0A\u306E\u6848\u5185\u306B\u5F93\u3063\u3066\u30AA\u30D5\u30E9\u30A4\u30F3\u7528\u30C7\u30FC\u30BF\u3092\u4FDD\u5B58\u3059\u308B\u3068\u3001e-Gov \u6CD5\u4EE4API\u306B\u30A2\u30AF\u30BB\u30B9\u3067\u304D\u306A\u3044\u74B0\u5883\u3067\u3082\u6CD5\u4EE4\u3092\u691C\u7D22\u30FB\u8868\u793A\u3067\u304D\u308B\u3088\u3046\u306B\u306A\u308A\u307E\u3059\u3002"),
+            react_1.default.createElement("table", { className: "table table-sm table-bordered", style: { width: "auto" } },
+                react_1.default.createElement("thead", null,
+                    react_1.default.createElement("tr", null,
+                        react_1.default.createElement("th", { colSpan: 2, style: { textAlign: "center" } }, "\u30ED\u30FC\u30AB\u30EBHTTP\u30B5\u30FC\u30D0\u3092\u7528\u3044\u3066\u958B\u304F\u5834\u5408\u306B\u5229\u7528\u3067\u304D\u308BLawtext\u306E\u6A5F\u80FD"))),
+                react_1.default.createElement("tbody", null,
+                    react_1.default.createElement("tr", null,
+                        react_1.default.createElement("th", null, "e-Gov\u6CD5\u4EE4API\u3092\u7528\u3044\u305F\u6CD5\u4EE4\u691C\u7D22\u30FB\u8868\u793A"),
+                        react_1.default.createElement("td", null, "\u25CB (e-Gov\u6CD5\u4EE4API\u306B\u30A2\u30AF\u30BB\u30B9\u3067\u304D\u308B\u74B0\u5883\u304C\u5FC5\u8981\u3067\u3059)")),
+                    react_1.default.createElement("tr", null,
+                        react_1.default.createElement("th", null, "\u6CD5\u4EE4XML\u3001Lawtext\u30D5\u30A1\u30A4\u30EB\u306E\u8868\u793A"),
+                        react_1.default.createElement("td", null, "\u25CB")),
+                    react_1.default.createElement("tr", null,
+                        react_1.default.createElement("th", null, "\u8868\u793A\u3057\u305F\u6CD5\u4EE4\u306EWord\u30D5\u30A1\u30A4\u30EB\u306A\u3069\u3078\u306E\u5909\u63DB"),
+                        react_1.default.createElement("td", null, "\u25CB")),
+                    react_1.default.createElement("tr", null,
+                        react_1.default.createElement("th", null, "\u30AA\u30D5\u30E9\u30A4\u30F3\u7528\u30C7\u30FC\u30BF\u3092\u7528\u3044\u305F\u6CD5\u4EE4\u691C\u7D22\u30FB\u8868\u793A"),
+                        react_1.default.createElement("td", null, "\u25CB"))))),
+        react_1.default.createElement("p", { className: "sidebar-footer-block", style: { fontSize: "0.8em", textAlign: "center", padding: "0.3em 0", color: "rgb(192, 192, 192)" } },
+            react_1.default.createElement("a", { href: "https://github.com/yamachig/lawtext", target: "_blank", rel: "noreferrer", style: { marginRight: "2em" } }, "GitHub"),
+            "\u00A9 2017-",
+            new Date().getFullYear(),
+            " yamachi")));
+};
+exports.DownloadPage = DownloadPage;
+
+
+/***/ }),
+
+/***/ 70673:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -36984,7 +37064,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ControlGlobalStyle = exports.WrapHTMLControlRun = void 0;
 const react_1 = __importDefault(__webpack_require__(67294));
 const std = __importStar(__webpack_require__(93619));
-const html_1 = __webpack_require__(20115);
+const html_1 = __webpack_require__(98297);
 const sentenceChildrenRun_1 = __webpack_require__(95041);
 const article_1 = __webpack_require__(37701);
 const paragraphItem_1 = __webpack_require__(42411);
@@ -37078,7 +37158,6 @@ const ____VarRef = (props) => {
     const refWindow = react_1.default.useRef(null);
     const [state, setState] = react_1.default.useState({ mode: VarRefFloatState.HIDDEN, arrowLeft: "" });
     react_1.default.useEffect(() => {
-        window.addEventListener("resize", updateSize);
         return () => {
             window.removeEventListener("resize", updateSize);
         };
@@ -37086,11 +37165,13 @@ const ____VarRef = (props) => {
     const varRefTextSpanOnClick = ( /* e: React.MouseEvent<HTMLSpanElement> */) => {
         if (state.mode === VarRefFloatState.OPEN) {
             setState(prevState => (Object.assign(Object.assign({}, prevState), { mode: VarRefFloatState.CLOSED })));
+            window.removeEventListener("resize", updateSize);
         }
         else {
             setState(prevState => (Object.assign(Object.assign({}, prevState), { mode: VarRefFloatState.OPEN })));
             setTimeout(() => {
                 updateSize();
+                window.addEventListener("resize", updateSize);
             }, 0);
         }
     };
@@ -37254,89 +37335,6 @@ const ____LawNum = (props) => {
 
 /***/ }),
 
-/***/ 26560:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DownloadPage = void 0;
-const react_1 = __importDefault(__webpack_require__(67294));
-const DownloadPage = () => {
-    react_1.default.useEffect(() => {
-        document.title = "ダウンロード | Lawtext";
-    }, []);
-    return (react_1.default.createElement("div", { className: "container", style: { paddingTop: "1em" } },
-        react_1.default.createElement("div", { className: "p-5 mb-4 bg-light rounded-3" },
-            react_1.default.createElement("h1", { className: "display-3" },
-                "Lawtext",
-                react_1.default.createElement("small", null, "\u3092\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9")),
-            react_1.default.createElement("p", { className: "lead" }, "Lawtext\u306EWeb\u30A2\u30D7\u30EA\u3092\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9\u3059\u308B\u3053\u3068\u3067\u3001\u30A4\u30F3\u30BF\u30FC\u30CD\u30C3\u30C8\u63A5\u7D9A\u304C\u306A\u3044\u74B0\u5883\u3067\u3082\u6CD5\u4EE4\u30D5\u30A1\u30A4\u30EB\u8868\u793A\u306A\u3069\u306E\u6A5F\u80FD\u3092\u5229\u7528\u3067\u304D\u307E\u3059\u3002"),
-            react_1.default.createElement("p", { className: "lead" },
-                react_1.default.createElement("a", { className: "btn btn-primary btn-lg", href: "media/Lawtext-app.zip", download: "Lawtext-app.zip", role: "button" }, "Lawtext\u3092\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9")),
-            react_1.default.createElement("p", null,
-                react_1.default.createElement("a", { href: "https://yamachig.github.io/lawtext-app/", target: "_blank", rel: "noreferrer" }, "Web\u7248Lawtext"))),
-        react_1.default.createElement("div", null,
-            react_1.default.createElement("h3", null, "\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9\u7248Lawtext\u306E\u4F7F\u7528\u65B9\u6CD5"),
-            react_1.default.createElement("h4", { className: "mt-5" }, "(\u65B9\u6CD51) index.html \u3092\u76F4\u63A5\u958B\u304F"),
-            react_1.default.createElement("p", null, "\u4E0A\u8A18\u30DC\u30BF\u30F3\u304B\u3089\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9\u7248Lawtext\uFF08Zip\u30D5\u30A1\u30A4\u30EB\uFF09\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9\u5F8C\u3001Zip\u30D5\u30A1\u30A4\u30EB\u3092\u5C55\u958B\u3057\u3001\u4E2D\u306B\u3042\u308Bindex.html\u3092\u958B\u3044\u3066\u304F\u3060\u3055\u3044\u3002\u30D6\u30E9\u30A6\u30B6\u304C\u8D77\u52D5\u3057\u3066\u3001Lawtext\u304C\u8868\u793A\u3055\u308C\u307E\u3059\u3002\u30A4\u30F3\u30B9\u30C8\u30FC\u30EB\u306F\u4E0D\u8981\u3067\u3059\u3002"),
-            react_1.default.createElement("table", { className: "table table-sm table-bordered", style: { width: "auto" } },
-                react_1.default.createElement("thead", null,
-                    react_1.default.createElement("tr", null,
-                        react_1.default.createElement("th", { colSpan: 2, style: { textAlign: "center" } }, "index.html \u3092\u76F4\u63A5\u958B\u304F\u5834\u5408\u306B\u5229\u7528\u3067\u304D\u308BLawtext\u306E\u6A5F\u80FD"))),
-                react_1.default.createElement("tbody", null,
-                    react_1.default.createElement("tr", null,
-                        react_1.default.createElement("th", null, "e-Gov\u6CD5\u4EE4API\u3092\u7528\u3044\u305F\u6CD5\u4EE4\u691C\u7D22\u30FB\u8868\u793A"),
-                        react_1.default.createElement("td", null, "\u25CB (e-Gov\u6CD5\u4EE4API\u306B\u30A2\u30AF\u30BB\u30B9\u3067\u304D\u308B\u74B0\u5883\u304C\u5FC5\u8981\u3067\u3059)")),
-                    react_1.default.createElement("tr", null,
-                        react_1.default.createElement("th", null, "\u6CD5\u4EE4XML\u3001Lawtext\u30D5\u30A1\u30A4\u30EB\u306E\u8868\u793A"),
-                        react_1.default.createElement("td", null, "\u25CB")),
-                    react_1.default.createElement("tr", null,
-                        react_1.default.createElement("th", null, "\u8868\u793A\u3057\u305F\u6CD5\u4EE4\u306EWord\u30D5\u30A1\u30A4\u30EB\u306A\u3069\u3078\u306E\u5909\u63DB"),
-                        react_1.default.createElement("td", null, "\u25CB")),
-                    react_1.default.createElement("tr", { className: "table-secondary" },
-                        react_1.default.createElement("th", null, "\u30AA\u30D5\u30E9\u30A4\u30F3\u7528\u30C7\u30FC\u30BF\u3092\u7528\u3044\u305F\u6CD5\u4EE4\u691C\u7D22\u30FB\u8868\u793A"),
-                        react_1.default.createElement("td", null, "\u00D7 (\u203B)")))),
-            react_1.default.createElement("p", null,
-                "(\u203B) \u30D5\u30A1\u30A4\u30EB\u3092\u76F4\u63A5\u958B\u304F\u65B9\u6CD5\u3067\u306F\u3001\u591A\u304F\u306E\u30D6\u30E9\u30A6\u30B6\u3067\u3001\u5236\u9650\uFF08",
-                react_1.default.createElement("a", { href: "https://developer.mozilla.org/ja/docs/Web/HTTP/CORS/Errors/CORSRequestNotHttp", target: "_blank", rel: "noreferrer" }, "\u4F8B"),
-                "\uFF09\u306B\u3088\u308A\u30AA\u30D5\u30E9\u30A4\u30F3\u7528\u30C7\u30FC\u30BF\u306B\u30A2\u30AF\u30BB\u30B9\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u305B\u3093\u3002\u30D6\u30E9\u30A6\u30B6\u306E\u8A2D\u5B9A\u306B\u3088\u308A\u30A2\u30AF\u30BB\u30B9\u304C\u53EF\u80FD\u3068\u306A\u308B\u5834\u5408\u304C\u3042\u308A\u307E\u3059\u3002"),
-            react_1.default.createElement("h4", { className: "mt-5" }, "(\u65B9\u6CD52) \u30ED\u30FC\u30AB\u30EBHTTP\u30B5\u30FC\u30D0\u3092\u7528\u3044\u3066\u958B\u304F"),
-            react_1.default.createElement("p", null,
-                "\u4E0A\u8A18\u30DC\u30BF\u30F3\u304B\u3089\u30AA\u30D5\u30E9\u30A4\u30F3\u7248Lawtext\uFF08Zip\u30D5\u30A1\u30A4\u30EB\uFF09\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9\u5F8C\u3001Zip\u30D5\u30A1\u30A4\u30EB\u3092\u5C55\u958B\u3057\u3001\u5C55\u958B\u5F8C\u306E\u30D5\u30A9\u30EB\u30C0\u3067\u30ED\u30FC\u30AB\u30EBHTTP\u30B5\u30FC\u30D0\u3092\u5B9F\u884C\u3057\u3066\u304F\u3060\u3055\u3044(",
-                react_1.default.createElement("a", { href: "https://developer.mozilla.org/docs/Learn/Common_questions/set_up_a_local_testing_server", target: "_blank", rel: "noreferrer" }, "\u30ED\u30FC\u30AB\u30EBHTTP\u30B5\u30FC\u30D0\u306E\u4F8B"),
-                ")\u3002\u8868\u793A\u3055\u308C\u305FLawtext\u306E\u753B\u9762\u4E0A\u306E\u6848\u5185\u306B\u5F93\u3063\u3066\u30AA\u30D5\u30E9\u30A4\u30F3\u7528\u30C7\u30FC\u30BF\u3092\u4FDD\u5B58\u3059\u308B\u3068\u3001e-Gov \u6CD5\u4EE4API\u306B\u30A2\u30AF\u30BB\u30B9\u3067\u304D\u306A\u3044\u74B0\u5883\u3067\u3082\u6CD5\u4EE4\u3092\u691C\u7D22\u30FB\u8868\u793A\u3067\u304D\u308B\u3088\u3046\u306B\u306A\u308A\u307E\u3059\u3002"),
-            react_1.default.createElement("table", { className: "table table-sm table-bordered", style: { width: "auto" } },
-                react_1.default.createElement("thead", null,
-                    react_1.default.createElement("tr", null,
-                        react_1.default.createElement("th", { colSpan: 2, style: { textAlign: "center" } }, "\u30ED\u30FC\u30AB\u30EBHTTP\u30B5\u30FC\u30D0\u3092\u7528\u3044\u3066\u958B\u304F\u5834\u5408\u306B\u5229\u7528\u3067\u304D\u308BLawtext\u306E\u6A5F\u80FD"))),
-                react_1.default.createElement("tbody", null,
-                    react_1.default.createElement("tr", null,
-                        react_1.default.createElement("th", null, "e-Gov\u6CD5\u4EE4API\u3092\u7528\u3044\u305F\u6CD5\u4EE4\u691C\u7D22\u30FB\u8868\u793A"),
-                        react_1.default.createElement("td", null, "\u25CB (e-Gov\u6CD5\u4EE4API\u306B\u30A2\u30AF\u30BB\u30B9\u3067\u304D\u308B\u74B0\u5883\u304C\u5FC5\u8981\u3067\u3059)")),
-                    react_1.default.createElement("tr", null,
-                        react_1.default.createElement("th", null, "\u6CD5\u4EE4XML\u3001Lawtext\u30D5\u30A1\u30A4\u30EB\u306E\u8868\u793A"),
-                        react_1.default.createElement("td", null, "\u25CB")),
-                    react_1.default.createElement("tr", null,
-                        react_1.default.createElement("th", null, "\u8868\u793A\u3057\u305F\u6CD5\u4EE4\u306EWord\u30D5\u30A1\u30A4\u30EB\u306A\u3069\u3078\u306E\u5909\u63DB"),
-                        react_1.default.createElement("td", null, "\u25CB")),
-                    react_1.default.createElement("tr", null,
-                        react_1.default.createElement("th", null, "\u30AA\u30D5\u30E9\u30A4\u30F3\u7528\u30C7\u30FC\u30BF\u3092\u7528\u3044\u305F\u6CD5\u4EE4\u691C\u7D22\u30FB\u8868\u793A"),
-                        react_1.default.createElement("td", null, "\u25CB"))))),
-        react_1.default.createElement("p", { className: "sidebar-footer-block", style: { fontSize: "0.8em", textAlign: "center", padding: "0.3em 0", color: "rgb(192, 192, 192)" } },
-            react_1.default.createElement("a", { href: "https://github.com/yamachig/lawtext", target: "_blank", rel: "noreferrer", style: { marginRight: "2em" } }, "GitHub"),
-            "\u00A9 2017-",
-            new Date().getFullYear(),
-            " yamachi")));
-};
-exports.DownloadPage = DownloadPage;
-
-
-/***/ }),
-
 /***/ 81981:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
@@ -37419,7 +37417,7 @@ exports.WrapLawComponent = void 0;
 const react_1 = __importDefault(__webpack_require__(67294));
 const styled_components_1 = __importDefault(__webpack_require__(58804));
 const ErrorCatcher_1 = __webpack_require__(81981);
-const ControlRun_1 = __webpack_require__(1186);
+const ControlRun_1 = __webpack_require__(70673);
 const el_1 = __webpack_require__(26252);
 const std = __importStar(__webpack_require__(93619));
 const download_1 = __webpack_require__(56644);
@@ -37588,7 +37586,7 @@ const react_1 = __importStar(__webpack_require__(67294));
 const styled_components_1 = __importStar(__webpack_require__(58804));
 const law_1 = __webpack_require__(64578);
 const htmlCSS_1 = __importDefault(__webpack_require__(81225));
-const ControlRun_1 = __webpack_require__(1186);
+const ControlRun_1 = __webpack_require__(70673);
 const LawWrapper_1 = __webpack_require__(70155);
 const useAfterMountTask_1 = __importDefault(__webpack_require__(81555));
 const GlobalStyle = (0, styled_components_1.createGlobalStyle) `
@@ -40238,7 +40236,11 @@ const detectLawname = (spans, spanIndex) => {
     const lawnameLength = (0, exports.getLawNameLength)(lawNum);
     const lawnameTextIndex = lawnameSpan.text.length - lawnameLength;
     const lawName = lawnameSpan.text.slice(lawnameTextIndex);
-    const lawnumEl = new el_1.EL("____LawNum", {}, [lawNum]);
+    const lawNumRange = lawnumSpan.el.range ? [
+        lawnumSpan.el.range[0] + match.index,
+        lawnumSpan.el.range[0] + match.index + lawNum.length,
+    ] : null;
+    const lawnumEl = new el_1.EL("____LawNum", {}, [lawNum], lawNumRange);
     if (lawnumSpan.text.length <= lawNum.length &&
         lawnumSpan.index + 1 < spans.length) {
         const afterSpan = spans[lawnumSpan.index + 1];
@@ -41038,6 +41040,7 @@ class FetchElawsLoader extends common_1.Loader {
     }
 }
 exports.FetchElawsLoader = FetchElawsLoader;
+exports["default"] = FetchElawsLoader;
 //# sourceMappingURL=FetchElawsLoader.js.map
 
 /***/ }),
@@ -41081,7 +41084,8 @@ const common_1 = __webpack_require__(10495);
 const data_paths = __importStar(__webpack_require__(14716));
 const path_1 = __importDefault(__webpack_require__(26470));
 const node_fetch_1 = __webpack_require__(43388);
-const fetch = (__webpack_require__.g["window"] && window.fetch) || node_fetch_1.fetch;
+const fetch = (__webpack_require__.g["fetch"]) || (__webpack_require__.g["window"] && window.fetch) || node_fetch_1.fetch;
+console.log(`fetch: ${fetch}`);
 const fetchText = async (textPath) => {
     try {
         const res = await fetch(textPath);
@@ -41130,11 +41134,13 @@ class StoredLawXML extends common_1.LawXMLStruct {
         return { url, type: (_a = res.headers.get("Content-Type")) !== null && _a !== void 0 ? _a : "" };
     }
     async getPictBlob(src) {
+        var _a;
         const url = path_1.default.join(this.lawdataPath, this.lawInfo.Path, src);
         const res = await fetch(url);
         if (!res.ok)
             return null;
-        return res.blob();
+        const blob = await res.blob();
+        return { buf: await blob.arrayBuffer(), type: (_a = res.headers.get("Content-Type")) !== null && _a !== void 0 ? _a : "" };
     }
 }
 exports.StoredLawXML = StoredLawXML;
@@ -41185,6 +41191,7 @@ class FetchStoredLoader extends common_1.Loader {
     }
 }
 exports.FetchStoredLoader = FetchStoredLoader;
+exports["default"] = FetchStoredLoader;
 //# sourceMappingURL=FetchStoredLoader.js.map
 
 /***/ }),
@@ -41198,9 +41205,6 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.csvTextToLawInfos = exports.lawInfosToByLawnumAndID = exports.jsonTextToLawInfos = exports.Loader = exports.LawXMLStruct = void 0;
 const lawinfo_1 = __webpack_require__(14292);
 class LawXMLStruct {
-    clean() {
-        /* */
-    }
 }
 exports.LawXMLStruct = LawXMLStruct;
 class Loader {
@@ -42160,6 +42164,7 @@ exports.LawQuery = LawQuery;
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
+/* provided dependency */ var Buffer = __webpack_require__(48764)["Buffer"];
 
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -42171,13 +42176,15 @@ const path_1 = __importDefault(__webpack_require__(26470));
 const common_1 = __webpack_require__(10495);
 const util_1 = __webpack_require__(84530);
 const node_fetch_1 = __webpack_require__(43388);
-const fetch = (__webpack_require__.g["window"] && window.fetch) || node_fetch_1.fetch;
+const fetch = (__webpack_require__.g["fetch"]) || (__webpack_require__.g["window"] && window.fetch) || node_fetch_1.fetch;
 // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-member-access
 const DOMParser = (__webpack_require__.g["window"] && window.DOMParser) || (__webpack_require__(16014).DOMParser);
 // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-member-access
 const XMLSerializer = (__webpack_require__.g["window"] && window.XMLSerializer) || (__webpack_require__(16014).XMLSerializer);
 const domParser = new DOMParser();
 const xmlSerializer = new XMLSerializer();
+// eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-member-access
+// const Blob: typeof window.Blob = (global["window"] && window.Blob) || require("buffer").Blob;
 exports.lawlistsURL = "https://elaws.e-gov.go.jp/api/1/lawlists/1";
 exports.lawdataURL = "https://elaws.e-gov.go.jp/api/1/lawdata/";
 exports.allXMLZipURL = "https://elaws.e-gov.go.jp/download?file_section=1&only_xml_flag=true";
@@ -42249,16 +42256,15 @@ class ElawsLawData extends common_1.LawXMLStruct {
         this.law = law;
         this.imageData = imageData;
         this._xml = _xml;
-        this.blobURLs = [];
+        // private blobURLs: string[] = [];
+        // public override clean() {
+        // console.log(`Revoking ${this.blobURLs.length} blob URLs`);
+        // while (this.blobURLs.length > 0) {
+        //     const url = this.blobURLs.pop();
+        //     if (url) URL.revokeObjectURL(url);
+        // }
+        // }
         this._pict = null;
-    }
-    clean() {
-        console.log(`Revoking ${this.blobURLs.length} blob URLs`);
-        while (this.blobURLs.length > 0) {
-            const url = this.blobURLs.pop();
-            if (url)
-                URL.revokeObjectURL(url);
-        }
     }
     getXml() {
         const doc = this.law.ownerDocument.implementation.createDocument("", "", null);
@@ -42271,12 +42277,13 @@ class ElawsLawData extends common_1.LawXMLStruct {
         return this._xml;
     }
     async getPictFileOrBlobURL(src) {
-        const blob = await this.getPictBlob(src);
-        if (!blob)
+        const _buf = await this.getPictBlob(src);
+        if (!_buf)
             return null;
-        const url = URL.createObjectURL(blob);
-        this.blobURLs.push(url);
-        return { url, type: blob.type };
+        const { buf, type } = _buf;
+        const url = `data:${type};base64,${Buffer.from(buf).toString("base64")}`;
+        // this.blobURLs.push(url);
+        return { url, type };
     }
     async ensurePict() {
         if (!this.imageData)
@@ -42288,8 +42295,8 @@ class ElawsLawData extends common_1.LawXMLStruct {
                 const buf = await zip.files[relPath].async("arraybuffer");
                 const ext = path_1.default.extname(relPath);
                 const type = ext in util_1.pictMimeDict ? util_1.pictMimeDict[ext] : "application/octet-stream";
-                const blob = new Blob([buf], { type });
-                this._pict.set(`./pict/${relPath}`, blob);
+                // const blob = new Blob([buf], { type });
+                this._pict.set(`./pict/${relPath}`, { buf, type });
             }
         }
         return this._pict;
@@ -42311,7 +42318,7 @@ const fetchLawData = async (lawIDOrLawNum) => {
         throw Error("getLawData(): Law element not exist");
     }
     const elImageData = elApplData.getElementsByTagName("ImageData").item(0);
-    const imageData = elImageData ? (0, util_1.decodeBase64)(elImageData.innerHTML) : null;
+    const imageData = (elImageData && elImageData.textContent) ? (0, util_1.decodeBase64)(elImageData.textContent) : null;
     return new ElawsLawData((_c = (_b = elApplData.getElementsByTagName("LawId").item(0)) === null || _b === void 0 ? void 0 : _b.textContent) !== null && _c !== void 0 ? _c : "", law, imageData);
 };
 exports.fetchLawData = fetchLawData;
@@ -44076,8 +44083,14 @@ class ArticleLine extends IndentsLine {
     }
     get sentencesArrayRange() {
         if (this.sentencesArray.length > 0) {
-            const sentences = this.sentencesArray.flat().map(ss => ss.sentences).flat();
-            return (0, el_1.rangeOfELs)(sentences);
+            const ranges = this.sentencesArray.flat().map(ss => [
+                ...ss.attrEntries.map(e => [e.entryRange, e.trailingSpaceRange]).flat(),
+                ss.leadingSpaceRange,
+                ...ss.sentences.map(s => s.range),
+            ]).flat().filter(r => r !== null);
+            if (ranges.length === 0)
+                return null;
+            return [ranges[0][0], ranges[ranges.length - 1][1]];
         }
         else {
             const base = this.midSpaceRange;
@@ -44118,8 +44131,14 @@ class ParagraphItemLine extends WithControlsLine {
     }
     get sentencesArrayRange() {
         if (this.sentencesArray.length > 0) {
-            const sentences = this.sentencesArray.flat().map(ss => ss.sentences).flat();
-            return (0, el_1.rangeOfELs)(sentences);
+            const ranges = this.sentencesArray.flat().map(ss => [
+                ...ss.attrEntries.map(e => [e.entryRange, e.trailingSpaceRange]).flat(),
+                ss.leadingSpaceRange,
+                ...ss.sentences.map(s => s.range),
+            ]).flat().filter(r => r !== null);
+            if (ranges.length === 0)
+                return null;
+            return [ranges[0][0], ranges[ranges.length - 1][1]];
         }
         else {
             const base = this.midSpaceRange;
@@ -44204,8 +44223,14 @@ class TableColumnLine extends IndentsLine {
     }
     get sentencesArrayRange() {
         if (this.sentencesArray.length > 0) {
-            const sentences = this.sentencesArray.flat().map(ss => ss.sentences).flat();
-            return (0, el_1.rangeOfELs)(sentences);
+            const ranges = this.sentencesArray.flat().map(ss => [
+                ...ss.attrEntries.map(e => [e.entryRange, e.trailingSpaceRange]).flat(),
+                ss.leadingSpaceRange,
+                ...ss.sentences.map(s => s.range),
+            ]).flat().filter(r => r !== null);
+            if (ranges.length === 0)
+                return null;
+            return [ranges[0][0], ranges[ranges.length - 1][1]];
         }
         else {
             const base = this.multilineIndicatorRange;
@@ -44236,8 +44261,14 @@ class OtherLine extends WithControlsLine {
     }
     get sentencesArrayRange() {
         if (this.sentencesArray.length > 0) {
-            const sentences = this.sentencesArray.flat().map(ss => ss.sentences).flat();
-            return (0, el_1.rangeOfELs)(sentences);
+            const ranges = this.sentencesArray.flat().map(ss => [
+                ...ss.attrEntries.map(e => [e.entryRange, e.trailingSpaceRange]).flat(),
+                ss.leadingSpaceRange,
+                ...ss.sentences.map(s => s.range),
+            ]).flat().filter(r => r !== null);
+            if (ranges.length === 0)
+                return null;
+            return [ranges[0][0], ranges[ranges.length - 1][1]];
         }
         else {
             const pos = this.controlsEndPos;
@@ -44305,7 +44336,7 @@ const innerXML = (el, withControlEl = false) => {
 exports.innerXML = innerXML;
 let currentID = 0;
 class EL {
-    constructor(tag, attr = {}, children = [], range = null) {
+    constructor(tag, attr = {}, children = [], range = null, id) {
         // if(!tag) {
         //     error(`${JSON.stringify(tag)} is invalid tag.`);
         // }
@@ -44314,7 +44345,7 @@ class EL {
         this.children = children;
         this.range = range;
         this.textCache = null;
-        this.id = ++currentID;
+        this.id = id !== null && id !== void 0 ? id : ++currentID;
     }
     get isControl() {
         return this.tag[0] === "_";
@@ -44349,7 +44380,7 @@ class EL {
         this.textCache = null;
         return this;
     }
-    json(withControlEl = false) {
+    json(withControlEl = false, withProperties = false) {
         const children = [];
         for (const el of this.children) {
             if (!(el instanceof EL || typeof el === "string")) {
@@ -44360,7 +44391,7 @@ class EL {
                 children.push(el);
             }
             else {
-                const js = el.json(withControlEl);
+                const js = el.json(withControlEl, withProperties);
                 if (withControlEl || el.tag[0] !== "_") {
                     children.push(js);
                 }
@@ -44379,9 +44410,14 @@ class EL {
                 joinedChildren.push(child);
             }
         }
+        const attr = Object.assign({}, this.attr);
+        if (withProperties) {
+            attr["__id"] = JSON.stringify(this.id);
+            attr["__range"] = JSON.stringify(this.range);
+        }
         return {
             tag: this.tag,
-            attr: this.attr,
+            attr,
             children: joinedChildren,
         };
     }
@@ -44463,6 +44499,7 @@ const rangeOfELs = (els) => {
 };
 exports.rangeOfELs = rangeOfELs;
 const loadEl = (rawLaw) => {
+    var _a, _b;
     if (typeof rawLaw === "string") {
         return rawLaw;
     }
@@ -44470,7 +44507,19 @@ const loadEl = (rawLaw) => {
         if (!rawLaw.children) {
             console.error("[load_el]", rawLaw);
         }
-        return new EL(rawLaw.tag, rawLaw.attr, rawLaw.children.map(exports.loadEl));
+        const attr = Object.assign({}, rawLaw.attr);
+        let id = undefined;
+        let range = undefined;
+        if ("__id" in rawLaw.attr) {
+            id = JSON.parse((_a = rawLaw.attr["__id"]) !== null && _a !== void 0 ? _a : "");
+            delete attr["__id"];
+        }
+        if ("__range" in rawLaw.attr) {
+            range = JSON.parse((_b = rawLaw.attr["__range"]) !== null && _b !== void 0 ? _b : "");
+            delete attr["__range"];
+        }
+        const el = new EL(rawLaw.tag, attr, rawLaw.children.map(exports.loadEl), range, id);
+        return el;
     }
 };
 exports.loadEl = loadEl;
@@ -47523,6 +47572,7 @@ const _noteLike_1 = __webpack_require__(88035);
 const _preamble_1 = __importStar(__webpack_require__(68581));
 const _tableStruct_1 = __importStar(__webpack_require__(55439));
 const columnsOrSentences_1 = __webpack_require__(15695);
+const _articleGroup_1 = __importDefault(__webpack_require__(40365));
 const anyToLines = (any, indentTexts) => {
     const lines = [];
     if (typeof any === "string" || (0, inline_1.isSentenceChildEL)(any)) {
@@ -47600,7 +47650,7 @@ exports.$any = factory_1.factory
     // .or(() => $amendProvision) // Same as (Sentence | Column)[]
     .or(() => _arithFormula_1.default)
     .or(() => _article_1.default)
-    // .or(() => $articleGroup) // Resets indentation
+    .or(() => _articleGroup_1.default) // Resets indentation
     .or(() => _figStruct_1.$fig) // Capture before $figStruct
     .or(() => _figStruct_1.default)
     .or(() => _list_1.$list) // Capture before $tableStruct
@@ -47966,6 +48016,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.$article = exports.articleToLines = void 0;
 const line_1 = __webpack_require__(69928);
 const std_1 = __webpack_require__(93619);
+const std = __importStar(__webpack_require__(93619));
 const columnsOrSentences_1 = __webpack_require__(15695);
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
 const util_1 = __webpack_require__(84530);
@@ -48091,7 +48142,12 @@ exports.$article = factory_1.default
     }
     firstParagraph.range = (0, el_1.rangeOfELs)(firstParagraph.children);
     article.append((0, _paragraphItem_1.paragraphItemFromAuto)("Paragraph", firstParagraph));
-    article.extend(otherParagraphs.map(p => p.value));
+    article.extend(otherParagraphs.map((p, i) => {
+        if (std.isParagraph(p.value) && p.value.attr.OldNum === "true") {
+            p.value.attr.Num = (i + 2).toString();
+        }
+        return p.value;
+    }));
     article.extend(supplNotes.map(n => n.value));
     const pos = captionLine ? captionLine.line.indentsEndPos : firstParagraphItemLine.line.indentsEndPos;
     const range = (_b = (0, el_1.rangeOfELs)(article.children)) !== null && _b !== void 0 ? _b : (pos !== null ? [pos, pos] : null);
@@ -49636,18 +49692,19 @@ exports.$autoParagraphItem = factory_1.default
             paragraphItem.attr.Delete = "false";
         }
     }
-    // if (firstParagraphItemLine.line.sentencesArray.length >= 1) {
-    //     const replacedAttrEntries: AttrEntries = [];
-    //     for (const attrEntry of firstParagraphItemLine.line.sentencesArray[0].attrEntries) {
-    //         if (attrEntry.entry[0] === "OldNum") {
-    //             (paragraphItem as std.Paragraph).attr.OldNum = attrEntry.entry[1];
-    //         } else {
-    //             replacedAttrEntries.push(attrEntry);
-    //         }
-    //     }
-    //     firstParagraphItemLine.line.sentencesArray[0].attrEntries.splice(0);
-    //     firstParagraphItemLine.line.sentencesArray[0].attrEntries.push(...replacedAttrEntries);
-    // }
+    if (firstParagraphItemLine.line.sentencesArray.length >= 1) {
+        const replacedAttrEntries = [];
+        for (const attrEntry of firstParagraphItemLine.line.sentencesArray[0].attrEntries) {
+            if (attrEntry.entry[0] === "OldNum") {
+                paragraphItem.attr.OldNum = attrEntry.entry[1];
+            }
+            else {
+                replacedAttrEntries.push(attrEntry);
+            }
+        }
+        firstParagraphItemLine.line.sentencesArray[0].attrEntries.splice(0);
+        firstParagraphItemLine.line.sentencesArray[0].attrEntries.push(...replacedAttrEntries);
+    }
     if (captionLine) {
         paragraphItem.append((0, std_1.newStdEL)("ParagraphCaption", {}, captionLine.line.sentencesArray
             .map(sa => sa.sentences.map(s => s.children))
@@ -50481,9 +50538,13 @@ const inline_1 = __webpack_require__(22845);
 const util_2 = __webpack_require__(84530);
 const _remarks_1 = __importStar(__webpack_require__(90137));
 const columnsOrSentences_1 = __webpack_require__(15695);
-const _any_1 = __importStar(__webpack_require__(22351));
+const _any_1 = __webpack_require__(22351);
 const _sentencesArray_1 = __webpack_require__(10145);
 const el_1 = __webpack_require__(26252);
+const _article_1 = __importDefault(__webpack_require__(60783));
+const _articleGroup_1 = __importDefault(__webpack_require__(40365));
+const _paragraphItem_1 = __webpack_require__(83974);
+const _figStruct_1 = __importDefault(__webpack_require__(43931));
 const tableToLines = (table, indentTexts) => {
     const lines = [];
     for (const row of table.children) {
@@ -50576,7 +50637,27 @@ const tableStructToLines = (tableStruct, indentTexts) => {
 };
 exports.tableStructToLines = tableStructToLines;
 const $tableCellChildrenBlock = (0, util_1.makeDoubleIndentBlockWithCaptureRule)("$tableCellChildrenBlock", (factory_1.factory
-    .ref(() => _any_1.default)));
+    .choice(c => c
+    .orSequence(s => s
+    .and(r => r.choice(c => c
+    .or(() => _articleGroup_1.default) // Resets indentation
+    .or(() => _article_1.default)
+    .or(() => _paragraphItem_1.$requireControlParagraphItem)
+    .or(() => _figStruct_1.default)
+    .or(() => _remarks_1.default)), "any")
+    .action(({ any }) => ({ value: [any.value], errors: any.errors })))
+    .or(r => r
+    .oneMatch(({ item }) => {
+    if (item.type === line_1.LineType.OTH) {
+        return {
+            value: (0, columnsOrSentences_1.sentencesArrayToColumnsOrSentences)(item.line.sentencesArray),
+            errors: [],
+        };
+    }
+    else {
+        return null;
+    }
+})))));
 const $table = factory_1.factory
     .withName("table")
     .sequence(s => s
@@ -51686,1573 +51767,7 @@ exports.toVirtualLines = toVirtualLines;
 
 /***/ }),
 
-/***/ 23080:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.renderDocxAsync = void 0;
-const react_1 = __importDefault(__webpack_require__(66406));
-const el_1 = __webpack_require__(26252);
-const std = __importStar(__webpack_require__(93619));
-const law_1 = __webpack_require__(64578);
-const docx_1 = __webpack_require__(25790);
-const any_1 = __webpack_require__(48774);
-const renderDocxAsync = (elOrJsonEL, docxOptions) => {
-    const el = (0, el_1.loadEl)(elOrJsonEL);
-    const element = std.isLaw(el)
-        ? react_1.default.createElement(law_1.DOCXLaw, { el: el, indent: 0, docxOptions: docxOptions !== null && docxOptions !== void 0 ? docxOptions : {} })
-        : react_1.default.createElement(any_1.DOCXAnyELs, { els: [el], indent: 0, docxOptions: docxOptions !== null && docxOptions !== void 0 ? docxOptions : {} });
-    return (0, docx_1.renderDocxAsync)(element);
-};
-exports.renderDocxAsync = renderDocxAsync;
-exports["default"] = exports.renderDocxAsync;
-//# sourceMappingURL=docx.js.map
-
-/***/ }),
-
-/***/ 62519:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.renderElementsFragment = exports.renderHTMLfragment = exports.renderHTML = void 0;
-const react_1 = __importDefault(__webpack_require__(66406));
-const el_1 = __webpack_require__(26252);
-const std = __importStar(__webpack_require__(93619));
-const law_1 = __webpack_require__(64578);
-const htmlCSS_1 = __importDefault(__webpack_require__(81225));
-const common_1 = __webpack_require__(87367);
-const any_1 = __webpack_require__(48774);
-const renderHTML = (elOrJsonEL, htmlOptions) => {
-    const rendered = (0, exports.renderHTMLfragment)(elOrJsonEL, htmlOptions);
-    const html = /*html*/ `\
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<style>
-${htmlCSS_1.default}
-</style>
-</head>
-<body>
-${rendered}
-</body>
-</html>
-`;
-    return html;
-};
-exports.renderHTML = renderHTML;
-const renderHTMLfragment = (elOrJsonEL, htmlOptions) => {
-    const el = (0, el_1.loadEl)(elOrJsonEL);
-    const element = std.isLaw(el)
-        ? react_1.default.createElement(law_1.HTMLLaw, { el: el, indent: 0, htmlOptions: htmlOptions !== null && htmlOptions !== void 0 ? htmlOptions : {} })
-        : react_1.default.createElement(any_1.HTMLAnyELs, { els: [el], indent: 0, htmlOptions: htmlOptions !== null && htmlOptions !== void 0 ? htmlOptions : {} });
-    const rendered = (0, common_1.renderToStaticMarkup)(element);
-    return rendered;
-};
-exports.renderHTMLfragment = renderHTMLfragment;
-const renderElementsFragment = (elements, htmlOptions) => {
-    return elements.map(e => (0, exports.renderHTMLfragment)(e, htmlOptions)).join("\n");
-};
-exports.renderElementsFragment = renderElementsFragment;
-exports["default"] = exports.renderHTML;
-//# sourceMappingURL=html.js.map
-
-/***/ }),
-
-/***/ 14813:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-__exportStar(__webpack_require__(24482), exports);
-__exportStar(__webpack_require__(62519), exports);
-__exportStar(__webpack_require__(23080), exports);
-__exportStar(__webpack_require__(52087), exports);
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-
-/***/ 24482:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.renderLawtext = void 0;
-const std = __importStar(__webpack_require__(93619));
-const std_1 = __webpack_require__(93619);
-const _any_1 = __webpack_require__(22351);
-const _law_1 = __webpack_require__(97192);
-const util_1 = __webpack_require__(84530);
-const renderLawtext = (el, indentTexts = []) => {
-    let ret = "";
-    if (std.isLaw(el)) {
-        const lines = (0, _law_1.lawToLines)(el, indentTexts);
-        ret += lines.map(l => l.text()).join("");
-    }
-    else if ((0, std_1.isStdEL)(el) || (0, std_1.isControl)(el)) {
-        const lines = (0, _any_1.anyToLines)(el, indentTexts);
-        ret += lines.map(l => l.text()).join("");
-    }
-    else {
-        throw new util_1.NotImplementedError(`render ${el.tag}`);
-    }
-    ret = ret.replace(/\r\n/g, "\n").replace(/\n/g, "\r\n").replace(/(\r?\n\r?\n)(?:\r?\n)+/g, "$1").replace(/(?<!\r\n)$/, "\r\n").replace(/(?:\r?\n)+$/, "\r\n");
-    return ret;
-};
-exports.renderLawtext = renderLawtext;
-exports["default"] = exports.renderLawtext;
-//# sourceMappingURL=lawtext.js.map
-
-/***/ }),
-
-/***/ 11543:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DOCXAmendProvision = exports.HTMLAmendProvision = exports.HTMLAmendProvisionCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
-const std = __importStar(__webpack_require__(93619));
-const util_1 = __webpack_require__(84530);
-const html_1 = __webpack_require__(20115);
-const columnsOrSentencesRun_1 = __webpack_require__(19400);
-const docx_1 = __webpack_require__(25790);
-const any_1 = __webpack_require__(48774);
-exports.HTMLAmendProvisionCSS = `
-.amend-provision-main {    
-    text-indent: 1em;
-}
-`;
-exports.HTMLAmendProvision = (0, html_1.wrapHTMLComponent)("HTMLAmendProvision", ((props) => {
-    const { el, htmlOptions, indent } = props;
-    const blocks = [];
-    for (const child of el.children) {
-        if (std.isAmendProvisionSentence(child)) {
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement("div", { className: `amend-provision-main indent-${indent}` },
-                    react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, Object.assign({ els: child.children }, { htmlOptions })))));
-        }
-        else if (std.isNewProvision(child)) {
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement("div", { className: "new-provision" },
-                    react_1.default.createElement(any_1.HTMLAnyELs, Object.assign({ els: child.children, indent: indent + 1 }, { htmlOptions })))));
-        }
-        else {
-            throw (0, util_1.assertNever)(child);
-        }
-    }
-    return (react_1.default.createElement("div", { className: "amend-provision" }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
-}));
-exports.DOCXAmendProvision = (0, docx_1.wrapDOCXComponent)("DOCXAmendProvision", ((props) => {
-    const { el, docxOptions, indent } = props;
-    const blocks = [];
-    for (const child of el.children) {
-        if (std.isAmendProvisionSentence(child)) {
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement(docx_1.w.p, null,
-                    react_1.default.createElement(docx_1.w.pPr, null,
-                        react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
-                    react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, Object.assign({ els: child.children }, { docxOptions })))));
-        }
-        else if (std.isNewProvision(child)) {
-            blocks.push(react_1.default.createElement(any_1.DOCXAnyELs, Object.assign({ els: child.children, indent: indent + 1 }, { docxOptions })));
-        }
-        else {
-            throw (0, util_1.assertNever)(child);
-        }
-    }
-    return (react_1.default.createElement(react_1.default.Fragment, null, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
-}));
-//# sourceMappingURL=amendProvision.js.map
-
-/***/ }),
-
-/***/ 48774:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DOCXAnyELs = exports.DOCXAnyELsToBlocks = exports.HTMLAnyELs = exports.HTMLAnyELsToBlocks = exports.HTMLAnyELsCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
-const std = __importStar(__webpack_require__(93619));
-const inline_1 = __webpack_require__(22845);
-const util_1 = __webpack_require__(84530);
-const amendProvision_1 = __webpack_require__(11543);
-const appdxItem_1 = __webpack_require__(66689);
-const article_1 = __webpack_require__(37701);
-const articleGroup_1 = __webpack_require__(5516);
-const columnsOrSentencesRun_1 = __webpack_require__(19400);
-const docx_1 = __webpack_require__(25790);
-const figRun_1 = __webpack_require__(33202);
-const html_1 = __webpack_require__(20115);
-const itemStruct_1 = __webpack_require__(52266);
-const law_1 = __webpack_require__(64578);
-const list_1 = __webpack_require__(42300);
-const noteLike_1 = __webpack_require__(16164);
-const paragraphItem_1 = __webpack_require__(42411);
-const remarks_1 = __webpack_require__(49597);
-const sentenceChildrenRun_1 = __webpack_require__(95041);
-const supplNote_1 = __webpack_require__(88110);
-const table_1 = __webpack_require__(91144);
-const toc_1 = __webpack_require__(92308);
-exports.HTMLAnyELsCSS = `
-
-`;
-const HTMLAnyELsToBlocks = (props) => {
-    const { els, htmlOptions, indent } = props;
-    const blocks = [];
-    let currentRuns = [];
-    const flushRuns = () => {
-        if (currentRuns.length > 0) {
-            blocks.push(currentRuns);
-            currentRuns = [];
-        }
-    };
-    for (let i = 0; i < els.length; i++) {
-        const el = els[i];
-        if (std.isLaw(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(law_1.HTMLLaw, Object.assign({ el: el, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isArticleGroup(el) || std.isMainProvision(el) || std.isSupplProvision(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(articleGroup_1.HTMLArticleGroup, Object.assign({ el: el, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isArticle(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(article_1.HTMLArticle, Object.assign({ el: el, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isParagraphItem(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(paragraphItem_1.HTMLParagraphItem, Object.assign({ el: el, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isTable(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(table_1.HTMLTable, Object.assign({ el: el, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isTableStruct(el) || std.isFigStruct(el) || std.isNoteLikeStruct(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(itemStruct_1.HTMLItemStruct, Object.assign({ el: el, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isAppdxItem(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(appdxItem_1.HTMLAppdxItem, Object.assign({ el: el, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isRemarks(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(remarks_1.HTMLRemarks, Object.assign({ el: el, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isNoteLike(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(noteLike_1.HTMLNoteLike, Object.assign({ el: el, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isList(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(list_1.HTMLList, Object.assign({ el: el, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isAmendProvision(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(amendProvision_1.HTMLAmendProvision, Object.assign({ el: el, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isSupplNote(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(supplNote_1.HTMLSupplNote, Object.assign({ el: el, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isEnactStatement(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(law_1.HTMLEnactStatement, Object.assign({ el: el, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isPreamble(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(law_1.HTMLPreamble, Object.assign({ el: el, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isTOC(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(toc_1.HTMLTOC, Object.assign({ el: el, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isTOCItem(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(toc_1.HTMLTOCItem, Object.assign({ el: el, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isArticleGroupTitle(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement("div", { className: `any-els-tag any-els-tag-${el.tag} indent-${indent}` },
-                    react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions })))));
-        }
-        else if (std.isSentence(el)) {
-            let j = i + 1;
-            while (j < els.length && std.isSentence(els[j]))
-                j++;
-            const sentences = els.slice(i, j);
-            currentRuns.push(react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, Object.assign({ els: sentences }, { htmlOptions })));
-            i = j - 1;
-        }
-        else if (std.isColumn(el)) {
-            let j = i + 1;
-            while (j < els.length && std.isColumn(els[j]))
-                j++;
-            const columns = els.slice(i, j);
-            currentRuns.push(react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, Object.assign({ els: columns }, { htmlOptions })));
-            i = j - 1;
-        }
-        else if (typeof el === "string" || (0, inline_1.isSentenceChildEL)(el)) {
-            // "Line", "QuoteStruct", "ArithFormula", "Ruby", "Sup", "Sub"
-            let j = i + 1;
-            while (j < els.length && (typeof els[j] === "string" || (0, inline_1.isSentenceChildEL)(els[j])))
-                j++;
-            const sentenceChildren = els.slice(i, j);
-            currentRuns.push(react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: sentenceChildren }, { htmlOptions })));
-            i = j - 1;
-        }
-        else if (std.isFig(el)) {
-            currentRuns.push(react_1.default.createElement(figRun_1.HTMLFigRun, Object.assign({ el: el }, { htmlOptions })));
-        }
-        else {
-            throw new util_1.NotImplementedError(el.tag);
-        }
-    }
-    flushRuns();
-    return blocks;
-};
-exports.HTMLAnyELsToBlocks = HTMLAnyELsToBlocks;
-exports.HTMLAnyELs = (0, html_1.wrapHTMLComponent)("HTMLAnyELs", ((props) => {
-    const { indent } = props;
-    const rawBlocks = (0, exports.HTMLAnyELsToBlocks)(props);
-    const blocks = [];
-    for (const rawBlock of rawBlocks) {
-        if (Array.isArray(rawBlock)) {
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement("div", { className: `any-els-runs indent-${indent}` }, rawBlock.map((run, i) => react_1.default.createElement(react_1.Fragment, { key: i }, run)))));
-        }
-        else {
-            blocks.push(rawBlock);
-        }
-    }
-    return (react_1.default.createElement(react_1.default.Fragment, null, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
-}));
-const DOCXAnyELsToBlocks = (props) => {
-    const { els, docxOptions, indent } = props;
-    const blocks = [];
-    let currentRuns = [];
-    const flushRuns = () => {
-        if (currentRuns.length > 0) {
-            blocks.push(currentRuns);
-            currentRuns = [];
-        }
-    };
-    for (let i = 0; i < els.length; i++) {
-        const el = els[i];
-        if (std.isLaw(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(law_1.DOCXLaw, Object.assign({ el: el, indent: indent }, { docxOptions })));
-        }
-        else if (std.isArticleGroup(el) || std.isMainProvision(el) || std.isSupplProvision(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(articleGroup_1.DOCXArticleGroup, Object.assign({ el: el, indent: indent }, { docxOptions })));
-        }
-        else if (std.isArticle(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(article_1.DOCXArticle, Object.assign({ el: el, indent: indent }, { docxOptions })));
-        }
-        else if (std.isParagraphItem(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(paragraphItem_1.DOCXParagraphItem, Object.assign({ el: el, indent: indent }, { docxOptions })));
-        }
-        else if (std.isTable(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(table_1.DOCXTable, Object.assign({ el: el, indent: indent }, { docxOptions })));
-        }
-        else if (std.isTableStruct(el) || std.isFigStruct(el) || std.isNoteLikeStruct(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(itemStruct_1.DOCXItemStruct, Object.assign({ el: el, indent: indent }, { docxOptions })));
-        }
-        else if (std.isAppdxItem(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(appdxItem_1.DOCXAppdxItem, Object.assign({ el: el, indent: indent }, { docxOptions })));
-        }
-        else if (std.isRemarks(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(remarks_1.DOCXRemarks, Object.assign({ el: el, indent: indent }, { docxOptions })));
-        }
-        else if (std.isNoteLike(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(noteLike_1.DOCXNoteLike, Object.assign({ el: el, indent: indent }, { docxOptions })));
-        }
-        else if (std.isList(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(list_1.DOCXList, Object.assign({ el: el, indent: indent }, { docxOptions })));
-        }
-        else if (std.isAmendProvision(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(amendProvision_1.DOCXAmendProvision, Object.assign({ el: el, indent: indent }, { docxOptions })));
-        }
-        else if (std.isSupplNote(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(supplNote_1.DOCXSupplNote, Object.assign({ el: el, indent: indent }, { docxOptions })));
-        }
-        else if (std.isEnactStatement(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(law_1.DOCXEnactStatement, Object.assign({ el: el, indent: indent }, { docxOptions })));
-        }
-        else if (std.isPreamble(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(law_1.DOCXPreamble, Object.assign({ el: el, indent: indent }, { docxOptions })));
-        }
-        else if (std.isTOC(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(toc_1.DOCXTOC, Object.assign({ el: el, indent: indent }, { docxOptions })));
-        }
-        else if (std.isTOCItem(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(toc_1.DOCXTOCItem, Object.assign({ el: el, indent: indent }, { docxOptions })));
-        }
-        else if (std.isArticleGroupTitle(el)) {
-            flushRuns();
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement(docx_1.w.p, null,
-                    react_1.default.createElement(docx_1.w.pPr, null,
-                        react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
-                    react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: el.children, emphasis: true }, { docxOptions })))));
-        }
-        else if (std.isSentence(el)) {
-            let j = i + 1;
-            while (j < els.length && std.isSentence(els[j]))
-                j++;
-            const sentences = els.slice(i, j);
-            currentRuns.push(react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, Object.assign({ els: sentences }, { docxOptions })));
-            i = j - 1;
-        }
-        else if (std.isColumn(el)) {
-            let j = i + 1;
-            while (j < els.length && std.isColumn(els[j]))
-                j++;
-            const columns = els.slice(i, j);
-            currentRuns.push(react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, Object.assign({ els: columns }, { docxOptions })));
-            i = j - 1;
-        }
-        else if (typeof el === "string" || (0, inline_1.isSentenceChildEL)(el)) {
-            // "Line", "QuoteStruct", "ArithFormula", "Ruby", "Sup", "Sub"
-            let j = i + 1;
-            while (j < els.length && (typeof els[j] === "string" || (0, inline_1.isSentenceChildEL)(els[j])))
-                j++;
-            const sentenceChildren = els.slice(i, j);
-            currentRuns.push(react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: sentenceChildren }, { docxOptions })));
-            i = j - 1;
-        }
-        else if (std.isFig(el)) {
-            currentRuns.push(react_1.default.createElement(figRun_1.DOCXFigRun, Object.assign({ el: el }, { docxOptions })));
-        }
-        else {
-            throw new util_1.NotImplementedError(el.tag);
-        }
-    }
-    flushRuns();
-    return blocks;
-};
-exports.DOCXAnyELsToBlocks = DOCXAnyELsToBlocks;
-exports.DOCXAnyELs = (0, docx_1.wrapDOCXComponent)("DOCXAnyELs", ((props) => {
-    const { indent } = props;
-    const rawBlocks = (0, exports.DOCXAnyELsToBlocks)(props);
-    const blocks = [];
-    for (const rawBlock of rawBlocks) {
-        if (Array.isArray(rawBlock)) {
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement(docx_1.w.p, null,
-                    react_1.default.createElement(docx_1.w.pPr, null,
-                        react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
-                    rawBlock.map((run, i) => react_1.default.createElement(react_1.Fragment, { key: i }, run)))));
-        }
-        else {
-            blocks.push(rawBlock);
-        }
-    }
-    return (react_1.default.createElement(react_1.default.Fragment, null, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
-}));
-//# sourceMappingURL=any.js.map
-
-/***/ }),
-
-/***/ 66689:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DOCXAppdxItem = exports.HTMLAppdxItem = exports.HTMLAppdxItemCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
-const std = __importStar(__webpack_require__(93619));
-const util_1 = __webpack_require__(84530);
-const html_1 = __webpack_require__(20115);
-const sentenceChildrenRun_1 = __webpack_require__(95041);
-const docx_1 = __webpack_require__(25790);
-const itemStruct_1 = __webpack_require__(52266);
-const paragraphItem_1 = __webpack_require__(42411);
-const remarks_1 = __webpack_require__(49597);
-const arithFormulaRun_1 = __webpack_require__(20808);
-exports.HTMLAppdxItemCSS = `
-.appdx-item {
-    clear: both;
-}
-
-.appdx-item-head {
-    clear: both;
-    font-weight: bold;
-}
-
-`;
-exports.HTMLAppdxItem = (0, html_1.wrapHTMLComponent)("HTMLAppdxItem", ((props) => {
-    const { el, htmlOptions, indent } = props;
-    const blocks = [];
-    const AppdxItemTitle = el.children.find(el => (std.isAppdxItemTitle(el)
-        || std.isSupplProvisionAppdxItemTitle(el)));
-    const RelatedArticleNum = el.children.find(std.isRelatedArticleNum);
-    if (AppdxItemTitle || RelatedArticleNum) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: `appdx-item-head indent-${indent}` },
-                (AppdxItemTitle !== undefined) && react_1.default.createElement(react_1.default.Fragment, null,
-                    react_1.default.createElement("span", { className: "appdx-item-title" },
-                        react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: AppdxItemTitle.children }, { htmlOptions })))),
-                (RelatedArticleNum !== undefined) && react_1.default.createElement(react_1.default.Fragment, null,
-                    react_1.default.createElement("span", { className: "related-article-num" },
-                        react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: RelatedArticleNum.children }, { htmlOptions })))))));
-    }
-    const bodyBlocks = [];
-    for (const child of el.children) {
-        if (std.isAppdxItemTitle(child)
-            || std.isSupplProvisionAppdxItemTitle(child)
-            || std.isRelatedArticleNum(child)) {
-            continue;
-        }
-        else if (std.isRemarks(child)) {
-            bodyBlocks.push(react_1.default.createElement(remarks_1.HTMLRemarks, Object.assign({ el: child, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isTableStruct(child) || std.isFigStruct(child) || std.isNoteLikeStruct(child)) {
-            bodyBlocks.push(react_1.default.createElement(itemStruct_1.HTMLItemStruct, Object.assign({ el: child, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isItem(child)) {
-            bodyBlocks.push(react_1.default.createElement(paragraphItem_1.HTMLParagraphItem, Object.assign({ el: child, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isArithFormula(child)) {
-            bodyBlocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement("div", { className: `appdx-item-runs indent-${indent}` },
-                    react_1.default.createElement(arithFormulaRun_1.HTMLArithFormulaRun, Object.assign({ el: child }, { htmlOptions })))));
-        }
-        else {
-            (0, util_1.assertNever)(child);
-        }
-    }
-    if (bodyBlocks.length > 0) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: "appdx-item-body" }, bodyBlocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block)))));
-    }
-    return (react_1.default.createElement("div", { className: "appdx-item" }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
-}));
-exports.DOCXAppdxItem = (0, docx_1.wrapDOCXComponent)("DOCXAppdxItem", ((props) => {
-    const { el, docxOptions, indent } = props;
-    const blocks = [];
-    const AppdxItemTitle = el.children.find(el => (std.isAppdxItemTitle(el)
-        || std.isSupplProvisionAppdxItemTitle(el)));
-    const RelatedArticleNum = el.children.find(std.isRelatedArticleNum);
-    if (AppdxItemTitle || RelatedArticleNum) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(docx_1.w.p, null,
-                react_1.default.createElement(docx_1.w.pPr, null,
-                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
-                (AppdxItemTitle !== undefined) && react_1.default.createElement(react_1.default.Fragment, null,
-                    react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: AppdxItemTitle.children, emphasis: true }, { docxOptions }))),
-                (RelatedArticleNum !== undefined) && react_1.default.createElement(react_1.default.Fragment, null,
-                    react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: RelatedArticleNum.children, emphasis: true }, { docxOptions }))))));
-    }
-    for (const child of el.children) {
-        if (std.isAppdxItemTitle(child)
-            || std.isSupplProvisionAppdxItemTitle(child)
-            || std.isRelatedArticleNum(child)) {
-            continue;
-        }
-        else if (std.isRemarks(child)) {
-            blocks.push(react_1.default.createElement(remarks_1.DOCXRemarks, Object.assign({ el: child, indent: indent }, { docxOptions })));
-        }
-        else if (std.isTableStruct(child) || std.isFigStruct(child) || std.isNoteLikeStruct(child)) {
-            blocks.push(react_1.default.createElement(itemStruct_1.DOCXItemStruct, Object.assign({ el: child, indent: indent }, { docxOptions })));
-        }
-        else if (std.isItem(child)) {
-            blocks.push(react_1.default.createElement(paragraphItem_1.DOCXParagraphItem, Object.assign({ el: child, indent: indent }, { docxOptions })));
-        }
-        else if (std.isArithFormula(child)) {
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement(docx_1.w.p, null,
-                    react_1.default.createElement(docx_1.w.pPr, null,
-                        react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
-                    react_1.default.createElement(arithFormulaRun_1.DOCXArithFormulaRun, Object.assign({ el: child }, { docxOptions })))));
-        }
-        else {
-            (0, util_1.assertNever)(child);
-        }
-    }
-    return (react_1.default.createElement(react_1.default.Fragment, null, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
-}));
-//# sourceMappingURL=appdxItem.js.map
-
-/***/ }),
-
-/***/ 20808:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DOCXArithFormulaRun = exports.HTMLArithFormulaRun = exports.HTMLArithFormulaRunCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
-const html_1 = __webpack_require__(20115);
-const docx_1 = __webpack_require__(25790);
-const any_1 = __webpack_require__(48774);
-const TextBoxRun_1 = __importDefault(__webpack_require__(17134));
-exports.HTMLArithFormulaRunCSS = `
-`;
-exports.HTMLArithFormulaRun = (0, html_1.wrapHTMLComponent)("HTMLArithFormulaRun", ((props) => {
-    const { el, htmlOptions } = props;
-    const rawBlocks = (0, any_1.HTMLAnyELsToBlocks)({
-        els: el.children,
-        indent: 0,
-        htmlOptions,
-    });
-    if (rawBlocks.every(Array.isArray)) {
-        const runs = rawBlocks.flat();
-        return (react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("span", { className: "arith-formula" }, runs.map((run, i) => react_1.default.createElement(react_1.Fragment, { key: i }, run)))));
-    }
-    else {
-        const blocks = [];
-        for (const rawBlock of rawBlocks) {
-            if (Array.isArray(rawBlock)) {
-                blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                    react_1.default.createElement("div", { className: "arith-formula-runs" }, rawBlock.map((run, i) => react_1.default.createElement(react_1.Fragment, { key: i }, run)))));
-            }
-            else {
-                blocks.push(rawBlock);
-            }
-        }
-        return (react_1.default.createElement("span", { className: "arith-formula", style: { display: "inline-block" } }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
-    }
-}));
-exports.DOCXArithFormulaRun = (0, docx_1.wrapDOCXComponent)("DOCXArithFormulaRun", ((props) => {
-    const { el, docxOptions } = props;
-    const rawBlocks = (0, any_1.DOCXAnyELsToBlocks)({
-        els: el.children,
-        indent: 0,
-        docxOptions,
-    });
-    if (rawBlocks.every(Array.isArray)) {
-        const runs = rawBlocks.flat();
-        return (react_1.default.createElement(react_1.default.Fragment, null, runs.map((run, i) => react_1.default.createElement(react_1.Fragment, { key: i }, run))));
-    }
-    else {
-        const blocks = [];
-        for (const rawBlock of rawBlocks) {
-            if (Array.isArray(rawBlock)) {
-                blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                    react_1.default.createElement(docx_1.w.p, null, rawBlock.map((run, i) => react_1.default.createElement(react_1.Fragment, { key: i }, run)))));
-            }
-            else {
-                blocks.push(rawBlock);
-            }
-        }
-        return (react_1.default.createElement(TextBoxRun_1.default, { id: 10000 + el.id, name: `ArithFormula${el.id}` }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
-    }
-}));
-//# sourceMappingURL=arithFormulaRun.js.map
-
-/***/ }),
-
-/***/ 37701:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DOCXArticle = exports.HTMLArticle = exports.HTMLArticleCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
-const std = __importStar(__webpack_require__(93619));
-const util_1 = __webpack_require__(84530);
-const html_1 = __webpack_require__(20115);
-const sentenceChildrenRun_1 = __webpack_require__(95041);
-const docx_1 = __webpack_require__(25790);
-const paragraphItem_1 = __webpack_require__(42411);
-const supplNote_1 = __webpack_require__(88110);
-exports.HTMLArticleCSS = `
-.article {
-    clear: both;
-}
-
-`;
-exports.HTMLArticle = (0, html_1.wrapHTMLComponent)("HTMLArticle", ((props) => {
-    const { el, htmlOptions, indent } = props;
-    const blocks = [];
-    const ArticleCaption = el.children.find(std.isArticleCaption);
-    const ArticleTitle = el.children.find(std.isArticleTitle);
-    const Paragraphs = el.children.filter(std.isParagraph);
-    if (ArticleCaption) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: `article-caption indent-${indent + 1}` },
-                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: ArticleCaption.children }, { htmlOptions }))))); /* >>>> INDENT >>>> */
-    }
-    const bodyBlocks = [];
-    for (const [i, child] of Paragraphs.entries()) {
-        if (i === 0 && ArticleTitle) {
-            bodyBlocks.push(react_1.default.createElement(paragraphItem_1.HTMLParagraphItem, Object.assign({ el: child, indent: indent, ArticleTitle: ArticleTitle }, { htmlOptions })));
-        }
-        else {
-            bodyBlocks.push(react_1.default.createElement(paragraphItem_1.HTMLParagraphItem, Object.assign({ el: child, indent: indent }, { htmlOptions })));
-        }
-    }
-    for (const child of el.children) {
-        if (std.isArticleCaption(child)
-            || std.isArticleTitle(child)
-            || std.isParagraph(child)) {
-            continue;
-        }
-        else if (child.tag === "SupplNote") {
-            bodyBlocks.push(react_1.default.createElement(supplNote_1.HTMLSupplNote, Object.assign({ el: child, indent: indent }, { htmlOptions })));
-        }
-        else {
-            (0, util_1.assertNever)(child);
-        }
-    }
-    if (bodyBlocks.length > 0) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: "article-body" }, bodyBlocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block)))));
-    }
-    return (react_1.default.createElement("div", { className: "article" }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
-}));
-exports.DOCXArticle = (0, docx_1.wrapDOCXComponent)("DOCXArticle", ((props) => {
-    const { el, docxOptions, indent } = props;
-    const blocks = [];
-    const ArticleCaption = el.children.find(std.isArticleCaption);
-    const ArticleTitle = el.children.find(std.isArticleTitle);
-    const Paragraphs = el.children.filter(std.isParagraph);
-    if (ArticleCaption) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(docx_1.w.p, null,
-                react_1.default.createElement(docx_1.w.pPr, null,
-                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent + 1}` })),
-                react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: ArticleCaption.children }, { docxOptions }))))); /* >>>> INDENT >>>> */
-    }
-    const bodyBlocks = [];
-    for (const [i, child] of Paragraphs.entries()) {
-        if (i === 0 && ArticleTitle) {
-            bodyBlocks.push(react_1.default.createElement(paragraphItem_1.DOCXParagraphItem, Object.assign({ el: child, indent: indent, ArticleTitle: ArticleTitle }, { docxOptions })));
-        }
-        else {
-            bodyBlocks.push(react_1.default.createElement(paragraphItem_1.DOCXParagraphItem, Object.assign({ el: child, indent: indent }, { docxOptions })));
-        }
-    }
-    for (const child of el.children) {
-        if (std.isArticleCaption(child)
-            || std.isArticleTitle(child)
-            || std.isParagraph(child)) {
-            continue;
-        }
-        else if (child.tag === "SupplNote") {
-            bodyBlocks.push(react_1.default.createElement(supplNote_1.DOCXSupplNote, Object.assign({ el: child, indent: indent }, { docxOptions })));
-        }
-        else {
-            (0, util_1.assertNever)(child);
-        }
-    }
-    if (bodyBlocks.length > 0) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null, bodyBlocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
-    }
-    return (react_1.default.createElement(react_1.default.Fragment, null, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
-}));
-//# sourceMappingURL=article.js.map
-
-/***/ }),
-
-/***/ 5516:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DOCXArticleGroup = exports.HTMLArticleGroup = exports.HTMLArticleGroupCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
-const std = __importStar(__webpack_require__(93619));
-const util_1 = __webpack_require__(84530);
-const html_1 = __webpack_require__(20115);
-const sentenceChildrenRun_1 = __webpack_require__(95041);
-const docx_1 = __webpack_require__(25790);
-const paragraphItem_1 = __webpack_require__(42411);
-const article_1 = __webpack_require__(37701);
-const appdxItem_1 = __webpack_require__(66689);
-const EmptyParagraph_1 = __importDefault(__webpack_require__(71642));
-exports.HTMLArticleGroupCSS = `
-.main-provision {
-    clear: both;
-}
-
-.article-group {
-    clear: both;
-}
-
-.article-group-title {
-    clear: both;
-    font-weight: bold;
-}
-
-.suppl-provision {
-    clear: both;
-}
-
-.suppl-provision-label {
-    clear: both;
-    font-weight: bold;
-}
-`;
-exports.HTMLArticleGroup = (0, html_1.wrapHTMLComponent)("HTMLArticleGroup", ((props) => {
-    const { el, htmlOptions, indent } = props;
-    const blocks = [];
-    const ArticleGroupTitle = el.children.find(std.isArticleGroupTitle);
-    const SupplProvisionLabel = el.children.find(std.isSupplProvisionLabel);
-    if (ArticleGroupTitle) {
-        const titleIndent = std.articleGroupTitleTags.indexOf(ArticleGroupTitle.tag) + 2;
-        if (blocks.length > 0)
-            blocks.push(react_1.default.createElement("div", { className: "empty" },
-                react_1.default.createElement("br", null)));
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: `article-group-title indent-${indent + titleIndent}` },
-                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: ArticleGroupTitle.children }, { htmlOptions })))));
-    }
-    if (SupplProvisionLabel && std.isSupplProvision(el)) {
-        const Extract = el.attr.Extract === "true" ? react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(html_1.HTMLMarginSpan, null),
-            "\u6284") : "";
-        const AmendLawNum = el.attr.AmendLawNum ? `（${el.attr.AmendLawNum}）` : "";
-        if (blocks.length > 0)
-            blocks.push(react_1.default.createElement("div", { className: "empty" },
-                react_1.default.createElement("br", null)));
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: `suppl-provision-label indent-${indent + 3}` },
-                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: SupplProvisionLabel.children }, { htmlOptions })),
-                AmendLawNum,
-                Extract)));
-    }
-    const bodyBlocks = [];
-    for (const child of el.children) {
-        if (std.isArticleGroupTitle(child)
-            || std.isSupplProvisionLabel(child)) {
-            continue;
-        }
-        else if (std.isArticle(child)) {
-            if (bodyBlocks.length > 0)
-                bodyBlocks.push(react_1.default.createElement("div", { className: "empty" },
-                    react_1.default.createElement("br", null)));
-            bodyBlocks.push(react_1.default.createElement(article_1.HTMLArticle, Object.assign({ el: child, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isParagraph(child)) {
-            if (bodyBlocks.length > 0)
-                bodyBlocks.push(react_1.default.createElement("div", { className: "empty" },
-                    react_1.default.createElement("br", null)));
-            bodyBlocks.push(react_1.default.createElement(paragraphItem_1.HTMLParagraphItem, Object.assign({ el: child, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isArticleGroup(child)) {
-            if (bodyBlocks.length > 0)
-                bodyBlocks.push(react_1.default.createElement("div", { className: "empty" },
-                    react_1.default.createElement("br", null)));
-            bodyBlocks.push(react_1.default.createElement(exports.HTMLArticleGroup, Object.assign({ el: child, indent: indent }, { htmlOptions })));
-        }
-        else if (std.isSupplProvisionAppdxItem(child)) {
-            if (bodyBlocks.length > 0)
-                bodyBlocks.push(react_1.default.createElement("div", { className: "empty" },
-                    react_1.default.createElement("br", null)));
-            bodyBlocks.push(react_1.default.createElement(appdxItem_1.HTMLAppdxItem, Object.assign({ el: child, indent: indent }, { htmlOptions })));
-        }
-        else {
-            (0, util_1.assertNever)(child);
-        }
-    }
-    const classNameBase = (std.isMainProvision(el)
-        ? "main-provision"
-        : std.isSupplProvision(el)
-            ? "suppl-provision"
-            : "article-group");
-    if (bodyBlocks.length > 0) {
-        if (blocks.length > 0)
-            blocks.push(react_1.default.createElement("div", { className: "empty" },
-                react_1.default.createElement("br", null)));
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: `${classNameBase}-body` }, bodyBlocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block)))));
-    }
-    return (react_1.default.createElement("div", { className: classNameBase }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
-}));
-exports.DOCXArticleGroup = (0, docx_1.wrapDOCXComponent)("DOCXArticleGroup", ((props) => {
-    const { el, docxOptions, indent } = props;
-    const blocks = [];
-    const ArticleGroupTitle = el.children.find(std.isArticleGroupTitle);
-    const SupplProvisionLabel = el.children.find(std.isSupplProvisionLabel);
-    if (ArticleGroupTitle) {
-        const titleIndent = std.articleGroupTitleTags.indexOf(ArticleGroupTitle.tag) + 2;
-        if (blocks.length > 0)
-            blocks.push(react_1.default.createElement(EmptyParagraph_1.default, null));
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(docx_1.w.p, null,
-                react_1.default.createElement(docx_1.w.pPr, null,
-                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `IndentHanging${indent + titleIndent}` })),
-                react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: ArticleGroupTitle.children, emphasis: true }, { docxOptions })))));
-    }
-    if (SupplProvisionLabel && std.isSupplProvision(el)) {
-        const Extract = el.attr.Extract === "true" ? react_1.default.createElement(react_1.default.Fragment, null,
-            "$",
-            docx_1.DOCXMargin,
-            "\u6284") : "";
-        const AmendLawNum = el.attr.AmendLawNum ? `（${el.attr.AmendLawNum}）` : "";
-        if (blocks.length > 0)
-            blocks.push(react_1.default.createElement(EmptyParagraph_1.default, null));
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(docx_1.w.p, null,
-                react_1.default.createElement(docx_1.w.pPr, null,
-                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `IndentHanging${indent + 3}` })),
-                react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: SupplProvisionLabel.children, emphasis: true }, { docxOptions })),
-                AmendLawNum,
-                Extract)));
-    }
-    for (const child of el.children) {
-        if (std.isArticleGroupTitle(child)
-            || std.isSupplProvisionLabel(child)) {
-            continue;
-        }
-        else if (std.isArticle(child)) {
-            if (blocks.length > 0)
-                blocks.push(react_1.default.createElement(EmptyParagraph_1.default, null));
-            blocks.push(react_1.default.createElement(article_1.DOCXArticle, Object.assign({ el: child, indent: indent }, { docxOptions })));
-        }
-        else if (std.isParagraph(child)) {
-            if (blocks.length > 0)
-                blocks.push(react_1.default.createElement(EmptyParagraph_1.default, null));
-            blocks.push(react_1.default.createElement(paragraphItem_1.DOCXParagraphItem, Object.assign({ el: child, indent: indent }, { docxOptions })));
-        }
-        else if (std.isArticleGroup(child)) {
-            if (blocks.length > 0)
-                blocks.push(react_1.default.createElement(EmptyParagraph_1.default, null));
-            blocks.push(react_1.default.createElement(exports.DOCXArticleGroup, Object.assign({ el: child, indent: indent }, { docxOptions })));
-        }
-        else if (std.isSupplProvisionAppdxItem(child)) {
-            if (blocks.length > 0)
-                blocks.push(react_1.default.createElement(EmptyParagraph_1.default, null));
-            blocks.push(react_1.default.createElement(appdxItem_1.DOCXAppdxItem, Object.assign({ el: child, indent: indent }, { docxOptions })));
-        }
-        else {
-            (0, util_1.assertNever)(child);
-        }
-    }
-    return (react_1.default.createElement(react_1.default.Fragment, null, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
-}));
-//# sourceMappingURL=articleGroup.js.map
-
-/***/ }),
-
-/***/ 19400:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DOCXColumnsOrSentencesRun = exports.HTMLColumnsOrSentencesRun = exports.HTMLColumnsOrSentencesRunCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
-const std = __importStar(__webpack_require__(93619));
-const util_1 = __webpack_require__(84530);
-const docx_1 = __webpack_require__(25790);
-const TextBoxRun_1 = __importDefault(__webpack_require__(17134));
-const html_1 = __webpack_require__(20115);
-const sentenceChildrenRun_1 = __webpack_require__(95041);
-const table_1 = __webpack_require__(91144);
-exports.HTMLColumnsOrSentencesRunCSS = `
-`;
-exports.HTMLColumnsOrSentencesRun = (0, html_1.wrapHTMLComponent)("HTMLColumnsOrSentencesRun", ((props) => {
-    const { els, htmlOptions } = props;
-    const runs = [];
-    for (let i = 0; i < els.length; i++) {
-        const el = els[i];
-        if (std.isSentence(el)) {
-            runs.push(react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions })));
-        }
-        else if (std.isColumn(el)) {
-            if (i !== 0) {
-                runs.push(react_1.default.createElement(html_1.HTMLMarginSpan, { className: "lawtext-column-margin" }));
-            }
-            const subruns = [];
-            for (let j = 0; j < el.children.length; j++) {
-                const subel = el.children[j];
-                subruns.push(react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: subel.children, key: j }, { htmlOptions })));
-            }
-            runs.push(react_1.default.createElement("span", { className: "lawtext-column" }, subruns));
-        }
-        else if (std.isTable(el)) {
-            runs.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement("span", { style: { display: "inline-block" } },
-                    react_1.default.createElement(table_1.HTMLTable, Object.assign({ el: el, indent: 0 }, { htmlOptions })))));
-        }
-        else {
-            (0, util_1.assertNever)(el);
-        }
-    }
-    return react_1.default.createElement(react_1.default.Fragment, null, runs.map((run, i) => react_1.default.createElement(react_1.Fragment, { key: i }, run)));
-}));
-exports.DOCXColumnsOrSentencesRun = (0, docx_1.wrapDOCXComponent)("DOCXColumnsOrSentencesRun", ((props) => {
-    const { els, docxOptions } = props;
-    const runs = [];
-    for (let i = 0; i < els.length; i++) {
-        const el = els[i];
-        if (std.isSentence(el)) {
-            runs.push(react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: el.children }, { docxOptions })));
-        }
-        else if (std.isColumn(el)) {
-            if (i !== 0) {
-                runs.push(react_1.default.createElement(react_1.default.Fragment, null,
-                    react_1.default.createElement(docx_1.w.r, null,
-                        react_1.default.createElement(docx_1.w.t, null, docx_1.DOCXMargin))));
-            }
-            for (let j = 0; j < el.children.length; j++) {
-                const subel = el.children[j];
-                runs.push(react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: subel.children, key: j }, { docxOptions })));
-            }
-        }
-        else if (std.isTable(el)) {
-            runs.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement(TextBoxRun_1.default, { id: 10000 + el.id, name: `Table${el.id}` },
-                    react_1.default.createElement(table_1.DOCXTable, Object.assign({ el: el, indent: 0 }, { docxOptions })))));
-        }
-        else {
-            (0, util_1.assertNever)(el);
-        }
-    }
-    return react_1.default.createElement(react_1.default.Fragment, null, runs.map((run, i) => react_1.default.createElement(react_1.Fragment, { key: i }, run)));
-}));
-//# sourceMappingURL=columnsOrSentencesRun.js.map
-
-/***/ }),
-
-/***/ 87367:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.renderToStaticMarkup = exports.revertConsole = exports.overrrideConsole = void 0;
-const server_1 = __importDefault(__webpack_require__(72977));
-const ignoreMessagePatterns = [
-    /is using incorrect casing\./,
-    /React does not recognize/,
-    /Invalid DOM property/,
-];
-const origWarn = __webpack_require__.g.console.warn;
-const filteredWarn = (message, ...args) => {
-    if (ignoreMessagePatterns.some(p => p.test(message))) {
-        return;
-    }
-    origWarn(message, ...args);
-};
-const origError = __webpack_require__.g.console.error;
-const filteredError = (message, ...args) => {
-    if (ignoreMessagePatterns.some(p => p.test(message))) {
-        return;
-    }
-    origError(message, ...args);
-};
-const overrrideConsole = () => {
-    console.warn = filteredWarn;
-    console.error = filteredError;
-    // const origError = global.console.error;
-    // console.error = (message, ...args) => {
-    //     if (ignoreMessagePatterns.some(p => p.test(message))) {
-    //         return;
-    //     }
-    //     origError(message, ...args);
-    // };
-    // const origLog = global.console.log;
-    // console.log = (message, ...args) => {
-    //     if (ignoreMessagePatterns.some(p => p.test(message))) {
-    //         return;
-    //     }
-    //     origLog(message, ...args);
-    // };
-};
-exports.overrrideConsole = overrrideConsole;
-const revertConsole = () => {
-    console.warn = origWarn;
-    console.error = origError;
-};
-exports.revertConsole = revertConsole;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const renderToStaticMarkup = (element) => {
-    try {
-        (0, exports.overrrideConsole)();
-        const ret = server_1.default.renderToStaticMarkup(element);
-        return ret;
-    }
-    finally {
-        (0, exports.revertConsole)();
-    }
-};
-exports.renderToStaticMarkup = renderToStaticMarkup;
-//# sourceMappingURL=common.js.map
-
-/***/ }),
-
-/***/ 95838:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.HTMLControlRun = exports.HTMLControlRunCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
-const html_1 = __webpack_require__(20115);
-const sentenceChildrenRun_1 = __webpack_require__(95041);
-const util_1 = __webpack_require__(84530);
-exports.HTMLControlRunCSS = `
-
-.control-parentheses
-{
-    transition: background-color 0.3s;
-}
-
-.control-parentheses:hover,
-.paragraph-item-Paragraph:hover .control-parentheses
-{
-    background-color: hsla(60, 100%, 50%, 0.1);
-}
-
-.control-parentheses[data-parentheses_depth="1"]:hover,
-.paragraph-item-Paragraph:hover .control-parentheses[data-parentheses_depth="1"]
-{
-    background-color: hsla(60, 100%, 50%, 0.1);
-}
-
-.control-parentheses[data-parentheses_depth="2"]:hover,
-.paragraph-item-Paragraph:hover .control-parentheses[data-parentheses_depth="2"]
-{
-    background-color: hsla(30, 100%, 50%, 0.1);
-}
-
-.control-parentheses[data-parentheses_depth="3"]:hover,
-.paragraph-item-Paragraph:hover .control-parentheses[data-parentheses_depth="3"]
-{
-    background-color: hsla(0, 100%, 50%, 0.1);
-}
-
-.control-parentheses[data-parentheses_depth="4"]:hover,
-.paragraph-item-Paragraph:hover .control-parentheses[data-parentheses_depth="4"]
-{
-    background-color: hsl(330, 100%, 50%, 0.1);
-}
-
-.control-parentheses[data-parentheses_depth="5"]:hover,
-.paragraph-item-Paragraph:hover .control-parentheses[data-parentheses_depth="5"]
-{
-    background-color: hsl(300, 100%, 50%, 0.1);
-}
-
-.control-parentheses[data-parentheses_depth="6"]:hover,
-.paragraph-item-Paragraph:hover .control-parentheses[data-parentheses_depth="6"]
-{
-    background-color: hsl(270, 100%, 50%, 0.1);
-}
-
-.control-start-parenthesis,
-.control-end-parenthesis
-{
-    border: 1px solid transparent;
-    margin: -1px;
-    transition: border-color 0.3s;
-}
-
-.control-parentheses:hover
-    > .control-start-parenthesis,
-.control-parentheses:hover
-    > .control-end-parenthesis
-{
-    border-color: gray;
-}
-
-.control-mismatch-start-parenthesis {
-    color: red;
-}
-
-.control-mismatch-end-parenthesis {
-    color: red;
-}
-`;
-// const isControlRunProps = (props: HTMLComponentProps): props is ControlRunProps => props.el.isControl;
-exports.HTMLControlRun = (0, html_1.wrapHTMLComponent)("HTMLControlRun", ((props) => {
-    const { el, htmlOptions } = props;
-    if (el.tag === "__Parentheses") {
-        return react_1.default.createElement(__Parentheses, Object.assign({ el: el }, { htmlOptions }));
-    }
-    else if (el.tag === "__PStart") {
-        return react_1.default.createElement(__PStart, Object.assign({ el: el }, { htmlOptions }));
-    }
-    else if (el.tag === "__PContent") {
-        return react_1.default.createElement(__PContent, Object.assign({ el: el }, { htmlOptions }));
-    }
-    else if (el.tag === "__PEnd") {
-        return react_1.default.createElement(__PEnd, Object.assign({ el: el }, { htmlOptions }));
-    }
-    else if (el.tag === "__MismatchStartParenthesis") {
-        return react_1.default.createElement(__MismatchStartParenthesis, Object.assign({ el: el }, { htmlOptions }));
-    }
-    else if (el.tag === "__MismatchEndParenthesis") {
-        return react_1.default.createElement(__MismatchEndParenthesis, Object.assign({ el: el }, { htmlOptions }));
-    }
-    else {
-        return react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }));
-    }
-}));
-const __Parentheses = (props) => {
-    const { el, htmlOptions } = props;
-    const blocks = [];
-    for (const child of el.children) {
-        if (typeof child === "string" || child instanceof String) {
-            throw new util_1.NotImplementedError("string");
-        }
-        else if (child.tag === "__PStart") {
-            blocks.push(react_1.default.createElement(__PStart, Object.assign({ el: child, key: child.id }, { htmlOptions })));
-        }
-        else if (child.tag === "__PContent") {
-            blocks.push(react_1.default.createElement(__PContent, Object.assign({ el: child, key: child.id }, { htmlOptions })));
-        }
-        else if (child.tag === "__PEnd") {
-            blocks.push(react_1.default.createElement(__PEnd, Object.assign({ el: child, key: child.id }, { htmlOptions })));
-        }
-        else {
-            throw new util_1.NotImplementedError(child.tag);
-        }
-    }
-    return (react_1.default.createElement("span", { className: "control-parentheses", "data-parentheses_type": el.attr.type, "data-parentheses_depth": el.attr.depth }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
-};
-const __PStart = (props) => {
-    const { el, htmlOptions } = props;
-    return (react_1.default.createElement("span", { className: "control-start-parenthesis", "data-parentheses_type": el.attr.type },
-        react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))));
-};
-const __PContent = (props) => {
-    const { el, htmlOptions } = props;
-    return (react_1.default.createElement("span", { className: "control-parentheses-content", "data-parentheses_type": el.attr.type },
-        react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))));
-};
-const __PEnd = (props) => {
-    const { el, htmlOptions } = props;
-    return (react_1.default.createElement("span", { className: "control-end-parenthesis", "data-parentheses_type": el.attr.type },
-        react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))));
-};
-const __MismatchStartParenthesis = (props) => {
-    const { el, htmlOptions } = props;
-    return (react_1.default.createElement("span", { className: "control-mismatch-end-parenthesis", "data-parentheses_type": el.attr.type },
-        react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))));
-};
-const __MismatchEndParenthesis = (props) => {
-    const { el, htmlOptions } = props;
-    return (react_1.default.createElement("span", { className: "control-mismatch-end-parenthesis", "data-parentheses_type": el.attr.type },
-        react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))));
-};
-//# sourceMappingURL=controlRun.js.map
-
-/***/ }),
-
-/***/ 71642:
+/***/ 24318:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -53263,7 +51778,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EmptyParagraph = void 0;
 const react_1 = __importDefault(__webpack_require__(66406));
-const tags_1 = __webpack_require__(90000);
+const tags_1 = __webpack_require__(29098);
 const EmptyParagraph = () => {
     return (react_1.default.createElement(tags_1.w.p, null,
         react_1.default.createElement(tags_1.w.pPr, null,
@@ -53275,7 +51790,7 @@ exports["default"] = exports.EmptyParagraph;
 
 /***/ }),
 
-/***/ 17134:
+/***/ 64306:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -53286,29 +51801,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TextBoxRun = void 0;
 const react_1 = __importDefault(__webpack_require__(66406));
-const tags_1 = __webpack_require__(90000);
+const tags_1 = __webpack_require__(29098);
 const TextBoxRun = props => {
-    return (react_1.default.createElement(react_1.default.Fragment, null,
-        react_1.default.createElement(tags_1.w.r, null,
-            react_1.default.createElement(tags_1.w.drawing, null,
-                react_1.default.createElement(tags_1.wp.inline, { distT: "0", distB: "0", distL: "0", distR: "0" },
-                    react_1.default.createElement(tags_1.wp.extent, { cx: "0", cy: "0" }),
-                    react_1.default.createElement(tags_1.wp.docPr, { id: props.id, name: props.name }),
-                    react_1.default.createElement(tags_1.a.graphic, { "xmlns:a": "http://schemas.openxmlformats.org/drawingml/2006/main" },
-                        react_1.default.createElement(tags_1.a.graphicData, { uri: "http://schemas.microsoft.com/office/word/2010/wordprocessingShape" },
-                            react_1.default.createElement(tags_1.wps.wsp, null,
-                                react_1.default.createElement(tags_1.wps.cNvSpPr, { txBox: "1" },
-                                    react_1.default.createElement(tags_1.a.spLocks, { noChangeArrowheads: "1" })),
-                                react_1.default.createElement(tags_1.wps.spPr, { bwMode: "auto" },
-                                    react_1.default.createElement(tags_1.a.xfrm, null,
-                                        react_1.default.createElement(tags_1.a.off, { x: "0", y: "0" })),
-                                    react_1.default.createElement(tags_1.a.prstGeom, { prst: "rect" },
-                                        react_1.default.createElement(tags_1.a.avLst, null)),
-                                    react_1.default.createElement(tags_1.a.noFill, null)),
-                                react_1.default.createElement(tags_1.wps.txbx, null,
-                                    react_1.default.createElement(tags_1.w.txbxContent, null, props.children)),
-                                react_1.default.createElement(tags_1.wps.bodyPr, { rot: "0", vert: "horz", wrap: "none", lIns: "0", tIns: "0", rIns: "0", bIns: "0", anchor: "t", anchorCtr: "0" },
-                                    react_1.default.createElement(tags_1.a.spAutoFit, null))))))))));
+    return (react_1.default.createElement(tags_1.w.r, null,
+        react_1.default.createElement(tags_1.w.drawing, null,
+            react_1.default.createElement(tags_1.wp.inline, { distT: "0", distB: "0", distL: "0", distR: "0" },
+                react_1.default.createElement(tags_1.wp.extent, { cx: "0", cy: "0" }),
+                react_1.default.createElement(tags_1.wp.docPr, { id: props.id, name: props.name }),
+                react_1.default.createElement(tags_1.a.graphic, { "xmlns:a": "http://schemas.openxmlformats.org/drawingml/2006/main" },
+                    react_1.default.createElement(tags_1.a.graphicData, { uri: "http://schemas.microsoft.com/office/word/2010/wordprocessingShape" },
+                        react_1.default.createElement(tags_1.wps.wsp, null,
+                            react_1.default.createElement(tags_1.wps.cNvSpPr, { txBox: "1" },
+                                react_1.default.createElement(tags_1.a.spLocks, { noChangeArrowheads: "1" })),
+                            react_1.default.createElement(tags_1.wps.spPr, { bwMode: "auto" },
+                                react_1.default.createElement(tags_1.a.xfrm, null,
+                                    react_1.default.createElement(tags_1.a.off, { x: "0", y: "0" })),
+                                react_1.default.createElement(tags_1.a.prstGeom, { prst: "rect" },
+                                    react_1.default.createElement(tags_1.a.avLst, null)),
+                                react_1.default.createElement(tags_1.a.noFill, null)),
+                            react_1.default.createElement(tags_1.wps.txbx, null,
+                                react_1.default.createElement(tags_1.w.txbxContent, null, props.children)),
+                            react_1.default.createElement(tags_1.wps.bodyPr, { rot: "0", vert: "horz", wrap: "none", lIns: "0", tIns: "0", rIns: "0", bIns: "0", anchor: "t", anchorCtr: "0" },
+                                react_1.default.createElement(tags_1.a.spAutoFit, null)))))))));
 };
 exports.TextBoxRun = TextBoxRun;
 exports["default"] = exports.TextBoxRun;
@@ -53316,7 +51830,7 @@ exports["default"] = exports.TextBoxRun;
 
 /***/ }),
 
-/***/ 40965:
+/***/ 10996:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -53349,7 +51863,7 @@ exports.makeComponentWithTag = makeComponentWithTag;
 
 /***/ }),
 
-/***/ 34145:
+/***/ 41198:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -53361,13 +51875,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.renderDocxAsync = void 0;
 const react_1 = __importDefault(__webpack_require__(66406));
 const jszip_1 = __importDefault(__webpack_require__(85388));
-const common_1 = __webpack_require__(87367);
-const tags_1 = __webpack_require__(90000);
-const contentTypes_1 = __importDefault(__webpack_require__(14408));
-const rels_1 = __importDefault(__webpack_require__(21312));
-const documentRels_1 = __importDefault(__webpack_require__(89845));
-const styles_1 = __importDefault(__webpack_require__(57993));
-const settings_1 = __importDefault(__webpack_require__(19535));
+const __1 = __webpack_require__(66914);
+const tags_1 = __webpack_require__(29098);
+const contentTypes_1 = __importDefault(__webpack_require__(26352));
+const rels_1 = __importDefault(__webpack_require__(94642));
+const documentRels_1 = __importDefault(__webpack_require__(94854));
+const styles_1 = __importDefault(__webpack_require__(86138));
+const settings_1 = __importDefault(__webpack_require__(91305));
 const renderDocxAsync = (bodyEL) => {
     const document = (react_1.default.createElement(tags_1.w.document, { "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main", "xmlns:wp": "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing", "xmlns:wps": "http://schemas.microsoft.com/office/word/2010/wordprocessingShape" },
         react_1.default.createElement(tags_1.w.body, null, bodyEL)));
@@ -53375,32 +51889,32 @@ const renderDocxAsync = (bodyEL) => {
         .file("[Content_Types].xml", 
     /*xml*/ `\
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-${(0, common_1.renderToStaticMarkup)(contentTypes_1.default)}
+${(0, __1.renderToStaticMarkup)(contentTypes_1.default)}
 `)
         .file("_rels/.rels", 
     /*xml*/ `\
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-${(0, common_1.renderToStaticMarkup)(rels_1.default)}
+${(0, __1.renderToStaticMarkup)(rels_1.default)}
 `)
         .file("word/_rels/document.xml.rels", 
     /*xml*/ `\
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-${(0, common_1.renderToStaticMarkup)(documentRels_1.default)}
+${(0, __1.renderToStaticMarkup)(documentRels_1.default)}
 `)
         .file("word/document.xml", 
     /*xml*/ `\
 <?xml version="1.0" encoding="utf-8"?>
-${(0, common_1.renderToStaticMarkup)(document)}
+${(0, __1.renderToStaticMarkup)(document)}
 `)
         .file("word/styles.xml", 
     /*xml*/ `\
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-${(0, common_1.renderToStaticMarkup)(styles_1.default)}
+${(0, __1.renderToStaticMarkup)(styles_1.default)}
 `)
         .file("word/settings.xml", 
     /*xml*/ `\
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-${(0, common_1.renderToStaticMarkup)(settings_1.default)}
+${(0, __1.renderToStaticMarkup)(settings_1.default)}
 `)
         .generateAsync({
         type: jszip_1.default.support.nodebuffer ? "nodebuffer" : "uint8array",
@@ -53415,7 +51929,7 @@ exports.renderDocxAsync = renderDocxAsync;
 
 /***/ }),
 
-/***/ 14408:
+/***/ 26352:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -53426,7 +51940,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.contentTypes = void 0;
 const react_1 = __importDefault(__webpack_require__(66406));
-const component_1 = __webpack_require__(40965);
+const component_1 = __webpack_require__(10996);
 const Types = (0, component_1.makeComponentWithTag)("Types");
 const Default = (0, component_1.makeComponentWithTag)("Default");
 const Override = (0, component_1.makeComponentWithTag)("Override");
@@ -53442,7 +51956,7 @@ exports["default"] = exports.contentTypes;
 
 /***/ }),
 
-/***/ 89845:
+/***/ 94854:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -53453,7 +51967,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.documentRels = void 0;
 const react_1 = __importDefault(__webpack_require__(66406));
-const component_1 = __webpack_require__(40965);
+const component_1 = __webpack_require__(10996);
 const Relationships = (0, component_1.makeComponentWithTag)("Relationships");
 const Relationship = (0, component_1.makeComponentWithTag)("Relationship");
 exports.documentRels = (react_1.default.createElement(Relationships, { xmlns: "http://schemas.openxmlformats.org/package/2006/relationships" },
@@ -53464,7 +51978,7 @@ exports["default"] = exports.documentRels;
 
 /***/ }),
 
-/***/ 21312:
+/***/ 94642:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -53475,7 +51989,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.rels = void 0;
 const react_1 = __importDefault(__webpack_require__(66406));
-const component_1 = __webpack_require__(40965);
+const component_1 = __webpack_require__(10996);
 const Relationships = (0, component_1.makeComponentWithTag)("Relationships");
 const Relationship = (0, component_1.makeComponentWithTag)("Relationship");
 exports.rels = (react_1.default.createElement(Relationships, { xmlns: "http://schemas.openxmlformats.org/package/2006/relationships" },
@@ -53485,7 +51999,7 @@ exports["default"] = exports.rels;
 
 /***/ }),
 
-/***/ 19535:
+/***/ 91305:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -53496,7 +52010,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.settings = void 0;
 const react_1 = __importDefault(__webpack_require__(66406));
-const tags_1 = __webpack_require__(90000);
+const tags_1 = __webpack_require__(29098);
 exports.settings = (react_1.default.createElement(tags_1.w.settings, { "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main" },
     react_1.default.createElement(tags_1.w.compat, null,
         react_1.default.createElement(tags_1.w.compatSetting, { "w:name": "compatibilityMode", "w:uri": "http://schemas.microsoft.com/office/word", "w:val": "15" }))));
@@ -53505,7 +52019,7 @@ exports["default"] = exports.settings;
 
 /***/ }),
 
-/***/ 25790:
+/***/ 80826:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -53525,18 +52039,18 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-__exportStar(__webpack_require__(40965), exports);
-__exportStar(__webpack_require__(90000), exports);
-__exportStar(__webpack_require__(14408), exports);
-__exportStar(__webpack_require__(34145), exports);
-__exportStar(__webpack_require__(21312), exports);
-__exportStar(__webpack_require__(57993), exports);
-__exportStar(__webpack_require__(89845), exports);
+__exportStar(__webpack_require__(10996), exports);
+__exportStar(__webpack_require__(29098), exports);
+__exportStar(__webpack_require__(26352), exports);
+__exportStar(__webpack_require__(41198), exports);
+__exportStar(__webpack_require__(94642), exports);
+__exportStar(__webpack_require__(86138), exports);
+__exportStar(__webpack_require__(94854), exports);
 //# sourceMappingURL=index.js.map
 
 /***/ }),
 
-/***/ 57993:
+/***/ 86138:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -53548,7 +52062,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.styles = void 0;
 const react_1 = __importDefault(__webpack_require__(66406));
 const util_1 = __webpack_require__(84530);
-const tags_1 = __webpack_require__(90000);
+const tags_1 = __webpack_require__(29098);
 const fontSizePt = 10.5;
 exports.styles = (react_1.default.createElement(tags_1.w.styles, { "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main" },
     react_1.default.createElement(tags_1.w.docDefaults, null,
@@ -53630,14 +52144,14 @@ exports["default"] = exports.styles;
 
 /***/ }),
 
-/***/ 90000:
+/***/ 29098:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.wps = exports.a = exports.wp = exports.w = void 0;
-const component_1 = __webpack_require__(40965);
+const component_1 = __webpack_require__(10996);
 const wTags = [
     "abstractNum",
     "abstractNumId",
@@ -54580,7 +53094,7 @@ for (const key of wpsTags) {
 
 /***/ }),
 
-/***/ 33202:
+/***/ 98297:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -54589,63 +53103,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DOCXFigRun = exports.HTMLFigRunWithFigData = exports.HTMLFigRun = exports.HTMLFigRunCSS = void 0;
-const react_1 = __importDefault(__webpack_require__(66406));
-const html_1 = __webpack_require__(20115);
-const docx_1 = __webpack_require__(25790);
-const util_1 = __webpack_require__(84530);
-exports.HTMLFigRunCSS = `
-.fig-iframe {
-    width: 100%;
-    height: 80vh;
-    border: 1px solid gray;
-}
-
-.fig-img {
-    max-width: 100%;
-}
-`;
-exports.HTMLFigRun = (0, html_1.wrapHTMLComponent)("HTMLFigRun", ((props) => {
-    const { el, htmlOptions } = props;
-    const { getFigData: getFigData } = htmlOptions;
-    if (el.children.length > 0) {
-        throw new util_1.NotImplementedError(el.outerXML());
-    }
-    if (getFigData) {
-        const figData = getFigData(el.attr.src);
-        return figData === null ? (react_1.default.createElement(react_1.default.Fragment, null,
-            "[",
-            el.attr.src,
-            "]")) : (react_1.default.createElement(exports.HTMLFigRunWithFigData, Object.assign({}, props, { figData: figData })));
-    }
-    else {
-        return (react_1.default.createElement("span", { className: "fig-src" }, el.attr.src));
-    }
-}));
-const HTMLFigRunWithFigData = (props) => {
-    const { el, figData } = props;
-    return (figData.type.includes("pdf") ? (react_1.default.createElement("iframe", { className: "fig-iframe", src: figData.url })) : figData.type.startsWith("image/") ? (react_1.default.createElement("img", { className: "fig-img", src: figData.url })) : (react_1.default.createElement("a", { className: "fig-link", href: figData.url, type: figData.type, target: "_blank", rel: "noreferrer" }, el.attr.src)));
-};
-exports.HTMLFigRunWithFigData = HTMLFigRunWithFigData;
-exports.DOCXFigRun = (0, docx_1.wrapDOCXComponent)("DOCXFigRun", ((props) => {
-    const { el } = props;
-    return (react_1.default.createElement(docx_1.w.r, null,
-        react_1.default.createElement(docx_1.w.t, null, el.attr.src)));
-}));
-//# sourceMappingURL=figRun.js.map
-
-/***/ }),
-
-/***/ 20115:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.wrapHTMLComponent = exports.HTMLMarginSpan = void 0;
+exports.elProps = exports.wrapHTMLComponent = exports.HTMLMarginSpan = void 0;
 const react_1 = __importDefault(__webpack_require__(66406));
 // eslint-disable-next-line no-irregular-whitespace
 const HTMLMarginSpan = props => react_1.default.createElement("span", Object.assign({}, props), "\u3000");
@@ -54664,7 +53122,1605 @@ function wrapHTMLComponent(htmlComponentID, Component) {
     return ret;
 }
 exports.wrapHTMLComponent = wrapHTMLComponent;
+const elProps = (el, htmlOptions) => {
+    const ret = {};
+    if (htmlOptions.annotateLawtextRange && el.range) {
+        ret["data-lawtext_range"] = JSON.stringify(el.range);
+        ret["data-el_id"] = JSON.stringify(el.id);
+    }
+    return ret;
+};
+exports.elProps = elProps;
 //# sourceMappingURL=html.js.map
+
+/***/ }),
+
+/***/ 66914:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.withKey = exports.renderToStaticMarkup = exports.revertConsole = exports.overrrideConsole = void 0;
+const react_1 = __importDefault(__webpack_require__(66406));
+const server_1 = __importDefault(__webpack_require__(72977));
+const ignoreMessagePatterns = [
+    /is using incorrect casing\./,
+    /React does not recognize/,
+    /Invalid DOM property/,
+];
+const origWarn = __webpack_require__.g.console.warn;
+const filteredWarn = (message, ...args) => {
+    if (ignoreMessagePatterns.some(p => p.test(message))) {
+        return;
+    }
+    origWarn(message, ...args);
+};
+const origError = __webpack_require__.g.console.error;
+const filteredError = (message, ...args) => {
+    if (ignoreMessagePatterns.some(p => p.test(message))) {
+        return;
+    }
+    origError(message, ...args);
+};
+const overrrideConsole = () => {
+    console.warn = filteredWarn;
+    console.error = filteredError;
+    // const origError = global.console.error;
+    // console.error = (message, ...args) => {
+    //     if (ignoreMessagePatterns.some(p => p.test(message))) {
+    //         return;
+    //     }
+    //     origError(message, ...args);
+    // };
+    // const origLog = global.console.log;
+    // console.log = (message, ...args) => {
+    //     if (ignoreMessagePatterns.some(p => p.test(message))) {
+    //         return;
+    //     }
+    //     origLog(message, ...args);
+    // };
+};
+exports.overrrideConsole = overrrideConsole;
+const revertConsole = () => {
+    console.warn = origWarn;
+    console.error = origError;
+};
+exports.revertConsole = revertConsole;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const renderToStaticMarkup = (element) => {
+    try {
+        (0, exports.overrrideConsole)();
+        const ret = server_1.default.renderToStaticMarkup(element);
+        return ret;
+    }
+    finally {
+        (0, exports.revertConsole)();
+    }
+};
+exports.renderToStaticMarkup = renderToStaticMarkup;
+const withKey = (els, baseKey = 0) => {
+    const ret = [];
+    for (let i = 0; i < els.length; i++) {
+        const el = els[i];
+        if (typeof el === "string") {
+            ret.push(el);
+        }
+        else {
+            ret.push(react_1.default.cloneElement(el, { key: baseKey + i }));
+        }
+    }
+    return ret;
+};
+exports.withKey = withKey;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 23080:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.renderDocxAsync = void 0;
+const react_1 = __importDefault(__webpack_require__(66406));
+const el_1 = __webpack_require__(26252);
+const std = __importStar(__webpack_require__(93619));
+const law_1 = __webpack_require__(64578);
+const docx_1 = __webpack_require__(80826);
+const any_1 = __webpack_require__(48774);
+const renderDocxAsync = (elOrJsonEL, docxOptions) => {
+    const el = (0, el_1.loadEl)(elOrJsonEL);
+    const element = std.isLaw(el)
+        ? react_1.default.createElement(law_1.DOCXLaw, { el: el, indent: 0, docxOptions: docxOptions !== null && docxOptions !== void 0 ? docxOptions : {} })
+        : react_1.default.createElement(any_1.DOCXAnyELs, { els: [el], indent: 0, docxOptions: docxOptions !== null && docxOptions !== void 0 ? docxOptions : {} });
+    return (0, docx_1.renderDocxAsync)(element);
+};
+exports.renderDocxAsync = renderDocxAsync;
+exports["default"] = exports.renderDocxAsync;
+//# sourceMappingURL=docx.js.map
+
+/***/ }),
+
+/***/ 62519:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.renderElementsFragment = exports.renderHTMLfragment = exports.renderHTML = void 0;
+const react_1 = __importDefault(__webpack_require__(66406));
+const el_1 = __webpack_require__(26252);
+const std = __importStar(__webpack_require__(93619));
+const law_1 = __webpack_require__(64578);
+const htmlCSS_1 = __importDefault(__webpack_require__(81225));
+const common_1 = __webpack_require__(66914);
+const any_1 = __webpack_require__(48774);
+const renderHTML = (elOrJsonEL, htmlOptions) => {
+    const rendered = (0, exports.renderHTMLfragment)(elOrJsonEL, htmlOptions);
+    const html = /*html*/ `\
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<style>
+${htmlCSS_1.default}
+</style>
+</head>
+<body>
+${rendered}
+</body>
+</html>
+`;
+    return html;
+};
+exports.renderHTML = renderHTML;
+const renderHTMLfragment = (elOrJsonEL, htmlOptions) => {
+    const el = elOrJsonEL instanceof el_1.EL ? elOrJsonEL : (0, el_1.loadEl)(elOrJsonEL);
+    const element = std.isLaw(el)
+        ? react_1.default.createElement(law_1.HTMLLaw, { el: el, indent: 0, htmlOptions: htmlOptions !== null && htmlOptions !== void 0 ? htmlOptions : {} })
+        : react_1.default.createElement(any_1.HTMLAnyELs, { els: [el], indent: 0, htmlOptions: htmlOptions !== null && htmlOptions !== void 0 ? htmlOptions : {} });
+    const rendered = (0, common_1.renderToStaticMarkup)(element);
+    return rendered;
+};
+exports.renderHTMLfragment = renderHTMLfragment;
+const renderElementsFragment = (elements, htmlOptions) => {
+    return elements.map(e => (0, exports.renderHTMLfragment)(e, htmlOptions)).join("\n");
+};
+exports.renderElementsFragment = renderElementsFragment;
+exports["default"] = exports.renderHTML;
+//# sourceMappingURL=html.js.map
+
+/***/ }),
+
+/***/ 14813:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__exportStar(__webpack_require__(24482), exports);
+__exportStar(__webpack_require__(62519), exports);
+__exportStar(__webpack_require__(23080), exports);
+__exportStar(__webpack_require__(52087), exports);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 24482:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.renderLawtext = void 0;
+const std = __importStar(__webpack_require__(93619));
+const std_1 = __webpack_require__(93619);
+const _any_1 = __webpack_require__(22351);
+const _law_1 = __webpack_require__(97192);
+const util_1 = __webpack_require__(84530);
+const renderLawtext = (el, indentTexts = []) => {
+    let ret = "";
+    if (std.isLaw(el)) {
+        const lines = (0, _law_1.lawToLines)(el, indentTexts);
+        ret += lines.map(l => l.text()).join("");
+    }
+    else if ((0, std_1.isStdEL)(el) || (0, std_1.isControl)(el)) {
+        const lines = (0, _any_1.anyToLines)(el, indentTexts);
+        ret += lines.map(l => l.text()).join("");
+    }
+    else {
+        throw new util_1.NotImplementedError(`render ${el.tag}`);
+    }
+    ret = ret.replace(/\r\n/g, "\n").replace(/\n/g, "\r\n").replace(/(\r?\n\r?\n)(?:\r?\n)+/g, "$1").replace(/(?<!\r\n)$/, "\r\n").replace(/(?:\r?\n)+$/, "\r\n");
+    return ret;
+};
+exports.renderLawtext = renderLawtext;
+exports["default"] = exports.renderLawtext;
+//# sourceMappingURL=lawtext.js.map
+
+/***/ }),
+
+/***/ 11543:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DOCXAmendProvision = exports.HTMLAmendProvision = exports.HTMLAmendProvisionCSS = void 0;
+const react_1 = __importDefault(__webpack_require__(66406));
+const std = __importStar(__webpack_require__(93619));
+const util_1 = __webpack_require__(84530);
+const html_1 = __webpack_require__(98297);
+const columnsOrSentencesRun_1 = __webpack_require__(19400);
+const docx_1 = __webpack_require__(80826);
+const any_1 = __webpack_require__(48774);
+const common_1 = __webpack_require__(66914);
+exports.HTMLAmendProvisionCSS = `
+.amend-provision-main {    
+    text-indent: 1em;
+}
+`;
+exports.HTMLAmendProvision = (0, html_1.wrapHTMLComponent)("HTMLAmendProvision", ((props) => {
+    const { el, htmlOptions, indent } = props;
+    const blocks = [];
+    for (const child of el.children) {
+        if (std.isAmendProvisionSentence(child)) {
+            blocks.push((react_1.default.createElement("div", { className: `amend-provision-main indent-${indent}` },
+                react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, Object.assign({ els: child.children }, { htmlOptions })))));
+        }
+        else if (std.isNewProvision(child)) {
+            blocks.push((react_1.default.createElement("div", Object.assign({ className: "new-provision" }, (0, html_1.elProps)(child, htmlOptions)),
+                react_1.default.createElement(any_1.HTMLAnyELs, Object.assign({ els: child.children, indent: indent + 1 }, { htmlOptions })))));
+        }
+        else {
+            throw (0, util_1.assertNever)(child);
+        }
+    }
+    return (react_1.default.createElement("div", Object.assign({ className: "amend-provision" }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
+}));
+exports.DOCXAmendProvision = (0, docx_1.wrapDOCXComponent)("DOCXAmendProvision", ((props) => {
+    const { el, docxOptions, indent } = props;
+    const blocks = [];
+    for (const child of el.children) {
+        if (std.isAmendProvisionSentence(child)) {
+            blocks.push((react_1.default.createElement(docx_1.w.p, null,
+                react_1.default.createElement(docx_1.w.pPr, null,
+                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
+                react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, Object.assign({ els: child.children }, { docxOptions })))));
+        }
+        else if (std.isNewProvision(child)) {
+            blocks.push(react_1.default.createElement(any_1.DOCXAnyELs, Object.assign({ els: child.children, indent: indent + 1 }, { docxOptions })));
+        }
+        else {
+            throw (0, util_1.assertNever)(child);
+        }
+    }
+    return (react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(blocks)));
+}));
+//# sourceMappingURL=amendProvision.js.map
+
+/***/ }),
+
+/***/ 48774:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DOCXAnyELs = exports.DOCXAnyELsToBlocks = exports.HTMLAnyELs = exports.HTMLAnyELsToBlocks = exports.HTMLAnyELsCSS = void 0;
+const react_1 = __importDefault(__webpack_require__(66406));
+const std = __importStar(__webpack_require__(93619));
+const inline_1 = __webpack_require__(22845);
+const util_1 = __webpack_require__(84530);
+const amendProvision_1 = __webpack_require__(11543);
+const appdxItem_1 = __webpack_require__(66689);
+const article_1 = __webpack_require__(37701);
+const articleGroup_1 = __webpack_require__(5516);
+const columnsOrSentencesRun_1 = __webpack_require__(19400);
+const docx_1 = __webpack_require__(80826);
+const figRun_1 = __webpack_require__(33202);
+const html_1 = __webpack_require__(98297);
+const itemStruct_1 = __webpack_require__(52266);
+const law_1 = __webpack_require__(64578);
+const list_1 = __webpack_require__(42300);
+const noteLike_1 = __webpack_require__(16164);
+const paragraphItem_1 = __webpack_require__(42411);
+const remarks_1 = __webpack_require__(49597);
+const sentenceChildrenRun_1 = __webpack_require__(95041);
+const supplNote_1 = __webpack_require__(88110);
+const table_1 = __webpack_require__(91144);
+const toc_1 = __webpack_require__(92308);
+const common_1 = __webpack_require__(66914);
+exports.HTMLAnyELsCSS = `
+
+`;
+const HTMLAnyELsToBlocks = (props) => {
+    const { els, htmlOptions, indent } = props;
+    const blocks = [];
+    let currentRuns = [];
+    const flushRuns = () => {
+        if (currentRuns.length > 0) {
+            blocks.push(currentRuns);
+            currentRuns = [];
+        }
+    };
+    for (let i = 0; i < els.length; i++) {
+        const el = els[i];
+        if (std.isLaw(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(law_1.HTMLLaw, Object.assign({ el: el, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isArticleGroup(el) || std.isMainProvision(el) || std.isSupplProvision(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(articleGroup_1.HTMLArticleGroup, Object.assign({ el: el, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isArticle(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(article_1.HTMLArticle, Object.assign({ el: el, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isParagraphItem(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(paragraphItem_1.HTMLParagraphItem, Object.assign({ el: el, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isTable(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(table_1.HTMLTable, Object.assign({ el: el, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isTableStruct(el) || std.isFigStruct(el) || std.isNoteLikeStruct(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(itemStruct_1.HTMLItemStruct, Object.assign({ el: el, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isAppdxItem(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(appdxItem_1.HTMLAppdxItem, Object.assign({ el: el, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isRemarks(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(remarks_1.HTMLRemarks, Object.assign({ el: el, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isNoteLike(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(noteLike_1.HTMLNoteLike, Object.assign({ el: el, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isList(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(list_1.HTMLList, Object.assign({ el: el, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isAmendProvision(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(amendProvision_1.HTMLAmendProvision, Object.assign({ el: el, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isSupplNote(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(supplNote_1.HTMLSupplNote, Object.assign({ el: el, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isEnactStatement(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(law_1.HTMLEnactStatement, Object.assign({ el: el, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isPreamble(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(law_1.HTMLPreamble, Object.assign({ el: el, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isTOC(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(toc_1.HTMLTOC, Object.assign({ el: el, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isTOCItem(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(toc_1.HTMLTOCItem, Object.assign({ el: el, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isArticleGroupTitle(el) || std.isLawTitle(el)) {
+            flushRuns();
+            blocks.push((react_1.default.createElement("div", { className: `any-els-tag any-els-tag-${el.tag} indent-${indent}` },
+                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions })))));
+        }
+        else if (std.isSentence(el)) {
+            let j = i + 1;
+            while (j < els.length && std.isSentence(els[j]))
+                j++;
+            const sentences = els.slice(i, j);
+            currentRuns.push(react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, Object.assign({ els: sentences }, { htmlOptions })));
+            i = j - 1;
+        }
+        else if (std.isColumn(el)) {
+            let j = i + 1;
+            while (j < els.length && std.isColumn(els[j]))
+                j++;
+            const columns = els.slice(i, j);
+            currentRuns.push(react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, Object.assign({ els: columns }, { htmlOptions })));
+            i = j - 1;
+        }
+        else if (typeof el === "string" || (0, inline_1.isSentenceChildEL)(el)) {
+            // "Line", "QuoteStruct", "ArithFormula", "Ruby", "Sup", "Sub"
+            let j = i + 1;
+            while (j < els.length && (typeof els[j] === "string" || (0, inline_1.isSentenceChildEL)(els[j])))
+                j++;
+            const sentenceChildren = els.slice(i, j);
+            currentRuns.push(react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: sentenceChildren }, { htmlOptions })));
+            i = j - 1;
+        }
+        else if (std.isFig(el)) {
+            currentRuns.push(react_1.default.createElement(figRun_1.HTMLFigRun, Object.assign({ el: el }, { htmlOptions })));
+        }
+        else {
+            throw new util_1.NotImplementedError(el.tag);
+        }
+    }
+    flushRuns();
+    return blocks;
+};
+exports.HTMLAnyELsToBlocks = HTMLAnyELsToBlocks;
+exports.HTMLAnyELs = (0, html_1.wrapHTMLComponent)("HTMLAnyELs", ((props) => {
+    const { indent } = props;
+    const rawBlocks = (0, exports.HTMLAnyELsToBlocks)(props);
+    const blocks = [];
+    for (const rawBlock of rawBlocks) {
+        if (Array.isArray(rawBlock)) {
+            blocks.push((react_1.default.createElement("div", { className: `any-els-runs indent-${indent}` }, (0, common_1.withKey)(rawBlock))));
+        }
+        else {
+            blocks.push(rawBlock);
+        }
+    }
+    return (react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(blocks)));
+}));
+const DOCXAnyELsToBlocks = (props) => {
+    const { els, docxOptions, indent } = props;
+    const blocks = [];
+    let currentRuns = [];
+    const flushRuns = () => {
+        if (currentRuns.length > 0) {
+            blocks.push(currentRuns);
+            currentRuns = [];
+        }
+    };
+    for (let i = 0; i < els.length; i++) {
+        const el = els[i];
+        if (std.isLaw(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(law_1.DOCXLaw, Object.assign({ el: el, indent: indent }, { docxOptions })));
+        }
+        else if (std.isArticleGroup(el) || std.isMainProvision(el) || std.isSupplProvision(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(articleGroup_1.DOCXArticleGroup, Object.assign({ el: el, indent: indent }, { docxOptions })));
+        }
+        else if (std.isArticle(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(article_1.DOCXArticle, Object.assign({ el: el, indent: indent }, { docxOptions })));
+        }
+        else if (std.isParagraphItem(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(paragraphItem_1.DOCXParagraphItem, Object.assign({ el: el, indent: indent }, { docxOptions })));
+        }
+        else if (std.isTable(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(table_1.DOCXTable, Object.assign({ el: el, indent: indent }, { docxOptions })));
+        }
+        else if (std.isTableStruct(el) || std.isFigStruct(el) || std.isNoteLikeStruct(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(itemStruct_1.DOCXItemStruct, Object.assign({ el: el, indent: indent }, { docxOptions })));
+        }
+        else if (std.isAppdxItem(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(appdxItem_1.DOCXAppdxItem, Object.assign({ el: el, indent: indent }, { docxOptions })));
+        }
+        else if (std.isRemarks(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(remarks_1.DOCXRemarks, Object.assign({ el: el, indent: indent }, { docxOptions })));
+        }
+        else if (std.isNoteLike(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(noteLike_1.DOCXNoteLike, Object.assign({ el: el, indent: indent }, { docxOptions })));
+        }
+        else if (std.isList(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(list_1.DOCXList, Object.assign({ el: el, indent: indent }, { docxOptions })));
+        }
+        else if (std.isAmendProvision(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(amendProvision_1.DOCXAmendProvision, Object.assign({ el: el, indent: indent }, { docxOptions })));
+        }
+        else if (std.isSupplNote(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(supplNote_1.DOCXSupplNote, Object.assign({ el: el, indent: indent }, { docxOptions })));
+        }
+        else if (std.isEnactStatement(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(law_1.DOCXEnactStatement, Object.assign({ el: el, indent: indent }, { docxOptions })));
+        }
+        else if (std.isPreamble(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(law_1.DOCXPreamble, Object.assign({ el: el, indent: indent }, { docxOptions })));
+        }
+        else if (std.isTOC(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(toc_1.DOCXTOC, Object.assign({ el: el, indent: indent }, { docxOptions })));
+        }
+        else if (std.isTOCItem(el)) {
+            flushRuns();
+            blocks.push(react_1.default.createElement(toc_1.DOCXTOCItem, Object.assign({ el: el, indent: indent }, { docxOptions })));
+        }
+        else if (std.isArticleGroupTitle(el) || std.isLawTitle(el)) {
+            flushRuns();
+            blocks.push((react_1.default.createElement(docx_1.w.p, null,
+                react_1.default.createElement(docx_1.w.pPr, null,
+                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
+                react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: el.children, emphasis: true }, { docxOptions })))));
+        }
+        else if (std.isSentence(el)) {
+            let j = i + 1;
+            while (j < els.length && std.isSentence(els[j]))
+                j++;
+            const sentences = els.slice(i, j);
+            currentRuns.push(react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, Object.assign({ els: sentences }, { docxOptions })));
+            i = j - 1;
+        }
+        else if (std.isColumn(el)) {
+            let j = i + 1;
+            while (j < els.length && std.isColumn(els[j]))
+                j++;
+            const columns = els.slice(i, j);
+            currentRuns.push(react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, Object.assign({ els: columns }, { docxOptions })));
+            i = j - 1;
+        }
+        else if (typeof el === "string" || (0, inline_1.isSentenceChildEL)(el)) {
+            // "Line", "QuoteStruct", "ArithFormula", "Ruby", "Sup", "Sub"
+            let j = i + 1;
+            while (j < els.length && (typeof els[j] === "string" || (0, inline_1.isSentenceChildEL)(els[j])))
+                j++;
+            const sentenceChildren = els.slice(i, j);
+            currentRuns.push(react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: sentenceChildren }, { docxOptions })));
+            i = j - 1;
+        }
+        else if (std.isFig(el)) {
+            currentRuns.push(react_1.default.createElement(figRun_1.DOCXFigRun, Object.assign({ el: el }, { docxOptions })));
+        }
+        else {
+            throw new util_1.NotImplementedError(el.tag);
+        }
+    }
+    flushRuns();
+    return blocks;
+};
+exports.DOCXAnyELsToBlocks = DOCXAnyELsToBlocks;
+exports.DOCXAnyELs = (0, docx_1.wrapDOCXComponent)("DOCXAnyELs", ((props) => {
+    const { indent } = props;
+    const rawBlocks = (0, exports.DOCXAnyELsToBlocks)(props);
+    const blocks = [];
+    for (const rawBlock of rawBlocks) {
+        if (Array.isArray(rawBlock)) {
+            blocks.push((react_1.default.createElement(docx_1.w.p, null,
+                react_1.default.createElement(docx_1.w.pPr, null,
+                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
+                (0, common_1.withKey)(rawBlock))));
+        }
+        else {
+            blocks.push(rawBlock);
+        }
+    }
+    return (react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(blocks)));
+}));
+//# sourceMappingURL=any.js.map
+
+/***/ }),
+
+/***/ 66689:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DOCXAppdxItem = exports.HTMLAppdxItem = exports.HTMLAppdxItemCSS = void 0;
+const react_1 = __importDefault(__webpack_require__(66406));
+const std = __importStar(__webpack_require__(93619));
+const util_1 = __webpack_require__(84530);
+const html_1 = __webpack_require__(98297);
+const sentenceChildrenRun_1 = __webpack_require__(95041);
+const docx_1 = __webpack_require__(80826);
+const itemStruct_1 = __webpack_require__(52266);
+const paragraphItem_1 = __webpack_require__(42411);
+const remarks_1 = __webpack_require__(49597);
+const arithFormulaRun_1 = __webpack_require__(20808);
+const common_1 = __webpack_require__(66914);
+exports.HTMLAppdxItemCSS = `
+.appdx-item {
+    clear: both;
+}
+
+.appdx-item-head {
+    clear: both;
+    font-weight: bold;
+}
+
+`;
+exports.HTMLAppdxItem = (0, html_1.wrapHTMLComponent)("HTMLAppdxItem", ((props) => {
+    const { el, htmlOptions, indent } = props;
+    const blocks = [];
+    const AppdxItemTitle = el.children.find(el => (std.isAppdxItemTitle(el)
+        || std.isSupplProvisionAppdxItemTitle(el)));
+    const RelatedArticleNum = el.children.find(std.isRelatedArticleNum);
+    if (AppdxItemTitle || RelatedArticleNum) {
+        blocks.push((react_1.default.createElement("div", { className: `appdx-item-head indent-${indent}` },
+            (AppdxItemTitle !== undefined) && (react_1.default.createElement("span", Object.assign({ className: "appdx-item-title" }, (0, html_1.elProps)(AppdxItemTitle, htmlOptions)),
+                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: AppdxItemTitle.children }, { htmlOptions })))),
+            (RelatedArticleNum !== undefined) && (react_1.default.createElement("span", Object.assign({ className: "related-article-num" }, (0, html_1.elProps)(RelatedArticleNum, htmlOptions)),
+                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: RelatedArticleNum.children }, { htmlOptions })))))));
+    }
+    const bodyBlocks = [];
+    for (const child of el.children) {
+        if (std.isAppdxItemTitle(child)
+            || std.isSupplProvisionAppdxItemTitle(child)
+            || std.isRelatedArticleNum(child)) {
+            continue;
+        }
+        else if (std.isRemarks(child)) {
+            bodyBlocks.push(react_1.default.createElement(remarks_1.HTMLRemarks, Object.assign({ el: child, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isTableStruct(child) || std.isFigStruct(child) || std.isNoteLikeStruct(child)) {
+            bodyBlocks.push(react_1.default.createElement(itemStruct_1.HTMLItemStruct, Object.assign({ el: child, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isItem(child)) {
+            bodyBlocks.push(react_1.default.createElement(paragraphItem_1.HTMLParagraphItem, Object.assign({ el: child, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isArithFormula(child)) {
+            bodyBlocks.push((react_1.default.createElement("div", Object.assign({ className: `appdx-item-runs indent-${indent}` }, (0, html_1.elProps)(child, htmlOptions)),
+                react_1.default.createElement(arithFormulaRun_1.HTMLArithFormulaRun, Object.assign({ el: child }, { htmlOptions })))));
+        }
+        else {
+            (0, util_1.assertNever)(child);
+        }
+    }
+    if (bodyBlocks.length > 0) {
+        blocks.push((react_1.default.createElement("div", { className: "appdx-item-body" }, (0, common_1.withKey)(bodyBlocks))));
+    }
+    return (react_1.default.createElement("div", Object.assign({ className: "appdx-item" }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
+}));
+exports.DOCXAppdxItem = (0, docx_1.wrapDOCXComponent)("DOCXAppdxItem", ((props) => {
+    const { el, docxOptions, indent } = props;
+    const blocks = [];
+    const AppdxItemTitle = el.children.find(el => (std.isAppdxItemTitle(el)
+        || std.isSupplProvisionAppdxItemTitle(el)));
+    const RelatedArticleNum = el.children.find(std.isRelatedArticleNum);
+    if (AppdxItemTitle || RelatedArticleNum) {
+        blocks.push((react_1.default.createElement(docx_1.w.p, null,
+            react_1.default.createElement(docx_1.w.pPr, null,
+                react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
+            (AppdxItemTitle !== undefined) && (react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: AppdxItemTitle.children, emphasis: true }, { docxOptions }))),
+            (RelatedArticleNum !== undefined) && (react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: RelatedArticleNum.children, emphasis: true }, { docxOptions }))))));
+    }
+    for (const child of el.children) {
+        if (std.isAppdxItemTitle(child)
+            || std.isSupplProvisionAppdxItemTitle(child)
+            || std.isRelatedArticleNum(child)) {
+            continue;
+        }
+        else if (std.isRemarks(child)) {
+            blocks.push(react_1.default.createElement(remarks_1.DOCXRemarks, Object.assign({ el: child, indent: indent }, { docxOptions })));
+        }
+        else if (std.isTableStruct(child) || std.isFigStruct(child) || std.isNoteLikeStruct(child)) {
+            blocks.push(react_1.default.createElement(itemStruct_1.DOCXItemStruct, Object.assign({ el: child, indent: indent }, { docxOptions })));
+        }
+        else if (std.isItem(child)) {
+            blocks.push(react_1.default.createElement(paragraphItem_1.DOCXParagraphItem, Object.assign({ el: child, indent: indent }, { docxOptions })));
+        }
+        else if (std.isArithFormula(child)) {
+            blocks.push((react_1.default.createElement(docx_1.w.p, null,
+                react_1.default.createElement(docx_1.w.pPr, null,
+                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
+                react_1.default.createElement(arithFormulaRun_1.DOCXArithFormulaRun, Object.assign({ el: child }, { docxOptions })))));
+        }
+        else {
+            (0, util_1.assertNever)(child);
+        }
+    }
+    return (react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(blocks)));
+}));
+//# sourceMappingURL=appdxItem.js.map
+
+/***/ }),
+
+/***/ 20808:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DOCXArithFormulaRun = exports.HTMLArithFormulaRun = exports.HTMLArithFormulaRunCSS = void 0;
+const react_1 = __importDefault(__webpack_require__(66406));
+const html_1 = __webpack_require__(98297);
+const docx_1 = __webpack_require__(80826);
+const any_1 = __webpack_require__(48774);
+const TextBoxRun_1 = __importDefault(__webpack_require__(64306));
+const common_1 = __webpack_require__(66914);
+exports.HTMLArithFormulaRunCSS = `
+`;
+exports.HTMLArithFormulaRun = (0, html_1.wrapHTMLComponent)("HTMLArithFormulaRun", ((props) => {
+    const { el, htmlOptions } = props;
+    const rawBlocks = (0, any_1.HTMLAnyELsToBlocks)({
+        els: el.children,
+        indent: 0,
+        htmlOptions,
+    });
+    if (rawBlocks.every(Array.isArray)) {
+        const runs = rawBlocks.flat();
+        return ((react_1.default.createElement("span", Object.assign({ className: "arith-formula" }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(runs))));
+    }
+    else {
+        const blocks = [];
+        for (const rawBlock of rawBlocks) {
+            if (Array.isArray(rawBlock)) {
+                blocks.push((react_1.default.createElement("div", { className: "arith-formula-runs" }, (0, common_1.withKey)(rawBlock))));
+            }
+            else {
+                blocks.push(rawBlock);
+            }
+        }
+        return (react_1.default.createElement("span", Object.assign({ className: "arith-formula", style: { display: "inline-block" } }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
+    }
+}));
+exports.DOCXArithFormulaRun = (0, docx_1.wrapDOCXComponent)("DOCXArithFormulaRun", ((props) => {
+    const { el, docxOptions } = props;
+    const rawBlocks = (0, any_1.DOCXAnyELsToBlocks)({
+        els: el.children,
+        indent: 0,
+        docxOptions,
+    });
+    if (rawBlocks.every(Array.isArray)) {
+        const runs = rawBlocks.flat();
+        return (react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(runs)));
+    }
+    else {
+        const blocks = [];
+        for (const rawBlock of rawBlocks) {
+            if (Array.isArray(rawBlock)) {
+                blocks.push((react_1.default.createElement(docx_1.w.p, null, (0, common_1.withKey)(rawBlock))));
+            }
+            else {
+                blocks.push(rawBlock);
+            }
+        }
+        return (react_1.default.createElement(TextBoxRun_1.default, { id: 10000 + el.id, name: `ArithFormula${el.id}` }, (0, common_1.withKey)(blocks)));
+    }
+}));
+//# sourceMappingURL=arithFormulaRun.js.map
+
+/***/ }),
+
+/***/ 37701:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DOCXArticle = exports.HTMLArticle = exports.HTMLArticleCSS = void 0;
+const react_1 = __importDefault(__webpack_require__(66406));
+const std = __importStar(__webpack_require__(93619));
+const util_1 = __webpack_require__(84530);
+const html_1 = __webpack_require__(98297);
+const sentenceChildrenRun_1 = __webpack_require__(95041);
+const docx_1 = __webpack_require__(80826);
+const paragraphItem_1 = __webpack_require__(42411);
+const supplNote_1 = __webpack_require__(88110);
+const common_1 = __webpack_require__(66914);
+exports.HTMLArticleCSS = `
+.article {
+    clear: both;
+}
+
+`;
+exports.HTMLArticle = (0, html_1.wrapHTMLComponent)("HTMLArticle", ((props) => {
+    const { el, htmlOptions, indent } = props;
+    const blocks = [];
+    const ArticleCaption = el.children.find(std.isArticleCaption);
+    const ArticleTitle = el.children.find(std.isArticleTitle);
+    const Paragraphs = el.children.filter(std.isParagraph);
+    if (ArticleCaption) {
+        blocks.push((react_1.default.createElement("div", Object.assign({ className: `article-caption indent-${indent + 1}` }, (0, html_1.elProps)(ArticleCaption, htmlOptions)),
+            react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: ArticleCaption.children }, { htmlOptions }))))); /* >>>> INDENT >>>> */
+    }
+    const bodyBlocks = [];
+    for (const [i, child] of Paragraphs.entries()) {
+        if (i === 0 && ArticleTitle) {
+            bodyBlocks.push(react_1.default.createElement(paragraphItem_1.HTMLParagraphItem, Object.assign({ el: child, indent: indent, ArticleTitle: ArticleTitle }, { htmlOptions })));
+        }
+        else {
+            bodyBlocks.push(react_1.default.createElement(paragraphItem_1.HTMLParagraphItem, Object.assign({ el: child, indent: indent }, { htmlOptions })));
+        }
+    }
+    for (const child of el.children) {
+        if (std.isArticleCaption(child)
+            || std.isArticleTitle(child)
+            || std.isParagraph(child)) {
+            continue;
+        }
+        else if (child.tag === "SupplNote") {
+            bodyBlocks.push(react_1.default.createElement(supplNote_1.HTMLSupplNote, Object.assign({ el: child, indent: indent }, { htmlOptions })));
+        }
+        else {
+            (0, util_1.assertNever)(child);
+        }
+    }
+    if (bodyBlocks.length > 0) {
+        blocks.push((react_1.default.createElement("div", { className: "article-body" }, (0, common_1.withKey)(bodyBlocks))));
+    }
+    return (react_1.default.createElement("div", Object.assign({ className: "article" }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
+}));
+exports.DOCXArticle = (0, docx_1.wrapDOCXComponent)("DOCXArticle", ((props) => {
+    const { el, docxOptions, indent } = props;
+    const blocks = [];
+    const ArticleCaption = el.children.find(std.isArticleCaption);
+    const ArticleTitle = el.children.find(std.isArticleTitle);
+    const Paragraphs = el.children.filter(std.isParagraph);
+    if (ArticleCaption) {
+        blocks.push((react_1.default.createElement(docx_1.w.p, null,
+            react_1.default.createElement(docx_1.w.pPr, null,
+                react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent + 1}` })),
+            react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: ArticleCaption.children }, { docxOptions }))))); /* >>>> INDENT >>>> */
+    }
+    const bodyBlocks = [];
+    for (const [i, child] of Paragraphs.entries()) {
+        if (i === 0 && ArticleTitle) {
+            bodyBlocks.push(react_1.default.createElement(paragraphItem_1.DOCXParagraphItem, Object.assign({ el: child, indent: indent, ArticleTitle: ArticleTitle }, { docxOptions })));
+        }
+        else {
+            bodyBlocks.push(react_1.default.createElement(paragraphItem_1.DOCXParagraphItem, Object.assign({ el: child, indent: indent }, { docxOptions })));
+        }
+    }
+    for (const child of el.children) {
+        if (std.isArticleCaption(child)
+            || std.isArticleTitle(child)
+            || std.isParagraph(child)) {
+            continue;
+        }
+        else if (child.tag === "SupplNote") {
+            bodyBlocks.push(react_1.default.createElement(supplNote_1.DOCXSupplNote, Object.assign({ el: child, indent: indent }, { docxOptions })));
+        }
+        else {
+            (0, util_1.assertNever)(child);
+        }
+    }
+    if (bodyBlocks.length > 0) {
+        blocks.push(react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(bodyBlocks)));
+    }
+    return (react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(blocks)));
+}));
+//# sourceMappingURL=article.js.map
+
+/***/ }),
+
+/***/ 5516:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DOCXArticleGroup = exports.HTMLArticleGroup = exports.HTMLArticleGroupCSS = void 0;
+const react_1 = __importDefault(__webpack_require__(66406));
+const std = __importStar(__webpack_require__(93619));
+const util_1 = __webpack_require__(84530);
+const html_1 = __webpack_require__(98297);
+const sentenceChildrenRun_1 = __webpack_require__(95041);
+const docx_1 = __webpack_require__(80826);
+const paragraphItem_1 = __webpack_require__(42411);
+const article_1 = __webpack_require__(37701);
+const appdxItem_1 = __webpack_require__(66689);
+const EmptyParagraph_1 = __importDefault(__webpack_require__(24318));
+const common_1 = __webpack_require__(66914);
+exports.HTMLArticleGroupCSS = `
+.main-provision {
+    clear: both;
+}
+
+.article-group {
+    clear: both;
+}
+
+.article-group-title {
+    clear: both;
+    font-weight: bold;
+}
+
+.suppl-provision {
+    clear: both;
+}
+
+.suppl-provision-label {
+    clear: both;
+    font-weight: bold;
+}
+`;
+exports.HTMLArticleGroup = (0, html_1.wrapHTMLComponent)("HTMLArticleGroup", ((props) => {
+    const { el, htmlOptions, indent } = props;
+    const blocks = [];
+    const ArticleGroupTitle = el.children.find(std.isArticleGroupTitle);
+    const SupplProvisionLabel = el.children.find(std.isSupplProvisionLabel);
+    if (ArticleGroupTitle) {
+        const titleIndent = std.articleGroupTitleTags.indexOf(ArticleGroupTitle.tag) + 2;
+        if (blocks.length > 0)
+            blocks.push(react_1.default.createElement("div", { className: "empty" },
+                react_1.default.createElement("br", null)));
+        blocks.push((react_1.default.createElement("div", Object.assign({ className: `article-group-title indent-${indent + titleIndent}` }, (0, html_1.elProps)(ArticleGroupTitle, htmlOptions)),
+            react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: ArticleGroupTitle.children }, { htmlOptions })))));
+    }
+    if (SupplProvisionLabel && std.isSupplProvision(el)) {
+        const Extract = el.attr.Extract === "true" ? react_1.default.createElement(react_1.default.Fragment, null,
+            react_1.default.createElement(html_1.HTMLMarginSpan, null),
+            "\u6284") : "";
+        const AmendLawNum = el.attr.AmendLawNum ? `（${el.attr.AmendLawNum}）` : "";
+        if (blocks.length > 0)
+            blocks.push(react_1.default.createElement("div", { className: "empty" },
+                react_1.default.createElement("br", null)));
+        blocks.push((react_1.default.createElement("div", Object.assign({ className: `suppl-provision-label indent-${indent + 3}` }, (0, html_1.elProps)(SupplProvisionLabel, htmlOptions)),
+            react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: SupplProvisionLabel.children }, { htmlOptions })),
+            AmendLawNum,
+            Extract)));
+    }
+    const bodyBlocks = [];
+    for (const child of el.children) {
+        if (std.isArticleGroupTitle(child)
+            || std.isSupplProvisionLabel(child)) {
+            continue;
+        }
+        else if (std.isArticle(child)) {
+            if (bodyBlocks.length > 0)
+                bodyBlocks.push(react_1.default.createElement("div", { className: "empty" },
+                    react_1.default.createElement("br", null)));
+            bodyBlocks.push(react_1.default.createElement(article_1.HTMLArticle, Object.assign({ el: child, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isParagraph(child)) {
+            if (bodyBlocks.length > 0)
+                bodyBlocks.push(react_1.default.createElement("div", { className: "empty" },
+                    react_1.default.createElement("br", null)));
+            bodyBlocks.push(react_1.default.createElement(paragraphItem_1.HTMLParagraphItem, Object.assign({ el: child, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isArticleGroup(child)) {
+            if (bodyBlocks.length > 0)
+                bodyBlocks.push(react_1.default.createElement("div", { className: "empty" },
+                    react_1.default.createElement("br", null)));
+            bodyBlocks.push(react_1.default.createElement(exports.HTMLArticleGroup, Object.assign({ el: child, indent: indent }, { htmlOptions })));
+        }
+        else if (std.isSupplProvisionAppdxItem(child)) {
+            if (bodyBlocks.length > 0)
+                bodyBlocks.push(react_1.default.createElement("div", { className: "empty" },
+                    react_1.default.createElement("br", null)));
+            bodyBlocks.push(react_1.default.createElement(appdxItem_1.HTMLAppdxItem, Object.assign({ el: child, indent: indent }, { htmlOptions })));
+        }
+        else {
+            (0, util_1.assertNever)(child);
+        }
+    }
+    const classNameBase = (std.isMainProvision(el)
+        ? "main-provision"
+        : std.isSupplProvision(el)
+            ? "suppl-provision"
+            : "article-group");
+    if (bodyBlocks.length > 0) {
+        if (blocks.length > 0)
+            blocks.push(react_1.default.createElement("div", { className: "empty" },
+                react_1.default.createElement("br", null)));
+        blocks.push((react_1.default.createElement("div", { className: `${classNameBase}-body` }, (0, common_1.withKey)(bodyBlocks))));
+    }
+    return (react_1.default.createElement("div", Object.assign({ className: classNameBase }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
+}));
+exports.DOCXArticleGroup = (0, docx_1.wrapDOCXComponent)("DOCXArticleGroup", ((props) => {
+    const { el, docxOptions, indent } = props;
+    const blocks = [];
+    const ArticleGroupTitle = el.children.find(std.isArticleGroupTitle);
+    const SupplProvisionLabel = el.children.find(std.isSupplProvisionLabel);
+    if (ArticleGroupTitle) {
+        const titleIndent = std.articleGroupTitleTags.indexOf(ArticleGroupTitle.tag) + 2;
+        if (blocks.length > 0)
+            blocks.push(react_1.default.createElement(EmptyParagraph_1.default, null));
+        blocks.push((react_1.default.createElement(docx_1.w.p, null,
+            react_1.default.createElement(docx_1.w.pPr, null,
+                react_1.default.createElement(docx_1.w.pStyle, { "w:val": `IndentHanging${indent + titleIndent}` })),
+            react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: ArticleGroupTitle.children, emphasis: true }, { docxOptions })))));
+    }
+    if (SupplProvisionLabel && std.isSupplProvision(el)) {
+        const Extract = el.attr.Extract === "true" ? react_1.default.createElement(react_1.default.Fragment, null,
+            "$",
+            docx_1.DOCXMargin,
+            "\u6284") : "";
+        const AmendLawNum = el.attr.AmendLawNum ? `（${el.attr.AmendLawNum}）` : "";
+        if (blocks.length > 0)
+            blocks.push(react_1.default.createElement(EmptyParagraph_1.default, null));
+        blocks.push((react_1.default.createElement(docx_1.w.p, null,
+            react_1.default.createElement(docx_1.w.pPr, null,
+                react_1.default.createElement(docx_1.w.pStyle, { "w:val": `IndentHanging${indent + 3}` })),
+            react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: SupplProvisionLabel.children, emphasis: true }, { docxOptions })),
+            AmendLawNum,
+            Extract)));
+    }
+    for (const child of el.children) {
+        if (std.isArticleGroupTitle(child)
+            || std.isSupplProvisionLabel(child)) {
+            continue;
+        }
+        else if (std.isArticle(child)) {
+            if (blocks.length > 0)
+                blocks.push(react_1.default.createElement(EmptyParagraph_1.default, null));
+            blocks.push(react_1.default.createElement(article_1.DOCXArticle, Object.assign({ el: child, indent: indent }, { docxOptions })));
+        }
+        else if (std.isParagraph(child)) {
+            if (blocks.length > 0)
+                blocks.push(react_1.default.createElement(EmptyParagraph_1.default, null));
+            blocks.push(react_1.default.createElement(paragraphItem_1.DOCXParagraphItem, Object.assign({ el: child, indent: indent }, { docxOptions })));
+        }
+        else if (std.isArticleGroup(child)) {
+            if (blocks.length > 0)
+                blocks.push(react_1.default.createElement(EmptyParagraph_1.default, null));
+            blocks.push(react_1.default.createElement(exports.DOCXArticleGroup, Object.assign({ el: child, indent: indent }, { docxOptions })));
+        }
+        else if (std.isSupplProvisionAppdxItem(child)) {
+            if (blocks.length > 0)
+                blocks.push(react_1.default.createElement(EmptyParagraph_1.default, null));
+            blocks.push(react_1.default.createElement(appdxItem_1.DOCXAppdxItem, Object.assign({ el: child, indent: indent }, { docxOptions })));
+        }
+        else {
+            (0, util_1.assertNever)(child);
+        }
+    }
+    return (react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(blocks)));
+}));
+//# sourceMappingURL=articleGroup.js.map
+
+/***/ }),
+
+/***/ 19400:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DOCXColumnsOrSentencesRun = exports.HTMLColumnsOrSentencesRun = exports.HTMLColumnsOrSentencesRunCSS = void 0;
+const react_1 = __importDefault(__webpack_require__(66406));
+const std = __importStar(__webpack_require__(93619));
+const util_1 = __webpack_require__(84530);
+const common_1 = __webpack_require__(66914);
+const docx_1 = __webpack_require__(80826);
+const TextBoxRun_1 = __importDefault(__webpack_require__(64306));
+const html_1 = __webpack_require__(98297);
+const sentenceChildrenRun_1 = __webpack_require__(95041);
+const table_1 = __webpack_require__(91144);
+exports.HTMLColumnsOrSentencesRunCSS = `
+`;
+exports.HTMLColumnsOrSentencesRun = (0, html_1.wrapHTMLComponent)("HTMLColumnsOrSentencesRun", ((props) => {
+    const { els, htmlOptions } = props;
+    const runs = [];
+    for (let i = 0; i < els.length; i++) {
+        const el = els[i];
+        if (std.isSentence(el)) {
+            runs.push(react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions })));
+        }
+        else if (std.isColumn(el)) {
+            if (i !== 0) {
+                runs.push(react_1.default.createElement(html_1.HTMLMarginSpan, { className: "lawtext-column-margin" }));
+            }
+            const subruns = [];
+            for (let j = 0; j < el.children.length; j++) {
+                const subel = el.children[j];
+                subruns.push(react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: subel.children }, { htmlOptions })));
+            }
+            runs.push(react_1.default.createElement("span", Object.assign({ className: "lawtext-column" }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(subruns)));
+        }
+        else if (std.isTable(el)) {
+            runs.push((react_1.default.createElement("span", Object.assign({ style: { display: "inline-block" } }, (0, html_1.elProps)(el, htmlOptions)),
+                react_1.default.createElement(table_1.HTMLTable, Object.assign({ el: el, indent: 0 }, { htmlOptions })))));
+        }
+        else {
+            (0, util_1.assertNever)(el);
+        }
+    }
+    return react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(runs));
+}));
+exports.DOCXColumnsOrSentencesRun = (0, docx_1.wrapDOCXComponent)("DOCXColumnsOrSentencesRun", ((props) => {
+    const { els, docxOptions } = props;
+    const runs = [];
+    for (let i = 0; i < els.length; i++) {
+        const el = els[i];
+        if (std.isSentence(el)) {
+            runs.push(react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: el.children }, { docxOptions })));
+        }
+        else if (std.isColumn(el)) {
+            if (i !== 0) {
+                runs.push((react_1.default.createElement(docx_1.w.r, null,
+                    react_1.default.createElement(docx_1.w.t, null, docx_1.DOCXMargin))));
+            }
+            for (let j = 0; j < el.children.length; j++) {
+                const subel = el.children[j];
+                runs.push(react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: subel.children }, { docxOptions })));
+            }
+        }
+        else if (std.isTable(el)) {
+            runs.push((react_1.default.createElement(TextBoxRun_1.default, { id: 10000 + el.id, name: `Table${el.id}` },
+                react_1.default.createElement(table_1.DOCXTable, Object.assign({ el: el, indent: 0 }, { docxOptions })))));
+        }
+        else {
+            (0, util_1.assertNever)(el);
+        }
+    }
+    return react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(runs));
+}));
+//# sourceMappingURL=columnsOrSentencesRun.js.map
+
+/***/ }),
+
+/***/ 95838:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.HTMLControlRun = exports.HTMLControlRunCSS = void 0;
+const react_1 = __importDefault(__webpack_require__(66406));
+const html_1 = __webpack_require__(98297);
+const sentenceChildrenRun_1 = __webpack_require__(95041);
+const util_1 = __webpack_require__(84530);
+const common_1 = __webpack_require__(66914);
+exports.HTMLControlRunCSS = `
+
+.control-parentheses
+{
+    transition: background-color 0.3s;
+}
+
+.control-parentheses:hover,
+.paragraph-item-Paragraph:hover .control-parentheses
+{
+    background-color: hsla(60, 100%, 50%, 0.1);
+}
+
+.control-parentheses[data-parentheses_depth="1"]:hover,
+.paragraph-item-Paragraph:hover .control-parentheses[data-parentheses_depth="1"]
+{
+    background-color: hsla(60, 100%, 50%, 0.1);
+}
+
+.control-parentheses[data-parentheses_depth="2"]:hover,
+.paragraph-item-Paragraph:hover .control-parentheses[data-parentheses_depth="2"]
+{
+    background-color: hsla(30, 100%, 50%, 0.1);
+}
+
+.control-parentheses[data-parentheses_depth="3"]:hover,
+.paragraph-item-Paragraph:hover .control-parentheses[data-parentheses_depth="3"]
+{
+    background-color: hsla(0, 100%, 50%, 0.1);
+}
+
+.control-parentheses[data-parentheses_depth="4"]:hover,
+.paragraph-item-Paragraph:hover .control-parentheses[data-parentheses_depth="4"]
+{
+    background-color: hsl(330, 100%, 50%, 0.1);
+}
+
+.control-parentheses[data-parentheses_depth="5"]:hover,
+.paragraph-item-Paragraph:hover .control-parentheses[data-parentheses_depth="5"]
+{
+    background-color: hsl(300, 100%, 50%, 0.1);
+}
+
+.control-parentheses[data-parentheses_depth="6"]:hover,
+.paragraph-item-Paragraph:hover .control-parentheses[data-parentheses_depth="6"]
+{
+    background-color: hsl(270, 100%, 50%, 0.1);
+}
+
+.control-start-parenthesis,
+.control-end-parenthesis
+{
+    border: 1px solid transparent;
+    margin: -1px;
+    transition: border-color 0.3s;
+}
+
+.control-parentheses:hover
+    > .control-start-parenthesis,
+.control-parentheses:hover
+    > .control-end-parenthesis
+{
+    border-color: gray;
+}
+
+.control-mismatch-start-parenthesis {
+    color: red;
+}
+
+.control-mismatch-end-parenthesis {
+    color: red;
+}
+`;
+// const isControlRunProps = (props: HTMLComponentProps): props is ControlRunProps => props.el.isControl;
+exports.HTMLControlRun = (0, html_1.wrapHTMLComponent)("HTMLControlRun", ((props) => {
+    const { el, htmlOptions } = props;
+    if (el.tag === "__Parentheses") {
+        return react_1.default.createElement(__Parentheses, Object.assign({ el: el }, { htmlOptions }));
+    }
+    else if (el.tag === "__PStart") {
+        return react_1.default.createElement(__PStart, Object.assign({ el: el }, { htmlOptions }));
+    }
+    else if (el.tag === "__PContent") {
+        return react_1.default.createElement(__PContent, Object.assign({ el: el }, { htmlOptions }));
+    }
+    else if (el.tag === "__PEnd") {
+        return react_1.default.createElement(__PEnd, Object.assign({ el: el }, { htmlOptions }));
+    }
+    else if (el.tag === "__MismatchStartParenthesis") {
+        return react_1.default.createElement(__MismatchStartParenthesis, Object.assign({ el: el }, { htmlOptions }));
+    }
+    else if (el.tag === "__MismatchEndParenthesis") {
+        return react_1.default.createElement(__MismatchEndParenthesis, Object.assign({ el: el }, { htmlOptions }));
+    }
+    else {
+        return react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }));
+    }
+}));
+const __Parentheses = (props) => {
+    const { el, htmlOptions } = props;
+    const blocks = [];
+    for (const child of el.children) {
+        if (typeof child === "string" || child instanceof String) {
+            throw new util_1.NotImplementedError("string");
+        }
+        else if (child.tag === "__PStart") {
+            blocks.push(react_1.default.createElement(__PStart, Object.assign({ el: child }, { htmlOptions })));
+        }
+        else if (child.tag === "__PContent") {
+            blocks.push(react_1.default.createElement(__PContent, Object.assign({ el: child }, { htmlOptions })));
+        }
+        else if (child.tag === "__PEnd") {
+            blocks.push(react_1.default.createElement(__PEnd, Object.assign({ el: child }, { htmlOptions })));
+        }
+        else {
+            throw new util_1.NotImplementedError(child.tag);
+        }
+    }
+    return (react_1.default.createElement("span", { className: "control-parentheses", "data-parentheses_type": el.attr.type, "data-parentheses_depth": el.attr.depth }, (0, common_1.withKey)(blocks)));
+};
+const __PStart = (props) => {
+    const { el, htmlOptions } = props;
+    return (react_1.default.createElement("span", Object.assign({ className: "control-start-parenthesis", "data-parentheses_type": el.attr.type }, (0, html_1.elProps)(el, htmlOptions)),
+        react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))));
+};
+const __PContent = (props) => {
+    const { el, htmlOptions } = props;
+    return (react_1.default.createElement("span", Object.assign({ className: "control-parentheses-content", "data-parentheses_type": el.attr.type }, (0, html_1.elProps)(el, htmlOptions)),
+        react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))));
+};
+const __PEnd = (props) => {
+    const { el, htmlOptions } = props;
+    return (react_1.default.createElement("span", Object.assign({ className: "control-end-parenthesis", "data-parentheses_type": el.attr.type }, (0, html_1.elProps)(el, htmlOptions)),
+        react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))));
+};
+const __MismatchStartParenthesis = (props) => {
+    const { el, htmlOptions } = props;
+    return (react_1.default.createElement("span", Object.assign({ className: "control-mismatch-end-parenthesis", "data-parentheses_type": el.attr.type }, (0, html_1.elProps)(el, htmlOptions)),
+        react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))));
+};
+const __MismatchEndParenthesis = (props) => {
+    const { el, htmlOptions } = props;
+    return (react_1.default.createElement("span", Object.assign({ className: "control-mismatch-end-parenthesis", "data-parentheses_type": el.attr.type }, (0, html_1.elProps)(el, htmlOptions)),
+        react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))));
+};
+//# sourceMappingURL=controlRun.js.map
+
+/***/ }),
+
+/***/ 33202:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DOCXFigRun = exports.HTMLFigRunWithFigData = exports.HTMLFigRun = exports.HTMLFigRunCSS = void 0;
+const react_1 = __importDefault(__webpack_require__(66406));
+const html_1 = __webpack_require__(98297);
+const docx_1 = __webpack_require__(80826);
+const util_1 = __webpack_require__(84530);
+exports.HTMLFigRunCSS = `
+.fig-iframe {
+    width: 100%;
+    height: 80vh;
+    border: 1px solid gray;
+}
+
+.fig-img {
+    max-width: 100%;
+}
+`;
+exports.HTMLFigRun = (0, html_1.wrapHTMLComponent)("HTMLFigRun", ((props) => {
+    const { el, htmlOptions } = props;
+    const { getFigData } = htmlOptions;
+    if (el.children.length > 0) {
+        throw new util_1.NotImplementedError(el.outerXML());
+    }
+    if (getFigData) {
+        const figData = getFigData(el.attr.src);
+        return figData === null ? (react_1.default.createElement(react_1.default.Fragment, null,
+            "[",
+            el.attr.src,
+            "]")) : (react_1.default.createElement(exports.HTMLFigRunWithFigData, Object.assign({}, props, { figData: figData, fig: el })));
+    }
+    else {
+        return (react_1.default.createElement("span", Object.assign({ className: "fig-src" }, (0, html_1.elProps)(el, htmlOptions)), el.attr.src));
+    }
+}));
+const HTMLFigRunWithFigData = (props) => {
+    const { el, figData, htmlOptions, fig } = props;
+    const { renderPDFAsLink } = htmlOptions;
+    return (figData.type.startsWith("image/")
+        ? (react_1.default.createElement("img", Object.assign({ className: "fig-img", src: figData.url }, (0, html_1.elProps)(fig, htmlOptions))))
+        : ((!renderPDFAsLink) && figData.type.includes("pdf"))
+            ? (react_1.default.createElement("iframe", Object.assign({ className: "fig-iframe", src: figData.url, sandbox: "allow-scripts" }, (0, html_1.elProps)(fig, htmlOptions))))
+            : (react_1.default.createElement("a", Object.assign({ className: "fig-link", href: figData.url, type: figData.type, target: "_blank", rel: "noreferrer" }, (0, html_1.elProps)(fig, htmlOptions)), el.attr.src)));
+};
+exports.HTMLFigRunWithFigData = HTMLFigRunWithFigData;
+exports.DOCXFigRun = (0, docx_1.wrapDOCXComponent)("DOCXFigRun", ((props) => {
+    const { el } = props;
+    return (react_1.default.createElement(docx_1.w.r, null,
+        react_1.default.createElement(docx_1.w.t, null, el.attr.src)));
+}));
+//# sourceMappingURL=figRun.js.map
 
 /***/ }),
 
@@ -54764,18 +54820,22 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DOCXItemStruct = exports.HTMLItemStruct = exports.HTMLItemStructCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
+const react_1 = __importDefault(__webpack_require__(66406));
 const std = __importStar(__webpack_require__(93619));
 const util_1 = __webpack_require__(84530);
-const html_1 = __webpack_require__(20115);
+const html_1 = __webpack_require__(98297);
 const sentenceChildrenRun_1 = __webpack_require__(95041);
-const docx_1 = __webpack_require__(25790);
+const docx_1 = __webpack_require__(80826);
 const table_1 = __webpack_require__(91144);
 const remarks_1 = __webpack_require__(49597);
 const noteLike_1 = __webpack_require__(16164);
 const figRun_1 = __webpack_require__(33202);
+const common_1 = __webpack_require__(66914);
 exports.HTMLItemStructCSS = `
 .item-struct {
     clear: both;
@@ -54796,9 +54856,8 @@ exports.HTMLItemStruct = (0, html_1.wrapHTMLComponent)("HTMLItemStruct", ((props
         || std.isFormatStructTitle(el)
         || std.isStyleStructTitle(el)));
     if (ItemStructTitle) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: `item-struct-title indent-${indent}` },
-                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: ItemStructTitle.children }, { htmlOptions })))));
+        blocks.push((react_1.default.createElement("div", Object.assign({ className: `item-struct-title indent-${indent}` }, (0, html_1.elProps)(ItemStructTitle, htmlOptions)),
+            react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: ItemStructTitle.children }, { htmlOptions })))));
     }
     const bodyBlocks = [];
     for (const child of el.children) {
@@ -54816,9 +54875,8 @@ exports.HTMLItemStruct = (0, html_1.wrapHTMLComponent)("HTMLItemStruct", ((props
             bodyBlocks.push(react_1.default.createElement(table_1.HTMLTable, Object.assign({ el: child, indent: indent }, { htmlOptions })));
         }
         else if (std.isFig(child)) {
-            bodyBlocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement("div", { className: `item-struct-runs indent-${indent}` },
-                    react_1.default.createElement(figRun_1.HTMLFigRun, Object.assign({ el: child }, { htmlOptions })))));
+            bodyBlocks.push((react_1.default.createElement("div", { className: `item-struct-runs indent-${indent}` },
+                react_1.default.createElement(figRun_1.HTMLFigRun, Object.assign({ el: child }, { htmlOptions })))));
         }
         else if (std.isNoteLike(child)) {
             bodyBlocks.push(react_1.default.createElement(noteLike_1.HTMLNoteLike, Object.assign({ el: child, indent: indent }, { htmlOptions })));
@@ -54828,10 +54886,9 @@ exports.HTMLItemStruct = (0, html_1.wrapHTMLComponent)("HTMLItemStruct", ((props
         }
     }
     if (bodyBlocks.length > 0) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: "item-struct-body" }, bodyBlocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block)))));
+        blocks.push((react_1.default.createElement("div", { className: "item-struct-body" }, (0, common_1.withKey)(bodyBlocks))));
     }
-    return (react_1.default.createElement("div", { className: "item-struct" }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+    return (react_1.default.createElement("div", Object.assign({ className: "item-struct" }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
 }));
 exports.DOCXItemStruct = (0, docx_1.wrapDOCXComponent)("DOCXItemStruct", ((props) => {
     const { el, docxOptions, indent } = props;
@@ -54842,11 +54899,10 @@ exports.DOCXItemStruct = (0, docx_1.wrapDOCXComponent)("DOCXItemStruct", ((props
         || std.isFormatStructTitle(el)
         || std.isStyleStructTitle(el)));
     if (ItemStructTitle) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(docx_1.w.p, null,
-                react_1.default.createElement(docx_1.w.pPr, null,
-                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
-                react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: ItemStructTitle.children, emphasis: true }, { docxOptions })))));
+        blocks.push((react_1.default.createElement(docx_1.w.p, null,
+            react_1.default.createElement(docx_1.w.pPr, null,
+                react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
+            react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: ItemStructTitle.children, emphasis: true }, { docxOptions })))));
     }
     for (const child of el.children) {
         if (std.isTableStructTitle(child)
@@ -54873,7 +54929,7 @@ exports.DOCXItemStruct = (0, docx_1.wrapDOCXComponent)("DOCXItemStruct", ((props
             (0, util_1.assertNever)(child);
         }
     }
-    return (react_1.default.createElement(react_1.default.Fragment, null, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+    return (react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(blocks)));
 }));
 //# sourceMappingURL=itemStruct.js.map
 
@@ -54912,18 +54968,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DOCXLaw = exports.HTMLLaw = exports.HTMLLawCSS = exports.DOCXPreamble = exports.HTMLPreamble = exports.HTMLPreambleCSS = exports.DOCXEnactStatement = exports.HTMLEnactStatement = exports.HTMLEnactStatementCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
+const react_1 = __importDefault(__webpack_require__(66406));
 const std = __importStar(__webpack_require__(93619));
 const util_1 = __webpack_require__(84530);
-const html_1 = __webpack_require__(20115);
+const html_1 = __webpack_require__(98297);
 const sentenceChildrenRun_1 = __webpack_require__(95041);
-const docx_1 = __webpack_require__(25790);
+const docx_1 = __webpack_require__(80826);
 const articleGroup_1 = __webpack_require__(5516);
 const _sentenceChildren_1 = __webpack_require__(36096);
 const appdxItem_1 = __webpack_require__(66689);
 const paragraphItem_1 = __webpack_require__(42411);
 const toc_1 = __webpack_require__(92308);
-const EmptyParagraph_1 = __importDefault(__webpack_require__(71642));
+const EmptyParagraph_1 = __importDefault(__webpack_require__(24318));
+const common_1 = __webpack_require__(66914);
 exports.HTMLEnactStatementCSS = `
 .enact-statement {
     clear: both;
@@ -54931,7 +54988,7 @@ exports.HTMLEnactStatementCSS = `
 `;
 exports.HTMLEnactStatement = (0, html_1.wrapHTMLComponent)("HTMLEnactStatement", ((props) => {
     const { el, htmlOptions, indent } = props;
-    return (react_1.default.createElement("div", { className: `enact-statement indent-${indent}` },
+    return (react_1.default.createElement("div", Object.assign({ className: `enact-statement indent-${indent}` }, (0, html_1.elProps)(el, htmlOptions)),
         react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))));
 }));
 exports.DOCXEnactStatement = (0, docx_1.wrapDOCXComponent)("DOCXEnactStatement", ((props) => {
@@ -54957,7 +55014,7 @@ exports.HTMLPreamble = (0, html_1.wrapHTMLComponent)("HTMLPreamble", ((props) =>
             (0, util_1.assertNever)(child);
         }
     }
-    return (react_1.default.createElement("div", { className: "preamble" }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+    return (react_1.default.createElement("div", Object.assign({ className: "preamble" }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
 }));
 exports.DOCXPreamble = (0, docx_1.wrapDOCXComponent)("DOCXPreamble", ((props) => {
     const { el, docxOptions, indent } = props;
@@ -54970,7 +55027,7 @@ exports.DOCXPreamble = (0, docx_1.wrapDOCXComponent)("DOCXPreamble", ((props) =>
             (0, util_1.assertNever)(child);
         }
     }
-    return (react_1.default.createElement(react_1.default.Fragment, null, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+    return (react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(blocks)));
 }));
 exports.HTMLLawCSS = `
 .law-title {
@@ -54988,9 +55045,8 @@ exports.HTMLLaw = (0, html_1.wrapHTMLComponent)("HTMLLaw", ((props) => {
     const LawTitle = (_a = el.children.find(std.isLawBody)) === null || _a === void 0 ? void 0 : _a.children.find(std.isLawTitle);
     const LawNum = el.children.find(std.isLawNum);
     if (LawTitle) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: `law-title indent-${indent}` },
-                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: LawTitle.children }, { htmlOptions })))));
+        blocks.push((react_1.default.createElement("div", Object.assign({ className: `law-title indent-${indent}` }, (0, html_1.elProps)(LawTitle, htmlOptions)),
+            react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: LawTitle.children }, { htmlOptions })))));
     }
     if (LawNum) {
         const LawNumString = (0, _sentenceChildren_1.sentenceChildrenToString)(LawNum.children);
@@ -54999,9 +55055,8 @@ exports.HTMLLaw = (0, html_1.wrapHTMLComponent)("HTMLLaw", ((props) => {
             LawNumChildren.unshift("（");
         if (!/[)）]$/.test(LawNumString))
             LawNumChildren.push("）");
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: `law-num indent-${indent}` },
-                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: LawNumChildren }, { htmlOptions })))));
+        blocks.push((react_1.default.createElement("div", Object.assign({ className: `law-num indent-${indent}` }, (0, html_1.elProps)(LawNum, htmlOptions)),
+            react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: LawNumChildren }, { htmlOptions })))));
     }
     const bodyBlocks = [];
     for (const child of (_c = (_b = el.children.find(std.isLawBody)) === null || _b === void 0 ? void 0 : _b.children) !== null && _c !== void 0 ? _c : []) {
@@ -55046,10 +55101,9 @@ exports.HTMLLaw = (0, html_1.wrapHTMLComponent)("HTMLLaw", ((props) => {
         if (blocks.length > 0)
             blocks.push(react_1.default.createElement("div", { className: "empty" },
                 react_1.default.createElement("br", null)));
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: "law-body" }, bodyBlocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block)))));
+        blocks.push((react_1.default.createElement("div", { className: "law-body" }, (0, common_1.withKey)(bodyBlocks))));
     }
-    return (react_1.default.createElement("div", { className: "law" }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+    return (react_1.default.createElement("div", Object.assign({ className: "law" }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
 }));
 exports.DOCXLaw = (0, docx_1.wrapDOCXComponent)("DOCXLaw", ((props) => {
     var _a, _b, _c;
@@ -55058,11 +55112,10 @@ exports.DOCXLaw = (0, docx_1.wrapDOCXComponent)("DOCXLaw", ((props) => {
     const LawTitle = (_a = el.children.find(std.isLawBody)) === null || _a === void 0 ? void 0 : _a.children.find(std.isLawTitle);
     const LawNum = el.children.find(std.isLawNum);
     if (LawTitle) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(docx_1.w.p, null,
-                react_1.default.createElement(docx_1.w.pPr, null,
-                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
-                react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: LawTitle.children, emphasis: true }, { docxOptions })))));
+        blocks.push((react_1.default.createElement(docx_1.w.p, null,
+            react_1.default.createElement(docx_1.w.pPr, null,
+                react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
+            react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: LawTitle.children, emphasis: true }, { docxOptions })))));
     }
     if (LawNum) {
         const LawNumString = (0, _sentenceChildren_1.sentenceChildrenToString)(LawNum.children);
@@ -55071,11 +55124,10 @@ exports.DOCXLaw = (0, docx_1.wrapDOCXComponent)("DOCXLaw", ((props) => {
             LawNumChildren.unshift("（");
         if (!/[)）]$/.test(LawNumString))
             LawNumChildren.push("）");
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(docx_1.w.p, null,
-                react_1.default.createElement(docx_1.w.pPr, null,
-                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
-                react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: LawNumChildren, emphasis: true }, { docxOptions })))));
+        blocks.push((react_1.default.createElement(docx_1.w.p, null,
+            react_1.default.createElement(docx_1.w.pPr, null,
+                react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
+            react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: LawNumChildren, emphasis: true }, { docxOptions })))));
     }
     for (const child of (_c = (_b = el.children.find(std.isLawBody)) === null || _b === void 0 ? void 0 : _b.children) !== null && _c !== void 0 ? _c : []) {
         if (std.isLawTitle(child)) {
@@ -55110,7 +55162,7 @@ exports.DOCXLaw = (0, docx_1.wrapDOCXComponent)("DOCXLaw", ((props) => {
             (0, util_1.assertNever)(child);
         }
     }
-    return (react_1.default.createElement(react_1.default.Fragment, null, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+    return (react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(blocks)));
 }));
 //# sourceMappingURL=law.js.map
 
@@ -55144,14 +55196,18 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DOCXList = exports.HTMLList = exports.HTMLListCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
+const react_1 = __importDefault(__webpack_require__(66406));
 const std = __importStar(__webpack_require__(93619));
 const util_1 = __webpack_require__(84530);
-const html_1 = __webpack_require__(20115);
+const html_1 = __webpack_require__(98297);
 const columnsOrSentencesRun_1 = __webpack_require__(19400);
-const docx_1 = __webpack_require__(25790);
+const docx_1 = __webpack_require__(80826);
+const common_1 = __webpack_require__(66914);
 exports.HTMLListCSS = `
 .list-main {    
 }
@@ -55161,9 +55217,8 @@ exports.HTMLList = (0, html_1.wrapHTMLComponent)("HTMLList", ((props) => {
     const blocks = [];
     for (const child of el.children) {
         if (std.isListOrSublistSentence(child)) {
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement("div", { className: `list-main indent-${indent}` },
-                    react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, Object.assign({ els: child.children }, { htmlOptions })))));
+            blocks.push((react_1.default.createElement("div", Object.assign({ className: `list-main indent-${indent}` }, (0, html_1.elProps)(child, htmlOptions)),
+                react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, Object.assign({ els: child.children }, { htmlOptions })))));
         }
         else if (std.isListOrSublist(child)) {
             blocks.push(react_1.default.createElement(exports.HTMLList, Object.assign({ el: child, indent: indent + 2 }, { htmlOptions })));
@@ -55172,18 +55227,17 @@ exports.HTMLList = (0, html_1.wrapHTMLComponent)("HTMLList", ((props) => {
             throw (0, util_1.assertNever)(child);
         }
     }
-    return (react_1.default.createElement("div", { className: `list-${el.tag}` }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+    return (react_1.default.createElement("div", Object.assign({ className: `list-${el.tag}` }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
 }));
 exports.DOCXList = (0, docx_1.wrapDOCXComponent)("DOCXList", ((props) => {
     const { el, docxOptions, indent } = props;
     const blocks = [];
     for (const child of el.children) {
         if (std.isListOrSublistSentence(child)) {
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement(docx_1.w.p, null,
-                    react_1.default.createElement(docx_1.w.pPr, null,
-                        react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
-                    react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, Object.assign({ els: child.children }, { docxOptions })))));
+            blocks.push((react_1.default.createElement(docx_1.w.p, null,
+                react_1.default.createElement(docx_1.w.pPr, null,
+                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
+                react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, Object.assign({ els: child.children }, { docxOptions })))));
         }
         else if (std.isListOrSublist(child)) {
             blocks.push(react_1.default.createElement(exports.DOCXList, Object.assign({ el: child, indent: indent + 2 }, { docxOptions })));
@@ -55192,7 +55246,7 @@ exports.DOCXList = (0, docx_1.wrapDOCXComponent)("DOCXList", ((props) => {
             throw (0, util_1.assertNever)(child);
         }
     }
-    return (react_1.default.createElement(react_1.default.Fragment, null, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+    return (react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(blocks)));
 }));
 //# sourceMappingURL=list.js.map
 
@@ -55209,15 +55263,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DOCXNoteLike = exports.HTMLNoteLike = exports.HTMLNoteLikeCSS = void 0;
 const react_1 = __importDefault(__webpack_require__(66406));
-const html_1 = __webpack_require__(20115);
-const docx_1 = __webpack_require__(25790);
+const html_1 = __webpack_require__(98297);
+const docx_1 = __webpack_require__(80826);
 const any_1 = __webpack_require__(48774);
 exports.HTMLNoteLikeCSS = `
 
 `;
 exports.HTMLNoteLike = (0, html_1.wrapHTMLComponent)("HTMLNoteLike", ((props) => {
     const { el, htmlOptions, indent } = props;
-    return (react_1.default.createElement("div", { className: "note-like" },
+    return (react_1.default.createElement("div", Object.assign({ className: "note-like" }, (0, html_1.elProps)(el, htmlOptions)),
         react_1.default.createElement(any_1.HTMLAnyELs, Object.assign({ els: el.children, indent: indent }, { htmlOptions }))));
 }));
 exports.DOCXNoteLike = (0, docx_1.wrapDOCXComponent)("DOCXNoteLike", ((props) => {
@@ -55256,18 +55310,22 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DOCXParagraphItem = exports.HTMLParagraphItem = exports.HTMLParagraphItemCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
+const react_1 = __importDefault(__webpack_require__(66406));
 const std = __importStar(__webpack_require__(93619));
 const util_1 = __webpack_require__(84530);
-const html_1 = __webpack_require__(20115);
+const html_1 = __webpack_require__(98297);
 const sentenceChildrenRun_1 = __webpack_require__(95041);
 const columnsOrSentencesRun_1 = __webpack_require__(19400);
-const docx_1 = __webpack_require__(25790);
+const docx_1 = __webpack_require__(80826);
 const itemStruct_1 = __webpack_require__(52266);
 const list_1 = __webpack_require__(42300);
 const amendProvision_1 = __webpack_require__(11543);
+const common_1 = __webpack_require__(66914);
 exports.HTMLParagraphItemCSS = `
 .paragraph-item-Paragraph {
     clear: both;
@@ -55285,6 +55343,10 @@ ${std.paragraphItemTags
     .filter(tag => tag !== "Paragraph")
     .map(tag => ".paragraph-item-" + tag).join(", ")} {
     clear: both;
+}
+
+.article-title {
+    font-weight: bold;
 }
 
 .paragraph-item-title {
@@ -55307,21 +55369,25 @@ exports.HTMLParagraphItem = (0, html_1.wrapHTMLComponent)("HTMLParagraphItem", (
     }
     const ParagraphItemTitle = el.children.find(std.isParagraphItemTitle);
     const ParagraphItemSentence = el.children.find(std.isParagraphItemSentence);
+    const OldParatraphNum = ((std.isParagraph(el) && el.attr.OldNum === "true")
+        ? String.fromCharCode("①".charCodeAt(0) - 1 + Number(el.attr.Num))
+        : undefined);
     if (ParagraphCaption) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: `paragraph-caption indent-${indent + 1}` },
-                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: ParagraphCaption.children }, { htmlOptions })))));
+        blocks.push((react_1.default.createElement("div", Object.assign({ className: `paragraph-caption indent-${indent + 1}` }, (0, html_1.elProps)(ParagraphCaption, htmlOptions)),
+            react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: ParagraphCaption.children }, { htmlOptions })))));
     }
     if (ParagraphItemTitle || ParagraphItemSentence) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: `paragraph-item-main indent-${indent}` },
-                Boolean(ParagraphItemTitle || ArticleTitle) && (react_1.default.createElement(react_1.default.Fragment, null,
-                    react_1.default.createElement("span", { className: "paragraph-item-title" },
-                        ParagraphItemTitle && react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: ParagraphItemTitle.children }, { htmlOptions })),
-                        ArticleTitle && react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: ArticleTitle.children }, { htmlOptions }))),
-                    Boolean(ParagraphItemSentence) && (react_1.default.createElement(html_1.HTMLMarginSpan, { className: "paragraph-item-margin" })))),
-                react_1.default.createElement("span", { className: "paragraph-item-body" },
-                    react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, Object.assign({ els: (_a = ParagraphItemSentence === null || ParagraphItemSentence === void 0 ? void 0 : ParagraphItemSentence.children) !== null && _a !== void 0 ? _a : [] }, { htmlOptions }))))));
+        blocks.push((react_1.default.createElement("div", { className: `paragraph-item-main indent-${indent}` },
+            Boolean(ParagraphItemTitle || ArticleTitle || OldParatraphNum) && ((react_1.default.createElement(react_1.default.Fragment, null,
+                ParagraphItemTitle && ((!ArticleTitle && !OldParatraphNum) || (ParagraphItemTitle.children.length > 0)) && (react_1.default.createElement("span", Object.assign({ className: "paragraph-item-title" }, (0, html_1.elProps)(ParagraphItemTitle, htmlOptions)),
+                    react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: ParagraphItemTitle.children }, { htmlOptions })))),
+                ArticleTitle && (react_1.default.createElement("span", Object.assign({ className: "article-title" }, (0, html_1.elProps)(ArticleTitle, htmlOptions)),
+                    react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: ArticleTitle.children }, { htmlOptions })))),
+                OldParatraphNum && (react_1.default.createElement("span", { className: "old-paragraph-num" },
+                    react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: [OldParatraphNum] }, { htmlOptions })))),
+                Boolean(ParagraphItemSentence) && (react_1.default.createElement(html_1.HTMLMarginSpan, { className: "paragraph-item-margin" }))))),
+            react_1.default.createElement("span", { className: "paragraph-item-body" },
+                react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, Object.assign({ els: (_a = ParagraphItemSentence === null || ParagraphItemSentence === void 0 ? void 0 : ParagraphItemSentence.children) !== null && _a !== void 0 ? _a : [] }, { htmlOptions }))))));
     }
     for (const child of el.children) {
         if (std.isArticleCaption(child)
@@ -55349,7 +55415,7 @@ exports.HTMLParagraphItem = (0, html_1.wrapHTMLComponent)("HTMLParagraphItem", (
             throw (0, util_1.assertNever)(child);
         }
     }
-    return (react_1.default.createElement("div", { className: `paragraph-item-${el.tag}` }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+    return (react_1.default.createElement("div", Object.assign({ className: `paragraph-item-${el.tag}` }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
 }));
 exports.DOCXParagraphItem = (0, docx_1.wrapDOCXComponent)("DOCXParagraphItem", ((props) => {
     var _a;
@@ -55361,22 +55427,24 @@ exports.DOCXParagraphItem = (0, docx_1.wrapDOCXComponent)("DOCXParagraphItem", (
     }
     const ParagraphItemTitle = el.children.find(std.isParagraphItemTitle);
     const ParagraphItemSentence = el.children.find(std.isParagraphItemSentence);
+    const OldParatraphNum = ((std.isParagraph(el) && el.attr.OldNum === "true")
+        ? String.fromCharCode("①".charCodeAt(0) - 1 + Number(el.attr.Num))
+        : undefined);
     if (ParagraphCaption) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(docx_1.w.p, null,
-                react_1.default.createElement(docx_1.w.pPr, null,
-                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent + 1}` })),
-                react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: ParagraphCaption.children }, { docxOptions })))));
+        blocks.push((react_1.default.createElement(docx_1.w.p, null,
+            react_1.default.createElement(docx_1.w.pPr, null,
+                react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent + 1}` })),
+            react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: ParagraphCaption.children }, { docxOptions })))));
     }
     if (ParagraphItemTitle || ParagraphItemSentence) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(docx_1.w.p, null,
-                react_1.default.createElement(docx_1.w.pPr, null, (ArticleTitle || ParagraphItemTitle) ? (react_1.default.createElement(docx_1.w.pStyle, { "w:val": `IndentHanging${indent}` })) : (react_1.default.createElement(docx_1.w.pStyle, { "w:val": `IndentFirstLine${indent}` }))),
-                ParagraphItemTitle && react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: ParagraphItemTitle.children }, { docxOptions })),
-                ArticleTitle && react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: ArticleTitle.children, emphasis: true }, { docxOptions })),
-                Boolean((ParagraphItemTitle || ArticleTitle) && ParagraphItemSentence) && (react_1.default.createElement(docx_1.w.r, null,
-                    react_1.default.createElement(docx_1.w.t, null, docx_1.DOCXMargin))),
-                react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, Object.assign({ els: (_a = ParagraphItemSentence === null || ParagraphItemSentence === void 0 ? void 0 : ParagraphItemSentence.children) !== null && _a !== void 0 ? _a : [] }, { docxOptions })))));
+        blocks.push((react_1.default.createElement(docx_1.w.p, null,
+            react_1.default.createElement(docx_1.w.pPr, null, (ArticleTitle || ParagraphItemTitle) ? (react_1.default.createElement(docx_1.w.pStyle, { "w:val": `IndentHanging${indent}` })) : (react_1.default.createElement(docx_1.w.pStyle, { "w:val": `IndentFirstLine${indent}` }))),
+            ParagraphItemTitle && ((!ArticleTitle && !OldParatraphNum) || (ParagraphItemTitle.children.length > 0)) && (react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: ParagraphItemTitle.children }, { docxOptions }))),
+            ArticleTitle && (react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: ArticleTitle.children, emphasis: true }, { docxOptions }))),
+            OldParatraphNum && (react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: [OldParatraphNum] }, { docxOptions }))),
+            Boolean((ParagraphItemTitle || ArticleTitle) && ParagraphItemSentence) && (react_1.default.createElement(docx_1.w.r, null,
+                react_1.default.createElement(docx_1.w.t, null, docx_1.DOCXMargin))),
+            react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, Object.assign({ els: (_a = ParagraphItemSentence === null || ParagraphItemSentence === void 0 ? void 0 : ParagraphItemSentence.children) !== null && _a !== void 0 ? _a : [] }, { docxOptions })))));
     }
     for (const child of el.children) {
         if (std.isArticleCaption(child)
@@ -55404,7 +55472,7 @@ exports.DOCXParagraphItem = (0, docx_1.wrapDOCXComponent)("DOCXParagraphItem", (
             throw (0, util_1.assertNever)(child);
         }
     }
-    return (react_1.default.createElement(react_1.default.Fragment, null, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+    return (react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(blocks)));
 }));
 //# sourceMappingURL=paragraphItem.js.map
 
@@ -55415,39 +55483,17 @@ exports.DOCXParagraphItem = (0, docx_1.wrapDOCXComponent)("DOCXParagraphItem", (
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DOCXQuoteStructRun = exports.HTMLQuoteStructRun = exports.HTMLQuoteStructRunCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
-const html_1 = __webpack_require__(20115);
-const docx_1 = __webpack_require__(25790);
+const react_1 = __importDefault(__webpack_require__(66406));
+const html_1 = __webpack_require__(98297);
+const docx_1 = __webpack_require__(80826);
 const any_1 = __webpack_require__(48774);
-const TextBoxRun_1 = __importDefault(__webpack_require__(17134));
+const TextBoxRun_1 = __importDefault(__webpack_require__(64306));
+const common_1 = __webpack_require__(66914);
 exports.HTMLQuoteStructRunCSS = `
 `;
 exports.HTMLQuoteStructRun = (0, html_1.wrapHTMLComponent)("HTMLQuoteStructRun", ((props) => {
@@ -55459,21 +55505,19 @@ exports.HTMLQuoteStructRun = (0, html_1.wrapHTMLComponent)("HTMLQuoteStructRun",
     });
     if (rawBlocks.every(Array.isArray)) {
         const runs = rawBlocks.flat();
-        return (react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("span", { className: "quote-struct" }, runs.map((run, i) => react_1.default.createElement(react_1.Fragment, { key: i }, run)))));
+        return ((react_1.default.createElement("span", Object.assign({ className: "quote-struct" }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(runs))));
     }
     else {
         const blocks = [];
         for (const rawBlock of rawBlocks) {
             if (Array.isArray(rawBlock)) {
-                blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                    react_1.default.createElement("div", { className: "quote-struct-runs" }, rawBlock.map((run, i) => react_1.default.createElement(react_1.Fragment, { key: i }, run)))));
+                blocks.push((react_1.default.createElement("div", { className: "quote-struct-runs" }, (0, common_1.withKey)(rawBlock))));
             }
             else {
                 blocks.push(rawBlock);
             }
         }
-        return (react_1.default.createElement("span", { className: "quote-struct", style: { display: "inline-block" } }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+        return (react_1.default.createElement("span", Object.assign({ className: "quote-struct", style: { display: "inline-block" } }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
     }
 }));
 exports.DOCXQuoteStructRun = (0, docx_1.wrapDOCXComponent)("DOCXQuoteStructRun", ((props) => {
@@ -55485,20 +55529,19 @@ exports.DOCXQuoteStructRun = (0, docx_1.wrapDOCXComponent)("DOCXQuoteStructRun",
     });
     if (rawBlocks.every(Array.isArray)) {
         const runs = rawBlocks.flat();
-        return (react_1.default.createElement(react_1.default.Fragment, null, runs.map((run, i) => react_1.default.createElement(react_1.Fragment, { key: i }, run))));
+        return (react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(runs)));
     }
     else {
         const blocks = [];
         for (const rawBlock of rawBlocks) {
             if (Array.isArray(rawBlock)) {
-                blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                    react_1.default.createElement(docx_1.w.p, null, rawBlock.map((run, i) => react_1.default.createElement(react_1.Fragment, { key: i }, run)))));
+                blocks.push((react_1.default.createElement(docx_1.w.p, null, (0, common_1.withKey)(rawBlock))));
             }
             else {
                 blocks.push(rawBlock);
             }
         }
-        return (react_1.default.createElement(TextBoxRun_1.default, { id: 10000 + el.id, name: `QuoteStruct${el.id}` }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+        return (react_1.default.createElement(TextBoxRun_1.default, { id: 10000 + el.id, name: `QuoteStruct${el.id}` }, (0, common_1.withKey)(blocks)));
     }
 }));
 //# sourceMappingURL=quoteStructRun.js.map
@@ -55533,15 +55576,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DOCXRemarks = exports.HTMLRemarks = exports.HTMLRemarksCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
+const react_1 = __importDefault(__webpack_require__(66406));
 const std = __importStar(__webpack_require__(93619));
 const util_1 = __webpack_require__(84530);
-const html_1 = __webpack_require__(20115);
+const html_1 = __webpack_require__(98297);
 const sentenceChildrenRun_1 = __webpack_require__(95041);
-const docx_1 = __webpack_require__(25790);
+const docx_1 = __webpack_require__(80826);
 const paragraphItem_1 = __webpack_require__(42411);
+const common_1 = __webpack_require__(66914);
 exports.HTMLRemarksCSS = `
 .remarks {
     clear: both;
@@ -55558,9 +55605,8 @@ exports.HTMLRemarks = (0, html_1.wrapHTMLComponent)("HTMLRemarks", ((props) => {
     const blocks = [];
     const RemarksLabel = el.children.find(std.isRemarksLabel);
     if (RemarksLabel) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: `remarks-label indent-${indent}` },
-                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: RemarksLabel.children }, { htmlOptions })))));
+        blocks.push((react_1.default.createElement("div", Object.assign({ className: `remarks-label indent-${indent}` }, (0, html_1.elProps)(RemarksLabel, htmlOptions)),
+            react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: RemarksLabel.children }, { htmlOptions })))));
     }
     const bodyBlocks = [];
     for (const child of el.children) {
@@ -55568,45 +55614,40 @@ exports.HTMLRemarks = (0, html_1.wrapHTMLComponent)("HTMLRemarks", ((props) => {
             continue;
         }
         else if (std.isSentence(child)) {
-            bodyBlocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement("div", { className: `remarks-sentence indent-${indent + 1}` },
-                    react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: child.children }, { htmlOptions })))));
+            bodyBlocks.push((react_1.default.createElement("div", Object.assign({ className: `remarks-sentence indent-${indent + 1}` }, (0, html_1.elProps)(child, htmlOptions)),
+                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: child.children }, { htmlOptions })))));
         }
         else if (std.isItem(child)) {
-            bodyBlocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement(paragraphItem_1.HTMLParagraphItem, Object.assign({ el: child, indent: indent + 1 }, { htmlOptions }))));
+            bodyBlocks.push((react_1.default.createElement(paragraphItem_1.HTMLParagraphItem, Object.assign({ el: child, indent: indent + 1 }, { htmlOptions }))));
         }
         else {
             (0, util_1.assertNever)(child);
         }
     }
     if (bodyBlocks.length > 0) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: "remarks-body" }, bodyBlocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block)))));
+        blocks.push((react_1.default.createElement("div", { className: "remarks-body" }, (0, common_1.withKey)(bodyBlocks))));
     }
-    return (react_1.default.createElement("div", { className: "remarks" }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+    return (react_1.default.createElement("div", Object.assign({ className: "remarks" }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
 }));
 exports.DOCXRemarks = (0, docx_1.wrapDOCXComponent)("DOCXRemarks", ((props) => {
     const { el, docxOptions, indent } = props;
     const blocks = [];
     const RemarksLabel = el.children.find(std.isRemarksLabel);
     if (RemarksLabel) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(docx_1.w.p, null,
-                react_1.default.createElement(docx_1.w.pPr, null,
-                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
-                react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: RemarksLabel.children, emphasis: true }, { docxOptions })))));
+        blocks.push((react_1.default.createElement(docx_1.w.p, null,
+            react_1.default.createElement(docx_1.w.pPr, null,
+                react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
+            react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: RemarksLabel.children, emphasis: true }, { docxOptions })))));
     }
     for (const child of el.children) {
         if (std.isRemarksLabel(child)) {
             continue;
         }
         else if (std.isSentence(child)) {
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement(docx_1.w.p, null,
-                    react_1.default.createElement(docx_1.w.pPr, null,
-                        react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent + 1}` })),
-                    react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: child.children }, { docxOptions })))));
+            blocks.push((react_1.default.createElement(docx_1.w.p, null,
+                react_1.default.createElement(docx_1.w.pPr, null,
+                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent + 1}` })),
+                react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: child.children }, { docxOptions })))));
         }
         else if (std.isItem(child)) {
             blocks.push(react_1.default.createElement(paragraphItem_1.DOCXParagraphItem, Object.assign({ el: child, indent: indent + 1 }, { docxOptions })));
@@ -55615,7 +55656,7 @@ exports.DOCXRemarks = (0, docx_1.wrapDOCXComponent)("DOCXRemarks", ((props) => {
             (0, util_1.assertNever)(child);
         }
     }
-    return (react_1.default.createElement(react_1.default.Fragment, null, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+    return (react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(blocks)));
 }));
 //# sourceMappingURL=remarks.js.map
 
@@ -55649,16 +55690,20 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DOCXSentenceChildrenRun = exports.HTMLSentenceChildrenRun = exports.HTMLSentenceChildrenRunCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
+const react_1 = __importDefault(__webpack_require__(66406));
 const std = __importStar(__webpack_require__(93619));
 const util_1 = __webpack_require__(84530);
-const html_1 = __webpack_require__(20115);
-const docx_1 = __webpack_require__(25790);
+const html_1 = __webpack_require__(98297);
+const docx_1 = __webpack_require__(80826);
 const arithFormulaRun_1 = __webpack_require__(20808);
 const quoteStructRun_1 = __webpack_require__(51235);
 const controlRun_1 = __webpack_require__(95838);
+const common_1 = __webpack_require__(66914);
 exports.HTMLSentenceChildrenRunCSS = `
 `;
 exports.HTMLSentenceChildrenRun = (0, html_1.wrapHTMLComponent)("HTMLSentenceChildrenRun", ((props) => {
@@ -55689,15 +55734,15 @@ exports.HTMLSentenceChildrenRun = (0, html_1.wrapHTMLComponent)("HTMLSentenceChi
                     .filter(c => !(typeof c === "string") && std.isRt(c))
                     .map(c => c.text)
                     .join("");
-                runs.push(react_1.default.createElement("ruby", null,
+                runs.push(react_1.default.createElement("ruby", Object.assign({}, (0, html_1.elProps)(el, htmlOptions)),
                     rb,
                     react_1.default.createElement("rt", null, rt)));
             }
             else if (el.tag === "Sub") {
-                runs.push(react_1.default.createElement("sub", null, el.text));
+                runs.push(react_1.default.createElement("sub", Object.assign({}, (0, html_1.elProps)(el, htmlOptions)), el.text));
             }
             else if (el.tag === "Sup") {
-                runs.push(react_1.default.createElement("sup", null, el.text));
+                runs.push(react_1.default.createElement("sup", Object.assign({}, (0, html_1.elProps)(el, htmlOptions)), el.text));
             }
             else if (el.tag === "QuoteStruct") {
                 runs.push(react_1.default.createElement(quoteStructRun_1.HTMLQuoteStructRun, Object.assign({ el: el }, { htmlOptions })));
@@ -55713,7 +55758,7 @@ exports.HTMLSentenceChildrenRun = (0, html_1.wrapHTMLComponent)("HTMLSentenceChi
             }
         }
     }
-    return react_1.default.createElement(react_1.default.Fragment, null, runs.map((run, i) => react_1.default.createElement(react_1.Fragment, { key: i }, run)));
+    return react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(runs));
 }));
 exports.DOCXSentenceChildrenRun = (0, docx_1.wrapDOCXComponent)("DOCXSentenceChildrenRun", ((props) => {
     const { els, emphasis, docxOptions } = props;
@@ -55779,7 +55824,7 @@ exports.DOCXSentenceChildrenRun = (0, docx_1.wrapDOCXComponent)("DOCXSentenceChi
             }
         }
     }
-    return react_1.default.createElement(react_1.default.Fragment, null, runs.map((run, i) => react_1.default.createElement(react_1.Fragment, { key: i }, run)));
+    return react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(runs));
 }));
 //# sourceMappingURL=sentenceChildrenRun.js.map
 
@@ -55796,9 +55841,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DOCXSupplNote = exports.HTMLSupplNote = exports.HTMLSupplNoteCSS = void 0;
 const react_1 = __importDefault(__webpack_require__(66406));
-const html_1 = __webpack_require__(20115);
+const html_1 = __webpack_require__(98297);
 const sentenceChildrenRun_1 = __webpack_require__(95041);
-const docx_1 = __webpack_require__(25790);
+const docx_1 = __webpack_require__(80826);
 exports.HTMLSupplNoteCSS = `
 .suppl-note {
     clear: both;
@@ -55806,7 +55851,7 @@ exports.HTMLSupplNoteCSS = `
 `;
 exports.HTMLSupplNote = (0, html_1.wrapHTMLComponent)("HTMLSupplNote", ((props) => {
     const { el, htmlOptions, indent } = props;
-    return (react_1.default.createElement("div", { className: `suppl-note indent-${indent}` },
+    return (react_1.default.createElement("div", Object.assign({ className: `suppl-note indent-${indent}` }, (0, html_1.elProps)(el, htmlOptions)),
         react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))));
 }));
 exports.DOCXSupplNote = (0, docx_1.wrapDOCXComponent)("DOCXSupplNote", ((props) => {
@@ -55848,14 +55893,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DOCXTableColumn = exports.DOCXTableRow = exports.DOCXTable = exports.HTMLTableColumn = exports.HTMLTableRow = exports.HTMLTable = exports.HTMLTableCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
+const react_1 = __importDefault(__webpack_require__(66406));
 const std = __importStar(__webpack_require__(93619));
 const util_1 = __webpack_require__(84530);
-const html_1 = __webpack_require__(20115);
+const html_1 = __webpack_require__(98297);
 const sentenceChildrenRun_1 = __webpack_require__(95041);
-const docx_1 = __webpack_require__(25790);
+const docx_1 = __webpack_require__(80826);
 const paragraphItem_1 = __webpack_require__(42411);
 const columnsOrSentencesRun_1 = __webpack_require__(19400);
 const articleGroup_1 = __webpack_require__(5516);
@@ -55863,6 +55911,7 @@ const article_1 = __webpack_require__(37701);
 const std_1 = __webpack_require__(93619);
 const remarks_1 = __webpack_require__(49597);
 const itemStruct_1 = __webpack_require__(52266);
+const common_1 = __webpack_require__(66914);
 exports.HTMLTableCSS = `
 .table {
     border-collapse: collapse;
@@ -55895,8 +55944,8 @@ exports.HTMLTable = (0, html_1.wrapHTMLComponent)("HTMLTable", ((props) => {
             (0, util_1.assertNever)(child);
         }
     }
-    return (react_1.default.createElement("table", { className: `table indent-${indent}` },
-        react_1.default.createElement("tbody", null, rows.map((row, i) => react_1.default.createElement(react_1.Fragment, { key: i }, row)))));
+    return (react_1.default.createElement("table", Object.assign({ className: `table indent-${indent}` }, (0, html_1.elProps)(el, htmlOptions)),
+        react_1.default.createElement("tbody", null, (0, common_1.withKey)(rows))));
 }));
 exports.HTMLTableRow = (0, html_1.wrapHTMLComponent)("HTMLTableRow", ((props) => {
     const { el, htmlOptions } = props;
@@ -55910,33 +55959,29 @@ exports.HTMLTableRow = (0, html_1.wrapHTMLComponent)("HTMLTableRow", ((props) =>
             (0, util_1.assertNever)(child);
         }
     }
-    return (react_1.default.createElement("tr", { className: "table-row" }, columns.map((column, i) => react_1.default.createElement(react_1.Fragment, { key: i }, column))));
+    return (react_1.default.createElement("tr", Object.assign({ className: "table-row" }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(columns)));
 }));
 exports.HTMLTableColumn = (0, html_1.wrapHTMLComponent)("HTMLTableColumn", ((props) => {
     const { el, htmlOptions } = props;
     const blocks = [];
     if (std.isTableHeaderColumn(el)) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", null,
-                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions })))));
+        blocks.push((react_1.default.createElement("div", null,
+            react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions })))));
     }
     else if (std.isTableColumn(el)) {
         if (el.children.every(std.isColumn)) {
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement("div", null,
-                    react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, Object.assign({ els: el.children }, { htmlOptions })))));
+            blocks.push((react_1.default.createElement("div", null,
+                react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, Object.assign({ els: el.children }, { htmlOptions })))));
         }
         else if (el.children.every(std.isSentence)) {
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement("div", null,
-                    react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, Object.assign({ els: el.children }, { htmlOptions })))));
+            blocks.push((react_1.default.createElement("div", null,
+                react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, Object.assign({ els: el.children }, { htmlOptions })))));
         }
         else {
             for (const child of el.children) {
                 if (child.tag === "Sentence" || child.tag === "Column") {
-                    blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                        react_1.default.createElement("div", null,
-                            react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, Object.assign({ els: [child] }, { htmlOptions })))));
+                    blocks.push((react_1.default.createElement("div", null,
+                        react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, Object.assign({ els: [child] }, { htmlOptions })))));
                 }
                 else if (std.isFigStruct(child)) {
                     blocks.push(react_1.default.createElement(itemStruct_1.HTMLItemStruct, Object.assign({ el: child, indent: 0 }, { htmlOptions })));
@@ -55945,16 +55990,13 @@ exports.HTMLTableColumn = (0, html_1.wrapHTMLComponent)("HTMLTableColumn", ((pro
                     blocks.push(react_1.default.createElement(remarks_1.HTMLRemarks, Object.assign({ el: child, indent: 0 }, { htmlOptions })));
                 }
                 else if (std.isArticleGroup(child)) {
-                    blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                        react_1.default.createElement(articleGroup_1.HTMLArticleGroup, Object.assign({ el: child, indent: 0 }, { htmlOptions }))));
+                    blocks.push((react_1.default.createElement(articleGroup_1.HTMLArticleGroup, Object.assign({ el: child, indent: 0 }, { htmlOptions }))));
                 }
                 else if (std.isArticle(child)) {
-                    blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                        react_1.default.createElement(article_1.HTMLArticle, Object.assign({ el: child, indent: 0 }, { htmlOptions }))));
+                    blocks.push((react_1.default.createElement(article_1.HTMLArticle, Object.assign({ el: child, indent: 0 }, { htmlOptions }))));
                 }
                 else if (std.isParagraphItem(child)) {
-                    blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                        react_1.default.createElement(paragraphItem_1.HTMLParagraphItem, Object.assign({ el: child, indent: 0 }, { htmlOptions }))));
+                    blocks.push((react_1.default.createElement(paragraphItem_1.HTMLParagraphItem, Object.assign({ el: child, indent: 0 }, { htmlOptions }))));
                 }
                 else {
                     (0, util_1.assertNever)(child);
@@ -55980,10 +56022,10 @@ exports.HTMLTableColumn = (0, html_1.wrapHTMLComponent)("HTMLTableColumn", ((pro
         style.verticalAlign = el.attr.Valign;
     const attr = Object.assign(Object.assign({ style }, ((el.attr.rowspan !== undefined) ? { rowSpan: Number(el.attr.rowspan) } : {})), ((el.attr.colspan !== undefined) ? { colSpan: Number(el.attr.colspan) } : {}));
     if (std.isTableHeaderColumn(el)) {
-        return (react_1.default.createElement("th", Object.assign({ className: "table-header-column" }, attr), blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+        return (react_1.default.createElement("th", Object.assign({ className: "table-header-column" }, attr, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
     }
     else {
-        return (react_1.default.createElement("td", Object.assign({ className: "table-column" }, attr), blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+        return (react_1.default.createElement("td", Object.assign({ className: "table-column" }, attr, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
     }
 }));
 const restructureTable = (table) => {
@@ -56048,7 +56090,7 @@ exports.DOCXTable = (0, docx_1.wrapDOCXComponent)("DOCXTable", ((props) => {
     return (react_1.default.createElement(docx_1.w.tbl, null,
         react_1.default.createElement(docx_1.w.tblPr, null,
             react_1.default.createElement(docx_1.w.tblStyle, { "w:val": `IndentTable${indent}` })),
-        rows.map((row, i) => react_1.default.createElement(react_1.Fragment, { key: i }, row))));
+        (0, common_1.withKey)(rows)));
 }));
 exports.DOCXTableRow = (0, docx_1.wrapDOCXComponent)("DOCXTableRow", ((props) => {
     const { el, docxOptions } = props;
@@ -56062,7 +56104,7 @@ exports.DOCXTableRow = (0, docx_1.wrapDOCXComponent)("DOCXTableRow", ((props) =>
             (0, util_1.assertNever)(child);
         }
     }
-    return (react_1.default.createElement(docx_1.w.tr, null, columns.map((column, i) => react_1.default.createElement(react_1.Fragment, { key: i }, column))));
+    return (react_1.default.createElement(docx_1.w.tr, null, (0, common_1.withKey)(columns)));
 }));
 const valignDict = {
     top: "top",
@@ -56080,27 +56122,23 @@ exports.DOCXTableColumn = (0, docx_1.wrapDOCXComponent)("DOCXTableColumn", ((pro
     const { el, docxOptions } = props;
     const blocks = [];
     if (std.isTableHeaderColumn(el)) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(docx_1.w.p, null,
-                react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: el.children }, { docxOptions })))));
+        blocks.push((react_1.default.createElement(docx_1.w.p, null,
+            react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: el.children }, { docxOptions })))));
     }
     else if (std.isTableColumn(el)) {
         if (el.children.every(std.isColumn)) {
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement(docx_1.w.p, null,
-                    react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, Object.assign({ els: el.children }, { docxOptions })))));
+            blocks.push((react_1.default.createElement(docx_1.w.p, null,
+                react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, Object.assign({ els: el.children }, { docxOptions })))));
         }
         else if (el.children.every(std.isSentence)) {
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement(docx_1.w.p, null,
-                    react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, Object.assign({ els: el.children }, { docxOptions })))));
+            blocks.push((react_1.default.createElement(docx_1.w.p, null,
+                react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, Object.assign({ els: el.children }, { docxOptions })))));
         }
         else {
             for (const child of el.children) {
                 if (child.tag === "Sentence" || child.tag === "Column") {
-                    blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                        react_1.default.createElement(docx_1.w.p, null,
-                            react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, Object.assign({ els: [child] }, { docxOptions })))));
+                    blocks.push((react_1.default.createElement(docx_1.w.p, null,
+                        react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, Object.assign({ els: [child] }, { docxOptions })))));
                 }
                 else if (std.isFigStruct(child)) {
                     blocks.push(react_1.default.createElement(itemStruct_1.DOCXItemStruct, Object.assign({ el: child, indent: 0 }, { docxOptions })));
@@ -56109,16 +56147,13 @@ exports.DOCXTableColumn = (0, docx_1.wrapDOCXComponent)("DOCXTableColumn", ((pro
                     blocks.push(react_1.default.createElement(remarks_1.DOCXRemarks, Object.assign({ el: child, indent: 0 }, { docxOptions })));
                 }
                 else if (std.isArticleGroup(child)) {
-                    blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                        react_1.default.createElement(articleGroup_1.DOCXArticleGroup, Object.assign({ el: child, indent: 0 }, { docxOptions }))));
+                    blocks.push((react_1.default.createElement(articleGroup_1.DOCXArticleGroup, Object.assign({ el: child, indent: 0 }, { docxOptions }))));
                 }
                 else if (std.isArticle(child)) {
-                    blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                        react_1.default.createElement(article_1.DOCXArticle, Object.assign({ el: child, indent: 0 }, { docxOptions }))));
+                    blocks.push((react_1.default.createElement(article_1.DOCXArticle, Object.assign({ el: child, indent: 0 }, { docxOptions }))));
                 }
                 else if (std.isParagraphItem(child)) {
-                    blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                        react_1.default.createElement(paragraphItem_1.DOCXParagraphItem, Object.assign({ el: child, indent: 0 }, { docxOptions }))));
+                    blocks.push((react_1.default.createElement(paragraphItem_1.DOCXParagraphItem, Object.assign({ el: child, indent: 0 }, { docxOptions }))));
                 }
                 else {
                     (0, util_1.assertNever)(child);
@@ -56143,13 +56178,12 @@ exports.DOCXTableColumn = (0, docx_1.wrapDOCXComponent)("DOCXTableColumn", ((pro
                 (el.attr.rowspan !== undefined) && react_1.default.createElement(docx_1.w.vMerge, { "w:val": "restart" }),
                 (el.attr.Align !== undefined) && react_1.default.createElement(docx_1.w.jc, { "w:val": el.attr.Align }),
                 (el.attr.Valign !== undefined) && react_1.default.createElement(docx_1.w.vAlign, { "w:val": valignDict[el.attr.Valign] }),
-                (((_c = (_b = (_a = el.attr.BorderTop) !== null && _a !== void 0 ? _a : el.attr.BorderBottom) !== null && _b !== void 0 ? _b : el.attr.BorderLeft) !== null && _c !== void 0 ? _c : el.attr.BorderRight) !== undefined) && react_1.default.createElement(react_1.default.Fragment, null,
-                    react_1.default.createElement(docx_1.w.tcBorders, null,
-                        (el.attr.BorderTop !== undefined) && react_1.default.createElement(docx_1.w.top, { "w:val": borderDict[el.attr.BorderTop] }),
-                        (el.attr.BorderBottom !== undefined) && react_1.default.createElement(docx_1.w.bottom, { "w:val": borderDict[el.attr.BorderBottom] }),
-                        (el.attr.BorderLeft !== undefined) && react_1.default.createElement(docx_1.w.left, { "w:val": borderDict[el.attr.BorderLeft] }),
-                        (el.attr.BorderRight !== undefined) && react_1.default.createElement(docx_1.w.right, { "w:val": borderDict[el.attr.BorderRight] })))),
-            blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+                (((_c = (_b = (_a = el.attr.BorderTop) !== null && _a !== void 0 ? _a : el.attr.BorderBottom) !== null && _b !== void 0 ? _b : el.attr.BorderLeft) !== null && _c !== void 0 ? _c : el.attr.BorderRight) !== undefined) && (react_1.default.createElement(docx_1.w.tcBorders, null,
+                    (el.attr.BorderTop !== undefined) && react_1.default.createElement(docx_1.w.top, { "w:val": borderDict[el.attr.BorderTop] }),
+                    (el.attr.BorderBottom !== undefined) && react_1.default.createElement(docx_1.w.bottom, { "w:val": borderDict[el.attr.BorderBottom] }),
+                    (el.attr.BorderLeft !== undefined) && react_1.default.createElement(docx_1.w.left, { "w:val": borderDict[el.attr.BorderLeft] }),
+                    (el.attr.BorderRight !== undefined) && react_1.default.createElement(docx_1.w.right, { "w:val": borderDict[el.attr.BorderRight] })))),
+            (0, common_1.withKey)(blocks)));
     }
 }));
 //# sourceMappingURL=table.js.map
@@ -56184,15 +56218,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DOCXTOCItem = exports.HTMLTOCItem = exports.DOCXTOC = exports.HTMLTOC = exports.HTMLTOCCSS = void 0;
-const react_1 = __importStar(__webpack_require__(66406));
+const react_1 = __importDefault(__webpack_require__(66406));
 const std = __importStar(__webpack_require__(93619));
 const util_1 = __webpack_require__(84530);
-const html_1 = __webpack_require__(20115);
+const html_1 = __webpack_require__(98297);
 const sentenceChildrenRun_1 = __webpack_require__(95041);
-const docx_1 = __webpack_require__(25790);
+const docx_1 = __webpack_require__(80826);
 const inline_1 = __webpack_require__(22845);
+const common_1 = __webpack_require__(66914);
 exports.HTMLTOCCSS = `
 .toc {
     clear: both;
@@ -56209,9 +56247,8 @@ exports.HTMLTOC = (0, html_1.wrapHTMLComponent)("HTMLTOC", ((props) => {
     const blocks = [];
     const TOCLabel = el.children.find(std.isTOCLabel);
     if (TOCLabel) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: `toc-label indent-${indent}` },
-                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: TOCLabel.children }, { htmlOptions })))));
+        blocks.push((react_1.default.createElement("div", Object.assign({ className: `toc-label indent-${indent}` }, (0, html_1.elProps)(TOCLabel, htmlOptions)),
+            react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: TOCLabel.children }, { htmlOptions })))));
     }
     const bodyBlocks = [];
     for (const child of el.children) {
@@ -56226,21 +56263,19 @@ exports.HTMLTOC = (0, html_1.wrapHTMLComponent)("HTMLTOC", ((props) => {
         }
     }
     if (bodyBlocks.length > 0) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: "toc-body" }, bodyBlocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block)))));
+        blocks.push((react_1.default.createElement("div", { className: "toc-body" }, (0, common_1.withKey)(bodyBlocks))));
     }
-    return (react_1.default.createElement("div", { className: "toc" }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+    return (react_1.default.createElement("div", Object.assign({ className: "toc" }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
 }));
 exports.DOCXTOC = (0, docx_1.wrapDOCXComponent)("DOCXTOC", ((props) => {
     const { el, docxOptions, indent } = props;
     const blocks = [];
     const TOCLabel = el.children.find(std.isTOCLabel);
     if (TOCLabel) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(docx_1.w.p, null,
-                react_1.default.createElement(docx_1.w.pPr, null,
-                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
-                react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: TOCLabel.children, emphasis: true }, { docxOptions })))));
+        blocks.push((react_1.default.createElement(docx_1.w.p, null,
+            react_1.default.createElement(docx_1.w.pPr, null,
+                react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
+            react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: TOCLabel.children, emphasis: true }, { docxOptions })))));
     }
     for (const child of el.children) {
         if (std.isTOCLabel(child)) {
@@ -56253,7 +56288,7 @@ exports.DOCXTOC = (0, docx_1.wrapDOCXComponent)("DOCXTOC", ((props) => {
             (0, util_1.assertNever)(child);
         }
     }
-    return (react_1.default.createElement(react_1.default.Fragment, null, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+    return (react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(blocks)));
 }));
 exports.HTMLTOCItem = (0, html_1.wrapHTMLComponent)("HTMLTOCItem", ((props) => {
     const { el, htmlOptions, indent } = props;
@@ -56261,10 +56296,11 @@ exports.HTMLTOCItem = (0, html_1.wrapHTMLComponent)("HTMLTOCItem", ((props) => {
     const TOCItemTitle = el.children.find(c => std.isArticleGroupTitle(c) || std.isSupplProvisionLabel(c) || std.isArticleTitle(c));
     const ArticleRange = el.children.find(c => std.isArticleRange(c) || std.isArticleCaption(c));
     if (TOCItemTitle || ArticleRange) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement("div", { className: `toc-item-main indent-${indent}` },
-                (TOCItemTitle !== undefined) && react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: TOCItemTitle.children }, { htmlOptions })),
-                (ArticleRange !== undefined) && react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: ArticleRange.children }, { htmlOptions })))));
+        blocks.push((react_1.default.createElement("div", { className: `toc-item-main indent-${indent}` },
+            (TOCItemTitle !== undefined) && (react_1.default.createElement("span", Object.assign({ className: "toc-item-title" }, (0, html_1.elProps)(TOCItemTitle, htmlOptions)),
+                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: TOCItemTitle.children }, { htmlOptions })))),
+            (ArticleRange !== undefined) && (react_1.default.createElement("span", Object.assign({ className: "article-range" }, (0, html_1.elProps)(ArticleRange, htmlOptions)),
+                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: ArticleRange.children }, { htmlOptions })))))));
     }
     for (let i = 0; i < el.children.length; i++) {
         const child = el.children[i];
@@ -56284,16 +56320,15 @@ exports.HTMLTOCItem = (0, html_1.wrapHTMLComponent)("HTMLTOCItem", ((props) => {
             while (j < el.children.length && (typeof el.children[j] === "string" || (0, inline_1.isSentenceChildEL)(el.children[j])))
                 j++;
             const sentenceChildren = el.children.slice(i, j);
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement("div", { className: `toc-item-main indent-${indent}` },
-                    react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: sentenceChildren }, { htmlOptions })))));
+            blocks.push((react_1.default.createElement("div", { className: `toc-item-main indent-${indent}` },
+                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: sentenceChildren }, { htmlOptions })))));
             i = j - 1;
         }
         else {
             throw (0, util_1.assertNever)(child);
         }
     }
-    return (react_1.default.createElement("div", { className: `toc-item-${el.tag}` }, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+    return (react_1.default.createElement("div", Object.assign({ className: `toc-item-${el.tag}` }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
 }));
 exports.DOCXTOCItem = (0, docx_1.wrapDOCXComponent)("DOCXTOCItem", ((props) => {
     const { el, docxOptions, indent } = props;
@@ -56301,12 +56336,11 @@ exports.DOCXTOCItem = (0, docx_1.wrapDOCXComponent)("DOCXTOCItem", ((props) => {
     const TOCItemTitle = el.children.find(c => std.isArticleGroupTitle(c) || std.isSupplProvisionLabel(c) || std.isArticleTitle(c));
     const ArticleRange = el.children.find(c => std.isArticleRange(c) || std.isArticleCaption(c));
     if (TOCItemTitle || ArticleRange) {
-        blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(docx_1.w.p, null,
-                react_1.default.createElement(docx_1.w.pPr, null,
-                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
-                (TOCItemTitle !== undefined) && react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: TOCItemTitle.children }, { docxOptions })),
-                (ArticleRange !== undefined) && react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: ArticleRange.children }, { docxOptions })))));
+        blocks.push((react_1.default.createElement(docx_1.w.p, null,
+            react_1.default.createElement(docx_1.w.pPr, null,
+                react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
+            (TOCItemTitle !== undefined) && react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: TOCItemTitle.children }, { docxOptions })),
+            (ArticleRange !== undefined) && react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: ArticleRange.children }, { docxOptions })))));
     }
     for (let i = 0; i < el.children.length; i++) {
         const child = el.children[i];
@@ -56326,18 +56360,17 @@ exports.DOCXTOCItem = (0, docx_1.wrapDOCXComponent)("DOCXTOCItem", ((props) => {
             while (j < el.children.length && (typeof el.children[j] === "string" || (0, inline_1.isSentenceChildEL)(el.children[j])))
                 j++;
             const sentenceChildren = el.children.slice(i, j);
-            blocks.push(react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement(docx_1.w.p, null,
-                    react_1.default.createElement(docx_1.w.pPr, null,
-                        react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
-                    react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: sentenceChildren }, { docxOptions })))));
+            blocks.push((react_1.default.createElement(docx_1.w.p, null,
+                react_1.default.createElement(docx_1.w.pPr, null,
+                    react_1.default.createElement(docx_1.w.pStyle, { "w:val": `Indent${indent}` })),
+                react_1.default.createElement(sentenceChildrenRun_1.DOCXSentenceChildrenRun, Object.assign({ els: sentenceChildren }, { docxOptions })))));
             i = j - 1;
         }
         else {
             throw (0, util_1.assertNever)(child);
         }
     }
-    return (react_1.default.createElement(react_1.default.Fragment, null, blocks.map((block, i) => react_1.default.createElement(react_1.Fragment, { key: i }, block))));
+    return (react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(blocks)));
 }));
 //# sourceMappingURL=toc.js.map
 
@@ -56372,7 +56405,7 @@ exports["default"] = exports.renderXML;
 /* provided dependency */ var Buffer = __webpack_require__(48764)["Buffer"];
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.pictMimeDict = exports.assertNever = exports.throwError = exports.NotImplementedError = exports.decodeBase64 = exports.omit = exports.pick = exports.range = exports.withTime = exports.wait = void 0;
+exports.throttle = exports.pictMimeDict = exports.assertNever = exports.throwError = exports.NotImplementedError = exports.decodeBase64 = exports.omit = exports.pick = exports.range = exports.withTime = exports.wait = void 0;
 const wait = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 };
@@ -56439,20 +56472,50 @@ exports.pictMimeDict = {
     ".tif": "image/tiff",
     ".tiff": "image/tiff",
 };
+const throttle = (func, waitms, initialWaitms) => {
+    let timer = undefined;
+    const lastArgsObj = {};
+    const dispatchLastArgs = () => {
+        if (lastArgsObj.args) {
+            const args = lastArgsObj.args;
+            lastArgsObj.args = undefined;
+            func(...args);
+            timer = setTimeout(dispatchLastArgs, waitms);
+        }
+        else {
+            timer = undefined;
+        }
+    };
+    return (...args) => {
+        lastArgsObj.args = args;
+        if (timer === undefined) {
+            timer = setTimeout(dispatchLastArgs, initialWaitms !== null && initialWaitms !== void 0 ? initialWaitms : waitms);
+        }
+    };
+};
+exports.throttle = throttle;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
 
 /***/ 43388:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 /**
  * @param {[url: RequestInfo, init?: RequestInit | undefined]} args
  */
-const fetch = (...args) => eval("import(\"node-fetch\")")
-    .then(({ default: fetch }) => fetch(...args));
+const fetch = async (...args) => {
+    try {
+        const { default: fetch } = await eval("import(\"node-fetch\")");
+        return fetch(...args);
+    }
+    catch (_a) {
+        const fetch = (__webpack_require__(91984)["default"]);
+        return fetch(...args);
+    }
+};
 exports.fetch = fetch;
 //# sourceMappingURL=index.js.map
 
@@ -66028,6 +66091,13 @@ function simpleWrite(buf) {
 function simpleEnd(buf) {
   return buf && buf.length ? this.write(buf) : '';
 }
+
+/***/ }),
+
+/***/ 91984:
+/***/ (() => {
+
+/* (ignored) */
 
 /***/ }),
 
