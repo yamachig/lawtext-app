@@ -36518,7 +36518,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.downloadXml = exports.downloadLawtext = exports.downloadDocx = exports.containerInfoOf = void 0;
 const std = __importStar(__webpack_require__(93619));
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const renderer = __importStar(__webpack_require__(14813));
 const lawtext_1 = __importDefault(__webpack_require__(24482));
 const file_saver_1 = __webpack_require__(93162);
@@ -36579,14 +36579,14 @@ const getLawRange = (origLaw, range) => {
     const law = new el_1.EL(origLaw.tag, origLaw.attr);
     const origLawNum = origLaw.children.find(std.isLawNum);
     if (origLawNum) {
-        law.append(origLawNum);
+        law.children.push(origLawNum);
     }
     const origLawBody = origLaw.children.find(std.isLawBody);
     const lawBody = (0, std_1.newStdEL)("LawBody", (_a = origLawBody === null || origLawBody === void 0 ? void 0 : origLawBody.attr) !== null && _a !== void 0 ? _a : {});
-    law.append(lawBody);
+    law.children.push(lawBody);
     const origLawTitle = origLawBody === null || origLawBody === void 0 ? void 0 : origLawBody.children.find(std.isLawTitle);
     if (origLawTitle) {
-        lawBody.append(origLawTitle);
+        lawBody.children.push(origLawTitle);
     }
     let inContainerRange = false;
     let inItemRange = false;
@@ -36652,7 +36652,7 @@ const getLawRange = (origLaw, range) => {
             const supplProvisionLabel = toplevel.children.find(std.isSupplProvisionLabel);
             if (supplProvisionLabel)
                 containerChildren.unshift(supplProvisionLabel);
-            lawBody.append(new el_1.EL(toplevel.tag, toplevel.attr, containerChildren));
+            lawBody.children.push((0, std_1.newStdEL)(toplevel.tag, toplevel.attr, containerChildren));
         }
         if (inContainerRange &&
             toplevelInfo.tag === ePos.container_tag &&
@@ -37066,25 +37066,42 @@ const react_1 = __importDefault(__webpack_require__(67294));
 const std = __importStar(__webpack_require__(93619));
 const html_1 = __webpack_require__(98297);
 const sentenceChildrenRun_1 = __webpack_require__(95041);
-const article_1 = __webpack_require__(37701);
-const paragraphItem_1 = __webpack_require__(42411);
-const table_1 = __webpack_require__(91144);
+const any_1 = __webpack_require__(48774);
 const styled_components_1 = __importStar(__webpack_require__(58804));
 const common_1 = __webpack_require__(4982);
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const util_1 = __webpack_require__(84530);
 const react_animate_height_1 = __importDefault(__webpack_require__(68133));
+const declaration_1 = __webpack_require__(98338);
+const controls_1 = __webpack_require__(48075);
 const WrapHTMLControlRun = props => {
     const { childProps, ChildComponent } = props;
     const { el, htmlOptions } = childProps;
-    if (el.tag === "____Declaration") {
-        return react_1.default.createElement(____Declaration, Object.assign({ el: el }, { htmlOptions }));
+    if (el instanceof declaration_1.____Declaration) {
+        return react_1.default.createElement(Declaration, Object.assign({ el: el }, { htmlOptions }));
     }
-    else if (el.tag === "____VarRef") {
-        return react_1.default.createElement(____VarRef, Object.assign({ el: el }, { htmlOptions }));
+    else if (el instanceof controls_1.____VarRef) {
+        const options = htmlOptions.options;
+        const analysis = options.lawData.analysis;
+        const sentenceChildren = el.children;
+        if (!analysis || !el.attr.declarationID)
+            return (react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: sentenceChildren }, { htmlOptions })));
+        const declaration = analysis.declarations.get(el.attr.declarationID);
+        const declContainer = analysis.sentenceEnvs[declaration.nameSentenceTextRange.start.sentenceIndex].container;
+        const containerID = declContainer.containerID;
+        return react_1.default.createElement(ContainerRef, Object.assign({ containerID: containerID, sentenceChildren: sentenceChildren }, { htmlOptions }));
     }
-    else if (el.tag === "____LawNum") {
-        return react_1.default.createElement(____LawNum, Object.assign({ el: el }, { htmlOptions }));
+    else if (el instanceof controls_1.____PF) {
+        const options = htmlOptions.options;
+        const analysis = options.lawData.analysis;
+        const sentenceChildren = el.children;
+        if (!analysis || !el.attr.locatedContainerID)
+            return (react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: sentenceChildren }, { htmlOptions })));
+        const containerID = el.attr.locatedContainerID;
+        return react_1.default.createElement(ContainerRef, Object.assign({ containerID: containerID, sentenceChildren: sentenceChildren }, { htmlOptions }));
+    }
+    else if (el instanceof controls_1.____LawNum) {
+        return react_1.default.createElement(LawNum, Object.assign({ el: el }, { htmlOptions }));
     }
     else {
         return react_1.default.createElement(ChildComponent, Object.assign({}, childProps));
@@ -37092,16 +37109,16 @@ const WrapHTMLControlRun = props => {
 };
 exports.WrapHTMLControlRun = WrapHTMLControlRun;
 exports.ControlGlobalStyle = (0, styled_components_1.createGlobalStyle) `
-.control-parentheses-content[data-lawtext_parentheses_type="square"] {
+.control-parentheses-content[data-parentheses_type="square"] {
     color: rgb(158, 79, 0);
 }
 
-.lawtext-varref-open .lawtext-varref-text {
+.lawtext-container-ref-open > .lawtext-container-ref-text {
     background-color: rgba(127, 127, 127, 0.15);
     border-bottom: 1px solid rgb(40, 167, 69);
 }
 
-.lawtext-varref-text:hover {
+.lawtext-container-ref-text:hover {
     background-color: rgb(255, 249, 160);
     border-bottom: 1px solid rgb(40, 167, 69);
 }
@@ -37109,42 +37126,42 @@ exports.ControlGlobalStyle = (0, styled_components_1.createGlobalStyle) `
 const DeclarationSpan = styled_components_1.default.span `
     color: rgb(40, 167, 69);
 `;
-const ____Declaration = (props) => {
+const Declaration = (props) => {
     const { el, htmlOptions } = props;
-    return (react_1.default.createElement(DeclarationSpan, { "data-lawtext_declaration_index": el.attr.declaration_index },
+    return (react_1.default.createElement(DeclarationSpan, null,
         react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))));
 };
-const VarRefSpan = styled_components_1.default.span `
+const ContainerRefSpan = styled_components_1.default.span `
 `;
-const VarRefTextSpan = styled_components_1.default.span `
+const ContainerRefTextSpan = styled_components_1.default.span `
     border-bottom: 1px solid rgba(127, 127, 127, 0.3);
     cursor: pointer;
     transition: background-color 0.3s, border-bottom-color 0.3s;
 `;
 // eslint-disable-next-line no-unused-vars
-var VarRefFloatState;
-(function (VarRefFloatState) {
+var ContainerRefFloatState;
+(function (ContainerRefFloatState) {
     // eslint-disable-next-line no-unused-vars
-    VarRefFloatState[VarRefFloatState["HIDDEN"] = 0] = "HIDDEN";
+    ContainerRefFloatState[ContainerRefFloatState["HIDDEN"] = 0] = "HIDDEN";
     // eslint-disable-next-line no-unused-vars
-    VarRefFloatState[VarRefFloatState["CLOSED"] = 1] = "CLOSED";
+    ContainerRefFloatState[ContainerRefFloatState["CLOSED"] = 1] = "CLOSED";
     // eslint-disable-next-line no-unused-vars
-    VarRefFloatState[VarRefFloatState["OPEN"] = 2] = "OPEN";
-})(VarRefFloatState || (VarRefFloatState = {}));
-const VarRefFloatBlockInnerSpan = styled_components_1.default.div `
+    ContainerRefFloatState[ContainerRefFloatState["OPEN"] = 2] = "OPEN";
+})(ContainerRefFloatState || (ContainerRefFloatState = {}));
+const ContainerRefFloatBlockInnerSpan = styled_components_1.default.div `
     position: relative;
     width: 100%;
     font-size: 1rem;
     padding: 0.5em;
 `;
-const VarRefArrowSpan = styled_components_1.default.div `
+const ContainerRefArrowSpan = styled_components_1.default.div `
     position: absolute;
     border-style: solid;
     border-width: 0 0.5em 0.5em 0.5em;
     border-color: transparent transparent rgba(125, 125, 125) transparent;
     margin: -0.5em 0 0 0;
 `;
-const VarRefWindowSpan = styled_components_1.default.span `
+const ContainerRefWindowSpan = styled_components_1.default.span `
     float: right;
     width: 100%;
     padding: 0.5em;
@@ -37152,23 +37169,23 @@ const VarRefWindowSpan = styled_components_1.default.span `
     border: 1px solid rgba(125, 125, 125);
     background-color: rgba(240, 240, 240);
 `;
-const ____VarRef = (props) => {
-    const { el, htmlOptions } = props;
+const ContainerRef = (props) => {
+    const { containerID, sentenceChildren, htmlOptions } = props;
     const refText = react_1.default.useRef(null);
     const refWindow = react_1.default.useRef(null);
-    const [state, setState] = react_1.default.useState({ mode: VarRefFloatState.HIDDEN, arrowLeft: "" });
+    const [state, setState] = react_1.default.useState({ mode: ContainerRefFloatState.HIDDEN, arrowLeft: "" });
     react_1.default.useEffect(() => {
         return () => {
             window.removeEventListener("resize", updateSize);
         };
     }, []);
     const varRefTextSpanOnClick = ( /* e: React.MouseEvent<HTMLSpanElement> */) => {
-        if (state.mode === VarRefFloatState.OPEN) {
-            setState(prevState => (Object.assign(Object.assign({}, prevState), { mode: VarRefFloatState.CLOSED })));
+        if (state.mode === ContainerRefFloatState.OPEN) {
+            setState(prevState => (Object.assign(Object.assign({}, prevState), { mode: ContainerRefFloatState.CLOSED })));
             window.removeEventListener("resize", updateSize);
         }
         else {
-            setState(prevState => (Object.assign(Object.assign({}, prevState), { mode: VarRefFloatState.OPEN })));
+            setState(prevState => (Object.assign(Object.assign({}, prevState), { mode: ContainerRefFloatState.OPEN })));
             setTimeout(() => {
                 updateSize();
                 window.addEventListener("resize", updateSize);
@@ -37176,8 +37193,8 @@ const ____VarRef = (props) => {
         }
     };
     const onAnimationEnd = () => {
-        if (state.mode === VarRefFloatState.CLOSED) {
-            setState(prevState => (Object.assign(Object.assign({}, prevState), { mode: VarRefFloatState.HIDDEN })));
+        if (state.mode === ContainerRefFloatState.CLOSED) {
+            setState(prevState => (Object.assign(Object.assign({}, prevState), { mode: ContainerRefFloatState.HIDDEN })));
         }
     };
     const updateSize = () => {
@@ -37194,9 +37211,9 @@ const ____VarRef = (props) => {
     const animateHeightOnAnimationEnd = () => {
         onAnimationEnd();
     };
-    return (react_1.default.createElement(VarRefSpan, null,
-        react_1.default.createElement(VarRefTextSpan, { onClick: varRefTextSpanOnClick, ref: refText },
-            react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))),
+    return (react_1.default.createElement(ContainerRefSpan, { className: state.mode === ContainerRefFloatState.OPEN ? "lawtext-container-ref-open" : undefined },
+        react_1.default.createElement(ContainerRefTextSpan, { onClick: varRefTextSpanOnClick, ref: refText, className: "lawtext-container-ref-text" },
+            react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: sentenceChildren }, { htmlOptions }))),
         react_1.default.createElement("div", { style: {
                 float: "right",
                 width: "100%",
@@ -37208,7 +37225,7 @@ const ____VarRef = (props) => {
                 position: "relative",
                 color: "initial",
             } },
-            react_1.default.createElement(react_animate_height_1.default, { height: state.mode === VarRefFloatState.OPEN ? "auto" : 0, style: {
+            react_1.default.createElement(react_animate_height_1.default, { height: state.mode === ContainerRefFloatState.OPEN ? "auto" : 0, style: {
                     width: "100%",
                     padding: 0,
                     margin: 0,
@@ -37218,28 +37235,29 @@ const ____VarRef = (props) => {
                     // overflow: "hidden",
                     position: "absolute",
                     color: "initial",
-                }, onAnimationEnd: animateHeightOnAnimationEnd, duration: 100 }, (state.mode !== VarRefFloatState.HIDDEN) && (react_1.default.createElement(VarRefFloatBlockInnerSpan, null,
-                react_1.default.createElement(VarRefArrowSpan, { style: state.arrowLeft ? { marginLeft: state.arrowLeft } : { visibility: "hidden" } }),
-                react_1.default.createElement(VarRefWindowSpan, { ref: refWindow },
-                    react_1.default.createElement(VarRefView, Object.assign({ el: props.el }, { htmlOptions })))))))));
+                }, onAnimationEnd: animateHeightOnAnimationEnd, duration: 100 }, (state.mode !== ContainerRefFloatState.HIDDEN) && (react_1.default.createElement(ContainerRefFloatBlockInnerSpan, null,
+                react_1.default.createElement(ContainerRefArrowSpan, { style: state.arrowLeft ? { marginLeft: state.arrowLeft } : { visibility: "hidden" } }),
+                react_1.default.createElement(ContainerRefWindowSpan, { ref: refWindow },
+                    react_1.default.createElement(PeekContainerView, Object.assign({ containerID: containerID }, { htmlOptions })))))))));
 };
-const VarRefView = (props) => {
-    const { el, htmlOptions } = props;
+const PeekContainerView = (props) => {
+    var _a;
+    const { containerID, htmlOptions } = props;
     const options = htmlOptions.options;
     const analysis = options.lawData.analysis;
     if (!analysis)
         return null;
-    const declarationIndex = Number(el.attr.ref_declaration_index);
-    const declaration = analysis.declarations.get(declarationIndex);
-    const declContainer = declaration.namePos.env.container;
-    const containerStack = declContainer.linealAscendant(c => {
+    const container = analysis.containers.get(containerID);
+    if (!container)
+        return null;
+    const containerStack = container.linealAscendant(c => {
         if (std.isParagraph(c.el)) {
             const paragraphNum = c.el.children.find(std.isParagraphNum);
             if (!c.parent)
                 return true;
             if (std.isArticle(c.parent.el) &&
                 c.parent.children.filter(pc => std.isParagraph(pc.el)).length === 1 &&
-                paragraphNum && paragraphNum.text === "") {
+                paragraphNum && paragraphNum.text() === "") {
                 return false;
             }
             else {
@@ -37251,84 +37269,105 @@ const VarRefView = (props) => {
         }
     });
     const names = [];
-    let lastContainerEl = declContainer.el;
     const titleTags = [
+        "LawTitle",
         "ArticleTitle",
         ...std.paragraphItemTitleTags,
+        ...std.articleGroupTitleTags,
+        ...std.appdxItemTitleTags,
+        ...std.supplProvisionAppdxItemTitleTags,
+        "SupplProvisionLabel",
         "TableStructTitle",
     ];
     const ignoreTags = ["ArticleCaption", "ParagraphCaption", ...titleTags];
-    for (const container of containerStack) {
-        if (std.isEnactStatement(container.el)) {
+    for (const c of containerStack) {
+        if (std.isLaw(container.el) && std.isLaw(c.el)) {
+            const lawTitle = (_a = c.el.children.find(std.isLawBody)) === null || _a === void 0 ? void 0 : _a.children.find(std.isLawTitle);
+            const lawNum = c.el.children.find(std.isLawNum);
+            if (lawTitle && lawNum) {
+                names.push(`${lawTitle.text()}（${lawNum.text()}）`);
+            }
+            else if (lawTitle) {
+                names.push(lawTitle.text());
+            }
+            else if (lawNum) {
+                names.push(lawNum.text());
+            }
+        }
+        else if (std.isEnactStatement(c.el)) {
             names.push("（制定文）");
         }
-        else if (std.isArticle(container.el)) {
-            const articleTitle = container.el.children
+        else if (std.isArticleGroup(container.el) && std.isArticleGroup(c.el)) {
+            const articleGroupTitle = c.el.children
+                .find(std.isArticleGroupTitle);
+            if (articleGroupTitle)
+                names.push(articleGroupTitle.text());
+        }
+        else if (std.isSupplProvision(c.el)) {
+            const supplProvisionLabel = c.el.children
+                .find(std.isSupplProvisionLabel);
+            if (supplProvisionLabel)
+                names.push(supplProvisionLabel.text());
+        }
+        else if (std.isArticle(c.el)) {
+            const articleTitle = c.el.children
                 .find(std.isArticleTitle);
             if (articleTitle)
-                names.push(articleTitle.text);
+                names.push(articleTitle.text());
         }
-        else if (std.isParagraph(container.el)) {
-            const paragraphNum = container.el.children
+        else if (std.isParagraph(c.el)) {
+            const paragraphNum = c.el.children
                 .find(std.isParagraphNum);
             if (paragraphNum)
-                names.push(paragraphNum.text || "１");
+                names.push(paragraphNum.text() || "１");
         }
-        else if (std.isParagraphItem(container.el)) {
-            const itemTitle = container.el.children
+        else if (std.isParagraphItem(c.el)) {
+            const itemTitle = c.el.children
                 .find(std.isParagraphItemTitle);
             if (itemTitle)
-                names.push(itemTitle.text);
+                names.push(itemTitle.text());
         }
-        else if (std.isTableStruct(container.el)) {
-            const tableStructTitleEl = container.el.children
+        else if (std.isTableStruct(c.el)) {
+            const tableStructTitleEl = c.el.children
                 .find(std.isTableStructTitle);
             const tableStructTitle = tableStructTitleEl
-                ? tableStructTitleEl.text
+                ? tableStructTitleEl.text()
                 : "表";
             names.push(tableStructTitle + "（抜粋）");
         }
         else {
             continue;
         }
-        lastContainerEl = container.el;
     }
-    const declElTitleTag = titleTags
-        .find(s => Boolean(s) && s.startsWith(lastContainerEl.tag));
-    if (declElTitleTag) {
-        const declEl = new el_1.EL(lastContainerEl.tag, {}, [
-            new el_1.EL(declElTitleTag, {}, [names.join("／")]),
-            ...lastContainerEl.children
-                .filter(child => ignoreTags.indexOf(child.tag) < 0),
+    const containerElTitleTag = titleTags
+        .find(s => Boolean(s) && s.startsWith(container.el.tag));
+    if (containerElTitleTag) {
+        const containerEl = new el_1.EL(container.el.tag, {}, [
+            ...((std.isLaw(container.el))
+                ? [new el_1.EL("LawBody", {}, [new el_1.EL("LawTitle", {}, [names.join("／")])])]
+                : [new el_1.EL(containerElTitleTag, {}, [names.join("／")])]),
+            ...((std.isLaw(container.el) || std.isArticleGroup(container.el) || std.isSupplProvision(container.el))
+                ? []
+                : container.el.children
+                    .filter(child => ignoreTags.indexOf(child.tag) < 0)),
         ]);
-        if (std.isArticle(declEl)) {
-            return react_1.default.createElement(article_1.HTMLArticle, Object.assign({ el: declEl, indent: 0 }, { htmlOptions }));
-        }
-        else if (std.isParagraphItem(declEl)) {
-            return react_1.default.createElement(paragraphItem_1.HTMLParagraphItem, Object.assign({ el: declEl, indent: 0 }, { htmlOptions }));
-        }
-        else if (std.isTable(declEl)) {
-            return react_1.default.createElement(table_1.HTMLTable, Object.assign({ el: declEl, indent: 0 }, { htmlOptions }));
-        }
-        else {
-            throw new util_1.NotImplementedError(declEl.tag);
-        }
+        return react_1.default.createElement(any_1.HTMLAnyELs, Object.assign({ els: [containerEl], indent: 0 }, { htmlOptions }));
     }
-    else if (std.isEnactStatement(lastContainerEl)) {
+    else if (std.isEnactStatement(container.el)) {
         return (react_1.default.createElement("div", { style: { paddingLeft: "1em", textIndent: "-1em" } },
             react_1.default.createElement("span", null, names.join("／")),
             react_1.default.createElement(html_1.HTMLMarginSpan, null),
-            react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: lastContainerEl.children }, { htmlOptions }))));
+            react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: container.el.children }, { htmlOptions }))));
     }
     else {
-        throw new util_1.NotImplementedError(lastContainerEl.tag);
+        throw new util_1.NotImplementedError(container.el.tag);
     }
 };
 const LawNumA = styled_components_1.default.a `
 `;
-const ____LawNum = (props) => {
+const LawNum = (props) => {
     const { el, htmlOptions } = props;
-    return (react_1.default.createElement(LawNumA, { href: `#/${el.text}`, target: "_blank" },
+    return (react_1.default.createElement(LawNumA, { href: `#/${el.text()}`, target: "_blank" },
         react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))));
 };
 
@@ -37418,7 +37457,7 @@ const react_1 = __importDefault(__webpack_require__(67294));
 const styled_components_1 = __importDefault(__webpack_require__(58804));
 const ErrorCatcher_1 = __webpack_require__(81981);
 const ControlRun_1 = __webpack_require__(70673);
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const std = __importStar(__webpack_require__(93619));
 const download_1 = __webpack_require__(56644);
 const ReplaceHTMLFigRun_1 = __importDefault(__webpack_require__(39238));
@@ -37970,7 +38009,7 @@ const NavLaw = props => {
     };
     return (react_1.default.createElement(TOCItemDiv, { style: {
             paddingLeft: (props.indent + 2) + "em",
-        }, onClick: onClick }, (_c = (_b = (_a = props.law.children.find(std.isLawBody)) === null || _a === void 0 ? void 0 : _a.children.find(std.isLawTitle)) === null || _b === void 0 ? void 0 : _b.text) !== null && _c !== void 0 ? _c : ""));
+        }, onClick: onClick }, (_c = (_b = (_a = props.law.children.find(std.isLawBody)) === null || _a === void 0 ? void 0 : _a.children.find(std.isLawTitle)) === null || _b === void 0 ? void 0 : _b.text()) !== null && _c !== void 0 ? _c : ""));
 };
 const NavEnactStatement = props => {
     const onClick = () => {
@@ -37995,7 +38034,7 @@ const NavTOC = props => {
     };
     return tocLabel ? (react_1.default.createElement(TOCItemDiv, { style: {
             paddingLeft: (props.indent + 2) + "em",
-        }, onClick: onClick }, tocLabel.text)) : null;
+        }, onClick: onClick }, tocLabel.text())) : null;
 };
 const NavArticleGroup = props => {
     return (react_1.default.createElement(react_1.default.Fragment, null, [...props.articleGroup.children].map((el, i) => {
@@ -38011,7 +38050,7 @@ const NavArticleGroup = props => {
             };
             return (react_1.default.createElement(TOCItemDiv, { key: i, style: {
                     paddingLeft: (props.indent + 2) + "em",
-                }, onClick: onClick, title: el.text }, el.text));
+                }, onClick: onClick, title: el.text() }, el.text()));
         }
         else {
             console.error(`unexpected element! ${JSON.stringify(el, undefined, 2)}`);
@@ -38023,10 +38062,10 @@ const NavArticle = props => {
     const articleCaption = props.article.children.find((el) => el.tag === "ArticleCaption");
     const articleTitle = props.article.children.find((el) => el.tag === "ArticleTitle");
     if (articleTitle) {
-        const name = articleTitle.text;
+        const name = articleTitle.text();
         let text = name;
         if (articleCaption) {
-            const appendText = articleCaption.text;
+            const appendText = articleCaption.text();
             text += (appendText[0] === "（" ? "" : "　") + appendText;
         }
         const onClick = () => {
@@ -38043,7 +38082,7 @@ const NavArticle = props => {
 const NavSupplProvision = props => {
     const supplProvisionLabel = props.supplProvision.children.find((el) => el.tag === "SupplProvisionLabel");
     if (supplProvisionLabel) {
-        const name = supplProvisionLabel.text;
+        const name = supplProvisionLabel.text();
         const amendLawNum = props.supplProvision.attr.AmendLawNum || "";
         // eslint-disable-next-line no-irregular-whitespace
         const text = (name + (amendLawNum ? ("（" + amendLawNum + "）") : "")).replace(/[\s　]+/, "");
@@ -38066,7 +38105,7 @@ const NavAppdxTable = props => {
         };
         return (react_1.default.createElement(TOCItemDiv, { style: {
                 paddingLeft: (props.indent + 2) + "em",
-            }, onClick: onClick, title: appdxTableTitle.text }, appdxTableTitle.text));
+            }, onClick: onClick, title: appdxTableTitle.text() }, appdxTableTitle.text()));
     }
     else {
         return null;
@@ -38080,7 +38119,7 @@ const NavAppdxStyle = props => {
         };
         return (react_1.default.createElement(TOCItemDiv, { style: {
                 paddingLeft: (props.indent + 2) + "em",
-            }, onClick: onClick, title: appdxStyleTitle.text }, appdxStyleTitle.text));
+            }, onClick: onClick, title: appdxStyleTitle.text() }, appdxStyleTitle.text()));
     }
     else {
         return null;
@@ -38094,7 +38133,7 @@ const NavAppdxFig = props => {
         };
         return (react_1.default.createElement(TOCItemDiv, { style: {
                 paddingLeft: (props.indent + 2) + "em",
-            }, onClick: onClick, title: AppdxFigTitle.text }, AppdxFigTitle.text));
+            }, onClick: onClick, title: AppdxFigTitle.text() }, AppdxFigTitle.text()));
     }
     else {
         return null;
@@ -38108,7 +38147,7 @@ const NavAppdxFormat = props => {
         };
         return (react_1.default.createElement(TOCItemDiv, { style: {
                 paddingLeft: (props.indent + 2) + "em",
-            }, onClick: onClick, title: appdxFormatTitle.text }, appdxFormatTitle.text));
+            }, onClick: onClick, title: appdxFormatTitle.text() }, appdxFormatTitle.text()));
     }
     else {
         return null;
@@ -38122,7 +38161,7 @@ const NavAppdxNote = props => {
         };
         return (react_1.default.createElement(TOCItemDiv, { style: {
                 paddingLeft: (props.indent + 2) + "em",
-            }, onClick: onClick, title: appdxNoteTitle.text }, appdxNoteTitle.text));
+            }, onClick: onClick, title: appdxNoteTitle.text() }, appdxNoteTitle.text()));
     }
     else {
         return null;
@@ -38136,7 +38175,7 @@ const NavAppdx = props => {
         };
         return (react_1.default.createElement(TOCItemDiv, { style: {
                 paddingLeft: (props.indent + 2) + "em",
-            }, onClick: onClick, title: ArithFormulaNum.text }, ArithFormulaNum.text));
+            }, onClick: onClick, title: ArithFormulaNum.text() }, ArithFormulaNum.text()));
     }
     else {
         return null;
@@ -38150,7 +38189,7 @@ const NavAnyLaw = props => {
         };
         return (react_1.default.createElement(TOCItemDiv, { style: {
                 paddingLeft: (props.indent + 2) + "em",
-            }, onClick: onClick, title: titleEL.text }, titleEL.text));
+            }, onClick: onClick, title: titleEL.text() }, titleEL.text()));
     }
     else {
         return null;
@@ -38888,8 +38927,8 @@ const getLawTitleWithNum = (law) => {
     const lawNum = law.children.find((el) => el.tag === "LawNum");
     const lawBody = law.children.find((el) => el.tag === "LawBody");
     const lawTitle = lawBody && lawBody.children.find((el) => el.tag === "LawTitle");
-    let sLawNum = lawNum ? lawNum.text : "";
-    const sLawTitle = lawTitle ? lawTitle.text : "";
+    let sLawNum = lawNum ? lawNum.text() : "";
+    const sLawTitle = lawTitle ? lawTitle.text() : "";
     sLawNum = (sLawNum && sLawTitle) ? (`（${sLawNum}）`) : sLawNum;
     return sLawTitle + sLawNum;
 };
@@ -39825,7 +39864,477 @@ if (!global.fetch) {
 
 /***/ }),
 
-/***/ 53868:
+/***/ 2823:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Declarations = void 0;
+class Declarations {
+    constructor() {
+        this.db = new Map();
+    }
+    filterByRange(sentenceTextRange) {
+        const declarations = new Declarations();
+        for (const declaration of this.db.values()) {
+            if (declaration.scope.some(range => (((range.start.sentenceIndex < sentenceTextRange.start.sentenceIndex)
+                || ((range.start.sentenceIndex === sentenceTextRange.start.sentenceIndex)
+                    && (range.start.textOffset <= sentenceTextRange.start.textOffset)))
+                && ((sentenceTextRange.end.sentenceIndex < range.end.sentenceIndex)
+                    || ((sentenceTextRange.end.sentenceIndex === range.end.sentenceIndex)
+                        && (sentenceTextRange.end.textOffset <= range.end.textOffset)))))) {
+                declarations.add(declaration);
+            }
+        }
+        return declarations;
+    }
+    values() {
+        return [...this.db.values()].sort((a, b) => -(a.attr.name.length - b.attr.name.length));
+    }
+    add(declaration) {
+        this.db.set(declaration.attr.declarationID, declaration);
+    }
+    get length() {
+        return this.db.size;
+    }
+    get(declarationID) {
+        return this.db.get(declarationID);
+    }
+}
+exports.Declarations = Declarations;
+//# sourceMappingURL=declarations.js.map
+
+/***/ }),
+
+/***/ 50638:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.isIgnoreAnalysis = exports.getContainerType = exports.containerTags = exports.sentencesContainerTags = exports.articleContainerTags = exports.toplevelContainerTags = exports.rootContainerTags = void 0;
+const container_1 = __webpack_require__(49814);
+const std = __importStar(__webpack_require__(93619));
+exports.rootContainerTags = ["Law"];
+exports.toplevelContainerTags = ["EnactStatement", "MainProvision", ...std.appdxItemTags];
+exports.articleContainerTags = std.articleGroupTags;
+exports.sentencesContainerTags = [
+    "Article",
+    ...std.paragraphItemTags,
+    "Table",
+    "TableRow",
+    "TableColumn",
+    "Sentence",
+];
+exports.containerTags = [
+    ...exports.rootContainerTags,
+    ...exports.toplevelContainerTags,
+    ...exports.articleContainerTags,
+    ...exports.sentencesContainerTags,
+];
+const getContainerType = (tag) => {
+    if (exports.rootContainerTags.indexOf(tag) >= 0)
+        return container_1.ContainerType.ROOT;
+    else if (exports.toplevelContainerTags.indexOf(tag) >= 0)
+        return container_1.ContainerType.TOPLEVEL;
+    else if (exports.articleContainerTags.indexOf(tag) >= 0)
+        return container_1.ContainerType.ARTICLES;
+    else if (exports.sentencesContainerTags.indexOf(tag) >= 0)
+        return container_1.ContainerType.SENTENCES;
+    else
+        return container_1.ContainerType.SENTENCES;
+};
+exports.getContainerType = getContainerType;
+// export const ignoreAnalysisTags = [
+//     "QuoteStruct",
+//     "NewProvision",
+//     // "LawNum",
+//     // "LawTitle",
+//     // "TOC",
+//     // "ArticleTitle",
+//     // ...std.paragraphItemTitleTags,
+//     // "SupplProvision",
+// ] as const;
+// export type IgnoreAnalysis = (
+//     | std.QuoteStruct
+//     | std.NewProvision
+//     | std.SupplProvision
+// );
+const isIgnoreAnalysis = (el) => {
+    if (typeof el === "string")
+        return false;
+    else if (std.isQuoteStruct(el))
+        return true;
+    else if (std.isNewProvision(el))
+        return true;
+    else if (std.isSupplProvision(el) && el.attr.AmendLawNum)
+        return true;
+    else
+        return false;
+};
+exports.isIgnoreAnalysis = isIgnoreAnalysis;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 35317:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.detectDeclarations = exports.detectDeclarationsBySentence = exports.detectDeclarationsByEL = void 0;
+const processNameInline_1 = __webpack_require__(39829);
+const processLawRef_1 = __webpack_require__(82388);
+const common_1 = __webpack_require__(50638);
+const processNameList_1 = __webpack_require__(10766);
+const detectDeclarationsByEL = (elToBeModified, sentenceEnv) => {
+    const declarations = [];
+    const errors = [];
+    {
+        const result = (0, processLawRef_1.processLawRef)(elToBeModified, sentenceEnv);
+        if (result) {
+            declarations.push(...result.value.declarations);
+            errors.push(...result.errors);
+        }
+    }
+    {
+        const result = (0, processNameInline_1.processNameInline)(elToBeModified, sentenceEnv);
+        if (result) {
+            declarations.push(...result.value.declarations);
+            errors.push(...result.errors);
+        }
+    }
+    for (const child of elToBeModified.children) {
+        if (typeof child === "string") {
+            continue;
+        }
+        else if ((0, common_1.isIgnoreAnalysis)(child)) {
+            continue;
+        }
+        else {
+            const detectLawnameResult = (0, exports.detectDeclarationsByEL)(child, sentenceEnv);
+            declarations.push(...detectLawnameResult.value);
+            errors.push(...detectLawnameResult.errors);
+        }
+    }
+    return { value: declarations, errors };
+};
+exports.detectDeclarationsByEL = detectDeclarationsByEL;
+const detectDeclarationsBySentence = (sentenceEnv, sentenceEnvsStruct) => {
+    const declarations = [];
+    const errors = [];
+    {
+        const result = (0, processNameList_1.processNameList)(sentenceEnv, sentenceEnvsStruct);
+        if (result) {
+            declarations.push(...result.value);
+            errors.push(...result.errors);
+        }
+    }
+    {
+        const result = (0, exports.detectDeclarationsByEL)(sentenceEnv.el, sentenceEnv);
+        if (result) {
+            declarations.push(...result.value);
+            errors.push(...result.errors);
+        }
+    }
+    return { value: declarations, errors };
+};
+exports.detectDeclarationsBySentence = detectDeclarationsBySentence;
+const detectDeclarations = (sentenceEnvsStruct) => {
+    const declarations = [];
+    const errors = [];
+    for (const sentenceEnv of sentenceEnvsStruct.sentenceEnvs) {
+        const result = (0, exports.detectDeclarationsBySentence)(sentenceEnv, sentenceEnvsStruct);
+        if (result) {
+            declarations.push(...result.value);
+            errors.push(...result.errors);
+        }
+    }
+    return { value: declarations, errors };
+};
+exports.detectDeclarations = detectDeclarations;
+exports["default"] = exports.detectDeclarations;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 82388:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.processLawRef = exports.getLawNameLength = void 0;
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const _512_1 = __importDefault(__webpack_require__(66366));
+const lawNumTable_1 = __webpack_require__(64434);
+const error_1 = __webpack_require__(40520);
+const controls_1 = __webpack_require__(48075);
+const container_1 = __webpack_require__(49814);
+const _lawRef_1 = __importDefault(__webpack_require__(78140));
+const env_1 = __webpack_require__(37025);
+const sentenceEnv_1 = __webpack_require__(6310);
+const getLawNameLength = (lawNum) => {
+    var _a;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    const digest = (0, _512_1.default)().update(lawNum).digest("hex");
+    const key = parseInt(digest.slice(0, lawNumTable_1.KEY_LENGTH), 16);
+    return (_a = lawNumTable_1.LAWNUM_TABLE[key]) !== null && _a !== void 0 ? _a : null;
+};
+exports.getLawNameLength = getLawNameLength;
+const processLawRef = (elToBeModified, sentenceEnv) => {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
+    const errors = [];
+    const declarations = [];
+    for (let i = 0; i < elToBeModified.children.length; i++) {
+        const result = _lawRef_1.default.match(i, elToBeModified.children, (0, env_1.initialEnv)({ target: "" }));
+        if (result.ok) {
+            const { lawNameCandidate, lawRefInfo: { aliasInfo, lawNum } } = result.value.value;
+            errors.push(...result.value.errors);
+            const lawNumText = lawNum.text();
+            if (aliasInfo) {
+                const { nameSquareParentheses, following, pointerRanges } = aliasInfo;
+                const name = nameSquareParentheses.content.text();
+                const followingStartPos = following ? {
+                    sentenceIndex: sentenceEnv.index,
+                    textOffset: (_b = (_a = sentenceEnv.textRageOfEL(nameSquareParentheses)) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : 0,
+                } : null;
+                const scope = (pointerRanges
+                    ? (pointerRanges.locatedScope
+                        ? (followingStartPos
+                            ? (0, sentenceEnv_1.applyFollowing)(pointerRanges.locatedScope, followingStartPos)
+                            : pointerRanges.locatedScope)
+                        : [])
+                    : [
+                        {
+                            start: {
+                                sentenceIndex: sentenceEnv.index,
+                                textOffset: (_d = (_c = sentenceEnv.textRageOfEL(lawNum)) === null || _c === void 0 ? void 0 : _c[1]) !== null && _d !== void 0 ? _d : 0,
+                            },
+                            end: {
+                                sentenceIndex: ((_f = (_e = sentenceEnv.container.thisOrClosest(p => p.type === container_1.ContainerType.TOPLEVEL || p.type === container_1.ContainerType.ROOT)) === null || _e === void 0 ? void 0 : _e.sentenceRange[1]) !== null && _f !== void 0 ? _f : Number.NaN) + 1,
+                                textOffset: 0,
+                            },
+                        },
+                    ]);
+                if (scope.length === 0) {
+                    errors.push(new error_1.ErrorMessage("No scope found", [
+                        { offset: (_h = (_g = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _g === void 0 ? void 0 : _g[0]) !== null && _h !== void 0 ? _h : 0, line: 0, column: 0 },
+                        { offset: (_k = (_j = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _j === void 0 ? void 0 : _j[1]) !== null && _k !== void 0 ? _k : 0, line: 0, column: 0 },
+                    ]));
+                }
+                const nameTextRange = sentenceEnv.textRageOfEL(nameSquareParentheses.content);
+                if (!nameTextRange) {
+                    throw new Error("nameTextRange is null");
+                }
+                const nameSentenceTextRange = {
+                    start: {
+                        sentenceIndex: sentenceEnv.index,
+                        textOffset: nameTextRange[0],
+                    },
+                    end: {
+                        sentenceIndex: sentenceEnv.index,
+                        textOffset: nameTextRange[1],
+                    },
+                };
+                const declarationID = `decl-sentence_${sentenceEnv.index}-text_${nameTextRange[0]}_${nameTextRange[1]}`;
+                const declaration = new controls_1.____Declaration({
+                    declarationID,
+                    type: "LawName",
+                    name,
+                    value: lawNumText,
+                    scope: scope,
+                    nameSentenceTextRange,
+                    range: nameSquareParentheses.content.range,
+                });
+                declarations.push(declaration);
+                nameSquareParentheses.content.children.splice(0, nameSquareParentheses.content.children.length, declaration);
+            }
+            else {
+                const lawNameLength = (0, exports.getLawNameLength)(lawNumText);
+                if (lawNameLength !== null) {
+                    const name = lawNameCandidate.text().slice(-lawNameLength);
+                    const scope = [
+                        {
+                            start: {
+                                sentenceIndex: sentenceEnv.index,
+                                textOffset: (_m = (_l = sentenceEnv.textRageOfEL(lawNum)) === null || _l === void 0 ? void 0 : _l[1]) !== null && _m !== void 0 ? _m : 0,
+                            },
+                            end: {
+                                sentenceIndex: ((_p = (_o = sentenceEnv.container.thisOrClosest(p => p.type === container_1.ContainerType.TOPLEVEL || p.type === container_1.ContainerType.ROOT)) === null || _o === void 0 ? void 0 : _o.sentenceRange[1]) !== null && _p !== void 0 ? _p : Number.NaN) + 1,
+                                textOffset: 0,
+                            },
+                        },
+                    ];
+                    const lawNameCandidateTextRange = sentenceEnv.textRageOfEL(lawNameCandidate);
+                    if (!lawNameCandidateTextRange) {
+                        throw new Error("lawNameCandidateTextRange is null");
+                    }
+                    const nameSentenceTextRange = {
+                        start: {
+                            sentenceIndex: sentenceEnv.index,
+                            textOffset: lawNameCandidateTextRange[1] - lawNameLength,
+                        },
+                        end: {
+                            sentenceIndex: sentenceEnv.index,
+                            textOffset: lawNameCandidateTextRange[1],
+                        },
+                    };
+                    const declarationID = `decl-sentence_${sentenceEnv.index}-text_${lawNameCandidateTextRange[1] - lawNameLength}_${lawNameCandidateTextRange[1]}`;
+                    const declaration = new controls_1.____Declaration({
+                        declarationID,
+                        type: "LawName",
+                        name,
+                        value: lawNumText,
+                        scope: scope,
+                        nameSentenceTextRange,
+                        range: lawNameCandidate.range && [
+                            lawNameCandidate.range[1] - lawNameLength,
+                            lawNameCandidate.range[1],
+                        ],
+                    });
+                    declarations.push(declaration);
+                    elToBeModified.children.splice(i, 1, new controls_1.__Text(lawNameCandidate.text().slice(0, lawNameCandidate.text().length - lawNameLength), lawNameCandidate.range && [
+                        lawNameCandidate.range[0],
+                        lawNameCandidate.range[1] - lawNameLength,
+                    ]), declaration);
+                    i++;
+                }
+            }
+        }
+    }
+    return {
+        value: { declarations },
+        errors,
+    };
+};
+exports.processLawRef = processLawRef;
+//# sourceMappingURL=processLawRef.js.map
+
+/***/ }),
+
+/***/ 39829:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.processNameInline = void 0;
+const error_1 = __webpack_require__(40520);
+const controls_1 = __webpack_require__(48075);
+const container_1 = __webpack_require__(49814);
+const _nameInline_1 = __importDefault(__webpack_require__(17685));
+const env_1 = __webpack_require__(37025);
+const sentenceEnv_1 = __webpack_require__(6310);
+const processNameInline = (elToBeModified, sentenceEnv) => {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+    const errors = [];
+    const declarations = [];
+    for (let i = 0; i < elToBeModified.children.length; i++) {
+        const result = _nameInline_1.default.match(i, elToBeModified.children, (0, env_1.initialEnv)({ target: "" }));
+        if (result.ok) {
+            const { nameSquareParentheses, following, pointerRanges } = result.value.value;
+            errors.push(...result.value.errors);
+            const name = nameSquareParentheses.content.text();
+            const followingStartPos = following ? {
+                sentenceIndex: sentenceEnv.index,
+                textOffset: (_b = (_a = sentenceEnv.textRageOfEL(nameSquareParentheses)) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : 0,
+            } : null;
+            const scope = (pointerRanges
+                ? (pointerRanges.locatedScope
+                    ? (followingStartPos
+                        ? (0, sentenceEnv_1.applyFollowing)(pointerRanges.locatedScope, followingStartPos)
+                        : pointerRanges.locatedScope)
+                    : [])
+                : [
+                    {
+                        start: {
+                            sentenceIndex: sentenceEnv.index,
+                            textOffset: (_d = (_c = sentenceEnv.textRageOfEL(nameSquareParentheses)) === null || _c === void 0 ? void 0 : _c[1]) !== null && _d !== void 0 ? _d : 0,
+                        },
+                        end: {
+                            sentenceIndex: ((_f = (_e = sentenceEnv.container.thisOrClosest(p => p.type === container_1.ContainerType.TOPLEVEL || p.type === container_1.ContainerType.ROOT)) === null || _e === void 0 ? void 0 : _e.sentenceRange[1]) !== null && _f !== void 0 ? _f : Number.NaN) + 1,
+                            textOffset: 0,
+                        },
+                    },
+                ]);
+            if (scope.length === 0) {
+                errors.push(new error_1.ErrorMessage("No scope found", [
+                    { offset: (_h = (_g = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _g === void 0 ? void 0 : _g[0]) !== null && _h !== void 0 ? _h : 0, line: 0, column: 0 },
+                    { offset: (_k = (_j = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _j === void 0 ? void 0 : _j[1]) !== null && _k !== void 0 ? _k : 0, line: 0, column: 0 },
+                ]));
+            }
+            const nameTextRange = sentenceEnv.textRageOfEL(nameSquareParentheses.content);
+            if (!nameTextRange) {
+                throw new Error("nameTextRange is null");
+            }
+            const nameSentenceTextRange = {
+                start: {
+                    sentenceIndex: sentenceEnv.index,
+                    textOffset: nameTextRange[0],
+                },
+                end: {
+                    sentenceIndex: sentenceEnv.index,
+                    textOffset: nameTextRange[1],
+                },
+            };
+            const declarationID = `decl-sentence_${sentenceEnv.index}-text_${nameTextRange[0]}_${nameTextRange[1]}`;
+            const declaration = new controls_1.____Declaration({
+                declarationID,
+                type: "Keyword",
+                name,
+                value: null,
+                scope: scope,
+                nameSentenceTextRange,
+                range: nameSquareParentheses.content.range,
+            });
+            declarations.push(declaration);
+            nameSquareParentheses.content.children.splice(0, nameSquareParentheses.content.children.length, declaration);
+        }
+    }
+    return {
+        value: { declarations },
+        errors,
+    };
+};
+exports.processNameInline = processNameInline;
+//# sourceMappingURL=processNameInline.js.map
+
+/***/ }),
+
+/***/ 10766:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -39857,743 +40366,1327 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.stdxmlToExt = exports.analyze = exports.Declarations = exports.____VarRef = exports.____Declaration = exports.getLawNameLength = void 0;
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const _512_1 = __importDefault(__webpack_require__(66366));
-const lawNumTable_1 = __webpack_require__(64434);
-const util_1 = __webpack_require__(84530);
-const container_1 = __webpack_require__(31486);
-const env_1 = __webpack_require__(6909);
-const span_1 = __webpack_require__(99805);
-const el_1 = __webpack_require__(26252);
-const pointer_1 = __webpack_require__(82773);
-const range_1 = __webpack_require__(91248);
-const env_2 = __webpack_require__(39099);
-const _sentenceChildren_1 = __webpack_require__(36096);
+exports.processNameList = void 0;
+const error_1 = __webpack_require__(40520);
+const controls_1 = __webpack_require__(48075);
+const _nameListHead_1 = __importDefault(__webpack_require__(12068));
+const env_1 = __webpack_require__(37025);
 const std = __importStar(__webpack_require__(93619));
-const num_1 = __webpack_require__(68685);
-const getLawNameLength = (lawNum) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-    const digest = (0, _512_1.default)().update(lawNum).digest("hex");
-    const key = parseInt(digest.slice(0, lawNumTable_1.KEY_LENGTH), 16);
-    return lawNumTable_1.LAWNUM_TABLE[key];
-};
-exports.getLawNameLength = getLawNameLength;
-const rootContainerTags = ["Law"];
-const toplevelContainerTags = ["EnactStatement", "MainProvision", "AppdxTable", "AppdxStyle"];
-const articleContainerTags = ["Part", "Chapter", "Section", "Subsection", "Division"];
-const spanContainerTags = [
-    "Article",
-    "Paragraph",
-    "Item",
-    "Subitem1",
-    "Subitem2",
-    "Subitem3",
-    "Subitem4",
-    "Subitem5",
-    "Subitem6",
-    "Subitem7",
-    "Subitem8",
-    "Subitem9",
-    "Subitem10",
-    "Table",
-    "TableRow",
-    "TableColumn",
-    "Sentence",
-];
-const containerTags = [
-    ...rootContainerTags,
-    ...toplevelContainerTags,
-    ...articleContainerTags,
-    ...spanContainerTags,
-];
-const getContainerType = (tag) => {
-    if (rootContainerTags.indexOf(tag) >= 0)
-        return container_1.ContainerType.ROOT;
-    else if (toplevelContainerTags.indexOf(tag) >= 0)
-        return container_1.ContainerType.TOPLEVEL;
-    else if (articleContainerTags.indexOf(tag) >= 0)
-        return container_1.ContainerType.ARTICLES;
-    else if (spanContainerTags.indexOf(tag) >= 0)
-        return container_1.ContainerType.SPANS;
-    else
-        return container_1.ContainerType.SPANS;
-};
-const ignoreSpanTag = [
-    "LawNum",
-    "LawTitle",
-    "TOC",
-    "ArticleTitle",
-    "ParagraphNum",
-    "ItemTitle",
-    "Subitem1Title",
-    "Subitem2Title",
-    "Subitem3Title",
-    "Subitem4Title",
-    "Subitem5Title",
-    "Subitem6Title",
-    "Subitem7Title",
-    "Subitem8Title",
-    "Subitem9Title",
-    "Subitem10Title",
-    "SupplProvision",
-];
-const extractSpans = (law) => {
-    const spans = [];
-    const containers = [];
-    let rootContainer = null;
-    const extract = (el, origEnv) => {
-        if (!el.tag)
-            return;
-        if (ignoreSpanTag.indexOf(el.tag) >= 0)
-            return;
-        const env = origEnv.copy();
-        let isMixed = false;
-        for (const subel of el.children) {
-            if (typeof subel === "string") {
-                isMixed = true;
-                break;
-            }
-        }
-        if (isMixed && el.children.length !== 1) {
-            // console.warn(`unexpected mixed content! ${JSON.stringify(el)}`);
-        }
-        if (isMixed) {
-            el.attr.span_index = String(spans.length);
-            spans.push(new span_1.Span(spans.length, el, env));
-            return;
-        }
-        else {
-            env.parents.push(el);
-            const isContainer = containerTags.indexOf(el.tag) >= 0;
-            let container = null;
-            if (isContainer) {
-                const type = getContainerType(el.tag);
-                container = new container_1.Container(el, type);
-                env.addContainer(container);
-                containers.push(container);
-                if (type === container_1.ContainerType.ROOT)
-                    rootContainer = container;
-            }
-            const startSpanIndex = spans.length;
-            for (const subel of el.children) {
-                if (typeof subel === "string")
-                    continue;
-                extract(subel, env);
-            }
-            const endSpanIndex = spans.length; // half open
-            if (container)
-                container.spanRange = [startSpanIndex, endSpanIndex];
-        }
-    };
-    extract(law, new env_1.Env(law.attr.LawType || ""));
-    if (!rootContainer)
-        throw new Error();
-    return [spans, containers, rootContainer];
-};
-class Pos {
-    constructor(options) {
-        this.span = options.span;
-        this.spanIndex = options.spanIndex;
-        this.textIndex = options.textIndex;
-        this.length = options.length;
-        this.env = options.env;
-    }
-}
-class ____Declaration extends el_1.EL {
-    constructor(options) {
-        super("____Declaration", {}, [], options.range);
-        this.type = options.type;
-        this.name = options.name;
-        this.value = options.value;
-        this.scope = options.scope;
-        this.namePos = options.namePos;
-        this.attr.type = this.type;
-        this.attr.name = this.name;
-        if (this.value !== null)
-            this.attr.value = this.value;
-        this.attr.scope = JSON.stringify(this.scope);
-        this.attr.name_pos = JSON.stringify({
-            span_index: this.namePos.spanIndex,
-            text_index: this.namePos.textIndex,
-            length: this.namePos.length,
-        });
-        this.append(this.name);
-    }
-    get nameRange() {
-        return this.namePos.span.el.range && [
-            this.namePos.span.el.range[0] + this.namePos.textIndex,
-            this.namePos.span.el.range[0] + this.namePos.textIndex + this.namePos.length,
-        ];
-    }
-}
-exports.____Declaration = ____Declaration;
-class ScopeRange {
-    constructor(options) {
-        this.startSpanIndex = options.startSpanIndex;
-        this.startTextIndex = options.startTextIndex;
-        this.endSpanIndex = options.endSpanIndex;
-        this.endTextIndex = options.endTextIndex;
-    }
-}
-class ____VarRef extends el_1.EL {
-    constructor(options) {
-        super("____VarRef", {}, [], options.range);
-        this.refName = options.refName;
-        this.declaration = options.declaration;
-        this.refPos = options.refPos;
-        this.attr.ref_declaration_index = this.declaration.attr.declaration_index;
-        this.append(this.refName);
-    }
-}
-exports.____VarRef = ____VarRef;
-class Declarations {
-    constructor() {
-        this.declarations = [];
-    }
-    getInSpan(spanIndex) {
-        const declarations = [];
-        for (const declaration of this.declarations) {
-            if (declaration.scope.some(range => range.startSpanIndex <= spanIndex &&
-                spanIndex < range.endSpanIndex)) {
-                declarations.push(declaration);
-            }
-        }
-        declarations.sort((a, b) => -(a.name.length - b.name.length));
-        return declarations;
-    }
-    add(declaration) {
-        this.declarations.push(declaration);
-    }
-    get length() {
-        return this.declarations.length;
-    }
-    get(index) {
-        return this.declarations[index];
-    }
-}
-exports.Declarations = Declarations;
-const parseRanges = (text) => {
-    if (text === "")
-        return [];
-    const result = range_1.$ranges.match(0, text, (0, env_2.initialEnv)({}));
-    if (result.ok)
-        return result.value.value;
-    else
-        return [];
-};
-const locatePointer = (origPointer, prevPointer, currentSpan) => {
-    let locatedPointer;
-    const head = origPointer[0];
-    const headType = getContainerType(head.tag);
-    const currentContainer = currentSpan.env.container;
-    if (ignoreSpanTag.indexOf(head.tag) >= 0) {
-        locatedPointer = origPointer;
-    }
-    else if (head.relPos === pointer_1.RelPos.SAME) {
-        // console.warn("RelPos.SAME is detected. Skipping:", currentSpan, origPointer);
-        const copy = head.copy();
-        copy.locatedContainer = currentContainer
-            .thisOrClosest(c => c.type === container_1.ContainerType.TOPLEVEL);
-        locatedPointer = [copy];
-    }
-    else if (head.relPos === pointer_1.RelPos.HERE ||
-        head.relPos === pointer_1.RelPos.PREV ||
-        head.relPos === pointer_1.RelPos.NEXT) {
-        const scopeContainer = currentContainer
-            .thisOrClosest(c => c.el.tag === head.tag);
-        if (scopeContainer) {
-            head.locatedContainer =
-                (head.relPos === pointer_1.RelPos.HERE)
-                    ? scopeContainer
-                    : (headType === container_1.ContainerType.ARTICLES)
-                        ? (head.relPos === pointer_1.RelPos.PREV)
-                            ? scopeContainer.prev(c => c.el.tag === head.tag)
-                            : (head.relPos === pointer_1.RelPos.NEXT)
-                                ? scopeContainer.next(c => c.el.tag === head.tag)
-                                : (0, util_1.throwError)()
-                        : (head.relPos === pointer_1.RelPos.PREV)
-                            ? scopeContainer.prevSub(c => c.el.tag === head.tag)
-                            : (head.relPos === pointer_1.RelPos.NEXT)
-                                ? scopeContainer.nextSub(c => c.el.tag === head.tag)
-                                : (0, util_1.throwError)();
-        }
-        locatedPointer = origPointer;
-    }
-    else {
-        const foundIndex = prevPointer
-            ? prevPointer.findIndex(fragment => fragment.tag === head.tag)
-            : -1;
-        if (prevPointer &&
-            1 <= foundIndex) {
-            locatedPointer = [
-                ...prevPointer.slice(0, foundIndex),
-                ...origPointer,
-            ];
-        }
-        else if (headType === container_1.ContainerType.TOPLEVEL) {
-            head.locatedContainer = currentContainer.findAncestorChildrenSub(c => {
-                if (c.el.tag !== head.tag)
-                    return false;
-                const titleEl = c.el.children.find(el => el instanceof el_1.EL && el.tag === `${c.el.tag}Title`);
-                return (new RegExp(`^${head.name}(?:[(（]|\\s|$)`)).exec(titleEl.text) !== null;
-            });
-            locatedPointer = origPointer;
-        }
-        else {
-            const func = (c) => (c.el.tag === head.tag ||
-                head.tag === "SUBITEM" && /^Subitem\d+$/.exec(c.el.tag) !== null) &&
-                (c.el.attr.Num || null) === head.num;
-            head.locatedContainer =
-                headType === container_1.ContainerType.ARTICLES
-                    ? currentContainer.findAncestorChildren(func)
-                    : currentContainer.findAncestorChildrenSub(func);
-            locatedPointer = origPointer;
-        }
-    }
-    if (locatedPointer[0].locatedContainer) {
-        let parentContainer = locatedPointer[0].locatedContainer;
-        for (const fragment of locatedPointer.slice(1)) {
-            if (!parentContainer)
-                break;
-            // let fragment_rank = container_tags.indexOf(fragment.tag);
-            // if (fragment_rank < 0) fragment_rank = Number.POSITIVE_INFINITY;
-            fragment.locatedContainer =
-                parentContainer.find(c => ((c.el.tag === fragment.tag ||
-                    fragment.tag === "SUBITEM" &&
-                        /^Subitem\d+$/.exec(c.el.tag) !== null) &&
-                    (c.el.attr.Num || null) === fragment.num) ||
-                    fragment.tag === "PROVISO" &&
-                        c.el.tag === "Sentence" &&
-                        c.el.attr.Function === "proviso");
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            parentContainer = fragment.locatedContainer;
-        }
-    }
-    return locatedPointer;
-};
-const locateRanges = (origRanges, currentSpan) => {
-    const ranges = [];
-    let prevPointer = null;
-    for (const [origFrom, origTo] of origRanges) {
-        const from = locatePointer(origFrom, prevPointer, currentSpan);
-        prevPointer = from;
-        let to;
-        if (origFrom === origTo) {
-            to = from;
-        }
-        else {
-            to = locatePointer(origTo, prevPointer, currentSpan);
-            prevPointer = to;
-        }
-        ranges.push([from, to]);
-    }
-    return ranges;
-};
-const getScope = (currentSpan, scopeText, following, followingIndex) => {
-    const ret = [];
-    const ranges = locateRanges(parseRanges(scopeText), currentSpan);
-    for (const [from, to] of ranges) {
-        const fromc = from[from.length - 1].locatedContainer;
-        const toc = to[to.length - 1].locatedContainer;
-        if (fromc && toc) {
-            if (following) {
-                ret.push(new ScopeRange({
-                    startSpanIndex: followingIndex,
-                    startTextIndex: 0,
-                    endSpanIndex: toc.spanRange[1],
-                    endTextIndex: 0,
-                }));
-            }
-            else {
-                ret.push(new ScopeRange({
-                    startSpanIndex: fromc.spanRange[0],
-                    startTextIndex: 0,
-                    endSpanIndex: toc.spanRange[1],
-                    endTextIndex: 0,
-                }));
-            }
-        }
-        else {
-            // console.warn("Scope couldn't be detected:", { from, to });
-        }
-    }
-    // console.log(scope_text, ranges, ret);
-    return ret;
-};
-const detectLawname = (spans, spanIndex) => {
-    if (spans.length <= spanIndex + 3)
-        return null;
-    const [lawnameSpan, startSpan, lawnumSpan,] = spans.slice(spanIndex, spanIndex + 3);
-    if (!(startSpan.el.tag === "__PStart" &&
-        startSpan.el.attr.type === "round"))
-        return null;
-    const match = /^(?:明治|大正|昭和|平成|令和)[元〇一二三四五六七八九十]+年\S+?第[〇一二三四五六七八九十百千]+号/.exec(lawnumSpan.text);
-    if (!match)
-        return null;
-    const lawNum = match[0];
-    const lawnameLength = (0, exports.getLawNameLength)(lawNum);
-    const lawnameTextIndex = lawnameSpan.text.length - lawnameLength;
-    const lawName = lawnameSpan.text.slice(lawnameTextIndex);
-    const lawNumRange = lawnumSpan.el.range ? [
-        lawnumSpan.el.range[0] + match.index,
-        lawnumSpan.el.range[0] + match.index + lawNum.length,
-    ] : null;
-    const lawnumEl = new el_1.EL("____LawNum", {}, [lawNum], lawNumRange);
-    if (lawnumSpan.text.length <= lawNum.length &&
-        lawnumSpan.index + 1 < spans.length) {
-        const afterSpan = spans[lawnumSpan.index + 1];
-        if (afterSpan.el.tag === "__PEnd" &&
-            afterSpan.el.attr.type === "round") {
-            const scope = [
-                new ScopeRange({
-                    startSpanIndex: afterSpan.index + 1,
-                    startTextIndex: 0,
-                    endSpanIndex: spans.length,
-                    endTextIndex: 0, // half open
-                }),
-            ];
-            const namePos = new Pos({
-                span: lawnameSpan,
-                spanIndex: lawnameSpan.index,
-                textIndex: lawnameTextIndex,
-                length: lawnameLength,
-                env: lawnameSpan.env,
-            });
-            const range = lawnameSpan.el.range ? [
-                lawnameSpan.el.range[0] + lawnameTextIndex,
-                lawnameSpan.el.range[0] + lawnameTextIndex + lawnameLength,
-            ] : null;
-            const declaration = new ____Declaration({
-                type: "LawName",
-                name: lawName,
-                value: lawNum,
-                scope: scope,
-                namePos: namePos,
-                range,
-            });
-            lawnameSpan.el.replaceSpan(lawnameTextIndex, lawnameTextIndex + lawnameLength, declaration);
-            lawnumSpan.el.replaceSpan(0, lawNum.length, lawnumEl);
-            return declaration;
-        }
-    }
-    else if (lawNum.length < lawnumSpan.text.length &&
-        lawnumSpan.text[lawNum.length] === "。" &&
-        lawnumSpan.index + 5 < spans.length) {
-        const [nameStartSpan, nameSpan, nameEndSpan, nameAfterSpan,] = spans.slice(lawnumSpan.index + 1, lawnumSpan.index + 5);
-        const scopeMatch = /^(以下)?(?:([^。]+?)において)?(?:単に)?$/.exec(lawnumSpan.text.slice(lawNum.length + 1));
-        const nameAfterMatch = /^という。/.exec(nameAfterSpan.text);
-        if (scopeMatch &&
-            nameStartSpan.el.tag === "__PStart" &&
-            nameStartSpan.el.attr.type === "square" &&
-            nameEndSpan.el.tag === "__PEnd" &&
-            nameEndSpan.el.attr.type === "square" &&
-            nameAfterMatch) {
-            const following = scopeMatch[1] !== undefined;
-            const scopeText = scopeMatch[2] || null;
-            const scope = scopeText
-                ? getScope(lawnumSpan, scopeText, following, nameAfterSpan.index)
-                : [
-                    new ScopeRange({
-                        startSpanIndex: nameAfterSpan.index,
-                        startTextIndex: 0,
-                        endSpanIndex: spans.length,
-                        endTextIndex: 0,
-                    }),
-                ];
-            const namePos = new Pos({
-                span: nameSpan,
-                spanIndex: nameSpan.index,
-                textIndex: 0,
-                length: nameSpan.text.length,
-                env: nameSpan.env,
-            });
-            const range = lawnameSpan.el.range ? [
-                lawnameSpan.el.range[0] + lawnameTextIndex,
-                lawnameSpan.el.range[0] + lawnameTextIndex + lawnameLength,
-            ] : null;
-            const declaration = new ____Declaration({
-                type: "LawName",
-                name: nameSpan.text,
-                value: lawNum,
-                scope: scope,
-                namePos: namePos,
-                range,
-            });
-            lawnameSpan.el.replaceSpan(lawnameTextIndex, lawnameTextIndex + lawnameLength, new el_1.EL("____DeclarationVal", {}, [lawName]));
-            nameSpan.el.replaceSpan(0, nameSpan.text.length, declaration);
-            lawnumSpan.el.replaceSpan(0, lawNum.length, lawnumEl);
-            return declaration;
-        }
-    }
-    return null;
-};
-const detectNameInline = (spans, spanIndex) => {
-    if (spans.length < spanIndex + 5)
-        return null;
-    const [nameBeforeSpan, nameStartSpan, nameSpan, nameEndSpan, nameAfterSpan,] = spans.slice(spanIndex, spanIndex + 5);
-    const scopeMatch = /(以下)?(?:([^。]+?)において)?(?:単に)?$/.exec(nameBeforeSpan.text);
-    const nameAfterMatch = /^という。/.exec(nameAfterSpan.text);
-    if (scopeMatch &&
-        nameStartSpan.el.tag === "__PStart" &&
-        nameStartSpan.el.attr.type === "square" &&
-        nameEndSpan.el.tag === "__PEnd" &&
-        nameEndSpan.el.attr.type === "square" &&
-        nameAfterMatch) {
-        const following = scopeMatch[1] !== undefined;
-        const scopeText = scopeMatch[2] || null;
-        const scope = scopeText
-            ? getScope(nameBeforeSpan, scopeText, following, nameAfterSpan.index)
-            : [
-                new ScopeRange({
-                    startSpanIndex: nameAfterSpan.index,
-                    startTextIndex: 0,
-                    endSpanIndex: spans.length,
-                    endTextIndex: 0,
-                }),
-            ];
-        const namePos = new Pos({
-            span: nameSpan,
-            spanIndex: nameSpan.index,
-            textIndex: 0,
-            length: nameSpan.text.length,
-            env: nameSpan.env,
-        });
-        const range = nameSpan.el.range ? [
-            nameSpan.el.range[0],
-            nameSpan.el.range[0] + nameSpan.text.length,
-        ] : null;
-        const declaration = new ____Declaration({
-            type: "Keyword",
-            name: nameSpan.text,
-            value: null,
-            scope: scope,
-            namePos: namePos,
-            range,
-        });
-        nameSpan.el.replaceSpan(0, nameSpan.text.length, declaration);
-        return declaration;
-    }
-    return null;
-};
-const detectNameList = (spans, spanIndex) => {
-    var _a, _b;
-    const ret = [];
-    let columnsMode = true;
-    let paragraphMatch = /([^。\r\n]+?)において、?[次左]の各号に掲げる用語の意義は、(?:それぞれ)?当該各号に定めるところによる。$/.exec(spans[spanIndex].text);
-    if (!paragraphMatch) {
-        columnsMode = false;
-        paragraphMatch = /^(.+?)(?:及びこの法律に基づく命令)?(?:において次に掲げる用語は、|の規定の解釈に(?:ついて|関して)は、)次の定義に従うものとする。$/.exec(spans[spanIndex].text);
-        if (!paragraphMatch)
-            return ret;
-    }
-    const paragraph = spans[spanIndex].env.container;
-    for (const item of (_b = (_a = paragraph.parent) === null || _a === void 0 ? void 0 : _a.children) !== null && _b !== void 0 ? _b : []) {
-        const sentence = item.el.children.find(el => (0, el_1.isJsonEL)(el) && std.paragraphItemSentenceTags.includes(el.tag));
-        if (!sentence || !(0, el_1.isJsonEL)(sentence))
-            continue;
-        let nameSpan = null;
-        let name = null;
-        let value = null;
-        if (columnsMode) {
-            if (sentence.children.length < 2)
-                continue;
-            const [nameCol, valCol] = sentence.children;
-            if (!(0, el_1.isJsonEL)(nameCol) || !(0, el_1.isJsonEL)(valCol))
-                continue;
-            name = nameCol.text;
-            value = valCol.text;
-            for (let i = item.spanRange[0]; i < item.spanRange[1]; i++) {
-                if (spans[i].env.parents.includes(nameCol))
-                    nameSpan = spans[i];
-            }
-        }
-        else {
-            let defStartSpanI = null;
-            for (let i = item.spanRange[0]; i < item.spanRange[1]; i++) {
-                if (spans[i].env.parents.includes(sentence)) {
-                    defStartSpanI = i;
-                    break;
-                }
-            }
-            if (defStartSpanI === null)
-                continue;
-            const [nameStartSpan, _nameSpan, nameEndSpan, ...nameAfterSpans] = spans.slice(defStartSpanI, item.spanRange[1]);
-            const nameAfterSpansText = nameAfterSpans.map(s => s.text).join();
-            const nameAfterMatch = /^とは、(.+)をいう。(?!）)/.exec(nameAfterSpansText);
-            if (nameStartSpan.el.tag === "__PStart" &&
-                nameStartSpan.el.attr.type === "square" &&
-                nameEndSpan.el.tag === "__PEnd" &&
-                nameEndSpan.el.attr.type === "square" &&
-                nameAfterMatch) {
-                nameSpan = _nameSpan;
-                name = nameSpan.text;
-                value = nameAfterMatch[1];
-            }
-        }
-        if (nameSpan === null || name === null || value === null)
-            continue;
-        const scopeText = paragraphMatch[1] || null;
-        const scope = !scopeText
-            ? [
-                new ScopeRange({
-                    startSpanIndex: spanIndex,
-                    startTextIndex: 0,
-                    endSpanIndex: spans.length,
-                    endTextIndex: 0,
-                }),
-            ]
-            : num_1.lawTypes.some(([ptn]) => {
-                const re = new RegExp(`^この${ptn}`);
-                return re.exec(scopeText);
-            })
-                ? [
-                    new ScopeRange({
-                        startSpanIndex: 0,
-                        startTextIndex: 0,
-                        endSpanIndex: spans.length,
-                        endTextIndex: 0,
-                    }),
-                ]
-                : getScope(spans[spanIndex], // currentSpan
-                scopeText, // scopeText
-                false, // following
-                spanIndex);
-        const namePos = new Pos({
-            span: nameSpan,
-            spanIndex: nameSpan.index,
-            textIndex: 0,
-            length: nameSpan.text.length,
-            env: nameSpan.env, // env
-        });
-        const range = nameSpan.el.range ? [
-            nameSpan.el.range[0],
-            nameSpan.el.range[0] + nameSpan.text.length,
-        ] : null;
-        const declaration = new ____Declaration({
-            type: "Keyword",
-            name: name,
-            value: value,
-            scope: scope,
-            namePos: namePos,
-            range,
-        });
-        nameSpan.el.replaceSpan(0, nameSpan.text.length, declaration);
-        ret.push(declaration);
-    }
-    return ret;
-};
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const detectDeclarations = (_law, spans, _containers) => {
-    const declarations = new Declarations();
-    for (let spanIndex = 0; spanIndex < spans.length; spanIndex++) {
-        const declaration = detectLawname(spans, spanIndex) ||
-            detectNameInline(spans, spanIndex);
-        if (declaration) {
-            declaration.attr.declaration_index = String(declarations.length);
-            declarations.add(declaration);
-        }
-        for (const declaration of detectNameList(spans, spanIndex)) {
-            declaration.attr.declaration_index = String(declarations.length);
-            declarations.add(declaration);
-        }
-    }
-    return declarations;
-};
-const detectVariableReferences = (_law, spans, declarations) => {
-    let variableReferences = [];
-    const detect = (span) => {
-        const parent = span.env.parents[span.env.parents.length - 1];
-        if (parent.tag === "__PContent" && parent.attr.type === "square")
-            return;
-        const ret = [];
-        for (const declaration of declarations.getInSpan(span.index)) {
-            const textScope = {
-                start: 0,
-                end: Number.POSITIVE_INFINITY,
+const processNameList = (headSentenceEnv, sentenceEnvsStruct) => {
+    var _a, _b, _c, _d, _e;
+    const errors = [];
+    const declarations = [];
+    const result = _nameListHead_1.default.match(0, headSentenceEnv.el.children, (0, env_1.initialEnv)({ target: "" }));
+    if (result.ok) {
+        const { pointerRanges, pointerRangesModifier } = result.value.value;
+        if (pointerRangesModifier) {
+            console.warn("pointerRangesModifier not implemented.");
+            return {
+                value: declarations,
+                errors,
             };
-            let nextIndexOffset = 0;
-            for (const child of span.el.children) {
-                const indexOffset = nextIndexOffset;
-                nextIndexOffset += (child instanceof el_1.EL ? child.text : child).length;
-                if (child instanceof el_1.EL)
+        }
+        const scope = (_a = pointerRanges.locatedScope) !== null && _a !== void 0 ? _a : [];
+        if (scope.length === 0) {
+            errors.push(new error_1.ErrorMessage("No scope found", [
+                { offset: (_c = (_b = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _b === void 0 ? void 0 : _b[0]) !== null && _c !== void 0 ? _c : 0, line: 0, column: 0 },
+                { offset: (_e = (_d = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _d === void 0 ? void 0 : _d[1]) !== null && _e !== void 0 ? _e : 0, line: 0, column: 0 },
+            ]));
+        }
+        for (const nameContainer of headSentenceEnv.container.children) {
+            const paragraphItemSentence = nameContainer.el.children.find(std.isParagraphItemSentence);
+            if (!paragraphItemSentence || paragraphItemSentence.children.length === 0)
+                continue;
+            if (paragraphItemSentence.children.every(std.isSentence)) {
+                const sentence = paragraphItemSentence.children[0];
+                if (sentence.children.length <= 1)
                     continue;
-                let searchIndex = 0;
-                while (true) {
-                    const index = child.indexOf(declaration.name, searchIndex);
-                    if (index < 0)
-                        break;
-                    searchIndex = index + declaration.name.length;
-                    if (textScope.start <= index && index < textScope.end) {
-                        const refPos = new Pos({
-                            span: span,
-                            spanIndex: span.index,
-                            textIndex: index + indexOffset,
-                            length: declaration.name.length,
-                            env: span.env, // env
-                        });
-                        const range = span.el.range ? [
-                            span.el.range[0] + index + indexOffset,
-                            span.el.range[0] + searchIndex + indexOffset,
-                        ] : null;
-                        const varref = new ____VarRef({
-                            refName: declaration.name,
-                            declaration: declaration,
-                            refPos: refPos,
-                            range,
-                        });
-                        span.el.replaceSpan(index + indexOffset, searchIndex + indexOffset, varref);
-                        ret.push(varref);
-                    }
+                const sentenceEnv = sentenceEnvsStruct.sentenceEnvByEL.get(sentence);
+                if (!sentenceEnv)
+                    continue;
+                const nameChild = sentence.children[0];
+                if (!(nameChild instanceof controls_1.__Parentheses && nameChild.attr.type === "square"))
+                    continue;
+                const name = nameChild.content.text();
+                const afterNameChild = sentence.children[1];
+                if (!(afterNameChild instanceof controls_1.__Text))
+                    continue;
+                const afterNameMatch = /^とは、/.exec(afterNameChild.text());
+                if (!afterNameMatch)
+                    continue;
+                const lastChild = sentence.children[sentence.children.length - 1];
+                if (!(lastChild instanceof controls_1.__Text))
+                    continue;
+                const lastMatch = /をいう。$/.exec(lastChild.text());
+                if (!lastMatch)
+                    continue;
+                const nameTextRange = sentenceEnv.textRageOfEL(nameChild.content);
+                if (!nameTextRange) {
+                    throw new Error("nameTextRange is null");
+                }
+                const nameSentenceTextRange = {
+                    start: {
+                        sentenceIndex: sentenceEnv.index,
+                        textOffset: nameTextRange[0],
+                    },
+                    end: {
+                        sentenceIndex: sentenceEnv.index,
+                        textOffset: nameTextRange[1],
+                    },
+                };
+                const declarationID = `decl-sentence_${sentenceEnv.index}-text_${nameSentenceTextRange.start.textOffset}_${nameSentenceTextRange.end.textOffset}`;
+                const declaration = new controls_1.____Declaration({
+                    declarationID,
+                    type: "Keyword",
+                    name,
+                    value: sentence.text().slice(nameChild.text().length + afterNameMatch[0].length, -lastMatch[0].length),
+                    scope: scope,
+                    nameSentenceTextRange,
+                    range: nameChild.content.range,
+                });
+                declarations.push(declaration);
+                nameChild.content.children.splice(0, nameChild.content.children.length, declaration);
+            }
+            else if (paragraphItemSentence.children.every(std.isColumn)) {
+                if (paragraphItemSentence.children.length !== 2)
+                    continue;
+                const [nameColumn, defColumn] = paragraphItemSentence.children;
+                if (nameColumn.children.length !== 1)
+                    continue;
+                const nameSentence = nameColumn.children[0];
+                if (!std.isSentence(nameSentence))
+                    continue;
+                const name = nameSentence.text();
+                const nameSentenceEnv = sentenceEnvsStruct.sentenceEnvByEL.get(nameSentence);
+                if (!nameSentenceEnv)
+                    continue;
+                const nameSentenceTextRange = {
+                    start: {
+                        sentenceIndex: nameSentenceEnv.index,
+                        textOffset: 0,
+                    },
+                    end: {
+                        sentenceIndex: nameSentenceEnv.index,
+                        textOffset: name.length,
+                    },
+                };
+                const declarationID = `decl-sentence_${nameSentenceEnv.index}-text_${nameSentenceTextRange.start.textOffset}_${nameSentenceTextRange.end.textOffset}`;
+                const declaration = new controls_1.____Declaration({
+                    declarationID,
+                    type: "Keyword",
+                    name,
+                    value: defColumn.text(),
+                    scope: scope,
+                    nameSentenceTextRange,
+                    range: nameSentence.range ? [
+                        nameSentence.range[0],
+                        nameSentence.range[0] + name.length,
+                    ] : null,
+                });
+                declarations.push(declaration);
+                nameSentence.children.splice(0, 1, declaration);
+            }
+        }
+    }
+    return {
+        value: declarations,
+        errors,
+    };
+};
+exports.processNameList = processNameList;
+//# sourceMappingURL=processNameList.js.map
+
+/***/ }),
+
+/***/ 38667:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.detectTokens = exports.detectTokensByEL = void 0;
+const controls_1 = __webpack_require__(48075);
+const common_1 = __webpack_require__(50638);
+const getScope_1 = __importDefault(__webpack_require__(25300));
+const matchLawNum_1 = __importDefault(__webpack_require__(58412));
+const matchPointerRanges_1 = __webpack_require__(13355);
+const detectTokensByEL = (elToBeModified, sentenceEnv) => {
+    const pointerRangesList = [];
+    const lawNums = [];
+    const errors = [];
+    for (let childIndex = 0; childIndex < elToBeModified.children.length; childIndex++) {
+        const child = elToBeModified.children[childIndex];
+        if ((0, common_1.isIgnoreAnalysis)(child)) {
+            continue;
+        }
+        else if (typeof child === "string") {
+            continue;
+        }
+        else if (child instanceof controls_1.__Parentheses && child.attr.type === "square") {
+            continue;
+        }
+        else if (child instanceof controls_1.__Text) {
+            {
+                // match before pointerRanges
+                const match = (0, matchLawNum_1.default)(child);
+                if (match) {
+                    lawNums.push(match.value.lawNum);
+                    errors.push(...match.errors);
+                    elToBeModified.children.splice(childIndex, 1, ...match.value.newItems);
+                    childIndex += match.value.proceedOffset - 1;
+                    continue;
+                }
+            }
+            {
+                const match = (0, matchPointerRanges_1.matchPointerRanges)(child);
+                if (match) {
+                    const pointerRanges = match.value.pointerRanges;
+                    (0, getScope_1.default)(sentenceEnv.container, pointerRanges);
+                    pointerRangesList.push(pointerRanges);
+                    errors.push(...match.errors);
+                    elToBeModified.children.splice(childIndex, 1, ...match.value.newItems);
+                    childIndex += match.value.proceedOffset - 1;
+                    continue;
                 }
             }
         }
-        return ret;
-    };
-    for (const span of spans) {
-        const varrefs = detect(span);
-        if (varrefs) {
-            variableReferences = variableReferences.concat(varrefs);
-        }
-    }
-    return variableReferences;
-};
-const analyze = (lawToBeModified) => {
-    const [spans, containers] = extractSpans(lawToBeModified);
-    const declarations = detectDeclarations(lawToBeModified, spans, containers);
-    const variableReferences = detectVariableReferences(lawToBeModified, spans, declarations);
-    return {
-        declarations,
-        variableReferences,
-    };
-};
-exports.analyze = analyze;
-const stdxmlToExt = (elToBeModified) => {
-    if (["LawNum", "QuoteStruct"].indexOf(elToBeModified.tag) < 0) {
-        const isMixed = elToBeModified.children.some(child => typeof child === "string" || child instanceof String);
-        if (isMixed) {
-            const result = _sentenceChildren_1.$sentenceChildren.match(0, elToBeModified.innerXML().replace(/\r|\n/, ""), (0, env_2.initialEnv)({}));
-            if (result.ok) {
-                elToBeModified.children = result.value.value;
-            }
-            else {
-                const message = `stdxml_to_ext: Error: ${elToBeModified.innerXML()}`;
-                throw new Error(message);
-            }
-        }
         else {
-            elToBeModified.children = elToBeModified.children.map(exports.stdxmlToExt);
+            const newResult = (0, exports.detectTokensByEL)(child, sentenceEnv);
+            pointerRangesList.push(...newResult.value.pointerRangesList);
+            lawNums.push(...newResult.value.lawNums);
+            errors.push(...newResult.errors);
         }
     }
-    return elToBeModified;
+    return {
+        value: {
+            pointerRangesList,
+            lawNums,
+        },
+        errors,
+    };
 };
-exports.stdxmlToExt = stdxmlToExt;
+exports.detectTokensByEL = detectTokensByEL;
+const detectTokens = (sentenceEnvsStruct) => {
+    const pointerRangesList = [];
+    const lawNums = [];
+    const errors = [];
+    for (const sentenceEnv of sentenceEnvsStruct.sentenceEnvs) {
+        const newResult = (0, exports.detectTokensByEL)(sentenceEnv.el, sentenceEnv);
+        pointerRangesList.push(...newResult.value.pointerRangesList);
+        lawNums.push(...newResult.value.lawNums);
+        errors.push(...newResult.errors);
+    }
+    return {
+        value: {
+            pointerRangesList,
+            lawNums,
+        },
+        errors,
+    };
+};
+exports.detectTokens = detectTokens;
+exports["default"] = exports.detectTokens;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
 
-/***/ 91248:
+/***/ 58412:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.matchLawNum = void 0;
+const controls_1 = __webpack_require__(48075);
+const num_1 = __webpack_require__(68685);
+const reLawNum = new RegExp(`${num_1.ptnLawNum}`);
+const matchLawNum = (textEL) => {
+    const errors = [];
+    const text = textEL.text();
+    const match = reLawNum.exec(text);
+    if (!match)
+        return null;
+    const newItems = [];
+    if (match.index > 0) {
+        newItems.push(new controls_1.__Text(text.substring(0, match.index), textEL.range && [textEL.range[0], textEL.range[0] + match.index]));
+    }
+    const lawNum = new controls_1.____LawNum(match[0], textEL.range && [
+        textEL.range[0] + match.index,
+        textEL.range[0] + match.index + match[0].length,
+    ]);
+    newItems.push(lawNum);
+    if (match.index + match[0].length < text.length) {
+        newItems.push(new controls_1.__Text(text.substring(match.index + match[0].length), textEL.range && [
+            textEL.range[0] + match.index + match[0].length,
+            textEL.range[1],
+        ]));
+    }
+    return {
+        value: {
+            newItems,
+            lawNum,
+            proceedOffset: match.index > 0 ? 2 : 1,
+        },
+        errors,
+    };
+};
+exports.matchLawNum = matchLawNum;
+exports["default"] = exports.matchLawNum;
+//# sourceMappingURL=matchLawNum.js.map
+
+/***/ }),
+
+/***/ 13355:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.matchPointerRanges = void 0;
+const env_1 = __webpack_require__(39099);
+const _pointerRanges_1 = __importDefault(__webpack_require__(23952));
+const controls_1 = __webpack_require__(48075);
+const matchPointerRanges = (textEL) => {
+    const errors = [];
+    const text = textEL.text();
+    for (let textIndex = 0; textIndex < text.length; textIndex++) {
+        const result = _pointerRanges_1.default.match(textIndex, text, (0, env_1.initialEnv)({ baseOffset: textEL.range ? textEL.range[0] : 0 }));
+        if (result.ok) {
+            const pointerRanges = result.value.value;
+            errors.push(...result.value.errors);
+            const newItems = [];
+            if (textIndex > 0) {
+                newItems.push(new controls_1.__Text(text.substring(0, textIndex), textEL.range && [textEL.range[0], textEL.range[0] + textIndex]));
+            }
+            newItems.push(pointerRanges);
+            if (result.nextOffset < text.length) {
+                newItems.push(new controls_1.__Text(text.substring(result.nextOffset), textEL.range && [
+                    textEL.range[0] + result.nextOffset,
+                    textEL.range[1],
+                ]));
+            }
+            return {
+                value: {
+                    newItems,
+                    pointerRanges,
+                    proceedOffset: textIndex > 0 ? 2 : 1,
+                },
+                errors,
+            };
+        }
+    }
+    return null;
+};
+exports.matchPointerRanges = matchPointerRanges;
+exports["default"] = exports.matchPointerRanges;
+//# sourceMappingURL=matchPointerRanges.js.map
+
+/***/ }),
+
+/***/ 96416:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.detectVariableReferences = exports.detectVariableReferencesOfEL = exports.matchVariableReference = void 0;
+const varRef_1 = __webpack_require__(29390);
+const controls_1 = __webpack_require__(48075);
+const sentenceEnv_1 = __webpack_require__(6310);
+const common_1 = __webpack_require__(50638);
+const matchVariableReference = (textEL, sentenceEnv, declarations) => {
+    var _a, _b;
+    const errors = [];
+    const text = textEL.text();
+    for (const declaration of declarations.values()) {
+        const name = declaration.attr.name;
+        const nameOffset = text.indexOf(name);
+        if (nameOffset < 0)
+            continue;
+        const newItems = [];
+        if (nameOffset > 0) {
+            newItems.push(new controls_1.__Text(text.substring(0, nameOffset), textEL.range && [textEL.range[0], textEL.range[0] + nameOffset]));
+        }
+        const textRange = sentenceEnv.textRageOfEL(textEL);
+        const refSentenceTextRange = {
+            start: {
+                sentenceIndex: sentenceEnv.index,
+                textOffset: ((_a = textRange === null || textRange === void 0 ? void 0 : textRange[0]) !== null && _a !== void 0 ? _a : Number.NaN) + nameOffset,
+            },
+            end: {
+                sentenceIndex: sentenceEnv.index,
+                textOffset: ((_b = textRange === null || textRange === void 0 ? void 0 : textRange[0]) !== null && _b !== void 0 ? _b : Number.NaN) + nameOffset + name.length,
+            },
+        };
+        const range = (textEL.range) ? [
+            textEL.range[0] + nameOffset,
+            textEL.range[0] + nameOffset + name.length,
+        ] : null;
+        const varRef = new varRef_1.____VarRef({
+            refName: name,
+            declarationID: declaration.attr.declarationID,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            refSentenceTextRange,
+            range,
+        });
+        newItems.push(varRef);
+        if (nameOffset + name.length < text.length) {
+            newItems.push(new controls_1.__Text(text.substring(nameOffset + name.length), textEL.range && [
+                textEL.range[0] + nameOffset + name.length,
+                textEL.range[1],
+            ]));
+        }
+        return {
+            value: {
+                newItems,
+                varRef,
+                proceedOffset: nameOffset > 0 ? 1 : 2,
+            },
+            errors,
+        };
+    }
+    return null;
+};
+exports.matchVariableReference = matchVariableReference;
+const detectVariableReferencesOfEL = (elToBeModified, sentenceEnv, declarations) => {
+    const varRefs = [];
+    const errors = [];
+    for (let childIndex = 0; childIndex < elToBeModified.children.length; childIndex++) {
+        const child = elToBeModified.children[childIndex];
+        if ((0, common_1.isIgnoreAnalysis)(child)) {
+            continue;
+        }
+        else if (typeof child === "string") {
+            continue;
+        }
+        else if (child instanceof controls_1.__Parentheses && child.attr.type === "square") {
+            continue;
+        }
+        else if (child instanceof controls_1.__Text) {
+            const textRange = sentenceEnv.textRageOfEL(child);
+            if (!textRange)
+                throw new Error("textRange is null");
+            const filteredDeclarations = declarations.filterByRange({
+                start: {
+                    sentenceIndex: sentenceEnv.index,
+                    textOffset: textRange[0],
+                },
+                end: {
+                    sentenceIndex: sentenceEnv.index,
+                    textOffset: textRange[1],
+                },
+            });
+            {
+                // match before pointerRanges
+                const match = (0, exports.matchVariableReference)(child, sentenceEnv, filteredDeclarations);
+                if (match) {
+                    varRefs.push(match.value.varRef);
+                    errors.push(...match.errors);
+                    elToBeModified.children.splice(childIndex, 1, ...match.value.newItems);
+                    childIndex += match.value.proceedOffset - 1;
+                    continue;
+                }
+            }
+        }
+        else if ((0, sentenceEnv_1.isSentenceText)(child)) {
+            continue;
+        }
+        else {
+            const textRange = sentenceEnv.textRageOfEL(child);
+            if (!textRange) {
+                throw new Error("textRange is null");
+            }
+            const filteredDeclarations = declarations.filterByRange({
+                start: {
+                    sentenceIndex: sentenceEnv.index,
+                    textOffset: textRange[0],
+                },
+                end: {
+                    sentenceIndex: sentenceEnv.index,
+                    textOffset: textRange[1],
+                },
+            });
+            const newResult = (0, exports.detectVariableReferencesOfEL)(child, sentenceEnv, filteredDeclarations);
+            varRefs.push(...newResult.value.varRefs);
+            errors.push(...newResult.errors);
+        }
+    }
+    return {
+        value: {
+            varRefs,
+        },
+        errors,
+    };
+};
+exports.detectVariableReferencesOfEL = detectVariableReferencesOfEL;
+const detectVariableReferences = (sentenceEnvsStruct, declarations) => {
+    const varRefs = [];
+    const errors = [];
+    for (const sentenceEnv of sentenceEnvsStruct.sentenceEnvs) {
+        const result = (0, exports.detectVariableReferencesOfEL)(sentenceEnv.el, sentenceEnv, declarations.filterByRange({
+            start: {
+                sentenceIndex: sentenceEnv.index,
+                textOffset: 0,
+            },
+            end: {
+                sentenceIndex: sentenceEnv.index + 1,
+                textOffset: 0,
+            },
+        }));
+        if (result) {
+            varRefs.push(...result.value.varRefs);
+            errors.push(...result.errors);
+        }
+    }
+    return { value: { varRefs }, errors };
+};
+exports.detectVariableReferences = detectVariableReferences;
+exports["default"] = exports.detectVariableReferences;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 25300:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getScope = void 0;
+const util_1 = __webpack_require__(84530);
+const container_1 = __webpack_require__(49814);
+const el_1 = __webpack_require__(18539);
+const common_1 = __webpack_require__(50638);
+const pointer_1 = __webpack_require__(85919);
+const std = __importStar(__webpack_require__(93619));
+const locatePointer = (origPointer, prevLocatedPointerInfo, currentContainer) => {
+    const origFragments = origPointer.fragments();
+    const head = origFragments[0];
+    const headType = (0, common_1.getContainerType)(head.attr.targetType);
+    let locatedFragments;
+    let headContainer = null;
+    if (head.attr.relPos === pointer_1.RelPos.SAME) {
+        locatedFragments = origFragments;
+        // if (origPointer.fragments().length !== 1) {
+        //     console.warn("RelPos.SAME with multiple fragments", currentSpan, origPointer);
+        // }
+        // headContainer = currentContainer
+        //     .thisOrClosest(c => c.type === ContainerType.TOPLEVEL);
+        // locatedFragments = [head];
+    }
+    else if ((head.attr.relPos === pointer_1.RelPos.HERE)
+        || (head.attr.relPos === pointer_1.RelPos.PREV)
+        || (head.attr.relPos === pointer_1.RelPos.NEXT)) {
+        const scopeContainer = currentContainer
+            .thisOrClosest(c => c.el.tag === head.attr.targetType);
+        if (scopeContainer) {
+            headContainer =
+                (head.attr.relPos === pointer_1.RelPos.HERE)
+                    ? scopeContainer
+                    : (headType === container_1.ContainerType.ARTICLES)
+                        ? (head.attr.relPos === pointer_1.RelPos.PREV)
+                            ? scopeContainer.prev(c => c.el.tag === head.attr.targetType)
+                            : (head.attr.relPos === pointer_1.RelPos.NEXT)
+                                ? scopeContainer.next(c => c.el.tag === head.attr.targetType)
+                                : (0, util_1.throwError)()
+                        : (head.attr.relPos === pointer_1.RelPos.PREV)
+                            ? scopeContainer.prevSub(c => c.el.tag === head.attr.targetType)
+                            : (head.attr.relPos === pointer_1.RelPos.NEXT)
+                                ? scopeContainer.nextSub(c => c.el.tag === head.attr.targetType)
+                                : (0, util_1.throwError)();
+        }
+        locatedFragments = origFragments;
+    }
+    else {
+        const foundIndex = prevLocatedPointerInfo
+            ? prevLocatedPointerInfo.findIndex(([fragment]) => fragment.attr.targetType === head.attr.targetType)
+            : -1;
+        if (prevLocatedPointerInfo
+            && (1 <= foundIndex)) {
+            locatedFragments = [
+                ...prevLocatedPointerInfo.slice(0, foundIndex).map(([fragment]) => fragment),
+                ...origFragments,
+            ];
+        }
+        else if (headType === container_1.ContainerType.TOPLEVEL) {
+            headContainer = currentContainer.findAncestorChildrenSub(c => {
+                if (c.el.tag !== head.attr.targetType)
+                    return false;
+                const titleEl = c.el.children.find(el => el instanceof el_1.EL && el.tag === `${c.el.tag}Title`);
+                return (new RegExp(`^${head.attr.name}(?:[(（]|\\s|$)`)).exec(titleEl.text()) !== null;
+            });
+            locatedFragments = origFragments;
+        }
+        else {
+            const func = (c) => (((c.el.tag === head.attr.targetType)
+                || ((head.attr.targetType === "SUBITEM")
+                    && (/^Subitem\d+$/.exec(c.el.tag) !== null)))
+                && ((c.num || null) === head.attr.num));
+            headContainer =
+                headType === container_1.ContainerType.ARTICLES
+                    ? currentContainer.findAncestorChildren(func)
+                    : currentContainer.findAncestorChildrenSub(func);
+            locatedFragments = origFragments;
+        }
+    }
+    const retOne = [];
+    if (headContainer) {
+        retOne.push([locatedFragments[0], headContainer]);
+        let parentContainer = headContainer;
+        for (const fragment of locatedFragments.slice(1)) {
+            // if (!parentContainer) break;
+            // let fragment_rank = container_tags.indexOf(fragment.tag);
+            // if (fragment_rank < 0) fragment_rank = Number.POSITIVE_INFINITY;
+            const container = parentContainer.find(c => {
+                var _a;
+                return (((c.el.tag === fragment.attr.targetType)
+                    || ((fragment.attr.targetType === "SUBITEM")
+                        && (/^Subitem\d+$/.exec(c.el.tag) !== null)))
+                    && (((_a = c.num) !== null && _a !== void 0 ? _a : null) === fragment.attr.num))
+                    || ((fragment.attr.targetType === "PROVISO")
+                        && (c.el.tag === "Sentence")
+                        && (c.el.attr.Function === "proviso"));
+            });
+            if (container) {
+                retOne.push([fragment, container]);
+                parentContainer = container;
+            }
+            else {
+                break;
+            }
+        }
+    }
+    return retOne;
+};
+const locateRanges = (origRanges, currentContainer) => {
+    var _a, _b;
+    const ranges = [];
+    const rangeELs = origRanges.ranges();
+    let processed = false;
+    if (rangeELs.length === 1) {
+        const pointerELs = rangeELs[0].pointers();
+        if (pointerELs.length === 1) {
+            const fragments = pointerELs[0].fragments();
+            if (fragments.length === 1) {
+                const fragmentEL = fragments[0];
+                if (fragmentEL.attr.relPos === pointer_1.RelPos.HERE && fragmentEL.attr.targetType === "Law") {
+                    // "この法律" does not contain SupplProvision of other amendments.
+                    processed = true;
+                    for (const container of (_b = (_a = currentContainer.thisOrClosest(p => p.type === container_1.ContainerType.ROOT)) === null || _a === void 0 ? void 0 : _a.children) !== null && _b !== void 0 ? _b : []) {
+                        if (std.isSupplProvision(container.el) && container.el.attr.AmendLawNum) {
+                            continue;
+                        }
+                        ranges.push([[[fragmentEL, container]], [[fragmentEL, container]]]);
+                    }
+                }
+                else if (fragmentEL.attr.relPos === pointer_1.RelPos.PREV && fragmentEL.attr.count !== null) {
+                    processed = true;
+                    let count = fragmentEL.attr.count === "all" ? Number.MAX_SAFE_INTEGER : Number(fragmentEL.attr.count);
+                    const scopeContainer = currentContainer
+                        .thisOrClosest(c => c.el.tag === fragmentEL.attr.targetType);
+                    if (scopeContainer && count > 0) {
+                        for (const prevContainer of scopeContainer.prevAll(c => c.el.tag === fragmentEL.attr.targetType)) {
+                            ranges.unshift([[[fragmentEL, prevContainer]], [[fragmentEL, prevContainer]]]);
+                            count--;
+                            if (count <= 0)
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (!processed) {
+        let prevLocatedPointerInfo = null;
+        for (const [origFrom, origTo] of rangeELs.map(r => r.pointers())) {
+            const from = locatePointer(origFrom, prevLocatedPointerInfo, currentContainer);
+            prevLocatedPointerInfo = from;
+            if (!origTo) {
+                ranges.push([from, from]);
+            }
+            else {
+                const to = locatePointer(origTo, prevLocatedPointerInfo, currentContainer);
+                ranges.push([from, to]);
+            }
+        }
+        // if (!from || !to || from.length === 0 || to.length === 0) {
+        //     console.warn("locateRanges: invalid range", origRanges, currentSpan, from, to);
+        // }
+    }
+    return ranges;
+};
+const getScope = (currentContainer, pointerRangesToBeModified, followingStartPos) => {
+    const scope = [];
+    const ranges = locateRanges(pointerRangesToBeModified, currentContainer);
+    for (const [from, to] of ranges) {
+        if (from.length === 0 || to.length === 0) {
+            continue;
+        }
+        for (const [fragment, container] of from) {
+            fragment.attr.locatedContainerID = container.containerID;
+        }
+        for (const [fragment, container] of to) {
+            fragment.attr.locatedContainerID = container.containerID;
+        }
+        const [, fromc] = from[from.length - 1];
+        const [, toc] = to[to.length - 1];
+        if (followingStartPos) {
+            scope.push({
+                start: followingStartPos,
+                end: {
+                    sentenceIndex: toc.sentenceRange[1],
+                    textOffset: 0,
+                },
+            });
+        }
+        else {
+            scope.push({
+                start: {
+                    sentenceIndex: fromc.sentenceRange[0],
+                    textOffset: 0,
+                },
+                end: {
+                    sentenceIndex: toc.sentenceRange[1],
+                    textOffset: 0,
+                },
+            });
+        }
+    }
+    if (scope.length > 0) {
+        pointerRangesToBeModified.attr.locatedScope = JSON.stringify(scope);
+    }
+    // console.log(scope_text, ranges, ret);
+    return scope;
+};
+exports.getScope = getScope;
+exports["default"] = exports.getScope;
+//# sourceMappingURL=getScope.js.map
+
+/***/ }),
+
+/***/ 41829:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getSentenceEnvs = void 0;
+const container_1 = __webpack_require__(49814);
+const common_1 = __webpack_require__(50638);
+const sentenceEnv_1 = __webpack_require__(6310);
+const getSentenceEnvs = (el) => {
+    var _a;
+    const sentenceEnvs = [];
+    const sentenceEnvByEL = new Map();
+    const containers = new Map();
+    const containersByEL = new Map();
+    let rootContainer = null;
+    const lawType = (_a = el.attr.LawType) !== null && _a !== void 0 ? _a : "";
+    const dummyRootContainer = new container_1.Container({
+        containerID: "container-dummy-root",
+        type: container_1.ContainerType.ROOT,
+        el,
+    });
+    const extract = (el, prevContainer, prevParentELs) => {
+        var _a;
+        if ((0, common_1.isIgnoreAnalysis)(el))
+            return;
+        if ((0, sentenceEnv_1.isSentenceLike)(el)) {
+            const container = (_a = prevContainer !== null && prevContainer !== void 0 ? prevContainer : rootContainer) !== null && _a !== void 0 ? _a : dummyRootContainer;
+            if (!rootContainer)
+                rootContainer = container;
+            const sentenceEnv = new sentenceEnv_1.SentenceEnv({
+                index: sentenceEnvs.length,
+                el,
+                lawType,
+                parentELs: [...prevParentELs],
+                container,
+            });
+            sentenceEnvs.push(sentenceEnv);
+            sentenceEnvByEL.set(el, sentenceEnv);
+            return;
+        }
+        else {
+            const parentELs = [...prevParentELs, el];
+            let container = prevContainer;
+            if (common_1.containerTags.includes(el.tag)) {
+                container = new container_1.Container({ el });
+                if (prevContainer)
+                    prevContainer.addChild(container);
+                containers.set(container.containerID, container);
+                containersByEL.set(el, container);
+                if (!rootContainer)
+                    rootContainer = container;
+            }
+            const startSentenceIndex = sentenceEnvs.length;
+            for (const child of el.children) {
+                if (typeof child === "string")
+                    continue;
+                extract(child, container, parentELs);
+            }
+            const endSpanIndex = sentenceEnvs.length; // half open
+            if (container)
+                container.sentenceRange = [startSentenceIndex, endSpanIndex];
+        }
+    };
+    extract(el, null, []);
+    dummyRootContainer.sentenceRange = [0, sentenceEnvs.length];
+    if (!rootContainer)
+        throw new Error();
+    return { sentenceEnvs, sentenceEnvByEL, containers, containersByEL, rootContainer };
+};
+exports.getSentenceEnvs = getSentenceEnvs;
+exports["default"] = exports.getSentenceEnvs;
+//# sourceMappingURL=getSentenceEnvs.js.map
+
+/***/ }),
+
+/***/ 53868:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.analyze = void 0;
+const getSentenceEnvs_1 = __importDefault(__webpack_require__(41829));
+const detectVariableReferences_1 = __importDefault(__webpack_require__(96416));
+const declarations_1 = __webpack_require__(2823);
+const detectTokens_1 = __importDefault(__webpack_require__(38667));
+const detectDeclarations_1 = __importDefault(__webpack_require__(35317));
+const analyze = (elToBeModified) => {
+    const errors = [];
+    const sentenceEnvsStruct = (0, getSentenceEnvs_1.default)(elToBeModified);
+    const detectTokensResult = (0, detectTokens_1.default)(sentenceEnvsStruct);
+    errors.push(...detectTokensResult.errors);
+    const detectDeclarationsResult = (0, detectDeclarations_1.default)(sentenceEnvsStruct);
+    const declarations = new declarations_1.Declarations();
+    for (const declaration of detectDeclarationsResult.value)
+        declarations.add(declaration);
+    errors.push(...detectDeclarationsResult.errors);
+    const detectVariableReferencesResult = (0, detectVariableReferences_1.default)(sentenceEnvsStruct, declarations);
+    const variableReferences = detectVariableReferencesResult.value.varRefs;
+    errors.push(...detectVariableReferencesResult.errors);
+    return Object.assign(Object.assign(Object.assign(Object.assign({}, detectTokensResult.value), { declarations,
+        variableReferences }), sentenceEnvsStruct), { errors });
+};
+exports.analyze = analyze;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 37025:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.initialEnv = void 0;
+const core_1 = __webpack_require__(24658);
+const error_1 = __webpack_require__(40520);
+const initialEnv = (initialEnvOptions) => {
+    const { target, options = {}, baseOffset = 0 } = initialEnvOptions;
+    const registerCurrentRangeTarget = () => { };
+    const offsetToPos = (_, offset) => ({ offset });
+    const stringOffsetToPos = (0, core_1.getMemorizedStringOffsetToPos)();
+    // const onMatchFail = (matchFail: MatchFail, matchContext: MatchContext) => {
+    //     if (state.maxOffsetMatchFail === null || matchFail.offset > state.maxOffsetMatchFail.offset) {
+    //         state.maxOffsetMatchFail = matchFail;
+    //         state.maxOffsetMatchContext = matchContext;
+    //     }
+    // };
+    const newErrorMessage = (message, range) => new error_1.ErrorMessage(message, [
+        stringOffsetToPos(target, range[0]),
+        stringOffsetToPos(target, range[1]),
+    ]);
+    const state = {
+        maxOffsetMatchFail: null,
+        maxOffsetMatchContext: null,
+    };
+    return {
+        options,
+        // toStringOptions: {
+        //     fullToString: true,
+        //     maxToStringDepth: 5,
+        // },
+        registerCurrentRangeTarget,
+        offsetToPos,
+        // onMatchFail,
+        state,
+        newErrorMessage,
+        stringOffsetToPos,
+        baseOffset,
+    };
+};
+exports.initialEnv = initialEnv;
+//# sourceMappingURL=env.js.map
+
+/***/ }),
+
+/***/ 12266:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.factory = void 0;
+const factory_1 = __webpack_require__(21718);
+exports.factory = new factory_1.RuleFactory();
+exports["default"] = exports.factory;
+//# sourceMappingURL=factory.js.map
+
+/***/ }),
+
+/***/ 78140:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.$lawRef = exports.$lawNum = void 0;
+const controls_1 = __webpack_require__(48075);
+const env_1 = __webpack_require__(37025);
+const factory_1 = __importDefault(__webpack_require__(12266));
+exports.$lawNum = factory_1.default
+    .withName("nameInline")
+    .sequence(s => s
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.____LawNum)) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}), "lawNum")
+    .and(r => r
+    .zeroOrOne(r => r
+    .sequence(s => s
+    .and(r => r
+    .zeroOrOne(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)
+        && /以下(?:単に)?$/.test(item.text())) {
+        return item;
+    }
+    else {
+        return null;
+    }
+})), "following")
+    .and(r => r
+    .zeroOrOne(r => r
+    .sequence(s => s
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.____PointerRanges)) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}))
+    .andOmit(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)
+        && /^において(?:単に)?$/.test(item.text())) {
+        return item;
+    }
+    else {
+        return null;
+    }
+})))), "pointerRanges")
+    .andOmit(r => r
+    .assert(({ following, pointerRanges }) => following || pointerRanges))
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Parentheses)
+        && item.attr.type === "square"
+        && item.content.children.every(c => c instanceof controls_1.__Text)) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}), "nameSquareParentheses")
+    .andOmit(r => r
+    .zeroOrOne(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)
+        && /^という。/.test(item.text())) {
+        return item;
+    }
+    else {
+        return null;
+    }
+})))
+    .action(({ following, pointerRanges, nameSquareParentheses }) => {
+    const value = {
+        following: Boolean(following),
+        pointerRanges,
+        nameSquareParentheses,
+    };
+    return { value, errors: [] };
+}))), "aliasInfo")
+    .action(({ lawNum, aliasInfo }) => {
+    var _a, _b;
+    const value = {
+        lawNum,
+        aliasInfo: (_a = aliasInfo === null || aliasInfo === void 0 ? void 0 : aliasInfo.value) !== null && _a !== void 0 ? _a : null,
+    };
+    return { value, errors: [...((_b = aliasInfo === null || aliasInfo === void 0 ? void 0 : aliasInfo.errors) !== null && _b !== void 0 ? _b : [])] };
+}));
+exports.$lawRef = factory_1.default
+    .withName("lawRef")
+    .sequence(s => s
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}), "lawNameCandidate")
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Parentheses)
+        && item.attr.type === "round") {
+        const match = exports.$lawNum.match(0, item.content.children, (0, env_1.initialEnv)({ target: "" }));
+        if (!match.ok)
+            return null;
+        return {
+            value: Object.assign({}, match.value.value),
+            errors: match.value.errors,
+        };
+    }
+    else {
+        return null;
+    }
+}), "lawRefInfo")
+    .action(({ lawNameCandidate, lawRefInfo }) => {
+    const value = {
+        lawNameCandidate,
+        lawRefInfo: lawRefInfo.value,
+    };
+    return { value, errors: [...lawRefInfo.errors] };
+}));
+exports["default"] = exports.$lawRef;
+//# sourceMappingURL=$lawRef.js.map
+
+/***/ }),
+
+/***/ 17685:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.$nameInline = void 0;
+// import * as std from "../../../law/std";
+const controls_1 = __webpack_require__(48075);
+const factory_1 = __importDefault(__webpack_require__(12266));
+exports.$nameInline = factory_1.default
+    .withName("nameInline")
+    .sequence(s => s
+    .and(r => r
+    .zeroOrOne(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)
+        && /以下(?:単に)?$/.test(item.text())) {
+        return item;
+    }
+    else {
+        return null;
+    }
+})), "following")
+    .and(r => r
+    .zeroOrOne(r => r
+    .sequence(s => s
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.____PointerRanges)) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}))
+    .andOmit(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)
+        && /^において(?:単に)?$/.test(item.text())) {
+        return item;
+    }
+    else {
+        return null;
+    }
+})))), "pointerRanges")
+    .andOmit(r => r
+    .assert(({ following, pointerRanges }) => following || pointerRanges))
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Parentheses)
+        && item.attr.type === "square"
+        && item.content.children.every(c => c instanceof controls_1.__Text)) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}), "nameSquareParentheses")
+    .andOmit(r => r
+    .zeroOrOne(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)
+        && /^という。/.test(item.text())) {
+        return item;
+    }
+    else {
+        return null;
+    }
+})))
+    .action(({ following, pointerRanges, nameSquareParentheses }) => {
+    const value = {
+        following: Boolean(following),
+        pointerRanges,
+        nameSquareParentheses,
+    };
+    return { value, errors: [] };
+}));
+exports["default"] = exports.$nameInline;
+//# sourceMappingURL=$nameInline.js.map
+
+/***/ }),
+
+/***/ 12068:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.$nameListHead = void 0;
+// import * as std from "../../../law/std";
+const controls_1 = __webpack_require__(48075);
+const factory_1 = __importDefault(__webpack_require__(12266));
+const reAfterScope = /(?:の規定)?/;
+const reAfterInferior = /(?:において|中(?:の)?|の|における)(?:(?:使用する)?用語は)?(?:解釈に(?:関して|ついて)は)?(?:、)?/;
+const reAfterImport = /(?:において|で)使用する用語の例による(?:ほか|外)(?:、)?/;
+const reNameRef = /(?:次|左)(?:の各号)?に掲げる用語(?:の意義|の定義)?は(?:、)?/;
+const reOther = /(?:別段の定め(?:が|の)ある場合を除き)(?:、)?/;
+const reDefRef = /(?:それぞれ)?(?:次|左|当該各号)(?:の各号)?(?:に|の)(?:定める|示す|掲げる|定義に従う|とおりとする|例による|意味に用いる|ところによる|ものとする)+。/;
+const reCombinedWithoutInferiorIncludingImport = new RegExp(`^${reAfterScope.source}${reAfterInferior.source}(?:(.*?)${reAfterImport.source})?(?:${reNameRef.source})?(?:${reOther.source})?${reDefRef.source}$`);
+const reCombinedBeforeInferior = new RegExp(`^${reAfterScope.source}(?:又は)$`);
+const reCombinedAfterInferiorIncludingImport = new RegExp(`^(?:の規定)?${reAfterInferior.source}(?:(.*?)${reAfterImport.source})?(?:${reNameRef.source})?(?:${reOther.source})?${reDefRef.source}$`);
+const reCombinedAfterInferiorBeforeImport = new RegExp(`^(?:の規定)?${reAfterInferior.source}(.*)$`);
+const reCombinedBeforeImportWithoutInferior = new RegExp(`^${reAfterScope.source}${reAfterInferior.source}(.*)$`);
+const reCombinedAfterImport = new RegExp(`^(.*)?${reAfterImport.source}(?:${reNameRef.source})?(?:${reOther.source})?${reDefRef.source}$`);
+exports.$nameListHead = factory_1.default
+    .withName("nameListHead")
+    .sequence(s => s
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.____PointerRanges)) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}), "pointerRanges")
+    .and(r => r
+    .zeroOrOne(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Parentheses)) {
+        return item;
+    }
+    else {
+        return null;
+    }
+})), "pointerRangesModifier")
+    .and(r => r
+    .choice(c => c
+    .orSequence(r => r
+    .and(r => r
+    .oneMatch(({ item }) => {
+    let m;
+    if ((item instanceof controls_1.__Text)
+        && (m = reCombinedWithoutInferiorIncludingImport.exec(item.text()))) {
+        return [
+            item,
+            [m.index, m.index + m[0].length],
+        ];
+    }
+    else {
+        return null;
+    }
+})))
+    .orSequence(r => r
+    .andOmit(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)
+        && reCombinedBeforeInferior.test(item.text())) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}))
+    .andOmit(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.____PointerRanges)) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}))
+    .andOmit(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)
+        && reCombinedAfterInferiorIncludingImport.test(item.text())) {
+        return item;
+    }
+    else {
+        return null;
+    }
+})))
+    .orSequence(r => r
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)
+        && reCombinedBeforeImportWithoutInferior.test(item.text())) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}))
+    .and(r => r
+    .oneOrMore(r => r
+    .oneMatch(({ item }) => {
+    if (!((item instanceof controls_1.__Text)
+        && reCombinedAfterImport.test(item.text()))) {
+        return item;
+    }
+    else {
+        return null;
+    }
+})))
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)
+        && reCombinedAfterImport.test(item.text())) {
+        return item;
+    }
+    else {
+        return null;
+    }
+})))
+    .orSequence(r => r
+    .andOmit(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)
+        && reCombinedBeforeInferior.test(item.text())) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}))
+    .andOmit(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.____PointerRanges)) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}))
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)
+        && reCombinedAfterInferiorBeforeImport.test(item.text())) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}))
+    .and(r => r
+    .zeroOrMore(r => r
+    .oneMatch(({ item }) => {
+    if (!((item instanceof controls_1.__Text)
+        && !reCombinedAfterImport.test(item.text()))) {
+        return item;
+    }
+    else {
+        return null;
+    }
+})))
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)
+        && reCombinedAfterImport.test(item.text())) {
+        return item;
+    }
+    else {
+        return null;
+    }
+})))), "importSentenceChildren")
+    .action(({ pointerRanges, pointerRangesModifier, importSentenceChildren }) => {
+    const value = {
+        pointerRanges,
+        pointerRangesModifier,
+        importSentenceChildren: importSentenceChildren ? importSentenceChildren.flat() : null,
+    };
+    return { value, errors: [] };
+}));
+exports["default"] = exports.$nameListHead;
+//# sourceMappingURL=$nameListHead.js.map
+
+/***/ }),
+
+/***/ 23952:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -40603,19 +41696,261 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.rules = exports.$pointer_fragment = exports.$pointer = exports.$range = exports.$ranges = void 0;
+exports.$anyWherePointerFragment = exports.$secondaryOnlyPointerFragment = exports.$firstOnlyPointerFragment = exports.$singleOnlyPointerFragment = exports.$pointer = exports.$pointerRange = exports.$pointerRanges = void 0;
 /* eslint-disable no-irregular-whitespace */
 const num_1 = __webpack_require__(68685);
-const pointer_1 = __webpack_require__(82773);
+const controls_1 = __webpack_require__(48075);
+const pointer_1 = __webpack_require__(85919);
 const factory_1 = __webpack_require__(31707);
 const lexical_1 = __webpack_require__(99247);
 const makeRangesRule_1 = __importDefault(__webpack_require__(64358));
-_a = (0, makeRangesRule_1.default)(() => exports.$pointer), exports.$ranges = _a.$ranges, exports.$range = _a.$range;
+const makeRange = (from, midText, to, trailingText, range) => {
+    return new pointer_1.____PointerRange({
+        from,
+        midChildren: midText ? [new controls_1.__Text(midText.text, midText.range)] : [],
+        to,
+        trailingChildren: trailingText ? [new controls_1.__Text(trailingText.text, trailingText.range)] : [],
+        range,
+    });
+};
+const makeRanges = (first, midText, rest, range) => {
+    const children = [];
+    const errors = [];
+    children.push(first.value);
+    errors.push(...first.errors);
+    if (midText)
+        children.push(new controls_1.__Text(midText.text, midText.range));
+    if (rest) {
+        children.push(...rest.value.children);
+        errors.push(...rest.errors);
+    }
+    return {
+        value: new pointer_1.____PointerRanges({
+            children,
+            range,
+        }),
+        errors,
+    };
+};
+_a = (0, makeRangesRule_1.default)((() => exports.$pointer), makeRange, makeRanges), exports.$pointerRanges = _a.$ranges, exports.$pointerRange = _a.$range;
 exports.$pointer = factory_1.factory
     .withName("pointer")
-    .oneOrMore(() => exports.$pointer_fragment);
-exports.$pointer_fragment = factory_1.factory
-    .withName("pointer_fragment")
+    .choice(c => c
+    .orSequence(s => s
+    .and(r => r
+    .choice(c => c
+    .or(() => exports.$anyWherePointerFragment)
+    .or(() => exports.$firstOnlyPointerFragment)), "first")
+    .and(r => r
+    .zeroOrMore(r => r
+    .choice(c => c
+    .or(() => exports.$anyWherePointerFragment)
+    .or(() => exports.$secondaryOnlyPointerFragment))), "rest")
+    .action(({ first, rest, range }) => {
+    return new pointer_1.____Pointer({
+        children: [first, ...rest],
+        range: range(),
+    });
+}))
+    .orSequence(s => s
+    .and(() => exports.$singleOnlyPointerFragment, "single")
+    .action(({ single, range }) => {
+    return new pointer_1.____Pointer({
+        children: [single],
+        range: range(),
+    });
+})));
+exports.$singleOnlyPointerFragment = factory_1.factory
+    .withName("firstOnlyPointerFragment")
+    .choice(c => c
+    .or(r => r
+    .action(r => r
+    .sequence(c => c
+    .and(r => r.seqEqual("前"))
+    .and(r => r
+    .choice(c => c
+    .or(r => r.zeroOrOne(r => r.seqEqual("各")))
+    .or(r => r.zeroOrOne(() => lexical_1.$kanjiDigits))), "count")
+    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, count, type_char, range }) => {
+    const targetType = (type_char === "表")
+        ? "TableStruct"
+        : num_1.articleGroupType[type_char];
+    if (count === "各") {
+        return new pointer_1.____PF({
+            relPos: pointer_1.RelPos.PREV,
+            targetType,
+            count: "all",
+            name: text(),
+            range: range(),
+        });
+    }
+    else {
+        const digits = count ? (0, num_1.parseKanjiNum)(count) : null;
+        return new pointer_1.____PF({
+            relPos: pointer_1.RelPos.PREV,
+            targetType,
+            count: digits ? `${digits}` : null,
+            name: text(),
+            range: range(),
+        });
+    }
+}))));
+exports.$firstOnlyPointerFragment = factory_1.factory
+    .withName("firstOnlyPointerFragment")
+    .choice(c => c
+    .or(r => r
+    .action(r => r
+    .sequence(c => c
+    .and(r => r.seqEqual("次"))
+    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, type_char, range }) => {
+    return new pointer_1.____PF({
+        relPos: pointer_1.RelPos.NEXT,
+        targetType: (type_char === "表")
+            ? "TableStruct"
+            : num_1.articleGroupType[type_char],
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .sequence(c => c
+    .and(r => r.seqEqual("前"))
+    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, type_char, range }) => {
+    return new pointer_1.____PF({
+        relPos: pointer_1.RelPos.PREV,
+        targetType: (type_char === "表")
+            ? "TableStruct"
+            : num_1.articleGroupType[type_char],
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .sequence(c => c
+    .and(r => r
+    .choice(c => c
+    .or(r => r.seqEqual("この"))
+    .or(r => r.seqEqual("本"))))
+    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, type_char, range }) => {
+    return new pointer_1.____PF({
+        relPos: pointer_1.RelPos.HERE,
+        targetType: (type_char === "表")
+            ? "TableStruct"
+            : num_1.articleGroupType[type_char],
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .sequence(c => c
+    .and(r => r
+    .choice(c => c
+    .or(r => r.seqEqual("この"))))
+    .and(r => r
+    .choice(c => c
+    .or(r => r.regExp(/^法律|勅令|政令|規則|省令|府令|内閣官房令|命令/))
+    .or(r => r.seqEqual("附則"))
+    .or(r => r.seqEqual("別表"))), "type")), (({ text, type, range }) => {
+    return new pointer_1.____PF({
+        relPos: pointer_1.RelPos.HERE,
+        targetType: ((type === "附則")
+            ? "SupplProvision"
+            : (type === "別表")
+                ? "AppdxTable"
+                : "Law"),
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .sequence(c => c
+    .and(r => r.seqEqual("同"))
+    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, type_char, range }) => {
+    return new pointer_1.____PF({
+        relPos: pointer_1.RelPos.SAME,
+        targetType: (type_char === "表")
+            ? "TableStruct"
+            : num_1.articleGroupType[type_char],
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .sequence(c => c
+    .and(r => r.regExp(/^[付附]/))
+    .and(r => r.seqEqual("則"), "type_char")), (({ text, type_char, range }) => {
+    return new pointer_1.____PF({
+        relPos: pointer_1.RelPos.NAMED,
+        targetType: num_1.articleGroupType[type_char],
+        name: text(),
+        range: range(),
+    });
+}))));
+exports.$secondaryOnlyPointerFragment = factory_1.factory
+    .withName("secondaryOnlyPointerFragment")
+    .choice(c => c
+    .or(r => r
+    .action(r => r
+    .seqEqual("前段"), (({ text, range }) => {
+    return new pointer_1.____PF({
+        relPos: pointer_1.RelPos.NAMED,
+        targetType: "FIRSTPART",
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .seqEqual("後段"), (({ text, range }) => {
+    return new pointer_1.____PF({
+        relPos: pointer_1.RelPos.NAMED,
+        targetType: "LATTERPART",
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .seqEqual("ただし書"), (({ text, range }) => {
+    return new pointer_1.____PF({
+        relPos: pointer_1.RelPos.NAMED,
+        targetType: "PROVISO",
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .seqEqual("に基づく命令"), (({ text, range }) => {
+    return new pointer_1.____PF({
+        relPos: pointer_1.RelPos.NAMED,
+        targetType: "INFERIOR",
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .choice(c => c
+    .orSequence(s => s
+    .and(() => lexical_1.$irohaChar)
+    .andOmit(r => r.nextIsNot(() => lexical_1.$irohaChar)))
+    .or(() => lexical_1.$romanDigits)), (({ text, range }) => {
+    return new pointer_1.____PF({
+        relPos: pointer_1.RelPos.NAMED,
+        targetType: "SUBITEM",
+        name: text(),
+        num: (0, num_1.parseNamedNum)(text()),
+        range: range(),
+    });
+}))));
+exports.$anyWherePointerFragment = factory_1.factory
+    .withName("anyWherePointerFragment")
     .choice(c => c
     .or(r => r
     .action(r => r
@@ -40627,95 +41962,42 @@ exports.$pointer_fragment = factory_1.factory
     .zeroOrMore(r => r
     .sequence(c => c
     .and(r => r.seqEqual("の"))
-    .and(() => lexical_1.$kanjiDigits))))), (({ text, type_char }) => {
-    return new pointer_1.PointerFragment(pointer_1.RelPos.NAMED, num_1.articleGroupType[type_char], text(), (0, num_1.parseNamedNum)(text()));
+    .and(() => lexical_1.$kanjiDigits))))), (({ text, type_char, range }) => {
+    return new pointer_1.____PF({
+        relPos: pointer_1.RelPos.NAMED,
+        targetType: num_1.articleGroupType[type_char],
+        name: text(),
+        num: (0, num_1.parseNamedNum)(text()),
+        range: range(),
+    });
 })))
-    .or(r => r
-    .action(r => r
-    .sequence(c => c
-    .and(r => r.seqEqual("次"))
-    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, type_char }) => {
-    return new pointer_1.PointerFragment(pointer_1.RelPos.NEXT, (type_char === "表")
-        ? "TableStruct"
-        : num_1.articleGroupType[type_char], text(), null);
-})))
-    .or(r => r
-    .action(r => r
-    .sequence(c => c
-    .and(r => r.seqEqual("前"))
-    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, type_char }) => {
-    return new pointer_1.PointerFragment(pointer_1.RelPos.PREV, (type_char === "表")
-        ? "TableStruct"
-        : num_1.articleGroupType[type_char], text(), null);
-})))
-    .or(r => r
-    .action(r => r
-    .sequence(c => c
-    .and(r => r
-    .choice(c => c
-    .or(r => r.seqEqual("この"))
-    .or(r => r.seqEqual("本"))))
-    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, type_char }) => {
-    return new pointer_1.PointerFragment(pointer_1.RelPos.HERE, (type_char === "表")
-        ? "TableStruct"
-        : num_1.articleGroupType[type_char], text(), null);
-})))
-    .or(r => r
-    .action(r => r
-    .sequence(c => c
-    .and(r => r.seqEqual("同"))
-    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, type_char }) => {
-    return new pointer_1.PointerFragment(pointer_1.RelPos.SAME, (type_char === "表")
-        ? "TableStruct"
-        : num_1.articleGroupType[type_char], text(), null);
-})))
-    .or(r => r
-    .action(r => r
-    .sequence(c => c
-    .and(r => r.regExp(/^[付附]/))
-    .and(r => r.seqEqual("則"), "type_char")), (({ text, type_char }) => {
-    return new pointer_1.PointerFragment(pointer_1.RelPos.NAMED, num_1.articleGroupType[type_char], text(), null);
-})))
-    .or(r => r
-    .action(r => r
-    .sequence(c => c
-    .and(r => r.seqEqual("別表"))
-    .and(r => r
-    .zeroOrOne(r => r
-    .sequence(c => c
-    .and(r => r.seqEqual("第"))
-    .and(() => lexical_1.$kanjiDigits))))), (({ text }) => {
-    return new pointer_1.PointerFragment(pointer_1.RelPos.NAMED, "AppdxTable", text(), (0, num_1.parseNamedNum)(text()));
-})))
-    .or(r => r
-    .action(r => r
-    .seqEqual("前段"), (({ text }) => {
-    return new pointer_1.PointerFragment(pointer_1.RelPos.NAMED, "FIRSTPART", text(), null);
-})))
-    .or(r => r
-    .action(r => r
-    .seqEqual("後段"), (({ text }) => {
-    return new pointer_1.PointerFragment(pointer_1.RelPos.NAMED, "LATTERPART", text(), null);
-})))
-    .or(r => r
-    .action(r => r
-    .seqEqual("ただし書"), (({ text }) => {
-    return new pointer_1.PointerFragment(pointer_1.RelPos.NAMED, "PROVISO", text(), null);
-})))
-    .or(r => r
-    .action(r => r
-    .choice(c => c
-    .or(() => lexical_1.$irohaChar)
-    .or(() => lexical_1.$romanDigits)), (({ text }) => {
-    return new pointer_1.PointerFragment(pointer_1.RelPos.NAMED, "SUBITEM", text(), (0, num_1.parseNamedNum)(text()));
-}))));
-exports.rules = {
-    ranges: exports.$ranges,
-    range: exports.$range,
-    pointer: exports.$pointer,
-    pointer_fragment: exports.$pointer_fragment,
-};
-//# sourceMappingURL=range.js.map
+// .or(r => r
+//     .action(r => r
+//         .sequence(c => c
+//             .and(r => r.seqEqual("別表"))
+//             .and(r => r
+//                 .zeroOrOne(r => r
+//                     .sequence(c => c
+//                         .and(r => r.seqEqual("第"))
+//                         .and(() => $kanjiDigits),
+//                     )
+//                 )
+//             )
+//         )
+//     , (({ text, range }) => {
+//         return new ____PF({
+//             relPos: RelPos.NAMED,
+//             targetType: "AppdxTable",
+//             name: text(),
+//             num: parseNamedNum(text()),
+//             range: range(),
+//         });
+//     })
+//     )
+// )
+);
+exports["default"] = exports.$pointerRanges;
+//# sourceMappingURL=$pointerRanges.js.map
 
 /***/ }),
 
@@ -40747,14 +42029,18 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.toLawData = exports.Timing = void 0;
 const std = __importStar(__webpack_require__(93619));
 const analyzer = __importStar(__webpack_require__(53868));
 const util = __importStar(__webpack_require__(84530));
 const lawtext_1 = __webpack_require__(23259);
-const el_1 = __webpack_require__(26252);
 const elaws_api_1 = __webpack_require__(98120);
+const xmlToEL_1 = __webpack_require__(26338);
+const addSentenceChildrenControls_1 = __importDefault(__webpack_require__(16088));
 class Timing {
     constructor() {
         this.searchLawNum = null;
@@ -40799,12 +42085,12 @@ const toLawData = async (props, onMessage, timing) => {
             onMessage("法令XMLをパースしています...");
             // console.log("toLawData: parsing law xml...");
             await util.wait(30);
-            const [parseXMLOrLawtextTime, el] = await util.withTime(el_1.xmlToJson)(_props.xml);
+            const [parseXMLOrLawtextTime, el] = await util.withTime(xmlToEL_1.xmlToEL)(_props.xml);
             timing.parseXMLOrLawtext = parseXMLOrLawtextTime;
             onMessage("制御タグを追加しています...");
             // console.log("onNavigated: adding control tags...");
             await util.wait(30);
-            const [addControlTagsTime] = await util.withTime(analyzer.stdxmlToExt)(el);
+            const [addControlTagsTime] = await util.withTime(addSentenceChildrenControls_1.default)(el);
             timing.addControlTags = addControlTagsTime;
             onMessage("法令を解析しています...");
             // console.log("onNavigated: analysing law...");
@@ -40955,7 +42241,7 @@ class LawInfo {
     }
     addReferencingLawNums(xml) {
         // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
-        for (const m of xml.match(new RegExp(num_1.reLawnum, "g")) || []) {
+        for (const m of xml.match(new RegExp(num_1.ptnLawNum, "g")) || []) {
             if (m !== this.LawNum)
                 this.ReferencingLawNums.add(m);
         }
@@ -41461,9 +42747,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LawQuery = exports.LawQueryItem = exports.BaseLawCriteria = exports.Query = void 0;
 const elaws_api_1 = __webpack_require__(98120);
 const util_1 = __webpack_require__(84530);
-const el_1 = __webpack_require__(26252);
 const lawinfo_1 = __webpack_require__(14292);
 const FetchElawsLoader_1 = __webpack_require__(39028);
+const xmlToEL_1 = __webpack_require__(26338);
 // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-member-access
 const DOMParser = (__webpack_require__.g["window"] && window.DOMParser) || (__webpack_require__(16014).DOMParser);
 const domParser = new DOMParser();
@@ -42021,7 +43307,7 @@ class LawQueryItem extends lawinfo_1.LawInfo {
             const doc = await this.getDocument();
             if (doc === null)
                 return null;
-            this._cache.el = (0, el_1.elementToJson)(doc.documentElement);
+            this._cache.el = (0, xmlToEL_1.elementToEL)(doc.documentElement);
         }
         return this._cache.el;
     }
@@ -42384,10 +43670,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.articleGroupTitleTag = exports.articleGroupType = exports.setItemNum = exports.parseLawNum = exports.parseNamedNum = exports.KanaMode = exports.replaceWideNum = exports.reWideDigits = exports.parseRomanNum = exports.reItemNum = exports.reAiuChar = exports.aiuChars = exports.reIrohaChar = exports.irohaChars = exports.reNamedNum = exports.kanjiDigits = exports.parseKanjiNum = exports.reKanjiNum = exports.getLawtype = exports.lawTypes = exports.eras = exports.reLawnum = void 0;
+exports.articleGroupTitleTag = exports.articleGroupType = exports.setItemNum = exports.parseLawNum = exports.parseNamedNum = exports.KanaMode = exports.replaceWideNum = exports.reWideDigits = exports.parseRomanNum = exports.aiuChars = exports.irohaChars = exports.kanjiDigits = exports.parseKanjiNum = exports.getLawtype = exports.lawTypes = exports.eras = exports.ptnLawNum = void 0;
 const std = __importStar(__webpack_require__(93619));
 const util_1 = __webpack_require__(84530);
-exports.reLawnum = /(?:(?:明治|大正|昭和|平成|令和)[元〇一二三四五六七八九十]+年(?:(?:\S+?第[〇一二三四五六七八九十百千]+号|人事院規則[―〇一二三四五六七八九]+)|[一二三四五六七八九十]+月[一二三四五六七八九十]+日内閣総理大臣決定|憲法)|明治三十二年勅令|大正十二年内務省・鉄道省令|昭和五年逓信省・鉄道省令|昭和九年逓信省・農林省令|人事院規則一〇―一五)/;
+exports.ptnLawNum = "(明治|大正|昭和|平成|令和)([一二三四五六七八九十]+)年(\\S+?)(?:第([一二三四五六七八九十百千]+)号)";
+// export const reLawnum = /(?:(?:明治|大正|昭和|平成|令和)[元〇一二三四五六七八九十]+年(?:(?:\S+?第[〇一二三四五六七八九十百千]+号|人事院規則[―〇一二三四五六七八九]+)|[一二三四五六七八九十]+月[一二三四五六七八九十]+日内閣総理大臣決定|憲法)|明治三十二年勅令|大正十二年内務省・鉄道省令|昭和五年逓信省・鉄道省令|昭和九年逓信省・農林省令|人事院規則一〇―一五)/;
 exports.eras = {
     "明治": "Meiji", "大正": "Taisho",
     "昭和": "Showa", "平成": "Heisei",
@@ -42410,9 +43697,9 @@ const getLawtype = (text) => {
     return null;
 };
 exports.getLawtype = getLawtype;
-exports.reKanjiNum = /((\S*)千)?((\S*)百)?((\S*)十)?(\S*)/;
+const reKanjiNum = /((\S*)千)?((\S*)百)?((\S*)十)?(\S*)/;
 const parseKanjiNum = (text) => {
-    const m = exports.reKanjiNum.exec(text);
+    const m = reKanjiNum.exec(text);
     if (m) {
         const d1000 = m[1] ? exports.kanjiDigits[m[2]] || 1 : 0;
         const d100 = m[3] ? exports.kanjiDigits[m[4]] || 1 : 0;
@@ -42427,12 +43714,12 @@ exports.kanjiDigits = {
     "〇": 0, "一": 1, "二": 2, "三": 3, "四": 4,
     "五": 5, "六": 6, "七": 7, "八": 8, "九": 9,
 };
-exports.reNamedNum = /^(○?)第?([一二三四五六七八九十百千]+)\S*?([のノ一二三四五六七八九十百千]*)$/;
 exports.irohaChars = "イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセスン";
-exports.reIrohaChar = /[イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセスン]/;
 exports.aiuChars = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
-exports.reAiuChar = /[アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン]/;
-exports.reItemNum = /^\D*(\d+)\D*$/;
+const reNamedNum = /^(○?)第?([一二三四五六七八九十百千]+)\S*?([のノ一二三四五六七八九十百千]*)$/;
+const reIrohaChar = new RegExp(`[${exports.irohaChars}]`);
+const reAiuChar = new RegExp(`[${exports.aiuChars}]`);
+const reItemNum = /^\D*(\d+)\D*$/;
 const parseRomanNum = (text) => {
     let num = 0;
     for (let i = 0; i < text.length; i++) {
@@ -42494,7 +43781,7 @@ const parseNamedNum = (text, kanaMode = KanaMode.Iroha) => {
         .replace("及", "、")
         .split("、");
     for (const subtext of subtexts) {
-        let m = exports.reNamedNum.exec(subtext);
+        let m = reNamedNum.exec(subtext);
         if (m) {
             const nums = [(0, exports.parseKanjiNum)(m[2])];
             if (m[3]) {
@@ -42509,14 +43796,14 @@ const parseNamedNum = (text, kanaMode = KanaMode.Iroha) => {
             continue;
         }
         if (kanaMode === KanaMode.Iroha) {
-            m = exports.reIrohaChar.exec(subtext);
+            m = reIrohaChar.exec(subtext);
             if (m) {
                 numsGroup.push(String(exports.irohaChars.indexOf(m[0]) + 1));
                 continue;
             }
         }
         else if (kanaMode === KanaMode.Aiu) {
-            m = exports.reAiuChar.exec(subtext);
+            m = reAiuChar.exec(subtext);
             if (m) {
                 numsGroup.push(String(exports.aiuChars.indexOf(m[0]) + 1));
                 continue;
@@ -42526,7 +43813,7 @@ const parseNamedNum = (text, kanaMode = KanaMode.Iroha) => {
             throw (0, util_1.assertNever)(kanaMode);
         }
         const replacedSubtext = (0, exports.replaceWideNum)(subtext);
-        m = exports.reItemNum.exec(replacedSubtext);
+        m = reItemNum.exec(replacedSubtext);
         if (m) {
             numsGroup.push(m[1]);
             continue;
@@ -42539,6 +43826,7 @@ const parseNamedNum = (text, kanaMode = KanaMode.Iroha) => {
     return numsGroup.join(":");
 };
 exports.parseNamedNum = parseNamedNum;
+const reLawNum = new RegExp(`^${exports.ptnLawNum}$`);
 const parseLawNum = (lawNum) => {
     const ret = {
         Era: null,
@@ -42546,7 +43834,7 @@ const parseLawNum = (lawNum) => {
         LawType: null,
         Num: null,
     };
-    const m = lawNum.match(/^(明治|大正|昭和|平成|令和)([一二三四五六七八九十]+)年(\S+?)(?:第([一二三四五六七八九十百千]+)号)?$/);
+    const m = lawNum.match(reLawNum);
     if (m) {
         const [era, year, law_type, num] = m.slice(1);
         if (era in exports.eras)
@@ -42569,7 +43857,7 @@ const setItemNum = (els) => {
         let kanaMode = KanaMode.Iroha;
         for (const child of items[0].children) {
             if (std.isParagraphItemTitle(child)) {
-                if (/ア/.exec(child.text)) {
+                if (/ア/.exec(child.text())) {
                     kanaMode = KanaMode.Aiu;
                     break;
                 }
@@ -42579,7 +43867,7 @@ const setItemNum = (els) => {
             let paragraphItemTitle = "";
             for (const child of item.children) {
                 if (std.isParagraphItemTitle(child)) {
-                    paragraphItemTitle = child.text;
+                    paragraphItemTitle = child.text();
                     break;
                 }
             }
@@ -42808,7 +44096,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.isSubitem1Sentence = exports.isSubitem1Title = exports.isSubitem1 = exports.isItemSentence = exports.isItemTitle = exports.isItem = exports.isClassSentence = exports.isClassTitle = exports.isClass = exports.isNewProvision = exports.isAmendProvisionSentence = exports.isAmendProvision = exports.isSupplNote = exports.isParagraphSentence = exports.isParagraphNum = exports.isParagraphCaption = exports.isParagraph = exports.isArticleCaption = exports.isArticleTitle = exports.isArticle = exports.isDivisionTitle = exports.isDivision = exports.isSubsectionTitle = exports.isSubsection = exports.isSectionTitle = exports.isSection = exports.isChapterTitle = exports.isChapter = exports.isPartTitle = exports.isPart = exports.isMainProvision = exports.isPreamble = exports.isArticleRange = exports.isTOCAppdxTableLabel = exports.isTOCSupplProvision = exports.isTOCArticle = exports.isTOCDivision = exports.isTOCSubsection = exports.isTOCSection = exports.isTOCChapter = exports.isTOCPart = exports.isTOCPreambleLabel = exports.isTOCLabel = exports.isTOC = exports.isEnactStatement = exports.isLawTitle = exports.isLawBody = exports.isLawNum = exports.isLaw = exports.isControl = void 0;
 exports.isTableStruct = exports.isAppdxFigTitle = exports.isAppdxFig = exports.isArithFormula = exports.isArithFormulaNum = exports.isAppdx = exports.isAppdxFormatTitle = exports.isAppdxFormat = exports.isAppdxStyleTitle = exports.isAppdxStyle = exports.isAppdxNoteTitle = exports.isAppdxNote = exports.isAppdxTableTitle = exports.isAppdxTable = exports.isSupplProvisionAppdx = exports.isSupplProvisionAppdxStyleTitle = exports.isSupplProvisionAppdxStyle = exports.isSupplProvisionAppdxTableTitle = exports.isSupplProvisionAppdxTable = exports.isSupplProvisionLabel = exports.isSupplProvision = exports.isColumn = exports.isSentence = exports.isSubitem10Sentence = exports.isSubitem10Title = exports.isSubitem10 = exports.isSubitem9Sentence = exports.isSubitem9Title = exports.isSubitem9 = exports.isSubitem8Sentence = exports.isSubitem8Title = exports.isSubitem8 = exports.isSubitem7Sentence = exports.isSubitem7Title = exports.isSubitem7 = exports.isSubitem6Sentence = exports.isSubitem6Title = exports.isSubitem6 = exports.isSubitem5Sentence = exports.isSubitem5Title = exports.isSubitem5 = exports.isSubitem4Sentence = exports.isSubitem4Title = exports.isSubitem4 = exports.isSubitem3Sentence = exports.isSubitem3Title = exports.isSubitem3 = exports.isSubitem2Sentence = exports.isSubitem2Title = exports.isSubitem2 = void 0;
 exports.makeIsStdEL = exports.isStdEL = exports.newStdEL = exports.stdELTags = exports.isSub = exports.isSup = exports.isLine = exports.isRt = exports.isRuby = exports.isQuoteStruct = exports.isSublist3Sentence = exports.isSublist3 = exports.isSublist2Sentence = exports.isSublist2 = exports.isSublist1Sentence = exports.isSublist1 = exports.isListSentence = exports.isList = exports.isRemarksLabel = exports.isRemarks = exports.isRelatedArticleNum = exports.isFormat = exports.isFormatStructTitle = exports.isFormatStruct = exports.isStyle = exports.isStyleStructTitle = exports.isStyleStruct = exports.isNote = exports.isNoteStructTitle = exports.isNoteStruct = exports.isFig = exports.isFigStructTitle = exports.isFigStruct = exports.isTableColumn = exports.isTableHeaderColumn = exports.isTableHeaderRow = exports.isTableRow = exports.isTable = exports.isTableStructTitle = void 0;
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const isControl = (obj) => {
     return (typeof obj !== "string") && obj.isControl;
 };
@@ -43510,33 +44798,75 @@ exports.makeIsStdEL = makeIsStdEL;
 
 /***/ }),
 
-/***/ 31486:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ 49814:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Container = exports.ContainerType = void 0;
+const common_1 = __webpack_require__(50638);
+const num_1 = __webpack_require__(68685);
+const std = __importStar(__webpack_require__(93619));
 var ContainerType;
 (function (ContainerType) {
-    // eslint-disable-next-line no-unused-vars
     ContainerType["ROOT"] = "ROOT";
-    // eslint-disable-next-line no-unused-vars
     ContainerType["TOPLEVEL"] = "TOPLEVEL";
-    // eslint-disable-next-line no-unused-vars
     ContainerType["ARTICLES"] = "ARTICLES";
-    // eslint-disable-next-line no-unused-vars
-    ContainerType["SPANS"] = "SPANS";
+    ContainerType["SENTENCES"] = "SENTENCES";
 })(ContainerType = exports.ContainerType || (exports.ContainerType = {}));
+let currentID = 0;
 class Container {
-    constructor(el, type, spanRange = [NaN, NaN], parent = null, children = [], subParent = null, subChildren = []) {
+    constructor(options) {
+        var _a, _b;
+        this.parent = null;
+        this.children = [];
+        this.subParent = null; // skips ARTICLES
+        this.subChildren = []; // skips ARTICLES
+        const { el, type = (0, common_1.getContainerType)(el.tag), name = ((_b = (_a = el.children.find(c => (std.isArticleTitle(c)
+            || std.isParagraphItemTitle(c)
+            || std.isArticleGroupTitle(c)
+            || std.isAppdxItemTitle(c)))) === null || _a === void 0 ? void 0 : _a.text()) !== null && _b !== void 0 ? _b : null), num = ((name && (0, num_1.parseNamedNum)(name))
+            || ((std.isParagraph(el) && "1") || null)), containerID = `container-${currentID}-tag_${el.tag}-type_${type}`, sentenceRange = [NaN, NaN],
+        // parent = null,
+        // children = [],
+        // subParent = null,
+        // subChildren = [],
+         } = options;
+        currentID++;
+        this.containerID = containerID;
         this.el = el;
         this.type = type;
-        this.spanRange = spanRange;
-        this.parent = parent;
-        this.children = children;
-        this.subParent = subParent;
-        this.subChildren = subChildren;
+        this.name = name;
+        this.num = num;
+        this.sentenceRange = sentenceRange;
+        // this.parent = parent;
+        // this.children = children;
+        // this.subParent = subParent;
+        // this.subChildren = subChildren;
     }
     addChild(child) {
         this.children.push(child);
@@ -43686,72 +45016,139 @@ class Container {
     }
 }
 exports.Container = Container;
-//# sourceMappingURL=container.js.map
+//# sourceMappingURL=index.js.map
 
 /***/ }),
 
-/***/ 37973:
+/***/ 6310:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.__MatchFail = exports.__Text = exports.__Parentheses = exports.parenthesesTypeStrings = void 0;
-const el_1 = __webpack_require__(26252);
-exports.parenthesesTypeStrings = [
-    "round",
-    "square",
-    "curly",
-    "squareb",
-];
-class __Parentheses extends el_1.EL {
-    constructor(type, depth, start, end, content, text, range = null) {
-        super("__Parentheses");
-        this.attr = {
-            type,
-            depth: `${depth}`,
-        };
-        if (range) {
-            this.range = [range.start[0], range.end[1]];
+exports.SentenceEnv = exports.isSentenceLike = exports.sentenceLikeTags = exports.enumerateSentenceTexts = exports.textOfSentenceText = exports.isSentenceText = exports.sentenceTextTags = exports.applyFollowing = void 0;
+const common_1 = __webpack_require__(50638);
+const controls_1 = __webpack_require__(48075);
+const applyFollowing = (origRanges, following) => {
+    const ranges = [];
+    for (const origRange of origRanges) {
+        if (origRange.end.sentenceIndex === following.sentenceIndex) {
+            if (origRange.end.textOffset < following.textOffset) {
+                continue;
+            }
         }
-        this.append(new el_1.EL("__PStart", { type }, [start], range && range.start));
-        this.extend([new el_1.EL("__PContent", { type }, content, range && range.content)]);
-        this.append(new el_1.EL("__PEnd", { type }, [end], range && range.end));
-        this.content = text.slice(start.length, text.length - end.length);
+        else if (origRange.end.sentenceIndex < following.sentenceIndex) {
+            continue;
+        }
+        const range = { start: Object.assign({}, origRange.start), end: Object.assign({}, origRange.end) };
+        if (range.start.sentenceIndex === following.sentenceIndex) {
+            if (range.start.textOffset < following.textOffset) {
+                Object.assign(range.start, following);
+            }
+        }
+        else if (range.start.sentenceIndex < following.sentenceIndex) {
+            Object.assign(range.start, following);
+        }
+        ranges.push(range);
     }
-    get isControl() {
-        return true;
+    return ranges;
+};
+exports.applyFollowing = applyFollowing;
+exports.sentenceTextTags = [
+    "Ruby",
+    "QuoteStruct",
+    "__Text",
+    "__PStart",
+    "__PEnd",
+    "__MismatchStartParenthesis",
+    "__MismatchEndParenthesis",
+    "____PointerRanges",
+    "____LawNum",
+    "____Declaration",
+    "____VarRef",
+];
+const isSentenceText = (el) => typeof el !== "string" && exports.sentenceTextTags.includes(el.tag);
+exports.isSentenceText = isSentenceText;
+const textOfSentenceText = (el) => {
+    if (el.tag === "Ruby") {
+        return el.children.map(c => {
+            if (typeof c === "string") {
+                return c;
+            }
+            else if (c instanceof controls_1.__Text) {
+                return c.text();
+            }
+            else {
+                return "";
+            }
+        }).join("");
+    }
+    else {
+        return el.text();
+    }
+};
+exports.textOfSentenceText = textOfSentenceText;
+function* enumerateSentenceTexts(el) {
+    if ((0, exports.isSentenceText)(el)) {
+        yield el;
+    }
+    else if (!(0, common_1.isIgnoreAnalysis)(el)) {
+        for (const child of el.children) {
+            if (typeof child === "string")
+                continue;
+            yield* enumerateSentenceTexts(child);
+        }
     }
 }
-exports.__Parentheses = __Parentheses;
-class __Text extends el_1.EL {
-    get isControl() {
-        return true;
+exports.enumerateSentenceTexts = enumerateSentenceTexts;
+exports.sentenceLikeTags = ["Sentence"];
+const isSentenceLike = (el) => typeof el !== "string" && exports.sentenceLikeTags.includes(el.tag);
+exports.isSentenceLike = isSentenceLike;
+class SentenceEnv {
+    constructor(options) {
+        const { index, el, lawType, parentELs, container } = options;
+        this.index = index;
+        this.el = el;
+        this.lawType = lawType;
+        this.parentELs = parentELs;
+        this.container = container;
+        this._text = [...enumerateSentenceTexts(el)].map(exports.textOfSentenceText).join("");
     }
-    constructor(text, range = null) {
-        super("__Text", {}, [text], range);
+    get text() { return this._text; }
+    textRageOfEL(el) {
+        if ((0, exports.isSentenceText)(el)) {
+            let offset = 0;
+            for (const sentenceText of enumerateSentenceTexts(this.el)) {
+                const length = (0, exports.textOfSentenceText)(sentenceText).length;
+                if (sentenceText === el) {
+                    return [offset, offset + length];
+                }
+                offset += length;
+            }
+            return null;
+        }
+        else {
+            const targetSentenceTexts = [...enumerateSentenceTexts(el)];
+            const firstTarget = targetSentenceTexts[0];
+            const lastTarget = targetSentenceTexts[targetSentenceTexts.length - 1];
+            let offset = 0;
+            let start = null;
+            for (const sentenceText of enumerateSentenceTexts(this.el)) {
+                const length = (0, exports.textOfSentenceText)(sentenceText).length;
+                if (sentenceText === firstTarget) {
+                    start = offset;
+                }
+                if (sentenceText === lastTarget) {
+                    return ((start !== null) && [start, offset + length]) || null;
+                }
+                offset += length;
+            }
+            return null;
+        }
     }
 }
-exports.__Text = __Text;
-class __MatchFail extends el_1.EL {
-    get isControl() {
-        return true;
-    }
-    constructor(matchFail, children, range = null) {
-        super("__MatchFail", {}, children, range);
-        this.matchFail = matchFail;
-    }
-    get matchFail() {
-        if (!this.attr.matchFail)
-            throw new Error();
-        return JSON.parse(this.attr.matchFail);
-    }
-    set matchFail(matchFail) {
-        this.attr.matchFail = JSON.stringify(matchFail);
-    }
-}
-exports.__MatchFail = __MatchFail;
-//# sourceMappingURL=control.js.map
+exports.SentenceEnv = SentenceEnv;
+//# sourceMappingURL=sentenceEnv.js.map
 
 /***/ }),
 
@@ -43806,7 +45203,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.OtherLine = exports.TableColumnLine = exports.ParagraphItemLine = exports.ArticleLine = exports.SupplProvisionAppdxItemHeadLine = exports.SupplProvisionHeadLine = exports.AppdxItemHeadLine = exports.ArticleGroupHeadLine = exports.TOCHeadLine = exports.BlankLine = exports.LineType = void 0;
 const _sentenceChildren_1 = __webpack_require__(36096);
 const _sentencesArray_1 = __webpack_require__(10145);
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 var LineType;
 (function (LineType) {
     LineType["BNK"] = "BNK";
@@ -44289,23 +45686,444 @@ exports.OtherLine = OtherLine;
 
 /***/ }),
 
-/***/ 26252:
+/***/ 98338:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.xmlToJson = exports.elementToJson = exports.loadEl = exports.rangeOfELs = exports.EL = exports.innerXML = exports.outerXML = exports.wrapXML = exports.isJsonEL = void 0;
-const xmldom_1 = __webpack_require__(16014);
-const NodeType = {
-    TEXT_NODE: 3,
-    ELEMENT_NODE: 1,
+exports.____Declaration = void 0;
+const __1 = __webpack_require__(18539);
+class ____Declaration extends __1.EL {
+    constructor(options) {
+        super("____Declaration", {}, [], options.range);
+        this.tag = "____Declaration";
+        this.scopeCache = null;
+        this.nameSentenceTextRangeCache = null;
+        const { declarationID: id, type, name, value, scope, nameSentenceTextRange } = options;
+        this.attr = {
+            declarationID: id,
+            type,
+            name,
+            scope: JSON.stringify(scope),
+            nameSentenceTextRange: JSON.stringify(nameSentenceTextRange),
+        };
+        if (value !== null)
+            this.attr.value = value;
+        this.children = [name];
+    }
+    get isControl() { return true; }
+    get scope() {
+        if (this.scopeCache !== null && this.scopeCache[0] === this.attr.scope) {
+            return this.scopeCache[1];
+        }
+        else {
+            const scope = JSON.parse(this.attr.scope);
+            this.scopeCache = [this.attr.scope, scope];
+            return scope;
+        }
+    }
+    get nameSentenceTextRange() {
+        if (this.nameSentenceTextRangeCache !== null && this.nameSentenceTextRangeCache[0] === this.attr.nameSentenceTextRange) {
+            return this.nameSentenceTextRangeCache[1];
+        }
+        else {
+            const nameSentenceTextRange = JSON.parse(this.attr.nameSentenceTextRange);
+            this.nameSentenceTextRangeCache = [this.attr.nameSentenceTextRange, nameSentenceTextRange];
+            return nameSentenceTextRange;
+        }
+    }
+    set nameSentenceTextRange(value) {
+        this.attr.nameSentenceTextRange = JSON.stringify(value);
+        this.nameSentenceTextRangeCache = [this.attr.nameSentenceTextRange, value];
+    }
+}
+exports.____Declaration = ____Declaration;
+//# sourceMappingURL=declaration.js.map
+
+/***/ }),
+
+/***/ 48075:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
-const isJsonEL = (object) => {
-    return "tag" in object && "attr" in object && "children" in object;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.controlFromEL = void 0;
+const text_1 = __webpack_require__(47550);
+const parentheses_1 = __webpack_require__(50234);
+const declaration_1 = __webpack_require__(98338);
+const varRef_1 = __webpack_require__(29390);
+const pointer_1 = __webpack_require__(85919);
+const lawNum_1 = __webpack_require__(22947);
+__exportStar(__webpack_require__(47550), exports);
+__exportStar(__webpack_require__(50234), exports);
+__exportStar(__webpack_require__(29390), exports);
+__exportStar(__webpack_require__(98338), exports);
+__exportStar(__webpack_require__(85919), exports);
+__exportStar(__webpack_require__(22947), exports);
+const controlFromEL = (el) => {
+    if (el.tag === "__Text") {
+        return Object.setPrototypeOf(el.copy(false, true), text_1.__Text.prototype);
+    }
+    else if (el.tag === "__Parentheses") {
+        return Object.setPrototypeOf(el.copy(false, true), parentheses_1.__Parentheses.prototype);
+    }
+    else if (el.tag === "__PStart") {
+        return Object.setPrototypeOf(el.copy(false, true), parentheses_1.__PStart.prototype);
+    }
+    else if (el.tag === "__PContent") {
+        return Object.setPrototypeOf(el.copy(false, true), parentheses_1.__PContent.prototype);
+    }
+    else if (el.tag === "__PEnd") {
+        return Object.setPrototypeOf(el.copy(false, true), parentheses_1.__PEnd.prototype);
+    }
+    else if (el.tag === "__MismatchStartParenthesis") {
+        return Object.setPrototypeOf(el.copy(false, true), parentheses_1.__MismatchStartParenthesis.prototype);
+    }
+    else if (el.tag === "__MismatchEndParenthesis") {
+        return Object.setPrototypeOf(el.copy(false, true), parentheses_1.__MismatchEndParenthesis.prototype);
+    }
+    else if (el.tag === "____Declaration") {
+        return Object.setPrototypeOf(el.copy(false, true), declaration_1.____Declaration.prototype);
+    }
+    else if (el.tag === "____VarRef") {
+        return Object.setPrototypeOf(el.copy(false, true), varRef_1.____VarRef.prototype);
+    }
+    else if (el.tag === "____PointerRanges") {
+        return Object.setPrototypeOf(el.copy(false, true), pointer_1.____PointerRanges.prototype);
+    }
+    else if (el.tag === "____PointerRange") {
+        return Object.setPrototypeOf(el.copy(false, true), pointer_1.____PointerRange.prototype);
+    }
+    else if (el.tag === "____Pointer") {
+        return Object.setPrototypeOf(el.copy(false, true), pointer_1.____Pointer.prototype);
+    }
+    else if (el.tag === "____PF") {
+        return Object.setPrototypeOf(el.copy(false, true), pointer_1.____PF.prototype);
+    }
+    else if (el.tag === "____LawNum") {
+        return Object.setPrototypeOf(el.copy(false, true), lawNum_1.____LawNum.prototype);
+    }
+    else {
+        return el;
+    }
 };
-exports.isJsonEL = isJsonEL;
+exports.controlFromEL = controlFromEL;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 22947:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.____LawNum = void 0;
+const __1 = __webpack_require__(18539);
+class ____LawNum extends __1.EL {
+    constructor(text, range = null) {
+        super("____LawNum", {}, [], range);
+        this.tag = "____LawNum";
+        this.children = [text];
+    }
+    get isControl() { return true; }
+}
+exports.____LawNum = ____LawNum;
+//# sourceMappingURL=lawNum.js.map
+
+/***/ }),
+
+/***/ 50234:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.__MismatchEndParenthesis = exports.__MismatchStartParenthesis = exports.__PEnd = exports.__PStart = exports.__PContent = exports.__Parentheses = exports.parenthesesTypeStrings = void 0;
+const __1 = __webpack_require__(18539);
+exports.parenthesesTypeStrings = [
+    "round",
+    "square",
+    "curly",
+    "squareb",
+];
+class __Parentheses extends __1.EL {
+    constructor(options) {
+        super("__Parentheses");
+        this.tag = "__Parentheses";
+        const { type, depth, start, end, content, range } = options;
+        this.attr = {
+            type,
+            depth: `${depth}`,
+        };
+        this.children = [
+            new __PStart(type, start, range && range.start),
+            new __PContent(type, content, range && range.content),
+            new __PEnd(type, end, range && range.end),
+        ];
+        if (range) {
+            this.range = [range.start[0], range.end[1]];
+        }
+    }
+    get isControl() { return true; }
+    get content() {
+        return this.children.find(c => c instanceof __PContent);
+    }
+    get start() {
+        return this.children.find(c => c instanceof __PStart);
+    }
+    get end() {
+        return this.children.find(c => c instanceof __PEnd);
+    }
+}
+exports.__Parentheses = __Parentheses;
+class __PContent extends __1.EL {
+    constructor(type, content, range = null) {
+        super("__PContent", {}, [], range);
+        this.tag = "__PContent";
+        this.attr = { type };
+        this.children = content;
+    }
+    get isControl() { return true; }
+}
+exports.__PContent = __PContent;
+class __PStart extends __1.EL {
+    constructor(type, text, range = null) {
+        super("__PStart", {}, [], range);
+        this.tag = "__PStart";
+        this.attr = { type };
+        this.children = [text];
+    }
+    get isControl() { return true; }
+}
+exports.__PStart = __PStart;
+class __PEnd extends __1.EL {
+    constructor(type, text, range = null) {
+        super("__PEnd", {}, [], range);
+        this.tag = "__PEnd";
+        this.attr = { type };
+        this.children = [text];
+    }
+    get isControl() { return true; }
+}
+exports.__PEnd = __PEnd;
+class __MismatchStartParenthesis extends __1.EL {
+    constructor(
+    // type: ParenthesesType,
+    text, range = null) {
+        super("__MismatchStartParenthesis", {}, [], range);
+        this.tag = "__MismatchStartParenthesis";
+        // this.attr = { type };
+        this.children = [text];
+    }
+    get isControl() { return true; }
+}
+exports.__MismatchStartParenthesis = __MismatchStartParenthesis;
+class __MismatchEndParenthesis extends __1.EL {
+    constructor(
+    // type: ParenthesesType,
+    text, range = null) {
+        super("__MismatchEndParenthesis", {}, [], range);
+        this.tag = "__MismatchEndParenthesis";
+        // this.attr = { type };
+        this.children = [text];
+    }
+    get isControl() { return true; }
+}
+exports.__MismatchEndParenthesis = __MismatchEndParenthesis;
+//# sourceMappingURL=parentheses.js.map
+
+/***/ }),
+
+/***/ 85919:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.____PointerRanges = exports.____PointerRange = exports.____Pointer = exports.____PF = exports.isRelPos = exports.RelPos = void 0;
+const __1 = __webpack_require__(18539);
+var RelPos;
+(function (RelPos) {
+    RelPos["PREV"] = "PREV";
+    RelPos["HERE"] = "HERE";
+    RelPos["NEXT"] = "NEXT";
+    RelPos["SAME"] = "SAME";
+    RelPos["NAMED"] = "NAMED";
+})(RelPos = exports.RelPos || (exports.RelPos = {}));
+const isRelPos = (object) => {
+    return (object === RelPos.PREV ||
+        object === RelPos.HERE ||
+        object === RelPos.NEXT ||
+        object === RelPos.NAMED);
+};
+exports.isRelPos = isRelPos;
+class ____PF extends __1.EL {
+    constructor(options) {
+        super("____PF", {}, [], options.range);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        this.tag = "____PF";
+        const { relPos, targetType, name, num = null, count = null, locatedContainerID = null, } = Object.assign({}, options);
+        this.attr = {
+            relPos,
+            targetType: targetType,
+            name,
+        };
+        if (num !== null)
+            this.attr.num = num;
+        if (count !== null)
+            this.attr.count = count;
+        if (locatedContainerID)
+            this.attr.locatedContainerID = locatedContainerID;
+        this.children = [name];
+    }
+    get isControl() { return true; }
+}
+exports.____PF = ____PF;
+class ____Pointer extends __1.EL {
+    constructor(options) {
+        super("____Pointer", {}, [], options.range);
+        this.tag = "____Pointer";
+        this.children = options.children;
+    }
+    get isControl() { return true; }
+    fragments() {
+        return this.children.filter(c => c instanceof ____PF);
+    }
+}
+exports.____Pointer = ____Pointer;
+class ____PointerRange extends __1.EL {
+    constructor(options) {
+        super("____PointerRange", {}, [], options.range);
+        this.tag = "____PointerRange";
+        this.children = [
+            options.from,
+            ...options.midChildren,
+            ...(options.to ? [options.to] : []),
+            ...options.trailingChildren,
+        ];
+    }
+    get isControl() { return true; }
+    pointers() {
+        return this.children.filter(c => c instanceof ____Pointer);
+    }
+}
+exports.____PointerRange = ____PointerRange;
+class ____PointerRanges extends __1.EL {
+    constructor(options) {
+        super("____PointerRanges", {}, [], options.range);
+        this.tag = "____PointerRanges";
+        this.locatedScopeCache = null;
+        this.children = options.children;
+        this.attr = {};
+        if (options.locatedScope !== undefined)
+            this.attr.locatedScope = JSON.stringify(options.locatedScope);
+    }
+    get isControl() { return true; }
+    get locatedScope() {
+        if (this.locatedScopeCache !== null && this.locatedScopeCache[0] === this.attr.locatedScope) {
+            return this.locatedScopeCache[1];
+        }
+        else {
+            if (!this.attr.locatedScope)
+                return null;
+            const scope = JSON.parse(this.attr.locatedScope);
+            this.locatedScopeCache = [this.attr.locatedScope, scope];
+            return scope;
+        }
+    }
+    ranges() {
+        return this.children.filter(c => c instanceof ____PointerRange);
+    }
+}
+exports.____PointerRanges = ____PointerRanges;
+//# sourceMappingURL=pointer.js.map
+
+/***/ }),
+
+/***/ 47550:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.__Text = void 0;
+const __1 = __webpack_require__(18539);
+class __Text extends __1.EL {
+    constructor(text, range = null) {
+        super("__Text", {}, [], range);
+        this.tag = "__Text";
+        this.children = [text];
+    }
+    get isControl() { return true; }
+}
+exports.__Text = __Text;
+//# sourceMappingURL=text.js.map
+
+/***/ }),
+
+/***/ 29390:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.____VarRef = void 0;
+const __1 = __webpack_require__(18539);
+class ____VarRef extends __1.EL {
+    constructor(options) {
+        super("____VarRef", {}, [], options.range);
+        this.tag = "____VarRef";
+        this.refSentenceTextRangeCache = null;
+        const { refName, declarationID, refSentenceTextRange } = options;
+        this.attr = {
+            refName,
+            declarationID,
+            refSentenceTextRange: JSON.stringify(refSentenceTextRange),
+        };
+        this.children.push(refName);
+    }
+    get isControl() { return true; }
+    get refSentenceTextRange() {
+        if (this.refSentenceTextRangeCache !== null && this.refSentenceTextRangeCache[0] === this.attr.refSentenceTextRange) {
+            return this.refSentenceTextRangeCache[1];
+        }
+        else {
+            const refSentenceTextRange = JSON.parse(this.attr.refSentenceTextRange);
+            this.refSentenceTextRangeCache = [this.attr.refSentenceTextRange, refSentenceTextRange];
+            return refSentenceTextRange;
+        }
+    }
+}
+exports.____VarRef = ____VarRef;
+//# sourceMappingURL=varRef.js.map
+
+/***/ }),
+
+/***/ 27443:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.innerXML = exports.outerXML = exports.wrapXML = void 0;
 const wrapXML = (el, inner) => {
     const attr = Object.keys(el.attr).map(key => { var _a; return ` ${key}="${(_a = el.attr[key]) !== null && _a !== void 0 ? _a : ""}"`; }).join("");
     if (inner) {
@@ -44334,6 +46152,18 @@ const innerXML = (el, withControlEl = false) => {
         : (0, exports.outerXML)(child, withControlEl)).join("");
 };
 exports.innerXML = innerXML;
+//# sourceMappingURL=elToXML.js.map
+
+/***/ }),
+
+/***/ 18539:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.rangeOfELs = exports.EL = void 0;
+const elToXML_1 = __webpack_require__(27443);
 let currentID = 0;
 class EL {
     constructor(tag, attr = {}, children = [], range = null, id) {
@@ -44344,41 +46174,18 @@ class EL {
         this.attr = attr;
         this.children = children;
         this.range = range;
-        this.textCache = null;
+        // this.textCache = null;
         this.id = id !== null && id !== void 0 ? id : ++currentID;
     }
     get isControl() {
         return this.tag[0] === "_";
     }
-    copy(deep = true) {
+    copy(deep = true, copyID = false) {
         const el = new EL(this.tag, Object.assign({}, this.attr), (deep
             ? this.children.map(child => child instanceof EL ? child.copy(true) : child)
-            : [...this.children]), this.range && [...this.range]);
+            : [...this.children]), this.range && [...this.range], copyID ? this.id : undefined);
+        Object.setPrototypeOf(el, Object.getPrototypeOf(this));
         return el;
-    }
-    append(child) {
-        if (child !== undefined && child !== null) {
-            // if(!(child instanceof EL) && !(child instanceof String || (typeof child === "string"))) {
-            //     error("child is not EL or String.");
-            // }
-            this.children.push(child);
-            this.textCache = null;
-        }
-        return this;
-    }
-    extend(children) {
-        // if(!Array.isArray(children)) {
-        //     error(`${JSON.stringify(children).slice(0,100)} is not Array.`);
-        // }
-        // for(let i = 0; i < children.length; i++) {
-        //     let child = children[i];
-        //     if(!(child instanceof EL) && !(child instanceof String || (typeof child === "string"))) {
-        //         error("child is not EL or String.");
-        //     }
-        // }
-        this.children = this.children.concat(children);
-        this.textCache = null;
-        return this;
     }
     json(withControlEl = false, withProperties = false) {
         const children = [];
@@ -44421,24 +46228,21 @@ class EL {
             children: joinedChildren,
         };
     }
-    get text() {
-        if (this.textCache === null) {
-            this.textCache = this.children.map(child => child instanceof EL ? child.text : child).join("");
-        }
-        return this.textCache;
-    }
-    set text(t) {
-        this.children = [t];
-        this.textCache = null;
+    text() {
+        if (this.children.length === 0)
+            return "";
+        if (this.children.length === 1 && typeof this.children[0] === "string")
+            return this.children[0];
+        return this.children.map(child => child instanceof EL ? child.text() : child).join("");
     }
     wrapXML(inner) {
-        return (0, exports.wrapXML)(this, inner);
+        return (0, elToXML_1.wrapXML)(this, inner);
     }
     outerXML(withControlEl = false) {
-        return (0, exports.outerXML)(this, withControlEl);
+        return (0, elToXML_1.outerXML)(this, withControlEl);
     }
     innerXML(withControlEl = false) {
-        return (0, exports.innerXML)(this, withControlEl);
+        return (0, elToXML_1.innerXML)(this, withControlEl);
     }
     replaceSpan(start, end /* half open */, replChildren) {
         if (!Array.isArray(replChildren)) {
@@ -44448,7 +46252,7 @@ class EL {
         for (let i = 0; i < this.children.length; i++) {
             const child = this.children[i];
             const cStart = nextCStart;
-            const cEnd = cStart + (child instanceof EL ? child.text : child).length; // half open
+            const cEnd = cStart + (child instanceof EL ? child.text() : child).length; // half open
             nextCStart = cEnd;
             if (cStart <= start && start < cEnd) {
                 if (cStart < end && end <= cEnd) {
@@ -44470,7 +46274,6 @@ class EL {
                             ...this.children.slice(i + 1),
                         ];
                         this.children = newChildren;
-                        this.textCache = null;
                     }
                 }
                 else {
@@ -44498,7 +46301,20 @@ const rangeOfELs = (els) => {
     return (start !== null && end !== null) ? [start, end] : null;
 };
 exports.rangeOfELs = rangeOfELs;
-const loadEl = (rawLaw) => {
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 62031:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.loadEL = void 0;
+const _1 = __webpack_require__(18539);
+const controls_1 = __webpack_require__(48075);
+const loadEL = (rawLaw) => {
     var _a, _b;
     if (typeof rawLaw === "string") {
         return rawLaw;
@@ -44518,12 +46334,31 @@ const loadEl = (rawLaw) => {
             range = JSON.parse((_b = rawLaw.attr["__range"]) !== null && _b !== void 0 ? _b : "");
             delete attr["__range"];
         }
-        const el = new EL(rawLaw.tag, attr, rawLaw.children.map(exports.loadEl), range, id);
+        const _el = new _1.EL(rawLaw.tag, attr, rawLaw.children.map(exports.loadEL), range, id);
+        const el = _el.isControl ? (0, controls_1.controlFromEL)(_el) : _el;
         return el;
     }
 };
-exports.loadEl = loadEl;
-const elementToJson = (el) => {
+exports.loadEL = loadEL;
+exports["default"] = exports.loadEL;
+//# sourceMappingURL=loadEL.js.map
+
+/***/ }),
+
+/***/ 26338:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.xmlToEL = exports.elementToEL = void 0;
+const xmldom_1 = __webpack_require__(16014);
+const _1 = __webpack_require__(18539);
+const NodeType = {
+    TEXT_NODE: 3,
+    ELEMENT_NODE: 1,
+};
+const elementToEL = (el) => {
     const children = [];
     for (const node of Array.from(el.childNodes)) {
         if (node.nodeType === NodeType.TEXT_NODE) {
@@ -44535,7 +46370,7 @@ const elementToJson = (el) => {
             }
         }
         else if (node.nodeType === NodeType.ELEMENT_NODE) {
-            children.push((0, exports.elementToJson)(node));
+            children.push((0, exports.elementToEL)(node));
         }
         else {
             // console.log(node);
@@ -44545,118 +46380,55 @@ const elementToJson = (el) => {
     for (const at of Array.from(el.attributes)) {
         attr[at.name] = at.value;
     }
-    return new EL(el.tagName, attr, children);
+    return new _1.EL(el.tagName, attr, children);
 };
-exports.elementToJson = elementToJson;
-const xmlToJson = (xml) => {
+exports.elementToEL = elementToEL;
+const xmlToEL = (xml) => {
     const parser = new xmldom_1.DOMParser();
     const dom = parser.parseFromString(xml, "text/xml");
     if (!dom.documentElement)
         throw new Error("never");
-    return (0, exports.elementToJson)(dom.documentElement);
+    return (0, exports.elementToEL)(dom.documentElement);
 };
-exports.xmlToJson = xmlToJson;
-//# sourceMappingURL=el.js.map
+exports.xmlToEL = xmlToEL;
+//# sourceMappingURL=xmlToEL.js.map
 
 /***/ }),
 
-/***/ 6909:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ 16088:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Env = void 0;
-class Env {
-    constructor(lawType, container = null, parents = []) {
-        this.lawType = lawType;
-        this.containerCache = container;
-        this.parents = parents;
-    }
-    get container() {
-        if (!this.containerCache)
-            throw new Error();
-        return this.containerCache;
-    }
-    set container(container) {
-        this.containerCache = container;
-    }
-    addContainer(container) {
-        if (this.containerCache) {
-            this.containerCache.addChild(container);
+exports.addSentenceChildrenControls = void 0;
+const env_1 = __webpack_require__(39099);
+const _sentenceChildren_1 = __importDefault(__webpack_require__(36096));
+const addSentenceChildrenControls = (elToBeModified) => {
+    if (["LawNum", "QuoteStruct"].indexOf(elToBeModified.tag) < 0) {
+        const isMixed = elToBeModified.children.some(child => typeof child === "string" || child instanceof String);
+        if (isMixed) {
+            const result = _sentenceChildren_1.default.match(0, elToBeModified.innerXML().replace(/\r|\n/, ""), (0, env_1.initialEnv)({}));
+            if (result.ok) {
+                elToBeModified.children = result.value.value;
+            }
+            else {
+                const message = `addControls: Error: ${elToBeModified.innerXML()}`;
+                throw new Error(message);
+            }
         }
-        this.containerCache = container;
+        else {
+            elToBeModified.children = elToBeModified.children.map(exports.addSentenceChildrenControls);
+        }
     }
-    copy() {
-        return new Env(this.lawType, this.containerCache, this.parents.slice());
-    }
-}
-exports.Env = Env;
-//# sourceMappingURL=env.js.map
-
-/***/ }),
-
-/***/ 82773:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PointerFragment = exports.isRelPos = exports.RelPos = void 0;
-var RelPos;
-(function (RelPos) {
-    // eslint-disable-next-line no-unused-vars
-    RelPos["PREV"] = "PREV";
-    // eslint-disable-next-line no-unused-vars
-    RelPos["HERE"] = "HERE";
-    // eslint-disable-next-line no-unused-vars
-    RelPos["NEXT"] = "NEXT";
-    // eslint-disable-next-line no-unused-vars
-    RelPos["SAME"] = "SAME";
-    // eslint-disable-next-line no-unused-vars
-    RelPos["NAMED"] = "NAMED";
-})(RelPos = exports.RelPos || (exports.RelPos = {}));
-const isRelPos = (object) => {
-    return (object === RelPos.PREV ||
-        object === RelPos.HERE ||
-        object === RelPos.NEXT ||
-        object === RelPos.NAMED);
+    return elToBeModified;
 };
-exports.isRelPos = isRelPos;
-class PointerFragment {
-    constructor(relPos, tag, name, num, locatedContainer = null) {
-        this.relPos = relPos;
-        this.tag = tag;
-        this.name = name;
-        this.num = num;
-        this.locatedContainer = locatedContainer;
-    }
-    copy() {
-        return new PointerFragment(this.relPos, this.tag, this.name, this.num, this.locatedContainer);
-    }
-}
-exports.PointerFragment = PointerFragment;
-//# sourceMappingURL=pointer.js.map
-
-/***/ }),
-
-/***/ 99805:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Span = void 0;
-class Span {
-    constructor(index, el, env) {
-        this.index = index;
-        this.el = el;
-        this.env = env;
-        this.text = el.text;
-    }
-}
-exports.Span = Span;
-//# sourceMappingURL=span.js.map
+exports.addSentenceChildrenControls = addSentenceChildrenControls;
+exports["default"] = exports.addSentenceChildrenControls;
+//# sourceMappingURL=addSentenceChildrenControls.js.map
 
 /***/ }),
 
@@ -44667,9 +46439,10 @@ exports.Span = Span;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.initialEnv = void 0;
-const core_1 = __webpack_require__(14570);
+const core_1 = __webpack_require__(24658);
 const error_1 = __webpack_require__(40520);
-const initialEnv = (options) => {
+const initialEnv = (initialEnvOptions) => {
+    const { options = {}, baseOffset = 0 } = initialEnvOptions;
     let target = "";
     const registerCurrentRangeTarget = (start, end, _target) => {
         void start;
@@ -44682,12 +46455,12 @@ const initialEnv = (options) => {
         maxOffsetMatchFail: null,
         maxOffsetMatchContext: null,
     };
-    const onMatchFail = (matchFail, matchContext) => {
-        if (state.maxOffsetMatchFail === null || matchFail.offset > state.maxOffsetMatchFail.offset) {
-            state.maxOffsetMatchFail = matchFail;
-            state.maxOffsetMatchContext = matchContext;
-        }
-    };
+    // const onMatchFail = (matchFail: MatchFail, matchContext: MatchContext) => {
+    //     if (state.maxOffsetMatchFail === null || matchFail.offset > state.maxOffsetMatchFail.offset) {
+    //         state.maxOffsetMatchFail = matchFail;
+    //         state.maxOffsetMatchContext = matchContext;
+    //     }
+    // };
     const newErrorMessage = (message, range) => new error_1.ErrorMessage(message, [
         offsetToPos(target, range[0]),
         offsetToPos(target, range[1]),
@@ -44695,15 +46468,16 @@ const initialEnv = (options) => {
     return {
         currentIndentDepth: 0,
         offsetToPos,
-        toStringOptions: {
-            fullToString: true,
-            maxToStringDepth: 5,
-        },
+        // toStringOptions: {
+        //     fullToString: true,
+        //     maxToStringDepth: 5,
+        // },
         registerCurrentRangeTarget,
         options,
         state,
-        onMatchFail,
+        // onMatchFail,
         newErrorMessage,
+        baseOffset,
     };
 };
 exports.initialEnv = initialEnv;
@@ -44767,7 +46541,7 @@ exports.ErrorMessage = ErrorMessage;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.factory = void 0;
-const factory_1 = __webpack_require__(91117);
+const factory_1 = __webpack_require__(21718);
 exports.factory = new factory_1.RuleFactory();
 exports["default"] = exports.factory;
 //# sourceMappingURL=factory.js.map
@@ -44784,13 +46558,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.parse = void 0;
-const generic_parser_1 = __webpack_require__(74964);
+const generic_parser_1 = __webpack_require__(87377);
 const env_1 = __webpack_require__(39099);
 const factory_1 = __importDefault(__webpack_require__(31707));
 const _lines_1 = __importDefault(__webpack_require__(58285));
 const makeMatchContextString = (context, target) => {
-    const { offset, ruleToString, prevContext } = context;
-    const expected = ruleToString();
+    const { offset, prevRule, prevContext } = context;
+    const expected = prevRule.toString();
     const newLineOffsetBefore = target.lastIndexOf("\n", offset);
     const newLineOffsetAfter = target.slice(offset).search(/\r?\n/);
     // eslint-disable-next-line no-irregular-whitespace
@@ -44844,7 +46618,7 @@ const _indents_1 = __importDefault(__webpack_require__(2027));
 const line_1 = __webpack_require__(69928);
 const lexical_1 = __webpack_require__(99247);
 const util_1 = __webpack_require__(26459);
-const control_1 = __webpack_require__(37973);
+const controls_1 = __webpack_require__(48075);
 const _tagControl_1 = __webpack_require__(71040);
 exports.appdxItemTitlePtns = [
     ["AppdxFig", /^[別付附]?図/],
@@ -44900,7 +46674,7 @@ exports.$appdxItemHeadLine = factory_1.default
     var _a, _b;
     const inline = (0, util_1.mergeAdjacentTexts)((_a = tail === null || tail === void 0 ? void 0 : tail.value) !== null && _a !== void 0 ? _a : []);
     const lastItem = inline.length > 0 ? inline[inline.length - 1] : null;
-    const [title, relatedArticleNum] = (lastItem instanceof control_1.__Parentheses
+    const [title, relatedArticleNum] = (lastItem instanceof controls_1.__Parentheses
         && lastItem.attr.type === "round") ? [inline.slice(0, -1), inline.slice(-1)] : [inline, []];
     const errors = [
         ...indentsStruct.errors,
@@ -44944,7 +46718,7 @@ const util_1 = __webpack_require__(26459);
 const num_1 = __webpack_require__(68685);
 const inline_1 = __webpack_require__(22845);
 const makeRangesRule_1 = __importDefault(__webpack_require__(64358));
-const control_1 = __webpack_require__(37973);
+const controls_1 = __webpack_require__(48075);
 const { $ranges: $articleGroupRanges } = (0, makeRangesRule_1.default)(() => _articleGroupNum_1.default);
 exports.$articleGroupHeadLine = factory_1.default
     .withName("articleGroupHeadLine")
@@ -44990,10 +46764,10 @@ exports.$articleGroupHeadLine = factory_1.default
         ...((_a = tail === null || tail === void 0 ? void 0 : tail.inline.errors) !== null && _a !== void 0 ? _a : []),
     ];
     const sentenceChildren = (0, util_1.mergeAdjacentTexts)([
-        new control_1.__Text(articleGroupNum.text, articleGroupNum.range),
+        new controls_1.__Text(articleGroupNum.text, articleGroupNum.range),
         ...(tail
             ? [
-                new control_1.__Text(tail.space.text, tail.space.range),
+                new controls_1.__Text(tail.space.text, tail.space.range),
                 ...tail.inline.value,
             ]
             : []),
@@ -45295,7 +47069,7 @@ const inline_1 = __webpack_require__(22845);
 const _xml_1 = __importDefault(__webpack_require__(33439));
 const std_1 = __webpack_require__(93619);
 const std = __importStar(__webpack_require__(93619));
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 exports.$otherLine = factory_1.default
     .withName("otherLine")
     .sequence(s => s
@@ -45798,8 +47572,8 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.rules = exports.$SQUARE_PARENTHESES_INLINE = exports.$CURLY_BRACKETS_INLINE = exports.$SQUARE_BRACKETS_INLINE = exports.$ROUND_PARENTHESES_INLINE = exports.makeParenthesesInline = exports.$PARENTHESES_INLINE_INNER = exports.$PARENTHESES_INLINE = exports.$MISMATCH_END_PARENTHESIS = exports.$MISMATCH_START_PARENTHESIS = exports.$OUTSIDE_ROUND_PARENTHESES_INLINE = exports.$OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES = exports.$OUTSIDE_PARENTHESES_INLINE = exports.$PERIOD_SENTENCE_FRAGMENT = exports.$INLINE_FRAGMENT = exports.$NOT_PARENTHESIS_CHAR = exports.$sentenceChildren = exports.sentenceChildrenToString = void 0;
 /* eslint-disable no-irregular-whitespace */
 const std_1 = __webpack_require__(93619);
-const control_1 = __webpack_require__(37973);
-const el_1 = __webpack_require__(26252);
+const controls_1 = __webpack_require__(48075);
+const el_1 = __webpack_require__(18539);
 const util_1 = __webpack_require__(84530);
 const factory_1 = __webpack_require__(31707);
 const lexical_1 = __webpack_require__(99247);
@@ -45814,8 +47588,11 @@ const sentenceChildrenToString = (els) => {
         else if (el.tag === "__CapturedXML" || el.tag === "__UnexpectedXML") {
             runs.push(/* $$$$$$ */ el.children.map(c => typeof c === "string" ? c : c.outerXML()).join("") /* $$$$$$ */);
         }
+        else if (el instanceof controls_1.__Parentheses) {
+            runs.push(/* $$$$$$ */ [el.start.text(), ...(0, exports.sentenceChildrenToString)(el.content.children), el.end.text()].join("") /* $$$$$$ */);
+        }
         else if (el.isControl) {
-            runs.push(/* $$$$$$ */ el.text.replace(/\r|\n/g, "") /* $$$$$$ */);
+            runs.push(/* $$$$$$ */ el.text().replace(/\r|\n/g, "") /* $$$$$$ */);
         }
         else if (el.tag === "Ruby" || el.tag === "Sub" || el.tag === "Sup" || el.tag === "QuoteStruct") {
             runs.push(/* $$$$$$ */ el.outerXML() /* $$$$$$ */);
@@ -45858,6 +47635,7 @@ exports.$INLINE_FRAGMENT = factory_1.factory
     .and(r => r
     .oneOrMore(r => r
     .choice(c => c
+    // .or(() => $pointerRanges)
     .or(r => r
     .sequence(c => c
     .and(r => r
@@ -45865,7 +47643,7 @@ exports.$INLINE_FRAGMENT = factory_1.factory
     .oneOrMore(r => r.regExp(/^[^\r\n<>()（）[\]［］{}｛｝「」 　\t]/))), "plain")
     .action(({ plain, range }) => {
     return {
-        value: new control_1.__Text(plain, range()),
+        value: new controls_1.__Text(plain, range()),
         errors: [],
     };
 })))
@@ -45887,6 +47665,7 @@ exports.$PERIOD_SENTENCE_FRAGMENT = factory_1.factory
     .sequence(c => c
     .and(r => r
     .choice(c => c
+    // .or(() => $pointerRanges)
     .or(r => r
     .sequence(c => c
     .and(r => r
@@ -45894,7 +47673,7 @@ exports.$PERIOD_SENTENCE_FRAGMENT = factory_1.factory
     .oneOrMore(r => r.regExp(/^[^\r\n<>()（）[\]［］{}｛｝「」 　\t。]/))), "plain")
     .action(({ plain, range }) => {
     return {
-        value: new control_1.__Text(plain, range()),
+        value: new controls_1.__Text(plain, range()),
         errors: [],
     };
 })))
@@ -45913,13 +47692,13 @@ exports.$PERIOD_SENTENCE_FRAGMENT = factory_1.factory
     .action(({ texts, tail }) => {
     const last = texts[texts.length - 1];
     if (tail) {
-        if (last.value instanceof control_1.__Text) {
-            last.value.text += tail.text;
+        if (last.value instanceof controls_1.__Text) {
+            last.value.children.splice(0, last.value.children.length, last.value.text() + tail.text);
             if (last.value.range)
                 last.value.range[1] += tail.text.length;
         }
         else {
-            texts.push({ value: new control_1.__Text(tail.text, tail.range), errors: [] });
+            texts.push({ value: new controls_1.__Text(tail.text, tail.range), errors: [] });
         }
     }
     return {
@@ -45931,30 +47710,34 @@ exports.$PERIOD_SENTENCE_FRAGMENT = factory_1.factory
     .action(r => r
     .sequence(c => c
     .and(r => r.seqEqual("。"), "plain")), (({ plain, range }) => {
-    return { value: [new control_1.__Text(plain, range())], errors: [] };
+    return { value: [new controls_1.__Text(plain, range())], errors: [] };
 }))));
 exports.$OUTSIDE_PARENTHESES_INLINE = factory_1.factory
     .withName("OUTSIDE_PARENTHESES_INLINE")
-    .sequence(c => c
+    .choice(c => c
+    // .or(() => $pointerRanges)
+    .orSequence(s => s
     .and(r => r
     .asSlice(r => r.oneOrMore(() => exports.$NOT_PARENTHESIS_CHAR)), "plain")
     .action(({ plain, range }) => {
     return {
-        value: new control_1.__Text(plain, range()),
+        value: new controls_1.__Text(plain, range()),
         errors: [],
     };
-}));
+})));
 exports.$OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES = factory_1.factory
     .withName("OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES")
-    .action(r => r
-    .sequence(c => c
+    .choice(c => c
+    // .or(() => $pointerRanges)
+    .orSequence(s => s
     .and(r => r
-    .regExp(/^((?![ 　\t]*\r?\n)[^\r\n<>()（）[\]［］{}｛｝「」])+/), "plain")), (({ plain, range }) => {
+    .regExp(/^((?![ 　\t]*\r?\n)[^\r\n<>()（）[\]［］{}｛｝「」])+/), "plain")
+    .action(({ plain, range }) => {
     return {
-        value: new control_1.__Text(plain, range()),
+        value: new controls_1.__Text(plain, range()),
         errors: [],
     };
-}));
+})));
 exports.$OUTSIDE_ROUND_PARENTHESES_INLINE = factory_1.factory
     .withName("OUTSIDE_ROUND_PARENTHESES_INLINE")
     .action(r => r
@@ -45985,7 +47768,7 @@ exports.$MISMATCH_START_PARENTHESIS = factory_1.factory
     .action(({ mismatch, range, newErrorMessage }) => {
     const error = newErrorMessage("$MISMATCH_START_PARENTHESIS: この括弧に対応する閉じ括弧がありません。", range());
     return {
-        value: new el_1.EL("__MismatchStartParenthesis", {}, [mismatch], range()),
+        value: new controls_1.__MismatchStartParenthesis(mismatch, range()),
         errors: [error],
     };
 }));
@@ -45997,7 +47780,7 @@ exports.$MISMATCH_END_PARENTHESIS = factory_1.factory
     .action(({ mismatch, range, newErrorMessage }) => {
     const error = newErrorMessage("$MISMATCH_END_PARENTHESIS: この括弧に対応する開き括弧がありません。", range());
     return {
-        value: new el_1.EL("__MismatchEndParenthesis", {}, [mismatch], range()),
+        value: new controls_1.__MismatchEndParenthesis(mismatch, range()),
         errors: [error],
     };
 }));
@@ -46093,7 +47876,7 @@ const makeParenthesesInline = (parenthesisType, startPtn, endPtn) => {
         .asSlice(r => r.oneOrMore(() => exports.$NOT_PARENTHESIS_CHAR)), "plain")
         .action(({ plain, range }) => {
         return {
-            value: new control_1.__Text(plain, range()),
+            value: new controls_1.__Text(plain, range()),
             errors: [],
         };
     })))
@@ -46111,12 +47894,19 @@ const makeParenthesesInline = (parenthesisType, startPtn, endPtn) => {
         .sequence(s => s
         .and(r => r.regExp(endPtn))
         .action(({ text, range }) => ({ text: text(), range: range() }))), "end")
-        .action(({ text, start, content, end, state }) => {
+        .action(({ start, content, end, state }) => {
         return {
-            value: new control_1.__Parentheses(parenthesisType, state.parenthesesDepth, start.text, end.text, content.value.map(c => c.value), text(), {
-                start: start.range,
-                end: end.range,
-                content: content.range,
+            value: new controls_1.__Parentheses({
+                type: parenthesisType,
+                depth: state.parenthesesDepth,
+                start: start.text,
+                end: end.text,
+                content: content.value.map(c => c.value),
+                range: {
+                    start: start.range,
+                    end: end.range,
+                    content: content.range,
+                },
             }),
             errors: content.value.map(c => c.errors).flat(),
         };
@@ -46152,7 +47942,7 @@ exports.$SQUARE_PARENTHESES_INLINE = factory_1.factory
     .or(() => exports.$SQUARE_PARENTHESES_INLINE))), "text")
     .action(({ text, range }) => {
     return {
-        value: new control_1.__Text(text, range()),
+        value: new controls_1.__Text(text, range()),
         errors: [],
     };
 }))))), "value")
@@ -46161,12 +47951,19 @@ exports.$SQUARE_PARENTHESES_INLINE = factory_1.factory
     .sequence(s => s
     .and(r => r.regExp(/^[」]/))
     .action(({ text, range }) => ({ text: text(), range: range() }))), "end")
-    .action(({ text, start, content, end, state }) => {
+    .action(({ start, content, end, state }) => {
     return {
-        value: new control_1.__Parentheses("square", state.parenthesesDepth, start.text, end.text, content.value.map(c => c.value), text(), {
-            start: start.range,
-            end: end.range,
-            content: content.range,
+        value: new controls_1.__Parentheses({
+            type: "square",
+            depth: state.parenthesesDepth,
+            start: start.text,
+            end: end.text,
+            content: content.value.map(c => c.value),
+            range: {
+                start: start.range,
+                end: end.range,
+                content: content.range,
+            },
         }),
         errors: content.value.map(c => c.errors).flat(),
     };
@@ -46225,7 +48022,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.$column = exports.$columns = exports.$periodSentences = exports.$sentencesArray = exports.forceSentencesArrayToSentenceChildren = exports.sentencesArrayToString = void 0;
 const std_1 = __webpack_require__(93619);
-const control_1 = __webpack_require__(37973);
+const controls_1 = __webpack_require__(48075);
 const factory_1 = __webpack_require__(31707);
 const _sentenceChildren_1 = __importStar(__webpack_require__(36096));
 const lexical_1 = __webpack_require__(99247);
@@ -46249,7 +48046,7 @@ exports.sentencesArrayToString = sentencesArrayToString;
 const forceSentencesArrayToSentenceChildren = (sentencesArray) => {
     return (0, util_1.mergeAdjacentTexts)(sentencesArray
         .flat()
-        .map(ss => ({ ls: new control_1.__Text(ss.leadingSpace, ss.leadingSpaceRange), ss: ss.sentences }))
+        .map(ss => ({ ls: new controls_1.__Text(ss.leadingSpace, ss.leadingSpaceRange), ss: ss.sentences }))
         .map(({ ls, ss }) => [
         ls,
         ...ss.map(s => s.children).flat(),
@@ -46326,8 +48123,8 @@ exports.$periodSentences = factory_1.factory
         const sentence = (0, std_1.newStdEL)("Sentence", {}, sentence_content, fragments[i].range);
         if (fragments.length >= 2)
             sentence.attr.Num = String(i + 1);
-        if (sentence_content[0] instanceof control_1.__Text &&
-            sentence_content[0].text.match(/^ただし、|但し、/)) {
+        if (sentence_content[0] instanceof controls_1.__Text &&
+            sentence_content[0].text().match(/^ただし、|但し、/)) {
             proviso_indices.push(i);
         }
         sentences.push(sentence);
@@ -46454,7 +48251,7 @@ const _indents_1 = __importDefault(__webpack_require__(2027));
 const line_1 = __webpack_require__(69928);
 const lexical_1 = __webpack_require__(99247);
 const util_1 = __webpack_require__(26459);
-const control_1 = __webpack_require__(37973);
+const controls_1 = __webpack_require__(48075);
 const _tagControl_1 = __webpack_require__(71040);
 exports.supplProvisionAppdxItemTitlePtns = [
     ["SupplProvisionAppdx", /^[付附]則[付附]録/],
@@ -46503,7 +48300,7 @@ exports.$supplProvisionAppdxItemHeadLine = factory_1.default
     var _a, _b;
     const inline = (0, util_1.mergeAdjacentTexts)((_a = tail === null || tail === void 0 ? void 0 : tail.value) !== null && _a !== void 0 ? _a : []);
     const lastItem = inline.length > 0 ? inline[inline.length - 1] : null;
-    const [title, relatedArticleNum] = (lastItem instanceof control_1.__Parentheses
+    const [title, relatedArticleNum] = (lastItem instanceof controls_1.__Parentheses
         && lastItem.attr.type === "round") ? [inline.slice(0, -1), inline.slice(-1)] : [inline, []];
     const errors = [
         ...indentsStruct.errors,
@@ -46845,7 +48642,7 @@ const factory_1 = __importDefault(__webpack_require__(31707));
 const std_1 = __webpack_require__(93619);
 const _indents_1 = __importDefault(__webpack_require__(2027));
 const line_1 = __webpack_require__(69928);
-const control_1 = __webpack_require__(37973);
+const controls_1 = __webpack_require__(48075);
 const lexical_1 = __webpack_require__(99247);
 exports.$tocHeadLine = factory_1.default
     .withName("tocHeadLine")
@@ -46857,7 +48654,7 @@ exports.$tocHeadLine = factory_1.default
     .and(r => r.regExp(/^目[ 　\t]*次/), "label")
     .action(({ label, range }) => {
     return {
-        content: (0, std_1.newStdEL)("TOC", {}, [(0, std_1.newStdEL)("TOCLabel", {}, [new control_1.__Text(label, range())], range())]),
+        content: (0, std_1.newStdEL)("TOC", {}, [(0, std_1.newStdEL)("TOCLabel", {}, [new controls_1.__Text(label, range())], range())]),
         contentText: label,
     };
 })), "contentStruct")
@@ -46887,8 +48684,8 @@ exports["default"] = exports.$tocHeadLine;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.$xml = void 0;
 /* eslint-disable no-irregular-whitespace */
-const el_1 = __webpack_require__(26252);
-const control_1 = __webpack_require__(37973);
+const el_1 = __webpack_require__(18539);
+const controls_1 = __webpack_require__(48075);
 const factory_1 = __webpack_require__(31707);
 const lexical_1 = __webpack_require__(99247);
 exports.$xml = factory_1.factory
@@ -46936,7 +48733,7 @@ exports.$xml = factory_1.factory
     .asSlice(r => r
     .oneOrMore(r => r.regExp(/^[^<>]/))), "text")), (({ text, range }) => {
     return {
-        value: new control_1.__Text(text.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, "\"").replace(/&apos;/g, "'"), range()),
+        value: new controls_1.__Text(text.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, "\"").replace(/&apos;/g, "'"), range()),
         errors: [],
     };
 }))))), "children")
@@ -47041,7 +48838,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.makeRangesRule = void 0;
 const factory_1 = __importDefault(__webpack_require__(31707));
-const makeRangesRule = (lazyPointerRule) => {
+const simpleRangeMaker = (from, midText, to) => {
+    void midText;
+    return [from, to !== null && to !== void 0 ? to : from];
+};
+const simpleRangesMaker = (first, midText, rest) => {
+    var _a, _b;
+    void midText;
+    return {
+        value: [first.value, ...((_a = rest === null || rest === void 0 ? void 0 : rest.value) !== null && _a !== void 0 ? _a : [])],
+        errors: [...first.errors, ...((_b = rest === null || rest === void 0 ? void 0 : rest.errors) !== null && _b !== void 0 ? _b : [])],
+    };
+};
+const makeRangesRule = (lazyPointerRule, rangeMaker = simpleRangeMaker, rangesMaker = simpleRangesMaker) => {
     const $ranges = factory_1.default
         .withName("ranges")
         .choice(c => c
@@ -47049,23 +48858,23 @@ const makeRangesRule = (lazyPointerRule) => {
         .sequence(c => c
         .and(() => $range, "first")
         .and(r => r
+        .sequence(s => s
+        .and(r => r
         .choice(c => c
         .or(r => r.seqEqual("、"))
         .or(r => r.seqEqual("及び"))
         .or(r => r.regExp(/^及(?!至)/))
         .or(r => r.seqEqual("並びに"))))
+        .action(({ text, range }) => ({ text: text(), range: range() }))), "midText")
         .and(() => $ranges, "rest")
-        .action(({ first, rest }) => {
-        return {
-            value: [first.value, ...rest.value],
-            errors: [...first.errors, ...rest.errors],
-        };
+        .action(({ first, midText, rest, range }) => {
+        return rangesMaker(first, midText, rest, range());
     })))
         .or(r => r
         .sequence(c => c
-        .and(() => $range, "range")
-        .action(({ range }) => {
-        return { value: [range.value], errors: range.errors };
+        .and(() => $range, "singleRange")
+        .action(({ singleRange, range }) => {
+        return rangesMaker(singleRange, null, null, range());
     }))));
     const $range = factory_1.default
         .withName("range")
@@ -47073,25 +48882,34 @@ const makeRangesRule = (lazyPointerRule) => {
         .or(r => r
         .sequence(c => c
         .and(lazyPointerRule, "from")
+        .and(r => r
+        .sequence(s => s
         .and(r => r.seqEqual("から"))
+        .action(({ text, range }) => ({ text: text(), range: range() }))), "midText")
         .and(lazyPointerRule, "to")
+        .and(r => r
+        .sequence(s => s
         .and(r => r.seqEqual("まで"))
-        .action(({ from, to }) => {
-        return { value: [from, to], errors: [] };
+        .action(({ text, range }) => ({ text: text(), range: range() }))), "trailingText")
+        .action(({ from, midText, to, trailingText, range }) => {
+        return { value: rangeMaker(from, midText, to, trailingText, range()), errors: [] };
     })))
         .or(r => r
         .sequence(c => c
         .and(lazyPointerRule, "from")
+        .and(r => r
+        .sequence(s => s
         .and(r => r.regExp(/^(?:・|～|乃至)/))
+        .action(({ text, range }) => ({ text: text(), range: range() }))), "midText")
         .and(lazyPointerRule, "to")
-        .action(({ from, to }) => {
-        return { value: [from, to], errors: [] };
+        .action(({ from, midText, to, range }) => {
+        return { value: rangeMaker(from, midText, to, null, range()), errors: [] };
     })))
         .or(r => r
         .sequence(c => c
         .and(lazyPointerRule, "pointer")
-        .action(({ pointer }) => {
-        return { value: [pointer, pointer], errors: [] };
+        .action(({ pointer, range }) => {
+        return { value: rangeMaker(pointer, null, null, null, range()), errors: [] };
     }))));
     return { $ranges, $range };
 };
@@ -47108,8 +48926,8 @@ exports["default"] = exports.makeRangesRule;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.separateTrailingSpaces = exports.mergeAdjacentTextsWithString = exports.mergeAdjacentTexts = exports.assertAllELsHaveRange = exports.enumAllELs = void 0;
-const control_1 = __webpack_require__(37973);
-const el_1 = __webpack_require__(26252);
+const controls_1 = __webpack_require__(48075);
+const el_1 = __webpack_require__(18539);
 const enumAllELs = (el) => {
     const result = [];
     if (el instanceof el_1.EL) {
@@ -47127,6 +48945,19 @@ const assertAllELsHaveRange = (elOrELs) => {
     }
 };
 exports.assertAllELsHaveRange = assertAllELsHaveRange;
+// export const cancelPointerRanges = (inline: SentenceChildEL[]): SentenceChildEL[] => {
+//     const result: SentenceChildEL[] = [];
+//     for (const el of inline) {
+//         if (el instanceof __Ranges) {
+//             result.push(new __Text(el.text(), el.range));
+//         } else {
+//             const newEL = el.copy(false) as SentenceChildEL;
+//             newEL.children = el.children.map(c => typeof c === "string" ? [c] : cancelPointerRanges([c as SentenceChildEL])).flat();
+//             result.push(newEL);
+//         }
+//     }
+//     return result;
+// };
 const mergeAdjacentTexts = (inline) => {
     return (0, exports.mergeAdjacentTextsWithString)(inline);
 };
@@ -47138,13 +48969,13 @@ const mergeAdjacentTextsWithString = (inline) => {
         if ((typeof lastItem !== "string")
             && (lastItem === null || lastItem === void 0 ? void 0 : lastItem.tag) === "__Text"
             && (typeof item === "string" || item.tag === "__Text")) {
-            const itemText = typeof item === "string" ? item : item.text;
-            const replacedTail = new control_1.__Text(lastItem.text + itemText, (lastItem.range ? [lastItem.range[0], lastItem.range[1] + itemText.length] : null));
+            const itemText = typeof item === "string" ? item : item.text();
+            const replacedTail = new controls_1.__Text(lastItem.text() + itemText, (lastItem.range ? [lastItem.range[0], lastItem.range[1] + itemText.length] : null));
             result.splice(-1, 1);
             result.push(replacedTail);
         }
         else if (typeof item === "string") {
-            result.push(new control_1.__Text(item, ((lastItem && lastItem.range) ? [lastItem.range[0], lastItem.range[1] + item.length] : null)));
+            result.push(new controls_1.__Text(item, ((lastItem && lastItem.range) ? [lastItem.range[0], lastItem.range[1] + item.length] : null)));
         }
         else {
             result.push(item);
@@ -47157,11 +48988,11 @@ const separateTrailingSpaces = (inline) => {
     var _a;
     const ret = { inline: (0, exports.mergeAdjacentTextsWithString)(inline), spaces: "" };
     if (((_a = ret.inline.slice(-1)[0]) === null || _a === void 0 ? void 0 : _a.tag) === "__Text") {
-        const m = /^(.*?)(\s+)$/.exec(ret.inline.slice(-1)[0].text);
+        const m = /^(.*?)(\s+)$/.exec(ret.inline.slice(-1)[0].text());
         if (m) {
             const orig = ret.inline.splice(-1, 1);
             if (m[1] !== "") {
-                ret.inline.push(new control_1.__Text(m[1], orig[0].range && [orig[0].range[0], orig[0].range[0] + m[1].length]));
+                ret.inline.push(new controls_1.__Text(m[1], orig[0].range && [orig[0].range[0], orig[0].range[0] + m[1].length]));
             }
             ret.spaces = m[2];
         }
@@ -47190,7 +49021,7 @@ const virtualLine_1 = __webpack_require__(40504);
 const parse = (lawtext) => {
     const lines = (0, parse_1.parse)(lawtext);
     const vls = (0, virtualLine_1.toVirtualLines)(lines.value);
-    const env = (0, env_1.initialEnv)(lawtext, {});
+    const env = (0, env_1.initialEnv)({ target: lawtext });
     const law = _law_1.default.match(0, vls, env);
     if (law.ok) {
         return {
@@ -47215,18 +49046,19 @@ exports.parse = parse;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.initialEnv = void 0;
-const core_1 = __webpack_require__(14570);
+const core_1 = __webpack_require__(24658);
 const error_1 = __webpack_require__(40520);
-const initialEnv = (target, options) => {
+const initialEnv = (initialEnvOptions) => {
+    const { target, options = {}, baseOffset = 0 } = initialEnvOptions;
     const registerCurrentRangeTarget = () => { };
     const offsetToPos = (_, offset) => ({ offset });
     const stringOffsetToPos = (0, core_1.getMemorizedStringOffsetToPos)();
-    const onMatchFail = (matchFail, matchContext) => {
-        if (state.maxOffsetMatchFail === null || matchFail.offset > state.maxOffsetMatchFail.offset) {
-            state.maxOffsetMatchFail = matchFail;
-            state.maxOffsetMatchContext = matchContext;
-        }
-    };
+    // const onMatchFail = (matchFail: MatchFail, matchContext: MatchContext) => {
+    //     if (state.maxOffsetMatchFail === null || matchFail.offset > state.maxOffsetMatchFail.offset) {
+    //         state.maxOffsetMatchFail = matchFail;
+    //         state.maxOffsetMatchContext = matchContext;
+    //     }
+    // };
     const newErrorMessage = (message, range) => new error_1.ErrorMessage(message, [
         stringOffsetToPos(target, range[0]),
         stringOffsetToPos(target, range[1]),
@@ -47237,16 +49069,17 @@ const initialEnv = (target, options) => {
     };
     return {
         options,
-        toStringOptions: {
-            fullToString: true,
-            maxToStringDepth: 5,
-        },
+        // toStringOptions: {
+        //     fullToString: true,
+        //     maxToStringDepth: 5,
+        // },
         registerCurrentRangeTarget,
         offsetToPos,
-        onMatchFail,
+        // onMatchFail,
         state,
         newErrorMessage,
         stringOffsetToPos,
+        baseOffset,
     };
 };
 exports.initialEnv = initialEnv;
@@ -47261,7 +49094,7 @@ exports.initialEnv = initialEnv;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.factory = void 0;
-const factory_1 = __webpack_require__(91117);
+const factory_1 = __webpack_require__(21718);
 exports.factory = new factory_1.RuleFactory();
 exports["default"] = exports.factory;
 //# sourceMappingURL=factory.js.map
@@ -47323,7 +49156,7 @@ const _noteLike_1 = __webpack_require__(88035);
 const _toc_1 = __importStar(__webpack_require__(20421));
 const _remarks_1 = __importStar(__webpack_require__(90137));
 const _supplNote_1 = __importStar(__webpack_require__(42455));
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const amendProvisionToLines = (amendProvision, indentTexts, options) => {
     const { withControl, } = Object.assign({ withControl: false }, options);
     const lines = [];
@@ -47723,7 +49556,7 @@ const std = __importStar(__webpack_require__(93619));
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
 const util_2 = __webpack_require__(26459);
 const inline_1 = __webpack_require__(22845);
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const util_3 = __webpack_require__(84530);
 const _remarks_1 = __importStar(__webpack_require__(90137));
 const _noteLike_1 = __webpack_require__(88035);
@@ -47919,7 +49752,7 @@ const std_1 = __webpack_require__(93619);
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
 const inline_1 = __webpack_require__(22845);
 const _any_1 = __importStar(__webpack_require__(22351));
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 exports.arithFormulaControl = ":arith-formula:";
 const arithFormulaToLines = (arithFormula, indentTexts) => {
     const lines = [];
@@ -48026,7 +49859,7 @@ const virtualLine_1 = __webpack_require__(40504);
 const util_2 = __webpack_require__(80427);
 const _paragraphItem_1 = __importStar(__webpack_require__(83974));
 const _supplNote_1 = __importStar(__webpack_require__(42455));
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const articleToLines = (el, indentTexts) => {
     const lines = [];
     const ArticleCaption = [];
@@ -48125,30 +49958,30 @@ exports.$article = factory_1.default
     article.attr.Delete = "false";
     article.attr.Hide = "false";
     if (captionLine) {
-        article.append((0, std_1.newStdEL)("ArticleCaption", {}, captionLine.line.sentencesArray
+        article.children.push((0, std_1.newStdEL)("ArticleCaption", {}, captionLine.line.sentencesArray
             .map(sa => sa.sentences.map(s => s.children))
             .flat(2), captionLine.line.sentencesArrayRange));
     }
     if (firstParagraphItemLine.line.title) {
-        article.append((0, std_1.newStdEL)("ArticleTitle", {}, [firstParagraphItemLine.line.title], firstParagraphItemLine.line.titleRange));
+        article.children.push((0, std_1.newStdEL)("ArticleTitle", {}, [firstParagraphItemLine.line.title], firstParagraphItemLine.line.titleRange));
     }
     const firstParagraph = (0, std_1.newStdEL)("Paragraph");
     firstParagraph.attr.OldStyle = "false";
     const sentencesArrayRange = firstParagraphItemLine.line.sentencesArrayRange;
-    firstParagraph.append((0, std_1.newStdEL)("ParagraphNum", {}, [], sentencesArrayRange ? [sentencesArrayRange[0], sentencesArrayRange[0]] : null));
-    firstParagraph.append((0, std_1.newStdEL)("ParagraphSentence", {}, (0, columnsOrSentences_1.sentencesArrayToColumnsOrSentences)(firstParagraphItemLine.line.sentencesArray), sentencesArrayRange));
+    firstParagraph.children.push((0, std_1.newStdEL)("ParagraphNum", {}, [], sentencesArrayRange ? [sentencesArrayRange[0], sentencesArrayRange[0]] : null));
+    firstParagraph.children.push((0, std_1.newStdEL)("ParagraphSentence", {}, (0, columnsOrSentences_1.sentencesArrayToColumnsOrSentences)(firstParagraphItemLine.line.sentencesArray), sentencesArrayRange));
     if (firstAutoParagraphChildren) {
-        firstParagraph.extend(firstAutoParagraphChildren.value);
+        firstParagraph.children.push(...firstAutoParagraphChildren.value);
     }
     firstParagraph.range = (0, el_1.rangeOfELs)(firstParagraph.children);
-    article.append((0, _paragraphItem_1.paragraphItemFromAuto)("Paragraph", firstParagraph));
-    article.extend(otherParagraphs.map((p, i) => {
+    article.children.push((0, _paragraphItem_1.paragraphItemFromAuto)("Paragraph", firstParagraph));
+    article.children.push(...otherParagraphs.map((p, i) => {
         if (std.isParagraph(p.value) && p.value.attr.OldNum === "true") {
             p.value.attr.Num = (i + 2).toString();
         }
         return p.value;
     }));
-    article.extend(supplNotes.map(n => n.value));
+    article.children.push(...supplNotes.map(n => n.value));
     const pos = captionLine ? captionLine.line.indentsEndPos : firstParagraphItemLine.line.indentsEndPos;
     const range = (_b = (0, el_1.rangeOfELs)(article.children)) !== null && _b !== void 0 ? _b : (pos !== null ? [pos, pos] : null);
     if (range && pos !== null) {
@@ -48211,7 +50044,7 @@ const _article_1 = __importStar(__webpack_require__(60783));
 const num_1 = __webpack_require__(68685);
 const _appdxItem_1 = __webpack_require__(67499);
 const inline_1 = __webpack_require__(22845);
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const articleGroupToLines = (el, indentTexts) => {
     const lines = [];
     const ChildItems = [];
@@ -48326,14 +50159,14 @@ exports.$articleGroup = factory_1.default
         }
     }
     const articleGroup = (0, std_1.newStdEL)(headLine.line.mainTag, { Delete: "false", Hide: "false" });
-    articleGroup.append((0, std_1.newStdEL)(std.articleGroupTitleTags[std.articleGroupTags.indexOf(headLine.line.mainTag)], {}, headLine.line.title, headLine.line.titleRange));
+    articleGroup.children.push((0, std_1.newStdEL)(std.articleGroupTitleTags[std.articleGroupTags.indexOf(headLine.line.mainTag)], {}, headLine.line.title, headLine.line.titleRange));
     const num = (0, num_1.parseNamedNum)(typeof headLine.line.title[0] === "string"
         ? headLine.line.title[0]
-        : (_a = headLine.line.title[0]) === null || _a === void 0 ? void 0 : _a.text);
+        : (_a = headLine.line.title[0]) === null || _a === void 0 ? void 0 : _a.text());
     if (num) {
         articleGroup.attr.Num = num;
     }
-    articleGroup.extend(children);
+    articleGroup.children.push(...children);
     const pos = headLine.line.indentsEndPos;
     const range = (_b = (0, el_1.rangeOfELs)(articleGroup.children)) !== null && _b !== void 0 ? _b : (pos !== null ? [pos, pos] : null);
     if (range && pos !== null) {
@@ -48389,7 +50222,7 @@ const util_1 = __webpack_require__(80427);
 const std_1 = __webpack_require__(93619);
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
 const inline_1 = __webpack_require__(22845);
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const util_2 = __webpack_require__(84530);
 const _remarks_1 = __importStar(__webpack_require__(90137));
 const _sentencesArray_1 = __webpack_require__(10145);
@@ -48581,7 +50414,7 @@ const _supplProvision_1 = __importStar(__webpack_require__(62678));
 const _appdxItem_1 = __webpack_require__(67499);
 const _sentencesArray_1 = __webpack_require__(10145);
 const num_1 = __webpack_require__(68685);
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const lawToLines = (law, indentTexts) => {
     const lines = [];
     const lawNum = law.children.find(std_1.isLawNum);
@@ -48805,9 +50638,9 @@ exports.$law = factory_1.factory
     if (lawTitleLines === null || lawTitleLines === void 0 ? void 0 : lawTitleLines.value.lawNumLine) {
         const parentheses = (0, util_1.isSingleParentheses)(lawTitleLines.value.lawNumLine);
         const lawNum = parentheses
-            ? parentheses.content
+            ? parentheses.content.text()
             : (0, _sentencesArray_1.sentencesArrayToString)(lawTitleLines.value.lawNumLine.line.sentencesArray);
-        law.append((0, std_1.newStdEL)("LawNum", {}, [lawNum], lawTitleLines.value.lawNumLine.line.sentencesArrayRange));
+        law.children.push((0, std_1.newStdEL)("LawNum", {}, [lawNum], lawTitleLines.value.lawNumLine.line.sentencesArrayRange));
         const { Era, Year, LawType, Num } = (0, num_1.parseLawNum)(lawNum);
         if (Era !== null)
             law.attr.Era = Era;
@@ -48818,28 +50651,28 @@ exports.$law = factory_1.factory
         law.attr.Num = Num !== null ? Num.toString() : "";
     }
     const lawBody = (0, std_1.newStdEL)("LawBody");
-    law.append(lawBody);
+    law.children.push(lawBody);
     if (lawTitleLines) {
-        lawBody.append((0, std_1.newStdEL)("LawTitle", {}, (0, _sentencesArray_1.forceSentencesArrayToSentenceChildren)(lawTitleLines.value.lawNameLine.line.sentencesArray), lawTitleLines.value.lawNameLine.virtualRange));
+        lawBody.children.push((0, std_1.newStdEL)("LawTitle", {}, (0, _sentencesArray_1.forceSentencesArrayToSentenceChildren)(lawTitleLines.value.lawNameLine.line.sentencesArray), lawTitleLines.value.lawNameLine.virtualRange));
     }
-    lawBody.extend(enactStatements.map(v => v.value));
+    lawBody.children.push(...enactStatements.map(v => v.value));
     errors.push(...enactStatements.map(v => v.errors).flat());
     if (toc) {
-        lawBody.append(toc.value);
+        lawBody.children.push(toc.value);
         errors.push(...toc.errors);
     }
     for (const preamble of preambles) {
-        lawBody.append(preamble.value);
+        lawBody.children.push(preamble.value);
         errors.push(...preamble.errors);
     }
     for (const [mainProvision, errorLines] of mainProvisionAndErrors) {
         const lastChild = lawBody.children.length > 0 ? lawBody.children[lawBody.children.length - 1] : null;
         if (lastChild && (0, std_1.isMainProvision)(lastChild)) {
-            lastChild.extend(mainProvision.value.children);
+            lastChild.children.push(...mainProvision.value.children);
             Object.assign(lastChild.attr, Object.assign(Object.assign({}, mainProvision.value.attr), lastChild.attr));
         }
         else {
-            lawBody.append(mainProvision.value);
+            lawBody.children.push(mainProvision.value);
         }
         errors.push(...mainProvision.errors);
         for (const errorLine of errorLines) {
@@ -48847,7 +50680,7 @@ exports.$law = factory_1.factory
         }
     }
     for (const [supplOrAppdxItem, errorLines] of supplOrAppdxItemAndErrors) {
-        lawBody.append(supplOrAppdxItem.value);
+        lawBody.children.push(supplOrAppdxItem.value);
         errors.push(...supplOrAppdxItem.errors);
         for (const errorLine of errorLines) {
             errors.push(newErrorMessage(`$law: この行をパースできませんでした。line.type: ${errorLine.type}`, errorLine.virtualRange));
@@ -48909,7 +50742,7 @@ const util_1 = __webpack_require__(80427);
 const factory_1 = __importDefault(__webpack_require__(13518));
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
 const util_2 = __webpack_require__(84530);
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const listOrSublistToLines = (listOrSublist, indentTexts) => {
     const lines = [];
     const childrenIndentTexts = [...indentTexts, toCSTSettings_1.default.INDENT];
@@ -49063,11 +50896,11 @@ const util_2 = __webpack_require__(84530);
 const _article_1 = __importStar(__webpack_require__(60783));
 const _articleGroup_1 = __importStar(__webpack_require__(40365));
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const mainProvisionToLines = (mainProvision, indentTexts) => {
     const lines = [];
     const paragraphs = mainProvision.children.filter(std_1.isParagraph);
-    const isSingleAnonymParagraph = paragraphs.length === 1 && paragraphs.every(p => p.children.filter(std_1.isParagraphItemTitle).every(el => el.text === ""));
+    const isSingleAnonymParagraph = paragraphs.length === 1 && paragraphs.every(p => p.children.filter(std_1.isParagraphItemTitle).every(el => el.text() === ""));
     for (const child of mainProvision.children) {
         if ((0, std_1.isParagraphItem)(child)) {
             if (isSingleAnonymParagraph) {
@@ -49188,7 +51021,7 @@ const std_1 = __webpack_require__(93619);
 const std = __importStar(__webpack_require__(93619));
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
 const inline_1 = __webpack_require__(22845);
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const util_2 = __webpack_require__(84530);
 const _remarks_1 = __importStar(__webpack_require__(90137));
 const _any_1 = __importStar(__webpack_require__(22351));
@@ -49373,7 +51206,7 @@ const util_2 = __webpack_require__(80427);
 const factory_1 = __importDefault(__webpack_require__(13518));
 const virtualLine_1 = __webpack_require__(40504);
 const util_3 = __webpack_require__(80427);
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const _amendProvision_1 = __importStar(__webpack_require__(88677));
 const _list_1 = __webpack_require__(58269);
 const _tableStruct_1 = __importStar(__webpack_require__(55439));
@@ -49451,8 +51284,8 @@ const paragraphItemToLines = (el, indentTexts, options) => {
         }));
     }
     else if (noControl
-        && ParagraphCaption.every(c => (typeof c !== "string" && !c.text) && !c)
-        && ParagraphItemTitle.every(c => (typeof c !== "string" && !c.text) && !c)
+        && ParagraphCaption.every(c => (typeof c !== "string" && !c.text()) && !c)
+        && ParagraphItemTitle.every(c => (typeof c !== "string" && !c.text()) && !c)
     // && paragraphItemTitleStr.length > 0
     ) {
         lines.push(new line_1.ParagraphItemLine({
@@ -49582,7 +51415,7 @@ exports.$autoParagraphItemChildrenOuter = factory_1.default
     .andOmit(r => r.assert(({ firstParagraphItemLine }) => {
     var _a, _b, _c;
     const lastText = (_c = (_b = (_a = firstParagraphItemLine.line
-        .sentencesArray.slice(-1)[0]) === null || _a === void 0 ? void 0 : _a.sentences.slice(-1)[0]) === null || _b === void 0 ? void 0 : _b.text) !== null && _c !== void 0 ? _c : "";
+        .sentencesArray.slice(-1)[0]) === null || _a === void 0 ? void 0 : _a.sentences.slice(-1)[0]) === null || _b === void 0 ? void 0 : _b.text()) !== null && _c !== void 0 ? _c : "";
     const m = /.*?の一部を次のように(?:改正す|改め)る。$/.exec(lastText);
     return m !== null;
 }))
@@ -49706,20 +51539,20 @@ exports.$autoParagraphItem = factory_1.default
         firstParagraphItemLine.line.sentencesArray[0].attrEntries.push(...replacedAttrEntries);
     }
     if (captionLine) {
-        paragraphItem.append((0, std_1.newStdEL)("ParagraphCaption", {}, captionLine.line.sentencesArray
+        paragraphItem.children.push((0, std_1.newStdEL)("ParagraphCaption", {}, captionLine.line.sentencesArray
             .map(sa => sa.sentences.map(s => s.children))
             .flat(2), captionLine.line.sentencesArrayRange));
     }
-    paragraphItem.append((0, std_1.newStdEL)(tag !== "__AutoParagraphItem"
+    paragraphItem.children.push((0, std_1.newStdEL)(tag !== "__AutoParagraphItem"
         ? std.paragraphItemTitleTags[std.paragraphItemTags.indexOf(tag)]
         : "__AutoParagraphItemTitle", {}, firstParagraphItemLine.line.title ? [firstParagraphItemLine.line.title] : [], firstParagraphItemLine.line.titleRange));
     const sentencesArrayRange = firstParagraphItemLine.line.sentencesArrayRange;
     const paragraphItemSentencePos = firstParagraphItemLine.line.indentsEndPos;
-    paragraphItem.append((0, std_1.newStdEL)(tag !== "__AutoParagraphItem"
+    paragraphItem.children.push((0, std_1.newStdEL)(tag !== "__AutoParagraphItem"
         ? std.paragraphItemSentenceTags[std.paragraphItemTags.indexOf(tag)]
         : "__AutoParagraphItemSentence", {}, (0, columnsOrSentences_1.sentencesArrayToColumnsOrSentences)(firstParagraphItemLine.line.sentencesArray), sentencesArrayRange !== null && sentencesArrayRange !== void 0 ? sentencesArrayRange : (paragraphItemSentencePos !== null ? [paragraphItemSentencePos, paragraphItemSentencePos] : null)));
     if (tailChildren) {
-        paragraphItem.extend(tailChildren.value);
+        paragraphItem.children.push(...tailChildren.value);
     }
     const pos = captionLine ? captionLine.line.indentsEndPos : firstParagraphItemLine.line.indentsEndPos;
     const range = (_c = (0, el_1.rangeOfELs)(paragraphItem.children)) !== null && _c !== void 0 ? _c : (pos !== null ? [pos, pos] : null);
@@ -49787,7 +51620,7 @@ exports.$noControlAnonymParagraph = factory_1.default
         (0, std_1.newStdEL)("ParagraphSentence", {}, (0, columnsOrSentences_1.sentencesArrayToColumnsOrSentences)(firstParagraphItemLine.line.sentencesArray), sentencesArrayRange),
     ]);
     if (tailChildren) {
-        paragraph.extend(tailChildren.value);
+        paragraph.children.push(...tailChildren.value);
     }
     const pos = firstParagraphItemLine.line.indentsEndPos;
     const range = (_a = (0, el_1.rangeOfELs)(paragraph.children)) !== null && _a !== void 0 ? _a : (pos !== null ? [pos, pos] : null);
@@ -49845,7 +51678,7 @@ const std_1 = __webpack_require__(93619);
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
 const inline_1 = __webpack_require__(22845);
 const _paragraphItem_1 = __importStar(__webpack_require__(83974));
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 exports.preambleControl = ":preamble:";
 const preambleToLines = (preamble, indentTexts) => {
     const lines = [];
@@ -49860,7 +51693,7 @@ const preambleToLines = (preamble, indentTexts) => {
     }));
     const childrenIndentTexts = [...indentTexts, toCSTSettings_1.default.INDENT];
     for (const paragraph of preamble.children) {
-        if (paragraph.children.filter(std_1.isParagraphItemTitle).some(el => el.text !== "")) {
+        if (paragraph.children.filter(std_1.isParagraphItemTitle).some(el => el.text() !== "")) {
             lines.push(...(0, _paragraphItem_1.paragraphItemToLines)(paragraph, childrenIndentTexts, { defaultTag: "Paragraph" }));
         }
         else {
@@ -49968,7 +51801,7 @@ const inline_1 = __webpack_require__(22845);
 const util_2 = __webpack_require__(84530);
 const _sentenceChildren_1 = __webpack_require__(36096);
 const _sentencesArray_1 = __webpack_require__(10145);
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 exports.remarksControl = ":remarks:";
 exports.remarksLabelPtn = /^(?:備\s*考|注)\s*$/;
 const remarksToLines = (remarks, indentTexts) => {
@@ -50099,7 +51932,7 @@ const std_1 = __webpack_require__(93619);
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
 const inline_1 = __webpack_require__(22845);
 const _sentencesArray_1 = __webpack_require__(10145);
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 exports.supplNoteControl = ":suppl-note:";
 const supplNoteToLines = (supplNote, indentTexts) => {
     const lines = [];
@@ -50198,7 +52031,7 @@ const _articleGroup_1 = __importStar(__webpack_require__(40365));
 const _supplProvisionAppdxItem_1 = __webpack_require__(7534);
 const inline_1 = __webpack_require__(22845);
 const _supplProvisionHeadLine_1 = __webpack_require__(45416);
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const supplProvisionToLines = (supplProvision, indentTexts) => {
     var _a, _b;
     const lines = [];
@@ -50225,7 +52058,7 @@ const supplProvisionToLines = (supplProvision, indentTexts) => {
     }));
     lines.push(new line_1.BlankLine({ range: null, lineEndText: toCSTSettings_1.default.EOL }));
     const paragraphs = supplProvision.children.filter(std_1.isParagraph);
-    const isSingleAnonymParagraph = paragraphs.length === 1 && paragraphs.every(p => p.children.filter(std_1.isParagraphItemTitle).every(el => el.text === ""));
+    const isSingleAnonymParagraph = paragraphs.length === 1 && paragraphs.every(p => p.children.filter(std_1.isParagraphItemTitle).every(el => el.text() === ""));
     for (const child of supplProvision.children) {
         if (child.tag === "SupplProvisionLabel")
             continue;
@@ -50380,7 +52213,7 @@ const std = __importStar(__webpack_require__(93619));
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
 const util_2 = __webpack_require__(26459);
 const inline_1 = __webpack_require__(22845);
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const util_3 = __webpack_require__(84530);
 const _noteLike_1 = __webpack_require__(88035);
 const _tableStruct_1 = __importStar(__webpack_require__(55439));
@@ -50540,7 +52373,7 @@ const _remarks_1 = __importStar(__webpack_require__(90137));
 const columnsOrSentences_1 = __webpack_require__(15695);
 const _any_1 = __webpack_require__(22351);
 const _sentencesArray_1 = __webpack_require__(10145);
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const _article_1 = __importDefault(__webpack_require__(60783));
 const _articleGroup_1 = __importDefault(__webpack_require__(40365));
 const _paragraphItem_1 = __webpack_require__(83974);
@@ -50860,7 +52693,7 @@ exports.$tableStruct = factory_1.factory
     var _a;
     const children = [];
     const errors = [];
-    const tableStructTitleText = titleLine.line.sentencesArray.map(ss => ss.sentences).flat().map(s => s.text).join("");
+    const tableStructTitleText = titleLine.line.sentencesArray.map(ss => ss.sentences).flat().map(s => s.text()).join("");
     const tableStructTitle = tableStructTitleText ? (0, std_1.newStdEL)("TableStructTitle", {}, [tableStructTitleText], titleLine.line.sentencesArrayRange) : null;
     if (tableStructTitle) {
         children.push(tableStructTitle);
@@ -50930,9 +52763,9 @@ const inline_1 = __webpack_require__(22845);
 const _sentenceChildren_1 = __webpack_require__(36096);
 const util_3 = __webpack_require__(26459);
 const virtualLine_1 = __webpack_require__(40504);
-const control_1 = __webpack_require__(37973);
+const controls_1 = __webpack_require__(48075);
 const _sentencesArray_1 = __webpack_require__(10145);
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const tocItemToLines = (el, indentTexts) => {
     var _a, _b, _c, _d, _e, _f;
     const lines = [];
@@ -50954,7 +52787,7 @@ const tocItemToLines = (el, indentTexts) => {
         const articleRange = el.children.find(std.isArticleRange);
         const sentenceChildren = (0, util_3.mergeAdjacentTextsWithString)([
             ...((_a = articleGroupTitle === null || articleGroupTitle === void 0 ? void 0 : articleGroupTitle.children) !== null && _a !== void 0 ? _a : []),
-            ...(/^[(（]/.exec((_b = articleRange === null || articleRange === void 0 ? void 0 : articleRange.text) !== null && _b !== void 0 ? _b : "（")
+            ...(/^[(（]/.exec((_b = articleRange === null || articleRange === void 0 ? void 0 : articleRange.text()) !== null && _b !== void 0 ? _b : "（")
                 ? []
                 : [toCSTSettings_1.default.MARGIN]),
             ...((_c = articleRange === null || articleRange === void 0 ? void 0 : articleRange.children) !== null && _c !== void 0 ? _c : []),
@@ -51083,7 +52916,7 @@ exports.$tocArticleGroup = factory_1.default
     const errors = [];
     const inline = (0, util_3.mergeAdjacentTexts)(headLine.line.title);
     const lastItem = inline.length > 0 ? inline[inline.length - 1] : null;
-    const [title, articleRangeSentenceChildren] = (lastItem instanceof control_1.__Parentheses
+    const [title, articleRangeSentenceChildren] = (lastItem instanceof controls_1.__Parentheses
         && lastItem.attr.type === "round") ? [inline.slice(0, -1), inline.slice(-1)] : [inline, []];
     const articleGroupTitleTag = std_1.articleGroupTitleTags[std_1.articleGroupTags.indexOf(headLine.line.mainTag)];
     const articleGroupTitle = (0, std_1.newStdEL)(articleGroupTitleTag, {}, title, (0, el_1.rangeOfELs)(title));
@@ -51164,14 +52997,25 @@ exports.$tocSupplProvision = factory_1.default
     const children = [];
     const errors = [];
     const inline = (0, util_3.mergeAdjacentTexts)([
-        new control_1.__Text(headLine.line.title, headLine.line.titleRange),
-        new control_1.__Text(headLine.line.openParen, headLine.line.openParenRange),
-        new control_1.__Text(headLine.line.amendLawNum, headLine.line.amendLawNumRange),
-        new control_1.__Text(headLine.line.closeParen, headLine.line.closeParenRange),
-        new control_1.__Text(headLine.line.extractText, headLine.line.extractTextRange),
+        new controls_1.__Text(headLine.line.title, headLine.line.titleRange),
+        new controls_1.__Parentheses({
+            start: headLine.line.openParen,
+            content: [new controls_1.__Text(headLine.line.amendLawNum, headLine.line.amendLawNumRange)],
+            end: headLine.line.closeParen,
+            type: "round",
+            range: ((headLine.line.openParenRange && headLine.line.amendLawNumRange && headLine.line.closeParenRange)
+                ? {
+                    start: headLine.line.openParenRange,
+                    content: headLine.line.amendLawNumRange,
+                    end: headLine.line.closeParenRange,
+                }
+                : null),
+            depth: 0,
+        }),
+        new controls_1.__Text(headLine.line.extractText, headLine.line.extractTextRange),
     ]);
     const lastItem = inline.length > 0 ? inline[inline.length - 1] : null;
-    const [title, articleRangeSentenceChildren] = (lastItem instanceof control_1.__Parentheses
+    const [title, articleRangeSentenceChildren] = (lastItem instanceof controls_1.__Parentheses
         && lastItem.attr.type === "round") ? [inline.slice(0, -1), inline.slice(-1)] : [inline, []];
     const supplProvisionLabel = (0, std_1.newStdEL)("SupplProvisionLabel", {}, title, (0, el_1.rangeOfELs)(title));
     children.push(supplProvisionLabel);
@@ -51347,7 +53191,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.isSingleParentheses = exports.makeDoubleIndentBlockWithCaptureRule = exports.makeIndentBlockWithCaptureRule = exports.$indentBlock = exports.$blankLine = exports.$optBNK_DEDENT = exports.$DEDENT = exports.$optBNK_INDENT = exports.$INDENT = void 0;
-const control_1 = __webpack_require__(37973);
+const controls_1 = __webpack_require__(48075);
 const line_1 = __webpack_require__(69928);
 const factory_1 = __importDefault(__webpack_require__(13518));
 const virtualLine_1 = __webpack_require__(40504);
@@ -51518,7 +53362,7 @@ const isSingleParentheses = (line) => {
     return (columns.length === 1
         && columns[0].sentences.length === 1
         && columns[0].sentences[0].children.length === 1
-        && columns[0].sentences[0].children[0] instanceof control_1.__Parentheses
+        && columns[0].sentences[0].children[0] instanceof controls_1.__Parentheses
         && columns[0].sentences[0].children[0].attr.type === "round"
     // && typeof columns[0].sentences[0].children[0] !== "string"
     // && columns[0].sentences[0].children[0].tag === "__Parentheses"
@@ -53254,13 +55098,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.renderDocxAsync = void 0;
 const react_1 = __importDefault(__webpack_require__(66406));
-const el_1 = __webpack_require__(26252);
 const std = __importStar(__webpack_require__(93619));
 const law_1 = __webpack_require__(64578);
 const docx_1 = __webpack_require__(80826);
 const any_1 = __webpack_require__(48774);
+const loadEL_1 = __importDefault(__webpack_require__(62031));
 const renderDocxAsync = (elOrJsonEL, docxOptions) => {
-    const el = (0, el_1.loadEl)(elOrJsonEL);
+    const el = (0, loadEL_1.default)(elOrJsonEL);
     const element = std.isLaw(el)
         ? react_1.default.createElement(law_1.DOCXLaw, { el: el, indent: 0, docxOptions: docxOptions !== null && docxOptions !== void 0 ? docxOptions : {} })
         : react_1.default.createElement(any_1.DOCXAnyELs, { els: [el], indent: 0, docxOptions: docxOptions !== null && docxOptions !== void 0 ? docxOptions : {} });
@@ -53306,12 +55150,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.renderElementsFragment = exports.renderHTMLfragment = exports.renderHTML = void 0;
 const react_1 = __importDefault(__webpack_require__(66406));
-const el_1 = __webpack_require__(26252);
+const el_1 = __webpack_require__(18539);
 const std = __importStar(__webpack_require__(93619));
 const law_1 = __webpack_require__(64578);
 const htmlCSS_1 = __importDefault(__webpack_require__(81225));
 const common_1 = __webpack_require__(66914);
 const any_1 = __webpack_require__(48774);
+const loadEL_1 = __importDefault(__webpack_require__(62031));
 const renderHTML = (elOrJsonEL, htmlOptions) => {
     const rendered = (0, exports.renderHTMLfragment)(elOrJsonEL, htmlOptions);
     const html = /*html*/ `\
@@ -53332,7 +55177,7 @@ ${rendered}
 };
 exports.renderHTML = renderHTML;
 const renderHTMLfragment = (elOrJsonEL, htmlOptions) => {
-    const el = elOrJsonEL instanceof el_1.EL ? elOrJsonEL : (0, el_1.loadEl)(elOrJsonEL);
+    const el = elOrJsonEL instanceof el_1.EL ? elOrJsonEL : (0, loadEL_1.default)(elOrJsonEL);
     const element = std.isLaw(el)
         ? react_1.default.createElement(law_1.HTMLLaw, { el: el, indent: 0, htmlOptions: htmlOptions !== null && htmlOptions !== void 0 ? htmlOptions : {} })
         : react_1.default.createElement(any_1.HTMLAnyELs, { els: [el], indent: 0, htmlOptions: htmlOptions !== null && htmlOptions !== void 0 ? htmlOptions : {} });
@@ -55719,7 +57564,7 @@ exports.HTMLSentenceChildrenRun = (0, html_1.wrapHTMLComponent)("HTMLSentenceChi
                 runs.push(react_1.default.createElement(controlRun_1.HTMLControlRun, Object.assign({ el: el }, props)));
             }
             else {
-                runs.push(el.text);
+                runs.push(el.text());
             }
         }
         else {
@@ -55728,21 +57573,21 @@ exports.HTMLSentenceChildrenRun = (0, html_1.wrapHTMLComponent)("HTMLSentenceChi
                     .map(c => (typeof c === "string")
                     ? c
                     : !std.isRt(c)
-                        ? c.text
+                        ? c.text()
                         : "").join("");
                 const rt = el.children
                     .filter(c => !(typeof c === "string") && std.isRt(c))
-                    .map(c => c.text)
+                    .map(c => c.text())
                     .join("");
                 runs.push(react_1.default.createElement("ruby", Object.assign({}, (0, html_1.elProps)(el, htmlOptions)),
                     rb,
                     react_1.default.createElement("rt", null, rt)));
             }
             else if (el.tag === "Sub") {
-                runs.push(react_1.default.createElement("sub", Object.assign({}, (0, html_1.elProps)(el, htmlOptions)), el.text));
+                runs.push(react_1.default.createElement("sub", Object.assign({}, (0, html_1.elProps)(el, htmlOptions)), el.text()));
             }
             else if (el.tag === "Sup") {
-                runs.push(react_1.default.createElement("sup", Object.assign({}, (0, html_1.elProps)(el, htmlOptions)), el.text));
+                runs.push(react_1.default.createElement("sup", Object.assign({}, (0, html_1.elProps)(el, htmlOptions)), el.text()));
             }
             else if (el.tag === "QuoteStruct") {
                 runs.push(react_1.default.createElement(quoteStructRun_1.HTMLQuoteStructRun, Object.assign({ el: el }, { htmlOptions })));
@@ -55772,7 +57617,7 @@ exports.DOCXSentenceChildrenRun = (0, docx_1.wrapDOCXComponent)("DOCXSentenceChi
         else if (el.isControl) {
             runs.push(react_1.default.createElement(docx_1.w.r, null,
                 emphasis ? react_1.default.createElement(docx_1.w.rStyle, { "w:val": "Emphasis" }) : null,
-                react_1.default.createElement(docx_1.w.t, null, el.text)));
+                react_1.default.createElement(docx_1.w.t, null, el.text())));
         }
         else {
             if (el.tag === "Ruby") {
@@ -55780,11 +57625,11 @@ exports.DOCXSentenceChildrenRun = (0, docx_1.wrapDOCXComponent)("DOCXSentenceChi
                     .map(c => (typeof c === "string")
                     ? c
                     : !std.isRt(c)
-                        ? c.text
+                        ? c.text()
                         : "").join("");
                 const rt = el.children
                     .filter(c => !(typeof c === "string") && std.isRt(c))
-                    .map(c => c.text)
+                    .map(c => c.text())
                     .join("");
                 runs.push(react_1.default.createElement(docx_1.w.r, null,
                     emphasis ? react_1.default.createElement(docx_1.w.rStyle, { "w:val": "Emphasis" }) : null,
@@ -55800,15 +57645,15 @@ exports.DOCXSentenceChildrenRun = (0, docx_1.wrapDOCXComponent)("DOCXSentenceChi
                 runs.push(react_1.default.createElement(docx_1.w.r, null,
                     react_1.default.createElement(docx_1.w.rPr, null,
                         react_1.default.createElement(docx_1.w.vertAlign, { "w:val": "subscript" })),
-                    react_1.default.createElement(docx_1.w.t, null, el.text)));
-                runs.push(react_1.default.createElement("sub", null, el.text));
+                    react_1.default.createElement(docx_1.w.t, null, el.text())));
+                runs.push(react_1.default.createElement("sub", null, el.text()));
             }
             else if (el.tag === "Sup") {
                 runs.push(react_1.default.createElement(docx_1.w.r, null,
                     react_1.default.createElement(docx_1.w.rPr, null,
                         react_1.default.createElement(docx_1.w.vertAlign, { "w:val": "superscript" })),
-                    react_1.default.createElement(docx_1.w.t, null, el.text)));
-                runs.push(react_1.default.createElement("sub", null, el.text));
+                    react_1.default.createElement(docx_1.w.t, null, el.text())));
+                runs.push(react_1.default.createElement("sub", null, el.text()));
             }
             else if (el.tag === "QuoteStruct") {
                 runs.push(react_1.default.createElement(quoteStructRun_1.DOCXQuoteStructRun, Object.assign({ el: el }, { docxOptions })));
@@ -56377,15 +58222,18 @@ exports.DOCXTOCItem = (0, docx_1.wrapDOCXComponent)("DOCXTOCItem", ((props) => {
 /***/ }),
 
 /***/ 52087:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.renderXML = void 0;
-const el_1 = __webpack_require__(26252);
+const loadEL_1 = __importDefault(__webpack_require__(62031));
 const renderXML = (elOrJsonEL, withControlEl = false) => {
-    const el = (0, el_1.loadEl)(elOrJsonEL);
+    const el = (0, loadEL_1.default)(elOrJsonEL);
     const xml = `\
 <?xml version="1.0" encoding="utf-8"?>
 ${el.outerXML(withControlEl)}
@@ -59664,1964 +61512,6 @@ function split(source,start){
 exports.XMLReader = XMLReader;
 exports.ParseError = ParseError;
 
-
-/***/ }),
-
-/***/ 17547:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __values = (this && this.__values) || function(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-    if (m) return m.call(o);
-    if (o && typeof o.length === "number") return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.makeActionEnv = exports.getMemorizedStringOffsetToPos = exports.getLineOffsets = exports.arrayLikeOffsetToPos = void 0;
-var result_1 = __webpack_require__(38195);
-var arrayLikeOffsetToPos = function (_target, offset) {
-    return {
-        offset: offset,
-    };
-};
-exports.arrayLikeOffsetToPos = arrayLikeOffsetToPos;
-var getLineOffsets = function (target) {
-    var e_1, _a;
-    var _b;
-    var lineOffsets = [0];
-    try {
-        for (var _c = __values(target.matchAll(/\r\n|\r|\n/g)), _d = _c.next(); !_d.done; _d = _c.next()) {
-            var m = _d.value;
-            lineOffsets.push(((_b = m.index) !== null && _b !== void 0 ? _b : 0) + m[0].length);
-        }
-    }
-    catch (e_1_1) { e_1 = { error: e_1_1 }; }
-    finally {
-        try {
-            if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
-        }
-        finally { if (e_1) throw e_1.error; }
-    }
-    return lineOffsets;
-};
-exports.getLineOffsets = getLineOffsets;
-var getMemorizedStringOffsetToPos = function () {
-    // return (target: string, offset: number): StringPos => {
-    //     const beforeStr = target.slice(0, offset);
-    //     const lines = beforeStr.split(/\r?\n/g);
-    //     return {
-    //         offset,
-    //         line: lines.length,
-    //         column: lines[lines.length - 1].length + 1,
-    //     };
-    // };
-    var lineOffsetsMemo = new Map();
-    return function (target, offset) {
-        var _a;
-        var lineOffsets = (_a = lineOffsetsMemo.get(target)) !== null && _a !== void 0 ? _a : (0, exports.getLineOffsets)(target);
-        if (!lineOffsetsMemo.has(target)) {
-            lineOffsetsMemo.set(target, lineOffsets);
-        }
-        var low = 0;
-        var high = lineOffsets.length - 1;
-        while (low < high) {
-            var mid = Math.floor((low + high) / 2);
-            var _b = __read([
-                lineOffsets[mid],
-                (mid + 1 < lineOffsets.length) ? lineOffsets[mid + 1] : Infinity,
-            ], 2), currentOffset = _b[0], nextOffset = _b[1];
-            if (currentOffset <= offset && offset < nextOffset) {
-                low = high = mid;
-            }
-            else if (offset < currentOffset) {
-                high = mid - 1;
-            }
-            else {
-                low = mid + 1;
-            }
-        }
-        return {
-            offset: offset,
-            line: low + 1,
-            column: offset - lineOffsets[low] + 1,
-        };
-    };
-};
-exports.getMemorizedStringOffsetToPos = getMemorizedStringOffsetToPos;
-var makeActionEnv = function (start, end, target, env) {
-    var error = function (message, where) {
-        throw new result_1.ParseError(message, where);
-    };
-    var expected = function (expected, where) {
-        if (where === void 0) { where = location(); }
-        throw new result_1.ParseError("Expected ".concat(expected, " but \"").concat(text(), "\" found"), where);
-    };
-    var location = function () {
-        return {
-            start: env.offsetToPos(target, start),
-            end: env.offsetToPos(target, end),
-        };
-    };
-    var offset = function () {
-        return start;
-    };
-    var range = function () {
-        return [
-            start,
-            end,
-        ];
-    };
-    var text = function () {
-        return target
-            .slice(start, end);
-    };
-    var _target = function () {
-        return target;
-    };
-    env.registerCurrentRangeTarget(start, end, target);
-    return __assign({ error: error, expected: expected, location: location, offset: offset, range: range, text: text, target: _target }, env);
-};
-exports.makeActionEnv = makeActionEnv;
-//# sourceMappingURL=env.js.map
-
-/***/ }),
-
-/***/ 14570:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-__exportStar(__webpack_require__(17547), exports);
-__exportStar(__webpack_require__(89442), exports);
-__exportStar(__webpack_require__(38195), exports);
-__exportStar(__webpack_require__(85144), exports);
-__exportStar(__webpack_require__(78300), exports);
-__exportStar(__webpack_require__(20709), exports);
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-
-/***/ 89442:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.LazyRule = exports.convertRuleOrFunc = void 0;
-var rule_1 = __webpack_require__(85144);
-var convertRuleOrFunc = function (ruleOrFunc, factory) {
-    var rule = (typeof ruleOrFunc === "function"
-        ? new LazyRule(ruleOrFunc, factory)
-        : ruleOrFunc);
-    return rule;
-};
-exports.convertRuleOrFunc = convertRuleOrFunc;
-var LazyRule = /** @class */ (function (_super) {
-    __extends(LazyRule, _super);
-    function LazyRule(ruleOrFunc, factory, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.factory = factory;
-        _this._rule = null;
-        if (typeof ruleOrFunc === "function") {
-            _this.func = ruleOrFunc;
-        }
-        else {
-            _this.func = function () { return ruleOrFunc; };
-            _this._rule = ruleOrFunc;
-        }
-        return _this;
-    }
-    LazyRule.prototype.__match__ = function (pos, target, env, context) {
-        if (this._rule === null) {
-            this._rule = this.func(this.factory);
-        }
-        return this._rule.match(pos, target, env, context);
-    };
-    LazyRule.prototype.toString = function (options, currentDepth) {
-        if (this.name !== null)
-            return this.name;
-        if (this._rule === null) {
-            this._rule = this.func(this.factory);
-        }
-        return this._rule.toString(options, currentDepth);
-    };
-    return LazyRule;
-}(rule_1.Rule));
-exports.LazyRule = LazyRule;
-//# sourceMappingURL=lazyRule.js.map
-
-/***/ }),
-
-/***/ 38195:
-/***/ (function(__unused_webpack_module, exports) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ParseError = exports.getStackByThrow = void 0;
-var getStackByThrow = function () {
-    var _a;
-    try {
-        throw new Error();
-    }
-    catch (e) {
-        return (_a = e.stack) !== null && _a !== void 0 ? _a : "";
-    }
-};
-exports.getStackByThrow = getStackByThrow;
-var ParseError = /** @class */ (function (_super) {
-    __extends(ParseError, _super);
-    function ParseError(message, location) {
-        var _this = _super.call(this, message) || this;
-        _this.location = location;
-        return _this;
-    }
-    return ParseError;
-}(Error));
-exports.ParseError = ParseError;
-//# sourceMappingURL=result.js.map
-
-/***/ }),
-
-/***/ 85144:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Rule = void 0;
-var Rule = /** @class */ (function () {
-    function Rule(name) {
-        this.name = name;
-    }
-    Rule.prototype.match = function (offset, target, env, prevContext) {
-        var _this = this;
-        if (prevContext === void 0) { prevContext = null; }
-        var context = {
-            ruleToString: function () { return _this.toString(); },
-            offset: offset,
-            prevContext: prevContext,
-        };
-        var result = this.__match__(offset, target, env, context);
-        if (!result.ok && env.onMatchFail) {
-            env.onMatchFail(result, context);
-        }
-        return result;
-    };
-    Rule.prototype.abstract = function () {
-        return this;
-    };
-    return Rule;
-}());
-exports.Rule = Rule;
-//# sourceMappingURL=rule.js.map
-
-/***/ }),
-
-/***/ 78300:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-//# sourceMappingURL=ruleFunc.js.map
-
-/***/ }),
-
-/***/ 20709:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-//# sourceMappingURL=target.js.map
-
-/***/ }),
-
-/***/ 74964:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ParseError = exports.getMemorizedStringOffsetToPos = exports.arrayLikeOffsetToPos = exports.Rule = exports.RuleFactory = void 0;
-var factory_1 = __webpack_require__(91117);
-Object.defineProperty(exports, "RuleFactory", ({ enumerable: true, get: function () { return factory_1.RuleFactory; } }));
-var core_1 = __webpack_require__(14570);
-Object.defineProperty(exports, "Rule", ({ enumerable: true, get: function () { return core_1.Rule; } }));
-Object.defineProperty(exports, "arrayLikeOffsetToPos", ({ enumerable: true, get: function () { return core_1.arrayLikeOffsetToPos; } }));
-Object.defineProperty(exports, "getMemorizedStringOffsetToPos", ({ enumerable: true, get: function () { return core_1.getMemorizedStringOffsetToPos; } }));
-Object.defineProperty(exports, "ParseError", ({ enumerable: true, get: function () { return core_1.ParseError; } }));
-// export { parse as parsePegjs, defaultOptions as defaultParsePegjsOptions } from "./pegjs/pegjsParser";
-// export { grammarToCode } from "./pegjs/astToCode";
-//# sourceMappingURL=main.js.map
-
-/***/ }),
-
-/***/ 61756:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ActionRule = void 0;
-var core_1 = __webpack_require__(14570);
-var factory_1 = __webpack_require__(91117);
-var getMaxOffset = function (result) {
-    if (Array.isArray(result.prevFail)) {
-        var prevMax = Math.max.apply(Math, __spreadArray([], __read(result.prevFail.map(getMaxOffset)), false));
-        return Math.max(result.offset, prevMax);
-    }
-    else if (result.prevFail === null) {
-        return result.offset;
-    }
-    else {
-        return Math.max(result.offset, result.prevFail.offset);
-    }
-};
-var ActionRule = /** @class */ (function (_super) {
-    __extends(ActionRule, _super);
-    function ActionRule(rule, thenFunc, catchFuncOrName, name) {
-        if (catchFuncOrName === void 0) { catchFuncOrName = null; }
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, typeof catchFuncOrName === "function" ? name : catchFuncOrName) || this;
-        _this.rule = rule;
-        _this.thenFunc = thenFunc;
-        _this.classSignature = "ActionRule";
-        _this.catchFunc = null;
-        if (typeof catchFuncOrName === "function") {
-            _this.catchFunc = catchFuncOrName;
-        }
-        return _this;
-    }
-    ActionRule.prototype.__match__ = function (offset, target, env, context) {
-        var result = this.rule.match(offset, target, env, context);
-        if (result.ok) {
-            var newEnv = result.env;
-            var value = this.thenFunc((0, core_1.makeActionEnv)(offset, result.nextOffset, target, newEnv));
-            return {
-                ok: true,
-                nextOffset: result.nextOffset,
-                value: value,
-                env: newEnv,
-            };
-        }
-        else if (typeof this.catchFunc === "function") {
-            var newEnv = __assign(__assign({}, env), { result: result, prevEnv: env, factory: new factory_1.RuleFactory() });
-            return this.catchFunc((0, core_1.makeActionEnv)(offset, getMaxOffset(result), target, newEnv));
-        }
-        else {
-            return {
-                ok: false,
-                offset: offset,
-                expected: this.toString(env.toStringOptions),
-                prevFail: result,
-            };
-        }
-    };
-    ActionRule.prototype.toString = function (options, currentDepth) {
-        var _a;
-        if (currentDepth === void 0) { currentDepth = 0; }
-        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
-            return "...";
-        return (_a = this.name) !== null && _a !== void 0 ? _a : "(".concat(this.rule.toString(options, currentDepth + 1), "){<action>}");
-    };
-    return ActionRule;
-}(core_1.Rule));
-exports.ActionRule = ActionRule;
-//# sourceMappingURL=action.js.map
-
-/***/ }),
-
-/***/ 55534:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AnyOneRule = void 0;
-var core_1 = __webpack_require__(14570);
-var AnyOneRule = /** @class */ (function (_super) {
-    __extends(AnyOneRule, _super);
-    function AnyOneRule(name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.classSignature = "AnyOneRule";
-        return _this;
-    }
-    AnyOneRule.prototype.__match__ = function (offset, target, env) {
-        if (offset < target.length) {
-            return {
-                ok: true,
-                nextOffset: offset + 1,
-                value: target[offset],
-                env: env,
-            };
-        }
-        else {
-            return {
-                ok: false,
-                offset: offset,
-                expected: this.toString(),
-                prevFail: null,
-            };
-        }
-    };
-    AnyOneRule.prototype.toString = function () { var _a; return (_a = this.name) !== null && _a !== void 0 ? _a : "."; };
-    return AnyOneRule;
-}(core_1.Rule));
-exports.AnyOneRule = AnyOneRule;
-//# sourceMappingURL=anyOne.js.map
-
-/***/ }),
-
-/***/ 11783:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AsSliceRule = void 0;
-var core_1 = __webpack_require__(14570);
-var AsSliceRule = /** @class */ (function (_super) {
-    __extends(AsSliceRule, _super);
-    function AsSliceRule(rule, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.rule = rule;
-        _this.classSignature = "AsSliceRule";
-        return _this;
-    }
-    AsSliceRule.prototype.__match__ = function (offset, target, env, context) {
-        var result = this.rule.match(offset, target, env, context);
-        if (result.ok) {
-            return {
-                ok: true,
-                nextOffset: result.nextOffset,
-                value: target.slice(offset, result.nextOffset),
-                env: env,
-            };
-        }
-        else {
-            return {
-                ok: false,
-                offset: offset,
-                expected: this.toString(env.toStringOptions),
-                prevFail: result,
-            };
-        }
-    };
-    AsSliceRule.prototype.toString = function (options, currentDepth) {
-        var _a;
-        if (currentDepth === void 0) { currentDepth = 0; }
-        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
-            return "...";
-        return (_a = this.name) !== null && _a !== void 0 ? _a : "$(".concat(this.rule.toString(options, currentDepth + 1), ")");
-    };
-    return AsSliceRule;
-}(core_1.Rule));
-exports.AsSliceRule = AsSliceRule;
-//# sourceMappingURL=asSlice.js.map
-
-/***/ }),
-
-/***/ 17141:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AssertRule = void 0;
-var core_1 = __webpack_require__(14570);
-var AssertRule = /** @class */ (function (_super) {
-    __extends(AssertRule, _super);
-    function AssertRule(func, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.func = func;
-        _this.classSignature = "AssertRule";
-        return _this;
-    }
-    AssertRule.prototype.__match__ = function (offset, target, env) {
-        var value = this.func((0, core_1.makeActionEnv)(offset, offset, target, env));
-        if (value) {
-            return {
-                ok: true,
-                nextOffset: offset,
-                value: undefined,
-                env: env,
-            };
-        }
-        else {
-            return {
-                ok: false,
-                offset: offset,
-                expected: this.toString(),
-                prevFail: null,
-            };
-        }
-    };
-    AssertRule.prototype.toString = function () { var _a; return (_a = this.name) !== null && _a !== void 0 ? _a : "${assert}"; };
-    return AssertRule;
-}(core_1.Rule));
-exports.AssertRule = AssertRule;
-//# sourceMappingURL=assert.js.map
-
-/***/ }),
-
-/***/ 63620:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AssertNotRule = void 0;
-var core_1 = __webpack_require__(14570);
-var AssertNotRule = /** @class */ (function (_super) {
-    __extends(AssertNotRule, _super);
-    function AssertNotRule(func, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.func = func;
-        _this.classSignature = "AssertNotRule";
-        return _this;
-    }
-    AssertNotRule.prototype.__match__ = function (offset, target, env) {
-        var value = this.func((0, core_1.makeActionEnv)(offset, offset, target, env));
-        if (value) {
-            return {
-                ok: false,
-                offset: offset,
-                expected: this.toString(),
-                prevFail: null,
-            };
-        }
-        else {
-            return {
-                ok: true,
-                nextOffset: offset,
-                value: undefined,
-                env: env,
-            };
-        }
-    };
-    AssertNotRule.prototype.toString = function () { var _a; return (_a = this.name) !== null && _a !== void 0 ? _a : "!{assert}"; };
-    return AssertNotRule;
-}(core_1.Rule));
-exports.AssertNotRule = AssertNotRule;
-//# sourceMappingURL=assertNot.js.map
-
-/***/ }),
-
-/***/ 65407:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __values = (this && this.__values) || function(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-    if (m) return m.call(o);
-    if (o && typeof o.length === "number") return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ChoiceRule = void 0;
-var core_1 = __webpack_require__(14570);
-var sequence_1 = __webpack_require__(32798);
-var ChoiceRule = /** @class */ (function (_super) {
-    __extends(ChoiceRule, _super);
-    function ChoiceRule(rules, factory, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.rules = rules;
-        _this.factory = factory;
-        _this.classSignature = "ChoiceRule";
-        return _this;
-    }
-    ChoiceRule.prototype.__match__ = function (offset, target, env, context) {
-        var e_1, _a;
-        var prevFail = [];
-        try {
-            for (var _b = __values(this.rules), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var rule = _c.value;
-                var result = rule.match(offset, target, env, context);
-                if (result.ok) {
-                    return {
-                        ok: true,
-                        nextOffset: result.nextOffset,
-                        value: result.value,
-                        env: env,
-                    };
-                }
-                else {
-                    prevFail.push(result);
-                }
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        return {
-            ok: false,
-            offset: offset,
-            expected: this.toString(env.toStringOptions),
-            prevFail: prevFail,
-        };
-    };
-    ChoiceRule.prototype.toString = function (options, currentDepth) {
-        var _a;
-        if (currentDepth === void 0) { currentDepth = 0; }
-        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
-            return "...";
-        return (_a = this.name) !== null && _a !== void 0 ? _a : ((options === null || options === void 0 ? void 0 : options.fullToString) ? "".concat(this.rules.map(function (rule) { return rule.toString(options, currentDepth + 1); }).join(" / ")) : "<choice of rules>");
-    };
-    ChoiceRule.prototype.or = function (ruleOrFunc) {
-        return new ChoiceRule(__spreadArray(__spreadArray([], __read(this.rules), false), [
-            (0, core_1.convertRuleOrFunc)(ruleOrFunc, this.factory),
-        ], false), this.factory, this.name);
-    };
-    ChoiceRule.prototype.orSequence = function (immediateFunc) {
-        var rule = immediateFunc(new sequence_1.SequenceRule([], this.factory, null));
-        return this.or(rule);
-    };
-    return ChoiceRule;
-}(core_1.Rule));
-exports.ChoiceRule = ChoiceRule;
-//# sourceMappingURL=choice.js.map
-
-/***/ }),
-
-/***/ 91117:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.RuleFactory = void 0;
-var assert_1 = __webpack_require__(17141);
-var assertNot_1 = __webpack_require__(63620);
-var core_1 = __webpack_require__(14570);
-var nextIs_1 = __webpack_require__(63937);
-var nextIsNot_1 = __webpack_require__(81461);
-var oneOf_1 = __webpack_require__(62642);
-var oneOrMore_1 = __webpack_require__(14532);
-var action_1 = __webpack_require__(61756);
-var seqEqual_1 = __webpack_require__(34670);
-var sequence_1 = __webpack_require__(32798);
-var zeroOrMore_1 = __webpack_require__(13447);
-var zeroOrOne_1 = __webpack_require__(46191);
-var ref_1 = __webpack_require__(52569);
-var anyOne_1 = __webpack_require__(55534);
-var asSlice_1 = __webpack_require__(11783);
-var choice_1 = __webpack_require__(65407);
-var regExp_1 = __webpack_require__(7784);
-var regExpObj_1 = __webpack_require__(17886);
-var oneMatch_1 = __webpack_require__(65156);
-var noConsumeRef_1 = __webpack_require__(58894);
-var RuleFactory = /** @class */ (function () {
-    function RuleFactory(name) {
-        if (name === void 0) { name = null; }
-        this.name = name;
-    }
-    RuleFactory.prototype.withName = function (name) {
-        return new RuleFactory(name);
-    };
-    RuleFactory.prototype.action = function (ruleOrFunc, thenFunc, catchFunc) {
-        if (catchFunc === void 0) { catchFunc = null; }
-        if (catchFunc) {
-            return new action_1.ActionRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), thenFunc, catchFunc, this.name);
-        }
-        else {
-            return new action_1.ActionRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), thenFunc, this.name);
-        }
-    };
-    RuleFactory.prototype.anyOne = function () {
-        return new anyOne_1.AnyOneRule(this.name);
-    };
-    RuleFactory.prototype.assert = function (func) {
-        return new assert_1.AssertRule(func, this.name);
-    };
-    RuleFactory.prototype.assertNot = function (func) {
-        return new assertNot_1.AssertNotRule(func, this.name);
-    };
-    RuleFactory.prototype.asSlice = function (ruleOrFunc) {
-        return new asSlice_1.AsSliceRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), this.name);
-    };
-    RuleFactory.prototype.choice = function (immediateFunc) {
-        return immediateFunc(new choice_1.ChoiceRule([], new RuleFactory(), this.name));
-    };
-    RuleFactory.prototype.nextIs = function (ruleOrFunc) {
-        return new nextIs_1.NextIsRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), this.name);
-    };
-    RuleFactory.prototype.nextIsNot = function (ruleOrFunc) {
-        return new nextIsNot_1.NextIsNotRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), this.name);
-    };
-    RuleFactory.prototype.noConsumeRef = function (ruleOrFunc) {
-        return new noConsumeRef_1.NoConsumeRefRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), this.name);
-    };
-    RuleFactory.prototype.oneMatch = function (func) {
-        return new oneMatch_1.OneMatchRule(func, this.name);
-    };
-    RuleFactory.prototype.oneOf = function (items) {
-        return new oneOf_1.OneOfRule(items, this.name);
-    };
-    RuleFactory.prototype.oneOrMore = function (ruleOrFunc) {
-        return new oneOrMore_1.OneOrMoreRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), this.name);
-    };
-    RuleFactory.prototype.ref = function (ruleOrFunc) {
-        return new ref_1.RefRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), this.name);
-    };
-    RuleFactory.prototype.seqEqual = function (sequence) {
-        return new seqEqual_1.SeqEqualRule(sequence, this.name);
-    };
-    RuleFactory.prototype.sequence = function (immediateFunc) {
-        return immediateFunc(new sequence_1.SequenceRule([], new RuleFactory(), this.name));
-    };
-    RuleFactory.prototype.zeroOrMore = function (ruleOrFunc) {
-        return new zeroOrMore_1.ZeroOrMoreRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), this.name);
-    };
-    RuleFactory.prototype.zeroOrOne = function (ruleOrFunc) {
-        return new zeroOrOne_1.ZeroOrOneRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), this.name);
-    };
-    RuleFactory.prototype.regExp = function (regExp) {
-        return new regExp_1.RegExpRule(regExp, this.name);
-    };
-    RuleFactory.prototype.regExpObj = function (regExp) {
-        return new regExpObj_1.RegExpObjRule(regExp, this.name);
-    };
-    return RuleFactory;
-}());
-exports.RuleFactory = RuleFactory;
-//# sourceMappingURL=factory.js.map
-
-/***/ }),
-
-/***/ 63937:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NextIsRule = void 0;
-var core_1 = __webpack_require__(14570);
-var NextIsRule = /** @class */ (function (_super) {
-    __extends(NextIsRule, _super);
-    function NextIsRule(rule, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.rule = rule;
-        _this.classSignature = "NextIsRule";
-        return _this;
-    }
-    NextIsRule.prototype.__match__ = function (offset, target, env, context) {
-        var result = this.rule.match(offset, target, env, context);
-        if (result.ok) {
-            return {
-                ok: true,
-                nextOffset: offset,
-                value: undefined,
-                env: env,
-            };
-        }
-        else {
-            return {
-                ok: false,
-                offset: offset,
-                expected: this.toString(env.toStringOptions),
-                prevFail: result,
-            };
-        }
-    };
-    NextIsRule.prototype.toString = function (options, currentDepth) {
-        var _a;
-        if (currentDepth === void 0) { currentDepth = 0; }
-        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
-            return "...";
-        return (_a = this.name) !== null && _a !== void 0 ? _a : "&(".concat(this.rule.toString(options, currentDepth + 1), ")");
-    };
-    return NextIsRule;
-}(core_1.Rule));
-exports.NextIsRule = NextIsRule;
-//# sourceMappingURL=nextIs.js.map
-
-/***/ }),
-
-/***/ 81461:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NextIsNotRule = void 0;
-var core_1 = __webpack_require__(14570);
-var NextIsNotRule = /** @class */ (function (_super) {
-    __extends(NextIsNotRule, _super);
-    function NextIsNotRule(rule, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.rule = rule;
-        _this.classSignature = "NextIsNotRule";
-        return _this;
-    }
-    NextIsNotRule.prototype.__match__ = function (offset, target, env, context) {
-        var result = this.rule.match(offset, target, env, context);
-        if (result.ok) {
-            return {
-                ok: false,
-                offset: offset,
-                expected: this.toString(env.toStringOptions),
-                prevFail: null,
-            };
-        }
-        else {
-            return {
-                ok: true,
-                nextOffset: offset,
-                value: undefined,
-                env: env,
-            };
-        }
-    };
-    NextIsNotRule.prototype.toString = function (options, currentDepth) {
-        var _a;
-        if (currentDepth === void 0) { currentDepth = 0; }
-        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
-            return "...";
-        return (_a = this.name) !== null && _a !== void 0 ? _a : "!(".concat(this.rule.toString(options, currentDepth + 1), ")");
-    };
-    return NextIsNotRule;
-}(core_1.Rule));
-exports.NextIsNotRule = NextIsNotRule;
-//# sourceMappingURL=nextIsNot.js.map
-
-/***/ }),
-
-/***/ 58894:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NoConsumeRefRule = void 0;
-var core_1 = __webpack_require__(14570);
-var NoConsumeRefRule = /** @class */ (function (_super) {
-    __extends(NoConsumeRefRule, _super);
-    function NoConsumeRefRule(rule, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.rule = rule;
-        _this.classSignature = "NoConsumeRefRule";
-        return _this;
-    }
-    NoConsumeRefRule.prototype.__match__ = function (offset, target, env, context) {
-        var result = this.rule.match(offset, target, env, context);
-        if (result.ok) {
-            return __assign(__assign({}, result), { nextOffset: offset });
-        }
-        else {
-            return {
-                ok: false,
-                offset: offset,
-                expected: this.toString(env.toStringOptions),
-                prevFail: result,
-            };
-        }
-    };
-    NoConsumeRefRule.prototype.toString = function (options, currentDepth) {
-        var _a;
-        if (currentDepth === void 0) { currentDepth = 0; }
-        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
-            return "...";
-        return (_a = this.name) !== null && _a !== void 0 ? _a : "&(".concat(this.rule.toString(options, currentDepth + 1), ")");
-    };
-    return NoConsumeRefRule;
-}(core_1.Rule));
-exports.NoConsumeRefRule = NoConsumeRefRule;
-//# sourceMappingURL=noConsumeRef.js.map
-
-/***/ }),
-
-/***/ 65156:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.OneMatchRule = void 0;
-var core_1 = __webpack_require__(14570);
-var OneMatchRule = /** @class */ (function (_super) {
-    __extends(OneMatchRule, _super);
-    function OneMatchRule(func, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.func = func;
-        _this.classSignature = "OneMatchRule";
-        return _this;
-    }
-    OneMatchRule.prototype.__match__ = function (offset, target, env) {
-        if (offset < target.length) {
-            var value = this.func((0, core_1.makeActionEnv)(offset, offset, target, __assign(__assign({}, env), { item: target[offset] })));
-            if (value !== undefined && value !== null) {
-                return {
-                    ok: true,
-                    nextOffset: offset + 1,
-                    value: value,
-                    env: env,
-                };
-            }
-            else {
-                return {
-                    ok: false,
-                    offset: offset,
-                    expected: this.toString(),
-                    prevFail: null,
-                };
-            }
-        }
-        else {
-            return {
-                ok: false,
-                offset: offset,
-                expected: this.toString(),
-                prevFail: null,
-            };
-        }
-    };
-    OneMatchRule.prototype.toString = function () { var _a; return (_a = this.name) !== null && _a !== void 0 ? _a : ".${assert}"; };
-    return OneMatchRule;
-}(core_1.Rule));
-exports.OneMatchRule = OneMatchRule;
-//# sourceMappingURL=oneMatch.js.map
-
-/***/ }),
-
-/***/ 62642:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.OneOfRule = void 0;
-var core_1 = __webpack_require__(14570);
-var OneOfRule = /** @class */ (function (_super) {
-    __extends(OneOfRule, _super);
-    function OneOfRule(items, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.items = items;
-        _this.classSignature = "OneOfRule";
-        return _this;
-    }
-    OneOfRule.prototype.__match__ = function (offset, target, env) {
-        if (offset < target.length && this.items.includes(target[offset])) {
-            return {
-                ok: true,
-                nextOffset: offset + 1,
-                value: target[offset],
-                env: env,
-            };
-        }
-        else {
-            return {
-                ok: false,
-                offset: offset,
-                expected: this.toString(),
-                prevFail: null,
-            };
-        }
-    };
-    OneOfRule.prototype.toString = function () {
-        if (this.name !== null) {
-            return this.name;
-        }
-        else if (typeof this.items === "string") {
-            return "[".concat(this.items, "]");
-        }
-        else if (Array.isArray(this.items)) {
-            return "<one of ".concat(JSON.stringify(this.items), ">");
-        }
-        else if (typeof this.items.toString === "function") {
-            return "<one of ".concat(this.items.toString(), ">");
-        }
-        else {
-            return "".concat(this.items);
-        }
-    };
-    return OneOfRule;
-}(core_1.Rule));
-exports.OneOfRule = OneOfRule;
-//# sourceMappingURL=oneOf.js.map
-
-/***/ }),
-
-/***/ 14532:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.OneOrMoreRule = void 0;
-var core_1 = __webpack_require__(14570);
-var OneOrMoreRule = /** @class */ (function (_super) {
-    __extends(OneOrMoreRule, _super);
-    function OneOrMoreRule(rule, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.rule = rule;
-        _this.classSignature = "OneOrMoreRule";
-        return _this;
-    }
-    OneOrMoreRule.prototype.__match__ = function (offset, target, env, context) {
-        var value = [];
-        var nextOffset = offset;
-        if (nextOffset >= target.length) {
-            return {
-                ok: false,
-                offset: nextOffset,
-                expected: this.toString(env.toStringOptions),
-                prevFail: null,
-            };
-        }
-        var result = this.rule.match(nextOffset, target, env, context);
-        if (!result.ok) {
-            return {
-                ok: false,
-                offset: offset,
-                expected: this.toString(env.toStringOptions),
-                prevFail: result,
-            };
-        }
-        nextOffset = result.nextOffset;
-        value.push(result.value);
-        while (nextOffset < target.length) {
-            var result_1 = this.rule.match(nextOffset, target, env, context);
-            if (!result_1.ok)
-                break;
-            nextOffset = result_1.nextOffset;
-            value.push(result_1.value);
-        }
-        return {
-            ok: true,
-            nextOffset: nextOffset,
-            value: value,
-            env: env,
-        };
-    };
-    OneOrMoreRule.prototype.toString = function (options, currentDepth) {
-        var _a;
-        if (currentDepth === void 0) { currentDepth = 0; }
-        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
-            return "...";
-        return (_a = this.name) !== null && _a !== void 0 ? _a : "(".concat(this.rule.toString(options, currentDepth + 1), ")+");
-    };
-    return OneOrMoreRule;
-}(core_1.Rule));
-exports.OneOrMoreRule = OneOrMoreRule;
-//# sourceMappingURL=oneOrMore.js.map
-
-/***/ }),
-
-/***/ 52569:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.RefRule = void 0;
-var core_1 = __webpack_require__(14570);
-var RefRule = /** @class */ (function (_super) {
-    __extends(RefRule, _super);
-    function RefRule(rule, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.rule = rule;
-        _this.classSignature = "RefRule";
-        return _this;
-    }
-    RefRule.prototype.__match__ = function (offset, target, env, context) {
-        var result = this.rule.match(offset, target, env, context);
-        if (result.ok) {
-            return result;
-        }
-        else {
-            return {
-                ok: false,
-                offset: offset,
-                expected: this.toString(env.toStringOptions),
-                prevFail: result,
-            };
-        }
-    };
-    RefRule.prototype.toString = function (options, currentDepth) {
-        var _a;
-        if (currentDepth === void 0) { currentDepth = 0; }
-        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
-            return "...";
-        return (_a = this.name) !== null && _a !== void 0 ? _a : this.rule.toString(options, currentDepth + 1);
-    };
-    return RefRule;
-}(core_1.Rule));
-exports.RefRule = RefRule;
-//# sourceMappingURL=ref.js.map
-
-/***/ }),
-
-/***/ 7784:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.RegExpRule = void 0;
-var core_1 = __webpack_require__(14570);
-var RegExpRule = /** @class */ (function (_super) {
-    __extends(RegExpRule, _super);
-    function RegExpRule(regExp, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.regExp = regExp;
-        _this.classSignature = "RegExpRule";
-        return _this;
-    }
-    RegExpRule.prototype.__match__ = function (offset, target, env) {
-        var m = this.regExp.exec(target.slice(offset));
-        if (m) {
-            return {
-                ok: true,
-                nextOffset: offset + m[0].length,
-                value: m[0],
-                env: env,
-            };
-        }
-        else {
-            return {
-                ok: false,
-                offset: offset,
-                expected: this.toString(),
-                prevFail: null,
-            };
-        }
-    };
-    RegExpRule.prototype.toString = function () { var _a; return (_a = this.name) !== null && _a !== void 0 ? _a : "/".concat(this.regExp.source, "/"); };
-    return RegExpRule;
-}(core_1.Rule));
-exports.RegExpRule = RegExpRule;
-//# sourceMappingURL=regExp.js.map
-
-/***/ }),
-
-/***/ 17886:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.RegExpObjRule = void 0;
-var core_1 = __webpack_require__(14570);
-var RegExpObjRule = /** @class */ (function (_super) {
-    __extends(RegExpObjRule, _super);
-    function RegExpObjRule(regExp, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.regExp = regExp;
-        _this.classSignature = "RegExpObjRule";
-        return _this;
-    }
-    RegExpObjRule.prototype.__match__ = function (offset, target, env) {
-        var value = this.regExp.exec(target.slice(offset));
-        if (value) {
-            return {
-                ok: true,
-                nextOffset: offset + value[0].length,
-                value: value,
-                env: env,
-            };
-        }
-        else {
-            return {
-                ok: false,
-                offset: offset,
-                expected: this.toString(),
-                prevFail: null,
-            };
-        }
-    };
-    RegExpObjRule.prototype.toString = function () { var _a; return (_a = this.name) !== null && _a !== void 0 ? _a : "/".concat(this.regExp.source, "/"); };
-    return RegExpObjRule;
-}(core_1.Rule));
-exports.RegExpObjRule = RegExpObjRule;
-//# sourceMappingURL=regExpObj.js.map
-
-/***/ }),
-
-/***/ 34670:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.SeqEqualRule = void 0;
-var core_1 = __webpack_require__(14570);
-var SeqEqualRule = /** @class */ (function (_super) {
-    __extends(SeqEqualRule, _super);
-    function SeqEqualRule(sequence, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.sequence = sequence;
-        _this.classSignature = "SeqEqualRule";
-        return _this;
-    }
-    SeqEqualRule.prototype.__match__ = function (offset, target, env) {
-        if (target.length >= offset + this.sequence.length) {
-            for (var i = 0; i < this.sequence.length; i++) {
-                if (target[offset + i] !== this.sequence[i]) {
-                    return {
-                        ok: false,
-                        offset: offset,
-                        expected: this.toString(),
-                        prevFail: null,
-                    };
-                }
-            }
-            return {
-                ok: true,
-                nextOffset: offset + this.sequence.length,
-                value: this.sequence,
-                env: env,
-            };
-        }
-        return {
-            ok: false,
-            offset: offset,
-            expected: this.toString(),
-            prevFail: null,
-        };
-    };
-    SeqEqualRule.prototype.toString = function () {
-        if (this.name !== null) {
-            return this.name;
-        }
-        else if (typeof this.sequence === "string") {
-            return "\"".concat(this.sequence, "\"");
-        }
-        else if (Array.isArray(this.sequence)) {
-            return "".concat(JSON.stringify(this.sequence));
-        }
-        else if (typeof this.sequence.toString === "function") {
-            return "".concat(this.sequence.toString());
-        }
-        else {
-            return "".concat(this.sequence);
-        }
-    };
-    return SeqEqualRule;
-}(core_1.Rule));
-exports.SeqEqualRule = SeqEqualRule;
-//# sourceMappingURL=seqEqual.js.map
-
-/***/ }),
-
-/***/ 32798:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __values = (this && this.__values) || function(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-    if (m) return m.call(o);
-    if (o && typeof o.length === "number") return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-};
-var __read = (this && this.__read) || function (o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-};
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.SequenceRule = void 0;
-var core_1 = __webpack_require__(14570);
-var action_1 = __webpack_require__(61756);
-var SequenceRule = /** @class */ (function (_super) {
-    __extends(SequenceRule, _super);
-    function SequenceRule(rules, factory, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.rules = rules;
-        _this.factory = factory;
-        _this.classSignature = "SequenceRule";
-        return _this;
-    }
-    SequenceRule.prototype.__match__ = function (offset, target, env, context) {
-        var e_1, _a;
-        var value = [];
-        var nextOffset = offset;
-        var nextEnv = env;
-        try {
-            for (var _b = __values(this.rules), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var _d = _c.value, label = _d.label, rule = _d.rule, omit = _d.omit;
-                var result = rule.match(nextOffset, target, nextEnv, context);
-                if (!result.ok)
-                    return {
-                        ok: false,
-                        offset: offset,
-                        expected: this.toString(env.toStringOptions),
-                        prevFail: result,
-                    };
-                nextOffset = result.nextOffset;
-                nextEnv = __assign({}, result.env);
-                if (typeof label === "string") {
-                    nextEnv[label] = result.value;
-                }
-                if (!omit)
-                    value.push(result.value);
-            }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
-            }
-            finally { if (e_1) throw e_1.error; }
-        }
-        return {
-            ok: true,
-            nextOffset: nextOffset,
-            value: (value.length === 0
-                ? undefined
-                : value.length === 1
-                    ? value[0]
-                    : value),
-            env: nextEnv,
-        };
-    };
-    SequenceRule.prototype.toString = function (options, currentDepth) {
-        var _a;
-        if (currentDepth === void 0) { currentDepth = 0; }
-        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
-            return "...";
-        return (_a = this.name) !== null && _a !== void 0 ? _a : ((options === null || options === void 0 ? void 0 : options.fullToString) ? "".concat(this.rules.map(function (rs) { return rs.rule.toString(); }).join(" ")) : "<sequence of rules>");
-    };
-    SequenceRule.prototype.and = function (ruleOrFunc, label, omit) {
-        if (label === void 0) { label = null; }
-        if (omit === void 0) { omit = false; }
-        return new SequenceRule(__spreadArray(__spreadArray([], __read(this.rules), false), [
-            {
-                rule: (0, core_1.convertRuleOrFunc)(ruleOrFunc, this.factory),
-                label: label,
-                omit: omit,
-            }
-        ], false), this.factory, this.name);
-    };
-    SequenceRule.prototype.andOmit = function (ruleOrFunc, label) {
-        if (label === void 0) { label = null; }
-        return this.and(ruleOrFunc, label, true);
-    };
-    SequenceRule.prototype.action = function (thenFunc, catchFunc) {
-        if (catchFunc === void 0) { catchFunc = null; }
-        if (catchFunc) {
-            return new action_1.ActionRule(new SequenceRule(this.rules, this.factory), thenFunc, catchFunc, this.name);
-        }
-        else {
-            return new action_1.ActionRule(new SequenceRule(this.rules, this.factory), thenFunc, this.name);
-        }
-    };
-    return SequenceRule;
-}(core_1.Rule));
-exports.SequenceRule = SequenceRule;
-//# sourceMappingURL=sequence.js.map
-
-/***/ }),
-
-/***/ 13447:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ZeroOrMoreRule = void 0;
-var core_1 = __webpack_require__(14570);
-var ZeroOrMoreRule = /** @class */ (function (_super) {
-    __extends(ZeroOrMoreRule, _super);
-    function ZeroOrMoreRule(rule, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.rule = rule;
-        _this.classSignature = "ZeroOrMoreRule";
-        return _this;
-    }
-    ZeroOrMoreRule.prototype.__match__ = function (offset, target, env, context) {
-        var value = [];
-        var nextOffset = offset;
-        if (offset < target.length) {
-            while (nextOffset < target.length) {
-                var result = this.rule.match(nextOffset, target, env, context);
-                if (!result.ok)
-                    break;
-                nextOffset = result.nextOffset;
-                value.push(result.value);
-            }
-        }
-        return {
-            ok: true,
-            nextOffset: nextOffset,
-            value: value,
-            env: env,
-        };
-    };
-    ZeroOrMoreRule.prototype.toString = function (options, currentDepth) {
-        var _a;
-        if (currentDepth === void 0) { currentDepth = 0; }
-        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
-            return "...";
-        return (_a = this.name) !== null && _a !== void 0 ? _a : "(".concat(this.rule.toString(options, currentDepth + 1), ")*");
-    };
-    return ZeroOrMoreRule;
-}(core_1.Rule));
-exports.ZeroOrMoreRule = ZeroOrMoreRule;
-//# sourceMappingURL=zeroOrMore.js.map
-
-/***/ }),
-
-/***/ 46191:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ZeroOrOneRule = void 0;
-var core_1 = __webpack_require__(14570);
-var ZeroOrOneRule = /** @class */ (function (_super) {
-    __extends(ZeroOrOneRule, _super);
-    function ZeroOrOneRule(rule, name) {
-        if (name === void 0) { name = null; }
-        var _this = _super.call(this, name) || this;
-        _this.rule = rule;
-        _this.classSignature = "ZeroOrOneRule";
-        return _this;
-    }
-    ZeroOrOneRule.prototype.__match__ = function (offset, target, env, context) {
-        if (offset < target.length) {
-            var result = this.rule.match(offset, target, env, context);
-            if (result.ok) {
-                return {
-                    ok: true,
-                    nextOffset: result.nextOffset,
-                    value: result.value,
-                    env: env,
-                };
-            }
-        }
-        return {
-            ok: true,
-            nextOffset: offset,
-            value: null,
-            env: env,
-        };
-    };
-    ZeroOrOneRule.prototype.toString = function (options, currentDepth) {
-        var _a;
-        if (currentDepth === void 0) { currentDepth = 0; }
-        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
-            return "...";
-        return (_a = this.name) !== null && _a !== void 0 ? _a : "(".concat(this.rule.toString(options, currentDepth + 1), ")?");
-    };
-    return ZeroOrOneRule;
-}(core_1.Rule));
-exports.ZeroOrOneRule = ZeroOrOneRule;
-//# sourceMappingURL=zeroOrOne.js.map
 
 /***/ }),
 
@@ -66091,6 +65981,1986 @@ function simpleWrite(buf) {
 function simpleEnd(buf) {
   return buf && buf.length ? this.write(buf) : '';
 }
+
+/***/ }),
+
+/***/ 81336:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __values = (this && this.__values) || function(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.makeActionEnv = exports.getMemorizedStringOffsetToPos = exports.getLineOffsets = exports.arrayLikeOffsetToPos = void 0;
+var result_1 = __webpack_require__(41082);
+var arrayLikeOffsetToPos = function (_target, offset) {
+    return {
+        offset: offset,
+    };
+};
+exports.arrayLikeOffsetToPos = arrayLikeOffsetToPos;
+var getLineOffsets = function (target) {
+    var e_1, _a;
+    var _b;
+    var lineOffsets = [0];
+    try {
+        for (var _c = __values(target.matchAll(/\r\n|\r|\n/g)), _d = _c.next(); !_d.done; _d = _c.next()) {
+            var m = _d.value;
+            lineOffsets.push(((_b = m.index) !== null && _b !== void 0 ? _b : 0) + m[0].length);
+        }
+    }
+    catch (e_1_1) { e_1 = { error: e_1_1 }; }
+    finally {
+        try {
+            if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
+        }
+        finally { if (e_1) throw e_1.error; }
+    }
+    return lineOffsets;
+};
+exports.getLineOffsets = getLineOffsets;
+var getMemorizedStringOffsetToPos = function () {
+    // return (target: string, offset: number): StringPos => {
+    //     const beforeStr = target.slice(0, offset);
+    //     const lines = beforeStr.split(/\r?\n/g);
+    //     return {
+    //         offset,
+    //         line: lines.length,
+    //         column: lines[lines.length - 1].length + 1,
+    //     };
+    // };
+    var lineOffsetsMemo = new Map();
+    return function (target, offset) {
+        var _a;
+        var lineOffsets = (_a = lineOffsetsMemo.get(target)) !== null && _a !== void 0 ? _a : (0, exports.getLineOffsets)(target);
+        if (!lineOffsetsMemo.has(target)) {
+            lineOffsetsMemo.set(target, lineOffsets);
+        }
+        var low = 0;
+        var high = lineOffsets.length - 1;
+        while (low < high) {
+            var mid = Math.floor((low + high) / 2);
+            var _b = __read([
+                lineOffsets[mid],
+                (mid + 1 < lineOffsets.length) ? lineOffsets[mid + 1] : Infinity,
+            ], 2), currentOffset = _b[0], nextOffset = _b[1];
+            if (currentOffset <= offset && offset < nextOffset) {
+                low = high = mid;
+            }
+            else if (offset < currentOffset) {
+                high = mid - 1;
+            }
+            else {
+                low = mid + 1;
+            }
+        }
+        return {
+            offset: offset,
+            line: low + 1,
+            column: offset - lineOffsets[low] + 1,
+        };
+    };
+};
+exports.getMemorizedStringOffsetToPos = getMemorizedStringOffsetToPos;
+var makeActionEnv = function (rawStart, rawEnd, target, env) {
+    var error = function (message, where) {
+        throw new result_1.ParseError(message, where);
+    };
+    var expected = function (expected, where) {
+        if (where === void 0) { where = location(); }
+        throw new result_1.ParseError("Expected ".concat(expected, " but \"").concat(text(), "\" found"), where);
+    };
+    var location = function () {
+        return {
+            start: env.offsetToPos(target, rawStart),
+            end: env.offsetToPos(target, rawEnd),
+        };
+    };
+    var offset = function () {
+        return rawStart + env.baseOffset;
+    };
+    var range = function () {
+        return [
+            rawStart + env.baseOffset,
+            rawEnd + env.baseOffset,
+        ];
+    };
+    var text = function () {
+        return target
+            .slice(rawStart, rawEnd);
+    };
+    var _target = function () {
+        return target;
+    };
+    env.registerCurrentRangeTarget(rawStart, rawEnd, target);
+    return __assign({ error: error, expected: expected, location: location, offset: offset, range: range, text: text, target: _target }, env);
+};
+exports.makeActionEnv = makeActionEnv;
+//# sourceMappingURL=env.js.map
+
+/***/ }),
+
+/***/ 24658:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+__exportStar(__webpack_require__(81336), exports);
+__exportStar(__webpack_require__(75093), exports);
+__exportStar(__webpack_require__(41082), exports);
+__exportStar(__webpack_require__(89653), exports);
+__exportStar(__webpack_require__(55477), exports);
+__exportStar(__webpack_require__(80494), exports);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 75093:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.LazyRule = exports.convertRuleOrFunc = void 0;
+var rule_1 = __webpack_require__(89653);
+var convertRuleOrFunc = function (ruleOrFunc, factory) {
+    var rule = (typeof ruleOrFunc === "function"
+        ? new LazyRule(ruleOrFunc, factory)
+        : ruleOrFunc);
+    return rule;
+};
+exports.convertRuleOrFunc = convertRuleOrFunc;
+var LazyRule = /** @class */ (function (_super) {
+    __extends(LazyRule, _super);
+    function LazyRule(ruleOrFunc, factory, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.factory = factory;
+        _this._rule = null;
+        if (typeof ruleOrFunc === "function") {
+            _this.func = ruleOrFunc;
+        }
+        else {
+            _this.func = function () { return ruleOrFunc; };
+            _this._rule = ruleOrFunc;
+        }
+        return _this;
+    }
+    LazyRule.prototype.__match__ = function (pos, target, env, context) {
+        if (this._rule === null) {
+            this._rule = this.func(this.factory);
+        }
+        return this._rule.match(pos, target, env, context);
+    };
+    LazyRule.prototype.toString = function (options, currentDepth) {
+        if (this.name !== null)
+            return this.name;
+        if (this._rule === null) {
+            this._rule = this.func(this.factory);
+        }
+        return this._rule.toString(options, currentDepth);
+    };
+    return LazyRule;
+}(rule_1.Rule));
+exports.LazyRule = LazyRule;
+//# sourceMappingURL=lazyRule.js.map
+
+/***/ }),
+
+/***/ 41082:
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ParseError = exports.getStackByThrow = exports.matchResultToJson = void 0;
+var matchResultToJson = function (matchResult, toStringOptions) {
+    if (matchResult.ok) {
+        return {
+            ok: true,
+            nextOffset: matchResult.nextOffset,
+            value: matchResult.value,
+        };
+    }
+    else {
+        var offset = matchResult.offset, expected = matchResult.expected, prevFail = matchResult.prevFail;
+        return {
+            ok: false,
+            offset: offset,
+            expected: expected.toString(toStringOptions),
+            prevFail: ((Array.isArray(prevFail)
+                ? prevFail.map(function (f) { return (0, exports.matchResultToJson)(f, toStringOptions); })
+                : prevFail
+                    ? (0, exports.matchResultToJson)(prevFail, toStringOptions)
+                    : null)),
+        };
+    }
+};
+exports.matchResultToJson = matchResultToJson;
+var getStackByThrow = function () {
+    var _a;
+    try {
+        throw new Error();
+    }
+    catch (e) {
+        return (_a = e.stack) !== null && _a !== void 0 ? _a : "";
+    }
+};
+exports.getStackByThrow = getStackByThrow;
+var ParseError = /** @class */ (function (_super) {
+    __extends(ParseError, _super);
+    function ParseError(message, location) {
+        var _this = _super.call(this, message) || this;
+        _this.location = location;
+        return _this;
+    }
+    return ParseError;
+}(Error));
+exports.ParseError = ParseError;
+//# sourceMappingURL=result.js.map
+
+/***/ }),
+
+/***/ 89653:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Rule = void 0;
+var Rule = /** @class */ (function () {
+    function Rule(name) {
+        this.name = name;
+    }
+    Rule.prototype.match = function (offset, target, env, prevContext) {
+        if (prevContext === void 0) { prevContext = null; }
+        var context = {
+            prevRule: this,
+            offset: offset,
+            prevContext: prevContext,
+        };
+        var result = this.__match__(offset, target, env, context);
+        if (!result.ok && env.onMatchFail) {
+            env.onMatchFail(result, context);
+        }
+        return result;
+    };
+    Rule.prototype.abstract = function () {
+        return this;
+    };
+    return Rule;
+}());
+exports.Rule = Rule;
+//# sourceMappingURL=rule.js.map
+
+/***/ }),
+
+/***/ 55477:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=ruleFunc.js.map
+
+/***/ }),
+
+/***/ 80494:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+//# sourceMappingURL=target.js.map
+
+/***/ }),
+
+/***/ 87377:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ParseError = exports.getMemorizedStringOffsetToPos = exports.arrayLikeOffsetToPos = exports.Rule = exports.RuleFactory = void 0;
+var factory_1 = __webpack_require__(21718);
+Object.defineProperty(exports, "RuleFactory", ({ enumerable: true, get: function () { return factory_1.RuleFactory; } }));
+var core_1 = __webpack_require__(24658);
+Object.defineProperty(exports, "Rule", ({ enumerable: true, get: function () { return core_1.Rule; } }));
+Object.defineProperty(exports, "arrayLikeOffsetToPos", ({ enumerable: true, get: function () { return core_1.arrayLikeOffsetToPos; } }));
+Object.defineProperty(exports, "getMemorizedStringOffsetToPos", ({ enumerable: true, get: function () { return core_1.getMemorizedStringOffsetToPos; } }));
+Object.defineProperty(exports, "ParseError", ({ enumerable: true, get: function () { return core_1.ParseError; } }));
+// export { parse as parsePegjs, defaultOptions as defaultParsePegjsOptions } from "./pegjs/pegjsParser";
+// export { grammarToCode } from "./pegjs/astToCode";
+//# sourceMappingURL=main.js.map
+
+/***/ }),
+
+/***/ 69384:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ActionRule = void 0;
+var core_1 = __webpack_require__(24658);
+var factory_1 = __webpack_require__(21718);
+var getMaxOffset = function (result) {
+    if (Array.isArray(result.prevFail)) {
+        var prevMax = Math.max.apply(Math, __spreadArray([], __read(result.prevFail.map(getMaxOffset)), false));
+        return Math.max(result.offset, prevMax);
+    }
+    else if (result.prevFail === null) {
+        return result.offset;
+    }
+    else {
+        return Math.max(result.offset, result.prevFail.offset);
+    }
+};
+var ActionRule = /** @class */ (function (_super) {
+    __extends(ActionRule, _super);
+    function ActionRule(rule, thenFunc, catchFuncOrName, name) {
+        if (catchFuncOrName === void 0) { catchFuncOrName = null; }
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, typeof catchFuncOrName === "function" ? name : catchFuncOrName) || this;
+        _this.rule = rule;
+        _this.thenFunc = thenFunc;
+        _this.classSignature = "ActionRule";
+        _this.catchFunc = null;
+        if (typeof catchFuncOrName === "function") {
+            _this.catchFunc = catchFuncOrName;
+        }
+        return _this;
+    }
+    ActionRule.prototype.__match__ = function (offset, target, env, context) {
+        var result = this.rule.match(offset, target, env, context);
+        if (result.ok) {
+            var newEnv = result.env;
+            var value = this.thenFunc((0, core_1.makeActionEnv)(offset, result.nextOffset, target, newEnv));
+            return {
+                ok: true,
+                nextOffset: result.nextOffset,
+                value: value,
+                env: newEnv,
+            };
+        }
+        else if (typeof this.catchFunc === "function") {
+            var newEnv = __assign(__assign({}, env), { result: result, prevEnv: env, factory: new factory_1.RuleFactory() });
+            return this.catchFunc((0, core_1.makeActionEnv)(offset, getMaxOffset(result), target, newEnv));
+        }
+        else {
+            return {
+                ok: false,
+                offset: offset,
+                expected: this,
+                prevFail: result,
+            };
+        }
+    };
+    ActionRule.prototype.toString = function (options, currentDepth) {
+        var _a;
+        if (currentDepth === void 0) { currentDepth = 0; }
+        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
+            return "...";
+        return (_a = this.name) !== null && _a !== void 0 ? _a : "(".concat(this.rule.toString(options, currentDepth + 1), "){<action>}");
+    };
+    return ActionRule;
+}(core_1.Rule));
+exports.ActionRule = ActionRule;
+//# sourceMappingURL=action.js.map
+
+/***/ }),
+
+/***/ 89952:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AnyOneRule = void 0;
+var core_1 = __webpack_require__(24658);
+var AnyOneRule = /** @class */ (function (_super) {
+    __extends(AnyOneRule, _super);
+    function AnyOneRule(name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.classSignature = "AnyOneRule";
+        return _this;
+    }
+    AnyOneRule.prototype.__match__ = function (offset, target, env) {
+        if (offset < target.length) {
+            return {
+                ok: true,
+                nextOffset: offset + 1,
+                value: target[offset],
+                env: env,
+            };
+        }
+        else {
+            return {
+                ok: false,
+                offset: offset,
+                expected: this,
+                prevFail: null,
+            };
+        }
+    };
+    AnyOneRule.prototype.toString = function () { var _a; return (_a = this.name) !== null && _a !== void 0 ? _a : "."; };
+    return AnyOneRule;
+}(core_1.Rule));
+exports.AnyOneRule = AnyOneRule;
+//# sourceMappingURL=anyOne.js.map
+
+/***/ }),
+
+/***/ 85155:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AsSliceRule = void 0;
+var core_1 = __webpack_require__(24658);
+var AsSliceRule = /** @class */ (function (_super) {
+    __extends(AsSliceRule, _super);
+    function AsSliceRule(rule, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.rule = rule;
+        _this.classSignature = "AsSliceRule";
+        return _this;
+    }
+    AsSliceRule.prototype.__match__ = function (offset, target, env, context) {
+        var result = this.rule.match(offset, target, env, context);
+        if (result.ok) {
+            return {
+                ok: true,
+                nextOffset: result.nextOffset,
+                value: target.slice(offset, result.nextOffset),
+                env: env,
+            };
+        }
+        else {
+            return {
+                ok: false,
+                offset: offset,
+                expected: this,
+                prevFail: result,
+            };
+        }
+    };
+    AsSliceRule.prototype.toString = function (options, currentDepth) {
+        var _a;
+        if (currentDepth === void 0) { currentDepth = 0; }
+        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
+            return "...";
+        return (_a = this.name) !== null && _a !== void 0 ? _a : "$(".concat(this.rule.toString(options, currentDepth + 1), ")");
+    };
+    return AsSliceRule;
+}(core_1.Rule));
+exports.AsSliceRule = AsSliceRule;
+//# sourceMappingURL=asSlice.js.map
+
+/***/ }),
+
+/***/ 95764:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AssertRule = void 0;
+var core_1 = __webpack_require__(24658);
+var AssertRule = /** @class */ (function (_super) {
+    __extends(AssertRule, _super);
+    function AssertRule(func, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.func = func;
+        _this.classSignature = "AssertRule";
+        return _this;
+    }
+    AssertRule.prototype.__match__ = function (offset, target, env) {
+        var value = this.func((0, core_1.makeActionEnv)(offset, offset, target, env));
+        if (value) {
+            return {
+                ok: true,
+                nextOffset: offset,
+                value: undefined,
+                env: env,
+            };
+        }
+        else {
+            return {
+                ok: false,
+                offset: offset,
+                expected: this,
+                prevFail: null,
+            };
+        }
+    };
+    AssertRule.prototype.toString = function () { var _a; return (_a = this.name) !== null && _a !== void 0 ? _a : "${assert}"; };
+    return AssertRule;
+}(core_1.Rule));
+exports.AssertRule = AssertRule;
+//# sourceMappingURL=assert.js.map
+
+/***/ }),
+
+/***/ 52550:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AssertNotRule = void 0;
+var core_1 = __webpack_require__(24658);
+var AssertNotRule = /** @class */ (function (_super) {
+    __extends(AssertNotRule, _super);
+    function AssertNotRule(func, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.func = func;
+        _this.classSignature = "AssertNotRule";
+        return _this;
+    }
+    AssertNotRule.prototype.__match__ = function (offset, target, env) {
+        var value = this.func((0, core_1.makeActionEnv)(offset, offset, target, env));
+        if (value) {
+            return {
+                ok: false,
+                offset: offset,
+                expected: this,
+                prevFail: null,
+            };
+        }
+        else {
+            return {
+                ok: true,
+                nextOffset: offset,
+                value: undefined,
+                env: env,
+            };
+        }
+    };
+    AssertNotRule.prototype.toString = function () { var _a; return (_a = this.name) !== null && _a !== void 0 ? _a : "!{assert}"; };
+    return AssertNotRule;
+}(core_1.Rule));
+exports.AssertNotRule = AssertNotRule;
+//# sourceMappingURL=assertNot.js.map
+
+/***/ }),
+
+/***/ 6293:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __values = (this && this.__values) || function(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ChoiceRule = void 0;
+var core_1 = __webpack_require__(24658);
+var sequence_1 = __webpack_require__(11727);
+var ChoiceRule = /** @class */ (function (_super) {
+    __extends(ChoiceRule, _super);
+    function ChoiceRule(rules, factory, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.rules = rules;
+        _this.factory = factory;
+        _this.classSignature = "ChoiceRule";
+        return _this;
+    }
+    ChoiceRule.prototype.__match__ = function (offset, target, env, context) {
+        var e_1, _a;
+        var prevFail = [];
+        try {
+            for (var _b = __values(this.rules), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var rule = _c.value;
+                var result = rule.match(offset, target, env, context);
+                if (result.ok) {
+                    return {
+                        ok: true,
+                        nextOffset: result.nextOffset,
+                        value: result.value,
+                        env: env,
+                    };
+                }
+                else {
+                    prevFail.push(result);
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        return {
+            ok: false,
+            offset: offset,
+            expected: this,
+            prevFail: prevFail,
+        };
+    };
+    ChoiceRule.prototype.toString = function (options, currentDepth) {
+        var _a;
+        if (currentDepth === void 0) { currentDepth = 0; }
+        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
+            return "...";
+        return (_a = this.name) !== null && _a !== void 0 ? _a : ((options === null || options === void 0 ? void 0 : options.fullToString) ? "".concat(this.rules.map(function (rule) { return rule.toString(options, currentDepth + 1); }).join(" / ")) : "<choice of rules>");
+    };
+    ChoiceRule.prototype.or = function (ruleOrFunc) {
+        return new ChoiceRule(__spreadArray(__spreadArray([], __read(this.rules), false), [
+            (0, core_1.convertRuleOrFunc)(ruleOrFunc, this.factory),
+        ], false), this.factory, this.name);
+    };
+    ChoiceRule.prototype.orSequence = function (immediateFunc) {
+        var rule = immediateFunc(new sequence_1.SequenceRule([], this.factory, null));
+        return this.or(rule);
+    };
+    return ChoiceRule;
+}(core_1.Rule));
+exports.ChoiceRule = ChoiceRule;
+//# sourceMappingURL=choice.js.map
+
+/***/ }),
+
+/***/ 21718:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RuleFactory = void 0;
+var assert_1 = __webpack_require__(95764);
+var assertNot_1 = __webpack_require__(52550);
+var core_1 = __webpack_require__(24658);
+var nextIs_1 = __webpack_require__(59437);
+var nextIsNot_1 = __webpack_require__(43335);
+var oneOf_1 = __webpack_require__(11646);
+var oneOrMore_1 = __webpack_require__(10468);
+var action_1 = __webpack_require__(69384);
+var seqEqual_1 = __webpack_require__(7287);
+var sequence_1 = __webpack_require__(11727);
+var zeroOrMore_1 = __webpack_require__(63009);
+var zeroOrOne_1 = __webpack_require__(40930);
+var ref_1 = __webpack_require__(32985);
+var anyOne_1 = __webpack_require__(89952);
+var asSlice_1 = __webpack_require__(85155);
+var choice_1 = __webpack_require__(6293);
+var regExp_1 = __webpack_require__(69894);
+var regExpObj_1 = __webpack_require__(36708);
+var oneMatch_1 = __webpack_require__(56203);
+var noConsumeRef_1 = __webpack_require__(71970);
+var RuleFactory = /** @class */ (function () {
+    function RuleFactory(name) {
+        if (name === void 0) { name = null; }
+        this.name = name;
+    }
+    RuleFactory.prototype.withName = function (name) {
+        return new RuleFactory(name);
+    };
+    RuleFactory.prototype.action = function (ruleOrFunc, thenFunc, catchFunc) {
+        if (catchFunc === void 0) { catchFunc = null; }
+        if (catchFunc) {
+            return new action_1.ActionRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), thenFunc, catchFunc, this.name);
+        }
+        else {
+            return new action_1.ActionRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), thenFunc, this.name);
+        }
+    };
+    RuleFactory.prototype.anyOne = function () {
+        return new anyOne_1.AnyOneRule(this.name);
+    };
+    RuleFactory.prototype.assert = function (func) {
+        return new assert_1.AssertRule(func, this.name);
+    };
+    RuleFactory.prototype.assertNot = function (func) {
+        return new assertNot_1.AssertNotRule(func, this.name);
+    };
+    RuleFactory.prototype.asSlice = function (ruleOrFunc) {
+        return new asSlice_1.AsSliceRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), this.name);
+    };
+    RuleFactory.prototype.choice = function (immediateFunc) {
+        return immediateFunc(new choice_1.ChoiceRule([], new RuleFactory(), this.name));
+    };
+    RuleFactory.prototype.nextIs = function (ruleOrFunc) {
+        return new nextIs_1.NextIsRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), this.name);
+    };
+    RuleFactory.prototype.nextIsNot = function (ruleOrFunc) {
+        return new nextIsNot_1.NextIsNotRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), this.name);
+    };
+    RuleFactory.prototype.noConsumeRef = function (ruleOrFunc) {
+        return new noConsumeRef_1.NoConsumeRefRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), this.name);
+    };
+    RuleFactory.prototype.oneMatch = function (func) {
+        return new oneMatch_1.OneMatchRule(func, this.name);
+    };
+    RuleFactory.prototype.oneOf = function (items) {
+        return new oneOf_1.OneOfRule(items, this.name);
+    };
+    RuleFactory.prototype.oneOrMore = function (ruleOrFunc) {
+        return new oneOrMore_1.OneOrMoreRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), this.name);
+    };
+    RuleFactory.prototype.ref = function (ruleOrFunc) {
+        return new ref_1.RefRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), this.name);
+    };
+    RuleFactory.prototype.seqEqual = function (sequence) {
+        return new seqEqual_1.SeqEqualRule(sequence, this.name);
+    };
+    RuleFactory.prototype.sequence = function (immediateFunc) {
+        return immediateFunc(new sequence_1.SequenceRule([], new RuleFactory(), this.name));
+    };
+    RuleFactory.prototype.zeroOrMore = function (ruleOrFunc) {
+        return new zeroOrMore_1.ZeroOrMoreRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), this.name);
+    };
+    RuleFactory.prototype.zeroOrOne = function (ruleOrFunc) {
+        return new zeroOrOne_1.ZeroOrOneRule((0, core_1.convertRuleOrFunc)(ruleOrFunc, new RuleFactory()), this.name);
+    };
+    RuleFactory.prototype.regExp = function (regExp) {
+        return new regExp_1.RegExpRule(regExp, this.name);
+    };
+    RuleFactory.prototype.regExpObj = function (regExp) {
+        return new regExpObj_1.RegExpObjRule(regExp, this.name);
+    };
+    return RuleFactory;
+}());
+exports.RuleFactory = RuleFactory;
+//# sourceMappingURL=factory.js.map
+
+/***/ }),
+
+/***/ 59437:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.NextIsRule = void 0;
+var core_1 = __webpack_require__(24658);
+var NextIsRule = /** @class */ (function (_super) {
+    __extends(NextIsRule, _super);
+    function NextIsRule(rule, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.rule = rule;
+        _this.classSignature = "NextIsRule";
+        return _this;
+    }
+    NextIsRule.prototype.__match__ = function (offset, target, env, context) {
+        var result = this.rule.match(offset, target, env, context);
+        if (result.ok) {
+            return {
+                ok: true,
+                nextOffset: offset,
+                value: undefined,
+                env: env,
+            };
+        }
+        else {
+            return {
+                ok: false,
+                offset: offset,
+                expected: this,
+                prevFail: result,
+            };
+        }
+    };
+    NextIsRule.prototype.toString = function (options, currentDepth) {
+        var _a;
+        if (currentDepth === void 0) { currentDepth = 0; }
+        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
+            return "...";
+        return (_a = this.name) !== null && _a !== void 0 ? _a : "&(".concat(this.rule.toString(options, currentDepth + 1), ")");
+    };
+    return NextIsRule;
+}(core_1.Rule));
+exports.NextIsRule = NextIsRule;
+//# sourceMappingURL=nextIs.js.map
+
+/***/ }),
+
+/***/ 43335:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.NextIsNotRule = void 0;
+var core_1 = __webpack_require__(24658);
+var NextIsNotRule = /** @class */ (function (_super) {
+    __extends(NextIsNotRule, _super);
+    function NextIsNotRule(rule, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.rule = rule;
+        _this.classSignature = "NextIsNotRule";
+        return _this;
+    }
+    NextIsNotRule.prototype.__match__ = function (offset, target, env, context) {
+        var result = this.rule.match(offset, target, env, context);
+        if (result.ok) {
+            return {
+                ok: false,
+                offset: offset,
+                expected: this,
+                prevFail: null,
+            };
+        }
+        else {
+            return {
+                ok: true,
+                nextOffset: offset,
+                value: undefined,
+                env: env,
+            };
+        }
+    };
+    NextIsNotRule.prototype.toString = function (options, currentDepth) {
+        var _a;
+        if (currentDepth === void 0) { currentDepth = 0; }
+        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
+            return "...";
+        return (_a = this.name) !== null && _a !== void 0 ? _a : "!(".concat(this.rule.toString(options, currentDepth + 1), ")");
+    };
+    return NextIsNotRule;
+}(core_1.Rule));
+exports.NextIsNotRule = NextIsNotRule;
+//# sourceMappingURL=nextIsNot.js.map
+
+/***/ }),
+
+/***/ 71970:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.NoConsumeRefRule = void 0;
+var core_1 = __webpack_require__(24658);
+var NoConsumeRefRule = /** @class */ (function (_super) {
+    __extends(NoConsumeRefRule, _super);
+    function NoConsumeRefRule(rule, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.rule = rule;
+        _this.classSignature = "NoConsumeRefRule";
+        return _this;
+    }
+    NoConsumeRefRule.prototype.__match__ = function (offset, target, env, context) {
+        var result = this.rule.match(offset, target, env, context);
+        if (result.ok) {
+            return __assign(__assign({}, result), { nextOffset: offset });
+        }
+        else {
+            return {
+                ok: false,
+                offset: offset,
+                expected: this,
+                prevFail: result,
+            };
+        }
+    };
+    NoConsumeRefRule.prototype.toString = function (options, currentDepth) {
+        var _a;
+        if (currentDepth === void 0) { currentDepth = 0; }
+        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
+            return "...";
+        return (_a = this.name) !== null && _a !== void 0 ? _a : "&(".concat(this.rule.toString(options, currentDepth + 1), ")");
+    };
+    return NoConsumeRefRule;
+}(core_1.Rule));
+exports.NoConsumeRefRule = NoConsumeRefRule;
+//# sourceMappingURL=noConsumeRef.js.map
+
+/***/ }),
+
+/***/ 56203:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.OneMatchRule = void 0;
+var core_1 = __webpack_require__(24658);
+var OneMatchRule = /** @class */ (function (_super) {
+    __extends(OneMatchRule, _super);
+    function OneMatchRule(func, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.func = func;
+        _this.classSignature = "OneMatchRule";
+        return _this;
+    }
+    OneMatchRule.prototype.__match__ = function (offset, target, env) {
+        if (offset < target.length) {
+            var value = this.func((0, core_1.makeActionEnv)(offset, offset, target, __assign(__assign({}, env), { item: target[offset] })));
+            if (value !== undefined && value !== null) {
+                return {
+                    ok: true,
+                    nextOffset: offset + 1,
+                    value: value,
+                    env: env,
+                };
+            }
+            else {
+                return {
+                    ok: false,
+                    offset: offset,
+                    expected: this,
+                    prevFail: null,
+                };
+            }
+        }
+        else {
+            return {
+                ok: false,
+                offset: offset,
+                expected: this,
+                prevFail: null,
+            };
+        }
+    };
+    OneMatchRule.prototype.toString = function () { var _a; return (_a = this.name) !== null && _a !== void 0 ? _a : ".${assert}"; };
+    return OneMatchRule;
+}(core_1.Rule));
+exports.OneMatchRule = OneMatchRule;
+//# sourceMappingURL=oneMatch.js.map
+
+/***/ }),
+
+/***/ 11646:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.OneOfRule = void 0;
+var core_1 = __webpack_require__(24658);
+var OneOfRule = /** @class */ (function (_super) {
+    __extends(OneOfRule, _super);
+    function OneOfRule(items, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.items = items;
+        _this.classSignature = "OneOfRule";
+        return _this;
+    }
+    OneOfRule.prototype.__match__ = function (offset, target, env) {
+        if (offset < target.length && this.items.includes(target[offset])) {
+            return {
+                ok: true,
+                nextOffset: offset + 1,
+                value: target[offset],
+                env: env,
+            };
+        }
+        else {
+            return {
+                ok: false,
+                offset: offset,
+                expected: this,
+                prevFail: null,
+            };
+        }
+    };
+    OneOfRule.prototype.toString = function () {
+        if (this.name !== null) {
+            return this.name;
+        }
+        else if (typeof this.items === "string") {
+            return "[".concat(this.items, "]");
+        }
+        else if (Array.isArray(this.items)) {
+            return "<one of ".concat(JSON.stringify(this.items), ">");
+        }
+        else if (typeof this.items.toString === "function") {
+            return "<one of ".concat(this.items.toString(), ">");
+        }
+        else {
+            return "".concat(this.items);
+        }
+    };
+    return OneOfRule;
+}(core_1.Rule));
+exports.OneOfRule = OneOfRule;
+//# sourceMappingURL=oneOf.js.map
+
+/***/ }),
+
+/***/ 10468:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.OneOrMoreRule = void 0;
+var core_1 = __webpack_require__(24658);
+var OneOrMoreRule = /** @class */ (function (_super) {
+    __extends(OneOrMoreRule, _super);
+    function OneOrMoreRule(rule, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.rule = rule;
+        _this.classSignature = "OneOrMoreRule";
+        return _this;
+    }
+    OneOrMoreRule.prototype.__match__ = function (offset, target, env, context) {
+        var value = [];
+        var nextOffset = offset;
+        if (nextOffset >= target.length) {
+            return {
+                ok: false,
+                offset: nextOffset,
+                expected: this,
+                prevFail: null,
+            };
+        }
+        var result = this.rule.match(nextOffset, target, env, context);
+        if (!result.ok) {
+            return {
+                ok: false,
+                offset: offset,
+                expected: this,
+                prevFail: result,
+            };
+        }
+        nextOffset = result.nextOffset;
+        value.push(result.value);
+        while (nextOffset < target.length) {
+            var result_1 = this.rule.match(nextOffset, target, env, context);
+            if (!result_1.ok)
+                break;
+            nextOffset = result_1.nextOffset;
+            value.push(result_1.value);
+        }
+        return {
+            ok: true,
+            nextOffset: nextOffset,
+            value: value,
+            env: env,
+        };
+    };
+    OneOrMoreRule.prototype.toString = function (options, currentDepth) {
+        var _a;
+        if (currentDepth === void 0) { currentDepth = 0; }
+        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
+            return "...";
+        return (_a = this.name) !== null && _a !== void 0 ? _a : "(".concat(this.rule.toString(options, currentDepth + 1), ")+");
+    };
+    return OneOrMoreRule;
+}(core_1.Rule));
+exports.OneOrMoreRule = OneOrMoreRule;
+//# sourceMappingURL=oneOrMore.js.map
+
+/***/ }),
+
+/***/ 32985:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RefRule = void 0;
+var core_1 = __webpack_require__(24658);
+var RefRule = /** @class */ (function (_super) {
+    __extends(RefRule, _super);
+    function RefRule(rule, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.rule = rule;
+        _this.classSignature = "RefRule";
+        return _this;
+    }
+    RefRule.prototype.__match__ = function (offset, target, env, context) {
+        var result = this.rule.match(offset, target, env, context);
+        if (result.ok) {
+            return result;
+        }
+        else {
+            return {
+                ok: false,
+                offset: offset,
+                expected: this,
+                prevFail: result,
+            };
+        }
+    };
+    RefRule.prototype.toString = function (options, currentDepth) {
+        var _a;
+        if (currentDepth === void 0) { currentDepth = 0; }
+        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
+            return "...";
+        return (_a = this.name) !== null && _a !== void 0 ? _a : this.rule.toString(options, currentDepth + 1);
+    };
+    return RefRule;
+}(core_1.Rule));
+exports.RefRule = RefRule;
+//# sourceMappingURL=ref.js.map
+
+/***/ }),
+
+/***/ 69894:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RegExpRule = void 0;
+var core_1 = __webpack_require__(24658);
+var RegExpRule = /** @class */ (function (_super) {
+    __extends(RegExpRule, _super);
+    function RegExpRule(regExp, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.regExp = regExp;
+        _this.classSignature = "RegExpRule";
+        return _this;
+    }
+    RegExpRule.prototype.__match__ = function (offset, target, env) {
+        var m = this.regExp.exec(target.slice(offset));
+        if (m) {
+            return {
+                ok: true,
+                nextOffset: offset + m[0].length,
+                value: m[0],
+                env: env,
+            };
+        }
+        else {
+            return {
+                ok: false,
+                offset: offset,
+                expected: this,
+                prevFail: null,
+            };
+        }
+    };
+    RegExpRule.prototype.toString = function () { var _a; return (_a = this.name) !== null && _a !== void 0 ? _a : "/".concat(this.regExp.source, "/"); };
+    return RegExpRule;
+}(core_1.Rule));
+exports.RegExpRule = RegExpRule;
+//# sourceMappingURL=regExp.js.map
+
+/***/ }),
+
+/***/ 36708:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RegExpObjRule = void 0;
+var core_1 = __webpack_require__(24658);
+var RegExpObjRule = /** @class */ (function (_super) {
+    __extends(RegExpObjRule, _super);
+    function RegExpObjRule(regExp, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.regExp = regExp;
+        _this.classSignature = "RegExpObjRule";
+        return _this;
+    }
+    RegExpObjRule.prototype.__match__ = function (offset, target, env) {
+        var value = this.regExp.exec(target.slice(offset));
+        if (value) {
+            return {
+                ok: true,
+                nextOffset: offset + value[0].length,
+                value: value,
+                env: env,
+            };
+        }
+        else {
+            return {
+                ok: false,
+                offset: offset,
+                expected: this,
+                prevFail: null,
+            };
+        }
+    };
+    RegExpObjRule.prototype.toString = function () { var _a; return (_a = this.name) !== null && _a !== void 0 ? _a : "/".concat(this.regExp.source, "/"); };
+    return RegExpObjRule;
+}(core_1.Rule));
+exports.RegExpObjRule = RegExpObjRule;
+//# sourceMappingURL=regExpObj.js.map
+
+/***/ }),
+
+/***/ 7287:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SeqEqualRule = void 0;
+var core_1 = __webpack_require__(24658);
+var SeqEqualRule = /** @class */ (function (_super) {
+    __extends(SeqEqualRule, _super);
+    function SeqEqualRule(sequence, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.sequence = sequence;
+        _this.classSignature = "SeqEqualRule";
+        return _this;
+    }
+    SeqEqualRule.prototype.__match__ = function (offset, target, env) {
+        if (target.length >= offset + this.sequence.length) {
+            for (var i = 0; i < this.sequence.length; i++) {
+                if (target[offset + i] !== this.sequence[i]) {
+                    return {
+                        ok: false,
+                        offset: offset,
+                        expected: this,
+                        prevFail: null,
+                    };
+                }
+            }
+            return {
+                ok: true,
+                nextOffset: offset + this.sequence.length,
+                value: this.sequence,
+                env: env,
+            };
+        }
+        return {
+            ok: false,
+            offset: offset,
+            expected: this,
+            prevFail: null,
+        };
+    };
+    SeqEqualRule.prototype.toString = function () {
+        if (this.name !== null) {
+            return this.name;
+        }
+        else if (typeof this.sequence === "string") {
+            return "\"".concat(this.sequence, "\"");
+        }
+        else if (Array.isArray(this.sequence)) {
+            return "".concat(JSON.stringify(this.sequence));
+        }
+        else if (typeof this.sequence.toString === "function") {
+            return "".concat(this.sequence.toString());
+        }
+        else {
+            return "".concat(this.sequence);
+        }
+    };
+    return SeqEqualRule;
+}(core_1.Rule));
+exports.SeqEqualRule = SeqEqualRule;
+//# sourceMappingURL=seqEqual.js.map
+
+/***/ }),
+
+/***/ 11727:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __values = (this && this.__values) || function(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SequenceRule = void 0;
+var core_1 = __webpack_require__(24658);
+var action_1 = __webpack_require__(69384);
+var SequenceRule = /** @class */ (function (_super) {
+    __extends(SequenceRule, _super);
+    function SequenceRule(rules, factory, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.rules = rules;
+        _this.factory = factory;
+        _this.classSignature = "SequenceRule";
+        return _this;
+    }
+    SequenceRule.prototype.__match__ = function (offset, target, env, context) {
+        var e_1, _a;
+        var value = [];
+        var nextOffset = offset;
+        var nextEnv = env;
+        try {
+            for (var _b = __values(this.rules), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var _d = _c.value, label = _d.label, rule = _d.rule, omit = _d.omit;
+                var result = rule.match(nextOffset, target, nextEnv, context);
+                if (!result.ok)
+                    return {
+                        ok: false,
+                        offset: offset,
+                        expected: this,
+                        prevFail: result,
+                    };
+                nextOffset = result.nextOffset;
+                nextEnv = __assign({}, result.env);
+                if (typeof label === "string") {
+                    nextEnv[label] = result.value;
+                }
+                if (!omit)
+                    value.push(result.value);
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        return {
+            ok: true,
+            nextOffset: nextOffset,
+            value: (value.length === 0
+                ? undefined
+                : value.length === 1
+                    ? value[0]
+                    : value),
+            env: nextEnv,
+        };
+    };
+    SequenceRule.prototype.toString = function (options, currentDepth) {
+        var _a;
+        if (currentDepth === void 0) { currentDepth = 0; }
+        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
+            return "...";
+        return (_a = this.name) !== null && _a !== void 0 ? _a : ((options === null || options === void 0 ? void 0 : options.fullToString) ? "".concat(this.rules.map(function (rs) { return rs.rule.toString(); }).join(" ")) : "<sequence of rules>");
+    };
+    SequenceRule.prototype.and = function (ruleOrFunc, label, omit) {
+        if (label === void 0) { label = null; }
+        if (omit === void 0) { omit = false; }
+        return new SequenceRule(__spreadArray(__spreadArray([], __read(this.rules), false), [
+            {
+                rule: (0, core_1.convertRuleOrFunc)(ruleOrFunc, this.factory),
+                label: label,
+                omit: omit,
+            }
+        ], false), this.factory, this.name);
+    };
+    SequenceRule.prototype.andOmit = function (ruleOrFunc, label) {
+        if (label === void 0) { label = null; }
+        return this.and(ruleOrFunc, label, true);
+    };
+    SequenceRule.prototype.action = function (thenFunc, catchFunc) {
+        if (catchFunc === void 0) { catchFunc = null; }
+        if (catchFunc) {
+            return new action_1.ActionRule(new SequenceRule(this.rules, this.factory), thenFunc, catchFunc, this.name);
+        }
+        else {
+            return new action_1.ActionRule(new SequenceRule(this.rules, this.factory), thenFunc, this.name);
+        }
+    };
+    return SequenceRule;
+}(core_1.Rule));
+exports.SequenceRule = SequenceRule;
+//# sourceMappingURL=sequence.js.map
+
+/***/ }),
+
+/***/ 63009:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ZeroOrMoreRule = void 0;
+var core_1 = __webpack_require__(24658);
+var ZeroOrMoreRule = /** @class */ (function (_super) {
+    __extends(ZeroOrMoreRule, _super);
+    function ZeroOrMoreRule(rule, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.rule = rule;
+        _this.classSignature = "ZeroOrMoreRule";
+        return _this;
+    }
+    ZeroOrMoreRule.prototype.__match__ = function (offset, target, env, context) {
+        var value = [];
+        var nextOffset = offset;
+        if (offset < target.length) {
+            while (nextOffset < target.length) {
+                var result = this.rule.match(nextOffset, target, env, context);
+                if (!result.ok)
+                    break;
+                nextOffset = result.nextOffset;
+                value.push(result.value);
+            }
+        }
+        return {
+            ok: true,
+            nextOffset: nextOffset,
+            value: value,
+            env: env,
+        };
+    };
+    ZeroOrMoreRule.prototype.toString = function (options, currentDepth) {
+        var _a;
+        if (currentDepth === void 0) { currentDepth = 0; }
+        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
+            return "...";
+        return (_a = this.name) !== null && _a !== void 0 ? _a : "(".concat(this.rule.toString(options, currentDepth + 1), ")*");
+    };
+    return ZeroOrMoreRule;
+}(core_1.Rule));
+exports.ZeroOrMoreRule = ZeroOrMoreRule;
+//# sourceMappingURL=zeroOrMore.js.map
+
+/***/ }),
+
+/***/ 40930:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ZeroOrOneRule = void 0;
+var core_1 = __webpack_require__(24658);
+var ZeroOrOneRule = /** @class */ (function (_super) {
+    __extends(ZeroOrOneRule, _super);
+    function ZeroOrOneRule(rule, name) {
+        if (name === void 0) { name = null; }
+        var _this = _super.call(this, name) || this;
+        _this.rule = rule;
+        _this.classSignature = "ZeroOrOneRule";
+        return _this;
+    }
+    ZeroOrOneRule.prototype.__match__ = function (offset, target, env, context) {
+        if (offset < target.length) {
+            var result = this.rule.match(offset, target, env, context);
+            if (result.ok) {
+                return {
+                    ok: true,
+                    nextOffset: result.nextOffset,
+                    value: result.value,
+                    env: env,
+                };
+            }
+        }
+        return {
+            ok: true,
+            nextOffset: offset,
+            value: null,
+            env: env,
+        };
+    };
+    ZeroOrOneRule.prototype.toString = function (options, currentDepth) {
+        var _a;
+        if (currentDepth === void 0) { currentDepth = 0; }
+        if ((options === null || options === void 0 ? void 0 : options.maxToStringDepth) !== undefined && (options === null || options === void 0 ? void 0 : options.maxToStringDepth) < currentDepth)
+            return "...";
+        return (_a = this.name) !== null && _a !== void 0 ? _a : "(".concat(this.rule.toString(options, currentDepth + 1), ")?");
+    };
+    return ZeroOrOneRule;
+}(core_1.Rule));
+exports.ZeroOrOneRule = ZeroOrOneRule;
+//# sourceMappingURL=zeroOrOne.js.map
 
 /***/ }),
 
