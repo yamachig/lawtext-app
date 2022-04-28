@@ -37062,7 +37062,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ControlGlobalStyle = exports.WrapHTMLControlRun = void 0;
-const react_1 = __importDefault(__webpack_require__(67294));
+const react_1 = __importStar(__webpack_require__(67294));
 const std = __importStar(__webpack_require__(93619));
 const html_1 = __webpack_require__(98297);
 const sentenceChildrenRun_1 = __webpack_require__(95041);
@@ -37089,16 +37089,16 @@ const WrapHTMLControlRun = props => {
         const declaration = analysis.declarations.get(el.attr.declarationID);
         const declContainer = analysis.sentenceEnvs[declaration.nameSentenceTextRange.start.sentenceIndex].container;
         const containerID = declContainer.containerID;
-        return react_1.default.createElement(ContainerRef, Object.assign({ containerID: containerID, sentenceChildren: sentenceChildren }, { htmlOptions }));
+        return react_1.default.createElement(ContainerRef, Object.assign({ containerIDs: [containerID], sentenceChildren: sentenceChildren }, { htmlOptions }));
     }
     else if (el instanceof controls_1.____PF) {
         const options = htmlOptions.options;
         const analysis = options.lawData.analysis;
         const sentenceChildren = el.children;
-        if (!analysis || !el.attr.locatedContainerID)
+        if (!analysis || el.targetContainerIDs.length === 0)
             return (react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: sentenceChildren }, { htmlOptions })));
-        const containerID = el.attr.locatedContainerID;
-        return react_1.default.createElement(ContainerRef, Object.assign({ containerID: containerID, sentenceChildren: sentenceChildren }, { htmlOptions }));
+        const containerIDs = el.targetContainerIDs;
+        return react_1.default.createElement(ContainerRef, Object.assign({ containerIDs: containerIDs, sentenceChildren: sentenceChildren }, { htmlOptions }));
     }
     else if (el instanceof controls_1.____LawNum) {
         return react_1.default.createElement(LawNum, Object.assign({ el: el }, { htmlOptions }));
@@ -37170,7 +37170,7 @@ const ContainerRefWindowSpan = styled_components_1.default.span `
     background-color: rgba(240, 240, 240);
 `;
 const ContainerRef = (props) => {
-    const { containerID, sentenceChildren, htmlOptions } = props;
+    const { containerIDs, sentenceChildren, htmlOptions } = props;
     const refText = react_1.default.useRef(null);
     const refWindow = react_1.default.useRef(null);
     const [state, setState] = react_1.default.useState({ mode: ContainerRefFloatState.HIDDEN, arrowLeft: "" });
@@ -37238,130 +37238,134 @@ const ContainerRef = (props) => {
                 }, onAnimationEnd: animateHeightOnAnimationEnd, duration: 100 }, (state.mode !== ContainerRefFloatState.HIDDEN) && (react_1.default.createElement(ContainerRefFloatBlockInnerSpan, null,
                 react_1.default.createElement(ContainerRefArrowSpan, { style: state.arrowLeft ? { marginLeft: state.arrowLeft } : { visibility: "hidden" } }),
                 react_1.default.createElement(ContainerRefWindowSpan, { ref: refWindow },
-                    react_1.default.createElement(PeekContainerView, Object.assign({ containerID: containerID }, { htmlOptions })))))))));
+                    react_1.default.createElement(PeekContainerView, Object.assign({ containerIDs: containerIDs }, { htmlOptions })))))))));
 };
 const PeekContainerView = (props) => {
     var _a;
-    const { containerID, htmlOptions } = props;
+    const { containerIDs, htmlOptions } = props;
     const options = htmlOptions.options;
     const analysis = options.lawData.analysis;
     if (!analysis)
         return null;
-    const container = analysis.containers.get(containerID);
-    if (!container)
-        return null;
-    const containerStack = container.linealAscendant(c => {
-        if (std.isParagraph(c.el)) {
-            const paragraphNum = c.el.children.find(std.isParagraphNum);
-            if (!c.parent)
-                return true;
-            if (std.isArticle(c.parent.el) &&
-                c.parent.children.filter(pc => std.isParagraph(pc.el)).length === 1 &&
-                paragraphNum && paragraphNum.text() === "") {
-                return false;
+    const ret = [];
+    for (const containerID of containerIDs) {
+        const container = analysis.containers.get(containerID);
+        if (!container)
+            return null;
+        const containerStack = container.linealAscendant(c => {
+            if (std.isParagraph(c.el)) {
+                const paragraphNum = c.el.children.find(std.isParagraphNum);
+                if (!c.parent)
+                    return true;
+                if (std.isArticle(c.parent.el) &&
+                    c.parent.children.filter(pc => std.isParagraph(pc.el)).length === 1 &&
+                    paragraphNum && paragraphNum.text() === "") {
+                    return false;
+                }
+                else {
+                    return true;
+                }
             }
             else {
                 return true;
             }
+        });
+        const names = [];
+        const titleTags = [
+            "LawTitle",
+            "ArticleTitle",
+            ...std.paragraphItemTitleTags,
+            ...std.articleGroupTitleTags,
+            ...std.appdxItemTitleTags,
+            ...std.supplProvisionAppdxItemTitleTags,
+            "SupplProvisionLabel",
+            "TableStructTitle",
+        ];
+        const ignoreTags = ["ArticleCaption", "ParagraphCaption", ...titleTags];
+        for (const c of containerStack) {
+            if ((std.isLaw(container.el) || std.isMainProvision(container.el)) && std.isLaw(c.el)) {
+                const lawTitle = (_a = c.el.children.find(std.isLawBody)) === null || _a === void 0 ? void 0 : _a.children.find(std.isLawTitle);
+                const lawNum = c.el.children.find(std.isLawNum);
+                if (lawTitle && lawNum) {
+                    names.push(`${lawTitle.text()}（${lawNum.text()}）`);
+                }
+                else if (lawTitle) {
+                    names.push(lawTitle.text());
+                }
+                else if (lawNum) {
+                    names.push(lawNum.text());
+                }
+            }
+            else if (std.isEnactStatement(c.el)) {
+                names.push("（制定文）");
+            }
+            else if (std.isArticleGroup(container.el) && std.isArticleGroup(c.el)) {
+                const articleGroupTitle = c.el.children
+                    .find(std.isArticleGroupTitle);
+                if (articleGroupTitle)
+                    names.push(articleGroupTitle.text());
+            }
+            else if (std.isSupplProvision(c.el)) {
+                const supplProvisionLabel = c.el.children
+                    .find(std.isSupplProvisionLabel);
+                if (supplProvisionLabel)
+                    names.push(supplProvisionLabel.text());
+            }
+            else if (std.isArticle(c.el)) {
+                const articleTitle = c.el.children
+                    .find(std.isArticleTitle);
+                if (articleTitle)
+                    names.push(articleTitle.text());
+            }
+            else if (std.isParagraph(c.el)) {
+                const paragraphNum = c.el.children
+                    .find(std.isParagraphNum);
+                if (paragraphNum)
+                    names.push(paragraphNum.text() || "１");
+            }
+            else if (std.isParagraphItem(c.el)) {
+                const itemTitle = c.el.children
+                    .find(std.isParagraphItemTitle);
+                if (itemTitle)
+                    names.push(itemTitle.text());
+            }
+            else if (std.isTableStruct(c.el)) {
+                const tableStructTitleEl = c.el.children
+                    .find(std.isTableStructTitle);
+                const tableStructTitle = tableStructTitleEl
+                    ? tableStructTitleEl.text()
+                    : "表";
+                names.push(tableStructTitle + "（抜粋）");
+            }
+            else {
+                continue;
+            }
+        }
+        const containerElTitleTag = std.isMainProvision(container.el) ? "LawTitle" : titleTags
+            .find(s => s.startsWith(container.el.tag));
+        if (containerElTitleTag) {
+            const containerEl = new el_1.EL(std.isMainProvision(container.el) ? "Law" : container.el.tag, {}, [
+                ...((std.isLaw(container.el) || std.isMainProvision(container.el))
+                    ? [new el_1.EL("LawBody", {}, [new el_1.EL("LawTitle", {}, [names.join("／")])])]
+                    : [new el_1.EL(containerElTitleTag, {}, [names.join("／")])]),
+                ...((std.isLaw(container.el) || std.isMainProvision(container.el) || std.isArticleGroup(container.el) || std.isSupplProvision(container.el))
+                    ? []
+                    : container.el.children
+                        .filter(child => ignoreTags.indexOf(child.tag) < 0)),
+            ]);
+            ret.push(react_1.default.createElement(any_1.HTMLAnyELs, Object.assign({ els: [containerEl], indent: 0 }, { htmlOptions })));
+        }
+        else if (std.isEnactStatement(container.el)) {
+            ret.push(react_1.default.createElement("div", { style: { paddingLeft: "1em", textIndent: "-1em" } },
+                react_1.default.createElement("span", null, names.join("／")),
+                react_1.default.createElement(html_1.HTMLMarginSpan, null),
+                react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: container.el.children }, { htmlOptions }))));
         }
         else {
-            return true;
-        }
-    });
-    const names = [];
-    const titleTags = [
-        "LawTitle",
-        "ArticleTitle",
-        ...std.paragraphItemTitleTags,
-        ...std.articleGroupTitleTags,
-        ...std.appdxItemTitleTags,
-        ...std.supplProvisionAppdxItemTitleTags,
-        "SupplProvisionLabel",
-        "TableStructTitle",
-    ];
-    const ignoreTags = ["ArticleCaption", "ParagraphCaption", ...titleTags];
-    for (const c of containerStack) {
-        if (std.isLaw(container.el) && std.isLaw(c.el)) {
-            const lawTitle = (_a = c.el.children.find(std.isLawBody)) === null || _a === void 0 ? void 0 : _a.children.find(std.isLawTitle);
-            const lawNum = c.el.children.find(std.isLawNum);
-            if (lawTitle && lawNum) {
-                names.push(`${lawTitle.text()}（${lawNum.text()}）`);
-            }
-            else if (lawTitle) {
-                names.push(lawTitle.text());
-            }
-            else if (lawNum) {
-                names.push(lawNum.text());
-            }
-        }
-        else if (std.isEnactStatement(c.el)) {
-            names.push("（制定文）");
-        }
-        else if (std.isArticleGroup(container.el) && std.isArticleGroup(c.el)) {
-            const articleGroupTitle = c.el.children
-                .find(std.isArticleGroupTitle);
-            if (articleGroupTitle)
-                names.push(articleGroupTitle.text());
-        }
-        else if (std.isSupplProvision(c.el)) {
-            const supplProvisionLabel = c.el.children
-                .find(std.isSupplProvisionLabel);
-            if (supplProvisionLabel)
-                names.push(supplProvisionLabel.text());
-        }
-        else if (std.isArticle(c.el)) {
-            const articleTitle = c.el.children
-                .find(std.isArticleTitle);
-            if (articleTitle)
-                names.push(articleTitle.text());
-        }
-        else if (std.isParagraph(c.el)) {
-            const paragraphNum = c.el.children
-                .find(std.isParagraphNum);
-            if (paragraphNum)
-                names.push(paragraphNum.text() || "１");
-        }
-        else if (std.isParagraphItem(c.el)) {
-            const itemTitle = c.el.children
-                .find(std.isParagraphItemTitle);
-            if (itemTitle)
-                names.push(itemTitle.text());
-        }
-        else if (std.isTableStruct(c.el)) {
-            const tableStructTitleEl = c.el.children
-                .find(std.isTableStructTitle);
-            const tableStructTitle = tableStructTitleEl
-                ? tableStructTitleEl.text()
-                : "表";
-            names.push(tableStructTitle + "（抜粋）");
-        }
-        else {
-            continue;
+            throw new util_1.NotImplementedError(container.el.tag);
         }
     }
-    const containerElTitleTag = titleTags
-        .find(s => Boolean(s) && s.startsWith(container.el.tag));
-    if (containerElTitleTag) {
-        const containerEl = new el_1.EL(container.el.tag, {}, [
-            ...((std.isLaw(container.el))
-                ? [new el_1.EL("LawBody", {}, [new el_1.EL("LawTitle", {}, [names.join("／")])])]
-                : [new el_1.EL(containerElTitleTag, {}, [names.join("／")])]),
-            ...((std.isLaw(container.el) || std.isArticleGroup(container.el) || std.isSupplProvision(container.el))
-                ? []
-                : container.el.children
-                    .filter(child => ignoreTags.indexOf(child.tag) < 0)),
-        ]);
-        return react_1.default.createElement(any_1.HTMLAnyELs, Object.assign({ els: [containerEl], indent: 0 }, { htmlOptions }));
-    }
-    else if (std.isEnactStatement(container.el)) {
-        return (react_1.default.createElement("div", { style: { paddingLeft: "1em", textIndent: "-1em" } },
-            react_1.default.createElement("span", null, names.join("／")),
-            react_1.default.createElement(html_1.HTMLMarginSpan, null),
-            react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: container.el.children }, { htmlOptions }))));
-    }
-    else {
-        throw new util_1.NotImplementedError(container.el.tag);
-    }
+    return react_1.default.createElement(react_1.default.Fragment, null, ret.map((el, i) => react_1.default.createElement(react_1.Fragment, { key: i }, el)));
 };
 const LawNumA = styled_components_1.default.a `
 `;
@@ -40012,18 +40016,18 @@ const processNameInline_1 = __webpack_require__(39829);
 const processLawRef_1 = __webpack_require__(82388);
 const common_1 = __webpack_require__(50638);
 const processNameList_1 = __webpack_require__(10766);
-const detectDeclarationsByEL = (elToBeModified, sentenceEnv) => {
+const detectDeclarationsByEL = (elToBeModified, sentenceEnv, sentenceEnvsStruct) => {
     const declarations = [];
     const errors = [];
     {
-        const result = (0, processLawRef_1.processLawRef)(elToBeModified, sentenceEnv);
+        const result = (0, processLawRef_1.processLawRef)(elToBeModified, sentenceEnv, sentenceEnvsStruct);
         if (result) {
             declarations.push(...result.value.declarations);
             errors.push(...result.errors);
         }
     }
     {
-        const result = (0, processNameInline_1.processNameInline)(elToBeModified, sentenceEnv);
+        const result = (0, processNameInline_1.processNameInline)(elToBeModified, sentenceEnv, sentenceEnvsStruct);
         if (result) {
             declarations.push(...result.value.declarations);
             errors.push(...result.errors);
@@ -40037,7 +40041,7 @@ const detectDeclarationsByEL = (elToBeModified, sentenceEnv) => {
             continue;
         }
         else {
-            const detectLawnameResult = (0, exports.detectDeclarationsByEL)(child, sentenceEnv);
+            const detectLawnameResult = (0, exports.detectDeclarationsByEL)(child, sentenceEnv, sentenceEnvsStruct);
             declarations.push(...detectLawnameResult.value);
             errors.push(...detectLawnameResult.errors);
         }
@@ -40056,7 +40060,7 @@ const detectDeclarationsBySentence = (sentenceEnv, sentenceEnvsStruct) => {
         }
     }
     {
-        const result = (0, exports.detectDeclarationsByEL)(sentenceEnv.el, sentenceEnv);
+        const result = (0, exports.detectDeclarationsByEL)(sentenceEnv.el, sentenceEnv, sentenceEnvsStruct);
         if (result) {
             declarations.push(...result.value);
             errors.push(...result.errors);
@@ -40111,7 +40115,7 @@ const getLawNameLength = (lawNum) => {
     return (_a = lawNumTable_1.LAWNUM_TABLE[key]) !== null && _a !== void 0 ? _a : null;
 };
 exports.getLawNameLength = getLawNameLength;
-const processLawRef = (elToBeModified, sentenceEnv) => {
+const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct) => {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
     const errors = [];
     const declarations = [];
@@ -40129,11 +40133,7 @@ const processLawRef = (elToBeModified, sentenceEnv) => {
                     textOffset: (_b = (_a = sentenceEnv.textRageOfEL(nameSquareParentheses)) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : 0,
                 } : null;
                 const scope = (pointerRanges
-                    ? (pointerRanges.locatedScope
-                        ? (followingStartPos
-                            ? (0, sentenceEnv_1.applyFollowing)(pointerRanges.locatedScope, followingStartPos)
-                            : pointerRanges.locatedScope)
-                        : [])
+                    ? (0, sentenceEnv_1.toSentenceTextRanges)(pointerRanges.targetContainerIDRanges, sentenceEnvsStruct, followingStartPos)
                     : [
                         {
                             start: {
@@ -40258,7 +40258,7 @@ const container_1 = __webpack_require__(49814);
 const _nameInline_1 = __importDefault(__webpack_require__(17685));
 const env_1 = __webpack_require__(37025);
 const sentenceEnv_1 = __webpack_require__(6310);
-const processNameInline = (elToBeModified, sentenceEnv) => {
+const processNameInline = (elToBeModified, sentenceEnv, sentenceEnvsStruct) => {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
     const errors = [];
     const declarations = [];
@@ -40273,11 +40273,7 @@ const processNameInline = (elToBeModified, sentenceEnv) => {
                 textOffset: (_b = (_a = sentenceEnv.textRageOfEL(nameSquareParentheses)) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : 0,
             } : null;
             const scope = (pointerRanges
-                ? (pointerRanges.locatedScope
-                    ? (followingStartPos
-                        ? (0, sentenceEnv_1.applyFollowing)(pointerRanges.locatedScope, followingStartPos)
-                        : pointerRanges.locatedScope)
-                    : [])
+                ? (0, sentenceEnv_1.toSentenceTextRanges)(pointerRanges.targetContainerIDRanges, sentenceEnvsStruct, followingStartPos)
                 : [
                     {
                         start: {
@@ -40371,9 +40367,10 @@ const error_1 = __webpack_require__(40520);
 const controls_1 = __webpack_require__(48075);
 const _nameListHead_1 = __importDefault(__webpack_require__(12068));
 const env_1 = __webpack_require__(37025);
+const sentenceEnv_1 = __webpack_require__(6310);
 const std = __importStar(__webpack_require__(93619));
 const processNameList = (headSentenceEnv, sentenceEnvsStruct) => {
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c, _d;
     const errors = [];
     const declarations = [];
     const result = _nameListHead_1.default.match(0, headSentenceEnv.el.children, (0, env_1.initialEnv)({ target: "" }));
@@ -40386,11 +40383,11 @@ const processNameList = (headSentenceEnv, sentenceEnvsStruct) => {
                 errors,
             };
         }
-        const scope = (_a = pointerRanges.locatedScope) !== null && _a !== void 0 ? _a : [];
+        const scope = (0, sentenceEnv_1.toSentenceTextRanges)(pointerRanges.targetContainerIDRanges, sentenceEnvsStruct);
         if (scope.length === 0) {
             errors.push(new error_1.ErrorMessage("No scope found", [
-                { offset: (_c = (_b = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _b === void 0 ? void 0 : _b[0]) !== null && _c !== void 0 ? _c : 0, line: 0, column: 0 },
-                { offset: (_e = (_d = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _d === void 0 ? void 0 : _d[1]) !== null && _e !== void 0 ? _e : 0, line: 0, column: 0 },
+                { offset: (_b = (_a = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _a === void 0 ? void 0 : _a[0]) !== null && _b !== void 0 ? _b : 0, line: 0, column: 0 },
+                { offset: (_d = (_c = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _c === void 0 ? void 0 : _c[1]) !== null && _d !== void 0 ? _d : 0, line: 0, column: 0 },
             ]));
         }
         for (const nameContainer of headSentenceEnv.container.children) {
@@ -40513,10 +40510,12 @@ const common_1 = __webpack_require__(50638);
 const getScope_1 = __importDefault(__webpack_require__(25300));
 const matchLawNum_1 = __importDefault(__webpack_require__(58412));
 const matchPointerRanges_1 = __webpack_require__(13355);
-const detectTokensByEL = (elToBeModified, sentenceEnv) => {
+const detectTokensByEL = (elToBeModified, prevLocatedContainerForSame, __prevLocatedContainerForNamed, sentenceEnv) => {
+    const prevLocatedContainerForNamed = __prevLocatedContainerForNamed;
     const pointerRangesList = [];
     const lawNums = [];
     const errors = [];
+    let containerForNamedForNextChildren = prevLocatedContainerForNamed;
     for (let childIndex = 0; childIndex < elToBeModified.children.length; childIndex++) {
         const child = elToBeModified.children[childIndex];
         if ((0, common_1.isIgnoreAnalysis)(child)) {
@@ -40529,6 +40528,7 @@ const detectTokensByEL = (elToBeModified, sentenceEnv) => {
             continue;
         }
         else if (child instanceof controls_1.__Text) {
+            // containerForNamedForNextChildren = prevLocatedContainerForNamed;
             {
                 // match before pointerRanges
                 const match = (0, matchLawNum_1.default)(child);
@@ -40544,7 +40544,9 @@ const detectTokensByEL = (elToBeModified, sentenceEnv) => {
                 const match = (0, matchPointerRanges_1.matchPointerRanges)(child);
                 if (match) {
                     const pointerRanges = match.value.pointerRanges;
-                    (0, getScope_1.default)(sentenceEnv.container, pointerRanges);
+                    const getScopeResult = (0, getScope_1.default)(sentenceEnv.container, prevLocatedContainerForSame, prevLocatedContainerForNamed, pointerRanges);
+                    prevLocatedContainerForSame = getScopeResult.lastLocatedContainer;
+                    containerForNamedForNextChildren = getScopeResult.lastLocatedContainer;
                     pointerRangesList.push(pointerRanges);
                     errors.push(...match.errors);
                     elToBeModified.children.splice(childIndex, 1, ...match.value.newItems);
@@ -40554,18 +40556,22 @@ const detectTokensByEL = (elToBeModified, sentenceEnv) => {
             }
         }
         else {
-            const newResult = (0, exports.detectTokensByEL)(child, sentenceEnv);
-            pointerRangesList.push(...newResult.value.pointerRangesList);
-            lawNums.push(...newResult.value.lawNums);
-            errors.push(...newResult.errors);
+            const newResult = (0, exports.detectTokensByEL)(child, prevLocatedContainerForSame, containerForNamedForNextChildren, sentenceEnv);
+            prevLocatedContainerForSame = newResult.lastLocatedContainer;
+            pointerRangesList.push(...newResult.result.value.pointerRangesList);
+            lawNums.push(...newResult.result.value.lawNums);
+            errors.push(...newResult.result.errors);
         }
     }
     return {
-        value: {
-            pointerRangesList,
-            lawNums,
+        result: {
+            value: {
+                pointerRangesList,
+                lawNums,
+            },
+            errors,
         },
-        errors,
+        lastLocatedContainer: prevLocatedContainerForSame,
     };
 };
 exports.detectTokensByEL = detectTokensByEL;
@@ -40573,11 +40579,20 @@ const detectTokens = (sentenceEnvsStruct) => {
     const pointerRangesList = [];
     const lawNums = [];
     const errors = [];
+    let prevLocatedContainer = null;
+    let prevContainerID = null;
     for (const sentenceEnv of sentenceEnvsStruct.sentenceEnvs) {
-        const newResult = (0, exports.detectTokensByEL)(sentenceEnv.el, sentenceEnv);
-        pointerRangesList.push(...newResult.value.pointerRangesList);
-        lawNums.push(...newResult.value.lawNums);
-        errors.push(...newResult.errors);
+        const containerID = sentenceEnv.container.containerID;
+        if (containerID !== prevContainerID)
+            prevLocatedContainer = null;
+        const newResult = (0, exports.detectTokensByEL)(sentenceEnv.el, prevLocatedContainer, // use previous naming for RelPos.SAME
+        null, // reset naming for RelPos.NAMED
+        sentenceEnv);
+        prevLocatedContainer = newResult.lastLocatedContainer;
+        prevContainerID = containerID;
+        pointerRangesList.push(...newResult.result.value.pointerRangesList);
+        lawNums.push(...newResult.result.value.lawNums);
+        errors.push(...newResult.result.errors);
     }
     return {
         value: {
@@ -40644,18 +40659,45 @@ exports["default"] = exports.matchLawNum;
 
 "use strict";
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.matchPointerRanges = void 0;
 const env_1 = __webpack_require__(39099);
-const _pointerRanges_1 = __importDefault(__webpack_require__(23952));
+const _pointerRanges_1 = __importStar(__webpack_require__(23952));
 const controls_1 = __webpack_require__(48075);
 const matchPointerRanges = (textEL) => {
     const errors = [];
     const text = textEL.text();
     for (let textIndex = 0; textIndex < text.length; textIndex++) {
+        _pointerRanges_1.reSuppressPointerRanges.lastIndex = textIndex;
+        const suppressMatch = _pointerRanges_1.reSuppressPointerRanges.exec(text);
+        if (suppressMatch) {
+            textIndex += suppressMatch[0].length - 1;
+            _pointerRanges_1.reSuppressPointerRanges.lastIndex = 0;
+            continue;
+        }
         const result = _pointerRanges_1.default.match(textIndex, text, (0, env_1.initialEnv)({ baseOffset: textEL.range ? textEL.range[0] : 0 }));
         if (result.ok) {
             const pointerRanges = result.value.value;
@@ -40889,204 +40931,232 @@ const el_1 = __webpack_require__(18539);
 const common_1 = __webpack_require__(50638);
 const pointer_1 = __webpack_require__(85919);
 const std = __importStar(__webpack_require__(93619));
-const locatePointer = (origPointer, prevLocatedPointerInfo, currentContainer) => {
-    const origFragments = origPointer.fragments();
-    const head = origFragments[0];
-    const headType = (0, common_1.getContainerType)(head.attr.targetType);
-    let locatedFragments;
-    let headContainer = null;
-    if (head.attr.relPos === pointer_1.RelPos.SAME) {
-        locatedFragments = origFragments;
-        // if (origPointer.fragments().length !== 1) {
-        //     console.warn("RelPos.SAME with multiple fragments", currentSpan, origPointer);
-        // }
-        // headContainer = currentContainer
-        //     .thisOrClosest(c => c.type === ContainerType.TOPLEVEL);
-        // locatedFragments = [head];
+const locateContainerFromParent = (parentContainer, fragment) => {
+    return parentContainer.find(c => {
+        var _a;
+        return (((c.el.tag === fragment.attr.targetType)
+            || ((fragment.attr.targetType === "SUBITEM")
+                && (/^Subitem\d+$/.exec(c.el.tag) !== null)))
+            && (((_a = c.num) !== null && _a !== void 0 ? _a : null) === fragment.attr.num))
+            || ((fragment.attr.targetType === "PROVISO")
+                && (c.el.tag === "Sentence")
+                && (c.el.attr.Function === "proviso"));
+    });
+};
+const locateContainerOfHeadFragment = (head, prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer) => {
+    var _a, _b, _c, _d;
+    if ((head.attr.relPos === pointer_1.RelPos.SAME)) {
+        // e.g.: "同条"
+        return ((_a = prevLocatedContainerForSame === null || prevLocatedContainerForSame === void 0 ? void 0 : prevLocatedContainerForSame.thisOrClosest(c => c.el.tag === head.attr.targetType)) !== null && _a !== void 0 ? _a : null);
     }
-    else if ((head.attr.relPos === pointer_1.RelPos.HERE)
-        || (head.attr.relPos === pointer_1.RelPos.PREV)
-        || (head.attr.relPos === pointer_1.RelPos.NEXT)) {
+    else if (head.attr.relPos === pointer_1.RelPos.HERE) {
+        // e.g.: "この条"
         const scopeContainer = currentContainer
             .thisOrClosest(c => c.el.tag === head.attr.targetType);
         if (scopeContainer) {
-            headContainer =
-                (head.attr.relPos === pointer_1.RelPos.HERE)
-                    ? scopeContainer
-                    : (headType === container_1.ContainerType.ARTICLES)
-                        ? (head.attr.relPos === pointer_1.RelPos.PREV)
-                            ? scopeContainer.prev(c => c.el.tag === head.attr.targetType)
-                            : (head.attr.relPos === pointer_1.RelPos.NEXT)
-                                ? scopeContainer.next(c => c.el.tag === head.attr.targetType)
-                                : (0, util_1.throwError)()
-                        : (head.attr.relPos === pointer_1.RelPos.PREV)
-                            ? scopeContainer.prevSub(c => c.el.tag === head.attr.targetType)
-                            : (head.attr.relPos === pointer_1.RelPos.NEXT)
-                                ? scopeContainer.nextSub(c => c.el.tag === head.attr.targetType)
-                                : (0, util_1.throwError)();
+            return scopeContainer;
         }
-        locatedFragments = origFragments;
+        else {
+            return null;
+        }
     }
-    else {
-        const foundIndex = prevLocatedPointerInfo
-            ? prevLocatedPointerInfo.findIndex(([fragment]) => fragment.attr.targetType === head.attr.targetType)
-            : -1;
-        if (prevLocatedPointerInfo
-            && (1 <= foundIndex)) {
-            locatedFragments = [
-                ...prevLocatedPointerInfo.slice(0, foundIndex).map(([fragment]) => fragment),
-                ...origFragments,
-            ];
+    else if (head.attr.relPos === pointer_1.RelPos.PREV) {
+        // e.g.: "前条"
+        const scopeContainer = currentContainer
+            .thisOrClosest(c => c.el.tag === head.attr.targetType);
+        if (scopeContainer) {
+            let count = head.attr.count === "all" ? Number.MAX_SAFE_INTEGER : Number(head.attr.count);
+            if (count > 0) {
+                const ret = [];
+                for (const prevContainer of scopeContainer.prevAll(c => c.el.tag === head.attr.targetType)) {
+                    ret.unshift(prevContainer);
+                    count--;
+                    if (count <= 0)
+                        break;
+                }
+                return ret.length > 0 ? ret : null;
+            }
+            else {
+                return (((0, common_1.getContainerType)(head.attr.targetType) === container_1.ContainerType.ARTICLES)
+                    ? scopeContainer.prev(c => c.el.tag === head.attr.targetType)
+                    : scopeContainer.prevSub(c => c.el.tag === head.attr.targetType));
+            }
         }
-        else if (headType === container_1.ContainerType.TOPLEVEL) {
-            headContainer = currentContainer.findAncestorChildrenSub(c => {
+        else {
+            return null;
+        }
+    }
+    else if (head.attr.relPos === pointer_1.RelPos.NEXT) {
+        // e.g.: "次条"
+        const scopeContainer = currentContainer
+            .thisOrClosest(c => c.el.tag === head.attr.targetType);
+        if (scopeContainer) {
+            let count = head.attr.count === "all" ? Number.MAX_SAFE_INTEGER : Number(head.attr.count);
+            if (count > 0) {
+                const ret = [];
+                for (const nextContainer of scopeContainer.nextAll(c => c.el.tag === head.attr.targetType)) {
+                    ret.push(nextContainer);
+                    count--;
+                    if (count <= 0)
+                        break;
+                }
+                return ret.length > 0 ? ret : null;
+            }
+            else {
+                return (((0, common_1.getContainerType)(head.attr.targetType) === container_1.ContainerType.ARTICLES)
+                    ? scopeContainer.next(c => c.el.tag === head.attr.targetType)
+                    : scopeContainer.nextSub(c => c.el.tag === head.attr.targetType));
+            }
+        }
+        else {
+            return null;
+        }
+    }
+    else if (head.attr.relPos === pointer_1.RelPos.NAMED) {
+        // e.g.: "第二条", "第二項"
+        if ((0, common_1.getContainerType)(head.attr.targetType) === container_1.ContainerType.TOPLEVEL) {
+            // e.g.: "附則", "別表第二"
+            return currentContainer.findAncestorChildrenSub(c => {
                 if (c.el.tag !== head.attr.targetType)
                     return false;
                 const titleEl = c.el.children.find(el => el instanceof el_1.EL && el.tag === `${c.el.tag}Title`);
                 return (new RegExp(`^${head.attr.name}(?:[(（]|\\s|$)`)).exec(titleEl.text()) !== null;
             });
-            locatedFragments = origFragments;
         }
-        else {
-            const func = (c) => (((c.el.tag === head.attr.targetType)
-                || ((head.attr.targetType === "SUBITEM")
-                    && (/^Subitem\d+$/.exec(c.el.tag) !== null)))
-                && ((c.num || null) === head.attr.num));
-            headContainer =
-                headType === container_1.ContainerType.ARTICLES
-                    ? currentContainer.findAncestorChildren(func)
-                    : currentContainer.findAncestorChildrenSub(func);
-            locatedFragments = origFragments;
-        }
-    }
-    const retOne = [];
-    if (headContainer) {
-        retOne.push([locatedFragments[0], headContainer]);
-        let parentContainer = headContainer;
-        for (const fragment of locatedFragments.slice(1)) {
-            // if (!parentContainer) break;
-            // let fragment_rank = container_tags.indexOf(fragment.tag);
-            // if (fragment_rank < 0) fragment_rank = Number.POSITIVE_INFINITY;
-            const container = parentContainer.find(c => {
-                var _a;
-                return (((c.el.tag === fragment.attr.targetType)
-                    || ((fragment.attr.targetType === "SUBITEM")
-                        && (/^Subitem\d+$/.exec(c.el.tag) !== null)))
-                    && (((_a = c.num) !== null && _a !== void 0 ? _a : null) === fragment.attr.num))
-                    || ((fragment.attr.targetType === "PROVISO")
-                        && (c.el.tag === "Sentence")
-                        && (c.el.attr.Function === "proviso"));
-            });
+        else if (head.attr.targetType === "SUBITEM") {
+            // e.g. "イ"
+            const container = ((_c = (_b = (prevLocatedContainerForNamed === null || prevLocatedContainerForNamed === void 0 ? void 0 : prevLocatedContainerForNamed.children.find(c => c.name === head.attr.name))) !== null && _b !== void 0 ? _b : (prevLocatedContainerForNamed === null || prevLocatedContainerForNamed === void 0 ? void 0 : prevLocatedContainerForNamed.ancestorChildrenSub(c => c.name === head.attr.name).next().value)) !== null && _c !== void 0 ? _c : null);
             if (container) {
-                retOne.push([fragment, container]);
-                parentContainer = container;
+                // e.g.: "第二条第二項第二号" -> "イ"
+                return container;
             }
             else {
-                break;
+                // e.g.: "イ"
+                const func = (c) => c.name === head.attr.name;
+                return (_d = currentContainer.children.find(func)) !== null && _d !== void 0 ? _d : currentContainer.findAncestorChildrenSub(func);
+            }
+        }
+        else {
+            let parentTag = null;
+            {
+                const paragraphItemTagIndex = std.paragraphItemTags.indexOf(head.attr.targetType);
+                if (paragraphItemTagIndex >= 0) {
+                    parentTag = ["Article", ...std.paragraphItemTags][paragraphItemTagIndex];
+                }
+                else {
+                    const articleGroupTagIndex = std.articleGroupTags.indexOf(head.attr.targetType);
+                    if (articleGroupTagIndex > 0) {
+                        parentTag = std.articleGroupTags[articleGroupTagIndex - 1];
+                    }
+                }
+            }
+            const parentContainer = (parentTag !== null) ? (prevLocatedContainerForNamed === null || prevLocatedContainerForNamed === void 0 ? void 0 : prevLocatedContainerForNamed.thisOrClosest(c => c.el.tag === parentTag)) : null;
+            if (parentContainer) {
+                // e.g.: "第二条第二項" -> "第三項"
+                return locateContainerFromParent(parentContainer, head);
+            }
+            else {
+                // e.g.: "第二項"
+                const func = (c) => (((c.el.tag === head.attr.targetType))
+                    && ((c.num || null) === head.attr.num));
+                return (((0, common_1.getContainerType)(head.attr.targetType) === container_1.ContainerType.ARTICLES)
+                    ? currentContainer.findAncestorChildren(func)
+                    : currentContainer.findAncestorChildrenSub(func));
             }
         }
     }
-    return retOne;
+    else {
+        throw (0, util_1.assertNever)(head.attr.relPos);
+    }
 };
-const locateRanges = (origRanges, currentContainer) => {
-    var _a, _b;
+const locatePointer = (origPointer, prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer) => {
+    const origFragments = origPointer.fragments();
+    const _headContainer = locateContainerOfHeadFragment(origFragments[0], prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer);
+    const headContainers = Array.isArray(_headContainer) ? _headContainer : (_headContainer && [_headContainer]);
+    const pointerInfo = [];
+    let lastLocatedContainer = headContainers && headContainers[headContainers.length - 1];
+    if (headContainers) {
+        if (origFragments.length === 1) {
+            pointerInfo.push([origFragments[0], headContainers]);
+        }
+        else {
+            pointerInfo.push([origFragments[0], headContainers[headContainers.length - 1]]);
+            let parentContainer = headContainers[headContainers.length - 1];
+            for (const fragment of origFragments.slice(1)) {
+                const container = locateContainerFromParent(parentContainer, fragment);
+                if (container) {
+                    pointerInfo.push([fragment, container]);
+                    parentContainer = container;
+                    lastLocatedContainer = container;
+                }
+                else {
+                    break;
+                }
+            }
+        }
+    }
+    return { pointerInfo, lastLocatedContainer };
+};
+const locateRanges = (origRanges, prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer) => {
     const ranges = [];
     const rangeELs = origRanges.ranges();
-    let processed = false;
-    if (rangeELs.length === 1) {
-        const pointerELs = rangeELs[0].pointers();
-        if (pointerELs.length === 1) {
-            const fragments = pointerELs[0].fragments();
-            if (fragments.length === 1) {
-                const fragmentEL = fragments[0];
-                if (fragmentEL.attr.relPos === pointer_1.RelPos.HERE && fragmentEL.attr.targetType === "Law") {
-                    // "この法律" does not contain SupplProvision of other amendments.
-                    processed = true;
-                    for (const container of (_b = (_a = currentContainer.thisOrClosest(p => p.type === container_1.ContainerType.ROOT)) === null || _a === void 0 ? void 0 : _a.children) !== null && _b !== void 0 ? _b : []) {
-                        if (std.isSupplProvision(container.el) && container.el.attr.AmendLawNum) {
-                            continue;
-                        }
-                        ranges.push([[[fragmentEL, container]], [[fragmentEL, container]]]);
-                    }
-                }
-                else if (fragmentEL.attr.relPos === pointer_1.RelPos.PREV && fragmentEL.attr.count !== null) {
-                    processed = true;
-                    let count = fragmentEL.attr.count === "all" ? Number.MAX_SAFE_INTEGER : Number(fragmentEL.attr.count);
-                    const scopeContainer = currentContainer
-                        .thisOrClosest(c => c.el.tag === fragmentEL.attr.targetType);
-                    if (scopeContainer && count > 0) {
-                        for (const prevContainer of scopeContainer.prevAll(c => c.el.tag === fragmentEL.attr.targetType)) {
-                            ranges.unshift([[[fragmentEL, prevContainer]], [[fragmentEL, prevContainer]]]);
-                            count--;
-                            if (count <= 0)
-                                break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    if (!processed) {
-        let prevLocatedPointerInfo = null;
-        for (const [origFrom, origTo] of rangeELs.map(r => r.pointers())) {
-            const from = locatePointer(origFrom, prevLocatedPointerInfo, currentContainer);
-            prevLocatedPointerInfo = from;
-            if (!origTo) {
-                ranges.push([from, from]);
-            }
-            else {
-                const to = locatePointer(origTo, prevLocatedPointerInfo, currentContainer);
-                ranges.push([from, to]);
-            }
-        }
-        // if (!from || !to || from.length === 0 || to.length === 0) {
-        //     console.warn("locateRanges: invalid range", origRanges, currentSpan, from, to);
-        // }
-    }
-    return ranges;
-};
-const getScope = (currentContainer, pointerRangesToBeModified, followingStartPos) => {
-    const scope = [];
-    const ranges = locateRanges(pointerRangesToBeModified, currentContainer);
-    for (const [from, to] of ranges) {
-        if (from.length === 0 || to.length === 0) {
-            continue;
-        }
-        for (const [fragment, container] of from) {
-            fragment.attr.locatedContainerID = container.containerID;
-        }
-        for (const [fragment, container] of to) {
-            fragment.attr.locatedContainerID = container.containerID;
-        }
-        const [, fromc] = from[from.length - 1];
-        const [, toc] = to[to.length - 1];
-        if (followingStartPos) {
-            scope.push({
-                start: followingStartPos,
-                end: {
-                    sentenceIndex: toc.sentenceRange[1],
-                    textOffset: 0,
-                },
-            });
+    for (const [origFrom, origTo] of rangeELs.map(r => r.pointers())) {
+        const from = locatePointer(origFrom, prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer);
+        prevLocatedContainerForSame = from.lastLocatedContainer;
+        prevLocatedContainerForNamed = from.lastLocatedContainer;
+        if (!origTo) {
+            ranges.push([from.pointerInfo]);
         }
         else {
-            scope.push({
-                start: {
-                    sentenceIndex: fromc.sentenceRange[0],
-                    textOffset: 0,
-                },
-                end: {
-                    sentenceIndex: toc.sentenceRange[1],
-                    textOffset: 0,
-                },
-            });
+            const to = locatePointer(origTo, prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer);
+            prevLocatedContainerForSame = from.lastLocatedContainer;
+            prevLocatedContainerForNamed = from.lastLocatedContainer;
+            ranges.push([from.pointerInfo, to.pointerInfo]);
         }
     }
-    if (scope.length > 0) {
-        pointerRangesToBeModified.attr.locatedScope = JSON.stringify(scope);
+    return { ranges, lastLocatedContainer: prevLocatedContainerForSame };
+};
+const getScope = (currentContainer, prevLocatedContainerForSame, prevLocatedContainerForNamed, pointerRangesToBeModified) => {
+    const targetContainerIDRanges = new Set();
+    const { ranges, lastLocatedContainer } = locateRanges(pointerRangesToBeModified, prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer);
+    for (const fromTo of ranges) {
+        const [from, to] = fromTo;
+        if (from.length === 0 || (to && to.length === 0)) {
+            continue;
+        }
+        let fromContainerIDs = null;
+        for (const [fragment, container] of from) {
+            const containerIDs = Array.isArray(container) ? container.map(c => c.containerID) : [container.containerID];
+            fragment.targetContainerIDs = [...new Set([...fragment.targetContainerIDs, ...containerIDs])];
+            fromContainerIDs = containerIDs;
+        }
+        let toContainerIDs = null;
+        if (to) {
+            for (const [fragment, container] of to) {
+                const containerIDs = Array.isArray(container) ? container.map(c => c.containerID) : [container.containerID];
+                fragment.targetContainerIDs = [...new Set([...fragment.targetContainerIDs, ...containerIDs])];
+                toContainerIDs = containerIDs;
+            }
+        }
+        if (fromContainerIDs && toContainerIDs) {
+            for (let i = 0; i < fromContainerIDs.length - 1; i++)
+                targetContainerIDRanges.add(fromContainerIDs[i]);
+            targetContainerIDRanges.add([fromContainerIDs[fromContainerIDs.length - 1], toContainerIDs[0]]);
+            for (let i = 1; i < toContainerIDs.length; i++)
+                targetContainerIDRanges.add(toContainerIDs[i]);
+        }
+        else if (fromContainerIDs) {
+            for (const containerID of fromContainerIDs)
+                targetContainerIDRanges.add(containerID);
+        }
     }
-    // console.log(scope_text, ranges, ret);
-    return scope;
+    if (targetContainerIDRanges.size > 0) {
+        pointerRangesToBeModified.targetContainerIDRanges = [...targetContainerIDRanges];
+    }
+    return {
+        ranges: [...targetContainerIDRanges],
+        lastLocatedContainer,
+    };
 };
 exports.getScope = getScope;
 exports["default"] = exports.getScope;
@@ -41696,7 +41766,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.$anyWherePointerFragment = exports.$secondaryOnlyPointerFragment = exports.$firstOnlyPointerFragment = exports.$singleOnlyPointerFragment = exports.$pointer = exports.$pointerRange = exports.$pointerRanges = void 0;
+exports.$anyWherePointerFragment = exports.$secondaryOnlyPointerFragment = exports.$firstOnlyPointerFragment = exports.$singleOnlyPointerFragment = exports.$pointer = exports.$pointerRange = exports.$pointerRanges = exports.reSuppressPointerRanges = void 0;
 /* eslint-disable no-irregular-whitespace */
 const num_1 = __webpack_require__(68685);
 const controls_1 = __webpack_require__(48075);
@@ -41732,6 +41802,7 @@ const makeRanges = (first, midText, rest, range) => {
         errors,
     };
 };
+exports.reSuppressPointerRanges = /[ァ-ヿ]{2,}/yg;
 _a = (0, makeRangesRule_1.default)((() => exports.$pointer), makeRange, makeRanges), exports.$pointerRanges = _a.$ranges, exports.$pointerRange = _a.$range;
 exports.$pointer = factory_1.factory
     .withName("pointer")
@@ -41769,8 +41840,8 @@ exports.$singleOnlyPointerFragment = factory_1.factory
     .and(r => r.seqEqual("前"))
     .and(r => r
     .choice(c => c
-    .or(r => r.zeroOrOne(r => r.seqEqual("各")))
-    .or(r => r.zeroOrOne(() => lexical_1.$kanjiDigits))), "count")
+    .or(r => r.seqEqual("各"))
+    .or(() => lexical_1.$kanjiDigits)), "count")
     .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, count, type_char, range }) => {
     const targetType = (type_char === "表")
         ? "TableStruct"
@@ -41933,21 +42004,6 @@ exports.$secondaryOnlyPointerFragment = factory_1.factory
         name: text(),
         range: range(),
     });
-})))
-    .or(r => r
-    .action(r => r
-    .choice(c => c
-    .orSequence(s => s
-    .and(() => lexical_1.$irohaChar)
-    .andOmit(r => r.nextIsNot(() => lexical_1.$irohaChar)))
-    .or(() => lexical_1.$romanDigits)), (({ text, range }) => {
-    return new pointer_1.____PF({
-        relPos: pointer_1.RelPos.NAMED,
-        targetType: "SUBITEM",
-        name: text(),
-        num: (0, num_1.parseNamedNum)(text()),
-        range: range(),
-    });
 }))));
 exports.$anyWherePointerFragment = factory_1.factory
     .withName("anyWherePointerFragment")
@@ -41961,11 +42017,26 @@ exports.$anyWherePointerFragment = factory_1.factory
     .and(r => r
     .zeroOrMore(r => r
     .sequence(c => c
-    .and(r => r.seqEqual("の"))
+    .and(r => r.oneOf(["の", "ノ"]))
     .and(() => lexical_1.$kanjiDigits))))), (({ text, type_char, range }) => {
     return new pointer_1.____PF({
         relPos: pointer_1.RelPos.NAMED,
         targetType: num_1.articleGroupType[type_char],
+        name: text(),
+        num: (0, num_1.parseNamedNum)(text()),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .choice(c => c
+    .orSequence(s => s
+    .and(() => lexical_1.$irohaChar)
+    .andOmit(r => r.nextIsNot(() => lexical_1.$irohaChar)))
+    .or(() => lexical_1.$romanDigits)), (({ text, range }) => {
+    return new pointer_1.____PF({
+        relPos: pointer_1.RelPos.NAMED,
+        targetType: "SUBITEM",
         name: text(),
         num: (0, num_1.parseNamedNum)(text()),
         range: range(),
@@ -45021,39 +45092,138 @@ exports.Container = Container;
 /***/ }),
 
 /***/ 6310:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.SentenceEnv = exports.isSentenceLike = exports.sentenceLikeTags = exports.enumerateSentenceTexts = exports.textOfSentenceText = exports.isSentenceText = exports.sentenceTextTags = exports.applyFollowing = void 0;
+exports.SentenceEnv = exports.isSentenceLike = exports.sentenceLikeTags = exports.enumerateSentenceTexts = exports.textOfSentenceText = exports.isSentenceText = exports.sentenceTextTags = exports.toSentenceTextRanges = void 0;
+const _1 = __webpack_require__(49814);
 const common_1 = __webpack_require__(50638);
+const std = __importStar(__webpack_require__(93619));
 const controls_1 = __webpack_require__(48075);
-const applyFollowing = (origRanges, following) => {
-    const ranges = [];
-    for (const origRange of origRanges) {
-        if (origRange.end.sentenceIndex === following.sentenceIndex) {
-            if (origRange.end.textOffset < following.textOffset) {
-                continue;
-            }
-        }
-        else if (origRange.end.sentenceIndex < following.sentenceIndex) {
-            continue;
-        }
-        const range = { start: Object.assign({}, origRange.start), end: Object.assign({}, origRange.end) };
-        if (range.start.sentenceIndex === following.sentenceIndex) {
-            if (range.start.textOffset < following.textOffset) {
-                Object.assign(range.start, following);
-            }
-        }
-        else if (range.start.sentenceIndex < following.sentenceIndex) {
-            Object.assign(range.start, following);
-        }
+const pushRange = (ranges, range) => {
+    if (ranges.length === 0) {
         ranges.push(range);
     }
-    return ranges;
+    else {
+        const lastRange = ranges[ranges.length - 1];
+        if (lastRange.end.sentenceIndex === range.start.sentenceIndex && lastRange.end.textOffset === range.start.textOffset) {
+            lastRange.end = range.end;
+        }
+        else {
+            ranges.push(range);
+        }
+    }
 };
-exports.applyFollowing = applyFollowing;
+const toSentenceTextRanges = (origContainerIDRanges, sentenceEnvsStruct, following) => {
+    const origRanges = [];
+    for (const containerIDRange of origContainerIDRanges) {
+        const [from, toIncluded] = Array.isArray(containerIDRange) ? containerIDRange : [containerIDRange, undefined];
+        if (toIncluded) {
+            const fromContainer = sentenceEnvsStruct.containers.get(from);
+            const toContainer = sentenceEnvsStruct.containers.get(toIncluded);
+            if (fromContainer && toContainer) {
+                pushRange(origRanges, {
+                    start: {
+                        sentenceIndex: fromContainer.sentenceRange[0],
+                        textOffset: 0,
+                    },
+                    end: {
+                        sentenceIndex: toContainer.sentenceRange[1],
+                        textOffset: 0,
+                    },
+                });
+            }
+        }
+        else {
+            const container = sentenceEnvsStruct.containers.get(from);
+            if (container) {
+                if (container.type === _1.ContainerType.ROOT) {
+                    // "この法律" does not contain SupplProvision of other amendments.
+                    for (const rootChild of container.children) {
+                        if (std.isSupplProvision(rootChild.el) && rootChild.el.attr.AmendLawNum) {
+                            continue;
+                        }
+                        pushRange(origRanges, {
+                            start: {
+                                sentenceIndex: rootChild.sentenceRange[0],
+                                textOffset: 0,
+                            },
+                            end: {
+                                sentenceIndex: rootChild.sentenceRange[1],
+                                textOffset: 0,
+                            },
+                        });
+                    }
+                }
+                else {
+                    pushRange(origRanges, {
+                        start: {
+                            sentenceIndex: container.sentenceRange[0],
+                            textOffset: 0,
+                        },
+                        end: {
+                            sentenceIndex: container.sentenceRange[1],
+                            textOffset: 0,
+                        },
+                    });
+                }
+            }
+        }
+    }
+    if (following) {
+        const ranges = [];
+        for (const origRange of origRanges) {
+            if (origRange.end.sentenceIndex === following.sentenceIndex) {
+                if (origRange.end.textOffset < following.textOffset) {
+                    continue;
+                }
+            }
+            else if (origRange.end.sentenceIndex < following.sentenceIndex) {
+                continue;
+            }
+            const range = { start: Object.assign({}, origRange.start), end: Object.assign({}, origRange.end) };
+            if (range.start.sentenceIndex === following.sentenceIndex) {
+                if (range.start.textOffset < following.textOffset) {
+                    Object.assign(range.start, following);
+                }
+            }
+            else if (range.start.sentenceIndex < following.sentenceIndex) {
+                Object.assign(range.start, following);
+            }
+            ranges.push(range);
+        }
+        return ranges;
+    }
+    else {
+        return origRanges;
+    }
+};
+exports.toSentenceTextRanges = toSentenceTextRanges;
 exports.sentenceTextTags = [
     "Ruby",
     "QuoteStruct",
@@ -45980,7 +46150,8 @@ class ____PF extends __1.EL {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         this.tag = "____PF";
-        const { relPos, targetType, name, num = null, count = null, locatedContainerID = null, } = Object.assign({}, options);
+        this.targetContainerIDsCache = null;
+        const { relPos, targetType, name, num = null, count = null, targetContainerIDs, } = Object.assign({}, options);
         this.attr = {
             relPos,
             targetType: targetType,
@@ -45990,11 +46161,27 @@ class ____PF extends __1.EL {
             this.attr.num = num;
         if (count !== null)
             this.attr.count = count;
-        if (locatedContainerID)
-            this.attr.locatedContainerID = locatedContainerID;
+        if (targetContainerIDs !== undefined)
+            this.attr.targetContainerIDs = JSON.stringify(targetContainerIDs);
         this.children = [name];
     }
     get isControl() { return true; }
+    get targetContainerIDs() {
+        if (this.targetContainerIDsCache !== null && this.targetContainerIDsCache[0] === this.attr.targetContainerIDs) {
+            return this.targetContainerIDsCache[1];
+        }
+        else {
+            if (!this.attr.targetContainerIDs)
+                return [];
+            const value = JSON.parse(this.attr.targetContainerIDs);
+            this.targetContainerIDsCache = [this.attr.targetContainerIDs, value];
+            return value;
+        }
+    }
+    set targetContainerIDs(value) {
+        this.attr.targetContainerIDs = JSON.stringify(value);
+        this.targetContainerIDsCache = [this.attr.targetContainerIDs, value];
+    }
 }
 exports.____PF = ____PF;
 class ____Pointer extends __1.EL {
@@ -46030,24 +46217,28 @@ class ____PointerRanges extends __1.EL {
     constructor(options) {
         super("____PointerRanges", {}, [], options.range);
         this.tag = "____PointerRanges";
-        this.locatedScopeCache = null;
+        this.targetContainerIDRangesCache = null;
         this.children = options.children;
         this.attr = {};
-        if (options.locatedScope !== undefined)
-            this.attr.locatedScope = JSON.stringify(options.locatedScope);
+        if (options.targetContainerIDs !== undefined)
+            this.attr.targetContainerIDRanges = JSON.stringify(options.targetContainerIDs);
     }
     get isControl() { return true; }
-    get locatedScope() {
-        if (this.locatedScopeCache !== null && this.locatedScopeCache[0] === this.attr.locatedScope) {
-            return this.locatedScopeCache[1];
+    get targetContainerIDRanges() {
+        if (this.targetContainerIDRangesCache !== null && this.targetContainerIDRangesCache[0] === this.attr.targetContainerIDRanges) {
+            return this.targetContainerIDRangesCache[1];
         }
         else {
-            if (!this.attr.locatedScope)
-                return null;
-            const scope = JSON.parse(this.attr.locatedScope);
-            this.locatedScopeCache = [this.attr.locatedScope, scope];
-            return scope;
+            if (!this.attr.targetContainerIDRanges)
+                return [];
+            const value = JSON.parse(this.attr.targetContainerIDRanges);
+            this.targetContainerIDRangesCache = [this.attr.targetContainerIDRanges, value];
+            return value;
         }
+    }
+    set targetContainerIDRanges(value) {
+        this.attr.targetContainerIDRanges = JSON.stringify(value);
+        this.targetContainerIDRangesCache = [this.attr.targetContainerIDRanges, value];
     }
     ranges() {
         return this.children.filter(c => c instanceof ____PointerRange);
@@ -48863,8 +49054,14 @@ const makeRangesRule = (lazyPointerRule, rangeMaker = simpleRangeMaker, rangesMa
         .choice(c => c
         .or(r => r.seqEqual("、"))
         .or(r => r.seqEqual("及び"))
+        .or(r => r.seqEqual("および"))
         .or(r => r.regExp(/^及(?!至)/))
-        .or(r => r.seqEqual("並びに"))))
+        .or(r => r.seqEqual("並びに"))
+        .or(r => r.seqEqual("ならびに"))
+        .or(r => r.seqEqual("又は"))
+        .or(r => r.seqEqual("または"))
+        .or(r => r.seqEqual("若しくは"))
+        .or(r => r.seqEqual("もしくは"))))
         .action(({ text, range }) => ({ text: text(), range: range() }))), "midText")
         .and(() => $ranges, "rest")
         .action(({ first, midText, rest, range }) => {
