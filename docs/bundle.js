@@ -40148,8 +40148,8 @@ const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct) => {
                     ]);
                 if (scope.length === 0) {
                     errors.push(new error_1.ErrorMessage("No scope found", [
-                        { offset: (_h = (_g = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _g === void 0 ? void 0 : _g[0]) !== null && _h !== void 0 ? _h : 0, line: 0, column: 0 },
-                        { offset: (_k = (_j = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _j === void 0 ? void 0 : _j[1]) !== null && _k !== void 0 ? _k : 0, line: 0, column: 0 },
+                        (_h = (_g = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _g === void 0 ? void 0 : _g[0]) !== null && _h !== void 0 ? _h : 0,
+                        (_k = (_j = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _j === void 0 ? void 0 : _j[1]) !== null && _k !== void 0 ? _k : 0,
                     ]));
                 }
                 const nameTextRange = sentenceEnv.textRageOfEL(nameSquareParentheses.content);
@@ -40288,8 +40288,8 @@ const processNameInline = (elToBeModified, sentenceEnv, sentenceEnvsStruct) => {
                 ]);
             if (scope.length === 0) {
                 errors.push(new error_1.ErrorMessage("No scope found", [
-                    { offset: (_h = (_g = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _g === void 0 ? void 0 : _g[0]) !== null && _h !== void 0 ? _h : 0, line: 0, column: 0 },
-                    { offset: (_k = (_j = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _j === void 0 ? void 0 : _j[1]) !== null && _k !== void 0 ? _k : 0, line: 0, column: 0 },
+                    (_h = (_g = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _g === void 0 ? void 0 : _g[0]) !== null && _h !== void 0 ? _h : 0,
+                    (_k = (_j = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _j === void 0 ? void 0 : _j[1]) !== null && _k !== void 0 ? _k : 0,
                 ]));
             }
             const nameTextRange = sentenceEnv.textRageOfEL(nameSquareParentheses.content);
@@ -40375,19 +40375,12 @@ const processNameList = (headSentenceEnv, sentenceEnvsStruct) => {
     const declarations = [];
     const result = _nameListHead_1.default.match(0, headSentenceEnv.el.children, (0, env_1.initialEnv)({ target: "" }));
     if (result.ok) {
-        const { pointerRanges, pointerRangesModifier } = result.value.value;
-        if (pointerRangesModifier) {
-            console.warn("pointerRangesModifier not implemented.");
-            return {
-                value: declarations,
-                errors,
-            };
-        }
+        const { pointerRanges } = result.value.value;
         const scope = (0, sentenceEnv_1.toSentenceTextRanges)(pointerRanges.targetContainerIDRanges, sentenceEnvsStruct);
         if (scope.length === 0) {
             errors.push(new error_1.ErrorMessage("No scope found", [
-                { offset: (_b = (_a = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _a === void 0 ? void 0 : _a[0]) !== null && _b !== void 0 ? _b : 0, line: 0, column: 0 },
-                { offset: (_d = (_c = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _c === void 0 ? void 0 : _c[1]) !== null && _d !== void 0 ? _d : 0, line: 0, column: 0 },
+                (_b = (_a = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _a === void 0 ? void 0 : _a[0]) !== null && _b !== void 0 ? _b : 0,
+                (_d = (_c = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _c === void 0 ? void 0 : _c[1]) !== null && _d !== void 0 ? _d : 0,
             ]));
         }
         for (const nameContainer of headSentenceEnv.container.children) {
@@ -40492,242 +40485,6 @@ const processNameList = (headSentenceEnv, sentenceEnvsStruct) => {
 };
 exports.processNameList = processNameList;
 //# sourceMappingURL=processNameList.js.map
-
-/***/ }),
-
-/***/ 38667:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.detectTokens = exports.detectTokensByEL = void 0;
-const controls_1 = __webpack_require__(48075);
-const common_1 = __webpack_require__(50638);
-const getScope_1 = __importDefault(__webpack_require__(25300));
-const matchLawNum_1 = __importDefault(__webpack_require__(58412));
-const matchPointerRanges_1 = __webpack_require__(13355);
-const detectTokensByEL = (elToBeModified, prevLocatedContainerForSame, __prevLocatedContainerForNamed, sentenceEnv) => {
-    const prevLocatedContainerForNamed = __prevLocatedContainerForNamed;
-    const pointerRangesList = [];
-    const lawNums = [];
-    const errors = [];
-    let containerForNamedForNextChildren = prevLocatedContainerForNamed;
-    for (let childIndex = 0; childIndex < elToBeModified.children.length; childIndex++) {
-        const child = elToBeModified.children[childIndex];
-        if ((0, common_1.isIgnoreAnalysis)(child)) {
-            continue;
-        }
-        else if (typeof child === "string") {
-            continue;
-        }
-        else if (child instanceof controls_1.__Parentheses && child.attr.type === "square") {
-            continue;
-        }
-        else if (child instanceof controls_1.__Text) {
-            // containerForNamedForNextChildren = prevLocatedContainerForNamed;
-            {
-                // match before pointerRanges
-                const match = (0, matchLawNum_1.default)(child);
-                if (match) {
-                    lawNums.push(match.value.lawNum);
-                    errors.push(...match.errors);
-                    elToBeModified.children.splice(childIndex, 1, ...match.value.newItems);
-                    childIndex += match.value.proceedOffset - 1;
-                    continue;
-                }
-            }
-            {
-                const match = (0, matchPointerRanges_1.matchPointerRanges)(child);
-                if (match) {
-                    const pointerRanges = match.value.pointerRanges;
-                    const getScopeResult = (0, getScope_1.default)(sentenceEnv.container, prevLocatedContainerForSame, prevLocatedContainerForNamed, pointerRanges);
-                    prevLocatedContainerForSame = getScopeResult.lastLocatedContainer;
-                    containerForNamedForNextChildren = getScopeResult.lastLocatedContainer;
-                    pointerRangesList.push(pointerRanges);
-                    errors.push(...match.errors);
-                    elToBeModified.children.splice(childIndex, 1, ...match.value.newItems);
-                    childIndex += match.value.proceedOffset - 1;
-                    continue;
-                }
-            }
-        }
-        else {
-            const newResult = (0, exports.detectTokensByEL)(child, prevLocatedContainerForSame, containerForNamedForNextChildren, sentenceEnv);
-            prevLocatedContainerForSame = newResult.lastLocatedContainer;
-            pointerRangesList.push(...newResult.result.value.pointerRangesList);
-            lawNums.push(...newResult.result.value.lawNums);
-            errors.push(...newResult.result.errors);
-        }
-    }
-    return {
-        result: {
-            value: {
-                pointerRangesList,
-                lawNums,
-            },
-            errors,
-        },
-        lastLocatedContainer: prevLocatedContainerForSame,
-    };
-};
-exports.detectTokensByEL = detectTokensByEL;
-const detectTokens = (sentenceEnvsStruct) => {
-    const pointerRangesList = [];
-    const lawNums = [];
-    const errors = [];
-    let prevLocatedContainer = null;
-    let prevContainerID = null;
-    for (const sentenceEnv of sentenceEnvsStruct.sentenceEnvs) {
-        const containerID = sentenceEnv.container.containerID;
-        if (containerID !== prevContainerID)
-            prevLocatedContainer = null;
-        const newResult = (0, exports.detectTokensByEL)(sentenceEnv.el, prevLocatedContainer, // use previous naming for RelPos.SAME
-        null, // reset naming for RelPos.NAMED
-        sentenceEnv);
-        prevLocatedContainer = newResult.lastLocatedContainer;
-        prevContainerID = containerID;
-        pointerRangesList.push(...newResult.result.value.pointerRangesList);
-        lawNums.push(...newResult.result.value.lawNums);
-        errors.push(...newResult.result.errors);
-    }
-    return {
-        value: {
-            pointerRangesList,
-            lawNums,
-        },
-        errors,
-    };
-};
-exports.detectTokens = detectTokens;
-exports["default"] = exports.detectTokens;
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-
-/***/ 58412:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.matchLawNum = void 0;
-const controls_1 = __webpack_require__(48075);
-const num_1 = __webpack_require__(68685);
-const reLawNum = new RegExp(`${num_1.ptnLawNum}`);
-const matchLawNum = (textEL) => {
-    const errors = [];
-    const text = textEL.text();
-    const match = reLawNum.exec(text);
-    if (!match)
-        return null;
-    const newItems = [];
-    if (match.index > 0) {
-        newItems.push(new controls_1.__Text(text.substring(0, match.index), textEL.range && [textEL.range[0], textEL.range[0] + match.index]));
-    }
-    const lawNum = new controls_1.____LawNum(match[0], textEL.range && [
-        textEL.range[0] + match.index,
-        textEL.range[0] + match.index + match[0].length,
-    ]);
-    newItems.push(lawNum);
-    if (match.index + match[0].length < text.length) {
-        newItems.push(new controls_1.__Text(text.substring(match.index + match[0].length), textEL.range && [
-            textEL.range[0] + match.index + match[0].length,
-            textEL.range[1],
-        ]));
-    }
-    return {
-        value: {
-            newItems,
-            lawNum,
-            proceedOffset: match.index > 0 ? 2 : 1,
-        },
-        errors,
-    };
-};
-exports.matchLawNum = matchLawNum;
-exports["default"] = exports.matchLawNum;
-//# sourceMappingURL=matchLawNum.js.map
-
-/***/ }),
-
-/***/ 13355:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.matchPointerRanges = void 0;
-const env_1 = __webpack_require__(39099);
-const _pointerRanges_1 = __importStar(__webpack_require__(23952));
-const controls_1 = __webpack_require__(48075);
-const matchPointerRanges = (textEL) => {
-    const errors = [];
-    const text = textEL.text();
-    for (let textIndex = 0; textIndex < text.length; textIndex++) {
-        _pointerRanges_1.reSuppressPointerRanges.lastIndex = textIndex;
-        const suppressMatch = _pointerRanges_1.reSuppressPointerRanges.exec(text);
-        if (suppressMatch) {
-            textIndex += suppressMatch[0].length - 1;
-            _pointerRanges_1.reSuppressPointerRanges.lastIndex = 0;
-            continue;
-        }
-        const result = _pointerRanges_1.default.match(textIndex, text, (0, env_1.initialEnv)({ baseOffset: textEL.range ? textEL.range[0] : 0 }));
-        if (result.ok) {
-            const pointerRanges = result.value.value;
-            errors.push(...result.value.errors);
-            const newItems = [];
-            if (textIndex > 0) {
-                newItems.push(new controls_1.__Text(text.substring(0, textIndex), textEL.range && [textEL.range[0], textEL.range[0] + textIndex]));
-            }
-            newItems.push(pointerRanges);
-            if (result.nextOffset < text.length) {
-                newItems.push(new controls_1.__Text(text.substring(result.nextOffset), textEL.range && [
-                    textEL.range[0] + result.nextOffset,
-                    textEL.range[1],
-                ]));
-            }
-            return {
-                value: {
-                    newItems,
-                    pointerRanges,
-                    proceedOffset: textIndex > 0 ? 2 : 1,
-                },
-                errors,
-            };
-        }
-    }
-    return null;
-};
-exports.matchPointerRanges = matchPointerRanges;
-exports["default"] = exports.matchPointerRanges;
-//# sourceMappingURL=matchPointerRanges.js.map
 
 /***/ }),
 
@@ -40931,6 +40688,7 @@ const el_1 = __webpack_require__(18539);
 const common_1 = __webpack_require__(50638);
 const pointer_1 = __webpack_require__(85919);
 const std = __importStar(__webpack_require__(93619));
+const num_1 = __webpack_require__(68685);
 const locateContainerFromParent = (parentContainer, fragment) => {
     return parentContainer.find(c => {
         var _a;
@@ -41071,6 +40829,11 @@ const locateContainerOfHeadFragment = (head, prevLocatedContainerForSame, prevLo
 };
 const locatePointer = (origPointer, prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer) => {
     const origFragments = origPointer.fragments();
+    for (const fragment of origFragments) {
+        const num = (0, num_1.parseNamedNum)(fragment.attr.name);
+        if (num)
+            fragment.attr.num = num;
+    }
     const _headContainer = locateContainerOfHeadFragment(origFragments[0], prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer);
     const headContainers = Array.isArray(_headContainer) ? _headContainer : (_headContainer && [_headContainer]);
     const pointerInfo = [];
@@ -41097,28 +40860,37 @@ const locatePointer = (origPointer, prevLocatedContainerForSame, prevLocatedCont
     }
     return { pointerInfo, lastLocatedContainer };
 };
-const locateRanges = (origRanges, prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer) => {
+const locateRanges = (origRanges, prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer, onBeforeModifierParentheses) => {
     const ranges = [];
-    const rangeELs = origRanges.ranges();
-    for (const [origFrom, origTo] of rangeELs.map(r => r.pointers())) {
-        const from = locatePointer(origFrom, prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer);
+    const pointerRangeList = origRanges.ranges();
+    for (const pointerRange of pointerRangeList) {
+        const [fromPointer, toPointer] = pointerRange.pointers();
+        const from = locatePointer(fromPointer, prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer);
         prevLocatedContainerForSame = from.lastLocatedContainer;
         prevLocatedContainerForNamed = from.lastLocatedContainer;
-        if (!origTo) {
+        if (!toPointer) {
             ranges.push([from.pointerInfo]);
         }
         else {
-            const to = locatePointer(origTo, prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer);
+            const to = locatePointer(toPointer, prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer);
             prevLocatedContainerForSame = from.lastLocatedContainer;
             prevLocatedContainerForNamed = from.lastLocatedContainer;
             ranges.push([from.pointerInfo, to.pointerInfo]);
         }
+        const modifierParentheses = pointerRange.modifierParentheses();
+        if (modifierParentheses) {
+            if (onBeforeModifierParentheses) {
+                const { lastLocatedContainer } = onBeforeModifierParentheses(modifierParentheses, origRanges, prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer);
+                prevLocatedContainerForSame = lastLocatedContainer;
+                prevLocatedContainerForNamed = lastLocatedContainer;
+            }
+        }
     }
     return { ranges, lastLocatedContainer: prevLocatedContainerForSame };
 };
-const getScope = (currentContainer, prevLocatedContainerForSame, prevLocatedContainerForNamed, pointerRangesToBeModified) => {
+const getScope = (currentContainer, prevLocatedContainerForSame, prevLocatedContainerForNamed, pointerRangesToBeModified, onBeforeModifierParentheses) => {
     const targetContainerIDRanges = new Set();
-    const { ranges, lastLocatedContainer } = locateRanges(pointerRangesToBeModified, prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer);
+    const { ranges, lastLocatedContainer } = locateRanges(pointerRangesToBeModified, prevLocatedContainerForSame, prevLocatedContainerForNamed, currentContainer, onBeforeModifierParentheses);
     for (const fromTo of ranges) {
         const [from, to] = fromTo;
         if (from.length === 0 || (to && to.length === 0)) {
@@ -41165,15 +40937,40 @@ exports["default"] = exports.getScope;
 /***/ }),
 
 /***/ 41829:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getSentenceEnvs = void 0;
 const container_1 = __webpack_require__(49814);
 const common_1 = __webpack_require__(50638);
 const sentenceEnv_1 = __webpack_require__(6310);
+const std = __importStar(__webpack_require__(93619));
+const num_1 = __webpack_require__(68685);
 const getSentenceEnvs = (el) => {
     var _a;
     const sentenceEnvs = [];
@@ -41186,9 +40983,11 @@ const getSentenceEnvs = (el) => {
         containerID: "container-dummy-root",
         type: container_1.ContainerType.ROOT,
         el,
+        name: null,
+        num: null,
     });
     const extract = (el, prevContainer, prevParentELs) => {
-        var _a;
+        var _a, _b, _c;
         if ((0, common_1.isIgnoreAnalysis)(el))
             return;
         if ((0, sentenceEnv_1.isSentenceLike)(el)) {
@@ -41210,7 +41009,14 @@ const getSentenceEnvs = (el) => {
             const parentELs = [...prevParentELs, el];
             let container = prevContainer;
             if (common_1.containerTags.includes(el.tag)) {
-                container = new container_1.Container({ el });
+                const name = ((_c = (_b = el.children.find(c => (std.isArticleTitle(c)
+                    || std.isParagraphItemTitle(c)
+                    || std.isArticleGroupTitle(c)
+                    || std.isAppdxItemTitle(c)))) === null || _b === void 0 ? void 0 : _b.text()) !== null && _c !== void 0 ? _c : null);
+                const num = ((name && (0, num_1.parseNamedNum)(name))
+                    || ((std.isParagraph(el) && "1") || null));
+                const containerID = prevContainer ? `${prevContainer.containerID}-${el.tag}[${prevContainer.children.filter(c => c.el.tag === el.tag).length + 1}]${num ? "[num=" + num + "]" : ""}` : `container-${el.tag}`;
+                container = new container_1.Container({ el, name, num, containerID });
                 if (prevContainer)
                     prevContainer.addChild(container);
                 containers.set(container.containerID, container);
@@ -41254,12 +41060,12 @@ exports.analyze = void 0;
 const getSentenceEnvs_1 = __importDefault(__webpack_require__(41829));
 const detectVariableReferences_1 = __importDefault(__webpack_require__(96416));
 const declarations_1 = __webpack_require__(2823);
-const detectTokens_1 = __importDefault(__webpack_require__(38667));
+const locatePointerRanges_1 = __importDefault(__webpack_require__(77665));
 const detectDeclarations_1 = __importDefault(__webpack_require__(35317));
 const analyze = (elToBeModified) => {
     const errors = [];
     const sentenceEnvsStruct = (0, getSentenceEnvs_1.default)(elToBeModified);
-    const detectTokensResult = (0, detectTokens_1.default)(sentenceEnvsStruct);
+    const detectTokensResult = (0, locatePointerRanges_1.default)(sentenceEnvsStruct);
     errors.push(...detectTokensResult.errors);
     const detectDeclarationsResult = (0, detectDeclarations_1.default)(sentenceEnvsStruct);
     const declarations = new declarations_1.Declarations();
@@ -41269,54 +41075,131 @@ const analyze = (elToBeModified) => {
     const detectVariableReferencesResult = (0, detectVariableReferences_1.default)(sentenceEnvsStruct, declarations);
     const variableReferences = detectVariableReferencesResult.value.varRefs;
     errors.push(...detectVariableReferencesResult.errors);
-    return Object.assign(Object.assign(Object.assign(Object.assign({}, detectTokensResult.value), { declarations,
-        variableReferences }), sentenceEnvsStruct), { errors });
+    return Object.assign(Object.assign({ pointerRangesList: detectTokensResult.value, declarations,
+        variableReferences }, sentenceEnvsStruct), { errors });
 };
 exports.analyze = analyze;
 //# sourceMappingURL=index.js.map
 
 /***/ }),
 
+/***/ 77665:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.locatePointerRanges = exports.locatePointerRangesForEL = void 0;
+const controls_1 = __webpack_require__(48075);
+const common_1 = __webpack_require__(50638);
+const getScope_1 = __importDefault(__webpack_require__(25300));
+const locatePointerRangesForEL = (elToBeModified, __prevLocatedContainerForSame, __prevLocatedContainerForNamed, sentenceEnv, sentenceEnvsStruct) => {
+    if (typeof elToBeModified === "string") {
+        return null;
+    }
+    else if ((0, common_1.isIgnoreAnalysis)(elToBeModified)) {
+        return null;
+    }
+    const prevLocatedContainerForNamed = __prevLocatedContainerForNamed;
+    let prevLocatedContainerForSame = __prevLocatedContainerForSame;
+    let containerForNamedForNextChildren = prevLocatedContainerForNamed;
+    const pointerRangesList = [];
+    const errors = [];
+    if (elToBeModified instanceof controls_1.____PointerRanges) {
+        const onBeforeModifierParentheses = (modifierParentheses, _, prevLocatedContainerForSame, prevLocatedContainerForNamed) => {
+            const result = (0, exports.locatePointerRangesForEL)(modifierParentheses, prevLocatedContainerForSame, prevLocatedContainerForNamed, sentenceEnv, sentenceEnvsStruct);
+            if (!result)
+                return { lastLocatedContainer: null };
+            pointerRangesList.push(...result.value.pointerRangesList);
+            errors.push(...result.errors);
+            return { lastLocatedContainer: result.value.lastLocatedContainer };
+        };
+        const pointerRanges = elToBeModified;
+        pointerRangesList.push(pointerRanges);
+        const getScopeResult = (0, getScope_1.default)(sentenceEnv.container, prevLocatedContainerForSame, prevLocatedContainerForNamed, pointerRanges, onBeforeModifierParentheses);
+        prevLocatedContainerForSame = getScopeResult.lastLocatedContainer;
+        containerForNamedForNextChildren = getScopeResult.lastLocatedContainer;
+    }
+    else {
+        for (const child of elToBeModified.children) {
+            if (typeof child === "string") {
+                continue;
+            }
+            else if ((0, common_1.isIgnoreAnalysis)(child)) {
+                continue;
+            }
+            const result = (0, exports.locatePointerRangesForEL)(child, prevLocatedContainerForSame, containerForNamedForNextChildren, sentenceEnv, sentenceEnvsStruct);
+            if (!result)
+                continue;
+            prevLocatedContainerForSame = result.value.lastLocatedContainer;
+            pointerRangesList.push(...result.value.pointerRangesList);
+            errors.push(...result.errors);
+        }
+    }
+    return {
+        value: {
+            pointerRangesList,
+            lastLocatedContainer: prevLocatedContainerForSame,
+        },
+        errors,
+    };
+};
+exports.locatePointerRangesForEL = locatePointerRangesForEL;
+const locatePointerRanges = (sentenceEnvsStruct) => {
+    const pointerRangesList = [];
+    const errors = [];
+    let prevLocatedContainer = null;
+    let prevContainerID = null;
+    for (const sentenceEnv of sentenceEnvsStruct.sentenceEnvs) {
+        const containerID = sentenceEnv.container.containerID;
+        if (containerID !== prevContainerID)
+            prevLocatedContainer = null;
+        {
+            const result = (0, exports.locatePointerRangesForEL)(sentenceEnv.el, prevLocatedContainer, // use previous naming for RelPos.SAME
+            null, // reset naming for RelPos.NAMED
+            sentenceEnv, sentenceEnvsStruct);
+            if (result) {
+                pointerRangesList.push(...result.value.pointerRangesList);
+                prevLocatedContainer = result.value.lastLocatedContainer;
+                prevContainerID = containerID;
+                errors.push(...result.errors);
+            }
+        }
+    }
+    return {
+        value: pointerRangesList,
+        errors,
+    };
+};
+exports.locatePointerRanges = locatePointerRanges;
+exports["default"] = exports.locatePointerRanges;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
 /***/ 37025:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.initialEnv = void 0;
-const core_1 = __webpack_require__(24658);
-const error_1 = __webpack_require__(40520);
 const initialEnv = (initialEnvOptions) => {
-    const { target, options = {}, baseOffset = 0 } = initialEnvOptions;
+    const { options = {}, baseOffset = 0 } = initialEnvOptions;
     const registerCurrentRangeTarget = () => { };
     const offsetToPos = (_, offset) => ({ offset });
-    const stringOffsetToPos = (0, core_1.getMemorizedStringOffsetToPos)();
-    // const onMatchFail = (matchFail: MatchFail, matchContext: MatchContext) => {
-    //     if (state.maxOffsetMatchFail === null || matchFail.offset > state.maxOffsetMatchFail.offset) {
-    //         state.maxOffsetMatchFail = matchFail;
-    //         state.maxOffsetMatchContext = matchContext;
-    //     }
-    // };
-    const newErrorMessage = (message, range) => new error_1.ErrorMessage(message, [
-        stringOffsetToPos(target, range[0]),
-        stringOffsetToPos(target, range[1]),
-    ]);
     const state = {
         maxOffsetMatchFail: null,
         maxOffsetMatchContext: null,
     };
     return {
         options,
-        // toStringOptions: {
-        //     fullToString: true,
-        //     maxToStringDepth: 5,
-        // },
         registerCurrentRangeTarget,
         offsetToPos,
-        // onMatchFail,
         state,
-        newErrorMessage,
-        stringOffsetToPos,
         baseOffset,
     };
 };
@@ -41603,16 +41486,15 @@ exports.$nameListHead = factory_1.default
         return null;
     }
 }), "pointerRanges")
-    .and(r => r
-    .zeroOrOne(r => r
-    .oneMatch(({ item }) => {
-    if ((item instanceof controls_1.__Parentheses)) {
-        return item;
-    }
-    else {
-        return null;
-    }
-})), "pointerRangesModifier")
+    // .and(r => r
+    //     .zeroOrOne(r => r
+    //         .oneMatch(({ item }) => {
+    //             if (
+    //                 (item instanceof __Parentheses)
+    //             ) { return item; } else { return null; }
+    //         })
+    //     )
+    // , "pointerRangesModifier")
     .and(r => r
     .choice(c => c
     .orSequence(r => r
@@ -41743,332 +41625,16 @@ exports.$nameListHead = factory_1.default
         return null;
     }
 })))), "importSentenceChildren")
-    .action(({ pointerRanges, pointerRangesModifier, importSentenceChildren }) => {
+    .action(({ pointerRanges, importSentenceChildren }) => {
     const value = {
         pointerRanges,
-        pointerRangesModifier,
+        // pointerRangesModifier,
         importSentenceChildren: importSentenceChildren ? importSentenceChildren.flat() : null,
     };
     return { value, errors: [] };
 }));
 exports["default"] = exports.$nameListHead;
 //# sourceMappingURL=$nameListHead.js.map
-
-/***/ }),
-
-/***/ 23952:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-var _a;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.$anyWherePointerFragment = exports.$secondaryOnlyPointerFragment = exports.$firstOnlyPointerFragment = exports.$singleOnlyPointerFragment = exports.$pointer = exports.$pointerRange = exports.$pointerRanges = exports.reSuppressPointerRanges = void 0;
-/* eslint-disable no-irregular-whitespace */
-const num_1 = __webpack_require__(68685);
-const controls_1 = __webpack_require__(48075);
-const pointer_1 = __webpack_require__(85919);
-const factory_1 = __webpack_require__(31707);
-const lexical_1 = __webpack_require__(99247);
-const makeRangesRule_1 = __importDefault(__webpack_require__(64358));
-const makeRange = (from, midText, to, trailingText, range) => {
-    return new pointer_1.____PointerRange({
-        from,
-        midChildren: midText ? [new controls_1.__Text(midText.text, midText.range)] : [],
-        to,
-        trailingChildren: trailingText ? [new controls_1.__Text(trailingText.text, trailingText.range)] : [],
-        range,
-    });
-};
-const makeRanges = (first, midText, rest, range) => {
-    const children = [];
-    const errors = [];
-    children.push(first.value);
-    errors.push(...first.errors);
-    if (midText)
-        children.push(new controls_1.__Text(midText.text, midText.range));
-    if (rest) {
-        children.push(...rest.value.children);
-        errors.push(...rest.errors);
-    }
-    return {
-        value: new pointer_1.____PointerRanges({
-            children,
-            range,
-        }),
-        errors,
-    };
-};
-exports.reSuppressPointerRanges = /[ァ-ヿ]{2,}/yg;
-_a = (0, makeRangesRule_1.default)((() => exports.$pointer), makeRange, makeRanges), exports.$pointerRanges = _a.$ranges, exports.$pointerRange = _a.$range;
-exports.$pointer = factory_1.factory
-    .withName("pointer")
-    .choice(c => c
-    .orSequence(s => s
-    .and(r => r
-    .choice(c => c
-    .or(() => exports.$anyWherePointerFragment)
-    .or(() => exports.$firstOnlyPointerFragment)), "first")
-    .and(r => r
-    .zeroOrMore(r => r
-    .choice(c => c
-    .or(() => exports.$anyWherePointerFragment)
-    .or(() => exports.$secondaryOnlyPointerFragment))), "rest")
-    .action(({ first, rest, range }) => {
-    return new pointer_1.____Pointer({
-        children: [first, ...rest],
-        range: range(),
-    });
-}))
-    .orSequence(s => s
-    .and(() => exports.$singleOnlyPointerFragment, "single")
-    .action(({ single, range }) => {
-    return new pointer_1.____Pointer({
-        children: [single],
-        range: range(),
-    });
-})));
-exports.$singleOnlyPointerFragment = factory_1.factory
-    .withName("firstOnlyPointerFragment")
-    .choice(c => c
-    .or(r => r
-    .action(r => r
-    .sequence(c => c
-    .and(r => r.seqEqual("前"))
-    .and(r => r
-    .choice(c => c
-    .or(r => r.seqEqual("各"))
-    .or(() => lexical_1.$kanjiDigits)), "count")
-    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, count, type_char, range }) => {
-    const targetType = (type_char === "表")
-        ? "TableStruct"
-        : num_1.articleGroupType[type_char];
-    if (count === "各") {
-        return new pointer_1.____PF({
-            relPos: pointer_1.RelPos.PREV,
-            targetType,
-            count: "all",
-            name: text(),
-            range: range(),
-        });
-    }
-    else {
-        const digits = count ? (0, num_1.parseKanjiNum)(count) : null;
-        return new pointer_1.____PF({
-            relPos: pointer_1.RelPos.PREV,
-            targetType,
-            count: digits ? `${digits}` : null,
-            name: text(),
-            range: range(),
-        });
-    }
-}))));
-exports.$firstOnlyPointerFragment = factory_1.factory
-    .withName("firstOnlyPointerFragment")
-    .choice(c => c
-    .or(r => r
-    .action(r => r
-    .sequence(c => c
-    .and(r => r.seqEqual("次"))
-    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, type_char, range }) => {
-    return new pointer_1.____PF({
-        relPos: pointer_1.RelPos.NEXT,
-        targetType: (type_char === "表")
-            ? "TableStruct"
-            : num_1.articleGroupType[type_char],
-        name: text(),
-        range: range(),
-    });
-})))
-    .or(r => r
-    .action(r => r
-    .sequence(c => c
-    .and(r => r.seqEqual("前"))
-    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, type_char, range }) => {
-    return new pointer_1.____PF({
-        relPos: pointer_1.RelPos.PREV,
-        targetType: (type_char === "表")
-            ? "TableStruct"
-            : num_1.articleGroupType[type_char],
-        name: text(),
-        range: range(),
-    });
-})))
-    .or(r => r
-    .action(r => r
-    .sequence(c => c
-    .and(r => r
-    .choice(c => c
-    .or(r => r.seqEqual("この"))
-    .or(r => r.seqEqual("本"))))
-    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, type_char, range }) => {
-    return new pointer_1.____PF({
-        relPos: pointer_1.RelPos.HERE,
-        targetType: (type_char === "表")
-            ? "TableStruct"
-            : num_1.articleGroupType[type_char],
-        name: text(),
-        range: range(),
-    });
-})))
-    .or(r => r
-    .action(r => r
-    .sequence(c => c
-    .and(r => r
-    .choice(c => c
-    .or(r => r.seqEqual("この"))))
-    .and(r => r
-    .choice(c => c
-    .or(r => r.regExp(/^法律|勅令|政令|規則|省令|府令|内閣官房令|命令/))
-    .or(r => r.seqEqual("附則"))
-    .or(r => r.seqEqual("別表"))), "type")), (({ text, type, range }) => {
-    return new pointer_1.____PF({
-        relPos: pointer_1.RelPos.HERE,
-        targetType: ((type === "附則")
-            ? "SupplProvision"
-            : (type === "別表")
-                ? "AppdxTable"
-                : "Law"),
-        name: text(),
-        range: range(),
-    });
-})))
-    .or(r => r
-    .action(r => r
-    .sequence(c => c
-    .and(r => r.seqEqual("同"))
-    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, type_char, range }) => {
-    return new pointer_1.____PF({
-        relPos: pointer_1.RelPos.SAME,
-        targetType: (type_char === "表")
-            ? "TableStruct"
-            : num_1.articleGroupType[type_char],
-        name: text(),
-        range: range(),
-    });
-})))
-    .or(r => r
-    .action(r => r
-    .sequence(c => c
-    .and(r => r.regExp(/^[付附]/))
-    .and(r => r.seqEqual("則"), "type_char")), (({ text, type_char, range }) => {
-    return new pointer_1.____PF({
-        relPos: pointer_1.RelPos.NAMED,
-        targetType: num_1.articleGroupType[type_char],
-        name: text(),
-        range: range(),
-    });
-}))));
-exports.$secondaryOnlyPointerFragment = factory_1.factory
-    .withName("secondaryOnlyPointerFragment")
-    .choice(c => c
-    .or(r => r
-    .action(r => r
-    .seqEqual("前段"), (({ text, range }) => {
-    return new pointer_1.____PF({
-        relPos: pointer_1.RelPos.NAMED,
-        targetType: "FIRSTPART",
-        name: text(),
-        range: range(),
-    });
-})))
-    .or(r => r
-    .action(r => r
-    .seqEqual("後段"), (({ text, range }) => {
-    return new pointer_1.____PF({
-        relPos: pointer_1.RelPos.NAMED,
-        targetType: "LATTERPART",
-        name: text(),
-        range: range(),
-    });
-})))
-    .or(r => r
-    .action(r => r
-    .seqEqual("ただし書"), (({ text, range }) => {
-    return new pointer_1.____PF({
-        relPos: pointer_1.RelPos.NAMED,
-        targetType: "PROVISO",
-        name: text(),
-        range: range(),
-    });
-})))
-    .or(r => r
-    .action(r => r
-    .seqEqual("に基づく命令"), (({ text, range }) => {
-    return new pointer_1.____PF({
-        relPos: pointer_1.RelPos.NAMED,
-        targetType: "INFERIOR",
-        name: text(),
-        range: range(),
-    });
-}))));
-exports.$anyWherePointerFragment = factory_1.factory
-    .withName("anyWherePointerFragment")
-    .choice(c => c
-    .or(r => r
-    .action(r => r
-    .sequence(c => c
-    .and(r => r.seqEqual("第"))
-    .and(() => lexical_1.$kanjiDigits)
-    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号"]), "type_char")
-    .and(r => r
-    .zeroOrMore(r => r
-    .sequence(c => c
-    .and(r => r.oneOf(["の", "ノ"]))
-    .and(() => lexical_1.$kanjiDigits))))), (({ text, type_char, range }) => {
-    return new pointer_1.____PF({
-        relPos: pointer_1.RelPos.NAMED,
-        targetType: num_1.articleGroupType[type_char],
-        name: text(),
-        num: (0, num_1.parseNamedNum)(text()),
-        range: range(),
-    });
-})))
-    .or(r => r
-    .action(r => r
-    .choice(c => c
-    .orSequence(s => s
-    .and(() => lexical_1.$irohaChar)
-    .andOmit(r => r.nextIsNot(() => lexical_1.$irohaChar)))
-    .or(() => lexical_1.$romanDigits)), (({ text, range }) => {
-    return new pointer_1.____PF({
-        relPos: pointer_1.RelPos.NAMED,
-        targetType: "SUBITEM",
-        name: text(),
-        num: (0, num_1.parseNamedNum)(text()),
-        range: range(),
-    });
-})))
-// .or(r => r
-//     .action(r => r
-//         .sequence(c => c
-//             .and(r => r.seqEqual("別表"))
-//             .and(r => r
-//                 .zeroOrOne(r => r
-//                     .sequence(c => c
-//                         .and(r => r.seqEqual("第"))
-//                         .and(() => $kanjiDigits),
-//                     )
-//                 )
-//             )
-//         )
-//     , (({ text, range }) => {
-//         return new ____PF({
-//             relPos: RelPos.NAMED,
-//             targetType: "AppdxTable",
-//             name: text(),
-//             num: parseNamedNum(text()),
-//             range: range(),
-//         });
-//     })
-//     )
-// )
-);
-exports["default"] = exports.$pointerRanges;
-//# sourceMappingURL=$pointerRanges.js.map
 
 /***/ }),
 
@@ -43744,7 +43310,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.articleGroupTitleTag = exports.articleGroupType = exports.setItemNum = exports.parseLawNum = exports.parseNamedNum = exports.KanaMode = exports.replaceWideNum = exports.reWideDigits = exports.parseRomanNum = exports.aiuChars = exports.irohaChars = exports.kanjiDigits = exports.parseKanjiNum = exports.getLawtype = exports.lawTypes = exports.eras = exports.ptnLawNum = void 0;
 const std = __importStar(__webpack_require__(93619));
 const util_1 = __webpack_require__(84530);
-exports.ptnLawNum = "(明治|大正|昭和|平成|令和)([一二三四五六七八九十]+)年(\\S+?)(?:第([一二三四五六七八九十百千]+)号)";
+exports.ptnLawNum = "(明治|大正|昭和|平成|令和)([一二三四五六七八九十]+)年([^ 　\t\r\n<>()（）[\\]［］{}｛｝「」]+?)(?:第([一二三四五六七八九十百千]+)号)";
 // export const reLawnum = /(?:(?:明治|大正|昭和|平成|令和)[元〇一二三四五六七八九十]+年(?:(?:\S+?第[〇一二三四五六七八九十百千]+号|人事院規則[―〇一二三四五六七八九]+)|[一二三四五六七八九十]+月[一二三四五六七八九十]+日内閣総理大臣決定|憲法)|明治三十二年勅令|大正十二年内務省・鉄道省令|昭和五年逓信省・鉄道省令|昭和九年逓信省・農林省令|人事院規則一〇―一五)/;
 exports.eras = {
     "明治": "Meiji", "大正": "Taisho",
@@ -44870,38 +44436,13 @@ exports.makeIsStdEL = makeIsStdEL;
 /***/ }),
 
 /***/ 49814:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Container = exports.ContainerType = void 0;
 const common_1 = __webpack_require__(50638);
-const num_1 = __webpack_require__(68685);
-const std = __importStar(__webpack_require__(93619));
 var ContainerType;
 (function (ContainerType) {
     ContainerType["ROOT"] = "ROOT";
@@ -44912,16 +44453,11 @@ var ContainerType;
 let currentID = 0;
 class Container {
     constructor(options) {
-        var _a, _b;
         this.parent = null;
         this.children = [];
         this.subParent = null; // skips ARTICLES
         this.subChildren = []; // skips ARTICLES
-        const { el, type = (0, common_1.getContainerType)(el.tag), name = ((_b = (_a = el.children.find(c => (std.isArticleTitle(c)
-            || std.isParagraphItemTitle(c)
-            || std.isArticleGroupTitle(c)
-            || std.isAppdxItemTitle(c)))) === null || _a === void 0 ? void 0 : _a.text()) !== null && _b !== void 0 ? _b : null), num = ((name && (0, num_1.parseNamedNum)(name))
-            || ((std.isParagraph(el) && "1") || null)), containerID = `container-${currentID}-tag_${el.tag}-type_${type}`, sentenceRange = [NaN, NaN],
+        const { el, type = (0, common_1.getContainerType)(el.tag), name, num, containerID = `container-${currentID}-tag_${el.tag}-type_${type}`, sentenceRange = [NaN, NaN],
         // parent = null,
         // children = [],
         // subParent = null,
@@ -45232,7 +44768,7 @@ exports.sentenceTextTags = [
     "__PEnd",
     "__MismatchStartParenthesis",
     "__MismatchEndParenthesis",
-    "____PointerRanges",
+    "____Pointer",
     "____LawNum",
     "____Declaration",
     "____VarRef",
@@ -46129,6 +45665,7 @@ exports.__MismatchEndParenthesis = __MismatchEndParenthesis;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.____PointerRanges = exports.____PointerRange = exports.____Pointer = exports.____PF = exports.isRelPos = exports.RelPos = void 0;
 const __1 = __webpack_require__(18539);
+const parentheses_1 = __webpack_require__(50234);
 var RelPos;
 (function (RelPos) {
     RelPos["PREV"] = "PREV";
@@ -46210,6 +45747,15 @@ class ____PointerRange extends __1.EL {
     get isControl() { return true; }
     pointers() {
         return this.children.filter(c => c instanceof ____Pointer);
+    }
+    modifierParentheses() {
+        const lastChild = this.children[this.children.length - 1];
+        if (lastChild instanceof parentheses_1.__Parentheses) {
+            return lastChild;
+        }
+        else {
+            return null;
+        }
     }
 }
 exports.____PointerRange = ____PointerRange;
@@ -46591,15 +46137,46 @@ exports.xmlToEL = xmlToEL;
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.addSentenceChildrenControls = void 0;
+const std = __importStar(__webpack_require__(93619));
+const controls_1 = __webpack_require__(48075);
 const env_1 = __webpack_require__(39099);
 const _sentenceChildren_1 = __importDefault(__webpack_require__(36096));
 const addSentenceChildrenControls = (elToBeModified) => {
-    if (["LawNum", "QuoteStruct"].indexOf(elToBeModified.tag) < 0) {
+    if (["LawNum", "QuoteStruct"].includes(elToBeModified.tag)) {
+        //
+    }
+    else if (["ArticleTitle", ...std.paragraphItemTitleTags, ...std.appdxItemTitleTags, ...std.supplProvisionAppdxItemTitleTags].includes(elToBeModified.tag)) {
+        elToBeModified.children = [new controls_1.__Text(elToBeModified.text(), elToBeModified.range)];
+    }
+    else {
         const isMixed = elToBeModified.children.some(child => typeof child === "string" || child instanceof String);
         if (isMixed) {
             const result = _sentenceChildren_1.default.match(0, elToBeModified.innerXML().replace(/\r|\n/, ""), (0, env_1.initialEnv)({}));
@@ -46631,43 +46208,20 @@ exports["default"] = exports.addSentenceChildrenControls;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.initialEnv = void 0;
 const core_1 = __webpack_require__(24658);
-const error_1 = __webpack_require__(40520);
 const initialEnv = (initialEnvOptions) => {
     const { options = {}, baseOffset = 0 } = initialEnvOptions;
-    let target = "";
-    const registerCurrentRangeTarget = (start, end, _target) => {
-        void start;
-        void end;
-        target = _target;
-    };
     const offsetToPos = (0, core_1.getMemorizedStringOffsetToPos)();
     const state = {
         parenthesesDepth: 0,
         maxOffsetMatchFail: null,
         maxOffsetMatchContext: null,
     };
-    // const onMatchFail = (matchFail: MatchFail, matchContext: MatchContext) => {
-    //     if (state.maxOffsetMatchFail === null || matchFail.offset > state.maxOffsetMatchFail.offset) {
-    //         state.maxOffsetMatchFail = matchFail;
-    //         state.maxOffsetMatchContext = matchContext;
-    //     }
-    // };
-    const newErrorMessage = (message, range) => new error_1.ErrorMessage(message, [
-        offsetToPos(target, range[0]),
-        offsetToPos(target, range[1]),
-    ]);
     return {
         currentIndentDepth: 0,
         offsetToPos,
-        // toStringOptions: {
-        //     fullToString: true,
-        //     maxToStringDepth: 5,
-        // },
-        registerCurrentRangeTarget,
+        registerCurrentRangeTarget: () => { },
         options,
         state,
-        // onMatchFail,
-        newErrorMessage,
         baseOffset,
     };
 };
@@ -46677,47 +46231,46 @@ exports.initialEnv = initialEnv;
 /***/ }),
 
 /***/ 40520:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
+/* eslint-disable no-irregular-whitespace */
+// import { wrapSingle } from "../../util/term";
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ErrorMessage = void 0;
-const term_1 = __webpack_require__(82102);
-const sliceLinesWithNumbers = (allLines, start, end, maxWidth) => {
-    const ls = [];
-    const digits = Math.floor(Math.log10(end.line)) + 1;
-    for (let i = Math.max(1, start.line - 2); i <= Math.min(allLines.length, end.line + 2); i++) {
-        let line = allLines[i - 1];
-        if (i === end.line) {
-            line = line.slice(0, end.column - 1) + "◂" + line.slice(end.column - 1);
-        }
-        if (i === start.line) {
-            line = line.slice(0, start.column - 1) + "▸" + line.slice(start.column - 1);
-        }
-        // eslint-disable-next-line no-irregular-whitespace
-        const mIndent = /^ */.exec(line.replace(/　/g, "  "));
-        const indentWidth = mIndent ? mIndent[0].length : 0;
-        // eslint-disable-next-line no-irregular-whitespace
-        line = line.replace(/ /g, "･").replace(/　/g, "⬚");
-        const wrapLines = Array.from((0, term_1.wrapSingle)(line, maxWidth, indentWidth + 2));
-        for (const [j, wrapLine] of wrapLines.entries()) {
-            ls.push(`${(j === 0 ? i.toString() : "").padStart(digits, " ")}│${j === 0 ? "" : "".padStart(indentWidth + 2, " ")}${wrapLine}`);
-        }
-    }
-    return ls.join("\n");
-};
+// export const sliceLinesWithNumbers = (
+//     allLines: string[],
+//     start: {offset: number, line: number, column: number},
+//     end: {offset: number, line: number, column: number},
+//     maxWidth: number,
+// ) => {
+//     const ls: string[] = [];
+//     const digits = Math.floor(Math.log10(end.line)) + 1;
+//     for (let i = Math.max(1, start.line - 2); i <= Math.min(allLines.length, end.line + 2); i++) {
+//         let line = allLines[i - 1];
+//         if (i === end.line) {
+//             line = line.slice(0, end.column - 1) + "◂" + line.slice(end.column - 1);
+//         }
+//         if (i === start.line) {
+//             line = line.slice(0, start.column - 1) + "▸" + line.slice(start.column - 1);
+//         }
+//         // eslint-disable-next-line no-irregular-whitespace
+//         const mIndent = /^ */.exec(line.replace(/　/g, "  "));
+//         const indentWidth = mIndent ? mIndent[0].length : 0;
+//         // eslint-disable-next-line no-irregular-whitespace
+//         line = line.replace(/ /g, "･").replace(/　/g, "⬚");
+//         const wrapLines = Array.from(wrapSingle(line, maxWidth, indentWidth + 2));
+//         for (const [j, wrapLine] of wrapLines.entries()) {
+//             ls.push(`${(j === 0 ? i.toString() : "").padStart(digits, " ")}│${j === 0 ? "" : "".padStart(indentWidth + 2, " ")}${wrapLine}`);
+//         }
+//     }
+//     return ls.join("\n");
+// };
 class ErrorMessage {
-    constructor(message, 
-    // public range: [start: number, end: number],
-    location) {
+    constructor(message, range) {
         this.message = message;
-        this.location = location;
-    }
-    toString(allLines, maxWidth = 70) {
-        return `\
-Error: ${this.message}
-${sliceLinesWithNumbers(allLines, ...this.location, maxWidth)}`;
+        this.range = range;
     }
 }
 exports.ErrorMessage = ErrorMessage;
@@ -46804,7 +46357,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.$appdxItemHeadLine = exports.detectAppdxItemTitle = exports.appdxItemTitlePtns = void 0;
 const factory_1 = __importDefault(__webpack_require__(31707));
-const _sentenceChildren_1 = __importDefault(__webpack_require__(36096));
+const _sentenceChildren_1 = __webpack_require__(36096);
 const _indents_1 = __importDefault(__webpack_require__(2027));
 const line_1 = __webpack_require__(69928);
 const lexical_1 = __webpack_require__(99247);
@@ -46859,7 +46412,7 @@ exports.$appdxItemHeadLine = factory_1.default
     return { tag, control };
 }))), "tagControl")
     .and(r => r
-    .zeroOrOne(() => _sentenceChildren_1.default), "tail")
+    .zeroOrOne(() => _sentenceChildren_1.$sentenceChildrenWithoutToplevelInlineToken), "tail")
     .and(() => lexical_1.$_EOL, "lineEndText")
     .action(({ range, indentsStruct, tagControl: { tag, control }, tail, lineEndText }) => {
     var _a, _b;
@@ -47728,6 +47281,325 @@ exports["default"] = exports.$paragraphItemTitle;
 
 /***/ }),
 
+/***/ 96404:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.$anyWherePointerFragment = exports.$secondaryOnlyPointerFragment = exports.$firstOnlyPointerFragment = exports.$singleOnlyPointerFragment = exports.$pointer = exports.$pointerRange = exports.$pointerRanges = exports.pointerRangesCandidateChars = exports.reSuppressPointerRanges = void 0;
+/* eslint-disable no-irregular-whitespace */
+const num_1 = __webpack_require__(68685);
+const controls_1 = __webpack_require__(48075);
+const factory_1 = __webpack_require__(31707);
+const lexical_1 = __webpack_require__(99247);
+const makeRangesRule_1 = __importDefault(__webpack_require__(64358));
+const makeRange = (from, midText, to, trailingText, modifierParentheses, range) => {
+    return new controls_1.____PointerRange({
+        from,
+        midChildren: midText ? [new controls_1.__Text(midText.text, midText.range)] : [],
+        to,
+        trailingChildren: [
+            ...(trailingText ? [new controls_1.__Text(trailingText.text, trailingText.range)] : []),
+            ...(modifierParentheses ? [modifierParentheses] : []),
+        ],
+        range,
+    });
+};
+const makeRanges = (first, midText, rest, range) => {
+    const children = [];
+    const errors = [];
+    children.push(first.value);
+    errors.push(...first.errors);
+    if (midText)
+        children.push(new controls_1.__Text(midText.text, midText.range));
+    if (rest) {
+        children.push(...rest.value.children);
+        errors.push(...rest.errors);
+    }
+    return {
+        value: new controls_1.____PointerRanges({
+            children,
+            range,
+        }),
+        errors,
+    };
+};
+exports.reSuppressPointerRanges = /^[ァ-ヿ]{2,}/;
+exports.pointerRangesCandidateChars = `${num_1.irohaChars}明大昭平令第前次こ本同付附iIｉＩvVｖＶxXｘＸ`;
+_a = (0, makeRangesRule_1.default)((() => exports.$pointer), makeRange, makeRanges), exports.$pointerRanges = _a.$ranges, exports.$pointerRange = _a.$range;
+exports.$pointer = factory_1.factory
+    .withName("pointer")
+    .choice(c => c
+    .orSequence(s => s
+    .and(r => r
+    .choice(c => c
+    .or(() => exports.$anyWherePointerFragment)
+    .or(() => exports.$firstOnlyPointerFragment)), "first")
+    .and(r => r
+    .zeroOrMore(r => r
+    .choice(c => c
+    .or(() => exports.$anyWherePointerFragment)
+    .or(() => exports.$secondaryOnlyPointerFragment))), "rest")
+    .action(({ first, rest, range }) => {
+    return new controls_1.____Pointer({
+        children: [first, ...rest],
+        range: range(),
+    });
+}))
+    .orSequence(s => s
+    .and(() => exports.$singleOnlyPointerFragment, "single")
+    .action(({ single, range }) => {
+    return new controls_1.____Pointer({
+        children: [single],
+        range: range(),
+    });
+})));
+exports.$singleOnlyPointerFragment = factory_1.factory
+    .withName("firstOnlyPointerFragment")
+    .choice(c => c
+    .or(r => r
+    .action(r => r
+    .sequence(c => c
+    .and(r => r.seqEqual("前"))
+    .and(r => r
+    .choice(c => c
+    .or(r => r.seqEqual("各"))
+    .or(() => lexical_1.$kanjiDigits)), "count")
+    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, count, type_char, range }) => {
+    const targetType = (type_char === "表")
+        ? "TableStruct"
+        : num_1.articleGroupType[type_char];
+    if (count === "各") {
+        return new controls_1.____PF({
+            relPos: controls_1.RelPos.PREV,
+            targetType,
+            count: "all",
+            name: text(),
+            range: range(),
+        });
+    }
+    else {
+        const digits = count ? (0, num_1.parseKanjiNum)(count) : null;
+        return new controls_1.____PF({
+            relPos: controls_1.RelPos.PREV,
+            targetType,
+            count: digits ? `${digits}` : null,
+            name: text(),
+            range: range(),
+        });
+    }
+}))));
+exports.$firstOnlyPointerFragment = factory_1.factory
+    .withName("firstOnlyPointerFragment")
+    .choice(c => c
+    .or(r => r
+    .action(r => r
+    .sequence(c => c
+    .and(r => r.seqEqual("次"))
+    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, type_char, range }) => {
+    return new controls_1.____PF({
+        relPos: controls_1.RelPos.NEXT,
+        targetType: (type_char === "表")
+            ? "TableStruct"
+            : num_1.articleGroupType[type_char],
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .sequence(c => c
+    .and(r => r.seqEqual("前"))
+    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, type_char, range }) => {
+    return new controls_1.____PF({
+        relPos: controls_1.RelPos.PREV,
+        targetType: (type_char === "表")
+            ? "TableStruct"
+            : num_1.articleGroupType[type_char],
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .sequence(c => c
+    .and(r => r
+    .choice(c => c
+    .or(r => r.seqEqual("この"))
+    .or(r => r.seqEqual("本"))))
+    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, type_char, range }) => {
+    return new controls_1.____PF({
+        relPos: controls_1.RelPos.HERE,
+        targetType: (type_char === "表")
+            ? "TableStruct"
+            : num_1.articleGroupType[type_char],
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .sequence(c => c
+    .and(r => r
+    .choice(c => c
+    .or(r => r.seqEqual("この"))))
+    .and(r => r
+    .choice(c => c
+    .or(r => r.regExp(/^法律|勅令|政令|規則|省令|府令|内閣官房令|命令/))
+    .or(r => r.seqEqual("附則"))
+    .or(r => r.seqEqual("別表"))), "type")), (({ text, type, range }) => {
+    return new controls_1.____PF({
+        relPos: controls_1.RelPos.HERE,
+        targetType: ((type === "附則")
+            ? "SupplProvision"
+            : (type === "別表")
+                ? "AppdxTable"
+                : "Law"),
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .sequence(c => c
+    .and(r => r.seqEqual("同"))
+    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号", "表"]), "type_char")), (({ text, type_char, range }) => {
+    return new controls_1.____PF({
+        relPos: controls_1.RelPos.SAME,
+        targetType: (type_char === "表")
+            ? "TableStruct"
+            : num_1.articleGroupType[type_char],
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .sequence(c => c
+    .and(r => r.regExp(/^[付附]/))
+    .and(r => r.seqEqual("則"), "type_char")), (({ text, type_char, range }) => {
+    return new controls_1.____PF({
+        relPos: controls_1.RelPos.NAMED,
+        targetType: num_1.articleGroupType[type_char],
+        name: text(),
+        range: range(),
+    });
+}))));
+exports.$secondaryOnlyPointerFragment = factory_1.factory
+    .withName("secondaryOnlyPointerFragment")
+    .choice(c => c
+    .or(r => r
+    .action(r => r
+    .seqEqual("前段"), (({ text, range }) => {
+    return new controls_1.____PF({
+        relPos: controls_1.RelPos.NAMED,
+        targetType: "FIRSTPART",
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .seqEqual("後段"), (({ text, range }) => {
+    return new controls_1.____PF({
+        relPos: controls_1.RelPos.NAMED,
+        targetType: "LATTERPART",
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .seqEqual("ただし書"), (({ text, range }) => {
+    return new controls_1.____PF({
+        relPos: controls_1.RelPos.NAMED,
+        targetType: "PROVISO",
+        name: text(),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .seqEqual("に基づく命令"), (({ text, range }) => {
+    return new controls_1.____PF({
+        relPos: controls_1.RelPos.NAMED,
+        targetType: "INFERIOR",
+        name: text(),
+        range: range(),
+    });
+}))));
+exports.$anyWherePointerFragment = factory_1.factory
+    .withName("anyWherePointerFragment")
+    .choice(c => c
+    .or(r => r
+    .action(r => r
+    .sequence(c => c
+    .and(r => r.seqEqual("第"))
+    .and(() => lexical_1.$kanjiDigits)
+    .and(r => r.oneOf(["編", "章", "節", "款", "目", "章", "条", "項", "号"]), "type_char")
+    .and(r => r
+    .zeroOrMore(r => r
+    .sequence(c => c
+    .and(r => r.oneOf(["の", "ノ"]))
+    .and(() => lexical_1.$kanjiDigits))))), (({ text, type_char, range }) => {
+    return new controls_1.____PF({
+        relPos: controls_1.RelPos.NAMED,
+        targetType: num_1.articleGroupType[type_char],
+        name: text(),
+        // num: parseNamedNum(text()),
+        range: range(),
+    });
+})))
+    .or(r => r
+    .action(r => r
+    .choice(c => c
+    .orSequence(s => s
+    .and(() => lexical_1.$irohaChar)
+    .andOmit(r => r.nextIsNot(() => lexical_1.$irohaChar)))
+    .or(() => lexical_1.$romanDigits)), (({ text, range }) => {
+    return new controls_1.____PF({
+        relPos: controls_1.RelPos.NAMED,
+        targetType: "SUBITEM",
+        name: text(),
+        // num: parseNamedNum(text()),
+        range: range(),
+    });
+})))
+// .or(r => r
+//     .action(r => r
+//         .sequence(c => c
+//             .and(r => r.seqEqual("別表"))
+//             .and(r => r
+//                 .zeroOrOne(r => r
+//                     .sequence(c => c
+//                         .and(r => r.seqEqual("第"))
+//                         .and(() => $kanjiDigits),
+//                     )
+//                 )
+//             )
+//         )
+//     , (({ text, range }) => {
+//         return new ____PF({
+//             relPos: RelPos.NAMED,
+//             targetType: "AppdxTable",
+//             name: text(),
+//             num: parseNamedNum(text()),
+//             range: range(),
+//         });
+//     })
+//     )
+// )
+);
+exports["default"] = exports.$pointerRanges;
+//# sourceMappingURL=$pointerRanges.js.map
+
+/***/ }),
+
 /***/ 36096:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
@@ -47760,7 +47632,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.rules = exports.$SQUARE_PARENTHESES_INLINE = exports.$CURLY_BRACKETS_INLINE = exports.$SQUARE_BRACKETS_INLINE = exports.$ROUND_PARENTHESES_INLINE = exports.makeParenthesesInline = exports.$PARENTHESES_INLINE_INNER = exports.$PARENTHESES_INLINE = exports.$MISMATCH_END_PARENTHESIS = exports.$MISMATCH_START_PARENTHESIS = exports.$OUTSIDE_ROUND_PARENTHESES_INLINE = exports.$OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES = exports.$OUTSIDE_PARENTHESES_INLINE = exports.$PERIOD_SENTENCE_FRAGMENT = exports.$INLINE_FRAGMENT = exports.$NOT_PARENTHESIS_CHAR = exports.$sentenceChildren = exports.sentenceChildrenToString = void 0;
+exports.$SQUARE_PARENTHESES_INLINE = exports.$CURLY_BRACKETS_INLINE = exports.$SQUARE_BRACKETS_INLINE = exports.$ROUND_PARENTHESES_INLINE = exports.makeParenthesesInline = exports.ANY_PARENTHESES_INLINE = exports.$MISMATCH_END_PARENTHESIS = exports.$MISMATCH_START_PARENTHESIS = exports.$OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES = exports.$OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES_WITHOUT_TOPLEVEL_INLINE_TOKEN = exports.$PERIOD_SENTENCE_FRAGMENT = exports.$inlineToken = exports.$sentenceChildrenWithoutToplevelInlineToken = exports.$sentenceChildren = exports.sentenceChildrenToString = void 0;
 /* eslint-disable no-irregular-whitespace */
 const std_1 = __webpack_require__(93619);
 const controls_1 = __webpack_require__(48075);
@@ -47770,6 +47642,9 @@ const factory_1 = __webpack_require__(31707);
 const lexical_1 = __webpack_require__(99247);
 const std = __importStar(__webpack_require__(93619));
 const _xml_1 = __importDefault(__webpack_require__(33439));
+const _pointerRanges_1 = __importStar(__webpack_require__(96404));
+const num_1 = __webpack_require__(68685);
+const error_1 = __webpack_require__(40520);
 const sentenceChildrenToString = (els) => {
     const runs = [];
     for (const el of els) {
@@ -47801,6 +47676,7 @@ const sentenceChildrenToString = (els) => {
     return /* $$$$$$ */ `${runs.join("")}` /* $$$$$$ */;
 };
 exports.sentenceChildrenToString = sentenceChildrenToString;
+const reLawNum = new RegExp(`^${num_1.ptnLawNum}`);
 exports.$sentenceChildren = factory_1.factory
     .withName("sentenceChildren")
     .action(r => r
@@ -47809,43 +47685,46 @@ exports.$sentenceChildren = factory_1.factory
     .oneOrMore(r => r
     .choice(c => c
     .or(() => exports.$OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES)
-    .or(() => exports.$PARENTHESES_INLINE)
+    .or(() => exports.ANY_PARENTHESES_INLINE)
     .or(() => exports.$MISMATCH_END_PARENTHESIS))), "texts")), (({ texts }) => {
     return {
-        value: texts.map(t => t.value),
+        value: texts.map(t => t.value).flat(),
         errors: texts.map(t => t.errors).flat(),
     };
 }));
-exports["default"] = exports.$sentenceChildren;
-exports.$NOT_PARENTHESIS_CHAR = factory_1.factory
-    .withName("NOT_PARENTHESIS_CHAR")
-    .regExp(/^[^\r\n<>()（）[\]［］{}｛｝「」]/);
-exports.$INLINE_FRAGMENT = factory_1.factory
-    .withName("INLINE_FRAGMENT")
+exports.$sentenceChildrenWithoutToplevelInlineToken = factory_1.factory
+    .withName("sentenceChildrenWithoutToplevelInlineToken")
+    .action(r => r
     .sequence(c => c
     .and(r => r
     .oneOrMore(r => r
     .choice(c => c
-    // .or(() => $pointerRanges)
-    .or(r => r
-    .sequence(c => c
-    .and(r => r
-    .asSlice(r => r
-    .oneOrMore(r => r.regExp(/^[^\r\n<>()（）[\]［］{}｛｝「」 　\t]/))), "plain")
-    .action(({ plain, range }) => {
+    .or(() => exports.$OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES_WITHOUT_TOPLEVEL_INLINE_TOKEN)
+    .or(() => exports.ANY_PARENTHESES_INLINE)
+    .or(() => exports.$MISMATCH_END_PARENTHESIS))), "texts")), (({ texts }) => {
     return {
-        value: new controls_1.__Text(plain, range()),
-        errors: [],
-    };
-})))
-    .or(() => exports.$PARENTHESES_INLINE)
-    .or(() => exports.$MISMATCH_END_PARENTHESIS))), "texts")
-    .action(({ texts }) => {
-    return {
-        value: texts.map(t => t.value),
+        value: texts.map(t => t.value).flat(),
         errors: texts.map(t => t.errors).flat(),
     };
 }));
+exports["default"] = exports.$sentenceChildren;
+exports.$inlineToken = factory_1.factory
+    .withName("inlineToken")
+    .choice(c => c
+    .orSequence(s => s
+    .and(r => r.regExp(_pointerRanges_1.reSuppressPointerRanges), "text")
+    .action(({ text, range }) => ({
+    value: new controls_1.__Text(text, range()),
+    errors: [],
+})))
+    .orSequence(s => s
+    .and(r => r.regExp(reLawNum), "text")
+    .action(({ text, range }) => ({
+    value: new controls_1.____LawNum(text, range()),
+    errors: [],
+})))
+    .or(() => _pointerRanges_1.default));
+const rePeriodSentenceTextChars = new RegExp(`^(?:(?![${_pointerRanges_1.pointerRangesCandidateChars}])[^\r\n<>()（）[\\]［］{}｛｝「」 　\t。])+`);
 exports.$PERIOD_SENTENCE_FRAGMENT = factory_1.factory
     .withName("PERIOD_SENTENCE_FRAGMENT")
     .choice(c => c
@@ -47853,49 +47732,49 @@ exports.$PERIOD_SENTENCE_FRAGMENT = factory_1.factory
     .sequence(c => c
     .and(r => r
     .oneOrMore(r => r
-    .sequence(c => c
+    .choice(c => c
+    .or(r => r.regExp(rePeriodSentenceTextChars))
+    .or(() => exports.$inlineToken)
+    .or(r => r.regExp(/^[^\r\n<>()（）[\]［］{}｛｝「」 　\t。]/))
+    .or(() => exports.ANY_PARENTHESES_INLINE)
+    .or(() => exports.$MISMATCH_END_PARENTHESIS))), "texts")
     .and(r => r
     .choice(c => c
-    // .or(() => $pointerRanges)
-    .or(r => r
-    .sequence(c => c
-    .and(r => r
-    .asSlice(r => r
-    .oneOrMore(r => r.regExp(/^[^\r\n<>()（）[\]［］{}｛｝「」 　\t。]/))), "plain")
-    .action(({ plain, range }) => {
-    return {
-        value: new controls_1.__Text(plain, range()),
-        errors: [],
-    };
-})))
-    .or(() => exports.$PARENTHESES_INLINE)
-    .or(() => exports.$MISMATCH_END_PARENTHESIS)), "target")
-    .action(({ target }) => {
-    return target;
-}))), "texts")
-    .and(r => r
-    .choice(c => c
-    .orSequence(s => s
-    .and(r => r.seqEqual("。"), "period")
-    .action(({ period, range }) => ({ text: period, range: range() })))
+    .or(r => r.seqEqual("。"))
     .or(r => r.nextIs(() => lexical_1.$__))
     .or(r => r.nextIs(() => lexical_1.$_EOL))), "tail")
-    .action(({ texts, tail }) => {
-    const last = texts[texts.length - 1];
-    if (tail) {
-        if (last.value instanceof controls_1.__Text) {
-            last.value.children.splice(0, last.value.children.length, last.value.text() + tail.text);
-            if (last.value.range)
-                last.value.range[1] += tail.text.length;
+    .action(({ texts, tail, offset }) => {
+    var _a, _b;
+    const target = [...texts, ...(tail ? [tail] : [])];
+    const value = [];
+    const errors = [];
+    let lastOffset = offset();
+    for (const t of target) {
+        const lastEL = value[value.length - 1];
+        if (typeof t === "string") {
+            if (lastEL instanceof controls_1.__Text) {
+                lastEL.children.splice(0, 1, lastEL.children[0] + t);
+                if (lastEL.range)
+                    lastEL.range[1] += t.length;
+            }
+            else {
+                value.push(new controls_1.__Text(t, [lastOffset, lastOffset += t.length]));
+                lastOffset += t.length;
+            }
+        }
+        else if (lastEL instanceof controls_1.__Text && t.value instanceof controls_1.__Text) {
+            lastEL.children.splice(0, 1, lastEL.children[0] + t.value.children[0]);
+            if (lastEL.range)
+                lastEL.range[1] += t.value.children[0].length;
+            errors.push(...t.errors);
         }
         else {
-            texts.push({ value: new controls_1.__Text(tail.text, tail.range), errors: [] });
+            lastOffset = (_b = (_a = t.value.range) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : lastOffset;
+            value.push(t.value);
+            errors.push(...t.errors);
         }
     }
-    return {
-        value: texts.map(t => t.value),
-        errors: texts.map(t => t.errors).flat(),
-    };
+    return { value, errors };
 })))
     .or(r => r
     .action(r => r
@@ -47903,61 +47782,77 @@ exports.$PERIOD_SENTENCE_FRAGMENT = factory_1.factory
     .and(r => r.seqEqual("。"), "plain")), (({ plain, range }) => {
     return { value: [new controls_1.__Text(plain, range())], errors: [] };
 }))));
-exports.$OUTSIDE_PARENTHESES_INLINE = factory_1.factory
-    .withName("OUTSIDE_PARENTHESES_INLINE")
-    .choice(c => c
-    // .or(() => $pointerRanges)
-    .orSequence(s => s
-    .and(r => r
-    .asSlice(r => r.oneOrMore(() => exports.$NOT_PARENTHESIS_CHAR)), "plain")
-    .action(({ plain, range }) => {
-    return {
-        value: new controls_1.__Text(plain, range()),
-        errors: [],
-    };
-})));
-exports.$OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES = factory_1.factory
-    .withName("OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES")
-    .choice(c => c
-    // .or(() => $pointerRanges)
-    .orSequence(s => s
-    .and(r => r
-    .regExp(/^((?![ 　\t]*\r?\n)[^\r\n<>()（）[\]［］{}｛｝「」])+/), "plain")
-    .action(({ plain, range }) => {
-    return {
-        value: new controls_1.__Text(plain, range()),
-        errors: [],
-    };
-})));
-exports.$OUTSIDE_ROUND_PARENTHESES_INLINE = factory_1.factory
-    .withName("OUTSIDE_ROUND_PARENTHESES_INLINE")
-    .action(r => r
-    .sequence(c => c
+exports.$OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES_WITHOUT_TOPLEVEL_INLINE_TOKEN = factory_1.factory
+    .withName("OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES_WITHOUT_TOPLEVEL_INLINE_TOKEN")
+    .sequence(s => s
     .and(r => r
     .oneOrMore(r => r
-    .action(r => r
-    .sequence(c => c
-    .and(r => r.nextIsNot(() => exports.$ROUND_PARENTHESES_INLINE))
-    .and(r => r
     .choice(c => c
-    .or(() => exports.$OUTSIDE_PARENTHESES_INLINE)
-    .or(() => exports.$PARENTHESES_INLINE)
-    .or(() => exports.$MISMATCH_END_PARENTHESIS)), "_target")), (({ _target }) => {
-    return _target;
-}))), "target")), (({ text, target }) => {
-    const content = {
+    .orSequence(s => s
+    .and(r => r
+    .regExp(/^(?:(?![ 　\t]*\r?\n)[^\r\n<>()（）[\]［］{}｛｝「」])+/), "plain")
+    .action(({ plain, range }) => {
+    return {
+        value: new controls_1.__Text(plain, range()),
+        errors: [],
+    };
+})))), "target")
+    .action(({ target }) => {
+    return {
         value: target.map(t => t.value),
         errors: target.map(t => t.errors).flat(),
     };
-    return { text: text(), content };
+}));
+const reOutsideParenthesesTextChars = new RegExp(`^(?:(?![${_pointerRanges_1.pointerRangesCandidateChars}]|[ 　\t]*\r?\n)[^\r\n<>()（）[\\]［］{}｛｝「」])+`);
+exports.$OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES = factory_1.factory
+    .withName("OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES")
+    .sequence(s => s
+    .and(r => r
+    .oneOrMore(r => r
+    .choice(c => c
+    .or(r => r.regExp(reOutsideParenthesesTextChars))
+    .or(() => exports.$inlineToken)
+    .or(r => r.regExp(/^(?![ 　\t]*\r?\n)[^\r\n<>()（）[\]［］{}｛｝「」]/)))), "target")
+    .action(({ target, offset }) => {
+    var _a, _b;
+    const value = [];
+    const errors = [];
+    let lastOffset = offset();
+    for (const t of target) {
+        const lastEL = value[value.length - 1];
+        if (typeof t === "string") {
+            const lastEL = value[value.length - 1];
+            if (lastEL instanceof controls_1.__Text) {
+                lastEL.children.splice(0, 1, lastEL.children[0] + t);
+                if (lastEL.range)
+                    lastEL.range[1] += t.length;
+            }
+            else {
+                value.push(new controls_1.__Text(t, [lastOffset, lastOffset += t.length]));
+                lastOffset += t.length;
+            }
+        }
+        else if (lastEL instanceof controls_1.__Text && t.value instanceof controls_1.__Text) {
+            lastEL.children.splice(0, 1, lastEL.children[0] + t.value.children[0]);
+            if (lastEL.range)
+                lastEL.range[1] += t.value.children[0].length;
+            errors.push(...t.errors);
+        }
+        else {
+            lastOffset = (_b = (_a = t.value.range) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : lastOffset;
+            value.push(t.value);
+            errors.push(...t.errors);
+        }
+    }
+    return { value, errors };
 }));
 exports.$MISMATCH_START_PARENTHESIS = factory_1.factory
     .withName("MISMATCH_START_PARENTHESIS")
     .sequence(c => c
     .and(r => r
     .asSlice(r => r.regExp(/^[<(（[［{｛「]/)), "mismatch")
-    .action(({ mismatch, range, newErrorMessage }) => {
-    const error = newErrorMessage("$MISMATCH_START_PARENTHESIS: この括弧に対応する閉じ括弧がありません。", range());
+    .action(({ mismatch, range }) => {
+    const error = new error_1.ErrorMessage("$MISMATCH_START_PARENTHESIS: この括弧に対応する閉じ括弧がありません。", range());
     return {
         value: new controls_1.__MismatchStartParenthesis(mismatch, range()),
         errors: [error],
@@ -47968,54 +47863,15 @@ exports.$MISMATCH_END_PARENTHESIS = factory_1.factory
     .sequence(c => c
     .and(r => r
     .asSlice(r => r.regExp(/^[>)）\]］}｝」]/)), "mismatch")
-    .action(({ mismatch, range, newErrorMessage }) => {
-    const error = newErrorMessage("$MISMATCH_END_PARENTHESIS: この括弧に対応する開き括弧がありません。", range());
+    .action(({ mismatch, range }) => {
+    const error = new error_1.ErrorMessage("$MISMATCH_END_PARENTHESIS: この括弧に対応する開き括弧がありません。", range());
     return {
         value: new controls_1.__MismatchEndParenthesis(mismatch, range()),
         errors: [error],
     };
 }));
-exports.$PARENTHESES_INLINE = factory_1.factory
-    .withName("PARENTHESES_INLINE")
-    .choice(c => c
-    .or(r => r
-    .action(r => r
-    .sequence(c => c
-    .and(r => r
-    .nextIs(r => r
-    .sequence(c => c
-    .and(r => r.seqEqual(""))
-    .and(r => r
-    .assert(({ state }) => {
-    state.parenthesesDepth++;
-    return true;
-})))))
-    .and(() => exports.$PARENTHESES_INLINE_INNER, "target")
-    .and(r => r
-    .nextIs(r => r
-    .sequence(c => c
-    .and(r => r.seqEqual(""))
-    .and(r => r
-    .assert(({ state }) => {
-    state.parenthesesDepth--;
-    return true;
-})))))), (({ target }) => {
-    return target;
-})))
-    .or(r => r
-    .sequence(c => c
-    .and(r => r
-    .nextIs(r => r
-    .sequence(c => c
-    .and(r => r.seqEqual(""))
-    .and(r => r
-    .assert(({ state }) => {
-    state.parenthesesDepth--;
-    return false;
-})))))
-    .and(r => r.seqEqual("DUMMY")))));
-exports.$PARENTHESES_INLINE_INNER = factory_1.factory
-    .withName("PARENTHESES_INLINE_INNER")
+exports.ANY_PARENTHESES_INLINE = factory_1.factory
+    .withName("ANY_PARENTHESES_INLINE")
     .choice(c => c
     .or(() => exports.$ROUND_PARENTHESES_INLINE)
     .or(() => exports.$SQUARE_BRACKETS_INLINE)
@@ -48023,7 +47879,7 @@ exports.$PARENTHESES_INLINE_INNER = factory_1.factory
     .or(() => exports.$SQUARE_PARENTHESES_INLINE)
     .orSequence(s => s
     .and(() => _xml_1.default, "elWithError")
-    .action(({ elWithError, range, newErrorMessage }) => {
+    .action(({ elWithError, range }) => {
     const el = elWithError.value;
     if (std.isLine(el) || std.isQuoteStruct(el) || std.isArithFormula(el) || std.isRuby(el) || std.isSup(el) || (0, std_1.isSub)(el) || std.isControl(el)) {
         return {
@@ -48043,15 +47899,22 @@ exports.$PARENTHESES_INLINE_INNER = factory_1.factory
             value: new el_1.EL("__UnexpectedXML", {}, [el], range()),
             errors: [
                 ...elWithError.errors,
-                newErrorMessage(`$PARENTHESES_INLINE_INNER: タグ <${el.tag}> はこの場所では使用できません。`, range()),
+                new error_1.ErrorMessage(`$PARENTHESES_INLINE_INNER: タグ <${el.tag}> はこの場所では使用できません。`, range()),
             ],
         };
     }
 }))
     .or(() => exports.$MISMATCH_START_PARENTHESIS));
+const reParenthesesInlineTextChars = new RegExp(`^(?:(?![${_pointerRanges_1.pointerRangesCandidateChars}])[^\r\n<>()（）[\\]［］{}｛｝「」])+`);
 const makeParenthesesInline = (parenthesisType, startPtn, endPtn) => {
     return factory_1.factory
-        .sequence(c => c
+        .choice(c => c
+        .orSequence(r => r
+        .andOmit(r => r
+        .assert(({ state }) => {
+        state.parenthesesDepth++;
+        return true;
+    }))
         .and(r => r
         .sequence(s => s
         .and(r => r.regExp(startPtn))
@@ -48061,17 +47924,10 @@ const makeParenthesesInline = (parenthesisType, startPtn, endPtn) => {
         .and(r => r
         .zeroOrMore(r => r
         .choice(c => c
-        .or(r => r
-        .sequence(c => c
-        .and(r => r
-        .asSlice(r => r.oneOrMore(() => exports.$NOT_PARENTHESIS_CHAR)), "plain")
-        .action(({ plain, range }) => {
-        return {
-            value: new controls_1.__Text(plain, range()),
-            errors: [],
-        };
-    })))
-        .or(() => exports.$PARENTHESES_INLINE)
+        .or(r => r.regExp(reParenthesesInlineTextChars))
+        .or(() => exports.$inlineToken)
+        .or(r => r.regExp(/^[^\r\n<>()（）[\]［］{}｛｝「」]/))
+        .or(() => exports.ANY_PARENTHESES_INLINE)
         .or(r => r
         .sequence(c => c
         .and(r => r
@@ -48079,29 +47935,72 @@ const makeParenthesesInline = (parenthesisType, startPtn, endPtn) => {
         .and(() => exports.$MISMATCH_END_PARENTHESIS, "target")
         .action(({ target }) => {
         return target;
-    }))))), "value")
-        .action(({ value, range }) => ({ value, range: range() }))), "content")
+    }))))), "target")
+        .action(({ target, offset, range }) => {
+        var _a, _b;
+        const value = [];
+        const errors = [];
+        let lastOffset = offset();
+        for (const t of target) {
+            const lastEL = value[value.length - 1];
+            if (typeof t === "string") {
+                if (lastEL instanceof controls_1.__Text) {
+                    lastEL.children.splice(0, 1, lastEL.children[0] + t);
+                    if (lastEL.range)
+                        lastEL.range[1] += t.length;
+                }
+                else {
+                    value.push(new controls_1.__Text(t, [lastOffset, lastOffset += t.length]));
+                    lastOffset += t.length;
+                }
+            }
+            else if (lastEL instanceof controls_1.__Text && t.value instanceof controls_1.__Text) {
+                lastEL.children.splice(0, 1, lastEL.children[0] + t.value.children[0]);
+                if (lastEL.range)
+                    lastEL.range[1] += t.value.children[0].length;
+                errors.push(...t.errors);
+            }
+            else {
+                lastOffset = (_b = (_a = t.value.range) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : lastOffset;
+                value.push(t.value);
+                errors.push(...t.errors);
+            }
+        }
+        return { value, errors, range: range() };
+    })), "content")
         .and(r => r
         .sequence(s => s
         .and(r => r.regExp(endPtn))
         .action(({ text, range }) => ({ text: text(), range: range() }))), "end")
+        .andOmit(r => r
+        .assert(({ state }) => {
+        state.parenthesesDepth--;
+        return true;
+    }))
         .action(({ start, content, end, state }) => {
         return {
             value: new controls_1.__Parentheses({
                 type: parenthesisType,
-                depth: state.parenthesesDepth,
+                depth: state.parenthesesDepth + 1,
                 start: start.text,
                 end: end.text,
-                content: content.value.map(c => c.value),
+                content: content.value,
                 range: {
                     start: start.range,
                     end: end.range,
                     content: content.range,
                 },
             }),
-            errors: content.value.map(c => c.errors).flat(),
+            errors: content.errors,
         };
-    }));
+    }))
+        .or(r => r
+        .sequence(c => c
+        .and(r => r
+        .assert(({ state }) => {
+        state.parenthesesDepth--;
+        return false;
+    })))));
 };
 exports.makeParenthesesInline = makeParenthesesInline;
 exports.$ROUND_PARENTHESES_INLINE = (0, exports.makeParenthesesInline)("round", /^[(（]/, /^[)）]/);
@@ -48112,7 +48011,13 @@ exports.$CURLY_BRACKETS_INLINE = (0, exports.makeParenthesesInline)("curly", /^[
 exports.$CURLY_BRACKETS_INLINE.name = "CURLY_BRACKETS_INLINE";
 exports.$SQUARE_PARENTHESES_INLINE = factory_1.factory
     .withName("SQUARE_PARENTHESES_INLINE")
-    .sequence(c => c
+    .choice(c => c
+    .orSequence(c => c
+    .andOmit(r => r
+    .assert(({ state }) => {
+    state.parenthesesDepth++;
+    return true;
+}))
     .and(r => r
     .sequence(s => s
     .and(r => r.regExp(/^[「]/))
@@ -48142,11 +48047,16 @@ exports.$SQUARE_PARENTHESES_INLINE = factory_1.factory
     .sequence(s => s
     .and(r => r.regExp(/^[」]/))
     .action(({ text, range }) => ({ text: text(), range: range() }))), "end")
+    .andOmit(r => r
+    .assert(({ state }) => {
+    state.parenthesesDepth--;
+    return true;
+}))
     .action(({ start, content, end, state }) => {
     return {
         value: new controls_1.__Parentheses({
             type: "square",
-            depth: state.parenthesesDepth,
+            depth: state.parenthesesDepth + 1,
             start: start.text,
             end: end.text,
             content: content.value.map(c => c.value),
@@ -48158,23 +48068,14 @@ exports.$SQUARE_PARENTHESES_INLINE = factory_1.factory
         }),
         errors: content.value.map(c => c.errors).flat(),
     };
-}));
-exports.rules = {
-    INLINE: exports.$sentenceChildren,
-    NOT_PARENTHESIS_CHAR: exports.$NOT_PARENTHESIS_CHAR,
-    INLINE_FRAGMENT: exports.$INLINE_FRAGMENT,
-    PERIOD_SENTENCE_FRAGMENT: exports.$PERIOD_SENTENCE_FRAGMENT,
-    OUTSIDE_PARENTHESES_INLINE: exports.$OUTSIDE_PARENTHESES_INLINE,
-    OUTSIDE_ROUND_PARENTHESES_INLINE: exports.$OUTSIDE_ROUND_PARENTHESES_INLINE,
-    MISMATCH_START_PARENTHESIS: exports.$MISMATCH_START_PARENTHESIS,
-    MISMATCH_END_PARENTHESIS: exports.$MISMATCH_END_PARENTHESIS,
-    PARENTHESES_INLINE: exports.$PARENTHESES_INLINE,
-    PARENTHESES_INLINE_INNER: exports.$PARENTHESES_INLINE_INNER,
-    ROUND_PARENTHESES_INLINE: exports.$ROUND_PARENTHESES_INLINE,
-    SQUARE_BRACKETS_INLINE: exports.$SQUARE_BRACKETS_INLINE,
-    CURLY_BRACKETS_INLINE: exports.$CURLY_BRACKETS_INLINE,
-    SQUARE_PARENTHESES_INLINE: exports.$SQUARE_PARENTHESES_INLINE,
-};
+}))
+    .or(r => r
+    .sequence(c => c
+    .and(r => r
+    .assert(({ state }) => {
+    state.parenthesesDepth--;
+    return false;
+})))));
 //# sourceMappingURL=$sentenceChildren.js.map
 
 /***/ }),
@@ -48437,7 +48338,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.$supplProvisionAppdxItemHeadLine = exports.detectSupplProvisionAppdxItemTitle = exports.supplProvisionAppdxItemTitlePtns = void 0;
 const factory_1 = __importDefault(__webpack_require__(31707));
-const _sentenceChildren_1 = __importDefault(__webpack_require__(36096));
+const _sentenceChildren_1 = __webpack_require__(36096);
 const _indents_1 = __importDefault(__webpack_require__(2027));
 const line_1 = __webpack_require__(69928);
 const lexical_1 = __webpack_require__(99247);
@@ -48485,7 +48386,7 @@ exports.$supplProvisionAppdxItemHeadLine = factory_1.default
     return { tag, control };
 }))), "tagControl")
     .and(r => r
-    .zeroOrOne(() => _sentenceChildren_1.default), "tail")
+    .zeroOrOne(() => _sentenceChildren_1.$sentenceChildrenWithoutToplevelInlineToken), "tail")
     .and(() => lexical_1.$_EOL, "lineEndText")
     .action(({ range, indentsStruct, tagControl: { tag, control }, tail, lineEndText }) => {
     var _a, _b;
@@ -49027,8 +48928,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.makeRangesRule = void 0;
+exports.makeRangesRule = exports.ptnRangesConnectors = void 0;
 const factory_1 = __importDefault(__webpack_require__(31707));
+const _sentenceChildren_1 = __webpack_require__(36096);
 const simpleRangeMaker = (from, midText, to) => {
     void midText;
     return [from, to !== null && to !== void 0 ? to : from];
@@ -49041,6 +48943,8 @@ const simpleRangesMaker = (first, midText, rest) => {
         errors: [...first.errors, ...((_b = rest === null || rest === void 0 ? void 0 : rest.errors) !== null && _b !== void 0 ? _b : [])],
     };
 };
+exports.ptnRangesConnectors = ["、", "及び", "及(?!至)", "並びに", "ならびに", "又は", "または", "若しくは", "もしくは"];
+const reRangesConnector = new RegExp(`^(${exports.ptnRangesConnectors.join("|")})`); // no $
 const makeRangesRule = (lazyPointerRule, rangeMaker = simpleRangeMaker, rangesMaker = simpleRangesMaker) => {
     const $ranges = factory_1.default
         .withName("ranges")
@@ -49050,18 +48954,7 @@ const makeRangesRule = (lazyPointerRule, rangeMaker = simpleRangeMaker, rangesMa
         .and(() => $range, "first")
         .and(r => r
         .sequence(s => s
-        .and(r => r
-        .choice(c => c
-        .or(r => r.seqEqual("、"))
-        .or(r => r.seqEqual("及び"))
-        .or(r => r.seqEqual("および"))
-        .or(r => r.regExp(/^及(?!至)/))
-        .or(r => r.seqEqual("並びに"))
-        .or(r => r.seqEqual("ならびに"))
-        .or(r => r.seqEqual("又は"))
-        .or(r => r.seqEqual("または"))
-        .or(r => r.seqEqual("若しくは"))
-        .or(r => r.seqEqual("もしくは"))))
+        .and(r => r.regExp(reRangesConnector))
         .action(({ text, range }) => ({ text: text(), range: range() }))), "midText")
         .and(() => $ranges, "rest")
         .action(({ first, midText, rest, range }) => {
@@ -49088,8 +48981,14 @@ const makeRangesRule = (lazyPointerRule, rangeMaker = simpleRangeMaker, rangesMa
         .sequence(s => s
         .and(r => r.seqEqual("まで"))
         .action(({ text, range }) => ({ text: text(), range: range() }))), "trailingText")
-        .action(({ from, midText, to, trailingText, range }) => {
-        return { value: rangeMaker(from, midText, to, trailingText, range()), errors: [] };
+        .and(r => r
+        .zeroOrOne(() => _sentenceChildren_1.$ROUND_PARENTHESES_INLINE), "modifierParentheses")
+        .action(({ from, midText, to, trailingText, modifierParentheses, range }) => {
+        var _a, _b;
+        return {
+            value: rangeMaker(from, midText, to, trailingText, (_a = modifierParentheses === null || modifierParentheses === void 0 ? void 0 : modifierParentheses.value) !== null && _a !== void 0 ? _a : null, range()),
+            errors: [...((_b = modifierParentheses === null || modifierParentheses === void 0 ? void 0 : modifierParentheses.errors) !== null && _b !== void 0 ? _b : [])],
+        };
     })))
         .or(r => r
         .sequence(c => c
@@ -49099,14 +48998,26 @@ const makeRangesRule = (lazyPointerRule, rangeMaker = simpleRangeMaker, rangesMa
         .and(r => r.regExp(/^(?:・|～|乃至)/))
         .action(({ text, range }) => ({ text: text(), range: range() }))), "midText")
         .and(lazyPointerRule, "to")
-        .action(({ from, midText, to, range }) => {
-        return { value: rangeMaker(from, midText, to, null, range()), errors: [] };
+        .and(r => r
+        .zeroOrOne(() => _sentenceChildren_1.$ROUND_PARENTHESES_INLINE), "modifierParentheses")
+        .action(({ from, midText, to, modifierParentheses, range }) => {
+        var _a, _b;
+        return {
+            value: rangeMaker(from, midText, to, null, (_a = modifierParentheses === null || modifierParentheses === void 0 ? void 0 : modifierParentheses.value) !== null && _a !== void 0 ? _a : null, range()),
+            errors: [...((_b = modifierParentheses === null || modifierParentheses === void 0 ? void 0 : modifierParentheses.errors) !== null && _b !== void 0 ? _b : [])],
+        };
     })))
         .or(r => r
         .sequence(c => c
         .and(lazyPointerRule, "pointer")
-        .action(({ pointer, range }) => {
-        return { value: rangeMaker(pointer, null, null, null, range()), errors: [] };
+        .and(r => r
+        .zeroOrOne(() => _sentenceChildren_1.$ROUND_PARENTHESES_INLINE), "modifierParentheses")
+        .action(({ pointer, modifierParentheses, range }) => {
+        var _a, _b;
+        return {
+            value: rangeMaker(pointer, null, null, null, (_a = modifierParentheses === null || modifierParentheses === void 0 ? void 0 : modifierParentheses.value) !== null && _a !== void 0 ? _a : null, range()),
+            errors: [...((_b = modifierParentheses === null || modifierParentheses === void 0 ? void 0 : modifierParentheses.errors) !== null && _b !== void 0 ? _b : [])],
+        };
     }))));
     return { $ranges, $range };
 };
@@ -49237,29 +49148,16 @@ exports.parse = parse;
 /***/ }),
 
 /***/ 45275:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.initialEnv = void 0;
-const core_1 = __webpack_require__(24658);
-const error_1 = __webpack_require__(40520);
 const initialEnv = (initialEnvOptions) => {
-    const { target, options = {}, baseOffset = 0 } = initialEnvOptions;
+    const { options = {}, baseOffset = 0 } = initialEnvOptions;
     const registerCurrentRangeTarget = () => { };
     const offsetToPos = (_, offset) => ({ offset });
-    const stringOffsetToPos = (0, core_1.getMemorizedStringOffsetToPos)();
-    // const onMatchFail = (matchFail: MatchFail, matchContext: MatchContext) => {
-    //     if (state.maxOffsetMatchFail === null || matchFail.offset > state.maxOffsetMatchFail.offset) {
-    //         state.maxOffsetMatchFail = matchFail;
-    //         state.maxOffsetMatchContext = matchContext;
-    //     }
-    // };
-    const newErrorMessage = (message, range) => new error_1.ErrorMessage(message, [
-        stringOffsetToPos(target, range[0]),
-        stringOffsetToPos(target, range[1]),
-    ]);
     const state = {
         maxOffsetMatchFail: null,
         maxOffsetMatchContext: null,
@@ -49274,8 +49172,6 @@ const initialEnv = (initialEnvOptions) => {
         offsetToPos,
         // onMatchFail,
         state,
-        newErrorMessage,
-        stringOffsetToPos,
         baseOffset,
     };
 };
@@ -50240,6 +50136,7 @@ const util_3 = __webpack_require__(26459);
 const _article_1 = __importStar(__webpack_require__(60783));
 const num_1 = __webpack_require__(68685);
 const _appdxItem_1 = __webpack_require__(67499);
+const error_1 = __webpack_require__(40520);
 const inline_1 = __webpack_require__(22845);
 const el_1 = __webpack_require__(18539);
 const articleGroupToLines = (el, indentTexts) => {
@@ -50339,13 +50236,13 @@ exports.$articleGroup = factory_1.default
     .and(r => r.anyOne(), "captured")
     .andOmit(r => r.assert(({ captured }) => (captured.type === line_1.LineType.OTH)
     || (captured.type === line_1.LineType.PIT)))))))))))))), "childrenAndErrors")
-    .action(({ headLine, childrenAndErrors, newErrorMessage }) => {
+    .action(({ headLine, childrenAndErrors }) => {
     var _a, _b;
     const children = [];
     const errors = [];
     for (const child of childrenAndErrors) {
         if (Array.isArray(child)) {
-            errors.push(newErrorMessage("$articleGroup: この部分をパースできませんでした。", [
+            errors.push(new error_1.ErrorMessage("$articleGroup: この部分をパースできませんでした。", [
                 child[0].virtualRange[0],
                 child.slice(-1)[0].virtualRange[1],
             ]));
@@ -50418,6 +50315,7 @@ const line_1 = __webpack_require__(69928);
 const util_1 = __webpack_require__(80427);
 const std_1 = __webpack_require__(93619);
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
+const error_1 = __webpack_require__(40520);
 const inline_1 = __webpack_require__(22845);
 const el_1 = __webpack_require__(18539);
 const util_2 = __webpack_require__(84530);
@@ -50477,7 +50375,7 @@ const figStructToLines = (figStruct, indentTexts) => {
 exports.figStructToLines = figStructToLines;
 exports.$fig = factory_1.factory
     .withName("fig")
-    .oneMatch(({ item, newErrorMessage }) => {
+    .oneMatch(({ item }) => {
     if (item.type === line_1.LineType.OTH
         && item.line.type === line_1.LineType.OTH
         && item.line.sentencesArray.length === 1
@@ -50491,7 +50389,7 @@ exports.$fig = factory_1.factory
         const errors = [];
         const fig = item.line.sentencesArray[0].sentences[0].children[0].children[0].copy(false);
         if (!("src" in fig.attr)) {
-            errors.push(newErrorMessage("$figStruct: Figタグ に src 属性が設定されていません。", item.virtualRange));
+            errors.push(new error_1.ErrorMessage("$figStruct: Figタグ に src 属性が設定されていません。", item.virtualRange));
             fig.attr.src = "";
         }
         return {
@@ -50609,6 +50507,7 @@ const _preamble_1 = __importStar(__webpack_require__(68581));
 const _mainProvision_1 = __importStar(__webpack_require__(16851));
 const _supplProvision_1 = __importStar(__webpack_require__(62678));
 const _appdxItem_1 = __webpack_require__(67499);
+const error_1 = __webpack_require__(40520);
 const _sentencesArray_1 = __webpack_require__(10145);
 const num_1 = __webpack_require__(68685);
 const el_1 = __webpack_require__(18539);
@@ -50827,7 +50726,7 @@ exports.$law = factory_1.factory
     .andOmit(r => r.zeroOrMore(() => util_1.$blankLine))
     .and(r => r.anyOne())
     .andOmit(r => r.zeroOrMore(() => util_1.$blankLine)))), "notCapturedErrorLines")
-    .action(({ lawTitleLines, enactStatements, toc, preambles, mainProvisionAndErrors, supplOrAppdxItemAndErrors, notCapturedErrorLines, newErrorMessage }) => {
+    .action(({ lawTitleLines, enactStatements, toc, preambles, mainProvisionAndErrors, supplOrAppdxItemAndErrors, notCapturedErrorLines }) => {
     const errors = [];
     const law = (0, std_1.newStdEL)("Law", {
         Lang: "ja",
@@ -50873,18 +50772,18 @@ exports.$law = factory_1.factory
         }
         errors.push(...mainProvision.errors);
         for (const errorLine of errorLines) {
-            errors.push(newErrorMessage(`$law: この行をパースできませんでした。line.type: ${errorLine.type}`, errorLine.virtualRange));
+            errors.push(new error_1.ErrorMessage(`$law: この行をパースできませんでした。line.type: ${errorLine.type}`, errorLine.virtualRange));
         }
     }
     for (const [supplOrAppdxItem, errorLines] of supplOrAppdxItemAndErrors) {
         lawBody.children.push(supplOrAppdxItem.value);
         errors.push(...supplOrAppdxItem.errors);
         for (const errorLine of errorLines) {
-            errors.push(newErrorMessage(`$law: この行をパースできませんでした。line.type: ${errorLine.type}`, errorLine.virtualRange));
+            errors.push(new error_1.ErrorMessage(`$law: この行をパースできませんでした。line.type: ${errorLine.type}`, errorLine.virtualRange));
         }
     }
     for (const errorLine of notCapturedErrorLines) {
-        errors.push(newErrorMessage(`$law: この行をパースできませんでした。line.type: ${errorLine.type}`, errorLine.virtualRange));
+        errors.push(new error_1.ErrorMessage(`$law: この行をパースできませんでした。line.type: ${errorLine.type}`, errorLine.virtualRange));
     }
     lawBody.range = (0, el_1.rangeOfELs)(lawBody.children);
     law.range = (0, el_1.rangeOfELs)(law.children);
@@ -51403,6 +51302,7 @@ const util_2 = __webpack_require__(80427);
 const factory_1 = __importDefault(__webpack_require__(13518));
 const virtualLine_1 = __webpack_require__(40504);
 const util_3 = __webpack_require__(80427);
+const error_1 = __webpack_require__(40520);
 const el_1 = __webpack_require__(18539);
 const _amendProvision_1 = __importStar(__webpack_require__(88677));
 const _list_1 = __webpack_require__(58269);
@@ -51766,14 +51666,14 @@ exports.$requireControlParagraphItem = factory_1.default
     .withName("$paragraphItem")
     .sequence(s => s
     .and(() => exports.$autoParagraphItem, "autoParagraphItem")
-    .action(({ autoParagraphItem, newErrorMessage }) => {
+    .action(({ autoParagraphItem }) => {
     var _a;
     let defautTag;
     const errors = [];
     errors.push(...autoParagraphItem.errors);
     if (autoParagraphItem.value.tag === "__AutoParagraphItem") {
         defautTag = "Paragraph";
-        errors.push(newErrorMessage("$requireControlParagraphItem: 制御記号（\":paragraph:\" や \"#\" など）が必要です。", (_a = autoParagraphItem.value.range) !== null && _a !== void 0 ? _a : [0, 0]));
+        errors.push(new error_1.ErrorMessage("$requireControlParagraphItem: 制御記号（\":paragraph:\" や \"#\" など）が必要です。", (_a = autoParagraphItem.value.range) !== null && _a !== void 0 ? _a : [0, 0]));
     }
     else {
         defautTag = autoParagraphItem.value.tag;
@@ -52564,6 +52464,7 @@ const line_1 = __webpack_require__(69928);
 const util_1 = __webpack_require__(80427);
 const std_1 = __webpack_require__(93619);
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
+const error_1 = __webpack_require__(40520);
 const inline_1 = __webpack_require__(22845);
 const util_2 = __webpack_require__(84530);
 const _remarks_1 = __importStar(__webpack_require__(90137));
@@ -52744,7 +52645,7 @@ const $table = factory_1.factory
     ]
 })))))
     .andOmit(r => r.zeroOrMore(() => util_1.$blankLine)))), "tableColumnLines")
-    .action(({ tableColumnLines, newErrorMessage }) => {
+    .action(({ tableColumnLines }) => {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
     const tableRows = [];
     const errors = [];
@@ -52801,11 +52702,11 @@ const $table = factory_1.factory
                 : tableColumnLine.line.columnIndicator === "-" ? "TableRow"
                     : (0, util_2.assertNever)(tableColumnLine.line.columnIndicator));
             if (tableRowOrNull === null) {
-                errors.push(newErrorMessage("table: No first column indicator", (_k = tableColumnLine.line.firstColumnIndicatorRange) !== null && _k !== void 0 ? _k : tableColumnLine.virtualRange));
+                errors.push(new error_1.ErrorMessage("table: No first column indicator", (_k = tableColumnLine.line.firstColumnIndicatorRange) !== null && _k !== void 0 ? _k : tableColumnLine.virtualRange));
                 tableRows.push(tableRow);
             }
             else if ((0, std_1.isTableHeaderRow)(tableRowOrNull) !== (tableColumnLine.line.columnIndicator === "*")) {
-                errors.push(newErrorMessage("table: Column indicator mismatch", (_l = tableColumnLine.line.columnIndicatorRange) !== null && _l !== void 0 ? _l : tableColumnLine.virtualRange));
+                errors.push(new error_1.ErrorMessage("table: Column indicator mismatch", (_l = tableColumnLine.line.columnIndicatorRange) !== null && _l !== void 0 ? _l : tableColumnLine.virtualRange));
             }
             if ((0, std_1.isTableHeaderRow)(tableRow)) {
                 const tableHeaderColumnChildren = [
@@ -53390,6 +53291,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.isSingleParentheses = exports.makeDoubleIndentBlockWithCaptureRule = exports.makeIndentBlockWithCaptureRule = exports.$indentBlock = exports.$blankLine = exports.$optBNK_DEDENT = exports.$DEDENT = exports.$optBNK_INDENT = exports.$INDENT = void 0;
 const controls_1 = __webpack_require__(48075);
 const line_1 = __webpack_require__(69928);
+const error_1 = __webpack_require__(40520);
 const factory_1 = __importDefault(__webpack_require__(13518));
 const virtualLine_1 = __webpack_require__(40504);
 exports.$INDENT = factory_1.default
@@ -53452,7 +53354,7 @@ const makeIndentBlockWithCaptureRule = (ruleName, ruleRepeatedOneOrMore) => fact
     .action(({ captured }) => ({ success: null, errorLines: captured })))))
     .andOmit(r => r.zeroOrMore(() => exports.$blankLine)))), "childrenAndErrors")
     .andOmit(() => exports.$optBNK_DEDENT)
-    .action(({ childrenAndErrors, newErrorMessage }) => {
+    .action(({ childrenAndErrors }) => {
     // const err = childrenAndErrors.filter(c => !c.success);
     // if (err.length > 5) {
     //     console.log(JSON.stringify(err.slice(0, 5), null, 2));
@@ -53469,7 +53371,7 @@ const makeIndentBlockWithCaptureRule = (ruleName, ruleRepeatedOneOrMore) => fact
             children.push(success);
         }
         if (errorLines.length > 0) {
-            errors.push(newErrorMessage(`${ruleName}: この部分をパースできませんでした。`, [
+            errors.push(new error_1.ErrorMessage(`${ruleName}: この部分をパースできませんでした。`, [
                 errorLines[0].virtualRange[0],
                 errorLines.slice(-1)[0].virtualRange[1],
             ]));
@@ -53519,7 +53421,7 @@ const makeDoubleIndentBlockWithCaptureRule = (ruleName, ruleRepeatedOneOrMore) =
     .andOmit(r => r.zeroOrMore(() => exports.$blankLine))
     .action(({ captured }) => ({ success: null, errorLines: captured })))), "errors2")
     .andOmit(() => exports.$optBNK_DEDENT)
-    .action(({ childrenAndErrors1, errors2, newErrorMessage }) => {
+    .action(({ childrenAndErrors1, errors2 }) => {
     const childrenAndErrors = [...childrenAndErrors1, ...errors2];
     for (let i = 0; i < childrenAndErrors.length; i += 1) {
         while (!childrenAndErrors[i].success && i + 1 < childrenAndErrors.length && !childrenAndErrors[i + 1].success) {
@@ -53533,7 +53435,7 @@ const makeDoubleIndentBlockWithCaptureRule = (ruleName, ruleRepeatedOneOrMore) =
             children.push(success);
         }
         if (errorLines.length > 0) {
-            errors.push(newErrorMessage(`${ruleName}: この部分をパースできませんでした。`, [
+            errors.push(new error_1.ErrorMessage(`${ruleName}: この部分をパースできませんでした。`, [
                 errorLines[0].virtualRange[0],
                 errorLines.slice(-1)[0].virtualRange[1],
             ]));
@@ -58563,155 +58465,6 @@ const fetch = async (...args) => {
 };
 exports.fetch = fetch;
 //# sourceMappingURL=index.js.map
-
-/***/ }),
-
-/***/ 82102:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ProgressBar = exports.withEllipsis = exports.toTableText = exports.widthWOColor = exports.wrap = exports.wrapSingle = exports.TERMC = void 0;
-const cli_progress_1 = __webpack_require__(51358);
-var TERMC;
-(function (TERMC) {
-    // eslint-disable-next-line no-unused-vars
-    TERMC["DEFAULT"] = "\u001B[39m";
-    // eslint-disable-next-line no-unused-vars
-    TERMC["RED"] = "\u001B[31m";
-    // eslint-disable-next-line no-unused-vars
-    TERMC["GREEN"] = "\u001B[32m";
-    // eslint-disable-next-line no-unused-vars
-    TERMC["YELLOW"] = "\u001B[33m";
-    // eslint-disable-next-line no-unused-vars
-    TERMC["BLUE"] = "\u001B[34m";
-    // eslint-disable-next-line no-unused-vars
-    TERMC["MAGENTA"] = "\u001B[35m";
-    // eslint-disable-next-line no-unused-vars
-    TERMC["CYAN"] = "\u001B[36m";
-})(TERMC = exports.TERMC || (exports.TERMC = {}));
-const sliceWOColor = (s, start, length) => {
-    const maxLen = s.length - start;
-    let ret = "";
-    for (let len = 1; len <= maxLen; len++) {
-        // eslint-disable-next-line no-control-regex
-        const m = /^\x1b\[\d+?m/.exec(s.slice(start + len - 1));
-        if (m)
-            len += m[0].length - 1;
-        const subs = s.slice(start, start + len);
-        if ((0, exports.widthWOColor)(subs) <= length) {
-            ret = subs;
-        }
-        else {
-            break;
-        }
-    }
-    return ret;
-};
-function* wrapSingle(s, width, afterFirstLineIndent = 0) {
-    let pos = 0;
-    let lastFlag = "";
-    let currentWidth = width;
-    while (pos < s.length) {
-        const sliced = sliceWOColor(s, pos, currentWidth);
-        if (pos === 0)
-            currentWidth -= afterFirstLineIndent;
-        pos += sliced.length;
-        // eslint-disable-next-line no-control-regex
-        const flags = sliced.match(/\x1b\[\d+?m/g) || [];
-        let retSubs = `${lastFlag}${sliced}`;
-        if (flags.length) {
-            const flag = flags[flags.length - 1];
-            if (flag === TERMC.DEFAULT) {
-                lastFlag = "";
-            }
-            else {
-                lastFlag = flag;
-                retSubs = `${retSubs}${TERMC.DEFAULT}`;
-            }
-        }
-        else if (lastFlag) {
-            retSubs = `${retSubs}${TERMC.DEFAULT}`;
-        }
-        yield retSubs;
-    }
-}
-exports.wrapSingle = wrapSingle;
-function* wrap(row, width) {
-    const iters = row.map(s => wrapSingle(s, width));
-    while (true) {
-        const nexts = iters.map(iter => iter.next());
-        if (nexts.every(({ done }) => done))
-            break;
-        yield nexts.map(({ value }) => value || "");
-    }
-}
-exports.wrap = wrap;
-const widthWOColor = (text) => {
-    // eslint-disable-next-line no-control-regex
-    return text.replace(/\x1b\[\d+?m/g, "").replace(/[^\x01-\x7E\uFF61-\uFF9F]/g, "  ").length;
-};
-exports.widthWOColor = widthWOColor;
-const toTableText = (table, width) => {
-    if (!table)
-        return "";
-    const wrapTable = [];
-    for (const row of table) {
-        wrapTable.push(...wrap(row, width));
-    }
-    const lengths = wrapTable[0].map(() => 0);
-    for (const row of wrapTable) {
-        row.forEach((text, i) => {
-            lengths[i] = Math.max(lengths[i], (0, exports.widthWOColor)(text));
-        });
-    }
-    const ret = [
-        "┌" + lengths.map(l => "─".repeat(l + 2)).join("┬") + "┐",
-        ...wrapTable.map(row => "│"
-            + row.map((text, i) => " "
-                + text
-                + " ".repeat(lengths[i] - (0, exports.widthWOColor)(text))
-                + " ").join("│")
-            + "│"),
-        "└" + lengths.map(l => "─".repeat(l + 2)).join("┴") + "┘",
-    ].join("\r\n");
-    return ret;
-};
-exports.toTableText = toTableText;
-const withEllipsis = (text, maxLength) => {
-    if (maxLength < (0, exports.widthWOColor)(text)) {
-        return `${sliceWOColor(text, 0, maxLength - 4)} ...`;
-    }
-    else {
-        return text;
-    }
-};
-exports.withEllipsis = withEllipsis;
-class ProgressBar {
-    constructor() {
-        this.bar = new cli_progress_1.Bar({
-            format: "[{bar}] {percentage}% | {message}",
-        }, cli_progress_1.Presets.rect);
-    }
-    progress(ratio, message) {
-        const payload = { message: (typeof message !== "string") ? "" : message.length > 30 ? message.slice(0, 30) + " ..." : message };
-        if (ratio) {
-            this.bar.update(ratio, payload);
-        }
-        else if (payload) {
-            this.bar.update(payload);
-        }
-    }
-    start(total, startValue) {
-        this.bar.start(total, startValue, { message: "" });
-    }
-    stop() {
-        this.bar.stop();
-    }
-}
-exports.ProgressBar = ProgressBar;
-//# sourceMappingURL=term.js.map
 
 /***/ }),
 
@@ -68162,13 +67915,6 @@ exports.ZeroOrOneRule = ZeroOrOneRule;
 /***/ }),
 
 /***/ 91984:
-/***/ (() => {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 51358:
 /***/ (() => {
 
 /* (ignored) */
