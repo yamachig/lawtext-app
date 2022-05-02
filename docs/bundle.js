@@ -39304,7 +39304,7 @@ exports.isIgnoreAnalysis = exports.getContainerType = exports.containerTags = ex
 const container_1 = __webpack_require__(49814);
 const std = __importStar(__webpack_require__(93619));
 exports.rootContainerTags = ["Law"];
-exports.toplevelContainerTags = ["EnactStatement", "MainProvision", ...std.appdxItemTags];
+exports.toplevelContainerTags = ["EnactStatement", "MainProvision", "SupplProvision", ...std.appdxItemTags];
 exports.articleContainerTags = std.articleGroupTags;
 exports.sentencesContainerTags = [
     "Article",
@@ -39376,6 +39376,8 @@ const processNameInline_1 = __webpack_require__(39829);
 const processLawRef_1 = __webpack_require__(82388);
 const common_1 = __webpack_require__(50638);
 const processNameList_1 = __webpack_require__(10766);
+const declarations_1 = __webpack_require__(2823);
+const processAmbiguousNameInline_1 = __webpack_require__(85404);
 const detectDeclarationsByEL = (elToBeModified, sentenceEnv, sentenceEnvsStruct) => {
     const declarations = [];
     const errors = [];
@@ -39430,20 +39432,329 @@ const detectDeclarationsBySentence = (sentenceEnv, sentenceEnvsStruct) => {
 };
 exports.detectDeclarationsBySentence = detectDeclarationsBySentence;
 const detectDeclarations = (sentenceEnvsStruct) => {
-    const declarations = [];
+    const declarations = new declarations_1.Declarations();
     const errors = [];
     for (const sentenceEnv of sentenceEnvsStruct.sentenceEnvs) {
         const result = (0, exports.detectDeclarationsBySentence)(sentenceEnv, sentenceEnvsStruct);
         if (result) {
-            declarations.push(...result.value);
+            for (const declaration of result.value)
+                declarations.add(declaration);
             errors.push(...result.errors);
         }
+    }
+    {
+        const result = (0, processAmbiguousNameInline_1.processAmbiguousNameInline)(sentenceEnvsStruct, declarations);
+        errors.push(...result.errors);
+        for (const declaration of result.value.toAddDeclarations)
+            declarations.add(declaration);
     }
     return { value: declarations, errors };
 };
 exports.detectDeclarations = detectDeclarations;
 exports["default"] = exports.detectDeclarations;
 //# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 85404:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.processAmbiguousNameInline = exports.findFilteredAmbiguousNameInline = exports.findAmbiguousNameCandidateInfos = void 0;
+const error_1 = __webpack_require__(40520);
+const controls_1 = __webpack_require__(48075);
+const env_1 = __webpack_require__(37025);
+const sentenceEnv_1 = __webpack_require__(6310);
+const _ambiguousNameParenthesesContent_1 = __importDefault(__webpack_require__(57373));
+const ptnNameChar = "(?!(?:\\s|[。、]))[^ぁ-ゟ](?<!当該)";
+const reName = new RegExp(`(?:(?:${ptnNameChar})+の)?((?:${ptnNameChar})+)$`);
+const findAmbiguousNameCandidateInfos = (elToBeModified, sentenceEnv) => {
+    const errors = [];
+    const ambiguousNameCandidateInfos = [];
+    for (let i = 1; i < elToBeModified.children.length; i++) {
+        // Leave the first child for nameCandidateEL.
+        const nameCandidateEL = elToBeModified.children[i - 1];
+        if (!(nameCandidateEL instanceof controls_1.__Text))
+            continue;
+        const parentheses = elToBeModified.children[i];
+        if (!(parentheses instanceof controls_1.__Parentheses && parentheses.attr.type === "round"))
+            continue;
+        const pContent = parentheses.content;
+        const result = _ambiguousNameParenthesesContent_1.default.match(0, pContent.children, (0, env_1.initialEnv)({ target: "" }));
+        if (!result.ok)
+            continue;
+        const { following, pointerRanges } = result.value.value;
+        ambiguousNameCandidateInfos.push({
+            elToBeModified,
+            nameCandidateEL,
+            following,
+            pointerRanges,
+            afterNameParentheses: parentheses,
+            sentenceEnv,
+        });
+        errors.push(...result.value.errors);
+    }
+    for (const child of elToBeModified.children) {
+        if (typeof child === "string")
+            continue;
+        const result = (0, exports.findAmbiguousNameCandidateInfos)(child, sentenceEnv);
+        ambiguousNameCandidateInfos.push(...result.value);
+        errors.push(...result.errors);
+    }
+    return {
+        value: ambiguousNameCandidateInfos,
+        errors,
+    };
+};
+exports.findAmbiguousNameCandidateInfos = findAmbiguousNameCandidateInfos;
+const findFilteredAmbiguousNameInline = (sentenceEnvsStruct, allDeclarations) => {
+    var _a, _b, _c, _d, _e, _f;
+    const errors = [];
+    const nameInfos = [];
+    for (const sentenceEnv of sentenceEnvsStruct.sentenceEnvs) {
+        const result = (0, exports.findAmbiguousNameCandidateInfos)(sentenceEnv.el, sentenceEnv);
+        errors.push(...result.errors);
+        if (result.value.length === 0)
+            continue;
+        for (const info of result.value) {
+            const followingStartPos = info.following ? {
+                sentenceIndex: sentenceEnv.index,
+                textOffset: (_b = (_a = sentenceEnv.textRageOfEL(info.afterNameParentheses)) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : 0,
+            } : null;
+            const scope = (0, sentenceEnv_1.toSentenceTextRanges)((_d = (_c = info.pointerRanges) === null || _c === void 0 ? void 0 : _c.targetContainerIDRanges) !== null && _d !== void 0 ? _d : null, sentenceEnvsStruct, followingStartPos);
+            nameInfos.push(Object.assign(Object.assign({}, info), { scope, nameCandidates: new Set(), errorEmitted: false, maxCandidateLength: 0 }));
+        }
+    }
+    if (nameInfos.length === 0)
+        return { value: [], errors };
+    const nameRegistry = new Map();
+    for (const info of nameInfos) {
+        // "Word-likeness": Pick keywords consists of Kanji's or Katakana's excluding "当該", connected by at most one "の"
+        // e.g. "（略）行政運営における公正の確保と透明性" -> ["透明性"]
+        // e.g. "（略）命令等を定めようとする場合には、当該命令等の案" -> ["案", "命令等の案"]
+        // e.g. "中期目標の期間" -> ["期間", "中期目標の期間"]
+        // e.g. "（略）その担任する事務に関する国の不作為" -> ["不作為", "国の不作為"]
+        // e.g. "（略）その担任する事務に関する都道府県の不作為" -> ["不作為", "都道府県の不作為"]
+        const match = reName.exec(info.nameCandidateEL.text());
+        if (!match) {
+            if (!info.errorEmitted)
+                errors.push(new error_1.ErrorMessage("processAmbiguousNameInline: 定義語のような文字列が見つかりませんでした。", info.nameCandidateEL.range ? [
+                    info.nameCandidateEL.range[1],
+                    info.nameCandidateEL.range[1],
+                ] : [NaN, NaN]));
+            info.errorEmitted = true;
+            continue;
+        }
+        info.nameCandidates.add(match[0]); // possibly includes "の"
+        info.nameCandidates.add(match[1]); // without "の"
+        info.maxCandidateLength = match[0].length;
+        const nameCandidateLastOffset = (_f = (_e = info.sentenceEnv.textRageOfEL(info.nameCandidateEL)) === null || _e === void 0 ? void 0 : _e[1]) !== null && _f !== void 0 ? _f : null;
+        // "Consistency": Skip candidates occured outside of the scope.
+        for (const sentenceEnv of sentenceEnvsStruct.sentenceEnvs) {
+            // TODO: exclude QuoteStruct and NewProvision
+            if (info.nameCandidates.size === 0)
+                break;
+            for (const name of [...info.nameCandidates]) {
+                let nextOffset = 0;
+                let inSentenceOffset = -1;
+                while ((inSentenceOffset = sentenceEnv.text.indexOf(name, nextOffset)) >= 0) {
+                    nextOffset = inSentenceOffset + name.length;
+                    if (!info.nameCandidates.has(name))
+                        break;
+                    if ((sentenceEnv.index === info.sentenceEnv.index)
+                        && (inSentenceOffset === (nameCandidateLastOffset !== null && nameCandidateLastOffset !== void 0 ? nameCandidateLastOffset : name.length) - name.length)) {
+                        // at the declaration position
+                        continue;
+                    }
+                    // check if the occurance is in scope
+                    let inScope = false;
+                    for (const s of info.scope) {
+                        if (((s.start.sentenceIndex < sentenceEnv.index)
+                            || ((s.start.sentenceIndex === sentenceEnv.index) && (s.start.textOffset <= inSentenceOffset)))
+                            && ((sentenceEnv.index < s.end.sentenceIndex)
+                                || ((sentenceEnv.index === s.end.sentenceIndex) && (inSentenceOffset <= s.end.textOffset)))) {
+                            inScope = true;
+                            break;
+                        }
+                    }
+                    if (!inScope) {
+                        info.nameCandidates.delete(name);
+                        break;
+                    }
+                }
+            }
+        }
+        if (info.nameCandidates.size === 0) {
+            if (!info.errorEmitted)
+                errors.push(new error_1.ErrorMessage("processAmbiguousNameInline: この法令中に未定義で使用されている例があるため、定義語としての処理を行いませんでした。", info.nameCandidateEL.range ? [
+                    info.nameCandidateEL.range[1] - info.maxCandidateLength,
+                    info.nameCandidateEL.range[1],
+                ] : [NaN, NaN]));
+            info.errorEmitted = true;
+            continue;
+        }
+        info.maxCandidateLength = Math.max(...[...info.nameCandidates].map(n => n.length));
+        // "Distinctiveness" (part 1): Remove unambiguously declared names.
+        // e.g. "以下「案」という。" and ["案", "命令等の案"] -> remove "案"
+        const currentDeclarations = allDeclarations.filterByRange({
+            start: {
+                sentenceIndex: info.sentenceEnv.index,
+                textOffset: (nameCandidateLastOffset !== null && nameCandidateLastOffset !== void 0 ? nameCandidateLastOffset : info.maxCandidateLength) - info.maxCandidateLength,
+            },
+            end: {
+                sentenceIndex: info.sentenceEnv.index,
+                textOffset: nameCandidateLastOffset !== null && nameCandidateLastOffset !== void 0 ? nameCandidateLastOffset : 0,
+            },
+        });
+        for (const declaration of currentDeclarations.values()) {
+            if (info.nameCandidates.size === 0)
+                continue;
+            if (info.nameCandidates.has(declaration.attr.name)) {
+                info.nameCandidates.delete(declaration.attr.name);
+            }
+        }
+        if (info.nameCandidates.size === 0) {
+            if (!info.errorEmitted)
+                errors.push(new error_1.ErrorMessage("processAmbiguousNameInline: この法令中に同一の語を「～」で定義している例があるため、定義語としての処理を行いませんでした。", info.nameCandidateEL.range ? [
+                    info.nameCandidateEL.range[1] - info.maxCandidateLength,
+                    info.nameCandidateEL.range[1],
+                ] : [NaN, NaN]));
+            info.errorEmitted = true;
+            continue;
+        }
+        info.maxCandidateLength = Math.max(...[...info.nameCandidates].map(n => n.length));
+        for (const name of info.nameCandidates) {
+            const nameInfos = nameRegistry.get(name);
+            if (nameInfos) {
+                nameInfos.add(info);
+            }
+            else {
+                nameRegistry.set(name, new Set([info]));
+            }
+        }
+    }
+    // "Distinctiveness" (part 2): Remove conflicting candidates.
+    // e.g. ["不作為", "国の不作為"] and ["不作為", "都道府県の不作為"] -> remove "不作為"
+    for (const [name, nameInfos] of nameRegistry) {
+        if (nameInfos.size <= 1)
+            continue;
+        const array = [...nameInfos];
+        const combinations = array.flatMap((info1, i) => array.slice(i + 1).map(info2 => [info1, info2]));
+        for (const [info1, info2] of combinations) {
+            if (!(info1.nameCandidates.has(name) && info2.nameCandidates.has(name)))
+                continue;
+            let overlapping = false;
+            for (const range1 of info1.scope) {
+                if (overlapping)
+                    break;
+                for (const range2 of info2.scope) {
+                    if (overlapping)
+                        break;
+                    const noOverlap = ((range1.end.sentenceIndex < range2.start.sentenceIndex)
+                        || ((range1.end.sentenceIndex === range2.start.sentenceIndex)
+                            && (range1.end.textOffset < range2.start.textOffset))
+                        || (range2.end.sentenceIndex < range1.start.sentenceIndex)
+                        || ((range2.end.sentenceIndex === range1.start.sentenceIndex)
+                            && (range2.end.textOffset < range1.start.textOffset)));
+                    if (!noOverlap)
+                        overlapping = true;
+                }
+            }
+            if (overlapping) {
+                info1.nameCandidates.delete(name);
+                info2.nameCandidates.delete(name);
+                nameInfos.delete(info1);
+                nameInfos.delete(info2);
+            }
+        }
+    }
+    const filteredNameInfos = [];
+    for (const info of nameInfos) {
+        if (info.nameCandidates.size === 0) {
+            if (!info.errorEmitted)
+                errors.push(new error_1.ErrorMessage("processAmbiguousNameInline: 同一の語を定義しようとする例があったため、定義語としての処理を行いませんでした。", info.nameCandidateEL.range ? [
+                    info.nameCandidateEL.range[1] - info.maxCandidateLength,
+                    info.nameCandidateEL.range[1],
+                ] : [NaN, NaN]));
+            info.errorEmitted = true;
+            continue;
+        }
+        // "Greedy": Pick the longest candidate
+        filteredNameInfos.push(Object.assign(Object.assign({}, info), { name: [...info.nameCandidates].sort((a, b) => b.length - a.length)[0] }));
+    }
+    return {
+        value: filteredNameInfos,
+        errors,
+    };
+};
+exports.findFilteredAmbiguousNameInline = findFilteredAmbiguousNameInline;
+const processAmbiguousNameInline = (sentenceEnvsStruct, allDeclarations) => {
+    var _a, _b, _c, _d;
+    const errors = [];
+    const toAddDeclarations = [];
+    const filteredNameInfos = (0, exports.findFilteredAmbiguousNameInline)(sentenceEnvsStruct, allDeclarations);
+    errors.push(...filteredNameInfos.errors);
+    if (filteredNameInfos.value.length === 0) {
+        return {
+            value: { toAddDeclarations },
+            errors,
+        };
+    }
+    for (const { scope, pointerRanges, sentenceEnv, name, nameCandidateEL, elToBeModified } of filteredNameInfos.value) {
+        if (scope.length === 0) {
+            errors.push(new error_1.ErrorMessage("No scope found", [
+                (_b = (_a = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _a === void 0 ? void 0 : _a[0]) !== null && _b !== void 0 ? _b : 0,
+                (_d = (_c = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _c === void 0 ? void 0 : _c[1]) !== null && _d !== void 0 ? _d : 0,
+            ]));
+        }
+        const nameCandidateELTextRange = sentenceEnv.textRageOfEL(nameCandidateEL);
+        if (!nameCandidateELTextRange) {
+            throw new Error("nameCandidateELRange is null");
+        }
+        const nameSentenceTextRange = {
+            start: {
+                sentenceIndex: sentenceEnv.index,
+                textOffset: nameCandidateELTextRange[1] - name.length,
+            },
+            end: {
+                sentenceIndex: sentenceEnv.index,
+                textOffset: nameCandidateELTextRange[1],
+            },
+        };
+        const newItems = [];
+        const nameCandidateELText = nameCandidateEL.text();
+        if (name.length < nameCandidateELText.length) {
+            newItems.push(new controls_1.__Text(nameCandidateELText.slice(0, -name.length), nameCandidateEL.range && [nameCandidateEL.range[0], nameCandidateEL.range[1] - name.length]));
+        }
+        const declarationID = `decl-sentence_${sentenceEnv.index}-text_${nameCandidateELTextRange[1] - name.length}_${nameCandidateELTextRange[1]}`;
+        const declaration = new controls_1.____Declaration({
+            declarationID,
+            type: "Keyword",
+            name,
+            value: null,
+            scope: scope,
+            nameSentenceTextRange,
+            range: nameCandidateEL.range ? [
+                nameCandidateEL.range[1] - name.length,
+                nameCandidateEL.range[1],
+            ] : null,
+        });
+        toAddDeclarations.push(declaration);
+        newItems.push(declaration);
+        elToBeModified.children.splice(elToBeModified.children.indexOf(nameCandidateEL), 1, ...newItems);
+    }
+    return {
+        value: { toAddDeclarations },
+        errors,
+    };
+};
+exports.processAmbiguousNameInline = processAmbiguousNameInline;
+//# sourceMappingURL=processAmbiguousNameInline.js.map
 
 /***/ }),
 
@@ -39476,7 +39787,7 @@ const getLawNameLength = (lawNum) => {
 };
 exports.getLawNameLength = getLawNameLength;
 const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct) => {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
     const errors = [];
     const declarations = [];
     for (let i = 0; i < elToBeModified.children.length; i++) {
@@ -39492,24 +39803,11 @@ const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct) => {
                     sentenceIndex: sentenceEnv.index,
                     textOffset: (_b = (_a = sentenceEnv.textRageOfEL(nameSquareParentheses)) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : 0,
                 } : null;
-                const scope = (pointerRanges
-                    ? (0, sentenceEnv_1.toSentenceTextRanges)(pointerRanges.targetContainerIDRanges, sentenceEnvsStruct, followingStartPos)
-                    : [
-                        {
-                            start: {
-                                sentenceIndex: sentenceEnv.index,
-                                textOffset: (_d = (_c = sentenceEnv.textRageOfEL(lawNum)) === null || _c === void 0 ? void 0 : _c[1]) !== null && _d !== void 0 ? _d : 0,
-                            },
-                            end: {
-                                sentenceIndex: ((_f = (_e = sentenceEnv.container.thisOrClosest(p => p.type === container_1.ContainerType.TOPLEVEL || p.type === container_1.ContainerType.ROOT)) === null || _e === void 0 ? void 0 : _e.sentenceRange[1]) !== null && _f !== void 0 ? _f : Number.NaN) + 1,
-                                textOffset: 0,
-                            },
-                        },
-                    ]);
+                const scope = (0, sentenceEnv_1.toSentenceTextRanges)((_c = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.targetContainerIDRanges) !== null && _c !== void 0 ? _c : null, sentenceEnvsStruct, followingStartPos);
                 if (scope.length === 0) {
                     errors.push(new error_1.ErrorMessage("No scope found", [
-                        (_h = (_g = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _g === void 0 ? void 0 : _g[0]) !== null && _h !== void 0 ? _h : 0,
-                        (_k = (_j = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _j === void 0 ? void 0 : _j[1]) !== null && _k !== void 0 ? _k : 0,
+                        (_e = (_d = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _d === void 0 ? void 0 : _d[0]) !== null && _e !== void 0 ? _e : 0,
+                        (_g = (_f = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _f === void 0 ? void 0 : _f[1]) !== null && _g !== void 0 ? _g : 0,
                     ]));
                 }
                 const nameTextRange = sentenceEnv.textRageOfEL(nameSquareParentheses.content);
@@ -39547,10 +39845,10 @@ const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct) => {
                         {
                             start: {
                                 sentenceIndex: sentenceEnv.index,
-                                textOffset: (_m = (_l = sentenceEnv.textRageOfEL(lawNum)) === null || _l === void 0 ? void 0 : _l[1]) !== null && _m !== void 0 ? _m : 0,
+                                textOffset: (_j = (_h = sentenceEnv.textRageOfEL(lawNum)) === null || _h === void 0 ? void 0 : _h[1]) !== null && _j !== void 0 ? _j : 0,
                             },
                             end: {
-                                sentenceIndex: ((_p = (_o = sentenceEnv.container.thisOrClosest(p => p.type === container_1.ContainerType.TOPLEVEL || p.type === container_1.ContainerType.ROOT)) === null || _o === void 0 ? void 0 : _o.sentenceRange[1]) !== null && _p !== void 0 ? _p : Number.NaN) + 1,
+                                sentenceIndex: ((_l = (_k = sentenceEnv.container.thisOrClosest(p => p.type === container_1.ContainerType.TOPLEVEL || p.type === container_1.ContainerType.ROOT)) === null || _k === void 0 ? void 0 : _k.sentenceRange[1]) !== null && _l !== void 0 ? _l : Number.NaN) + 1,
                                 textOffset: 0,
                             },
                         },
@@ -39614,12 +39912,11 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.processNameInline = void 0;
 const error_1 = __webpack_require__(40520);
 const controls_1 = __webpack_require__(48075);
-const container_1 = __webpack_require__(49814);
 const _nameInline_1 = __importDefault(__webpack_require__(17685));
 const env_1 = __webpack_require__(37025);
 const sentenceEnv_1 = __webpack_require__(6310);
 const processNameInline = (elToBeModified, sentenceEnv, sentenceEnvsStruct) => {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+    var _a, _b, _c, _d, _e, _f, _g;
     const errors = [];
     const declarations = [];
     for (let i = 0; i < elToBeModified.children.length; i++) {
@@ -39632,24 +39929,11 @@ const processNameInline = (elToBeModified, sentenceEnv, sentenceEnvsStruct) => {
                 sentenceIndex: sentenceEnv.index,
                 textOffset: (_b = (_a = sentenceEnv.textRageOfEL(nameSquareParentheses)) === null || _a === void 0 ? void 0 : _a[1]) !== null && _b !== void 0 ? _b : 0,
             } : null;
-            const scope = (pointerRanges
-                ? (0, sentenceEnv_1.toSentenceTextRanges)(pointerRanges.targetContainerIDRanges, sentenceEnvsStruct, followingStartPos)
-                : [
-                    {
-                        start: {
-                            sentenceIndex: sentenceEnv.index,
-                            textOffset: (_d = (_c = sentenceEnv.textRageOfEL(nameSquareParentheses)) === null || _c === void 0 ? void 0 : _c[1]) !== null && _d !== void 0 ? _d : 0,
-                        },
-                        end: {
-                            sentenceIndex: ((_f = (_e = sentenceEnv.container.thisOrClosest(p => p.type === container_1.ContainerType.TOPLEVEL || p.type === container_1.ContainerType.ROOT)) === null || _e === void 0 ? void 0 : _e.sentenceRange[1]) !== null && _f !== void 0 ? _f : Number.NaN) + 1,
-                            textOffset: 0,
-                        },
-                    },
-                ]);
+            const scope = (0, sentenceEnv_1.toSentenceTextRanges)((_c = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.targetContainerIDRanges) !== null && _c !== void 0 ? _c : null, sentenceEnvsStruct, followingStartPos);
             if (scope.length === 0) {
                 errors.push(new error_1.ErrorMessage("No scope found", [
-                    (_h = (_g = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _g === void 0 ? void 0 : _g[0]) !== null && _h !== void 0 ? _h : 0,
-                    (_k = (_j = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _j === void 0 ? void 0 : _j[1]) !== null && _k !== void 0 ? _k : 0,
+                    (_e = (_d = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _d === void 0 ? void 0 : _d[0]) !== null && _e !== void 0 ? _e : 0,
+                    (_g = (_f = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _f === void 0 ? void 0 : _f[1]) !== null && _g !== void 0 ? _g : 0,
                 ]));
             }
             const nameTextRange = sentenceEnv.textRageOfEL(nameSquareParentheses.content);
@@ -40148,10 +40432,11 @@ const locateContainerOfHeadFragment = (head, prevLocatedContainerForSame, prevLo
         if ((0, common_1.getContainerType)(head.attr.targetType) === container_1.ContainerType.TOPLEVEL) {
             // e.g.: "附則", "別表第二"
             return currentContainer.findAncestorChildrenSub(c => {
+                var _a;
                 if (c.el.tag !== head.attr.targetType)
                     return false;
-                const titleEl = c.el.children.find(el => el instanceof el_1.EL && el.tag === `${c.el.tag}Title`);
-                return (new RegExp(`^${head.attr.name}(?:[(（]|\\s|$)`)).exec(titleEl.text()) !== null;
+                const titleEl = c.el.children.find(el => el instanceof el_1.EL && (el.tag === `${c.el.tag}Title` || el.tag === `${c.el.tag}Label`));
+                return (new RegExp(`^${head.attr.name}(?:[(（]|\\s|$)`)).exec((_a = titleEl === null || titleEl === void 0 ? void 0 : titleEl.text()) !== null && _a !== void 0 ? _a : "") !== null;
             });
         }
         else if (head.attr.targetType === "SUBITEM") {
@@ -40451,7 +40736,6 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.analyze = void 0;
 const getSentenceEnvs_1 = __importDefault(__webpack_require__(41829));
 const detectVariableReferences_1 = __importDefault(__webpack_require__(96416));
-const declarations_1 = __webpack_require__(2823);
 const locatePointerRanges_1 = __importDefault(__webpack_require__(77665));
 const detectDeclarations_1 = __importDefault(__webpack_require__(35317));
 const analyze = (elToBeModified) => {
@@ -40460,9 +40744,7 @@ const analyze = (elToBeModified) => {
     const detectTokensResult = (0, locatePointerRanges_1.default)(sentenceEnvsStruct);
     errors.push(...detectTokensResult.errors);
     const detectDeclarationsResult = (0, detectDeclarations_1.default)(sentenceEnvsStruct);
-    const declarations = new declarations_1.Declarations();
-    for (const declaration of detectDeclarationsResult.value)
-        declarations.add(declaration);
+    const declarations = detectDeclarationsResult.value;
     errors.push(...detectDeclarationsResult.errors);
     const detectVariableReferencesResult = (0, detectVariableReferences_1.default)(sentenceEnvsStruct, declarations);
     const variableReferences = detectVariableReferencesResult.value.varRefs;
@@ -40611,6 +40893,102 @@ const factory_1 = __webpack_require__(21718);
 exports.factory = new factory_1.RuleFactory();
 exports["default"] = exports.factory;
 //# sourceMappingURL=factory.js.map
+
+/***/ }),
+
+/***/ 57373:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.$ambiguousNameParenthesesContent = void 0;
+const controls_1 = __webpack_require__(48075);
+const factory_1 = __importDefault(__webpack_require__(12266));
+exports.$ambiguousNameParenthesesContent = factory_1.default
+    .withName("nameInline")
+    .sequence(s => s
+    .and(r => r
+    .zeroOrMore(r => r
+    .oneMatch(({ item }) => {
+    if (!((item instanceof controls_1.__Text)
+        && item.text().includes("をいう。"))) {
+        return item;
+    }
+    else {
+        return null;
+    }
+})), "valueRest")
+    .and(r => r
+    .choice(c => c
+    .orSequence(s => s
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)
+        && /をいう。以下同じ。$/.test(item.text())) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}), "valueLast")
+    .action(({ valueLast }) => {
+    return {
+        valueLast,
+        following: true,
+        pointerRanges: null,
+    };
+}))
+    .orSequence(s => s
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)
+        && /をいう。(?:以下)?$/.test(item.text())) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}), "valueLast")
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.____PointerRanges)) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}), "pointerRanges")
+    .andOmit(r => r
+    .oneMatch(({ item }) => {
+    if ((item instanceof controls_1.__Text)
+        && /^において同じ。$/.test(item.text())) {
+        return item;
+    }
+    else {
+        return null;
+    }
+}))
+    .action(({ valueLast, pointerRanges }) => {
+    return {
+        valueLast,
+        following: valueLast.text().endsWith("以下"),
+        pointerRanges,
+    };
+}))), "rest")
+    .action(({ valueRest, rest }) => {
+    const value = {
+        valueELs: [...valueRest, rest.valueLast],
+        following: rest.following,
+        pointerRanges: rest.pointerRanges,
+    };
+    return { value, errors: [] };
+}));
+exports["default"] = exports.$ambiguousNameParenthesesContent;
+//# sourceMappingURL=$ambiguousNameParenthesesContent.js.map
 
 /***/ }),
 
@@ -44053,17 +44431,19 @@ const _1 = __webpack_require__(49814);
 const common_1 = __webpack_require__(50638);
 const std = __importStar(__webpack_require__(93619));
 const controls_1 = __webpack_require__(48075);
-const pushRange = (ranges, range) => {
-    if (ranges.length === 0) {
-        ranges.push(range);
-    }
-    else {
-        const lastRange = ranges[ranges.length - 1];
-        if (lastRange.end.sentenceIndex === range.start.sentenceIndex && lastRange.end.textOffset === range.start.textOffset) {
-            lastRange.end = range.end;
+const pushRange = (ranges, ...rangesToAdd) => {
+    for (const range of rangesToAdd) {
+        if (ranges.length === 0) {
+            ranges.push(range);
         }
         else {
-            ranges.push(range);
+            const lastRange = ranges[ranges.length - 1];
+            if (lastRange.end.sentenceIndex === range.start.sentenceIndex && lastRange.end.textOffset === range.start.textOffset) {
+                lastRange.end = range.end;
+            }
+            else {
+                ranges.push(range);
+            }
         }
     }
 };
@@ -44175,44 +44555,96 @@ const excludeTextRanges = (origRanges, excludeRanges) => {
     return ranges;
 };
 const toSentenceTextRanges = (origRangeInfos, sentenceEnvsStruct, following) => {
-    const rangesBeforeFollowing = [];
-    for (const rangeInfo of origRangeInfos) {
-        const { from, to } = rangeInfo;
-        const origRanges = fromToContainersToTextRanges(from, to !== null && to !== void 0 ? to : null, sentenceEnvsStruct);
-        const excludeRanges = rangeInfo.exclude && (0, exports.toSentenceTextRanges)(rangeInfo.exclude, sentenceEnvsStruct);
-        if (excludeRanges) {
-            rangesBeforeFollowing.push(...excludeTextRanges(origRanges, excludeRanges));
+    if (origRangeInfos) {
+        const rangesBeforeFollowing = [];
+        for (const rangeInfo of origRangeInfos) {
+            const { from, to } = rangeInfo;
+            const origRanges = fromToContainersToTextRanges(from, to !== null && to !== void 0 ? to : null, sentenceEnvsStruct);
+            const excludeRanges = rangeInfo.exclude && (0, exports.toSentenceTextRanges)(rangeInfo.exclude, sentenceEnvsStruct);
+            if (excludeRanges) {
+                pushRange(rangesBeforeFollowing, ...excludeTextRanges(origRanges, excludeRanges));
+            }
+            else {
+                pushRange(rangesBeforeFollowing, ...origRanges);
+            }
         }
-        else {
-            rangesBeforeFollowing.push(...origRanges);
-        }
-    }
-    if (following) {
-        const ranges = [];
-        for (const origRange of rangesBeforeFollowing) {
-            if (origRange.end.sentenceIndex === following.sentenceIndex) {
-                if (origRange.end.textOffset < following.textOffset) {
+        if (following) {
+            const ranges = [];
+            for (const origRange of rangesBeforeFollowing) {
+                if (origRange.end.sentenceIndex === following.sentenceIndex) {
+                    if (origRange.end.textOffset < following.textOffset) {
+                        continue;
+                    }
+                }
+                else if (origRange.end.sentenceIndex < following.sentenceIndex) {
                     continue;
                 }
-            }
-            else if (origRange.end.sentenceIndex < following.sentenceIndex) {
-                continue;
-            }
-            const range = { start: Object.assign({}, origRange.start), end: Object.assign({}, origRange.end) };
-            if (range.start.sentenceIndex === following.sentenceIndex) {
-                if (range.start.textOffset < following.textOffset) {
+                const range = { start: Object.assign({}, origRange.start), end: Object.assign({}, origRange.end) };
+                if (range.start.sentenceIndex === following.sentenceIndex) {
+                    if (range.start.textOffset < following.textOffset) {
+                        Object.assign(range.start, following);
+                    }
+                }
+                else if (range.start.sentenceIndex < following.sentenceIndex) {
                     Object.assign(range.start, following);
                 }
+                pushRange(ranges, range);
             }
-            else if (range.start.sentenceIndex < following.sentenceIndex) {
-                Object.assign(range.start, following);
-            }
-            ranges.push(range);
+            return ranges;
         }
-        return ranges;
+        else {
+            return rangesBeforeFollowing;
+        }
     }
     else {
-        return rangesBeforeFollowing;
+        if (!following)
+            return [];
+        // const sentenceEnv = sentenceEnvsStruct.sentenceEnvs[following.sentenceIndex];
+        const start = Object.assign({}, following);
+        // const topLevelContainer = sentenceEnv.container.thisOrClosest(p => p.type === ContainerType.TOPLEVEL) ?? sentenceEnvsStruct.rootContainer;
+        const ranges = [];
+        pushRange(ranges, {
+            start,
+            end: {
+                sentenceIndex: sentenceEnvsStruct.rootContainer.sentenceRange[1],
+                textOffset: 0,
+            },
+        });
+        // if (std.isMainProvision(topLevelContainer.el)) {
+        //     const originalSupplProvisions = topLevelContainer.parent?.children.filter(c => (std.isSupplProvision(c.el) && (!c.el.attr.AmendLawNum))) ?? [];
+        //     pushRange(
+        //         ranges,
+        //         {
+        //             start,
+        //             end: {
+        //                 sentenceIndex: topLevelContainer.sentenceRange[1],
+        //                 textOffset: 0,
+        //             },
+        //         },
+        //         ...originalSupplProvisions.map(c => ({
+        //             start: {
+        //                 sentenceIndex: c.sentenceRange[0],
+        //                 textOffset: 0,
+        //             },
+        //             end: {
+        //                 sentenceIndex: c.sentenceRange[1],
+        //                 textOffset: 0,
+        //             },
+        //         })),
+        //     );
+        // } else {
+        //     pushRange(
+        //         ranges,
+        //         {
+        //             start,
+        //             end: {
+        //                 sentenceIndex: topLevelContainer.sentenceRange[1],
+        //                 textOffset: 0,
+        //             },
+        //         },
+        //     );
+        // }
+        return ranges;
     }
 };
 exports.toSentenceTextRanges = toSentenceTextRanges;
