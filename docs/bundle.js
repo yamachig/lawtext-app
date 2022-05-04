@@ -36906,7 +36906,9 @@ const ElawsPartialLawView = (props) => {
         })();
     }, [appdxTable, article, lawNum, paragraph]);
     if (loading) {
-        return react_1.default.createElement("div", null, "e-Gov\u6CD5\u4EE4API\u304B\u3089\u6CD5\u4EE4\u30C7\u30FC\u30BF\u3092\u53D6\u5F97\u3057\u3066\u3044\u307E\u3059...");
+        return react_1.default.createElement("div", { className: "text-secondary" },
+            react_1.default.createElement("span", { className: "spinner-border", style: { width: "1em", height: "1em" }, role: "status" }),
+            " e-Gov\u6CD5\u4EE4API\u304B\u3089\u6CD5\u4EE4\u30C7\u30FC\u30BF\u3092\u53D6\u5F97\u3057\u3066\u3044\u307E\u3059...");
     }
     if (!el) {
         return react_1.default.createElement("div", null, "e-Gov\u6CD5\u4EE4API\u304B\u3089\u6CD5\u4EE4\u30C7\u30FC\u30BF\u3092\u53D6\u5F97\u3067\u304D\u307E\u305B\u3093\u3067\u3057\u305F\u3002");
@@ -37082,7 +37084,7 @@ const PeekView_1 = __importDefault(__webpack_require__(87642));
 const ContainersView_1 = __importDefault(__webpack_require__(471));
 const ElawsPartialLawView_1 = __importDefault(__webpack_require__(18968));
 const Pointer = (props) => {
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
     const { el, htmlOptions, wrapperProps } = props;
     const { childProps, ChildComponent } = wrapperProps;
     const options = htmlOptions.options;
@@ -37099,11 +37101,16 @@ const Pointer = (props) => {
             let article = undefined;
             let paragraph = undefined;
             let appdxTable = undefined;
+            for (const prefix of pointerEnv.located.fqPrefixFragments) {
+                article = (_a = (prefix.attr.targetType === "Article" ? prefix.attr.name : undefined)) !== null && _a !== void 0 ? _a : article;
+                paragraph = (_b = (prefix.attr.targetType === "Paragraph" ? prefix.attr.name : undefined)) !== null && _b !== void 0 ? _b : paragraph;
+                appdxTable = (_c = (prefix.attr.targetType === "AppdxTable" ? prefix.attr.name : undefined)) !== null && _c !== void 0 ? _c : appdxTable;
+            }
             for (const child of el.children) {
                 if (child instanceof controls_1.____PF) {
-                    article = (_a = (child.attr.targetType === "Article" ? child.attr.name : undefined)) !== null && _a !== void 0 ? _a : article;
-                    paragraph = (_b = (child.attr.targetType === "Paragraph" ? child.attr.name : undefined)) !== null && _b !== void 0 ? _b : paragraph;
-                    appdxTable = (_c = (child.attr.targetType === "AppdxTable" ? child.attr.name : undefined)) !== null && _c !== void 0 ? _c : appdxTable;
+                    article = (_d = (child.attr.targetType === "Article" ? child.attr.name : undefined)) !== null && _d !== void 0 ? _d : article;
+                    paragraph = (_e = (child.attr.targetType === "Paragraph" ? child.attr.name : undefined)) !== null && _e !== void 0 ? _e : paragraph;
+                    appdxTable = (_f = (child.attr.targetType === "AppdxTable" ? child.attr.name : undefined)) !== null && _f !== void 0 ? _f : appdxTable;
                     if (!article && !paragraph && !appdxTable) {
                         runs.push(react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: [child] }, { htmlOptions })));
                     }
@@ -37127,7 +37134,7 @@ const Pointer = (props) => {
         }
         else {
             for (const child of el.children) {
-                const containerIDs = (child instanceof controls_1.____PF) && ((_e = (_d = pointerEnv.located.fragments.find(({ fragment }) => fragment === child)) === null || _d === void 0 ? void 0 : _d.containers) === null || _e === void 0 ? void 0 : _e.map((c) => c.containerID)) || null;
+                const containerIDs = (child instanceof controls_1.____PF) && ((_h = (_g = pointerEnv.located.fragments.find(({ fragment }) => fragment === child)) === null || _g === void 0 ? void 0 : _g.containers) === null || _h === void 0 ? void 0 : _h.map((c) => c.containerID)) || null;
                 if ((child instanceof controls_1.____PF) && containerIDs) {
                     const ChildComponent = props => {
                         return react_1.default.createElement(ContainersView_1.default, Object.assign({ containerIDs: containerIDs }, { htmlOptions: props.htmlOptions }));
@@ -37949,7 +37956,10 @@ const ViewerMessagesDiv = styled_components_1.default.div `
     z-index: 100;
 `;
 const ViewerMessages = props => {
-    return (react_1.default.createElement(ViewerMessagesDiv, null, Object.entries(props.messages).map(([key, message]) => (react_1.default.createElement("span", { className: "badge bg-secondary", key: key }, message)))));
+    return (react_1.default.createElement(ViewerMessagesDiv, null, Object.entries(props.messages).map(([key, message]) => (react_1.default.createElement("span", { className: "badge bg-secondary", key: key },
+        react_1.default.createElement("span", { className: "spinner-border", style: { width: "1em", height: "1em" }, role: "status" }),
+        " ",
+        message)))));
 };
 const ViewerWelcomeDiv = styled_components_1.default.div `
     /* position: fixed;
@@ -46292,7 +46302,7 @@ class PointerEnv {
                         text: f.fragment.text(),
                         containers: f.containers.map(c => c.containerID),
                     })) }) : (((_b = this.located) === null || _b === void 0 ? void 0 : _b.type) === "external")
-                ? Object.assign(Object.assign({}, this.located), { lawRef: this.located.lawRef.text(), fqPrefixFragments: this.located.fqPrefixFragments.map(f => f.json(true)) }) : null),
+                ? Object.assign(Object.assign({}, this.located), { lawRef: this.located.lawRef.text(), fqPrefixFragments: this.located.fqPrefixFragments.map(f => f.text()) }) : null),
             directLawRef: this.directLawRef ? (_c = this.directLawRef) === null || _c === void 0 ? void 0 : _c.text() : null,
             namingParent: this.namingParent ? this.namingParent.pointer.text() : null,
             namingChildren: this.namingChildren.map(c => c.pointer.text()),
@@ -46301,7 +46311,7 @@ class PointerEnv {
         };
     }
     locate(force = false) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
         if (this.located && !force)
             return;
         const fragments = this.pointer.fragments();
@@ -46535,9 +46545,9 @@ class PointerEnv {
                     const prev = (_l = this.namingParent) === null || _l === void 0 ? void 0 : _l.located;
                     if ((prev === null || prev === void 0 ? void 0 : prev.type) === "external") {
                         // e.g. "行政手続法第二条" -> "第三条"
-                        const prevFQPrefixFragments = prev.fqPrefixFragments;
-                        const fqDupIndex = prevFQPrefixFragments.findIndex(f => f.attr.targetType === fragments[0].attr.targetType);
-                        const fqPrefixFragments = (fqDupIndex < 0) ? prevFQPrefixFragments : prevFQPrefixFragments.slice(0, fqDupIndex);
+                        const prevFQFragments = [...prev.fqPrefixFragments, ...((_o = (_m = this.namingParent) === null || _m === void 0 ? void 0 : _m.pointer.fragments()) !== null && _o !== void 0 ? _o : [])];
+                        const fqDupIndex = prevFQFragments.findIndex(f => f.attr.targetType === fragments[0].attr.targetType);
+                        const fqPrefixFragments = (fqDupIndex < 0) ? prevFQFragments : prevFQFragments.slice(0, fqDupIndex);
                         this.located = {
                             type: "external",
                             lawRef: prev.lawRef,
@@ -46548,11 +46558,11 @@ class PointerEnv {
                     else {
                         if ((prev === null || prev === void 0 ? void 0 : prev.type) === "internal") {
                             // e.g. "第二条第二項" -> "第三項"
-                            const scopeContainer = (_o = ((_m = prev.fragments.slice().reverse()
-                                .find(f => f.containers.length > 0)) === null || _m === void 0 ? void 0 : _m.containers.slice(-1)[0])) !== null && _o !== void 0 ? _o : null;
+                            const scopeContainer = (_q = ((_p = prev.fragments.slice().reverse()
+                                .find(f => f.containers.length > 0)) === null || _p === void 0 ? void 0 : _p.containers.slice(-1)[0])) !== null && _q !== void 0 ? _q : null;
                             const func = (c) => ((c.el.tag === fragments[0].attr.targetType)
                                 && ((c.num || null) === fragments[0].attr.num));
-                            const container = scopeContainer && ((_q = (_p = scopeContainer.children.find(func)) !== null && _p !== void 0 ? _p : scopeContainer.findAncestorChildrenSub(func)) !== null && _q !== void 0 ? _q : null);
+                            const container = scopeContainer && ((_s = (_r = scopeContainer.children.find(func)) !== null && _r !== void 0 ? _r : scopeContainer.findAncestorChildrenSub(func)) !== null && _s !== void 0 ? _s : null);
                             if (container) {
                                 this.located = {
                                     type: "internal",
@@ -46566,7 +46576,7 @@ class PointerEnv {
                             const scopeContainer = this.sentenceEnv.container;
                             const func = (c) => ((c.el.tag === fragments[0].attr.targetType)
                                 && ((c.num || null) === fragments[0].attr.num));
-                            const container = ((_s = (_r = scopeContainer.children.find(func)) !== null && _r !== void 0 ? _r : scopeContainer.findAncestorChildrenSub(func)) !== null && _s !== void 0 ? _s : null);
+                            const container = ((_u = (_t = scopeContainer.children.find(func)) !== null && _t !== void 0 ? _t : scopeContainer.findAncestorChildrenSub(func)) !== null && _u !== void 0 ? _u : null);
                             if (!container) {
                                 // console.warn(`Not located ${this.pointer.text()}`);
                                 return;
