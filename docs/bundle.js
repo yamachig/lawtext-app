@@ -40851,6 +40851,19 @@ const getPointerEnvsForEL = (el, sentenceEnv, __prevPointerEnv, __namingParent) 
     if (el instanceof controls_1.____PointerRanges) {
         const pointerRanges = el;
         pointerRangesList.push(pointerRanges);
+        // A PointerRanges establishes a new naming context if no naming parent is given.
+        // e.g.
+        //     "第七十五条第一項又は第七十六条第四項（第四号を除く。）若しくは第五項（第五号を除く。）"
+        //     -> "第五項" referes to "第七十六条第五項"
+        // Not the case:
+        //     "第三十八条の二十一第一項の規定は第二項の規定による" at "第四条の二第五項"
+        //     -> "第二項" referes to "第四条の二第二項" because "第二項" is not included in the previous PointerRanges.
+        //
+        // If a naming parent is given, the given naming parent is inherited.
+        // e.g.
+        //     "第二十四条の二第二項各号（第二号を除く。）のいずれかに該当するに至つたとき"
+        //     -> "第二号" referes to "第二十四条の二第二項第二号" because the Parentheses gives the naming parent.
+        let pointerRangesNamingParent = namingParent;
         for (const pointerRange of pointerRanges.ranges()) {
             for (const pointer of pointerRange.pointers()) {
                 const fragments = pointer.fragments();
@@ -40863,22 +40876,9 @@ const getPointerEnvsForEL = (el, sentenceEnv, __prevPointerEnv, __namingParent) 
                     pointer,
                     sentenceEnv,
                 });
-                // A PointerRanges establishes a new naming context if no naming parent is given.
-                // e.g.
-                //     "第七十五条第一項又は第七十六条第四項（第四号を除く。）若しくは第五項（第五号を除く。）"
-                //     -> "第五項" referes to "第七十六条第五項"
-                // Not the case:
-                //     "第三十八条の二十一第一項の規定は第二項の規定による" at "第四条の二第五項"
-                //     -> "第二項" referes to "第四条の二第二項" because "第二項" is not included in the previous PointerRanges.
-                //
-                // If a naming parent is given, the given naming parent is inherited.
-                // e.g.
-                //     "第二十四条の二第二項各号（第二号を除く。）のいずれかに該当するに至つたとき"
-                //     -> "第二号" referes to "第二十四条の二第二項第二号" because the Parentheses gives the naming parent.
-                const newNamingParent = lastPointerEnv !== null && lastPointerEnv !== void 0 ? lastPointerEnv : namingParent;
-                if (newNamingParent) {
-                    pointerEnv.namingParent = newNamingParent;
-                    newNamingParent.namingChildren.push(pointerEnv);
+                if (pointerRangesNamingParent) {
+                    pointerEnv.namingParent = pointerRangesNamingParent;
+                    pointerRangesNamingParent.namingChildren.push(pointerEnv);
                 }
                 const lastOrPrevPointerEnv = lastPointerEnv !== null && lastPointerEnv !== void 0 ? lastPointerEnv : prevPointerEnv;
                 if (lastOrPrevPointerEnv) {
@@ -40888,16 +40888,17 @@ const getPointerEnvsForEL = (el, sentenceEnv, __prevPointerEnv, __namingParent) 
                 if (!firstPointerEnv)
                     firstPointerEnv = pointerEnv;
                 lastPointerEnv = pointerEnv;
+                pointerRangesNamingParent = pointerEnv;
                 pointerEnvByEL.set(pointer, pointerEnv);
             }
             {
                 const modifierParentheses = pointerRange.modifierParentheses();
                 if (modifierParentheses) {
-                    const newNamingParent = lastPointerEnv !== null && lastPointerEnv !== void 0 ? lastPointerEnv : namingParent;
-                    const result = getPointerEnvsForEL(modifierParentheses, sentenceEnv, lastPointerEnv, newNamingParent);
+                    const result = getPointerEnvsForEL(modifierParentheses, sentenceEnv, lastPointerEnv, pointerRangesNamingParent);
                     if (result) {
                         if (!firstPointerEnv)
                             firstPointerEnv = result.value.firstPointerEnv;
+                        // Not update pointerRangesNamingParent
                         lastPointerEnv = result.value.lastPointerEnv;
                         for (const [k, v] of result.value.pointerEnvByEL) {
                             pointerEnvByEL.set(k, v);
@@ -40921,8 +40922,8 @@ const getPointerEnvsForEL = (el, sentenceEnv, __prevPointerEnv, __namingParent) 
             // e.g.
             //     "第二十四条の二第二項各号（第二号を除く。）のいずれかに該当するに至つたとき"
             //     -> "第二号" referes to "第二十四条の二第二項第二号"
-            const newNamingParent = ((child instanceof controls_1.__Parentheses) && lastPointerEnv) ? lastPointerEnv : namingParent;
-            const result = getPointerEnvsForEL(child, sentenceEnv, lastPointerEnv, newNamingParent);
+            const parenthesesNamingParent = ((child instanceof controls_1.__Parentheses) && lastPointerEnv) ? lastPointerEnv : namingParent;
+            const result = getPointerEnvsForEL(child, sentenceEnv, lastPointerEnv, parenthesesNamingParent);
             if (result) {
                 if (!firstPointerEnv)
                     firstPointerEnv = result.value.firstPointerEnv;
@@ -46461,7 +46462,7 @@ class PointerEnv {
                 }
                 else {
                     // e.g. "別表第一"
-                    const container = this.sentenceEnv.container.findAncestorChildrenSub(c => {
+                    const container = this.sentenceEnv.container.findAncestorChildren(c => {
                         var _a;
                         if (c.el.tag !== fragments[0].attr.targetType)
                             return false;
@@ -46500,7 +46501,7 @@ class PointerEnv {
                     else if (prev.type === "internal") {
                         const scopeContainer = (_f = ((_e = prev.fragments.slice().reverse()
                             .find(f => f.containers.length > 0)) === null || _e === void 0 ? void 0 : _e.containers.slice(-1)[0])) !== null && _f !== void 0 ? _f : null;
-                        const container = scopeContainer && ((_h = (_g = scopeContainer.children.find(c => c.name === fragments[0].attr.name)) !== null && _g !== void 0 ? _g : scopeContainer.findAncestorChildrenSub(c => c.name === fragments[0].attr.name)) !== null && _h !== void 0 ? _h : null);
+                        const container = scopeContainer && ((_h = (_g = scopeContainer.children.find(c => c.name === fragments[0].attr.name)) !== null && _g !== void 0 ? _g : scopeContainer.findAncestorChildren(c => c.name === fragments[0].attr.name)) !== null && _h !== void 0 ? _h : null);
                         if (!container) {
                             // console.warn(`Not located ${this.pointer.text()}`);
                             return;
@@ -46513,7 +46514,7 @@ class PointerEnv {
                 }
                 else {
                     const scopeContainer = this.sentenceEnv.container;
-                    const container = ((_k = (_j = scopeContainer.children.find(c => c.name === fragments[0].attr.name)) !== null && _j !== void 0 ? _j : scopeContainer.findAncestorChildrenSub(c => c.name === fragments[0].attr.name)) !== null && _k !== void 0 ? _k : null);
+                    const container = ((_k = (_j = scopeContainer.children.find(c => c.name === fragments[0].attr.name)) !== null && _j !== void 0 ? _j : scopeContainer.findAncestorChildren(c => c.name === fragments[0].attr.name)) !== null && _k !== void 0 ? _k : null);
                     if (!container) {
                         // console.warn(`Not located ${this.pointer.text()}`);
                         return;
@@ -46562,7 +46563,7 @@ class PointerEnv {
                                 .find(f => f.containers.length > 0)) === null || _p === void 0 ? void 0 : _p.containers.slice(-1)[0])) !== null && _q !== void 0 ? _q : null;
                             const func = (c) => ((c.el.tag === fragments[0].attr.targetType)
                                 && ((c.num || null) === fragments[0].attr.num));
-                            const container = scopeContainer && ((_s = (_r = scopeContainer.children.find(func)) !== null && _r !== void 0 ? _r : scopeContainer.findAncestorChildrenSub(func)) !== null && _s !== void 0 ? _s : null);
+                            const container = scopeContainer && ((_s = (_r = scopeContainer.children.find(func)) !== null && _r !== void 0 ? _r : scopeContainer.findAncestorChildren(func)) !== null && _s !== void 0 ? _s : null);
                             if (container) {
                                 this.located = {
                                     type: "internal",
@@ -46576,7 +46577,7 @@ class PointerEnv {
                             const scopeContainer = this.sentenceEnv.container;
                             const func = (c) => ((c.el.tag === fragments[0].attr.targetType)
                                 && ((c.num || null) === fragments[0].attr.num));
-                            const container = ((_u = (_t = scopeContainer.children.find(func)) !== null && _t !== void 0 ? _t : scopeContainer.findAncestorChildrenSub(func)) !== null && _u !== void 0 ? _u : null);
+                            const container = ((_u = (_t = scopeContainer.children.find(func)) !== null && _t !== void 0 ? _t : scopeContainer.findAncestorChildren(func)) !== null && _u !== void 0 ? _u : null);
                             if (!container) {
                                 // console.warn(`Not located ${this.pointer.text()}`);
                                 return;
