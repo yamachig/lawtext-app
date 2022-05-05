@@ -46312,7 +46312,7 @@ class PointerEnv {
         };
     }
     locate(force = false) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z;
         if (this.located && !force)
             return;
         const fragments = this.pointer.fragments();
@@ -46462,13 +46462,14 @@ class PointerEnv {
                 }
                 else {
                     // e.g. "別表第一"
-                    const container = this.sentenceEnv.container.findAncestorChildren(c => {
+                    const func = (c) => {
                         var _a;
                         if (c.el.tag !== fragments[0].attr.targetType)
                             return false;
                         const titleEl = c.el.children.find(el => el instanceof el_1.EL && (el.tag === `${c.el.tag}Title` || el.tag === `${c.el.tag}Label`));
                         return (new RegExp(`^${fragments[0].attr.name}(?:[(（]|\\s|$)`)).exec((_a = titleEl === null || titleEl === void 0 ? void 0 : titleEl.text()) !== null && _a !== void 0 ? _a : "") !== null;
-                    });
+                    };
+                    const container = ((_d = this.sentenceEnv.container.findAncestorChildren(func)) !== null && _d !== void 0 ? _d : this.sentenceEnv.container.findAncestorChildrenSub(func));
                     if (!container) {
                         // console.warn(`Not located ${this.pointer.text()}`);
                         return;
@@ -46485,7 +46486,7 @@ class PointerEnv {
                 let located = false;
                 if (this.namingParent)
                     this.namingParent.locate(force);
-                const prev = (_d = this.namingParent) === null || _d === void 0 ? void 0 : _d.located;
+                const prev = (_e = this.namingParent) === null || _e === void 0 ? void 0 : _e.located;
                 if (prev) {
                     if (prev.type === "external") {
                         const prevFQPrefixFragments = prev.fqPrefixFragments;
@@ -46499,9 +46500,10 @@ class PointerEnv {
                         located = true;
                     }
                     else if (prev.type === "internal") {
-                        const scopeContainer = (_f = ((_e = prev.fragments.slice().reverse()
-                            .find(f => f.containers.length > 0)) === null || _e === void 0 ? void 0 : _e.containers.slice(-1)[0])) !== null && _f !== void 0 ? _f : null;
-                        const container = scopeContainer && ((_h = (_g = scopeContainer.children.find(c => c.name === fragments[0].attr.name)) !== null && _g !== void 0 ? _g : scopeContainer.findAncestorChildren(c => c.name === fragments[0].attr.name)) !== null && _h !== void 0 ? _h : null);
+                        const scopeContainer = (_g = ((_f = prev.fragments.slice().reverse()
+                            .find(f => f.containers.length > 0)) === null || _f === void 0 ? void 0 : _f.containers.slice(-1)[0])) !== null && _g !== void 0 ? _g : null;
+                        const func = (c) => c.name === fragments[0].attr.name;
+                        const container = scopeContainer && ((_k = (_j = (_h = scopeContainer.children.find(func)) !== null && _h !== void 0 ? _h : scopeContainer.findAncestorChildren(func)) !== null && _j !== void 0 ? _j : scopeContainer.findAncestorChildrenSub(func)) !== null && _k !== void 0 ? _k : null);
                         if (!container) {
                             // console.warn(`Not located ${this.pointer.text()}`);
                             return;
@@ -46514,7 +46516,8 @@ class PointerEnv {
                 }
                 else {
                     const scopeContainer = this.sentenceEnv.container;
-                    const container = ((_k = (_j = scopeContainer.children.find(c => c.name === fragments[0].attr.name)) !== null && _j !== void 0 ? _j : scopeContainer.findAncestorChildren(c => c.name === fragments[0].attr.name)) !== null && _k !== void 0 ? _k : null);
+                    const func = (c) => c.name === fragments[0].attr.name;
+                    const container = ((_o = (_m = (_l = scopeContainer.children.find(func)) !== null && _l !== void 0 ? _l : scopeContainer.findAncestorChildren(func)) !== null && _m !== void 0 ? _m : scopeContainer.findAncestorChildrenSub(func)) !== null && _o !== void 0 ? _o : null);
                     if (!container) {
                         // console.warn(`Not located ${this.pointer.text()}`);
                         return;
@@ -46543,10 +46546,10 @@ class PointerEnv {
                     let located = false;
                     if (this.namingParent)
                         this.namingParent.locate(force);
-                    const prev = (_l = this.namingParent) === null || _l === void 0 ? void 0 : _l.located;
+                    const prev = (_p = this.namingParent) === null || _p === void 0 ? void 0 : _p.located;
                     if ((prev === null || prev === void 0 ? void 0 : prev.type) === "external") {
                         // e.g. "行政手続法第二条" -> "第三条"
-                        const prevFQFragments = [...prev.fqPrefixFragments, ...((_o = (_m = this.namingParent) === null || _m === void 0 ? void 0 : _m.pointer.fragments()) !== null && _o !== void 0 ? _o : [])];
+                        const prevFQFragments = [...prev.fqPrefixFragments, ...((_r = (_q = this.namingParent) === null || _q === void 0 ? void 0 : _q.pointer.fragments()) !== null && _r !== void 0 ? _r : [])];
                         const fqDupIndex = prevFQFragments.findIndex(f => f.attr.targetType === fragments[0].attr.targetType);
                         const fqPrefixFragments = (fqDupIndex < 0) ? prevFQFragments : prevFQFragments.slice(0, fqDupIndex);
                         this.located = {
@@ -46559,11 +46562,11 @@ class PointerEnv {
                     else {
                         if ((prev === null || prev === void 0 ? void 0 : prev.type) === "internal") {
                             // e.g. "第二条第二項" -> "第三項"
-                            const scopeContainer = (_q = ((_p = prev.fragments.slice().reverse()
-                                .find(f => f.containers.length > 0)) === null || _p === void 0 ? void 0 : _p.containers.slice(-1)[0])) !== null && _q !== void 0 ? _q : null;
+                            const scopeContainer = (_t = ((_s = prev.fragments.slice().reverse()
+                                .find(f => f.containers.length > 0)) === null || _s === void 0 ? void 0 : _s.containers.slice(-1)[0])) !== null && _t !== void 0 ? _t : null;
                             const func = (c) => ((c.el.tag === fragments[0].attr.targetType)
                                 && ((c.num || null) === fragments[0].attr.num));
-                            const container = scopeContainer && ((_s = (_r = scopeContainer.children.find(func)) !== null && _r !== void 0 ? _r : scopeContainer.findAncestorChildren(func)) !== null && _s !== void 0 ? _s : null);
+                            const container = scopeContainer && ((_w = (_v = (_u = scopeContainer.children.find(func)) !== null && _u !== void 0 ? _u : scopeContainer.findAncestorChildren(func)) !== null && _v !== void 0 ? _v : scopeContainer.findAncestorChildrenSub(func)) !== null && _w !== void 0 ? _w : null);
                             if (container) {
                                 this.located = {
                                     type: "internal",
@@ -46577,7 +46580,7 @@ class PointerEnv {
                             const scopeContainer = this.sentenceEnv.container;
                             const func = (c) => ((c.el.tag === fragments[0].attr.targetType)
                                 && ((c.num || null) === fragments[0].attr.num));
-                            const container = ((_u = (_t = scopeContainer.children.find(func)) !== null && _t !== void 0 ? _t : scopeContainer.findAncestorChildren(func)) !== null && _u !== void 0 ? _u : null);
+                            const container = ((_z = (_y = (_x = scopeContainer.children.find(func)) !== null && _x !== void 0 ? _x : scopeContainer.findAncestorChildren(func)) !== null && _y !== void 0 ? _y : scopeContainer.findAncestorChildrenSub(func)) !== null && _z !== void 0 ? _z : null);
                             if (!container) {
                                 // console.warn(`Not located ${this.pointer.text()}`);
                                 return;
