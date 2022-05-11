@@ -36934,11 +36934,12 @@ exports.LawNum = void 0;
 const react_1 = __importDefault(__webpack_require__(67294));
 const styled_components_1 = __importDefault(__webpack_require__(58804));
 const sentenceChildrenRun_1 = __webpack_require__(95041);
+const num_1 = __webpack_require__(68685);
 const LawNumA = styled_components_1.default.a `
 `;
 const LawNum = (props) => {
     const { el, htmlOptions } = props;
-    return (react_1.default.createElement(LawNumA, { href: `#/${el.text()}`, target: "_blank" },
+    return (react_1.default.createElement(LawNumA, { href: `#/${(0, num_1.toStdLawNum)(el.text())}`, target: "_blank" },
         react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))));
 };
 exports.LawNum = LawNum;
@@ -37093,8 +37094,7 @@ const Pointer = (props) => {
     if (pointerEnv && pointerEnv.located) {
         const runs = [];
         if (pointerEnv.located.type === "external") {
-            const declaration = analysis.declarations.get(pointerEnv.located.lawRef.attr.includingDeclarationID);
-            const lawNum = declaration === null || declaration === void 0 ? void 0 : declaration.attr.value;
+            const lawNum = pointerEnv.located.lawNum;
             if (!lawNum) {
                 return react_1.default.createElement(ChildComponent, Object.assign({}, childProps));
             }
@@ -40086,6 +40086,7 @@ const _lawRef_1 = __importDefault(__webpack_require__(78140));
 const env_1 = __webpack_require__(37025);
 const sentenceEnv_1 = __webpack_require__(6310);
 const getScope_1 = __importDefault(__webpack_require__(70634));
+const num_1 = __webpack_require__(68685);
 const getLawNameLength = (lawNum) => {
     var _a;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
@@ -40162,7 +40163,7 @@ const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct, pointerE
                     const firstPointer = pointerRanges.ranges()[0].pointers()[0];
                     const pointerEnv = pointerEnvsStruct.pointerEnvByEL.get(firstPointer);
                     if (pointerEnv) {
-                        pointerEnv.directLawRef = lawRef;
+                        pointerEnv.directLawNum = (0, num_1.toStdLawNum)(lawNumText);
                     }
                 }
             }
@@ -40232,7 +40233,7 @@ const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct, pointerE
                         const firstPointer = pointerRanges.ranges()[0].pointers()[0];
                         const pointerEnv = pointerEnvsStruct.pointerEnvByEL.get(firstPointer);
                         if (pointerEnv) {
-                            pointerEnv.directLawRef = lawRef;
+                            pointerEnv.directLawNum = (0, num_1.toStdLawNum)(lawNumText);
                         }
                     }
                 }
@@ -40498,6 +40499,7 @@ const varRef_1 = __webpack_require__(29390);
 const controls_1 = __webpack_require__(48075);
 const sentenceEnv_1 = __webpack_require__(6310);
 const common_1 = __webpack_require__(50638);
+const num_1 = __webpack_require__(68685);
 const matchVariableReferences = (textEL, sentenceEnv, declarations) => {
     var _a, _b;
     const errors = [];
@@ -40601,16 +40603,18 @@ const detectVariableReferencesOfEL = (elToBeModified, sentenceEnv, declarations,
                     errors.push(...match.errors);
                     elToBeModified.children.splice(childIndex, 1, ...match.value.newItems);
                     const lastNewItem = match.value.newItems[match.value.newItems.length - 1];
-                    if (lastNewItem instanceof varRef_1.____VarRef && declarations.get(lastNewItem.attr.declarationID).attr.type === "LawName") {
-                        const pointerRangesIndex = childIndex + match.value.newItems.length;
-                        if ((pointerRangesIndex < elToBeModified.children.length)
-                            && (elToBeModified.children[pointerRangesIndex] instanceof controls_1.____PointerRanges)) {
-                            const pointerRanges = elToBeModified.children[pointerRangesIndex];
-                            const firstPointer = pointerRanges.ranges()[0].pointers()[0];
-                            const pointerEnv = pointerEnvsStruct.pointerEnvByEL.get(firstPointer);
-                            const lawRef = lawRefByDeclarationID.get(lastNewItem.attr.declarationID);
-                            if (pointerEnv && lawRef) {
-                                pointerEnv.directLawRef = lawRef;
+                    if (lastNewItem instanceof varRef_1.____VarRef) {
+                        const declaration = declarations.get(lastNewItem.attr.declarationID);
+                        if (declaration.attr.type === "LawName") {
+                            const pointerRangesIndex = childIndex + match.value.newItems.length;
+                            if ((pointerRangesIndex < elToBeModified.children.length)
+                                && (elToBeModified.children[pointerRangesIndex] instanceof controls_1.____PointerRanges)) {
+                                const pointerRanges = elToBeModified.children[pointerRangesIndex];
+                                const firstPointer = pointerRanges.ranges()[0].pointers()[0];
+                                const pointerEnv = pointerEnvsStruct.pointerEnvByEL.get(firstPointer);
+                                if (pointerEnv && declaration.attr.value) {
+                                    pointerEnv.directLawNum = (0, num_1.toStdLawNum)(declaration.attr.value);
+                                }
                             }
                         }
                     }
@@ -40840,7 +40844,7 @@ const num_1 = __webpack_require__(68685);
 const controls_1 = __webpack_require__(48075);
 const pointerEnv_1 = __webpack_require__(48102);
 const common_1 = __webpack_require__(50638);
-const getPointerEnvsForEL = (el, sentenceEnv, __prevPointerEnv, __namingParent) => {
+const getPointerEnvsForEL = (el, prevLawNum, sentenceEnv, __prevPointerEnv, __namingParent) => {
     const prevPointerEnv = __prevPointerEnv;
     const namingParent = __namingParent;
     const pointerEnvByEL = new Map();
@@ -40864,8 +40868,8 @@ const getPointerEnvsForEL = (el, sentenceEnv, __prevPointerEnv, __namingParent) 
         //     "第二十四条の二第二項各号（第二号を除く。）のいずれかに該当するに至つたとき"
         //     -> "第二号" referes to "第二十四条の二第二項第二号" because the Parentheses gives the naming parent.
         let pointerRangesNamingParent = namingParent;
-        for (const pointerRange of pointerRanges.ranges()) {
-            for (const pointer of pointerRange.pointers()) {
+        for (const [iRange, pointerRange] of pointerRanges.ranges().entries()) {
+            for (const [iPointer, pointer] of pointerRange.pointers().entries()) {
                 const fragments = pointer.fragments();
                 for (const fragment of fragments) {
                     const num = (0, num_1.parseNamedNum)(fragment.attr.name);
@@ -40876,6 +40880,9 @@ const getPointerEnvsForEL = (el, sentenceEnv, __prevPointerEnv, __namingParent) 
                     pointer,
                     sentenceEnv,
                 });
+                if (prevLawNum && iRange === 0 && iPointer === 0) {
+                    pointerEnv.directLawNum = (0, num_1.toStdLawNum)(prevLawNum.text());
+                }
                 if (pointerRangesNamingParent) {
                     pointerEnv.namingParent = pointerRangesNamingParent;
                     pointerRangesNamingParent.namingChildren.push(pointerEnv);
@@ -40894,7 +40901,7 @@ const getPointerEnvsForEL = (el, sentenceEnv, __prevPointerEnv, __namingParent) 
             {
                 const modifierParentheses = pointerRange.modifierParentheses();
                 if (modifierParentheses) {
-                    const result = getPointerEnvsForEL(modifierParentheses, sentenceEnv, lastPointerEnv, pointerRangesNamingParent);
+                    const result = getPointerEnvsForEL(modifierParentheses, null, sentenceEnv, lastPointerEnv, pointerRangesNamingParent);
                     if (result) {
                         if (!firstPointerEnv)
                             firstPointerEnv = result.value.firstPointerEnv;
@@ -40911,7 +40918,7 @@ const getPointerEnvsForEL = (el, sentenceEnv, __prevPointerEnv, __namingParent) 
         }
     }
     else {
-        for (const child of el.children) {
+        for (const [i, child] of el.children.entries()) {
             if (typeof child === "string") {
                 continue;
             }
@@ -40923,7 +40930,9 @@ const getPointerEnvsForEL = (el, sentenceEnv, __prevPointerEnv, __namingParent) 
             //     "第二十四条の二第二項各号（第二号を除く。）のいずれかに該当するに至つたとき"
             //     -> "第二号" referes to "第二十四条の二第二項第二号"
             const parenthesesNamingParent = ((child instanceof controls_1.__Parentheses) && lastPointerEnv) ? lastPointerEnv : namingParent;
-            const result = getPointerEnvsForEL(child, sentenceEnv, lastPointerEnv, parenthesesNamingParent);
+            const result = getPointerEnvsForEL(child, (((i > 0) && (el.children[i - 1] instanceof controls_1.____LawNum))
+                ? el.children[i - 1]
+                : null), sentenceEnv, lastPointerEnv, parenthesesNamingParent);
             if (result) {
                 if (!firstPointerEnv)
                     firstPointerEnv = result.value.firstPointerEnv;
@@ -40963,7 +40972,7 @@ const getPointerEnvs = (sentenceEnvsStruct) => {
         const containerID = sentenceEnv.container.containerID;
         if (containerID !== prevContainerID)
             prevPointerEnv = null;
-        const result = getPointerEnvsForEL(sentenceEnv.el, sentenceEnv, prevPointerEnv, null);
+        const result = getPointerEnvsForEL(sentenceEnv.el, null, sentenceEnv, prevPointerEnv, null);
         if (result) {
             for (const [k, v] of result.value.pointerEnvByEL) {
                 pointerEnvByEL.set(k, v);
@@ -43358,10 +43367,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.articleGroupTitleTag = exports.articleGroupType = exports.setItemNum = exports.parseLawNum = exports.parseNamedNum = exports.KanaMode = exports.replaceWideNum = exports.reWideDigits = exports.parseRomanNum = exports.aiuChars = exports.irohaChars = exports.parseKanjiNum = exports.getLawtype = exports.lawTypes = exports.eras = exports.ptnLawNum = void 0;
+exports.articleGroupTitleTag = exports.articleGroupType = exports.setItemNum = exports.parseLawNum = exports.parseNamedNum = exports.KanaMode = exports.replaceWideNum = exports.reWideDigits = exports.parseRomanNum = exports.aiuChars = exports.irohaChars = exports.circledDigitChars = exports.parseKanjiNum = exports.getLawtype = exports.lawTypes = exports.eras = exports.toStdLawNum = exports.ptnLawNum = void 0;
 const std = __importStar(__webpack_require__(93619));
 const util_1 = __webpack_require__(84530);
-exports.ptnLawNum = "(明治|大正|昭和|平成|令和)([一二三四五六七八九十]+)年([^ 　\t\r\n<>()（）[\\]［］{}｛｝「」]+?)(?:第([一二三四五六七八九十百千]+)号)";
+exports.ptnLawNum = "(?:(?:(明治|大正|昭和|平成|令和)([一二三四五六七八九十]+)年([^ 　\t\r\n<>()（）[\\]［］{}｛｝「」]+?)(?:第([一二三四五六七八九十百千]+)号))|(?:日本国憲法))";
+const toStdLawNum = (lawNum) => {
+    if (/日本国憲法$/.test(lawNum)) {
+        return "昭和二十一年憲法";
+    }
+    else {
+        return lawNum;
+    }
+};
+exports.toStdLawNum = toStdLawNum;
 // export const reLawnum = /(?:(?:明治|大正|昭和|平成|令和)[元〇一二三四五六七八九十]+年(?:(?:\S+?第[〇一二三四五六七八九十百千]+号|人事院規則[―〇一二三四五六七八九]+)|[一二三四五六七八九十]+月[一二三四五六七八九十]+日内閣総理大臣決定|憲法)|明治三十二年勅令|大正十二年内務省・鉄道省令|昭和五年逓信省・鉄道省令|昭和九年逓信省・農林省令|人事院規則一〇―一五)/;
 exports.eras = {
     "明治": "Meiji", "大正": "Taisho",
@@ -43402,11 +43420,13 @@ const kanjiDigitToNumDict = {
     "〇": 0, "一": 1, "二": 2, "三": 3, "四": 4,
     "五": 5, "六": 6, "七": 7, "八": 8, "九": 9,
 };
+exports.circledDigitChars = "⓪①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚㉛㉜㉝㉞㉟㊱㊲㊳㊴㊵㊶㊷㊸㊹㊺㊻㊼㊽㊾㊿";
 exports.irohaChars = "イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセスン";
 exports.aiuChars = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
 const reNamedNum = /^(○?)第?([一二三四五六七八九十百千]+)\S*?([のノ一二三四五六七八九十百千]*)$/;
 const reIrohaChar = new RegExp(`[${exports.irohaChars}]`);
 const reAiuChar = new RegExp(`[${exports.aiuChars}]`);
+const reCircledDigit = new RegExp(`[${exports.circledDigitChars}]`);
 const reItemNum = /^\D*(\d+)\D*$/;
 const parseRomanNum = (text) => {
     let num = 0;
@@ -43499,6 +43519,11 @@ const parseNamedNum = (text, kanaMode = KanaMode.Iroha) => {
         }
         else {
             throw (0, util_1.assertNever)(kanaMode);
+        }
+        m = reCircledDigit.exec(subtext);
+        if (m) {
+            numsGroup.push(String(exports.circledDigitChars.indexOf(m[0])));
+            continue;
         }
         const replacedSubtext = (0, exports.replaceWideNum)(subtext);
         m = reItemNum.exec(replacedSubtext);
@@ -43783,7 +43808,7 @@ __exportStar(__webpack_require__(35865), exports);
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.isSubitem1Sentence = exports.isSubitem1Title = exports.isSubitem1 = exports.isItemSentence = exports.isItemTitle = exports.isItem = exports.isClassSentence = exports.isClassTitle = exports.isClass = exports.isNewProvision = exports.isAmendProvisionSentence = exports.isAmendProvision = exports.isSupplNote = exports.isParagraphSentence = exports.isParagraphNum = exports.isParagraphCaption = exports.isParagraph = exports.isArticleCaption = exports.isArticleTitle = exports.isArticle = exports.isDivisionTitle = exports.isDivision = exports.isSubsectionTitle = exports.isSubsection = exports.isSectionTitle = exports.isSection = exports.isChapterTitle = exports.isChapter = exports.isPartTitle = exports.isPart = exports.isMainProvision = exports.isPreamble = exports.isArticleRange = exports.isTOCAppdxTableLabel = exports.isTOCSupplProvision = exports.isTOCArticle = exports.isTOCDivision = exports.isTOCSubsection = exports.isTOCSection = exports.isTOCChapter = exports.isTOCPart = exports.isTOCPreambleLabel = exports.isTOCLabel = exports.isTOC = exports.isEnactStatement = exports.isLawTitle = exports.isLawBody = exports.isLawNum = exports.isLaw = exports.isControl = void 0;
 exports.isTableStruct = exports.isAppdxFigTitle = exports.isAppdxFig = exports.isArithFormula = exports.isArithFormulaNum = exports.isAppdx = exports.isAppdxFormatTitle = exports.isAppdxFormat = exports.isAppdxStyleTitle = exports.isAppdxStyle = exports.isAppdxNoteTitle = exports.isAppdxNote = exports.isAppdxTableTitle = exports.isAppdxTable = exports.isSupplProvisionAppdx = exports.isSupplProvisionAppdxStyleTitle = exports.isSupplProvisionAppdxStyle = exports.isSupplProvisionAppdxTableTitle = exports.isSupplProvisionAppdxTable = exports.isSupplProvisionLabel = exports.isSupplProvision = exports.isColumn = exports.isSentence = exports.isSubitem10Sentence = exports.isSubitem10Title = exports.isSubitem10 = exports.isSubitem9Sentence = exports.isSubitem9Title = exports.isSubitem9 = exports.isSubitem8Sentence = exports.isSubitem8Title = exports.isSubitem8 = exports.isSubitem7Sentence = exports.isSubitem7Title = exports.isSubitem7 = exports.isSubitem6Sentence = exports.isSubitem6Title = exports.isSubitem6 = exports.isSubitem5Sentence = exports.isSubitem5Title = exports.isSubitem5 = exports.isSubitem4Sentence = exports.isSubitem4Title = exports.isSubitem4 = exports.isSubitem3Sentence = exports.isSubitem3Title = exports.isSubitem3 = exports.isSubitem2Sentence = exports.isSubitem2Title = exports.isSubitem2 = void 0;
-exports.makeIsStdEL = exports.isStdEL = exports.newStdEL = exports.stdELTags = exports.isSub = exports.isSup = exports.isLine = exports.isRt = exports.isRuby = exports.isQuoteStruct = exports.isSublist3Sentence = exports.isSublist3 = exports.isSublist2Sentence = exports.isSublist2 = exports.isSublist1Sentence = exports.isSublist1 = exports.isListSentence = exports.isList = exports.isRemarksLabel = exports.isRemarks = exports.isRelatedArticleNum = exports.isFormat = exports.isFormatStructTitle = exports.isFormatStruct = exports.isStyle = exports.isStyleStructTitle = exports.isStyleStruct = exports.isNote = exports.isNoteStructTitle = exports.isNoteStruct = exports.isFig = exports.isFigStructTitle = exports.isFigStruct = exports.isTableColumn = exports.isTableHeaderColumn = exports.isTableHeaderRow = exports.isTableRow = exports.isTable = exports.isTableStructTitle = void 0;
+exports.makeIsStdEL = exports.isStdEL = exports.newStdEL = exports.defaultAttrs = exports.stdELTags = exports.isSub = exports.isSup = exports.isLine = exports.isRt = exports.isRuby = exports.isQuoteStruct = exports.isSublist3Sentence = exports.isSublist3 = exports.isSublist2Sentence = exports.isSublist2 = exports.isSublist1Sentence = exports.isSublist1 = exports.isListSentence = exports.isList = exports.isRemarksLabel = exports.isRemarks = exports.isRelatedArticleNum = exports.isFormat = exports.isFormatStructTitle = exports.isFormatStruct = exports.isStyle = exports.isStyleStructTitle = exports.isStyleStruct = exports.isNote = exports.isNoteStructTitle = exports.isNoteStruct = exports.isFig = exports.isFigStructTitle = exports.isFigStruct = exports.isTableColumn = exports.isTableHeaderColumn = exports.isTableHeaderRow = exports.isTableRow = exports.isTable = exports.isTableStructTitle = void 0;
 const el_1 = __webpack_require__(18539);
 const isControl = (obj) => {
     return (typeof obj !== "string") && obj.isControl;
@@ -43793,538 +43818,770 @@ const isLaw = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Law");
 };
 exports.isLaw = isLaw;
+const defaultAttrOfLaw = {};
 const isLawNum = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "LawNum");
 };
 exports.isLawNum = isLawNum;
+const defaultAttrOfLawNum = {};
 const isLawBody = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "LawBody");
 };
 exports.isLawBody = isLawBody;
+const defaultAttrOfLawBody = {};
 const isLawTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "LawTitle");
 };
 exports.isLawTitle = isLawTitle;
+const defaultAttrOfLawTitle = {};
 const isEnactStatement = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "EnactStatement");
 };
 exports.isEnactStatement = isEnactStatement;
+const defaultAttrOfEnactStatement = {};
 const isTOC = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TOC");
 };
 exports.isTOC = isTOC;
+const defaultAttrOfTOC = {};
 const isTOCLabel = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TOCLabel");
 };
 exports.isTOCLabel = isTOCLabel;
+const defaultAttrOfTOCLabel = {};
 const isTOCPreambleLabel = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TOCPreambleLabel");
 };
 exports.isTOCPreambleLabel = isTOCPreambleLabel;
+const defaultAttrOfTOCPreambleLabel = {};
 const isTOCPart = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TOCPart");
 };
 exports.isTOCPart = isTOCPart;
+const defaultAttrOfTOCPart = {
+    Delete: "false",
+};
 const isTOCChapter = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TOCChapter");
 };
 exports.isTOCChapter = isTOCChapter;
+const defaultAttrOfTOCChapter = {
+    Delete: "false",
+};
 const isTOCSection = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TOCSection");
 };
 exports.isTOCSection = isTOCSection;
+const defaultAttrOfTOCSection = {
+    Delete: "false",
+};
 const isTOCSubsection = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TOCSubsection");
 };
 exports.isTOCSubsection = isTOCSubsection;
+const defaultAttrOfTOCSubsection = {
+    Delete: "false",
+};
 const isTOCDivision = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TOCDivision");
 };
 exports.isTOCDivision = isTOCDivision;
+const defaultAttrOfTOCDivision = {
+    Delete: "false",
+};
 const isTOCArticle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TOCArticle");
 };
 exports.isTOCArticle = isTOCArticle;
+const defaultAttrOfTOCArticle = {
+    Delete: "false",
+};
 const isTOCSupplProvision = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TOCSupplProvision");
 };
 exports.isTOCSupplProvision = isTOCSupplProvision;
+const defaultAttrOfTOCSupplProvision = {};
 const isTOCAppdxTableLabel = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TOCAppdxTableLabel");
 };
 exports.isTOCAppdxTableLabel = isTOCAppdxTableLabel;
+const defaultAttrOfTOCAppdxTableLabel = {};
 const isArticleRange = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "ArticleRange");
 };
 exports.isArticleRange = isArticleRange;
+const defaultAttrOfArticleRange = {};
 const isPreamble = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Preamble");
 };
 exports.isPreamble = isPreamble;
+const defaultAttrOfPreamble = {};
 const isMainProvision = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "MainProvision");
 };
 exports.isMainProvision = isMainProvision;
+const defaultAttrOfMainProvision = {};
 const isPart = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Part");
 };
 exports.isPart = isPart;
+const defaultAttrOfPart = {
+    Delete: "false",
+    Hide: "false",
+};
 const isPartTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "PartTitle");
 };
 exports.isPartTitle = isPartTitle;
+const defaultAttrOfPartTitle = {};
 const isChapter = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Chapter");
 };
 exports.isChapter = isChapter;
+const defaultAttrOfChapter = {
+    Delete: "false",
+    Hide: "false",
+};
 const isChapterTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "ChapterTitle");
 };
 exports.isChapterTitle = isChapterTitle;
+const defaultAttrOfChapterTitle = {};
 const isSection = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Section");
 };
 exports.isSection = isSection;
+const defaultAttrOfSection = {
+    Delete: "false",
+    Hide: "false",
+};
 const isSectionTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "SectionTitle");
 };
 exports.isSectionTitle = isSectionTitle;
+const defaultAttrOfSectionTitle = {};
 const isSubsection = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subsection");
 };
 exports.isSubsection = isSubsection;
+const defaultAttrOfSubsection = {
+    Delete: "false",
+    Hide: "false",
+};
 const isSubsectionTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "SubsectionTitle");
 };
 exports.isSubsectionTitle = isSubsectionTitle;
+const defaultAttrOfSubsectionTitle = {};
 const isDivision = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Division");
 };
 exports.isDivision = isDivision;
+const defaultAttrOfDivision = {
+    Delete: "false",
+    Hide: "false",
+};
 const isDivisionTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "DivisionTitle");
 };
 exports.isDivisionTitle = isDivisionTitle;
+const defaultAttrOfDivisionTitle = {};
 const isArticle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Article");
 };
 exports.isArticle = isArticle;
+const defaultAttrOfArticle = {
+    Delete: "false",
+    Hide: "false",
+};
 const isArticleTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "ArticleTitle");
 };
 exports.isArticleTitle = isArticleTitle;
+const defaultAttrOfArticleTitle = {};
 const isArticleCaption = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "ArticleCaption");
 };
 exports.isArticleCaption = isArticleCaption;
+const defaultAttrOfArticleCaption = {};
 const isParagraph = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Paragraph");
 };
 exports.isParagraph = isParagraph;
+const defaultAttrOfParagraph = {
+    OldStyle: "false",
+    OldNum: "false",
+    Hide: "false",
+};
 const isParagraphCaption = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "ParagraphCaption");
 };
 exports.isParagraphCaption = isParagraphCaption;
+const defaultAttrOfParagraphCaption = {};
 const isParagraphNum = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "ParagraphNum");
 };
 exports.isParagraphNum = isParagraphNum;
+const defaultAttrOfParagraphNum = {};
 const isParagraphSentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "ParagraphSentence");
 };
 exports.isParagraphSentence = isParagraphSentence;
+const defaultAttrOfParagraphSentence = {};
 const isSupplNote = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "SupplNote");
 };
 exports.isSupplNote = isSupplNote;
+const defaultAttrOfSupplNote = {};
 const isAmendProvision = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "AmendProvision");
 };
 exports.isAmendProvision = isAmendProvision;
+const defaultAttrOfAmendProvision = {};
 const isAmendProvisionSentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "AmendProvisionSentence");
 };
 exports.isAmendProvisionSentence = isAmendProvisionSentence;
+const defaultAttrOfAmendProvisionSentence = {};
 const isNewProvision = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "NewProvision");
 };
 exports.isNewProvision = isNewProvision;
+const defaultAttrOfNewProvision = {};
 const isClass = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Class");
 };
 exports.isClass = isClass;
+const defaultAttrOfClass = {};
 const isClassTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "ClassTitle");
 };
 exports.isClassTitle = isClassTitle;
+const defaultAttrOfClassTitle = {};
 const isClassSentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "ClassSentence");
 };
 exports.isClassSentence = isClassSentence;
+const defaultAttrOfClassSentence = {};
 const isItem = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Item");
 };
 exports.isItem = isItem;
+const defaultAttrOfItem = {
+    Delete: "false",
+    Hide: "false",
+};
 const isItemTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "ItemTitle");
 };
 exports.isItemTitle = isItemTitle;
+const defaultAttrOfItemTitle = {};
 const isItemSentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "ItemSentence");
 };
 exports.isItemSentence = isItemSentence;
+const defaultAttrOfItemSentence = {};
 const isSubitem1 = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem1");
 };
 exports.isSubitem1 = isSubitem1;
+const defaultAttrOfSubitem1 = {
+    Delete: "false",
+    Hide: "false",
+};
 const isSubitem1Title = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem1Title");
 };
 exports.isSubitem1Title = isSubitem1Title;
+const defaultAttrOfSubitem1Title = {};
 const isSubitem1Sentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem1Sentence");
 };
 exports.isSubitem1Sentence = isSubitem1Sentence;
+const defaultAttrOfSubitem1Sentence = {};
 const isSubitem2 = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem2");
 };
 exports.isSubitem2 = isSubitem2;
+const defaultAttrOfSubitem2 = {
+    Delete: "false",
+    Hide: "false",
+};
 const isSubitem2Title = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem2Title");
 };
 exports.isSubitem2Title = isSubitem2Title;
+const defaultAttrOfSubitem2Title = {};
 const isSubitem2Sentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem2Sentence");
 };
 exports.isSubitem2Sentence = isSubitem2Sentence;
+const defaultAttrOfSubitem2Sentence = {};
 const isSubitem3 = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem3");
 };
 exports.isSubitem3 = isSubitem3;
+const defaultAttrOfSubitem3 = {
+    Delete: "false",
+    Hide: "false",
+};
 const isSubitem3Title = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem3Title");
 };
 exports.isSubitem3Title = isSubitem3Title;
+const defaultAttrOfSubitem3Title = {};
 const isSubitem3Sentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem3Sentence");
 };
 exports.isSubitem3Sentence = isSubitem3Sentence;
+const defaultAttrOfSubitem3Sentence = {};
 const isSubitem4 = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem4");
 };
 exports.isSubitem4 = isSubitem4;
+const defaultAttrOfSubitem4 = {
+    Delete: "false",
+    Hide: "false",
+};
 const isSubitem4Title = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem4Title");
 };
 exports.isSubitem4Title = isSubitem4Title;
+const defaultAttrOfSubitem4Title = {};
 const isSubitem4Sentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem4Sentence");
 };
 exports.isSubitem4Sentence = isSubitem4Sentence;
+const defaultAttrOfSubitem4Sentence = {};
 const isSubitem5 = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem5");
 };
 exports.isSubitem5 = isSubitem5;
+const defaultAttrOfSubitem5 = {
+    Delete: "false",
+    Hide: "false",
+};
 const isSubitem5Title = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem5Title");
 };
 exports.isSubitem5Title = isSubitem5Title;
+const defaultAttrOfSubitem5Title = {};
 const isSubitem5Sentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem5Sentence");
 };
 exports.isSubitem5Sentence = isSubitem5Sentence;
+const defaultAttrOfSubitem5Sentence = {};
 const isSubitem6 = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem6");
 };
 exports.isSubitem6 = isSubitem6;
+const defaultAttrOfSubitem6 = {
+    Delete: "false",
+    Hide: "false",
+};
 const isSubitem6Title = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem6Title");
 };
 exports.isSubitem6Title = isSubitem6Title;
+const defaultAttrOfSubitem6Title = {};
 const isSubitem6Sentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem6Sentence");
 };
 exports.isSubitem6Sentence = isSubitem6Sentence;
+const defaultAttrOfSubitem6Sentence = {};
 const isSubitem7 = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem7");
 };
 exports.isSubitem7 = isSubitem7;
+const defaultAttrOfSubitem7 = {
+    Delete: "false",
+    Hide: "false",
+};
 const isSubitem7Title = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem7Title");
 };
 exports.isSubitem7Title = isSubitem7Title;
+const defaultAttrOfSubitem7Title = {};
 const isSubitem7Sentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem7Sentence");
 };
 exports.isSubitem7Sentence = isSubitem7Sentence;
+const defaultAttrOfSubitem7Sentence = {};
 const isSubitem8 = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem8");
 };
 exports.isSubitem8 = isSubitem8;
+const defaultAttrOfSubitem8 = {
+    Delete: "false",
+    Hide: "false",
+};
 const isSubitem8Title = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem8Title");
 };
 exports.isSubitem8Title = isSubitem8Title;
+const defaultAttrOfSubitem8Title = {};
 const isSubitem8Sentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem8Sentence");
 };
 exports.isSubitem8Sentence = isSubitem8Sentence;
+const defaultAttrOfSubitem8Sentence = {};
 const isSubitem9 = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem9");
 };
 exports.isSubitem9 = isSubitem9;
+const defaultAttrOfSubitem9 = {
+    Delete: "false",
+    Hide: "false",
+};
 const isSubitem9Title = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem9Title");
 };
 exports.isSubitem9Title = isSubitem9Title;
+const defaultAttrOfSubitem9Title = {};
 const isSubitem9Sentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem9Sentence");
 };
 exports.isSubitem9Sentence = isSubitem9Sentence;
+const defaultAttrOfSubitem9Sentence = {};
 const isSubitem10 = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem10");
 };
 exports.isSubitem10 = isSubitem10;
+const defaultAttrOfSubitem10 = {
+    Delete: "false",
+    Hide: "false",
+};
 const isSubitem10Title = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem10Title");
 };
 exports.isSubitem10Title = isSubitem10Title;
+const defaultAttrOfSubitem10Title = {};
 const isSubitem10Sentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Subitem10Sentence");
 };
 exports.isSubitem10Sentence = isSubitem10Sentence;
+const defaultAttrOfSubitem10Sentence = {};
 const isSentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Sentence");
 };
 exports.isSentence = isSentence;
+const defaultAttrOfSentence = {
+    WritingMode: "vertical",
+};
 const isColumn = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Column");
 };
 exports.isColumn = isColumn;
+const defaultAttrOfColumn = {
+    LineBreak: "false",
+};
 const isSupplProvision = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "SupplProvision");
 };
 exports.isSupplProvision = isSupplProvision;
+const defaultAttrOfSupplProvision = {};
 const isSupplProvisionLabel = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "SupplProvisionLabel");
 };
 exports.isSupplProvisionLabel = isSupplProvisionLabel;
+const defaultAttrOfSupplProvisionLabel = {};
 const isSupplProvisionAppdxTable = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "SupplProvisionAppdxTable");
 };
 exports.isSupplProvisionAppdxTable = isSupplProvisionAppdxTable;
+const defaultAttrOfSupplProvisionAppdxTable = {};
 const isSupplProvisionAppdxTableTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "SupplProvisionAppdxTableTitle");
 };
 exports.isSupplProvisionAppdxTableTitle = isSupplProvisionAppdxTableTitle;
+const defaultAttrOfSupplProvisionAppdxTableTitle = {
+    WritingMode: "vertical",
+};
 const isSupplProvisionAppdxStyle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "SupplProvisionAppdxStyle");
 };
 exports.isSupplProvisionAppdxStyle = isSupplProvisionAppdxStyle;
+const defaultAttrOfSupplProvisionAppdxStyle = {};
 const isSupplProvisionAppdxStyleTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "SupplProvisionAppdxStyleTitle");
 };
 exports.isSupplProvisionAppdxStyleTitle = isSupplProvisionAppdxStyleTitle;
+const defaultAttrOfSupplProvisionAppdxStyleTitle = {
+    WritingMode: "vertical",
+};
 const isSupplProvisionAppdx = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "SupplProvisionAppdx");
 };
 exports.isSupplProvisionAppdx = isSupplProvisionAppdx;
+const defaultAttrOfSupplProvisionAppdx = {};
 const isAppdxTable = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "AppdxTable");
 };
 exports.isAppdxTable = isAppdxTable;
+const defaultAttrOfAppdxTable = {};
 const isAppdxTableTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "AppdxTableTitle");
 };
 exports.isAppdxTableTitle = isAppdxTableTitle;
+const defaultAttrOfAppdxTableTitle = {
+    WritingMode: "vertical",
+};
 const isAppdxNote = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "AppdxNote");
 };
 exports.isAppdxNote = isAppdxNote;
+const defaultAttrOfAppdxNote = {};
 const isAppdxNoteTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "AppdxNoteTitle");
 };
 exports.isAppdxNoteTitle = isAppdxNoteTitle;
+const defaultAttrOfAppdxNoteTitle = {
+    WritingMode: "vertical",
+};
 const isAppdxStyle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "AppdxStyle");
 };
 exports.isAppdxStyle = isAppdxStyle;
+const defaultAttrOfAppdxStyle = {};
 const isAppdxStyleTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "AppdxStyleTitle");
 };
 exports.isAppdxStyleTitle = isAppdxStyleTitle;
+const defaultAttrOfAppdxStyleTitle = {
+    WritingMode: "vertical",
+};
 const isAppdxFormat = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "AppdxFormat");
 };
 exports.isAppdxFormat = isAppdxFormat;
+const defaultAttrOfAppdxFormat = {};
 const isAppdxFormatTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "AppdxFormatTitle");
 };
 exports.isAppdxFormatTitle = isAppdxFormatTitle;
+const defaultAttrOfAppdxFormatTitle = {
+    WritingMode: "vertical",
+};
 const isAppdx = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Appdx");
 };
 exports.isAppdx = isAppdx;
+const defaultAttrOfAppdx = {};
 const isArithFormulaNum = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "ArithFormulaNum");
 };
 exports.isArithFormulaNum = isArithFormulaNum;
+const defaultAttrOfArithFormulaNum = {};
 const isArithFormula = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "ArithFormula");
 };
 exports.isArithFormula = isArithFormula;
+const defaultAttrOfArithFormula = {};
 const isAppdxFig = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "AppdxFig");
 };
 exports.isAppdxFig = isAppdxFig;
+const defaultAttrOfAppdxFig = {};
 const isAppdxFigTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "AppdxFigTitle");
 };
 exports.isAppdxFigTitle = isAppdxFigTitle;
+const defaultAttrOfAppdxFigTitle = {
+    WritingMode: "vertical",
+};
 const isTableStruct = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TableStruct");
 };
 exports.isTableStruct = isTableStruct;
+const defaultAttrOfTableStruct = {};
 const isTableStructTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TableStructTitle");
 };
 exports.isTableStructTitle = isTableStructTitle;
+const defaultAttrOfTableStructTitle = {
+    WritingMode: "vertical",
+};
 const isTable = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Table");
 };
 exports.isTable = isTable;
+const defaultAttrOfTable = {
+    WritingMode: "vertical",
+};
 const isTableRow = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TableRow");
 };
 exports.isTableRow = isTableRow;
+const defaultAttrOfTableRow = {};
 const isTableHeaderRow = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TableHeaderRow");
 };
 exports.isTableHeaderRow = isTableHeaderRow;
+const defaultAttrOfTableHeaderRow = {};
 const isTableHeaderColumn = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TableHeaderColumn");
 };
 exports.isTableHeaderColumn = isTableHeaderColumn;
+const defaultAttrOfTableHeaderColumn = {};
 const isTableColumn = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "TableColumn");
 };
 exports.isTableColumn = isTableColumn;
+const defaultAttrOfTableColumn = {
+    BorderTop: "solid",
+    BorderBottom: "solid",
+    BorderLeft: "solid",
+    BorderRight: "solid",
+};
 const isFigStruct = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "FigStruct");
 };
 exports.isFigStruct = isFigStruct;
+const defaultAttrOfFigStruct = {};
 const isFigStructTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "FigStructTitle");
 };
 exports.isFigStructTitle = isFigStructTitle;
+const defaultAttrOfFigStructTitle = {};
 const isFig = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Fig");
 };
 exports.isFig = isFig;
+const defaultAttrOfFig = {};
 const isNoteStruct = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "NoteStruct");
 };
 exports.isNoteStruct = isNoteStruct;
+const defaultAttrOfNoteStruct = {};
 const isNoteStructTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "NoteStructTitle");
 };
 exports.isNoteStructTitle = isNoteStructTitle;
+const defaultAttrOfNoteStructTitle = {};
 const isNote = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Note");
 };
 exports.isNote = isNote;
+const defaultAttrOfNote = {};
 const isStyleStruct = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "StyleStruct");
 };
 exports.isStyleStruct = isStyleStruct;
+const defaultAttrOfStyleStruct = {};
 const isStyleStructTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "StyleStructTitle");
 };
 exports.isStyleStructTitle = isStyleStructTitle;
+const defaultAttrOfStyleStructTitle = {};
 const isStyle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Style");
 };
 exports.isStyle = isStyle;
+const defaultAttrOfStyle = {};
 const isFormatStruct = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "FormatStruct");
 };
 exports.isFormatStruct = isFormatStruct;
+const defaultAttrOfFormatStruct = {};
 const isFormatStructTitle = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "FormatStructTitle");
 };
 exports.isFormatStructTitle = isFormatStructTitle;
+const defaultAttrOfFormatStructTitle = {};
 const isFormat = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Format");
 };
 exports.isFormat = isFormat;
+const defaultAttrOfFormat = {};
 const isRelatedArticleNum = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "RelatedArticleNum");
 };
 exports.isRelatedArticleNum = isRelatedArticleNum;
+const defaultAttrOfRelatedArticleNum = {};
 const isRemarks = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Remarks");
 };
 exports.isRemarks = isRemarks;
+const defaultAttrOfRemarks = {};
 const isRemarksLabel = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "RemarksLabel");
 };
 exports.isRemarksLabel = isRemarksLabel;
+const defaultAttrOfRemarksLabel = {
+    LineBreak: "false",
+};
 const isList = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "List");
 };
 exports.isList = isList;
+const defaultAttrOfList = {};
 const isListSentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "ListSentence");
 };
 exports.isListSentence = isListSentence;
+const defaultAttrOfListSentence = {};
 const isSublist1 = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Sublist1");
 };
 exports.isSublist1 = isSublist1;
+const defaultAttrOfSublist1 = {};
 const isSublist1Sentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Sublist1Sentence");
 };
 exports.isSublist1Sentence = isSublist1Sentence;
+const defaultAttrOfSublist1Sentence = {};
 const isSublist2 = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Sublist2");
 };
 exports.isSublist2 = isSublist2;
+const defaultAttrOfSublist2 = {};
 const isSublist2Sentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Sublist2Sentence");
 };
 exports.isSublist2Sentence = isSublist2Sentence;
+const defaultAttrOfSublist2Sentence = {};
 const isSublist3 = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Sublist3");
 };
 exports.isSublist3 = isSublist3;
+const defaultAttrOfSublist3 = {};
 const isSublist3Sentence = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Sublist3Sentence");
 };
 exports.isSublist3Sentence = isSublist3Sentence;
+const defaultAttrOfSublist3Sentence = {};
 const isQuoteStruct = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "QuoteStruct");
 };
 exports.isQuoteStruct = isQuoteStruct;
+const defaultAttrOfQuoteStruct = {};
 const isRuby = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Ruby");
 };
 exports.isRuby = isRuby;
+const defaultAttrOfRuby = {};
 const isRt = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Rt");
 };
 exports.isRt = isRt;
+const defaultAttrOfRt = {};
 const isLine = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Line");
 };
 exports.isLine = isLine;
+const defaultAttrOfLine = {
+    Style: "solid",
+};
 const isSup = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Sup");
 };
 exports.isSup = isSup;
+const defaultAttrOfSup = {};
 const isSub = (obj) => {
     return (typeof obj !== "string") && (obj.tag === "Sub");
 };
 exports.isSub = isSub;
+const defaultAttrOfSub = {};
 exports.stdELTags = [
     "Law",
     "LawNum",
@@ -44461,6 +44718,142 @@ exports.stdELTags = [
     "Sup",
     "Sub",
 ];
+exports.defaultAttrs = {
+    Law: defaultAttrOfLaw,
+    LawNum: defaultAttrOfLawNum,
+    LawBody: defaultAttrOfLawBody,
+    LawTitle: defaultAttrOfLawTitle,
+    EnactStatement: defaultAttrOfEnactStatement,
+    TOC: defaultAttrOfTOC,
+    TOCLabel: defaultAttrOfTOCLabel,
+    TOCPreambleLabel: defaultAttrOfTOCPreambleLabel,
+    TOCPart: defaultAttrOfTOCPart,
+    TOCChapter: defaultAttrOfTOCChapter,
+    TOCSection: defaultAttrOfTOCSection,
+    TOCSubsection: defaultAttrOfTOCSubsection,
+    TOCDivision: defaultAttrOfTOCDivision,
+    TOCArticle: defaultAttrOfTOCArticle,
+    TOCSupplProvision: defaultAttrOfTOCSupplProvision,
+    TOCAppdxTableLabel: defaultAttrOfTOCAppdxTableLabel,
+    ArticleRange: defaultAttrOfArticleRange,
+    Preamble: defaultAttrOfPreamble,
+    MainProvision: defaultAttrOfMainProvision,
+    Part: defaultAttrOfPart,
+    PartTitle: defaultAttrOfPartTitle,
+    Chapter: defaultAttrOfChapter,
+    ChapterTitle: defaultAttrOfChapterTitle,
+    Section: defaultAttrOfSection,
+    SectionTitle: defaultAttrOfSectionTitle,
+    Subsection: defaultAttrOfSubsection,
+    SubsectionTitle: defaultAttrOfSubsectionTitle,
+    Division: defaultAttrOfDivision,
+    DivisionTitle: defaultAttrOfDivisionTitle,
+    Article: defaultAttrOfArticle,
+    ArticleTitle: defaultAttrOfArticleTitle,
+    ArticleCaption: defaultAttrOfArticleCaption,
+    Paragraph: defaultAttrOfParagraph,
+    ParagraphCaption: defaultAttrOfParagraphCaption,
+    ParagraphNum: defaultAttrOfParagraphNum,
+    ParagraphSentence: defaultAttrOfParagraphSentence,
+    SupplNote: defaultAttrOfSupplNote,
+    AmendProvision: defaultAttrOfAmendProvision,
+    AmendProvisionSentence: defaultAttrOfAmendProvisionSentence,
+    NewProvision: defaultAttrOfNewProvision,
+    Class: defaultAttrOfClass,
+    ClassTitle: defaultAttrOfClassTitle,
+    ClassSentence: defaultAttrOfClassSentence,
+    Item: defaultAttrOfItem,
+    ItemTitle: defaultAttrOfItemTitle,
+    ItemSentence: defaultAttrOfItemSentence,
+    Subitem1: defaultAttrOfSubitem1,
+    Subitem1Title: defaultAttrOfSubitem1Title,
+    Subitem1Sentence: defaultAttrOfSubitem1Sentence,
+    Subitem2: defaultAttrOfSubitem2,
+    Subitem2Title: defaultAttrOfSubitem2Title,
+    Subitem2Sentence: defaultAttrOfSubitem2Sentence,
+    Subitem3: defaultAttrOfSubitem3,
+    Subitem3Title: defaultAttrOfSubitem3Title,
+    Subitem3Sentence: defaultAttrOfSubitem3Sentence,
+    Subitem4: defaultAttrOfSubitem4,
+    Subitem4Title: defaultAttrOfSubitem4Title,
+    Subitem4Sentence: defaultAttrOfSubitem4Sentence,
+    Subitem5: defaultAttrOfSubitem5,
+    Subitem5Title: defaultAttrOfSubitem5Title,
+    Subitem5Sentence: defaultAttrOfSubitem5Sentence,
+    Subitem6: defaultAttrOfSubitem6,
+    Subitem6Title: defaultAttrOfSubitem6Title,
+    Subitem6Sentence: defaultAttrOfSubitem6Sentence,
+    Subitem7: defaultAttrOfSubitem7,
+    Subitem7Title: defaultAttrOfSubitem7Title,
+    Subitem7Sentence: defaultAttrOfSubitem7Sentence,
+    Subitem8: defaultAttrOfSubitem8,
+    Subitem8Title: defaultAttrOfSubitem8Title,
+    Subitem8Sentence: defaultAttrOfSubitem8Sentence,
+    Subitem9: defaultAttrOfSubitem9,
+    Subitem9Title: defaultAttrOfSubitem9Title,
+    Subitem9Sentence: defaultAttrOfSubitem9Sentence,
+    Subitem10: defaultAttrOfSubitem10,
+    Subitem10Title: defaultAttrOfSubitem10Title,
+    Subitem10Sentence: defaultAttrOfSubitem10Sentence,
+    Sentence: defaultAttrOfSentence,
+    Column: defaultAttrOfColumn,
+    SupplProvision: defaultAttrOfSupplProvision,
+    SupplProvisionLabel: defaultAttrOfSupplProvisionLabel,
+    SupplProvisionAppdxTable: defaultAttrOfSupplProvisionAppdxTable,
+    SupplProvisionAppdxTableTitle: defaultAttrOfSupplProvisionAppdxTableTitle,
+    SupplProvisionAppdxStyle: defaultAttrOfSupplProvisionAppdxStyle,
+    SupplProvisionAppdxStyleTitle: defaultAttrOfSupplProvisionAppdxStyleTitle,
+    SupplProvisionAppdx: defaultAttrOfSupplProvisionAppdx,
+    AppdxTable: defaultAttrOfAppdxTable,
+    AppdxTableTitle: defaultAttrOfAppdxTableTitle,
+    AppdxNote: defaultAttrOfAppdxNote,
+    AppdxNoteTitle: defaultAttrOfAppdxNoteTitle,
+    AppdxStyle: defaultAttrOfAppdxStyle,
+    AppdxStyleTitle: defaultAttrOfAppdxStyleTitle,
+    AppdxFormat: defaultAttrOfAppdxFormat,
+    AppdxFormatTitle: defaultAttrOfAppdxFormatTitle,
+    Appdx: defaultAttrOfAppdx,
+    ArithFormulaNum: defaultAttrOfArithFormulaNum,
+    ArithFormula: defaultAttrOfArithFormula,
+    AppdxFig: defaultAttrOfAppdxFig,
+    AppdxFigTitle: defaultAttrOfAppdxFigTitle,
+    TableStruct: defaultAttrOfTableStruct,
+    TableStructTitle: defaultAttrOfTableStructTitle,
+    Table: defaultAttrOfTable,
+    TableRow: defaultAttrOfTableRow,
+    TableHeaderRow: defaultAttrOfTableHeaderRow,
+    TableHeaderColumn: defaultAttrOfTableHeaderColumn,
+    TableColumn: defaultAttrOfTableColumn,
+    FigStruct: defaultAttrOfFigStruct,
+    FigStructTitle: defaultAttrOfFigStructTitle,
+    Fig: defaultAttrOfFig,
+    NoteStruct: defaultAttrOfNoteStruct,
+    NoteStructTitle: defaultAttrOfNoteStructTitle,
+    Note: defaultAttrOfNote,
+    StyleStruct: defaultAttrOfStyleStruct,
+    StyleStructTitle: defaultAttrOfStyleStructTitle,
+    Style: defaultAttrOfStyle,
+    FormatStruct: defaultAttrOfFormatStruct,
+    FormatStructTitle: defaultAttrOfFormatStructTitle,
+    Format: defaultAttrOfFormat,
+    RelatedArticleNum: defaultAttrOfRelatedArticleNum,
+    Remarks: defaultAttrOfRemarks,
+    RemarksLabel: defaultAttrOfRemarksLabel,
+    List: defaultAttrOfList,
+    ListSentence: defaultAttrOfListSentence,
+    Sublist1: defaultAttrOfSublist1,
+    Sublist1Sentence: defaultAttrOfSublist1Sentence,
+    Sublist2: defaultAttrOfSublist2,
+    Sublist2Sentence: defaultAttrOfSublist2Sentence,
+    Sublist3: defaultAttrOfSublist3,
+    Sublist3Sentence: defaultAttrOfSublist3Sentence,
+    QuoteStruct: defaultAttrOfQuoteStruct,
+    Ruby: defaultAttrOfRuby,
+    Rt: defaultAttrOfRt,
+    Line: defaultAttrOfLine,
+    Sup: defaultAttrOfSup,
+    Sub: defaultAttrOfSub,
+};
 const newStdEL = (tag, attr, children, range = null) => {
     return new el_1.EL(tag, attr, children, range);
 };
@@ -46266,6 +46659,7 @@ const xmlToEL = (xml) => {
     return (0, exports.elementToEL)(dom.documentElement);
 };
 exports.xmlToEL = xmlToEL;
+exports["default"] = exports.xmlToEL;
 //# sourceMappingURL=xmlToEL.js.map
 
 /***/ }),
@@ -46284,7 +46678,7 @@ const el_1 = __webpack_require__(18539);
 const controls_1 = __webpack_require__(48075);
 class PointerEnv {
     constructor(options) {
-        this.directLawRef = null;
+        this.directLawNum = null;
         this.namingParent = null;
         this.namingChildren = [];
         this.seriesPrev = null;
@@ -46294,7 +46688,7 @@ class PointerEnv {
         this.sentenceEnv = options.sentenceEnv;
     }
     json() {
-        var _a, _b, _c;
+        var _a, _b;
         return {
             pointer: this.pointer.json(true),
             located: ((((_a = this.located) === null || _a === void 0 ? void 0 : _a.type) === "internal")
@@ -46303,8 +46697,8 @@ class PointerEnv {
                         text: f.fragment.text(),
                         containers: f.containers.map(c => c.containerID),
                     })) }) : (((_b = this.located) === null || _b === void 0 ? void 0 : _b.type) === "external")
-                ? Object.assign(Object.assign({}, this.located), { lawRef: this.located.lawRef.text(), fqPrefixFragments: this.located.fqPrefixFragments.map(f => f.text()) }) : null),
-            directLawRef: this.directLawRef ? (_c = this.directLawRef) === null || _c === void 0 ? void 0 : _c.text() : null,
+                ? Object.assign(Object.assign({}, this.located), { fqPrefixFragments: this.located.fqPrefixFragments.map(f => f.text()) }) : null),
+            directLawNum: this.directLawNum,
             namingParent: this.namingParent ? this.namingParent.pointer.text() : null,
             namingChildren: this.namingChildren.map(c => c.pointer.text()),
             seriesPrev: this.seriesPrev ? this.seriesPrev.pointer.text() : null,
@@ -46333,7 +46727,7 @@ class PointerEnv {
                 const fqPrefixFragments = (fqDupIndex < 0) ? prev.fqPrefixFragments : prev.fqPrefixFragments.slice(0, fqDupIndex);
                 this.located = {
                     type: "external",
-                    lawRef: prev.lawRef,
+                    lawNum: prev.lawNum,
                     fqPrefixFragments,
                 };
             }
@@ -46452,11 +46846,11 @@ class PointerEnv {
             // e.g.: "第二条", "第二項"
             if ((0, common_1.getContainerType)(fragments[0].attr.targetType) === container_1.ContainerType.TOPLEVEL) {
                 // e.g.: "附則", "別表第二"
-                if (this.directLawRef) {
+                if (this.directLawNum) {
                     // e.g. "電波法別表第一"
                     this.located = {
                         type: "external",
-                        lawRef: this.directLawRef,
+                        lawNum: this.directLawNum,
                         fqPrefixFragments: [],
                     };
                 }
@@ -46482,7 +46876,7 @@ class PointerEnv {
             }
             else if (fragments[0].attr.targetType === "SUBITEM") {
                 // e.g. "イ"
-                // Assuming no directLawRef
+                // Assuming no directLawNum
                 let located = false;
                 if (this.namingParent)
                     this.namingParent.locate(force);
@@ -46494,7 +46888,7 @@ class PointerEnv {
                         const fqPrefixFragments = (fqDupIndex < 0) ? prevFQPrefixFragments : prevFQPrefixFragments.slice(0, fqDupIndex);
                         this.located = {
                             type: "external",
-                            lawRef: prev.lawRef,
+                            lawNum: prev.lawNum,
                             fqPrefixFragments,
                         };
                         located = true;
@@ -46533,11 +46927,11 @@ class PointerEnv {
                 }
             }
             else {
-                if (this.directLawRef) {
+                if (this.directLawNum) {
                     // e.g. "行政手続法第二条"
                     this.located = {
                         type: "external",
-                        lawRef: this.directLawRef,
+                        lawNum: this.directLawNum,
                         fqPrefixFragments: [],
                     };
                 }
@@ -46554,7 +46948,7 @@ class PointerEnv {
                         const fqPrefixFragments = (fqDupIndex < 0) ? prevFQFragments : prevFQFragments.slice(0, fqDupIndex);
                         this.located = {
                             type: "external",
-                            lawRef: prev.lawRef,
+                            lawNum: prev.lawNum,
                             fqPrefixFragments,
                         };
                         located = true;
@@ -46680,7 +47074,7 @@ const controls_1 = __webpack_require__(48075);
 const env_1 = __webpack_require__(39099);
 const _sentenceChildren_1 = __importDefault(__webpack_require__(36096));
 const addSentenceChildrenControls = (elToBeModified) => {
-    if (["LawNum", "QuoteStruct"].includes(elToBeModified.tag)) {
+    if (["LawTitle", "LawNum", "QuoteStruct"].includes(elToBeModified.tag)) {
         //
     }
     else if (["ArticleTitle", ...std.paragraphItemTitleTags, ...std.appdxItemTitleTags, ...std.supplProvisionAppdxItemTitleTags].includes(elToBeModified.tag)) {
@@ -47703,9 +48097,10 @@ exports.$paragraphItemTitle = exports.$stdSubitem3Title = exports.$stdSubitem2Ti
 const factory_1 = __importDefault(__webpack_require__(31707));
 const lexical_1 = __webpack_require__(99247);
 const num_1 = __webpack_require__(68685);
+const reStdParagraphNum = new RegExp(`^(?:○?[0123456789０１２３４５６７８９]+|[${num_1.circledDigitChars}])`);
 exports.$stdParagraphNum = factory_1.default
     .withName("stdParagraphNum")
-    .regExp(/^○?[0123456789０１２３４５６７８９]+/) // e.g. "１", "○２０"
+    .regExp(reStdParagraphNum) // e.g. "１", "２０",  "○１", "○２０", "①"
 ;
 exports.$stdItemTitle = factory_1.default
     .withName("stdItemTitle")
@@ -47725,7 +48120,7 @@ exports.$stdSubitem3Title = factory_1.default
 ;
 const paragraphItemTitlePtn1 = "(?:[0123456789０１２３４５６７８９]+|[a-zA-Zａ-ｚＡ-Ｚ])[.．]"; // e.g. "１．", "a."
 const paragraphItemTitlePtn2 = `[(（](?:[0123456789０１２３４５６７８９]+|[${num_1.irohaChars}]|[${lexical_1.kanjiDigits}]+|[a-zA-Zａ-ｚＡ-Ｚ]+)[)）]`; // e.g. "（十二）", "（イ）", "(１０)", "(a)"
-const paragraphItemTitlePtn3 = `(?:[0123456789０１２３４５６７８９]+|[${num_1.irohaChars}]|[${lexical_1.kanjiDigits}]+|[a-zA-Zａ-ｚＡ-Ｚ]+|[⓪①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚㉛㉜㉝㉞㉟㊱㊲㊳㊴㊵㊶㊷㊸㊹㊺㊻㊼㊽㊾㊿]|[⑴⑵⑶⑷⑸⑹⑺⑻⑼⑽⑾⑿⒀⒁⒂⒃⒄⒅⒆⒇])`; // e.g. "１０", "イ", "十一", "①", "⑴"
+const paragraphItemTitlePtn3 = `(?:[0123456789０１２３４５６７８９]+|[${num_1.irohaChars}]|[${lexical_1.kanjiDigits}]+|[a-zA-Zａ-ｚＡ-Ｚ]+|[${num_1.circledDigitChars}]|[⑴⑵⑶⑷⑸⑹⑺⑻⑼⑽⑾⑿⒀⒁⒂⒃⒄⒅⒆⒇])`; // e.g. "１０", "イ", "十一", "①", "⑴"
 const paragraphItemTitleFragmentPtn = `(?:${paragraphItemTitlePtn1}|${paragraphItemTitlePtn2}|${paragraphItemTitlePtn3})`;
 const paragraphItemTitlePtn = `^○?${paragraphItemTitleFragmentPtn}(?:[のノ](?:${paragraphItemTitleFragmentPtn}))*`;
 exports.$paragraphItemTitle = factory_1.default
@@ -47792,7 +48187,7 @@ const makeRanges = (first, midText, rest, range) => {
     };
 };
 exports.reSuppressPointerRanges = /^[ァ-ヿ]{2,}/;
-exports.pointerRangesCandidateChars = `${num_1.irohaChars}明大昭平令第前次こ本同付附iIｉＩvVｖＶxXｘＸ`;
+exports.pointerRangesCandidateChars = `${num_1.irohaChars}明大昭平令第前次こ本同付附iIｉＩvVｖＶxXｘＸ日`;
 _a = (0, makeRangesRule_1.default)((() => exports.$pointer), makeRange, makeRanges), exports.$pointerRanges = _a.$ranges, exports.$pointerRange = _a.$range;
 exports.$pointer = factory_1.factory
     .withName("pointer")
@@ -48542,12 +48937,15 @@ const _sentenceChildren_1 = __importStar(__webpack_require__(36096));
 const lexical_1 = __webpack_require__(99247);
 const util_1 = __webpack_require__(26459);
 const inline_1 = __webpack_require__(22845);
+const std = __importStar(__webpack_require__(93619));
 const _squareAttr_1 = __importDefault(__webpack_require__(75498));
 const sentencesArrayToString = (sentencesArray) => {
     const runs = [];
     for (const sentences of sentencesArray) {
         runs.push(sentences.leadingSpace);
         for (const attrEntry of sentences.attrEntries) {
+            if (std.defaultAttrs.Sentence[attrEntry.entry[0]] === attrEntry.entry[1])
+                continue;
             runs.push(attrEntry.entryText + attrEntry.trailingSpace);
         }
         for (const sentence of sentences.sentences) {
@@ -50476,8 +50874,6 @@ exports.$article = factory_1.default
         ...otherParagraphs.map(p => p.errors).flat(),
         ...supplNotes.map(n => n.errors).flat(),
     ];
-    article.attr.Delete = "false";
-    article.attr.Hide = "false";
     if (captionLine) {
         article.children.push((0, std_1.newStdEL)("ArticleCaption", {}, captionLine.line.sentencesArray
             .map(sa => sa.sentences.map(s => s.children))
@@ -50487,7 +50883,7 @@ exports.$article = factory_1.default
         article.children.push((0, std_1.newStdEL)("ArticleTitle", {}, [firstParagraphItemLine.line.title], firstParagraphItemLine.line.titleRange));
     }
     const firstParagraph = (0, std_1.newStdEL)("Paragraph");
-    firstParagraph.attr.OldStyle = "false";
+    // firstParagraph.attr.OldStyle = "false";
     const sentencesArrayRange = firstParagraphItemLine.line.sentencesArrayRange;
     firstParagraph.children.push((0, std_1.newStdEL)("ParagraphNum", {}, [], sentencesArrayRange ? [sentencesArrayRange[0], sentencesArrayRange[0]] : null));
     firstParagraph.children.push((0, std_1.newStdEL)("ParagraphSentence", {}, (0, columnsOrSentences_1.sentencesArrayToColumnsOrSentences)(firstParagraphItemLine.line.sentencesArray), sentencesArrayRange));
@@ -50680,7 +51076,7 @@ exports.$articleGroup = factory_1.default
             errors.push(...child.errors);
         }
     }
-    const articleGroup = (0, std_1.newStdEL)(headLine.line.mainTag, { Delete: "false", Hide: "false" });
+    const articleGroup = (0, std_1.newStdEL)(headLine.line.mainTag);
     articleGroup.children.push((0, std_1.newStdEL)(std.articleGroupTitleTags[std.articleGroupTags.indexOf(headLine.line.mainTag)], {}, headLine.line.title, headLine.line.titleRange));
     const num = (0, num_1.parseNamedNum)(typeof headLine.line.title[0] === "string"
         ? headLine.line.title[0]
@@ -51718,8 +52114,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.$noControlAnonymParagraph = exports.$paragraphItem = exports.$requireControlParagraphItem = exports.$autoParagraphItem = exports.paragraphItemFromAuto = exports.isAutoParagraphItemSentence = exports.isAutoParagraphItemTitle = exports.isAutoParagraphItem = exports.$autoParagraphItemChildrenOuter = exports.paragraphItemToLines = void 0;
+/* eslint-disable no-irregular-whitespace */
 const line_1 = __webpack_require__(69928);
-const std_1 = __webpack_require__(93619);
 const std = __importStar(__webpack_require__(93619));
 const columnsOrSentences_1 = __webpack_require__(15695);
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
@@ -51739,6 +52135,8 @@ const _figStruct_1 = __importStar(__webpack_require__(43931));
 const _noteLike_1 = __webpack_require__(88035);
 const _paragraphItemLine_1 = __webpack_require__(50686);
 const _tagControl_1 = __webpack_require__(71040);
+const num_1 = __webpack_require__(68685);
+const reOldParagraphNum = new RegExp(`^(?:○[0123456789０１２３４５６７８９]+|[${num_1.circledDigitChars}])`);
 const paragraphItemToLines = (el, indentTexts, options) => {
     const lines = [];
     const { firstArticleParagraphArticleTitle, secondaryArticleParagraph, noControl, 
@@ -51778,7 +52176,7 @@ const paragraphItemToLines = (el, indentTexts, options) => {
             indentTexts: newIndentTexts,
             controls: [],
             sentencesArray: [
-                new inline_1.Sentences("", null, [], [(0, std_1.newStdEL)("Sentence", {}, ParagraphCaption)]),
+                new inline_1.Sentences("", null, [], [std.newStdEL("Sentence", {}, ParagraphCaption)]),
             ],
             lineEndText: toCSTSettings_1.default.EOL,
         }));
@@ -51787,14 +52185,14 @@ const paragraphItemToLines = (el, indentTexts, options) => {
     if (firstArticleParagraphArticleTitle
         && firstArticleParagraphArticleTitle.length > 0)
         Title.push(...firstArticleParagraphArticleTitle);
-    const paragraphItemTitleStr = (0, _sentenceChildren_1.sentenceChildrenToString)(Title);
-    const OldNum = (paragraphItemTitleStr.length === 0 && el.tag === "Paragraph" && el.attr.OldNum === "true") ? "true" : undefined;
+    let paragraphItemTitleStr = (0, _sentenceChildren_1.sentenceChildrenToString)(Title);
+    const oldNum = (paragraphItemTitleStr.length === 0 && el.tag === "Paragraph" && el.attr.OldNum === "true");
+    if (oldNum) {
+        paragraphItemTitleStr = num_1.circledDigitChars[Number(el.attr.Num)];
+    }
     const MissingNum = (secondaryArticleParagraph && Title.length === 0 && el.tag === "Paragraph" && el.attr.OldNum !== "true") ? "true" : undefined;
     const SentenceChildren = ParagraphItemSentence ? ParagraphItemSentence.children : [];
     const sentencesArray = (0, columnsOrSentences_1.columnsOrSentencesToSentencesArray)(SentenceChildren);
-    if (OldNum) {
-        sentencesArray[0].attrEntries.unshift(new inline_1.AttrEntry(`[OldNum="${OldNum}"]`, ["OldNum", "${OldNum}"], null, "", null));
-    }
     if (MissingNum) {
         sentencesArray[0].attrEntries.unshift(new inline_1.AttrEntry(`[MissingNum="${MissingNum}"]`, ["MissingNum", "${MissingNum}"], null, "", null));
     }
@@ -51825,21 +52223,38 @@ const paragraphItemToLines = (el, indentTexts, options) => {
         }));
     }
     else if (paragraphItemTitleStr.length > 0) {
+        const controls = [];
+        if ((el.tag === defaultTag)
+            && (0, _paragraphItemLine_1.unknownParagraphItemTitleMatch)(paragraphItemTitleStr).ok) {
+            // e.g.
+            //  │第一条・・・
+            //  │　一    <- Item
+            //  │　１    <- Item
+            //   -> If "一" or "１" appears as Item, no control needed.
+        }
+        else if (((el.tag in _paragraphItemLine_1.paragraphItemTitleRule)
+            && (_paragraphItemLine_1.paragraphItemTitleMatch[el.tag](paragraphItemTitleStr).ok))
+            || ((el.tag === "Paragraph")
+                && (el.attr.OldNum === "true")
+                && reOldParagraphNum.test(paragraphItemTitleStr))) {
+            // e.g.
+            //  │第一条・・・
+            //  │　# １             <- Paragraph
+            //   -> If "１" appears as Paragraph, auto control needed.
+            controls.push(new inline_1.Control(_tagControl_1.autoTagControls[0], null, " ", null));
+        }
+        else {
+            // e.g.
+            //  │第一条・・・
+            //  │　:paragraph:一    <- Paragraph
+            //   -> If "一" appears as Paragraph, specified control needed.
+            controls.push(new inline_1.Control(_tagControl_1.paragraphItemControls[el.tag], null, "", null));
+        }
         lines.push(new line_1.ParagraphItemLine({
             range: null,
             indentTexts,
             mainTag: el.tag,
-            controls: (((el.tag === defaultTag)
-                && (0, _paragraphItemLine_1.unknownParagraphItemTitleMatch)(paragraphItemTitleStr).ok)
-                ? []
-                : ((el.tag in _paragraphItemLine_1.paragraphItemTitleRule)
-                    && (_paragraphItemLine_1.paragraphItemTitleMatch[el.tag](paragraphItemTitleStr).ok))
-                    ? [
-                        new inline_1.Control(_tagControl_1.autoTagControls[0], null, " ", null)
-                    ]
-                    : [
-                        new inline_1.Control(_tagControl_1.paragraphItemControls[el.tag], null, "", null)
-                    ]),
+            controls,
             title: paragraphItemTitleStr,
             midSpace: (sentencesArray.length === 0) ? "" : toCSTSettings_1.default.MARGIN,
             sentencesArray,
@@ -51986,28 +52401,31 @@ exports.isAutoParagraphItemSentence = isAutoParagraphItemSentence;
 const paragraphItemFromAuto = (defautTag, paragraphItem) => {
     const tag = paragraphItem.tag === "__AutoParagraphItem" ? defautTag : paragraphItem.tag;
     const attr = {};
-    if (tag === "Paragraph") {
-        attr.OldStyle = "false";
-    }
-    else {
-        attr.Delete = "false";
-    }
     Object.assign(attr, paragraphItem.attr);
     const children = paragraphItem.children.map(c => {
         if (std.isParagraphItem(c) || (0, exports.isAutoParagraphItem)(c)) {
             return (0, exports.paragraphItemFromAuto)(std.paragraphItemTags[std.paragraphItemTags.indexOf(tag) + 1], c);
         }
         else if ((0, exports.isAutoParagraphItemTitle)(c)) {
-            return (0, std_1.newStdEL)(std.paragraphItemTitleTags[std.paragraphItemTags.indexOf(tag)], c.attr, c.children, c.range);
+            return std.newStdEL(std.paragraphItemTitleTags[std.paragraphItemTags.indexOf(tag)], c.attr, c.children, c.range);
         }
         else if ((0, exports.isAutoParagraphItemSentence)(c)) {
-            return (0, std_1.newStdEL)(std.paragraphItemSentenceTags[std.paragraphItemTags.indexOf(tag)], c.attr, c.children, c.range);
+            return std.newStdEL(std.paragraphItemSentenceTags[std.paragraphItemTags.indexOf(tag)], c.attr, c.children, c.range);
         }
         else {
             return c;
         }
     });
-    return (0, std_1.newStdEL)(tag, attr, children, paragraphItem.range);
+    if (tag === "Paragraph") {
+        const titleEL = children.find(std.isParagraphItemTitle);
+        const titleStr = titleEL ? titleEL.text() : "";
+        if (titleEL && reOldParagraphNum.test(titleStr)) {
+            attr.OldNum = "true";
+            attr.Num = (0, num_1.parseNamedNum)(titleStr);
+            titleEL.children.splice(0, titleEL.children.length);
+        }
+    }
+    return std.newStdEL(tag, attr, children, paragraphItem.range);
 };
 exports.paragraphItemFromAuto = paragraphItemFromAuto;
 exports.$autoParagraphItem = factory_1.default
@@ -52042,18 +52460,10 @@ exports.$autoParagraphItem = factory_1.default
     const tag = (_a = firstParagraphItemLine.line.mainTag) !== null && _a !== void 0 ? _a : "__AutoParagraphItem";
     const paragraphItem = new el_1.EL(tag);
     const errors = (_b = tailChildren === null || tailChildren === void 0 ? void 0 : tailChildren.errors) !== null && _b !== void 0 ? _b : [];
-    if (std.isParagraphItem(paragraphItem)) {
-        if ((0, std_1.isParagraph)(paragraphItem)) {
-            paragraphItem.attr.OldStyle = "false";
-        }
-        else {
-            paragraphItem.attr.Delete = "false";
-        }
-    }
     if (firstParagraphItemLine.line.sentencesArray.length >= 1) {
         const replacedAttrEntries = [];
         for (const attrEntry of firstParagraphItemLine.line.sentencesArray[0].attrEntries) {
-            if (attrEntry.entry[0] === "OldNum") {
+            if (attrEntry.entry[0] === "OldNum" && attrEntry.entry[1] !== std.defaultAttrs.Paragraph.OldNum) {
                 paragraphItem.attr.OldNum = attrEntry.entry[1];
             }
             else {
@@ -52064,16 +52474,16 @@ exports.$autoParagraphItem = factory_1.default
         firstParagraphItemLine.line.sentencesArray[0].attrEntries.push(...replacedAttrEntries);
     }
     if (captionLine) {
-        paragraphItem.children.push((0, std_1.newStdEL)("ParagraphCaption", {}, captionLine.line.sentencesArray
+        paragraphItem.children.push(std.newStdEL("ParagraphCaption", {}, captionLine.line.sentencesArray
             .map(sa => sa.sentences.map(s => s.children))
             .flat(2), captionLine.line.sentencesArrayRange));
     }
-    paragraphItem.children.push((0, std_1.newStdEL)(tag !== "__AutoParagraphItem"
+    paragraphItem.children.push(std.newStdEL(tag !== "__AutoParagraphItem"
         ? std.paragraphItemTitleTags[std.paragraphItemTags.indexOf(tag)]
         : "__AutoParagraphItemTitle", {}, firstParagraphItemLine.line.title ? [firstParagraphItemLine.line.title] : [], firstParagraphItemLine.line.titleRange));
     const sentencesArrayRange = firstParagraphItemLine.line.sentencesArrayRange;
     const paragraphItemSentencePos = firstParagraphItemLine.line.indentsEndPos;
-    paragraphItem.children.push((0, std_1.newStdEL)(tag !== "__AutoParagraphItem"
+    paragraphItem.children.push(std.newStdEL(tag !== "__AutoParagraphItem"
         ? std.paragraphItemSentenceTags[std.paragraphItemTags.indexOf(tag)]
         : "__AutoParagraphItemSentence", {}, (0, columnsOrSentences_1.sentencesArrayToColumnsOrSentences)(firstParagraphItemLine.line.sentencesArray), sentencesArrayRange !== null && sentencesArrayRange !== void 0 ? sentencesArrayRange : (paragraphItemSentencePos !== null ? [paragraphItemSentencePos, paragraphItemSentencePos] : null)));
     if (tailChildren) {
@@ -52138,11 +52548,11 @@ exports.$noControlAnonymParagraph = factory_1.default
     .action(({ firstParagraphItemLine, tailChildren }) => {
     var _a, _b;
     const sentencesArrayRange = firstParagraphItemLine.line.sentencesArrayRange;
-    const paragraph = (0, std_1.newStdEL)("Paragraph", {
-        OldStyle: "false",
+    const paragraph = std.newStdEL("Paragraph", {
+    // OldStyle: "false",
     }, [
-        (0, std_1.newStdEL)("ParagraphNum", {}, [], sentencesArrayRange ? [sentencesArrayRange[0], sentencesArrayRange[0]] : null),
-        (0, std_1.newStdEL)("ParagraphSentence", {}, (0, columnsOrSentences_1.sentencesArrayToColumnsOrSentences)(firstParagraphItemLine.line.sentencesArray), sentencesArrayRange),
+        std.newStdEL("ParagraphNum", {}, [], sentencesArrayRange ? [sentencesArrayRange[0], sentencesArrayRange[0]] : null),
+        std.newStdEL("ParagraphSentence", {}, (0, columnsOrSentences_1.sentencesArrayToColumnsOrSentences)(firstParagraphItemLine.line.sentencesArray), sentencesArrayRange),
     ]);
     if (tailChildren) {
         paragraph.children.push(...tailChildren.value);
@@ -52891,6 +53301,7 @@ const factory_1 = __webpack_require__(13518);
 const line_1 = __webpack_require__(69928);
 const util_1 = __webpack_require__(80427);
 const std_1 = __webpack_require__(93619);
+const std = __importStar(__webpack_require__(93619));
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
 const error_1 = __webpack_require__(40520);
 const inline_1 = __webpack_require__(22845);
@@ -52923,6 +53334,8 @@ const tableToLines = (table, indentTexts) => {
                 lineEndText: toCSTSettings_1.default.EOL,
             });
             for (const [name, value] of Object.entries(cell.attr)) {
+                if (std.defaultAttrs[cell.tag][name] === value)
+                    continue;
                 cellLine.attrEntries.push(new inline_1.AttrEntry(`[${name}="${value}"]`, [name, value], null, "", null));
             }
             lines.push(cellLine);
@@ -53655,15 +54068,15 @@ const columnsOrSentencesToSentencesArray = (els) => {
         const sentences = new inline_1.Sentences("", null, [], []);
         const el = els[i];
         if (el.tag === "Sentence") {
-            if (el.attr.WritingMode === "horizontal") {
-                sentences.attrEntries.unshift(new inline_1.AttrEntry("[WritingMode=\"horizontal\"]", ["WritingMode", "horizontal"], null, "", null));
+            if (el.attr.WritingMode && (el.attr.WritingMode !== std.defaultAttrs.Sentence.WritingMode)) {
+                sentences.attrEntries.unshift(new inline_1.AttrEntry(`[WritingMode="${el.attr.WritingMode}"]`, ["WritingMode", el.attr.WritingMode], null, "", null));
             }
             sentences.sentences.push(el);
         }
         else if (el.tag === "Column") {
             sentences.leadingSpace = i === 0 ? "" : toCSTSettings_1.default.MARGIN;
-            if (el.attr.LineBreak === "true") {
-                sentences.attrEntries.unshift(new inline_1.AttrEntry("[LineBreak=\"true\"]", ["LineBreak", "true"], null, "", null));
+            if (el.attr.LineBreak && (el.attr.LineBreak !== std.defaultAttrs.Column.LineBreak)) {
+                sentences.attrEntries.unshift(new inline_1.AttrEntry(`[LineBreak="${el.attr.LineBreak}"]`, ["LineBreak", el.attr.LineBreak], null, "", null));
             }
             sentences.sentences.push(...el.children);
         }
@@ -58759,17 +59172,182 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.renderXML = void 0;
 const loadEL_1 = __importDefault(__webpack_require__(62031));
-const renderXML = (elOrJsonEL, withControlEl = false) => {
+const formatXml_1 = __importDefault(__webpack_require__(11523));
+const renderXML = (elOrJsonEL, withControlEl = false, format = false) => {
     const el = (0, loadEL_1.default)(elOrJsonEL);
+    let body = el.outerXML(withControlEl);
+    if (format)
+        body = (0, formatXml_1.default)(body);
     const xml = `\
 <?xml version="1.0" encoding="utf-8"?>
-${el.outerXML(withControlEl)}
+${body}
 `;
     return xml;
 };
 exports.renderXML = renderXML;
 exports["default"] = exports.renderXML;
 //# sourceMappingURL=xml.js.map
+
+/***/ }),
+
+/***/ 11523:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+/*
+Based on xml-formatter released under the MIT license
+https://github.com/chrisbottin/xml-formatter/blob/9d6c5699bcd1b71ca9c2c2d9517e2be54c539318/LICENSE
+*/
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.formatXML = void 0;
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const xml_parser_xo_1 = __importDefault(__webpack_require__(50302));
+const trim = (str) => {
+    return str.replace(/^[ \r\n\t\v]+|[ \r\n\t\v]+$/g, "");
+};
+const defaultXMLFormatterOptions = {
+    indentation: "  ",
+    filter: undefined,
+    collapseContent: false,
+    lineSeparator: "\n",
+    whiteSpaceAtEndOfSelfclosingTag: false,
+};
+const newLine = (state) => {
+    if (!state.options.indentation && !state.options.lineSeparator)
+        return;
+    state.content += state.options.lineSeparator;
+    for (let i = 0; i < state.level; i++) {
+        state.content += state.options.indentation;
+    }
+};
+const appendContent = (state, content) => {
+    state.content += content;
+};
+const processNode = (node, state, preserveSpace) => {
+    if (typeof node.content === "string") {
+        processContentNode(node, state, preserveSpace);
+    }
+    else if (node.type === "Element") {
+        processElementNode(node, state, preserveSpace);
+    }
+    else if (node.type === "ProcessingInstruction") {
+        processProcessingInstruction(node, state);
+    }
+    else {
+        throw new Error("Unknown node type: " + node.type);
+    }
+};
+const processContentNode = (node, state, preserveSpace) => {
+    if (!preserveSpace) {
+        node.content = trim(node.content);
+    }
+    if (node.content.length > 0) {
+        if (!preserveSpace && state.content.length > 0) {
+            newLine(state);
+        }
+        appendContent(state, node.content);
+    }
+};
+const processElementNode = (node, state, preserveSpace) => {
+    if (!preserveSpace && state.content.length > 0) {
+        newLine(state);
+    }
+    appendContent(state, "<" + node.name);
+    processAttributes(state, node.attributes);
+    if (node.children === null) {
+        const selfClosingNodeClosingTag = state.options.whiteSpaceAtEndOfSelfclosingTag ? " />" : "/>";
+        // self-closing node
+        appendContent(state, selfClosingNodeClosingTag);
+    }
+    else if (node.children.length === 0) {
+        // empty node
+        appendContent(state, "></" + node.name + ">");
+    }
+    else {
+        appendContent(state, ">");
+        state.level++;
+        let nodePreserveSpace = node.attributes["xml:space"] === "preserve";
+        if (!nodePreserveSpace && state.options.collapseContent) {
+            let containsTextNodes = false;
+            let containsTextNodesWithLineBreaks = false;
+            let containsNonTextNodes = false;
+            node.children.forEach(function (child, index) {
+                if (child.type === "Text") {
+                    if (child.content.includes("\n")) {
+                        containsTextNodesWithLineBreaks = true;
+                        child.content = trim(child.content);
+                    }
+                    else if (index === 0 || index === node.children.length - 1) {
+                        if (trim(child.content).length === 0) {
+                            // If the text node is at the start or end and is empty, it should be ignored when formatting
+                            child.content = "";
+                        }
+                    }
+                    if (child.content.length > 0) {
+                        containsTextNodes = true;
+                    }
+                }
+                else if (child.type === "CDATA") {
+                    containsTextNodes = true;
+                }
+                else {
+                    containsNonTextNodes = true;
+                }
+            });
+            if (containsTextNodes && (!containsNonTextNodes || !containsTextNodesWithLineBreaks)) {
+                nodePreserveSpace = true;
+            }
+        }
+        node.children.forEach(function (child) {
+            processNode(child, state, preserveSpace || nodePreserveSpace);
+        });
+        state.level--;
+        if (!preserveSpace && !nodePreserveSpace) {
+            newLine(state);
+        }
+        appendContent(state, "</" + node.name + ">");
+    }
+};
+const processAttributes = (state, attributes) => {
+    Object.keys(attributes).forEach(function (attr) {
+        const escaped = attributes[attr].replace(/"/g, "&quot;");
+        appendContent(state, " " + attr + "=\"" + escaped + "\"");
+    });
+};
+const processProcessingInstruction = (node, state) => {
+    if (state.content.length > 0) {
+        newLine(state);
+    }
+    appendContent(state, "<?" + node.name);
+    processAttributes(state, node.attributes);
+    appendContent(state, "?>");
+};
+function formatXML(xml, _options = {}) {
+    const options = Object.assign(Object.assign({}, defaultXMLFormatterOptions), _options);
+    const parsedXml = (0, xml_parser_xo_1.default)(`<root>${xml}</root>`, { filter: options.filter });
+    const state = { content: "", level: 0, options: options };
+    if (parsedXml.declaration) {
+        processProcessingInstruction(parsedXml.declaration, state);
+    }
+    for (const child of parsedXml.children) {
+        processNode(child, state, false);
+    }
+    return state.content
+        .replace(/\r\n/g, "\n")
+        .replace(/^<root>\n?/, "")
+        .replace(/<\/root>\n?$/, "")
+        .replace(/\n*$/, "\n")
+        .replace(new RegExp(`^${options.indentation}`, "mg"), "")
+        .replace(/\n/g, options.lineSeparator);
+}
+exports.formatXML = formatXML;
+exports["default"] = formatXML;
+//# sourceMappingURL=formatXml.js.map
 
 /***/ }),
 
@@ -66359,6 +66937,256 @@ function simpleWrite(buf) {
 function simpleEnd(buf) {
   return buf && buf.length ? this.write(buf) : '';
 }
+
+/***/ }),
+
+/***/ 50302:
+/***/ ((module) => {
+
+/**
+ * @typedef {Object} ParsingOptions
+ *  @property {function(node)} filter Returns false to exclude a node. Default is true.
+ */
+
+/**
+ * Parse the given XML string into an object.
+ *
+ * @param {String} xml
+ * @param {ParsingOptions} [options]
+ * @return {Object}
+ * @api public
+ */
+function parse(xml, options = {}) {
+
+    options.filter = options.filter || (() => true);
+
+    function nextChild() {
+        return tag() || content() || comment() || cdata();
+    }
+
+    function nextRootChild() {
+        match(/\s*/);
+        return tag(true) || comment() || doctype() || processingInstruction(false);
+    }
+
+    function document() {
+        const decl = declaration();
+        const children = [];
+        let documentRootNode;
+        let child = nextRootChild();
+
+        while (child) {
+            if (child.node.type === 'Element') {
+                if (documentRootNode) {
+                    throw new Error('Found multiple root nodes');
+                }
+                documentRootNode = child.node;
+            }
+
+            if (!child.excluded) {
+                children.push(child.node);
+            }
+
+            child = nextRootChild();
+        }
+
+        if (!documentRootNode) {
+            throw new Error('Failed to parse XML');
+        }
+
+        return {
+            declaration: decl ? decl.node : null,
+            root: documentRootNode,
+            children
+        };
+    }
+
+    function declaration() {
+        return processingInstruction(true);
+    }
+
+    function processingInstruction(matchDeclaration) {
+        const m = matchDeclaration ? match(/^<\?(xml)\s*/) : match(/^<\?([\w-:.]+)\s*/);
+        if (!m) return;
+
+        // tag
+        const node = {
+            name: m[1],
+            type: 'ProcessingInstruction',
+            attributes: {}
+        };
+
+        // attributes
+        while (!(eos() || is('?>'))) {
+            const attr = attribute();
+            if (!attr) return node;
+            node.attributes[attr.name] = attr.value;
+        }
+
+        match(/\?>/);
+
+        return {
+            excluded: matchDeclaration ? false : options.filter(node) === false,
+            node
+        };
+    }
+
+    function tag(matchRoot) {
+        const m = match(/^<([\w-:.]+)\s*/);
+        if (!m) return;
+
+        // name
+        const node = {
+            type: 'Element',
+            name: m[1],
+            attributes: {},
+            children: []
+        };
+
+        // attributes
+        while (!(eos() || is('>') || is('?>') || is('/>'))) {
+            const attr = attribute();
+            if (!attr) return node;
+            node.attributes[attr.name] = attr.value;
+        }
+
+        const excluded = matchRoot ? false : options.filter(node) === false;
+
+        // self closing tag
+        if (match(/^\s*\/>/)) {
+            node.children = null;
+            return {
+                excluded,
+                node
+            };
+        }
+
+        match(/\??>/);
+
+        if (!excluded) {
+            // children
+            let child = nextChild();
+            while (child) {
+                if (!child.excluded) {
+                    node.children.push(child.node);
+                }
+                child = nextChild();
+            }
+        }
+
+        // closing
+        match(/^<\/[\w-:.]+>/);
+
+        return {
+            excluded,
+            node
+        };
+    }
+
+    function doctype() {
+        const m = match(/^<!DOCTYPE\s+[^>]*>/);
+        if (m) {
+            const node = {
+                type: 'DocumentType',
+                content: m[0]
+            };
+            return {
+                excluded: options.filter(node) === false,
+                node
+            };
+        }
+    }
+
+    function cdata() {
+        if (xml.startsWith('<![CDATA[')) {
+            const endPositionStart = xml.indexOf(']]>');
+            if (endPositionStart > -1) {
+                const endPositionFinish  = endPositionStart + 3;
+                const node = {
+                    type: 'CDATA',
+                    content: xml.substring(0, endPositionFinish)
+                };
+                xml = xml.slice(endPositionFinish);
+                return {
+                    excluded: options.filter(node) === false,
+                    node
+                };
+            }
+        }
+    }
+
+    function comment() {
+        const m = match(/^<!--[\s\S]*?-->/);
+        if (m) {
+            const node = {
+                type: 'Comment',
+                content: m[0]
+            };
+            return {
+                excluded: options.filter(node) === false,
+                node
+            };
+        }
+    }
+
+    function content() {
+        const m = match(/^([^<]+)/);
+        if (m) {
+            const node = {
+                type: 'Text',
+                content: m[1]
+            };
+            return {
+                excluded: options.filter(node) === false,
+                node
+            };
+        }
+    }
+
+    function attribute() {
+        const m = match(/([\w-:.]+)\s*=\s*("[^"]*"|'[^']*'|\w+)\s*/);
+        if (!m) return;
+        return {name: m[1], value: strip(m[2])}
+    }
+
+    /**
+     * Strip quotes from `val`.
+     */
+    function strip(val) {
+        return val.replace(/^['"]|['"]$/g, '');
+    }
+
+    /**
+     * Match `re` and advance the string.
+     */
+    function match(re) {
+        const m = xml.match(re);
+        if (!m) return;
+        xml = xml.slice(m[0].length);
+        return m;
+    }
+
+    /**
+     * End-of-source.
+     */
+    function eos() {
+        return 0 === xml.length;
+    }
+
+    /**
+     * Check for `prefix`.
+     */
+    function is(prefix) {
+        return 0 === xml.indexOf(prefix);
+    }
+
+    xml = xml.trim();
+
+    return document();
+}
+
+module.exports = parse;
+
 
 /***/ }),
 
