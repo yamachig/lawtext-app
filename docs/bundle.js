@@ -37884,7 +37884,15 @@ const SidebarFooterDiv = styled_components_1.default.div `
 `;
 const SidebarFooter = () => {
     return (react_1.default.createElement(SidebarFooterDiv, null,
-        react_1.default.createElement("div", { style: { fontSize: "0.8em", textAlign: "center", padding: "0.3em 0", color: "rgb(192, 192, 192)" } },
+        react_1.default.createElement("div", { style: { fontSize: "0.8em", padding: "0.3em 0.3em 0 0.3em", color: "rgb(140, 140, 140)", lineHeight: "1em" } },
+            "\u6CD5\u4EE4\u691C\u7D22\u30FB\u5143\u30C7\u30FC\u30BF\u306F",
+            react_1.default.createElement("a", { href: "https://elaws.e-gov.go.jp/", target: "_blank", rel: "noreferrer" }, "e-Gov\u6CD5\u4EE4\u691C\u7D22"),
+            "\u30FB",
+            react_1.default.createElement("a", { href: "https://elaws.e-gov.go.jp/apitop/", target: "_blank", rel: "noreferrer" }, "\u6CD5\u4EE4API"),
+            "\u3092\u4F7F\u7528\u3057\u3066\u3044\u307E\u3059\u3002\u5B9A\u7FA9\u8A9E\u30FB\u6761\u9805\u53C2\u7167\u306A\u3069\u306E\u8868\u793A\u306F",
+            react_1.default.createElement("a", { href: "https://github.com/yamachig/lawtext", target: "_blank", rel: "noreferrer" }, "Lawtext"),
+            "\u3067\u5225\u9014\u89E3\u6790\u30FB\u7DE8\u96C6\u3057\u305F\u3082\u306E\u3067\u3059\u3002"),
+        react_1.default.createElement("div", { style: { fontSize: "0.8em", textAlign: "center", padding: "0.3em 0", color: "rgb(140, 140, 140)" } },
             react_1.default.createElement("a", { href: "https://github.com/yamachig/lawtext", target: "_blank", rel: "noreferrer", style: { marginRight: "2em" } }, "GitHub"),
             "\u00A9 2017-",
             new Date().getFullYear(),
