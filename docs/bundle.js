@@ -39753,8 +39753,12 @@ const env_1 = __webpack_require__(37025);
 const sentenceEnv_1 = __webpack_require__(6310);
 const _ambiguousNameParenthesesContent_1 = __importDefault(__webpack_require__(57373));
 const getScope_1 = __importDefault(__webpack_require__(70634));
-const ptnNameChar = "(?!(?:\\s|[。、]))[^ぁ-ゟ](?<!当該)";
-const reName = new RegExp(`(?:(?:${ptnNameChar})+の)?((?:${ptnNameChar})+)$`);
+// Characters other than Hiragana's, spaces, and punctuations.
+const ptnNameChar = "(?!(?:\\s|[。、]))[^ぁ-ゟ]";
+// match[0] possibly includes "当該"
+// match[1] possibly includes "の"
+// match[2] does not include "の"
+const reNameGrp1 = new RegExp(`(?:当該)?((?:(?:${ptnNameChar})+の(?!当該))?((?:${ptnNameChar})+))$`);
 const findAmbiguousNameCandidateInfos = (elToBeModified, sentenceEnv, pointerEnvsStruct) => {
     const errors = [];
     const ambiguousNameCandidateInfos = [];
@@ -39824,7 +39828,7 @@ const findFilteredAmbiguousNameInline = (sentenceEnvsStruct, allDeclarations, po
         // e.g. "中期目標の期間" -> ["期間", "中期目標の期間"]
         // e.g. "（略）その担任する事務に関する国の不作為" -> ["不作為", "国の不作為"]
         // e.g. "（略）その担任する事務に関する都道府県の不作為" -> ["不作為", "都道府県の不作為"]
-        const match = reName.exec(info.nameCandidateEL.text());
+        const match = reNameGrp1.exec(info.nameCandidateEL.text());
         if (!match) {
             if (!info.errorEmitted)
                 errors.push(new error_1.ErrorMessage("processAmbiguousNameInline: 定義語のような文字列が見つかりませんでした。", info.nameCandidateEL.range ? [
@@ -39834,9 +39838,9 @@ const findFilteredAmbiguousNameInline = (sentenceEnvsStruct, allDeclarations, po
             info.errorEmitted = true;
             continue;
         }
-        info.nameCandidates.add(match[0]); // possibly includes "の"
-        info.nameCandidates.add(match[1]); // without "の"
-        info.maxCandidateLength = match[0].length;
+        info.nameCandidates.add(match[1]); // possibly includes "の"
+        info.nameCandidates.add(match[2]); // without "の"
+        info.maxCandidateLength = match[1].length;
         const nameCandidateLastOffset = (_f = (_e = info.sentenceEnv.textRageOfEL(info.nameCandidateEL)) === null || _e === void 0 ? void 0 : _e[1]) !== null && _f !== void 0 ? _f : null;
         const parentheseeLastOffset = (_h = (_g = info.sentenceEnv.textRageOfEL(info.afterNameParentheses)) === null || _g === void 0 ? void 0 : _g[1]) !== null && _h !== void 0 ? _h : null;
         // "Consistency": Skip candidates occured outside of the scope.
@@ -39869,20 +39873,20 @@ const findFilteredAmbiguousNameInline = (sentenceEnvsStruct, allDeclarations, po
                         // TODO: exclude other declared words.
                         {
                             const newWord = sentenceEnv.text.substring(0, inSentenceOffset + name.length);
-                            const match = reName.exec(newWord);
-                            if (match && match[0] !== newWord)
+                            const match = reNameGrp1.exec(newWord);
+                            if (match && match[1] !== newWord)
                                 continue;
                         }
                         if (inSentenceOffset + name.length < sentenceEnv.text.length) {
                             const newWord = sentenceEnv.text.substring(inSentenceOffset, inSentenceOffset + name.length + 1);
-                            const match = reName.exec(newWord);
-                            if (match && match[0] === newWord)
+                            const match = reNameGrp1.exec(newWord);
+                            if (match && match[1] === newWord)
                                 continue;
                         }
                         if (inSentenceOffset + name.length + 1 < sentenceEnv.text.length) {
                             const newWord = sentenceEnv.text.substring(inSentenceOffset, inSentenceOffset + name.length + 2);
-                            const match = reName.exec(newWord);
-                            if (match && match[0] === newWord)
+                            const match = reNameGrp1.exec(newWord);
+                            if (match && match[1] === newWord)
                                 continue;
                         }
                     }
@@ -56218,7 +56222,7 @@ const renderLawtext = (el, indentTexts = []) => {
     else {
         throw new util_1.NotImplementedError(`render ${el.tag}`);
     }
-    ret = ret.replace(/\r\n/g, "\n").replace(/\n/g, "\r\n").replace(/(\r?\n\r?\n)(?:\r?\n)+/g, "$1").replace(/(?<!\r\n)$/, "\r\n").replace(/(?:\r?\n)+$/, "\r\n");
+    ret = ret.replace(/\r\n/g, "\n").replace(/\n/g, "\r\n").replace(/(\r?\n\r?\n)(?:\r?\n)+/g, "$1").replace(/(?:\r?\n)?$/, "\r\n").replace(/(?:\r?\n)+$/, "\r\n");
     return ret;
 };
 exports.renderLawtext = renderLawtext;
