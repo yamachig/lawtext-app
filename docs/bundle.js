@@ -38674,6 +38674,12 @@ const navigateLawData = async (lawSearchKey, onMessage, timing) => {
             error: new Error(`「${lawSearchKey}」を検索しましたが、見つかりませんでした。`),
         };
     }
+    else if (typeof lawnum !== "string") {
+        return {
+            ok: false,
+            error: new Error(`「${lawSearchKey}」の検索時にエラーが発生しました： ${lawnum.error}: "${lawnum.message}"`),
+        };
+    }
     try {
         onMessage("保存されている法令情報を探しています...");
         // console.log(`navigateLawData: fetching stored law info for "${lawnum}"...`);
@@ -38852,13 +38858,28 @@ const getLawnumStored = async (lawSearchKey) => {
 };
 const getLawnumRemote = async (lawSearchKey) => {
     // console.log(`getLawnumRemote("${lawSearchKey}")`);
-    const response = await fetch(`https://lic857vlz1.execute-api.ap-northeast-1.amazonaws.com/prod/Lawtext-API?method=lawnums&lawname=${encodeURI(lawSearchKey)}`, {
-        mode: "cors",
-    });
-    const data = await response.json();
-    if (data.length) {
-        data.sort((a, b) => a[0].length - b[0].length);
-        return data[0][1];
+    try {
+        const response = await fetch(`https://lic857vlz1.execute-api.ap-northeast-1.amazonaws.com/prod/Lawtext-API?method=lawnums&lawname=${encodeURI(lawSearchKey)}`, {
+            mode: "cors",
+        });
+        const rawData = await response.json();
+        if (Array.isArray(rawData)) {
+            const data = rawData;
+            if (data.length) {
+                data.sort((a, b) => a[0].length - b[0].length);
+                return data[0][1];
+            }
+        }
+        else if ("error" in rawData) {
+            return rawData;
+        }
+    }
+    catch (_e) {
+        const e = _e;
+        return {
+            error: e.name,
+            message: e.message,
+        };
     }
     return null;
 };
@@ -67246,8 +67267,21 @@ var __read = (this && this.__read) || function (o, n) {
     return ar;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.makeActionEnv = exports.getMemorizedStringOffsetToPos = exports.getLineOffsets = exports.arrayLikeOffsetToPos = void 0;
+exports.makeActionEnv = exports.getMemorizedStringOffsetToPos = exports.getLineOffsets = exports.arrayLikeOffsetToPos = exports.makeStringEnv = exports.makeEnv = void 0;
 var result_1 = __webpack_require__(41082);
+var makeEnv = function () {
+    var _makeEnv = function (envOptions) {
+        var _a = envOptions !== null && envOptions !== void 0 ? envOptions : {}, _b = _a.options, options = _b === void 0 ? {} : _b, _c = _a.baseOffset, baseOffset = _c === void 0 ? 0 : _c, _d = _a.registerCurrentRangeTarget, registerCurrentRangeTarget = _d === void 0 ? function () { } : _d, _e = _a.offsetToPos, offsetToPos = _e === void 0 ? function (_, offset) { return ({ offset: offset }); } : _e;
+        return __assign(__assign({}, envOptions), { options: options, baseOffset: baseOffset, registerCurrentRangeTarget: registerCurrentRangeTarget, offsetToPos: offsetToPos });
+    };
+    return _makeEnv;
+};
+exports.makeEnv = makeEnv;
+var makeStringEnv = function (envOptions) {
+    var _a = envOptions !== null && envOptions !== void 0 ? envOptions : {}, _b = _a.options, options = _b === void 0 ? {} : _b, _c = _a.baseOffset, baseOffset = _c === void 0 ? 0 : _c, _d = _a.offsetToPos, offsetToPos = _d === void 0 ? (0, exports.getMemorizedStringOffsetToPos)() : _d, _e = _a.registerCurrentRangeTarget, registerCurrentRangeTarget = _e === void 0 ? function () { } : _e;
+    return __assign(__assign({}, envOptions), { options: options, baseOffset: baseOffset, offsetToPos: offsetToPos, registerCurrentRangeTarget: registerCurrentRangeTarget });
+};
+exports.makeStringEnv = makeStringEnv;
 var arrayLikeOffsetToPos = function (_target, offset) {
     return {
         offset: offset,
@@ -67576,19 +67610,27 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 /***/ }),
 
 /***/ 87377:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ParseError = exports.getMemorizedStringOffsetToPos = exports.arrayLikeOffsetToPos = exports.Rule = exports.RuleFactory = void 0;
-var factory_1 = __webpack_require__(21718);
-Object.defineProperty(exports, "RuleFactory", ({ enumerable: true, get: function () { return factory_1.RuleFactory; } }));
-var core_1 = __webpack_require__(24658);
-Object.defineProperty(exports, "Rule", ({ enumerable: true, get: function () { return core_1.Rule; } }));
-Object.defineProperty(exports, "arrayLikeOffsetToPos", ({ enumerable: true, get: function () { return core_1.arrayLikeOffsetToPos; } }));
-Object.defineProperty(exports, "getMemorizedStringOffsetToPos", ({ enumerable: true, get: function () { return core_1.getMemorizedStringOffsetToPos; } }));
-Object.defineProperty(exports, "ParseError", ({ enumerable: true, get: function () { return core_1.ParseError; } }));
+__exportStar(__webpack_require__(21718), exports);
+__exportStar(__webpack_require__(24658), exports);
 // export { parse as parsePegjs, defaultOptions as defaultParsePegjsOptions } from "./pegjs/pegjsParser";
 // export { grammarToCode } from "./pegjs/astToCode";
 //# sourceMappingURL=main.js.map
