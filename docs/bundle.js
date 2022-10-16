@@ -40034,7 +40034,7 @@ const findFilteredAmbiguousNameInline = (sentenceEnvsStruct, allDeclarations, po
 };
 exports.findFilteredAmbiguousNameInline = findFilteredAmbiguousNameInline;
 const processAmbiguousNameInline = (sentenceEnvsStruct, allDeclarations, pointerEnvsStruct) => {
-    var _a, _b, _c, _d;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
     const errors = [];
     const toAddDeclarations = [];
     const filteredNameInfos = (0, exports.findFilteredAmbiguousNameInline)(sentenceEnvsStruct, allDeclarations, pointerEnvsStruct);
@@ -40054,7 +40054,11 @@ const processAmbiguousNameInline = (sentenceEnvsStruct, allDeclarations, pointer
         }
         const nameCandidateELTextRange = sentenceEnv.textRageOfEL(nameCandidateEL);
         if (!nameCandidateELTextRange) {
-            throw new Error("nameCandidateELRange is null");
+            errors.push(new error_1.ErrorMessage("nameCandidateELRange is null", [
+                (_f = (_e = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _e === void 0 ? void 0 : _e[0]) !== null && _f !== void 0 ? _f : 0,
+                (_h = (_g = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _g === void 0 ? void 0 : _g[1]) !== null && _h !== void 0 ? _h : 0,
+            ]));
+            continue;
         }
         const nameSentenceTextRange = {
             start: {
@@ -40129,7 +40133,7 @@ const getLawNameLength = (lawNum) => {
 };
 exports.getLawNameLength = getLawNameLength;
 const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct, pointerEnvsStruct) => {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
     const errors = [];
     const declarations = [];
     const lawRefs = [];
@@ -40157,7 +40161,11 @@ const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct, pointerE
                 }
                 const nameTextRange = sentenceEnv.textRageOfEL(nameSquareParentheses.content);
                 if (!nameTextRange) {
-                    throw new Error("nameTextRange is null");
+                    errors.push(new error_1.ErrorMessage("nameTextRange is null", [
+                        (_j = (_h = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _h === void 0 ? void 0 : _h[0]) !== null && _j !== void 0 ? _j : 0,
+                        (_l = (_k = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _k === void 0 ? void 0 : _k[1]) !== null && _l !== void 0 ? _l : 0,
+                    ]));
+                    continue;
                 }
                 const nameSentenceTextRange = {
                     start: {
@@ -40208,17 +40216,21 @@ const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct, pointerE
                         {
                             start: {
                                 sentenceIndex: sentenceEnv.index,
-                                textOffset: (_j = (_h = sentenceEnv.textRageOfEL(lawNum)) === null || _h === void 0 ? void 0 : _h[1]) !== null && _j !== void 0 ? _j : 0,
+                                textOffset: (_o = (_m = sentenceEnv.textRageOfEL(lawNum)) === null || _m === void 0 ? void 0 : _m[1]) !== null && _o !== void 0 ? _o : 0,
                             },
                             end: {
-                                sentenceIndex: ((_l = (_k = sentenceEnv.container.thisOrClosest(p => p.type === container_1.ContainerType.TOPLEVEL || p.type === container_1.ContainerType.ROOT)) === null || _k === void 0 ? void 0 : _k.sentenceRange[1]) !== null && _l !== void 0 ? _l : Number.NaN) + 1,
+                                sentenceIndex: ((_q = (_p = sentenceEnv.container.thisOrClosest(p => p.type === container_1.ContainerType.TOPLEVEL || p.type === container_1.ContainerType.ROOT)) === null || _p === void 0 ? void 0 : _p.sentenceRange[1]) !== null && _q !== void 0 ? _q : Number.NaN) + 1,
                                 textOffset: 0,
                             },
                         },
                     ];
                     const lawNameCandidateTextRange = sentenceEnv.textRageOfEL(lawNameCandidate);
                     if (!lawNameCandidateTextRange) {
-                        throw new Error("lawNameCandidateTextRange is null");
+                        errors.push(new error_1.ErrorMessage("lawNameCandidateTextRange is null", [
+                            (_s = (_r = lawNameCandidate === null || lawNameCandidate === void 0 ? void 0 : lawNameCandidate.range) === null || _r === void 0 ? void 0 : _r[0]) !== null && _s !== void 0 ? _s : 0,
+                            (_u = (_t = lawNameCandidate === null || lawNameCandidate === void 0 ? void 0 : lawNameCandidate.range) === null || _t === void 0 ? void 0 : _t[1]) !== null && _u !== void 0 ? _u : 0,
+                        ]));
+                        continue;
                     }
                     const nameSentenceTextRange = {
                         start: {
@@ -40300,7 +40312,7 @@ const env_1 = __webpack_require__(37025);
 const sentenceEnv_1 = __webpack_require__(6310);
 const getScope_1 = __importDefault(__webpack_require__(70634));
 const processNameInline = (elToBeModified, sentenceEnv, sentenceEnvsStruct, pointerEnvsStruct) => {
-    var _a, _b, _c, _d, _e, _f, _g;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
     const errors = [];
     const declarations = [];
     for (let i = 0; i < elToBeModified.children.length; i++) {
@@ -40324,7 +40336,11 @@ const processNameInline = (elToBeModified, sentenceEnv, sentenceEnvsStruct, poin
             }
             const nameTextRange = sentenceEnv.textRageOfEL(nameSquareParentheses.content);
             if (!nameTextRange) {
-                throw new Error("nameTextRange is null");
+                errors.push(new error_1.ErrorMessage("nameTextRange is null", [
+                    (_j = (_h = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _h === void 0 ? void 0 : _h[0]) !== null && _j !== void 0 ? _j : 0,
+                    (_l = (_k = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _k === void 0 ? void 0 : _k[1]) !== null && _l !== void 0 ? _l : 0,
+                ]));
+                continue;
             }
             const nameSentenceTextRange = {
                 start: {
@@ -40401,7 +40417,7 @@ const sentenceEnv_1 = __webpack_require__(6310);
 const std = __importStar(__webpack_require__(93619));
 const getScope_1 = __importDefault(__webpack_require__(70634));
 const processNameList = (headSentenceEnv, sentenceEnvsStruct, pointerEnvsStruct) => {
-    var _a, _b, _c, _d;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
     const errors = [];
     const declarations = [];
     const result = _nameListHead_1.default.match(0, headSentenceEnv.el.children, (0, env_1.initialEnv)({ target: "" }));
@@ -40445,7 +40461,11 @@ const processNameList = (headSentenceEnv, sentenceEnvsStruct, pointerEnvsStruct)
                     continue;
                 const nameTextRange = sentenceEnv.textRageOfEL(nameChild.content);
                 if (!nameTextRange) {
-                    throw new Error("nameTextRange is null");
+                    errors.push(new error_1.ErrorMessage("nameTextRange is null", [
+                        (_f = (_e = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _e === void 0 ? void 0 : _e[0]) !== null && _f !== void 0 ? _f : 0,
+                        (_h = (_g = pointerRanges === null || pointerRanges === void 0 ? void 0 : pointerRanges.range) === null || _g === void 0 ? void 0 : _g[1]) !== null && _h !== void 0 ? _h : 0,
+                    ]));
+                    continue;
                 }
                 const nameSentenceTextRange = {
                     start: {
@@ -40530,6 +40550,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.detectVariableReferences = exports.detectVariableReferencesOfEL = exports.matchVariableReferences = void 0;
 const varRef_1 = __webpack_require__(29390);
 const controls_1 = __webpack_require__(48075);
+const error_1 = __webpack_require__(40520);
 const sentenceEnv_1 = __webpack_require__(6310);
 const common_1 = __webpack_require__(50638);
 const num_1 = __webpack_require__(68685);
@@ -40602,6 +40623,7 @@ const matchVariableReferences = (textEL, sentenceEnv, declarations) => {
 };
 exports.matchVariableReferences = matchVariableReferences;
 const detectVariableReferencesOfEL = (elToBeModified, sentenceEnv, declarations, lawRefByDeclarationID, pointerEnvsStruct) => {
+    var _a, _b, _c, _d, _e, _f, _g, _h;
     const varRefs = [];
     const errors = [];
     for (let childIndex = 0; childIndex < elToBeModified.children.length; childIndex++) {
@@ -40617,8 +40639,13 @@ const detectVariableReferencesOfEL = (elToBeModified, sentenceEnv, declarations,
         }
         else if (child instanceof controls_1.__Text) {
             const textRange = sentenceEnv.textRageOfEL(child);
-            if (!textRange)
-                throw new Error("textRange is null");
+            if (!textRange) {
+                errors.push(new error_1.ErrorMessage("textRange is null", [
+                    (_b = (_a = child === null || child === void 0 ? void 0 : child.range) === null || _a === void 0 ? void 0 : _a[0]) !== null && _b !== void 0 ? _b : 0,
+                    (_d = (_c = child === null || child === void 0 ? void 0 : child.range) === null || _c === void 0 ? void 0 : _c[1]) !== null && _d !== void 0 ? _d : 0,
+                ]));
+                continue;
+            }
             const filteredDeclarations = declarations.filterByRange({
                 start: {
                     sentenceIndex: sentenceEnv.index,
@@ -40662,7 +40689,11 @@ const detectVariableReferencesOfEL = (elToBeModified, sentenceEnv, declarations,
         else {
             const textRange = sentenceEnv.textRageOfEL(child);
             if (!textRange) {
-                throw new Error("textRange is null");
+                errors.push(new error_1.ErrorMessage("textRange is null", [
+                    (_f = (_e = child === null || child === void 0 ? void 0 : child.range) === null || _e === void 0 ? void 0 : _e[0]) !== null && _f !== void 0 ? _f : 0,
+                    (_h = (_g = child === null || child === void 0 ? void 0 : child.range) === null || _g === void 0 ? void 0 : _g[1]) !== null && _h !== void 0 ? _h : 0,
+                ]));
+                continue;
             }
             const filteredDeclarations = declarations.filterByRange({
                 start: {
