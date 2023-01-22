@@ -36103,20 +36103,31 @@ const law_util_1 = __webpack_require__(50377);
 const showErrorModal_1 = __webpack_require__(87322);
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const sampleXml = (__webpack_require__(25687)/* ["default"] */ .Z);
-const onNavigated = async (lawSearchKey, origSetState) => {
-    console.log(`onNavigated(${lawSearchKey})`);
+const onNavigated = async (pathStr, prevPathStr, origSetState) => {
+    console.log(`onNavigated(${pathStr})`);
+    {
+        const firstPart = pathStr.split("/")[0];
+        const prevFirstPart = prevPathStr.split("/")[0];
+        if (firstPart === prevFirstPart) {
+            console.log("onNavigated: the first step in the path did not change.");
+            origSetState(s => {
+                return Object.assign(Object.assign({}, s), { navigatedPath: pathStr });
+            });
+            return;
+        }
+    }
     const onMessage = (message) => {
         origSetState(s => (Object.assign(Object.assign({}, s), { viewerMessages: Object.assign(Object.assign({}, s.viewerMessages), { loadingLaw: message }) })));
         console.log(message);
     };
-    if (!lawSearchKey) {
+    if (!pathStr) {
         console.log("onNavigated: detected the top page.");
         origSetState(s => {
             // const { law: oldLaw } = s;
             // if (oldLaw && ("xml" in oldLaw)) {
             //     oldLaw.lawXMLStruct?.clean();
             // }
-            return Object.assign(Object.assign({}, s), { navigatedLawSearchKey: lawSearchKey, law: null, loadingLaw: false, viewerMessages: util.omit(s.viewerMessages, "loadingLaw") });
+            return Object.assign(Object.assign({}, s), { navigatedPath: pathStr, law: null, loadingLaw: false, viewerMessages: util.omit(s.viewerMessages, "loadingLaw") });
         });
         return;
     }
@@ -36125,9 +36136,9 @@ const onNavigated = async (lawSearchKey, origSetState) => {
         // if (oldLaw && ("xml" in oldLaw)) {
         //     oldLaw.lawXMLStruct?.clean();
         // }
-        return Object.assign(Object.assign({}, s), { navigatedLawSearchKey: lawSearchKey, law: null, loadingLaw: true, viewerMessages: Object.assign(Object.assign({}, s.viewerMessages), { loadingLaw: "法令を読み込んでいます..." }) });
+        return Object.assign(Object.assign({}, s), { navigatedPath: pathStr, law: null, loadingLaw: true, viewerMessages: Object.assign(Object.assign({}, s.viewerMessages), { loadingLaw: "法令を読み込んでいます..." }) });
     });
-    const toDownloadSample = (lawSearchKey.startsWith("(sample)"));
+    const toDownloadSample = (pathStr.startsWith("(sample)"));
     let lawDataResult;
     const timing = new lawdata_1.Timing();
     if (toDownloadSample) {
@@ -36143,7 +36154,7 @@ const onNavigated = async (lawSearchKey, origSetState) => {
         onMessage("法令を検索しています...");
         // console.log("onNavigated: searching law...");
         await util.wait(30);
-        lawDataResult = await (0, navigateLawData_1.navigateLawData)(lawSearchKey, onMessage, timing);
+        lawDataResult = await (0, navigateLawData_1.navigateLawData)(pathStr, onMessage, timing);
     }
     if (!lawDataResult.ok) {
         console.error("onNavigated: error during loading the law...");
@@ -36245,8 +36256,10 @@ const scrollToLawAnchor = (id) => {
             const elRect = el.getBoundingClientRect();
             const scrollELRect = scrollEL.getBoundingClientRect();
             scrollEL.scrollTop = elRect.top - scrollELRect.top;
+            return;
         }
     }
+    console.error(`scrollToLawAnchor(id=${id}) could not find id.`);
 };
 exports.scrollToLawAnchor = scrollToLawAnchor;
 
@@ -36490,6 +36503,7 @@ const std = __importStar(__webpack_require__(93619));
 const download_1 = __webpack_require__(56644);
 const ReplaceHTMLFigRun_1 = __importDefault(__webpack_require__(39238));
 const WrapHTMLControlRun_1 = __importDefault(__webpack_require__(50360));
+const container_1 = __webpack_require__(49814);
 const wrapperByID = {};
 wrapperByID["HTMLControlRun"] = WrapHTMLControlRun_1.default;
 wrapperByID["HTMLFigRun"] = ReplaceHTMLFigRun_1.default;
@@ -36507,7 +36521,7 @@ const WrapLawComponent = props => {
     const options = childProps.htmlOptions.options;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const el = childProps.el;
-    const elID = (el instanceof el_1.EL) && (std.isLaw(el) || std.isPreamble(el) || std.isTOC(el) || std.isAppdxItem(el) || std.isSupplProvisionAppdxItem(el) || std.isSupplProvision(el) || std.isArticleGroup(el) || std.isArticle(el)) && el.id;
+    const elID = (el instanceof el_1.EL) && (container_1.containerTags.includes(el.tag) || std.isPreamble(el) || std.isTOC(el)) && el.id;
     const WrapperByID = wrapperByID[htmlComponentID];
     const baseElement = (
     // (htmlComponentID === "HTMLSentenceChildrenRun")
@@ -36522,7 +36536,7 @@ const WrapLawComponent = props => {
         dataset.push(["data-toplevel_container_info", JSON.stringify((0, download_1.containerInfoOf)(el))]);
     }
     if ((el instanceof el_1.EL)
-        && (std.isArticle(el) || std.isParagraph(el))) {
+        && (container_1.containerTags.includes(el.tag))) {
         dataset.push(["data-container_info", JSON.stringify((0, download_1.containerInfoOf)(el))]);
     }
     const withDatasetElement = (dataset.length > 0
@@ -36934,12 +36948,12 @@ exports.LawNum = void 0;
 const react_1 = __importDefault(__webpack_require__(67294));
 const styled_components_1 = __importDefault(__webpack_require__(58804));
 const sentenceChildrenRun_1 = __webpack_require__(95041);
-const num_1 = __webpack_require__(68685);
+const lawNum_1 = __webpack_require__(3963);
 const LawNumA = styled_components_1.default.a `
 `;
 const LawNum = (props) => {
     const { el, htmlOptions } = props;
-    return (react_1.default.createElement(LawNumA, { href: `#/${(0, num_1.toStdLawNum)(el.text())}`, target: "_blank" },
+    return (react_1.default.createElement(LawNumA, { href: `#/${(0, lawNum_1.lawNumLikeToLawNum)(el.text())}`, target: "_blank" },
         react_1.default.createElement(sentenceChildrenRun_1.HTMLSentenceChildrenRun, Object.assign({ els: el.children }, { htmlOptions }))));
 };
 exports.LawNum = LawNum;
@@ -37253,6 +37267,9 @@ const htmlCSS_1 = __importDefault(__webpack_require__(81225));
 const LawWrapper_1 = __webpack_require__(70155);
 const useAfterMountTask_1 = __importDefault(__webpack_require__(81555));
 const ControlGlobalStyle_1 = __importDefault(__webpack_require__(40993));
+const parse_1 = __importDefault(__webpack_require__(94762));
+const locate_1 = __importDefault(__webpack_require__(68968));
+const scroll_1 = __webpack_require__(31529);
 const GlobalStyle = (0, styled_components_1.createGlobalStyle) `
 `;
 const LawViewDiv = styled_components_1.default.div `
@@ -37264,13 +37281,52 @@ const LawView = props => {
         origSetState(prev => (Object.assign(Object.assign({}, prev), { hasError: true, errors: [...prev.errors, error] })));
     }, [origSetState]);
     const MemoLawDataComponent = react_1.default.useMemo(() => react_1.default.memo(LawDataComponent), []);
+    const [prevPath, setPrevPath] = (0, react_1.useState)("");
+    react_1.default.useEffect(() => {
+        if (prevPath !== origState.navigatedPath) {
+            if (origState.law) {
+                let restPath = null;
+                {
+                    const m = /^v1:(.+)$/.exec(origState.navigatedPath);
+                    if (m) {
+                        const parsedPath = (0, parse_1.default)(m[1]);
+                        if (parsedPath.ok && parsedPath.value.length > 1 && parsedPath.value[0].type === "LAW") {
+                            restPath = parsedPath.value.slice(1);
+                        }
+                    }
+                    else {
+                        const m = /^.+?\/(.+)$/.exec(origState.navigatedPath);
+                        if (m) {
+                            const parsedPath = (0, parse_1.default)(m[1]);
+                            if (parsedPath.ok && parsedPath.value.length >= 1) {
+                                restPath = parsedPath.value;
+                            }
+                        }
+                    }
+                }
+                if (restPath) {
+                    const located = (0, locate_1.default)(origState.law.analysis.rootContainer, restPath, []);
+                    if (located.ok) {
+                        (0, scroll_1.scrollToLawAnchor)(located.value.container.el.id.toString());
+                    }
+                    else {
+                        console.error(located);
+                        if (located.partialValue) {
+                            (0, scroll_1.scrollToLawAnchor)(located.partialValue.container.el.id.toString());
+                        }
+                    }
+                }
+            }
+            setPrevPath(origState.navigatedPath);
+        }
+    }, [prevPath, origState.navigatedPath, origState.law]);
     return (react_1.default.createElement(LawViewDiv, null,
         react_1.default.createElement("style", null, htmlCSS_1.default),
         react_1.default.createElement(GlobalStyle, null),
         react_1.default.createElement(ControlGlobalStyle_1.default, null),
         origState.hasError && react_1.default.createElement(LawViewError, Object.assign({}, props)),
         origState.law &&
-            (origState.navigatedLawSearchKey === props.lawSearchKey) &&
+            // (origState.navigatedPath === props.path) &&
             react_1.default.createElement(MemoLawDataComponent, { lawData: origState.law, onError: onError, origSetState: origSetState })));
 };
 exports.LawView = LawView;
@@ -37379,12 +37435,35 @@ exports["default"] = exports.useAfterMountTasks;
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LawtextAppPage = void 0;
-const react_1 = __importDefault(__webpack_require__(67294));
+const react_1 = __importStar(__webpack_require__(67294));
 const styled_components_1 = __importDefault(__webpack_require__(58804));
 const Sidebar_1 = __webpack_require__(12661);
 const LawtextAppPageState_1 = __webpack_require__(65244);
@@ -37412,13 +37491,17 @@ const HiddenInput = styled_components_1.default.input `
 `;
 const LawtextAppPage = () => {
     const stateStruct = (0, LawtextAppPageState_1.useLawtextAppPageState)();
-    const { navigate, lawSearchKey, origSetState } = stateStruct;
+    const { navigate, path, origSetState } = stateStruct;
     react_1.default.useEffect(() => {
         document.title = "Lawtext";
     }, []);
+    const [prevPath, setPrevPath] = (0, react_1.useState)("");
     react_1.default.useEffect(() => {
-        (0, onNavigated_1.onNavigated)(lawSearchKey, origSetState);
-    }, [lawSearchKey, origSetState]);
+        if (path !== prevPath) {
+            (0, onNavigated_1.onNavigated)(path.trim(), prevPath, origSetState);
+            setPrevPath(path);
+        }
+    }, [path, prevPath, origSetState]);
     const inputChanged = async () => {
         origSetState(s => (Object.assign(Object.assign({}, s), { loadingLaw: true, viewerMessages: Object.assign(Object.assign({}, s.viewerMessages), { loadingLaw: "ファイルを読み込んでいます..." }) })));
         console.log("openFileInputChange: Loading file");
@@ -37470,10 +37553,10 @@ const getInitialState = () => ({
     viewerMessages: {},
     hasError: false,
     errors: [],
-    navigatedLawSearchKey: "",
+    navigatedPath: "",
 });
 const useLawtextAppPageState = () => {
-    const { lawSearchKey } = (0, react_router_dom_1.useParams)();
+    const { "*": path } = (0, react_router_dom_1.useParams)();
     const [state, origSetState] = react_1.default.useState(getInitialState);
     const setState = react_1.default.useCallback((newState) => {
         origSetState(prevState => (Object.assign(Object.assign({}, prevState), newState)));
@@ -37484,7 +37567,7 @@ const useLawtextAppPageState = () => {
         origSetState,
         setState,
         navigate,
-        lawSearchKey: lawSearchKey !== null && lawSearchKey !== void 0 ? lawSearchKey : "",
+        path: path !== null && path !== void 0 ? path : "",
     };
 };
 exports.useLawtextAppPageState = useLawtextAppPageState;
@@ -37532,6 +37615,7 @@ const util_1 = __webpack_require__(84530);
 const download_1 = __webpack_require__(56644);
 const openFile_1 = __webpack_require__(63895);
 const scroll_1 = __webpack_require__(31529);
+const make_1 = __importDefault(__webpack_require__(45940));
 const SidebarH1 = styled_components_1.default.h1 `
     text-align: center;
     margin-top: 1rem;
@@ -37542,11 +37626,11 @@ const SidebarHeadDiv = styled_components_1.default.div `
     margin-bottom: 1rem;
 `;
 const SidebarHead = props => {
-    const { origState, navigate, lawSearchKey } = props;
-    const [editingKey, setEditingKey] = react_1.default.useState(lawSearchKey);
+    const { origState, navigate } = props;
+    const [editingKey, setEditingKey] = react_1.default.useState("");
     const handleSearchSubmit = (event) => {
         event.preventDefault();
-        navigate(`/${editingKey}`);
+        navigate(`/${editingKey.replace("/", "")}`);
     };
     const lawSearchKeyOnChange = (e) => {
         setEditingKey(e.target.value);
@@ -37618,6 +37702,21 @@ const TOCItemDiv = styled_components_1.default.div `
         background-color: rgba(255, 255, 255, .8);
     }
 `;
+const TOCItemAnchor = styled_components_1.default.a `
+    display: block;
+    color: currentColor;
+    text-decoration: none;
+    text-indent: -1em;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    &:hover {
+        background-color: rgba(255, 255, 255, .8);
+        color: currentColor;
+    }
+`;
 const LawNavDiv = styled_components_1.default.div `
     flex-grow: 1;
     flex-basis: 0;
@@ -37627,65 +37726,59 @@ const LawNavDiv = styled_components_1.default.div `
     padding: 0.4rem 0;
     font-size: 0.75em;
 `;
+const TOCItem = props => {
+    var _a;
+    const container = props.containers.get(props.el);
+    const path = (_a = (container && (0, make_1.default)(container))) !== null && _a !== void 0 ? _a : null;
+    if (path) {
+        return (react_1.default.createElement(TOCItemAnchor, { style: {
+                paddingLeft: (props.indent + 2) + "em",
+            }, href: `#/${props.firstPart}/${path}` }, props.text));
+    }
+    else {
+        const onClick = () => {
+            props.navigate(`/${props.firstPart}`);
+            (0, scroll_1.scrollToLawAnchor)(props.el.id.toString());
+        };
+        return (react_1.default.createElement(TOCItemDiv, { style: {
+                paddingLeft: (props.indent + 2) + "em",
+            }, onClick: onClick }, props.text));
+    }
+};
 const NavLaw = props => {
     var _a, _b, _c;
-    const onClick = () => {
-        (0, scroll_1.scrollToLawAnchor)(props.law.id.toString());
-    };
-    return (react_1.default.createElement(TOCItemDiv, { style: {
-            paddingLeft: (props.indent + 2) + "em",
-        }, onClick: onClick }, (_c = (_b = (_a = props.law.children.find(std.isLawBody)) === null || _a === void 0 ? void 0 : _a.children.find(std.isLawTitle)) === null || _b === void 0 ? void 0 : _b.text()) !== null && _c !== void 0 ? _c : ""));
+    return (react_1.default.createElement(TOCItem, Object.assign({}, props, { text: (_c = (_b = (_a = props.el.children.find(std.isLawBody)) === null || _a === void 0 ? void 0 : _a.children.find(std.isLawTitle)) === null || _b === void 0 ? void 0 : _b.text()) !== null && _c !== void 0 ? _c : "" })));
 };
 const NavEnactStatement = props => {
-    const onClick = () => {
-        (0, scroll_1.scrollToLawAnchor)(props.enactStatement.id.toString());
-    };
-    return (react_1.default.createElement(TOCItemDiv, { style: {
-            paddingLeft: (props.indent + 2) + "em",
-        }, onClick: onClick }, "\u5236\u5B9A\u6587"));
+    return (react_1.default.createElement(TOCItem, Object.assign({}, props, { text: "制定文" })));
 };
 const NavPreamble = props => {
-    const onClick = () => {
-        (0, scroll_1.scrollToLawAnchor)(props.preamble.id.toString());
-    };
-    return (react_1.default.createElement(TOCItemDiv, { style: {
-            paddingLeft: (props.indent + 2) + "em",
-        }, onClick: onClick }, "\u524D\u6587"));
+    return (react_1.default.createElement(TOCItem, Object.assign({}, props, { text: "前文" })));
 };
 const NavTOC = props => {
-    const tocLabel = props.toc.children.find((el) => el.tag === "TOCLabel");
-    const onClick = () => {
-        (0, scroll_1.scrollToLawAnchor)(props.toc.id.toString());
-    };
-    return tocLabel ? (react_1.default.createElement(TOCItemDiv, { style: {
-            paddingLeft: (props.indent + 2) + "em",
-        }, onClick: onClick }, tocLabel.text())) : null;
+    const tocLabel = props.el.children.find((el) => el.tag === "TOCLabel");
+    return tocLabel ? (react_1.default.createElement(TOCItem, Object.assign({}, props, { text: tocLabel.text() }))) : null;
 };
 const NavArticleGroup = props => {
-    return (react_1.default.createElement(react_1.default.Fragment, null, [...props.articleGroup.children].map((el, i) => {
+    return (react_1.default.createElement(react_1.default.Fragment, null, [...props.el.children].map((el, i) => {
         if (std.isArticleGroup(el)) {
-            return react_1.default.createElement(NavArticleGroup, { key: i, articleGroup: el, indent: props.articleGroup.tag === "MainProvision" ? props.indent : props.indent + 1 });
+            return react_1.default.createElement(NavArticleGroup, Object.assign({}, props, { key: i, el: el, indent: props.el.tag === "MainProvision" ? props.indent : props.indent + 1 }));
         }
         else if (std.isArticle(el)) {
-            return react_1.default.createElement(NavArticle, { key: i, article: el, indent: props.articleGroup.tag === "MainProvision" ? props.indent : props.indent + 1 });
+            return react_1.default.createElement(NavArticle, Object.assign({}, props, { key: i, el: el, indent: props.el.tag === "MainProvision" ? props.indent : props.indent + 1 }));
         }
-        else if (el.tag === "Paragraph" || el.tag === "PartTitle" || el.tag === "ChapterTitle" || el.tag === "SectionTitle" || el.tag === "SubsectionTitle" || el.tag === "DivisionTitle") {
-            const onClick = () => {
-                (0, scroll_1.scrollToLawAnchor)(props.articleGroup.id.toString());
-            };
-            return (react_1.default.createElement(TOCItemDiv, { key: i, style: {
-                    paddingLeft: (props.indent + 2) + "em",
-                }, onClick: onClick, title: el.text() }, el.text()));
+        else if (el.tag === "PartTitle" || el.tag === "ChapterTitle" || el.tag === "SectionTitle" || el.tag === "SubsectionTitle" || el.tag === "DivisionTitle") {
+            return (react_1.default.createElement(TOCItem, Object.assign({}, props, { key: i, text: el.text() })));
         }
         else {
             console.error(`unexpected element! ${JSON.stringify(el, undefined, 2)}`);
-            return react_1.default.createElement(NavAnyLaw, { key: i, el: el, indent: props.indent });
+            return react_1.default.createElement(NavAnyLaw, Object.assign({}, props, { key: i, el: el, indent: props.indent }));
         }
     })));
 };
 const NavArticle = props => {
-    const articleCaption = props.article.children.find((el) => el.tag === "ArticleCaption");
-    const articleTitle = props.article.children.find((el) => el.tag === "ArticleTitle");
+    const articleCaption = props.el.children.find((el) => el.tag === "ArticleCaption");
+    const articleTitle = props.el.children.find((el) => el.tag === "ArticleTitle");
     if (articleTitle) {
         const name = articleTitle.text();
         let text = name;
@@ -37693,114 +37786,74 @@ const NavArticle = props => {
             const appendText = articleCaption.text();
             text += (appendText[0] === "（" ? "" : "　") + appendText;
         }
-        const onClick = () => {
-            (0, scroll_1.scrollToLawAnchor)(props.article.id.toString());
-        };
-        return (react_1.default.createElement(TOCItemDiv, { style: {
-                paddingLeft: (props.indent + 2) + "em",
-            }, onClick: onClick, title: text }, text));
+        return (react_1.default.createElement(TOCItem, Object.assign({}, props, { text: text })));
     }
     else {
         return null;
     }
 };
 const NavSupplProvision = props => {
-    const supplProvisionLabel = props.supplProvision.children.find((el) => el.tag === "SupplProvisionLabel");
+    const supplProvisionLabel = props.el.children.find((el) => el.tag === "SupplProvisionLabel");
     if (supplProvisionLabel) {
         const name = supplProvisionLabel.text();
-        const amendLawNum = props.supplProvision.attr.AmendLawNum || "";
+        const amendLawNum = props.el.attr.AmendLawNum || "";
         // eslint-disable-next-line no-irregular-whitespace
         const text = (name + (amendLawNum ? ("（" + amendLawNum + "）") : "")).replace(/[\s　]+/, "");
-        const onClick = () => {
-            (0, scroll_1.scrollToLawAnchor)(props.supplProvision.id.toString());
-        };
-        return (react_1.default.createElement(TOCItemDiv, { style: {
-                paddingLeft: (props.indent + 2) + "em",
-            }, onClick: onClick, title: text }, text));
+        return (react_1.default.createElement(TOCItem, Object.assign({}, props, { text: text })));
     }
     else {
         return null;
     }
 };
 const NavAppdxTable = props => {
-    const appdxTableTitle = props.appdxTable.children.find((el) => el.tag === "AppdxTableTitle");
+    const appdxTableTitle = props.el.children.find((el) => el.tag === "AppdxTableTitle");
     if (appdxTableTitle) {
-        const onClick = () => {
-            (0, scroll_1.scrollToLawAnchor)(props.appdxTable.id.toString());
-        };
-        return (react_1.default.createElement(TOCItemDiv, { style: {
-                paddingLeft: (props.indent + 2) + "em",
-            }, onClick: onClick, title: appdxTableTitle.text() }, appdxTableTitle.text()));
+        return (react_1.default.createElement(TOCItem, Object.assign({}, props, { text: appdxTableTitle.text() })));
     }
     else {
         return null;
     }
 };
 const NavAppdxStyle = props => {
-    const appdxStyleTitle = props.appdxStyle.children.find((el) => el.tag === "AppdxStyleTitle");
+    const appdxStyleTitle = props.el.children.find((el) => el.tag === "AppdxStyleTitle");
     if (appdxStyleTitle) {
-        const onClick = () => {
-            (0, scroll_1.scrollToLawAnchor)(props.appdxStyle.id.toString());
-        };
-        return (react_1.default.createElement(TOCItemDiv, { style: {
-                paddingLeft: (props.indent + 2) + "em",
-            }, onClick: onClick, title: appdxStyleTitle.text() }, appdxStyleTitle.text()));
+        return (react_1.default.createElement(TOCItem, Object.assign({}, props, { text: appdxStyleTitle.text() })));
     }
     else {
         return null;
     }
 };
 const NavAppdxFig = props => {
-    const AppdxFigTitle = props.appdxFig.children.find((el) => el.tag === "AppdxFigTitle");
+    const AppdxFigTitle = props.el.children.find((el) => el.tag === "AppdxFigTitle");
     if (AppdxFigTitle) {
-        const onClick = () => {
-            (0, scroll_1.scrollToLawAnchor)(props.appdxFig.id.toString());
-        };
-        return (react_1.default.createElement(TOCItemDiv, { style: {
-                paddingLeft: (props.indent + 2) + "em",
-            }, onClick: onClick, title: AppdxFigTitle.text() }, AppdxFigTitle.text()));
+        return (react_1.default.createElement(TOCItem, Object.assign({}, props, { text: AppdxFigTitle.text() })));
     }
     else {
         return null;
     }
 };
 const NavAppdxFormat = props => {
-    const appdxFormatTitle = props.appdxFig.children.find((el) => el.tag === "AppdxFormatTitle");
+    const appdxFormatTitle = props.el.children.find((el) => el.tag === "AppdxFormatTitle");
     if (appdxFormatTitle) {
-        const onClick = () => {
-            (0, scroll_1.scrollToLawAnchor)(props.appdxFig.id.toString());
-        };
-        return (react_1.default.createElement(TOCItemDiv, { style: {
-                paddingLeft: (props.indent + 2) + "em",
-            }, onClick: onClick, title: appdxFormatTitle.text() }, appdxFormatTitle.text()));
+        return (react_1.default.createElement(TOCItem, Object.assign({}, props, { text: appdxFormatTitle.text() })));
     }
     else {
         return null;
     }
 };
 const NavAppdxNote = props => {
-    const appdxNoteTitle = props.appdxFig.children.find((el) => el.tag === "AppdxNoteTitle");
+    const appdxNoteTitle = props.el.children.find((el) => el.tag === "AppdxNoteTitle");
     if (appdxNoteTitle) {
-        const onClick = () => {
-            (0, scroll_1.scrollToLawAnchor)(props.appdxFig.id.toString());
-        };
-        return (react_1.default.createElement(TOCItemDiv, { style: {
-                paddingLeft: (props.indent + 2) + "em",
-            }, onClick: onClick, title: appdxNoteTitle.text() }, appdxNoteTitle.text()));
+        return (react_1.default.createElement(TOCItem, Object.assign({}, props, { text: appdxNoteTitle.text() })));
     }
     else {
         return null;
     }
 };
 const NavAppdx = props => {
-    const ArithFormulaNum = props.appdxFig.children.find((el) => el.tag === "ArithFormulaNum");
+    const ArithFormulaNum = props.el.children.find((el) => el.tag === "ArithFormulaNum");
     if (ArithFormulaNum) {
-        const onClick = () => {
-            (0, scroll_1.scrollToLawAnchor)(props.appdxFig.id.toString());
-        };
-        return (react_1.default.createElement(TOCItemDiv, { style: {
-                paddingLeft: (props.indent + 2) + "em",
-            }, onClick: onClick, title: ArithFormulaNum.text() }, ArithFormulaNum.text()));
+        return (react_1.default.createElement(TOCItem, Object.assign({}, props, { text: ArithFormulaNum.text() })));
     }
     else {
         return null;
@@ -37809,54 +37862,49 @@ const NavAppdx = props => {
 const NavAnyLaw = props => {
     const titleEL = props.el.children.find(c => typeof c !== "string" && c.tag.includes("Title")) || props.el;
     if (titleEL) {
-        const onClick = () => {
-            (0, scroll_1.scrollToLawAnchor)(props.el.id.toString());
-        };
-        return (react_1.default.createElement(TOCItemDiv, { style: {
-                paddingLeft: (props.indent + 2) + "em",
-            }, onClick: onClick, title: titleEL.text() }, titleEL.text()));
+        return (react_1.default.createElement(TOCItem, Object.assign({}, props, { text: titleEL.text() })));
     }
     else {
         return null;
     }
 };
 const LawBody = props => {
-    return (react_1.default.createElement(react_1.default.Fragment, null, props.lawBody.children.map((el, i) => {
+    return (react_1.default.createElement(react_1.default.Fragment, null, props.el.children.map((el, i) => {
         if (el.tag === "LawTitle") {
             return null;
         }
         else if (el.tag === "EnactStatement") {
-            return react_1.default.createElement(NavEnactStatement, { key: i, enactStatement: el, indent: 0 });
+            return react_1.default.createElement(NavEnactStatement, Object.assign({}, props, { key: i, el: el, indent: 0 }));
         }
         else if (el.tag === "TOC") {
-            return react_1.default.createElement(NavTOC, { key: i, toc: el, indent: 0 });
+            return react_1.default.createElement(NavTOC, Object.assign({}, props, { key: i, el: el, indent: 0 }));
         }
         else if (el.tag === "Preamble") {
-            return react_1.default.createElement(NavPreamble, { key: i, preamble: el, indent: 0 });
+            return react_1.default.createElement(NavPreamble, Object.assign({}, props, { key: i, el: el, indent: 0 }));
         }
         else if (el.tag === "MainProvision") {
-            return react_1.default.createElement(NavArticleGroup, { key: i, articleGroup: el, indent: 0 });
+            return react_1.default.createElement(NavArticleGroup, Object.assign({}, props, { key: i, el: el, indent: 0 }));
         }
         else if (el.tag === "SupplProvision") {
-            return react_1.default.createElement(NavSupplProvision, { key: i, supplProvision: el, indent: 0 });
+            return react_1.default.createElement(NavSupplProvision, Object.assign({}, props, { key: i, el: el, indent: 0 }));
         }
         else if (el.tag === "AppdxTable") {
-            return react_1.default.createElement(NavAppdxTable, { key: i, appdxTable: el, indent: 0 });
+            return react_1.default.createElement(NavAppdxTable, Object.assign({}, props, { key: i, el: el, indent: 0 }));
         }
         else if (el.tag === "AppdxStyle") {
-            return react_1.default.createElement(NavAppdxStyle, { key: i, appdxStyle: el, indent: 0 });
+            return react_1.default.createElement(NavAppdxStyle, Object.assign({}, props, { key: i, el: el, indent: 0 }));
         }
         else if (el.tag === "AppdxFig") {
-            return react_1.default.createElement(NavAppdxFig, { key: i, appdxFig: el, indent: 0 });
+            return react_1.default.createElement(NavAppdxFig, Object.assign({}, props, { key: i, el: el, indent: 0 }));
         }
         else if (el.tag === "AppdxNote") {
-            return react_1.default.createElement(NavAppdxNote, { key: i, appdxFig: el, indent: 0 });
+            return react_1.default.createElement(NavAppdxNote, Object.assign({}, props, { key: i, el: el, indent: 0 }));
         }
         else if (el.tag === "AppdxFormat") {
-            return react_1.default.createElement(NavAppdxFormat, { key: i, appdxFig: el, indent: 0 });
+            return react_1.default.createElement(NavAppdxFormat, Object.assign({}, props, { key: i, el: el, indent: 0 }));
         }
         else if (el.tag === "Appdx") {
-            return react_1.default.createElement(NavAppdx, { key: i, appdxFig: el, indent: 0 });
+            return react_1.default.createElement(NavAppdx, Object.assign({}, props, { key: i, el: el, indent: 0 }));
         }
         else {
             return (0, util_1.assertNever)(el);
@@ -37867,15 +37915,15 @@ const NavBlock = props => {
     if (props.law) {
         const lawBody = props.law.children.find((el) => el.tag === "LawBody");
         return (react_1.default.createElement(LawNavDiv, null,
-            react_1.default.createElement(NavLaw, { law: props.law, indent: 0 }),
-            react_1.default.createElement(LawBody, { lawBody: lawBody })));
+            react_1.default.createElement(NavLaw, Object.assign({}, props, { el: props.law, indent: 0 })),
+            react_1.default.createElement(LawBody, Object.assign({}, props, { el: lawBody }))));
     }
     return null;
 };
 const SidebarBody = props => {
     const MemoNavBlock = react_1.default.useMemo(() => react_1.default.memo(NavBlock), []);
     return (react_1.default.createElement(SidebarBodyDiv, null,
-        react_1.default.createElement(MemoNavBlock, { law: props.law })));
+        react_1.default.createElement(MemoNavBlock, Object.assign({}, props, { law: props.law }))));
 };
 const SidebarFooterDiv = styled_components_1.default.div `
     flex-shrink: 0;
@@ -37905,10 +37953,10 @@ const SidebarDiv = styled_components_1.default.div `
     justify-content: space-between;
 `;
 const Sidebar = props => {
-    var _a, _b;
+    var _a, _b, _c, _d;
     return (react_1.default.createElement(SidebarDiv, null,
         react_1.default.createElement(SidebarHead, Object.assign({}, props)),
-        react_1.default.createElement(SidebarBody, { law: (_b = (_a = props.origState.law) === null || _a === void 0 ? void 0 : _a.el) !== null && _b !== void 0 ? _b : null }),
+        react_1.default.createElement(SidebarBody, { law: (_b = (_a = props.origState.law) === null || _a === void 0 ? void 0 : _a.el) !== null && _b !== void 0 ? _b : null, containers: (_d = (_c = props.origState.law) === null || _c === void 0 ? void 0 : _c.analysis.containersByEL) !== null && _d !== void 0 ? _d : new Map(), firstPart: props.origState.navigatedPath.split("/")[0], navigate: props.navigate }),
         react_1.default.createElement(SidebarFooter, null)));
 };
 exports.Sidebar = Sidebar;
@@ -37985,12 +38033,12 @@ const ViewerWelcomeDiv = styled_components_1.default.div `
     align-items: stretch;
 `;
 const ViewerWelcome = props => {
-    const { navigate, lawSearchKey } = props;
-    const [editingKey, setEditingKey] = react_1.default.useState(lawSearchKey);
+    const { navigate, path } = props;
+    const [editingKey, setEditingKey] = react_1.default.useState(path);
     const lawSearchKeyInputRef = react_1.default.useRef(null);
     const handleSearchSubmit = (event) => {
         event.preventDefault();
-        navigate(`/${editingKey}`);
+        navigate(`/${editingKey.replace("/", "")}`);
     };
     const [fetchAbility, setFetchAbility] = react_1.default.useState(null);
     (0, react_1.useEffect)(() => {
@@ -38513,7 +38561,7 @@ const App = () => {
     return (react_1.default.createElement(react_router_dom_1.HashRouter, null,
         react_1.default.createElement(react_router_dom_1.Routes, null,
             react_1.default.createElement(react_router_dom_1.Route, { path: "/download/", element: react_1.default.createElement(DownloadPage_1.DownloadPage, null) }),
-            react_1.default.createElement(react_router_dom_1.Route, { path: ":lawSearchKey", element: react_1.default.createElement(LawtextAppPage_1.LawtextAppPage, null) }),
+            react_1.default.createElement(react_router_dom_1.Route, { path: "/*", element: react_1.default.createElement(LawtextAppPage_1.LawtextAppPage, null) }),
             react_1.default.createElement(react_router_dom_1.Route, { path: "", element: react_1.default.createElement(LawtextAppPage_1.LawtextAppPage, null) }))));
 };
 const rootElement = document.getElementById("root");
@@ -38634,6 +38682,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.navigateLawData = void 0;
 const temp_law_1 = __webpack_require__(44234);
@@ -38641,8 +38692,12 @@ const loaders_1 = __webpack_require__(48618);
 const searchLawNum_1 = __webpack_require__(89825);
 const util = __importStar(__webpack_require__(84530));
 const lawdata_1 = __webpack_require__(54121);
-const navigateLawData = async (lawSearchKey, onMessage, timing) => {
-    const text = (0, temp_law_1.getTempLaw)(lawSearchKey);
+const lawNum_1 = __webpack_require__(3963);
+const parse_1 = __importDefault(__webpack_require__(94762));
+const lawID_1 = __webpack_require__(50739);
+const navigateLawData = async (pathStr, onMessage, timing) => {
+    const firstPart = pathStr.split("/")[0];
+    const text = (0, temp_law_1.getTempLaw)(firstPart);
     if (text !== null) {
         if (/^(?:<\?xml|<Law)/.test(text.trim())) {
             onMessage("法令XMLをパースしています...");
@@ -38664,26 +38719,60 @@ const navigateLawData = async (lawSearchKey, onMessage, timing) => {
             }, onMessage, timing);
         }
     }
-    onMessage("法令番号を検索しています...");
-    // console.log("navigateLawData: searching lawnum...");
-    const [searchLawNumTime, lawnum] = await util.withTime(searchLawNum_1.searchLawnum)(lawSearchKey);
-    timing.searchLawNum = searchLawNumTime;
-    if (!lawnum) {
-        return {
-            ok: false,
-            error: new Error(`「${lawSearchKey}」を検索しましたが、見つかりませんでした。`),
-        };
+    let lawIDOrLawNum;
+    {
+        let lawID = null;
+        let lawnum = null;
+        const v1Match = /^v1:(.+)$/.exec(pathStr);
+        if (v1Match) {
+            const path = (0, parse_1.default)(v1Match[1]);
+            if (!path.ok) {
+                return {
+                    ok: false,
+                    error: new Error(`パス「${v1Match[1]}」にエラーがあります：${JSON.stringify(path.errors)}`),
+                };
+            }
+            const firstFragment = path.value[0];
+            if (firstFragment.type !== "LAW") {
+                return {
+                    ok: false,
+                    error: new Error(`パス「${v1Match[1]}」の先頭には法令IDを指定してください。`),
+                };
+            }
+            lawID = firstFragment.text;
+        }
+        const reLawNumLike = new RegExp(`^(?:${lawNum_1.ptnLawNumLike})$`);
+        if (lawID === null && (0, lawID_1.parseLawID)(firstPart)) {
+            lawID = firstPart;
+        }
+        else if (reLawNumLike.test(firstPart)) {
+            lawnum = (0, lawNum_1.lawNumLikeToLawNum)(firstPart);
+        }
+        lawIDOrLawNum = lawID !== null && lawID !== void 0 ? lawID : lawnum;
     }
-    else if (typeof lawnum !== "string") {
-        return {
-            ok: false,
-            error: new Error(`「${lawSearchKey}」の検索時にエラーが発生しました： ${lawnum.error}: "${lawnum.message}"`),
-        };
+    if (lawIDOrLawNum === null) {
+        onMessage("法令番号を検索しています...");
+        // console.log("navigateLawData: searching lawnum...");
+        const [searchLawNumTime, lawnumResult] = await util.withTime(searchLawNum_1.searchLawnum)(firstPart);
+        timing.searchLawNum = searchLawNumTime;
+        if (!lawnumResult) {
+            return {
+                ok: false,
+                error: new Error(`「${firstPart}」を検索しましたが、見つかりませんでした。`),
+            };
+        }
+        else if (typeof lawnumResult !== "string") {
+            return {
+                ok: false,
+                error: new Error(`「${firstPart}」の検索時にエラーが発生しました： ${lawnumResult.error}: "${lawnumResult.message}"`),
+            };
+        }
+        lawIDOrLawNum = lawnumResult;
     }
     try {
         onMessage("保存されている法令情報を探しています...");
         // console.log(`navigateLawData: fetching stored law info for "${lawnum}"...`);
-        const [fetchStoredLawInfoTime, lawInfo] = await util.withTime(loaders_1.storedLoader.getLawInfoByLawNum.bind(loaders_1.storedLoader))(lawnum);
+        const [fetchStoredLawInfoTime, lawInfo] = await util.withTime(loaders_1.storedLoader.getLawInfoByLawIDOrLawNum.bind(loaders_1.storedLoader))(lawIDOrLawNum);
         timing.fetchStoredLawInfo = fetchStoredLawInfoTime;
         if (!lawInfo)
             throw null;
@@ -38706,8 +38795,8 @@ const navigateLawData = async (lawSearchKey, onMessage, timing) => {
     }
     try {
         onMessage("e-Gov 法令APIから法令XMLを取得しています...");
-        console.log(`navigateLawData: fetching law data via e-LAWS API for "${lawnum}"...`);
-        const [loadDataTime, lawXMLStruct] = await util.withTime(loaders_1.elawsLoader.loadLawXMLStructByInfo.bind(loaders_1.storedLoader))(lawnum);
+        console.log(`navigateLawData: fetching law data via e-LAWS API for "${lawIDOrLawNum}"...`);
+        const [loadDataTime, lawXMLStruct] = await util.withTime(loaders_1.elawsLoader.loadLawXMLStructByInfo.bind(loaders_1.storedLoader))(lawIDOrLawNum);
         timing.loadData = loadDataTime;
         onMessage("法令XMLをパースしています...");
         // console.log("navigateLawData: parsing law xml...");
@@ -38785,11 +38874,9 @@ exports.searchLawnum = void 0;
 const js_levenshtein_1 = __importDefault(__webpack_require__(39991));
 const loaders_1 = __webpack_require__(48618);
 const searchLawnum = async (lawSearchKey) => {
-    const reLawnum = /^(?:明治|大正|昭和|平成|令和)[元〇一二三四五六七八九十]+年(?:\S+?第[〇一二三四五六七八九十百千]+号|人事院規則[〇一二三四五六七八九―]+|[一二三四五六七八九十]+月[一二三四五六七八九十]+日内閣総理大臣決定|憲法)$/;
-    const match = reLawnum.exec(lawSearchKey);
-    const lawnum = ((match && match[0]) ||
-        // await getLawnumCache(lawSearchKey) ||
-        await getLawnumStored(lawSearchKey) ||
+    const lawnum = (
+    // await getLawnumCache(lawSearchKey) ||
+    await getLawnumStored(lawSearchKey) ||
         await getLawnumRemote(lawSearchKey));
     // if (lawnum && localStorage) {
     //     for (let i = 0; i < 5; i++) {
@@ -39593,39 +39680,8 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.isIgnoreAnalysis = exports.getContainerType = exports.containerTags = exports.sentencesContainerTags = exports.articleContainerTags = exports.toplevelContainerTags = exports.rootContainerTags = void 0;
-const container_1 = __webpack_require__(49814);
+exports.isIgnoreAnalysis = void 0;
 const std = __importStar(__webpack_require__(93619));
-exports.rootContainerTags = ["Law"];
-exports.toplevelContainerTags = ["EnactStatement", "MainProvision", "SupplProvision", ...std.appdxItemTags];
-exports.articleContainerTags = std.articleGroupTags;
-exports.sentencesContainerTags = [
-    "Article",
-    ...std.paragraphItemTags,
-    "Table",
-    "TableRow",
-    "TableColumn",
-    "Sentence",
-];
-exports.containerTags = [
-    ...exports.rootContainerTags,
-    ...exports.toplevelContainerTags,
-    ...exports.articleContainerTags,
-    ...exports.sentencesContainerTags,
-];
-const getContainerType = (tag) => {
-    if (exports.rootContainerTags.indexOf(tag) >= 0)
-        return container_1.ContainerType.ROOT;
-    else if (exports.toplevelContainerTags.indexOf(tag) >= 0)
-        return container_1.ContainerType.TOPLEVEL;
-    else if (exports.articleContainerTags.indexOf(tag) >= 0)
-        return container_1.ContainerType.ARTICLES;
-    else if (exports.sentencesContainerTags.indexOf(tag) >= 0)
-        return container_1.ContainerType.SENTENCES;
-    else
-        return container_1.ContainerType.SENTENCES;
-};
-exports.getContainerType = getContainerType;
 // export const ignoreAnalysisTags = [
 //     "QuoteStruct",
 //     "NewProvision",
@@ -40123,7 +40179,7 @@ const _lawRef_1 = __importDefault(__webpack_require__(78140));
 const env_1 = __webpack_require__(37025);
 const sentenceEnv_1 = __webpack_require__(6310);
 const getScope_1 = __importDefault(__webpack_require__(70634));
-const num_1 = __webpack_require__(68685);
+const lawNum_1 = __webpack_require__(3963);
 const getLawNameLength = (lawNum) => {
     var _a;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
@@ -40204,7 +40260,7 @@ const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct, pointerE
                     const firstPointer = pointerRanges.ranges()[0].pointers()[0];
                     const pointerEnv = pointerEnvsStruct.pointerEnvByEL.get(firstPointer);
                     if (pointerEnv) {
-                        pointerEnv.directLawNum = (0, num_1.toStdLawNum)(lawNumText);
+                        pointerEnv.directLawNum = (0, lawNum_1.lawNumLikeToLawNum)(lawNumText);
                     }
                 }
             }
@@ -40278,7 +40334,7 @@ const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct, pointerE
                         const firstPointer = pointerRanges.ranges()[0].pointers()[0];
                         const pointerEnv = pointerEnvsStruct.pointerEnvByEL.get(firstPointer);
                         if (pointerEnv) {
-                            pointerEnv.directLawNum = (0, num_1.toStdLawNum)(lawNumText);
+                            pointerEnv.directLawNum = (0, lawNum_1.lawNumLikeToLawNum)(lawNumText);
                         }
                     }
                 }
@@ -40553,7 +40609,7 @@ const controls_1 = __webpack_require__(48075);
 const error_1 = __webpack_require__(40520);
 const sentenceEnv_1 = __webpack_require__(6310);
 const common_1 = __webpack_require__(50638);
-const num_1 = __webpack_require__(68685);
+const lawNum_1 = __webpack_require__(3963);
 const matchVariableReferences = (textEL, sentenceEnv, declarations) => {
     var _a, _b;
     const errors = [];
@@ -40673,7 +40729,7 @@ const detectVariableReferencesOfEL = (elToBeModified, sentenceEnv, declarations,
                                 const firstPointer = pointerRanges.ranges()[0].pointers()[0];
                                 const pointerEnv = pointerEnvsStruct.pointerEnvByEL.get(firstPointer);
                                 if (pointerEnv && declaration.attr.value) {
-                                    pointerEnv.directLawNum = (0, num_1.toStdLawNum)(declaration.attr.value);
+                                    pointerEnv.directLawNum = (0, lawNum_1.lawNumLikeToLawNum)(declaration.attr.value);
                                 }
                             }
                         }
@@ -40817,7 +40873,7 @@ const getSentenceEnvs = (el) => {
         else {
             const parentELs = [...prevParentELs, el];
             let container = prevContainer;
-            if (common_1.containerTags.includes(el.tag)) {
+            if (container_1.containerTags.includes(el.tag)) {
                 const name = ((_c = (_b = el.children.find(c => (std.isArticleTitle(c)
                     || std.isParagraphItemTitle(c)
                     || std.isArticleGroupTitle(c)
@@ -40905,6 +40961,7 @@ exports.analyze = analyze;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getPointerEnvs = void 0;
 const num_1 = __webpack_require__(68685);
+const lawNum_1 = __webpack_require__(3963);
 const controls_1 = __webpack_require__(48075);
 const pointerEnv_1 = __webpack_require__(48102);
 const common_1 = __webpack_require__(50638);
@@ -40945,7 +41002,7 @@ const getPointerEnvsForEL = (el, prevLawNum, sentenceEnv, __prevPointerEnv, __na
                     sentenceEnv,
                 });
                 if (prevLawNum && iRange === 0 && iPointer === 0) {
-                    pointerEnv.directLawNum = (0, num_1.toStdLawNum)(prevLawNum.text());
+                    pointerEnv.directLawNum = (0, lawNum_1.lawNumLikeToLawNum)(prevLawNum.text());
                 }
                 if (pointerRangesNamingParent) {
                     pointerEnv.namingParent = pointerRangesNamingParent;
@@ -41920,7 +41977,7 @@ exports.toLawData = toLawData;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LawListGenerator = exports.LawInfo = void 0;
-const num_1 = __webpack_require__(68685);
+const lawNum_1 = __webpack_require__(3963);
 class LawInfo {
     constructor(LawID, LawNum, LawTitle, Enforced, Path, XmlName) {
         /** この法令が参照している法令の法令番号の一覧 */
@@ -41985,7 +42042,7 @@ class LawInfo {
     }
     addReferencingLawNums(xml) {
         // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
-        for (const m of xml.match(new RegExp(num_1.ptnLawNum, "g")) || []) {
+        for (const m of xml.match(new RegExp(lawNum_1.ptnLawNumLike, "g")) || []) {
             if (m !== this.LawNum)
                 this.ReferencingLawNums.add(m);
         }
@@ -42065,8 +42122,8 @@ class FetchElawsLoader extends common_1.Loader {
     async loadBaseLawInfosFromCSV() {
         return fetchBaseLawInfosFromElaws();
     }
-    async loadLawXMLStructByInfo(lawInfoOrLawID) {
-        return (0, elaws_api_1.fetchLawData)(typeof lawInfoOrLawID === "string" ? lawInfoOrLawID : lawInfoOrLawID.LawID);
+    async loadLawXMLStructByInfo(lawInfoOrLawIDOrLawNum) {
+        return (0, elaws_api_1.fetchLawData)(typeof lawInfoOrLawIDOrLawNum === "string" ? lawInfoOrLawIDOrLawNum : lawInfoOrLawIDOrLawNum.LawID);
     }
 }
 exports.FetchElawsLoader = FetchElawsLoader;
@@ -42278,6 +42335,12 @@ class Loader {
             }
         }
         return lawInfos[0];
+    }
+    async getLawInfoByLawIDOrLawNum(lawIDOrLawNum) {
+        const byLawID = await this.getLawInfoByLawID(lawIDOrLawNum);
+        if (byLawID)
+            return byLawID;
+        return this.getLawInfoByLawNum(lawIDOrLawNum);
     }
     async makeLawListFromBaseLawInfos(baseLawInfos, onProgress = () => undefined) {
         const progress = (() => {
@@ -43382,6 +43445,340 @@ exports.fetchPartialLaw = fetchPartialLaw;
 
 /***/ }),
 
+/***/ 50739:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.parseLawID = exports.LawIDCabinetOrderEffect = exports.LawIDActCategory = exports.ptnLawID = exports.lawIDTypes = exports.LawIDType = void 0;
+const util_1 = __webpack_require__(84530);
+const std_1 = __webpack_require__(93619);
+// c.f. https://elaws.e-gov.go.jp/file/LawIdNamingConvention.pdf
+var LawIDType;
+(function (LawIDType) {
+    LawIDType["Constitution"] = "Constitution";
+    LawIDType["Act"] = "Act";
+    LawIDType["CabinetOrder"] = "CabinetOrder";
+    LawIDType["ImperialOrder"] = "ImperialOrder";
+    LawIDType["DajokanFukoku"] = "DajokanFukoku";
+    LawIDType["DajokanTasshi"] = "DajokanTasshi";
+    LawIDType["DajokanFutatsu"] = "DajokanFutatsu";
+    LawIDType["MinisterialOrdinance"] = "MinisterialOrdinance";
+    LawIDType["Jinji"] = "Jinji";
+    LawIDType["Rule"] = "Rule";
+    LawIDType["PrimeMinisterDecision"] = "PrimeMinisterDecision";
+})(LawIDType = exports.LawIDType || (exports.LawIDType = {}));
+exports.lawIDTypes = Object.values(LawIDType);
+exports.ptnLawID = {
+    // e.g. `321CONSTITUTION` (昭和二十一年憲法)
+    [LawIDType.Constitution]: "\
+(?<era>\\d)\
+(?<year>\\d{2})\
+CONSTITUTION\
+",
+    // e.g. `335AC0000000105` (昭和三十五年法律第百五号)
+    [LawIDType.Act]: "\
+(?<era>\\d)\
+(?<year>\\d{2})\
+AC\
+(?<category>\\d{7})\
+(?<num>\\d{3})\
+",
+    // e.g. `415CO0000000263` (平成十五年政令第二百六十三号)
+    [LawIDType.CabinetOrder]: "\
+(?<era>\\d)\
+(?<year>\\d{2})\
+CO\
+(?<category>\\d{7})\
+(?<num>\\d{3})\
+",
+    // e.g. `318IO0000000618` (昭和十八年勅令第六百十八号)
+    [LawIDType.ImperialOrder]: "\
+(?<era>\\d)\
+(?<year>\\d{2})\
+IO\
+(?<category>\\d{7})\
+(?<num>\\d{3})\
+",
+    // e.g. `105DF0000000337` (明治五年太政官布告第三百三十七号)
+    [LawIDType.DajokanFukoku]: "\
+(?<era>\\d)\
+(?<year>\\d{2})\
+DF\
+(?<category>\\d{7})\
+(?<num>\\d{3})\
+",
+    // e.g. `110DT0000000097` (明治十年太政官達第九十七号)
+    [LawIDType.DajokanTasshi]: "\
+(?<era>\\d)\
+(?<year>\\d{2})\
+DT\
+(?<category>\\d{7})\
+(?<num>\\d{3})\
+",
+    // e.g. `106DH0000000016` (明治六年太政官布達第十六号)
+    [LawIDType.DajokanFutatsu]: "\
+(?<era>\\d)\
+(?<year>\\d{2})\
+DH\
+(?<category>\\d{7})\
+(?<num>\\d{3})\
+",
+    // e.g. `427M60001080001` (平成二十七年文部科学省・環境省令第一号)
+    [LawIDType.MinisterialOrdinance]: "\
+(?<era>\\d)\
+(?<year>\\d{2})\
+M\
+(?<category>[0-9a-fA-F]{8})\
+(?<num>\\d{3})\
+",
+    // e.g. `333RJNJ09024000` (昭和三十三年人事院規則九―二四), `427RJNJ09017142` (平成二十七年人事院規則九―一七―一四二)
+    [LawIDType.Jinji]: "\
+(?<era>\\d)\
+(?<year>\\d{2})\
+R\
+JNJ\
+(?<num1>\\d{2})\
+(?<num2>\\d{3})\
+(?<num3>\\d{3})\
+",
+    // e.g. `322R00000001001` (昭和二十二年会計検査院規則第一号)
+    [LawIDType.Rule]: "\
+(?<era>\\d)\
+(?<year>\\d{2})\
+R\
+(?<category>[0-9a-fA-F]{8})\
+(?<num>\\d{3})\
+",
+    // e.g. `427RPMD10100000` ( 平成二十七年十月十日内閣総理大臣決定)
+    [LawIDType.PrimeMinisterDecision]: "\
+(?<era>\\d)\
+(?<year>\\d{2})\
+R\
+PMD\
+(?<date>[0-9a-fA-F]{4})\
+(?<num>\\d{4})\
+",
+};
+const reLawID = Object.fromEntries(Object.entries(exports.ptnLawID).map(([key, value]) => [key, new RegExp(`^${value}$`)]));
+const eraNumToEra = {
+    "1": std_1.Era.Meiji,
+    "2": std_1.Era.Taisho,
+    "3": std_1.Era.Showa,
+    "4": std_1.Era.Heisei,
+    "5": std_1.Era.Reiwa,
+};
+var LawIDActCategory;
+(function (LawIDActCategory) {
+    LawIDActCategory["Cabinet"] = "0000000";
+    LawIDActCategory["HouseOfRepresentative"] = "1000000";
+    LawIDActCategory["HouseOfCouncillors"] = "0100000";
+})(LawIDActCategory = exports.LawIDActCategory || (exports.LawIDActCategory = {}));
+var LawIDCabinetOrderEffect;
+(function (LawIDCabinetOrderEffect) {
+    LawIDCabinetOrderEffect["CabinetOrder"] = "0000000";
+    LawIDCabinetOrderEffect["Act"] = "1000000";
+})(LawIDCabinetOrderEffect = exports.LawIDCabinetOrderEffect || (exports.LawIDCabinetOrderEffect = {}));
+const parseLawID = (text) => {
+    for (const type of exports.lawIDTypes) {
+        const re = reLawID[type];
+        const m = re.exec(text);
+        if (!m || !m.groups)
+            continue;
+        if (type === LawIDType.MinisterialOrdinance) {
+            return {
+                text,
+                type,
+                era: eraNumToEra[m.groups.era],
+                year: m.groups.year,
+                category: m.groups.category,
+                rawNum: m.groups.num,
+                num: m.groups.num.replace(/^(?:0(?!$))+/, ""),
+            };
+        }
+        else if (type === LawIDType.Act) {
+            return {
+                text,
+                type,
+                era: eraNumToEra[m.groups.era],
+                year: m.groups.year,
+                category: m.groups.category,
+                rawNum: m.groups.num,
+                num: m.groups.num.replace(/^(?:0(?!$))+/, ""),
+            };
+        }
+        else if (type === LawIDType.CabinetOrder || type === LawIDType.ImperialOrder || type === LawIDType.DajokanFukoku || type === LawIDType.DajokanTasshi || type === LawIDType.DajokanFutatsu) {
+            return {
+                text,
+                type,
+                era: eraNumToEra[m.groups.era],
+                year: m.groups.year,
+                category: m.groups.category,
+                rawNum: m.groups.num,
+                num: m.groups.num.replace(/^(?:0(?!$))+/, ""),
+            };
+        }
+        else if (type === LawIDType.Jinji) {
+            const numParts = [
+                m.groups.num1.replace(/^(?:0(?!$))+/, ""),
+                m.groups.num2.replace(/^(?:0(?!$))+/, ""),
+            ];
+            if (m.groups.num3 !== "000") {
+                numParts.push(m.groups.num3.replace(/^(?:0(?!$))+/, ""));
+            }
+            return {
+                text,
+                type,
+                era: eraNumToEra[m.groups.era],
+                year: m.groups.year,
+                rawNumPart1: m.groups.num1,
+                rawNumPart2: m.groups.num2,
+                rawNumPart3: m.groups.num3,
+                num: numParts.join("_"),
+            };
+        }
+        else if (type === LawIDType.Rule) {
+            return {
+                text,
+                type,
+                era: eraNumToEra[m.groups.era],
+                year: m.groups.year,
+                category: m.groups.category,
+                rawNum: m.groups.num,
+                num: m.groups.num.replace(/^(?:0(?!$))+/, ""),
+            };
+        }
+        else if (type === LawIDType.PrimeMinisterDecision) {
+            return {
+                text,
+                type,
+                era: eraNumToEra[m.groups.era],
+                year: m.groups.year,
+                date: m.groups.date,
+                rawNum: m.groups.num,
+                num: m.groups.num.replace(/^0+/, ""),
+            };
+        }
+        else if (type === LawIDType.Constitution) {
+            return {
+                text,
+                type,
+                era: eraNumToEra[m.groups.era],
+                year: m.groups.year,
+            };
+        }
+        else {
+            throw (0, util_1.assertNever)(type);
+        }
+    }
+    return null;
+};
+exports.parseLawID = parseLawID;
+//# sourceMappingURL=lawID.js.map
+
+/***/ }),
+
+/***/ 3963:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.parseLawNum = exports.lawNumLikeToLawNum = exports.ptnLawNumLike = exports.ptnLawNum = void 0;
+const num_1 = __webpack_require__(68685);
+const std_1 = __webpack_require__(93619);
+exports.ptnLawNum = "(?:\
+(?<era>明治|大正|昭和|平成|令和)(?<year>[一二三四五六七八九十]+|元)年\
+(?:\
+(?:\
+(?<type1>[^ 　\t\r\n<>()（）[\\]［］{}｛｝「」]+?)\
+(?:第(?<num1>[〇一二三四五六七八九十百千]+)号)\
+)\
+|\
+(?:\
+(?<type2>人事院規則)\
+(?<num2>[―〇一二三四五六七八九]+)\
+)\
+|\
+(?:\
+([一二三四五六七八九十]+)月([一二三四五六七八九十]+)日\
+(?<type3>内閣総理大臣決定)\
+)\
+|\
+(?:\
+(?<type4>憲法|勅令|内務省・鉄道省令|逓信省・鉄道省令|逓信省・農林省令|農林省・大蔵省・内務省令第(?<num3>〇)号)\
+)\
+)\
+)";
+exports.ptnLawNumLike = `(?:\
+(?:${exports.ptnLawNum})\
+|\
+(?:日本国憲法)\
+)`;
+const lawNumLikeToLawNum = (lawNum) => {
+    if (/日本国憲法$/.test(lawNum)) {
+        return "昭和二十一年憲法";
+    }
+    else {
+        return lawNum;
+    }
+};
+exports.lawNumLikeToLawNum = lawNumLikeToLawNum;
+const lawTypes = [
+    [/^(?:憲法)$/, "Constitution"],
+    [/^(?:法律)$/, "Act"],
+    [/^(?:政令|太政官布告|太政官達|太政官布達)$/, "CabinetOrder"],
+    [/^(?:勅令)$/, "ImperialOrder"],
+    [/^(?:海上保安庁令)$/, "Rule"],
+    [/^(?:\S+令)$/, "MinisterialOrdinance"],
+    [/^\S*(?:中央労働委員会規則|公正取引委員会規則|電波監理委員会規則|公安審査委員会規則|国家公安委員会規則|国家公安委員会規程|公害等調整委員会規則|運輸安全委員会規則|原子力規制委員会規則|特定個人情報保護委員会規則|個人情報保護委員会規則|カジノ管理委員会規則)$/, "MinisterialOrdinance"],
+    [/^(?:\S+規則)$/, "Rule"],
+    [/^(?:内閣総理大臣決定)$/, "Rule"],
+];
+const getLawtype = (text) => {
+    for (const [re, type] of lawTypes) {
+        if (re.exec(text))
+            return type;
+    }
+    return null;
+};
+const reLawNum = new RegExp(`^${exports.ptnLawNumLike}$`);
+const parseLawNum = (lawNum) => {
+    var _a;
+    const ret = {
+        Era: null,
+        Year: null,
+        LawType: null,
+        Num: null,
+    };
+    const m = lawNum.match(reLawNum);
+    if (m) {
+        const { era, year, type1, type2, type3, type4, num1, num2, num3 } = (_a = m.groups) !== null && _a !== void 0 ? _a : {};
+        const type = [
+            type1 !== null && type1 !== void 0 ? type1 : "",
+            type2 !== null && type2 !== void 0 ? type2 : "",
+            type3 !== null && type3 !== void 0 ? type3 : "",
+            type4 !== null && type4 !== void 0 ? type4 : "",
+        ].join("");
+        const num = [
+            num1 !== null && num1 !== void 0 ? num1 : "",
+            num2 !== null && num2 !== void 0 ? num2 : "",
+            num3 !== null && num3 !== void 0 ? num3 : "",
+        ].join("");
+        if (era in std_1.eras)
+            ret.Era = std_1.eras[era];
+        ret.Year = (0, num_1.parseKanjiNum)(year);
+        ret.LawType = getLawtype(type);
+        ret.Num = (0, num_1.parseNamedNum)(num) || null;
+    }
+    return ret;
+};
+exports.parseLawNum = parseLawNum;
+//# sourceMappingURL=lawNum.js.map
+
+/***/ }),
+
 /***/ 64434:
 /***/ ((__unused_webpack_module, exports) => {
 
@@ -43403,79 +43800,33 @@ for (let i = 0; i < LAWNUM_TABLE_RAW.length; i += exports.KEY_LENGTH + LEN_LENGT
 /***/ }),
 
 /***/ 68685:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.articleGroupTitleTag = exports.articleGroupType = exports.setItemNum = exports.parseLawNum = exports.parseNamedNum = exports.KanaMode = exports.replaceWideNum = exports.reWideDigits = exports.parseRomanNum = exports.aiuChars = exports.irohaChars = exports.circledDigitChars = exports.parseKanjiNum = exports.getLawtype = exports.lawTypes = exports.eras = exports.toStdLawNum = exports.ptnLawNum = void 0;
-const std = __importStar(__webpack_require__(93619));
+exports.parseNamedNum = exports.KanaMode = exports.aiuChars = exports.irohaChars = exports.circledDigitChars = exports.parseKanjiNum = void 0;
 const util_1 = __webpack_require__(84530);
-exports.ptnLawNum = "(?:(?:(明治|大正|昭和|平成|令和)([一二三四五六七八九十]+)年([^ 　\t\r\n<>()（）[\\]［］{}｛｝「」]+?)(?:第([一二三四五六七八九十百千]+)号))|(?:日本国憲法))";
-const toStdLawNum = (lawNum) => {
-    if (/日本国憲法$/.test(lawNum)) {
-        return "昭和二十一年憲法";
-    }
-    else {
-        return lawNum;
-    }
-};
-exports.toStdLawNum = toStdLawNum;
-// export const reLawnum = /(?:(?:明治|大正|昭和|平成|令和)[元〇一二三四五六七八九十]+年(?:(?:\S+?第[〇一二三四五六七八九十百千]+号|人事院規則[―〇一二三四五六七八九]+)|[一二三四五六七八九十]+月[一二三四五六七八九十]+日内閣総理大臣決定|憲法)|明治三十二年勅令|大正十二年内務省・鉄道省令|昭和五年逓信省・鉄道省令|昭和九年逓信省・農林省令|人事院規則一〇―一五)/;
-exports.eras = {
-    "明治": "Meiji", "大正": "Taisho",
-    "昭和": "Showa", "平成": "Heisei",
-    "令和": "Reiwa",
-};
-exports.lawTypes = [
-    ["憲法", "Constitution"],
-    ["法律", "Act"],
-    ["政令", "CabinetOrder"],
-    ["勅令", "ImperialOrder"],
-    ["\\S*[^政勅]令", "MinisterialOrdinance"],
-    ["\\S*規則", "Rule"],
-];
-const getLawtype = (text) => {
-    for (const [ptn, type] of exports.lawTypes) {
-        const re = new RegExp(`^${ptn}`);
-        if (re.exec(text))
-            return type;
-    }
-    return null;
-};
-exports.getLawtype = getLawtype;
 const reKanjiNum = /((\S*)千)?((\S*)百)?((\S*)十)?(\S*)/;
 const parseKanjiNum = (text) => {
+    if (text === "元")
+        return 1;
     const m = reKanjiNum.exec(text);
     if (m) {
-        const d1000 = m[1] ? kanjiDigitToNumDict[m[2]] || 1 : 0;
-        const d100 = m[3] ? kanjiDigitToNumDict[m[4]] || 1 : 0;
-        const d10 = m[5] ? kanjiDigitToNumDict[m[6]] || 1 : 0;
-        const d1 = kanjiDigitToNumDict[m[7]] || 0;
-        return d1000 * 1000 + d100 * 100 + d10 * 10 + d1;
+        if (!m[1] && !m[2] && !m[3] && m[7] && m[7].length > 1) {
+            const ds = m[7].split("").map(c => (kanjiDigitToNumDict[c] || 0).toString()).join("");
+            const ret = Number(ds);
+            if (Number.isNaN(ret))
+                return null;
+            return ret;
+        }
+        else {
+            const d1000 = m[1] ? kanjiDigitToNumDict[m[2]] || 1 : 0;
+            const d100 = m[3] ? kanjiDigitToNumDict[m[4]] || 1 : 0;
+            const d10 = m[5] ? kanjiDigitToNumDict[m[6]] || 1 : 0;
+            const d1 = kanjiDigitToNumDict[m[7]] || 0;
+            return d1000 * 1000 + d100 * 100 + d10 * 10 + d1;
+        }
     }
     return null;
 };
@@ -43487,7 +43838,7 @@ const kanjiDigitToNumDict = {
 exports.circledDigitChars = "⓪①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚㉛㉜㉝㉞㉟㊱㊲㊳㊴㊵㊶㊷㊸㊹㊺㊻㊼㊽㊾㊿";
 exports.irohaChars = "イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセスン";
 exports.aiuChars = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
-const reNamedNum = /^(○?)第?([一二三四五六七八九十百千]+)\S*?([のノ一二三四五六七八九十百千]*)$/;
+const reNamedNum = /^(○?)第?([〇一二三四五六七八九十百千]+)\S*?([のノ―〇一二三四五六七八九十百千]*)$/;
 const reIrohaChar = new RegExp(`[${exports.irohaChars}]`);
 const reAiuChar = new RegExp(`[${exports.aiuChars}]`);
 const reCircledDigit = new RegExp(`[${exports.circledDigitChars}]`);
@@ -43512,8 +43863,7 @@ const parseRomanNum = (text) => {
     }
     return num;
 };
-exports.parseRomanNum = parseRomanNum;
-exports.reWideDigits = [
+const reWideDigits = [
     [/０/g, "0"],
     [/１/g, "1"],
     [/２/g, "2"],
@@ -43527,12 +43877,11 @@ exports.reWideDigits = [
 ];
 const replaceWideNum = (text) => {
     let ret = text;
-    for (const [reWide, narrow] of exports.reWideDigits) {
+    for (const [reWide, narrow] of reWideDigits) {
         ret = ret.replace(reWide, narrow);
     }
     return ret;
 };
-exports.replaceWideNum = replaceWideNum;
 var KanaMode;
 (function (KanaMode) {
     // eslint-disable-next-line no-unused-vars
@@ -43557,7 +43906,7 @@ const parseNamedNum = (text, kanaMode = KanaMode.Iroha) => {
         if (m) {
             const nums = [(0, exports.parseKanjiNum)(m[2])];
             if (m[3]) {
-                const bs = m[3].split(/[のノ]/g);
+                const bs = m[3].split(/[のノ―]/g);
                 for (const b of bs) {
                     if (!b)
                         continue;
@@ -43589,13 +43938,13 @@ const parseNamedNum = (text, kanaMode = KanaMode.Iroha) => {
             numsGroup.push(String(exports.circledDigitChars.indexOf(m[0])));
             continue;
         }
-        const replacedSubtext = (0, exports.replaceWideNum)(subtext);
+        const replacedSubtext = replaceWideNum(subtext);
         m = reItemNum.exec(replacedSubtext);
         if (m) {
             numsGroup.push(m[1]);
             continue;
         }
-        const romanNum = (0, exports.parseRomanNum)(replacedSubtext);
+        const romanNum = parseRomanNum(replacedSubtext);
         if (romanNum !== 0) {
             numsGroup.push(String(romanNum));
         }
@@ -43603,69 +43952,38 @@ const parseNamedNum = (text, kanaMode = KanaMode.Iroha) => {
     return numsGroup.join(":");
 };
 exports.parseNamedNum = parseNamedNum;
-const reLawNum = new RegExp(`^${exports.ptnLawNum}$`);
-const parseLawNum = (lawNum) => {
-    const ret = {
-        Era: null,
-        Year: null,
-        LawType: null,
-        Num: null,
-    };
-    const m = lawNum.match(reLawNum);
-    if (m) {
-        const [era, year, law_type, num] = m.slice(1);
-        if (era in exports.eras)
-            ret.Era = exports.eras[era];
-        ret.Year = (0, exports.parseKanjiNum)(year);
-        ret.LawType = (0, exports.getLawtype)(law_type);
-        ret.Num = (0, exports.parseKanjiNum)(num);
-    }
-    return ret;
-};
-exports.parseLawNum = parseLawNum;
-const setItemNum = (els) => {
-    const items = [];
-    for (const el of els) {
-        if (std.isParagraphItem(el) && el.tag !== "Paragraph") {
-            items.push(el);
-        }
-    }
-    if (items.length) {
-        let kanaMode = KanaMode.Iroha;
-        for (const child of items[0].children) {
-            if (std.isParagraphItemTitle(child)) {
-                if (/ア/.exec(child.text())) {
-                    kanaMode = KanaMode.Aiu;
-                    break;
-                }
-            }
-        }
-        for (const item of items) {
-            let paragraphItemTitle = "";
-            for (const child of item.children) {
-                if (std.isParagraphItemTitle(child)) {
-                    paragraphItemTitle = child.text();
-                    break;
-                }
-            }
-            const num = (0, exports.parseNamedNum)(paragraphItemTitle, kanaMode);
-            if (num) {
-                item.attr.Num = num;
-            }
-        }
-    }
-};
-exports.setItemNum = setItemNum;
-exports.articleGroupType = {
-    "編": "Part", "章": "Chapter", "節": "Section",
-    "款": "Subsection", "目": "Division",
-    "条": "Article", "項": "Paragraph", "号": "Item", "則": "SupplProvision",
-};
-exports.articleGroupTitleTag = {
-    "編": "PartTitle", "章": "ChapterTitle", "節": "SectionTitle",
-    "款": "SubsectionTitle", "目": "DivisionTitle", "条": "ArticleTitle",
-    "則": "SupplProvisionLabel",
-};
+// export const setItemNum = (els: EL[]): void => {
+//     const items: Array<Diff<std.ParagraphItem, std.Paragraph>> = [];
+//     for (const el of els) {
+//         if (std.isParagraphItem(el) && el.tag !== "Paragraph") {
+//             items.push(el);
+//         }
+//     }
+//     if (items.length) {
+//         let kanaMode = KanaMode.Iroha;
+//         for (const child of items[0].children) {
+//             if (std.isParagraphItemTitle(child)) {
+//                 if (/ア/.exec(child.text())) {
+//                     kanaMode = KanaMode.Aiu;
+//                     break;
+//                 }
+//             }
+//         }
+//         for (const item of items) {
+//             let paragraphItemTitle = "";
+//             for (const child of item.children) {
+//                 if (std.isParagraphItemTitle(child)) {
+//                     paragraphItemTitle = child.text();
+//                     break;
+//                 }
+//             }
+//             const num = parseNamedNum(paragraphItemTitle, kanaMode);
+//             if (num) {
+//                 item.attr.Num = num;
+//             }
+//         }
+//     }
+// };
 //# sourceMappingURL=num.js.map
 
 /***/ }),
@@ -43676,7 +43994,20 @@ exports.articleGroupTitleTag = {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.isSupplProvisionAppdxItemTitle = exports.supplProvisionAppdxItemTitleTags = exports.isSupplProvisionAppdxItem = exports.supplProvisionAppdxItemTags = exports.isAppdxItemTitle = exports.appdxItemTitleTags = exports.isAppdxItem = exports.appdxItemTags = exports.isNoteLikeStructTitle = exports.noteLikeStructTitleTags = exports.isNoteLikeStruct = exports.noteLikeStructTags = exports.isNoteLike = exports.noteLikeTags = exports.isListOrSublistSentence = exports.listOrSublistSentenceTags = exports.isListOrSublist = exports.listOrSublistTags = exports.isTOCItem = exports.tocItemTags = exports.isTOCArticleGroup = exports.tocArticleGroupTags = exports.isArticleGroupTitle = exports.articleGroupTitleTags = exports.isArticleGroup = exports.articleGroupTags = exports.articleGroupTypeChars = exports.listTags = exports.isParagraphItemSentence = exports.paragraphItemSentenceTags = exports.isParagraphItemTitle = exports.paragraphItemTitleTags = exports.isParagraphItem = exports.paragraphItemTags = void 0;
+exports.isSupplProvisionAppdxItemTitle = exports.supplProvisionAppdxItemTitleTags = exports.isSupplProvisionAppdxItem = exports.supplProvisionAppdxItemTags = exports.isAppdxItemTitle = exports.appdxItemTitleTags = exports.isAppdxItem = exports.appdxItemTags = exports.isNoteLikeStructTitle = exports.noteLikeStructTitleTags = exports.isNoteLikeStruct = exports.noteLikeStructTags = exports.isNoteLike = exports.noteLikeTags = exports.isListOrSublistSentence = exports.listOrSublistSentenceTags = exports.isListOrSublist = exports.listOrSublistTags = exports.isTOCItem = exports.tocItemTags = exports.isTOCArticleGroup = exports.tocArticleGroupTags = exports.isArticleGroupTitle = exports.articleGroupTitleTags = exports.isArticleGroup = exports.articleGroupTags = exports.articleGroupTypeChars = exports.typeCharsMap = exports.listTags = exports.isParagraphItemSentence = exports.paragraphItemSentenceTags = exports.isParagraphItemTitle = exports.paragraphItemTitleTags = exports.isParagraphItem = exports.paragraphItemTags = exports.eras = exports.Era = void 0;
+var Era;
+(function (Era) {
+    Era["Meiji"] = "Meiji";
+    Era["Taisho"] = "Taisho";
+    Era["Showa"] = "Showa";
+    Era["Heisei"] = "Heisei";
+    Era["Reiwa"] = "Reiwa";
+})(Era = exports.Era || (exports.Era = {}));
+exports.eras = {
+    "明治": Era.Meiji, "大正": Era.Taisho,
+    "昭和": Era.Showa, "平成": Era.Heisei,
+    "令和": Era.Reiwa,
+};
 exports.paragraphItemTags = [
     "Paragraph",
     "Item",
@@ -43726,6 +44057,11 @@ exports.paragraphItemSentenceTags = [
 const isParagraphItemSentence = (el) => typeof el !== "string" && exports.paragraphItemSentenceTags.includes(el.tag);
 exports.isParagraphItemSentence = isParagraphItemSentence;
 exports.listTags = ["List", "Sublist1", "Sublist2", "Sublist3"];
+exports.typeCharsMap = {
+    "編": "Part", "章": "Chapter", "節": "Section", "款": "Subsection", "目": "Division",
+    "条": "Article", "項": "Paragraph", "号": "Item",
+    "則": "SupplProvision",
+};
 exports.articleGroupTypeChars = ["編", "章", "節", "款", "目"];
 exports.articleGroupTags = [
     "Part",
@@ -44944,13 +45280,36 @@ exports.makeIsStdEL = makeIsStdEL;
 /***/ }),
 
 /***/ 49814:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Container = exports.ContainerType = void 0;
-const common_1 = __webpack_require__(50638);
+exports.Container = exports.getContainerType = exports.containerTags = exports.sentencesContainerTags = exports.articlesContainerTags = exports.toplevelContainerTags = exports.rootContainerTags = exports.ContainerType = void 0;
+const std = __importStar(__webpack_require__(93619));
 var ContainerType;
 (function (ContainerType) {
     ContainerType["ROOT"] = "ROOT";
@@ -44958,6 +45317,36 @@ var ContainerType;
     ContainerType["ARTICLES"] = "ARTICLES";
     ContainerType["SENTENCES"] = "SENTENCES";
 })(ContainerType = exports.ContainerType || (exports.ContainerType = {}));
+exports.rootContainerTags = ["Law"];
+exports.toplevelContainerTags = ["EnactStatement", "MainProvision", "SupplProvision", ...std.appdxItemTags];
+exports.articlesContainerTags = std.articleGroupTags;
+exports.sentencesContainerTags = [
+    "Article",
+    ...std.paragraphItemTags,
+    "Table",
+    "TableRow",
+    "TableColumn",
+    "Sentence",
+];
+exports.containerTags = [
+    ...exports.rootContainerTags,
+    ...exports.toplevelContainerTags,
+    ...exports.articlesContainerTags,
+    ...exports.sentencesContainerTags,
+];
+const getContainerType = (tag) => {
+    if (exports.rootContainerTags.indexOf(tag) >= 0)
+        return ContainerType.ROOT;
+    else if (exports.toplevelContainerTags.indexOf(tag) >= 0)
+        return ContainerType.TOPLEVEL;
+    else if (exports.articlesContainerTags.indexOf(tag) >= 0)
+        return ContainerType.ARTICLES;
+    else if (exports.sentencesContainerTags.indexOf(tag) >= 0)
+        return ContainerType.SENTENCES;
+    else
+        return ContainerType.SENTENCES;
+};
+exports.getContainerType = getContainerType;
 let currentID = 0;
 class Container {
     constructor(options) {
@@ -44965,7 +45354,7 @@ class Container {
         this.children = [];
         this.subParent = null; // skips ARTICLES
         this.subChildren = []; // skips ARTICLES
-        const { el, type = (0, common_1.getContainerType)(el.tag), name, num, containerID = `container-${currentID}-tag_${el.tag}-type_${type}`, sentenceRange = [NaN, NaN],
+        const { el, type = (0, exports.getContainerType)(el.tag), name, num, containerID = `container-${currentID}-tag_${el.tag}-type_${type}`, sentenceRange = [NaN, NaN],
         // parent = null,
         // children = [],
         // subParent = null,
@@ -46735,7 +47124,6 @@ exports["default"] = exports.xmlToEL;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PointerEnv = void 0;
-const common_1 = __webpack_require__(50638);
 const util_1 = __webpack_require__(84530);
 const container_1 = __webpack_require__(49814);
 const el_1 = __webpack_require__(18539);
@@ -46853,7 +47241,7 @@ class PointerEnv {
             }
             else {
                 // e.g.: "前条"
-                const container = (((0, common_1.getContainerType)(fragments[0].attr.targetType) === container_1.ContainerType.ARTICLES)
+                const container = (((0, container_1.getContainerType)(fragments[0].attr.targetType) === container_1.ContainerType.ARTICLES)
                     ? scopeContainer.prev(c => c.el.tag === fragments[0].attr.targetType)
                     : scopeContainer.prevSub(c => c.el.tag === fragments[0].attr.targetType));
                 if (!container) {
@@ -46893,7 +47281,7 @@ class PointerEnv {
                 };
             }
             else {
-                const container = (((0, common_1.getContainerType)(fragments[0].attr.targetType) === container_1.ContainerType.ARTICLES)
+                const container = (((0, container_1.getContainerType)(fragments[0].attr.targetType) === container_1.ContainerType.ARTICLES)
                     ? scopeContainer.next(c => c.el.tag === fragments[0].attr.targetType)
                     : scopeContainer.nextSub(c => c.el.tag === fragments[0].attr.targetType));
                 if (!container) {
@@ -46908,7 +47296,7 @@ class PointerEnv {
         }
         else if (fragments[0].attr.relPos === controls_1.RelPos.NAMED) {
             // e.g.: "第二条", "第二項"
-            if ((0, common_1.getContainerType)(fragments[0].attr.targetType) === container_1.ContainerType.TOPLEVEL) {
+            if ((0, container_1.getContainerType)(fragments[0].attr.targetType) === container_1.ContainerType.TOPLEVEL) {
                 // e.g.: "附則", "別表第二"
                 if (this.directLawNum) {
                     // e.g. "電波法別表第一"
@@ -47427,7 +47815,7 @@ const _indents_1 = __importDefault(__webpack_require__(2027));
 const line_1 = __webpack_require__(69928);
 const lexical_1 = __webpack_require__(99247);
 const util_1 = __webpack_require__(26459);
-const num_1 = __webpack_require__(68685);
+const helpers_1 = __webpack_require__(35865);
 const inline_1 = __webpack_require__(22845);
 const makeRangesRule_1 = __importDefault(__webpack_require__(64358));
 const controls_1 = __webpack_require__(48075);
@@ -47488,7 +47876,7 @@ exports.$articleGroupHeadLine = factory_1.default
         value: new line_1.ArticleGroupHeadLine({
             range: range(),
             indentTexts: indentsStruct.value.indentTexts,
-            mainTag: num_1.articleGroupType[articleGroupNum.ranges.value[0][0].value.typeChar],
+            mainTag: helpers_1.typeCharsMap[articleGroupNum.ranges.value[0][0].value.typeChar],
             controls: control ? [control] : [],
             sentenceChildren,
             lineEndText,
@@ -48214,6 +48602,7 @@ var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.$anyWherePointerFragment = exports.$secondaryOnlyPointerFragment = exports.$firstOnlyPointerFragment = exports.$singleOnlyPointerFragment = exports.$pointer = exports.$pointerRange = exports.$pointerRanges = exports.pointerRangesCandidateChars = exports.reSuppressPointerRanges = void 0;
 /* eslint-disable no-irregular-whitespace */
+const helpers_1 = __webpack_require__(35865);
 const num_1 = __webpack_require__(68685);
 const controls_1 = __webpack_require__(48075);
 const factory_1 = __webpack_require__(31707);
@@ -48294,7 +48683,7 @@ exports.$singleOnlyPointerFragment = factory_1.factory
     .and(r => r.regExp(/^[編章節款目章条項号表]/), "type_char")), (({ text, count, type_char, range }) => {
     const targetType = (type_char === "表")
         ? "TableStruct"
-        : (num_1.articleGroupType)[type_char];
+        : (helpers_1.typeCharsMap)[type_char];
     if (count === "各") {
         return new controls_1.____PF({
             relPos: controls_1.RelPos.PREV,
@@ -48327,7 +48716,7 @@ exports.$firstOnlyPointerFragment = factory_1.factory
         relPos: controls_1.RelPos.NEXT,
         targetType: (type_char === "表")
             ? "TableStruct"
-            : num_1.articleGroupType[type_char],
+            : helpers_1.typeCharsMap[type_char],
         name: text(),
         range: range(),
     });
@@ -48341,7 +48730,7 @@ exports.$firstOnlyPointerFragment = factory_1.factory
         relPos: controls_1.RelPos.PREV,
         targetType: (type_char === "表")
             ? "TableStruct"
-            : num_1.articleGroupType[type_char],
+            : helpers_1.typeCharsMap[type_char],
         name: text(),
         range: range(),
     });
@@ -48358,7 +48747,7 @@ exports.$firstOnlyPointerFragment = factory_1.factory
         relPos: controls_1.RelPos.HERE,
         targetType: (type_char === "表")
             ? "TableStruct"
-            : num_1.articleGroupType[type_char],
+            : helpers_1.typeCharsMap[type_char],
         name: text(),
         range: range(),
     });
@@ -48390,7 +48779,7 @@ exports.$firstOnlyPointerFragment = factory_1.factory
         relPos: controls_1.RelPos.SAME,
         targetType: (type_char === "表")
             ? "TableStruct"
-            : num_1.articleGroupType[type_char],
+            : helpers_1.typeCharsMap[type_char],
         name: text(),
         range: range(),
     });
@@ -48402,7 +48791,7 @@ exports.$firstOnlyPointerFragment = factory_1.factory
     .and(r => r.seqEqual("則"), "type_char")), (({ text, type_char, range }) => {
     return new controls_1.____PF({
         relPos: controls_1.RelPos.NAMED,
-        targetType: num_1.articleGroupType[type_char],
+        targetType: helpers_1.typeCharsMap[type_char],
         name: text(),
         range: range(),
     });
@@ -48461,7 +48850,7 @@ exports.$anyWherePointerFragment = factory_1.factory
     const type_char = match[1];
     return new controls_1.____PF({
         relPos: controls_1.RelPos.NAMED,
-        targetType: num_1.articleGroupType[type_char],
+        targetType: helpers_1.typeCharsMap[type_char],
         name: text(),
         range: range(),
     });
@@ -48524,7 +48913,7 @@ const lexical_1 = __webpack_require__(99247);
 const std = __importStar(__webpack_require__(93619));
 const _xml_1 = __importDefault(__webpack_require__(33439));
 const _pointerRanges_1 = __importStar(__webpack_require__(96404));
-const num_1 = __webpack_require__(68685);
+const lawNum_1 = __webpack_require__(3963);
 const error_1 = __webpack_require__(40520);
 const sentenceChildrenToString = (els) => {
     const runs = [];
@@ -48557,7 +48946,6 @@ const sentenceChildrenToString = (els) => {
     return /* $$$$$$ */ `${runs.join("")}` /* $$$$$$ */;
 };
 exports.sentenceChildrenToString = sentenceChildrenToString;
-const reLawNum = new RegExp(`^${num_1.ptnLawNum}`);
 exports.$sentenceChildren = factory_1.factory
     .withName("sentenceChildren")
     .action(r => r
@@ -48589,6 +48977,7 @@ exports.$sentenceChildrenWithoutToplevelInlineToken = factory_1.factory
     };
 }));
 exports["default"] = exports.$sentenceChildren;
+const reLawNumLike = new RegExp(`^${lawNum_1.ptnLawNumLike}`);
 exports.$inlineToken = factory_1.factory
     .withName("inlineToken")
     .choice(c => c
@@ -48599,7 +48988,7 @@ exports.$inlineToken = factory_1.factory
     errors: [],
 })))
     .orSequence(s => s
-    .and(r => r.regExp(reLawNum), "text")
+    .and(r => r.regExp(reLawNumLike), "text")
     .action(({ text, range }) => ({
     value: new controls_1.____LawNum(text, range()),
     errors: [],
@@ -51397,7 +51786,7 @@ const _supplProvision_1 = __importStar(__webpack_require__(62678));
 const _appdxItem_1 = __webpack_require__(67499);
 const error_1 = __webpack_require__(40520);
 const _sentencesArray_1 = __webpack_require__(10145);
-const num_1 = __webpack_require__(68685);
+const lawNum_1 = __webpack_require__(3963);
 const el_1 = __webpack_require__(18539);
 const lawToLines = (law, indentTexts) => {
     const lines = [];
@@ -51625,7 +52014,7 @@ exports.$law = factory_1.factory
             ? parentheses.content.text()
             : (0, _sentencesArray_1.sentencesArrayToString)(lawTitleLines.value.lawNumLine.line.sentencesArray);
         law.children.push((0, std_1.newStdEL)("LawNum", {}, [lawNum], lawTitleLines.value.lawNumLine.line.sentencesArrayRange));
-        const { Era, Year, LawType, Num } = (0, num_1.parseLawNum)(lawNum);
+        const { Era, Year, LawType, Num } = (0, lawNum_1.parseLawNum)(lawNum);
         if (Era !== null)
             law.attr.Era = Era;
         if (Year !== null)
@@ -54612,6 +55001,450 @@ const toVirtualLines = (lines) => {
 };
 exports.toVirtualLines = toVirtualLines;
 //# sourceMappingURL=virtualLine.js.map
+
+/***/ }),
+
+/***/ 33722:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.sentencesContainerAlias = exports.topLevelAlias = void 0;
+const container_1 = __webpack_require__(49814);
+const std = __importStar(__webpack_require__(93619));
+exports.topLevelAlias = Object.assign({ "sp": "SupplProvision" }, Object.fromEntries(container_1.toplevelContainerTags.map(s => [s, s])));
+exports.sentencesContainerAlias = Object.assign({ "a": "Article", "p": "Paragraph", "i": "Item", "si1": "Subitem1", "si2": "Subitem2", "si3": "Subitem3", "si4": "Subitem4", "si5": "Subitem5", "si6": "Subitem6", "si7": "Subitem7", "si8": "Subitem8", "si9": "Subitem9", "si10": "Subitem10", "Article": "Article" }, Object.fromEntries(std.paragraphItemTags.map(s => [s, s])));
+//# sourceMappingURL=common.js.map
+
+/***/ }),
+
+/***/ 68968:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.locate = void 0;
+const error_1 = __webpack_require__(40520);
+const util_1 = __webpack_require__(84530);
+const locate = (contextContainer, path, processedFragments) => {
+    if (path.length === 0)
+        return {
+            ok: true,
+            value: {
+                container: contextContainer,
+                fragments: processedFragments,
+            },
+        };
+    const fragment = path[0];
+    if (fragment.type === "LAW") {
+        return {
+            ok: false,
+            errors: [
+                new error_1.ErrorMessage("Unexpected \"LAW\" type fragment in the path", [processedFragments.length, processedFragments.length + path.length]),
+            ],
+            partialValue: processedFragments.length === 0 ? null : {
+                container: processedFragments[processedFragments.length - 1].container,
+                fragments: processedFragments,
+            },
+        };
+    }
+    else if (fragment.type === "TOPLEVEL" || fragment.type === "ARTICLES") {
+        if (contextContainer.type === "ROOT" && fragment.type === "ARTICLES") {
+            const mainProvisionContainer = contextContainer.subChildren.find(c => c.el.tag === "MainProvision");
+            if (mainProvisionContainer)
+                return (0, exports.locate)(mainProvisionContainer, path, processedFragments);
+        }
+        if (fragment.tag === "SupplProvision" && fragment.num === null && fragment.attr.length === 0) {
+            const cs = contextContainer.children.filter(c => ((c.el.tag === fragment.tag) &&
+                !("AmendLawNum" in c.el.attr)));
+            const c = ((fragment.nth)
+                ? cs[Number(fragment.nth) - 1]
+                : cs[0]);
+            if (c)
+                return (0, exports.locate)(c, path.slice(1), [...processedFragments, { container: c, pathFragment: fragment }]);
+        }
+        const cs = contextContainer.children.filter(c => ((c.el.tag === fragment.tag) &&
+            ((fragment.num === null) ||
+                ("Num" in c.el.attr && c.el.attr.Num === fragment.num)) &&
+            fragment.attr.every(({ key, value }) => (key in c.el.attr && c.el.attr[key] === value))));
+        const c = ((fragment.nth)
+            ? cs[Number(fragment.nth) - 1]
+            : cs[0]);
+        if (c)
+            return (0, exports.locate)(c, path.slice(1), [...processedFragments, { container: c, pathFragment: fragment }]);
+    }
+    else if (fragment.type === "SENTENCES") {
+        if (contextContainer.type === "ROOT") {
+            const mainProvisionContainer = contextContainer.subChildren.find(c => c.el.tag === "MainProvision");
+            if (mainProvisionContainer)
+                return (0, exports.locate)(mainProvisionContainer, path, processedFragments);
+        }
+        if ((fragment.tag !== "Paragraph") &&
+            (contextContainer.subChildren.length === 1) &&
+            (contextContainer.subChildren[0].el.tag === "Paragraph") &&
+            (!("Num" in contextContainer.subChildren[0].el.attr) ||
+                contextContainer.subChildren[0].el.attr.Num === "" ||
+                contextContainer.subChildren[0].el.attr.Num === "1")) {
+            return (0, exports.locate)(contextContainer.subChildren[0], path, processedFragments);
+        }
+        const cs = contextContainer.subChildren.filter(c => ((c.el.tag === fragment.tag) &&
+            ((fragment.num === null) ||
+                ("Num" in c.el.attr && c.el.attr.Num === fragment.num)) &&
+            fragment.attr.every(({ key, value }) => (key in c.el.attr && c.el.attr[key] === value))));
+        const c = ((fragment.nth)
+            ? cs[Number(fragment.nth) - 1]
+            : cs[0]);
+        if (c)
+            return (0, exports.locate)(c, path.slice(1), [...processedFragments, { container: c, pathFragment: fragment }]);
+    }
+    else {
+        throw (0, util_1.assertNever)(fragment);
+    }
+    return {
+        ok: false,
+        errors: [
+            new error_1.ErrorMessage(`Cannot locate ${fragment.text} in <${contextContainer.el.tag}${Object.entries(contextContainer.el.attr).map(([key, value]) => " " + (value === undefined ? key : (key + "=\"" + value + "\""))).join("")} />`, [processedFragments.length, processedFragments.length + path.length]),
+        ],
+        partialValue: processedFragments.length === 0 ? null : {
+            container: processedFragments[processedFragments.length - 1].container,
+            fragments: processedFragments,
+        },
+    };
+};
+exports.locate = locate;
+exports["default"] = exports.locate;
+//# sourceMappingURL=locate.js.map
+
+/***/ }),
+
+/***/ 45940:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.make = exports.makePathFragments = void 0;
+const container_1 = __webpack_require__(49814);
+const util_1 = __webpack_require__(84530);
+const common_1 = __webpack_require__(33722);
+const makePathFragments = (container, childFragments) => {
+    var _a, _b, _c, _d, _e, _f;
+    if (!container.parent || container.type === container_1.ContainerType.ROOT) {
+        return childFragments;
+    }
+    else if (container.type === container_1.ContainerType.TOPLEVEL) {
+        if (container.el.tag === "MainProvision" && childFragments.length > 0) {
+            return (0, exports.makePathFragments)(container.parent, childFragments);
+        }
+        const alias = ((_a = Object.entries(common_1.topLevelAlias).find(([, value]) => value === container.el.tag)) !== null && _a !== void 0 ? _a : [container.el.tag])[0];
+        if (((container.el.tag === "SupplProvision") &&
+            !("AmendLawNum" in container.el.attr) &&
+            (container.parent.children.filter(c => c.el.tag === container.el.tag && !("AmendLawNum" in c.el.attr)).length === 1)) ||
+            (!("Num" in container.el.attr) &&
+                (container.parent.children.filter(c => c.el.tag === container.el.tag && !("Num" in c.el.attr)).length === 1))) {
+            const fragment = {
+                type: "TOPLEVEL",
+                text: alias,
+                tag: container.el.tag,
+                num: null,
+                attr: [],
+                nth: null,
+            };
+            return (0, exports.makePathFragments)(container.parent, [fragment, ...childFragments]);
+        }
+        else {
+            let num = null;
+            const attr = [];
+            let nth = null;
+            if ("Num" in container.el.attr) {
+                num = (_b = container.el.attr.Num) !== null && _b !== void 0 ? _b : "";
+            }
+            else if ("AmendLawNum" in container.el.attr) {
+                attr.push({ key: "AmendLawNum", value: (_c = container.el.attr.AmendLawNum) !== null && _c !== void 0 ? _c : "" });
+            }
+            else {
+                nth = (container.parent.children.filter(c => c.el.tag === container.el.tag).indexOf(container) + 1).toString();
+            }
+            const modifier = ((num !== null)
+                ? `=${num}`
+                : (attr.length !== 0)
+                    ? attr.map(({ key, value }) => `[${key}="${value}"]`).join("")
+                    : `[${nth}]`);
+            const fragment = {
+                type: "TOPLEVEL",
+                text: `${alias}${modifier}`,
+                tag: container.el.tag,
+                num,
+                attr,
+                nth,
+            };
+            return (0, exports.makePathFragments)(container.parent, [fragment, ...childFragments]);
+        }
+    }
+    else if (container.type === container_1.ContainerType.ARTICLES) {
+        let num = null;
+        let nth = null;
+        if ("Num" in container.el.attr) {
+            num = (_d = container.el.attr.Num) !== null && _d !== void 0 ? _d : "";
+        }
+        else {
+            nth = (container.parent.children.filter(c => c.el.tag === container.el.tag).indexOf(container) + 1).toString();
+        }
+        const modifier = ((num !== null)
+            ? `=${num}`
+            : `[${nth}]`);
+        const fragment = {
+            type: "ARTICLES",
+            text: `${container.el.tag}${modifier}`,
+            tag: container.el.tag,
+            num,
+            attr: [],
+            nth,
+        };
+        return (0, exports.makePathFragments)(container.parent, [fragment, ...childFragments]);
+    }
+    else if (container.type === container_1.ContainerType.SENTENCES) {
+        if (!container.subParent)
+            return childFragments;
+        const alias = ((_e = Object.entries(common_1.sentencesContainerAlias).find(([, value]) => value === container.el.tag)) !== null && _e !== void 0 ? _e : [container.el.tag])[0];
+        let num = null;
+        let nth = null;
+        if ("Num" in container.el.attr) {
+            num = (_f = container.el.attr.Num) !== null && _f !== void 0 ? _f : "";
+        }
+        else {
+            nth = (container.subParent.subChildren.filter(c => c.el.tag === container.el.tag).indexOf(container) + 1).toString();
+        }
+        const modifier = ((num !== null)
+            ? `=${num}`
+            : `[${nth}]`);
+        const fragment = {
+            type: "TOPLEVEL",
+            text: `${alias}${modifier}`,
+            tag: container.el.tag,
+            num,
+            attr: [],
+            nth,
+        };
+        return (0, exports.makePathFragments)((((container.subParent.el.tag === "Paragraph") &&
+            (container.subParent.subParent) &&
+            (container.subParent.subParent.subChildren.length === 1))
+            ? container.subParent.subParent
+            : container.subParent), [fragment, ...childFragments]);
+    }
+    else {
+        throw (0, util_1.assertNever)(container.type);
+    }
+};
+exports.makePathFragments = makePathFragments;
+const make = (container) => {
+    const fragments = (0, exports.makePathFragments)(container, []);
+    return fragments.map(f => f.text).join("/");
+};
+exports.make = make;
+exports["default"] = exports.make;
+//# sourceMappingURL=make.js.map
+
+/***/ }),
+
+/***/ 94762:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.parse = void 0;
+const gp = __importStar(__webpack_require__(87377));
+const error_1 = __webpack_require__(40520);
+const container_1 = __webpack_require__(49814);
+const lawID_1 = __webpack_require__(50739);
+const common_1 = __webpack_require__(33722);
+const makeEnv = () => gp.makeStringEnv();
+const factory = new gp.RuleFactory();
+const ptnAnyLawIDInner = Object.values(lawID_1.ptnLawID).map(s => s.replace(/\(\?<\w+>/g, "(")).map(s => `(?:${s})`).join("|");
+const reAnyLawID = new RegExp(`^(?:${ptnAnyLawIDInner})`);
+const $lawID = factory
+    .sequence(s => s
+    .and(r => r
+    .sequence(s => s
+    .and(r => r
+    .sequence(s => s
+    .andOmit(r => r.regExp(reAnyLawID), "lawID")
+    .action(({ lawID }) => (0, lawID_1.parseLawID)(lawID))), "lawID")
+    .andOmit(r => r.assert(({ lawID }) => lawID))
+    .action(({ lawID }) => lawID))));
+const $fragmentLaw = factory
+    .sequence(s => s
+    .and(() => $lawID, "lawIDStruct")
+    .and(r => r.zeroOrOne(r => r
+    .sequence(s => s
+    .and(r => r.seqEqual("_"))
+    .and(r => r.regExp(/^\d{8}/), "date")
+    .and(r => r.seqEqual("_"))
+    .and(() => $lawID, "lawIDStruct")
+    .action(({ date, lawIDStruct }) => ({ date, lawIDStruct })))), "revision")
+    .action(({ text, lawIDStruct, revision }) => ({
+    type: "LAW",
+    text: text(),
+    lawIDStruct,
+    revision,
+})));
+const $equalsNum = factory
+    .sequence(s => s
+    .andOmit(r => r.seqEqual("="))
+    // eslint-disable-next-line no-irregular-whitespace
+    .and(r => r.regExp(/^[^/ 　\t]+/)));
+const $suareBracketsAttr = factory
+    .sequence(s => s
+    // .andOmit(r => r.assert(({ offset, target }) => { console.log({ offset: offset(), target: target() }); return true; }))
+    .andOmit(r => r.seqEqual("["))
+    // eslint-disable-next-line no-irregular-whitespace
+    .and(r => r.regExp(/^[^/ 　\t=[\]"]+/), "key")
+    .andOmit(r => r.seqEqual("="))
+    .and(r => r
+    .sequence(s => s
+    .andOmit(r => r.seqEqual("\""))
+    // eslint-disable-next-line no-irregular-whitespace
+    .and(r => r.regExp(/^[^/ 　\t=[\]"]+/))
+    .andOmit(r => r.seqEqual("\""))), "value")
+    .andOmit(r => r.seqEqual("]"))
+    .action(({ key, value }) => ({ key, value })));
+const $suareBracketsNth = factory
+    .sequence(s => s
+    .andOmit(r => r.seqEqual("["))
+    .and(r => r.regExp(/^\d+/))
+    .andOmit(r => r.seqEqual("]")));
+const $fragmentTopLevel = factory
+    .sequence(s => s
+    .and(r => r.regExp(new RegExp(`^(?:${Object.keys(common_1.topLevelAlias).join("|")})`)), "topLevelKey")
+    .and(r => r.zeroOrOne(() => $equalsNum), "num")
+    .and(r => r.zeroOrMore(() => $suareBracketsAttr), "attr")
+    .and(r => r.zeroOrOne(() => $suareBracketsNth), "nth")
+    .action(({ text, topLevelKey, num, attr, nth }) => ({
+    type: "TOPLEVEL",
+    text: text(),
+    tag: common_1.topLevelAlias[topLevelKey],
+    num,
+    attr,
+    nth,
+})));
+const $fragmentArticlesContainer = factory
+    .sequence(s => s
+    .and(r => r.regExp(new RegExp(`^(?:${container_1.articlesContainerTags.join("|")})`)), "tag")
+    .and(r => r.zeroOrOne(() => $equalsNum), "num")
+    .and(r => r.zeroOrMore(() => $suareBracketsAttr), "attr")
+    .and(r => r.zeroOrOne(() => $suareBracketsNth), "nth")
+    .action(({ text, tag, num, attr, nth }) => ({
+    type: "ARTICLES",
+    text: text(),
+    tag: tag,
+    num,
+    attr,
+    nth,
+})));
+const $fragmentSentencesContainer = factory
+    .sequence(s => s
+    .andOmit(r => r.nextIsNot(r => r.regExp(new RegExp(`^(?:${Object.keys(common_1.topLevelAlias).join("|")})`))))
+    .and(r => r.regExp(new RegExp(`^(?:${Object.keys(common_1.sentencesContainerAlias).join("|")})`)), "sentencesContainerKey")
+    .and(r => r.zeroOrOne(() => $equalsNum), "num")
+    .and(r => r.zeroOrMore(() => $suareBracketsAttr), "attr")
+    .and(r => r.zeroOrOne(() => $suareBracketsNth), "nth")
+    .action(({ text, sentencesContainerKey, num, attr, nth }) => ({
+    type: "SENTENCES",
+    text: text(),
+    tag: common_1.sentencesContainerAlias[sentencesContainerKey],
+    num,
+    attr,
+    nth,
+})));
+const $fragment = factory
+    .choice(s => s
+    .or(() => $fragmentSentencesContainer)
+    .or(() => $fragmentArticlesContainer)
+    .or(() => $fragmentTopLevel)
+    .or(() => $fragmentLaw));
+const $path = factory
+    .sequence(s => s
+    .and(() => $fragment, "first")
+    .and(r => r.zeroOrMore(r => r
+    .sequence(s => s
+    .andOmit(r => r.seqEqual("/"))
+    .and(() => $fragment))), "rest")
+    .action(({ first, rest }) => [first, ...rest]));
+const parse = (text) => {
+    const m = $path.match(0, text, makeEnv());
+    if (m.ok) {
+        if (m.nextOffset === text.length) {
+            return {
+                ok: true,
+                value: m.value,
+            };
+        }
+        else {
+            return {
+                ok: false,
+                errors: [new error_1.ErrorMessage("Cannot parse the path", [m.nextOffset, text.length])],
+            };
+        }
+    }
+    else {
+        return {
+            ok: false,
+            errors: [new error_1.ErrorMessage("Cannot parse the path", [0, text.length])],
+        };
+    }
+};
+exports.parse = parse;
+exports["default"] = exports.parse;
+//# sourceMappingURL=parse.js.map
 
 /***/ }),
 
