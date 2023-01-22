@@ -37731,9 +37731,15 @@ const TOCItem = props => {
     const container = props.containers.get(props.el);
     const path = (_a = (container && (0, make_1.default)(container))) !== null && _a !== void 0 ? _a : null;
     if (path) {
+        const onClick = (e) => {
+            props.navigate(`/${props.firstPart}`);
+            (0, scroll_1.scrollToLawAnchor)(props.el.id.toString());
+            e.preventDefault();
+            return false;
+        };
         return (react_1.default.createElement(TOCItemAnchor, { style: {
                 paddingLeft: (props.indent + 2) + "em",
-            }, href: `#/${props.firstPart}/${path}` }, props.text));
+            }, href: `#/${props.firstPart}/${path}`, onClick: onClick }, props.text));
     }
     else {
         const onClick = () => {
