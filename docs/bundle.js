@@ -35904,16 +35904,19 @@ const tobeDownloadedRange = () => {
             return null;
         const el = node.parentNode;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const findData = (el, key) => {
+        const findData = (el, key, func) => {
             var _a;
             const containerInfo = el.parentElement
-                ? findData(el.parentElement, key)
+                ? findData(el.parentElement, key, func)
                 : null;
             if (containerInfo)
                 return containerInfo;
-            return el.dataset[key] ? JSON.parse((_a = el.dataset[key]) !== null && _a !== void 0 ? _a : "") : null;
+            const data = el.dataset[key] ? JSON.parse((_a = el.dataset[key]) !== null && _a !== void 0 ? _a : "") : null;
+            if (!data)
+                return null;
+            return (!func || func(data)) ? data : null;
         };
-        const containerInfo = findData(el, "container_info");
+        const containerInfo = findData(el, "container_info", (data) => ["Article", "Paragraph", "Item"].includes(data.tag));
         const toplevelContainerInfo = findData(el, "toplevel_container_info");
         if (!toplevelContainerInfo)
             return null;
