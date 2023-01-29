@@ -37274,7 +37274,7 @@ exports.HTMLParagraphItemMenuCSS = (0, styled_components_1.createGlobalStyle /*c
 }
 `;
 const HTMLParagraphItemMenu = props => {
-    var _a, _b;
+    var _a, _b, _c;
     const { el, htmlOptions } = props;
     const options = htmlOptions.options;
     const analysis = options.lawData.analysis;
@@ -37283,7 +37283,6 @@ const HTMLParagraphItemMenu = props => {
     const container = analysis.containersByEL.get(el);
     if (!container)
         return null;
-    const path = (0, make_1.default)(container);
     let articlePath = null;
     let articleTitle = null;
     const articleContainer = container.parentsSub(c => c.el.tag === "Article").next().value;
@@ -37292,6 +37291,11 @@ const HTMLParagraphItemMenu = props => {
         articlePath = (0, make_1.default)(articleContainer);
         articleTitle = (_b = (_a = article.children.find(std_1.isArticleTitle)) === null || _a === void 0 ? void 0 : _a.text()) !== null && _b !== void 0 ? _b : "この条";
     }
+    const path = (articlePath
+        && container.el.tag === "Paragraph"
+        && ((_c = container.subParent) === null || _c === void 0 ? void 0 : _c.subChildren.filter(c => c.el.tag === "Paragraph").length) === 1)
+        ? null
+        : (0, make_1.default)(container);
     const onClickParagraphItemLink = (e) => {
         navigator.clipboard.writeText(`${location.protocol}//${location.host}${location.pathname}#/${options.firstPart}/${path}`);
         e.preventDefault();
@@ -37307,8 +37311,8 @@ const HTMLParagraphItemMenu = props => {
         react_1.default.createElement("div", { className: "btn-group dropstart" },
             react_1.default.createElement("button", { className: "btn btn-sm btn-outline-secondary paragraph-item-menu-button dropdown-toggle", "data-bs-toggle": "dropdown", "aria-expanded": "false" }),
             react_1.default.createElement("ul", { className: "dropdown-menu" },
-                react_1.default.createElement("li", null,
-                    react_1.default.createElement("a", { className: "dropdown-item", href: `#/${options.firstPart}/${path}`, onClick: onClickParagraphItemLink }, "\u3053\u306E\u9805\u76EE\u3078\u306E\u30EA\u30F3\u30AF\u3092\u30B3\u30D4\u30FC")),
+                path && (react_1.default.createElement("li", null,
+                    react_1.default.createElement("a", { className: "dropdown-item", href: `#/${options.firstPart}/${path}`, onClick: onClickParagraphItemLink }, "\u3053\u306E\u9805\u76EE\u3078\u306E\u30EA\u30F3\u30AF\u3092\u30B3\u30D4\u30FC"))),
                 articlePath && (react_1.default.createElement("li", null,
                     react_1.default.createElement("a", { className: "dropdown-item", href: `#/${options.firstPart}/${articlePath}`, onClick: onClickArticleLink },
                         articleTitle,
@@ -59238,7 +59242,7 @@ exports.HTMLParagraphItem = (0, html_1.wrapHTMLComponent)("HTMLParagraphItem", (
     return (react_1.default.createElement("div", Object.assign({ className: `paragraph-item-${el.tag} paragraph-item-any` }, (0, html_1.elProps)(el, htmlOptions)),
         (decorations.length > 0) && react_1.default.createElement(react_1.default.Fragment, null, decorations.map((D, i) => (react_1.default.createElement("div", { key: i, className: "paragraph-item-decoration-block", style: { ["--paragraph-item-indent"]: `${indent}em` } },
             react_1.default.createElement(D, Object.assign({}, props)))))),
-        react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(blocks))));
+        react_1.default.createElement("div", { style: { position: "relative" } }, (0, common_1.withKey)(blocks))));
 }));
 exports.DOCXParagraphItem = (0, docx_1.wrapDOCXComponent)("DOCXParagraphItem", ((props) => {
     var _a;
