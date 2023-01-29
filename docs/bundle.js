@@ -36508,10 +36508,16 @@ const ReplaceHTMLFigRun_1 = __importDefault(__webpack_require__(39238));
 const WrapHTMLControlRun_1 = __importDefault(__webpack_require__(50360));
 const WrapHTMLParagraphItem_1 = __importDefault(__webpack_require__(3424));
 const container_1 = __webpack_require__(49814);
+const WrapHTMLToplevelAndArticles_1 = __importDefault(__webpack_require__(91864));
 const wrapperByID = {};
 wrapperByID["HTMLControlRun"] = WrapHTMLControlRun_1.default;
 wrapperByID["HTMLFigRun"] = ReplaceHTMLFigRun_1.default;
 wrapperByID["HTMLParagraphItem"] = WrapHTMLParagraphItem_1.default;
+wrapperByID["HTMLArticleGroup"] = WrapHTMLToplevelAndArticles_1.default;
+wrapperByID["HTMLAppdxItem"] = WrapHTMLToplevelAndArticles_1.default;
+wrapperByID["HTMLSupplProvision"] = WrapHTMLToplevelAndArticles_1.default;
+wrapperByID["HTMLEnactStatement"] = WrapHTMLToplevelAndArticles_1.default;
+wrapperByID["HTMLPreamble"] = WrapHTMLToplevelAndArticles_1.default;
 const ErrorComponentDiv = styled_components_1.default.div `
 `;
 class LawErrorCatcher extends ErrorCatcher_1.ErrorCatcher {
@@ -37331,6 +37337,111 @@ exports["default"] = exports.WrapHTMLParagraphItem;
 
 /***/ }),
 
+/***/ 91864:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.WrapHTMLToplevelAndArticles = exports.HTMLToplevelAndArticlesMenu = exports.HTMLToplevelAndArticlesMenuCSS = void 0;
+const react_1 = __importDefault(__webpack_require__(67294));
+const styled_components_1 = __webpack_require__(58804);
+const make_1 = __importDefault(__webpack_require__(45940));
+const std = __importStar(__webpack_require__(93619));
+exports.HTMLToplevelAndArticlesMenuCSS = (0, styled_components_1.createGlobalStyle /*css*/) `
+.toplevel-and-articles-wrap {
+    position: relative;
+}
+
+.toplevel-and-articles-menu {
+    position: absolute;
+    margin-left: -1.5em;
+    margin-top: -0.15em;
+}
+
+.toplevel-and-articles-menu-button {
+    opacity: 0%;
+    transition: opacity 0.3s;
+
+    font-size: 0.7em;
+    padding: 0 0 0 0.15em;
+    width: calc(1em/0.7);
+    height: calc(1em/0.7);
+    line-height: 0.5em;
+    background: var(--bs-body-bg);
+}
+
+.toplevel-and-articles-wrap:hover > .toplevel-and-articles-menu > div > .toplevel-and-articles-menu-button, .toplevel-and-articles-menu-button:hover {
+    opacity: 100%;
+}
+`;
+const HTMLToplevelAndArticlesMenu = props => {
+    var _a, _b;
+    const { el, htmlOptions } = props;
+    const options = htmlOptions.options;
+    if (std.isMainProvision(el))
+        return null;
+    const analysis = options.lawData.analysis;
+    if (!analysis)
+        return null;
+    const container = analysis.containersByEL.get(el);
+    if (!container)
+        return null;
+    const path = (0, make_1.default)(container);
+    const title = (_b = (_a = container.el.children.find(el => std.isArticleGroupTitle(el) || std.isAppdxItemTitle(el) || std.isSupplProvisionLabel(el))) === null || _a === void 0 ? void 0 : _a.text()) !== null && _b !== void 0 ? _b : "この項目";
+    const onClickLink = (e) => {
+        navigator.clipboard.writeText(`${location.protocol}//${location.host}${location.pathname}#/${options.firstPart}/${path}`);
+        e.preventDefault();
+        return false;
+    };
+    return react_1.default.createElement("div", { className: "toplevel-and-articles-menu" },
+        react_1.default.createElement("div", { className: "btn-group dropstart" },
+            react_1.default.createElement("button", { className: "btn btn-sm btn-outline-secondary toplevel-and-articles-menu-button dropdown-toggle", "data-bs-toggle": "dropdown", "aria-expanded": "false" }),
+            react_1.default.createElement("ul", { className: "dropdown-menu" }, path && (react_1.default.createElement("li", null,
+                react_1.default.createElement("a", { className: "dropdown-item", href: `#/${options.firstPart}/${path}`, onClick: onClickLink },
+                    title,
+                    "\u3078\u306E\u30EA\u30F3\u30AF\u3092\u30B3\u30D4\u30FC"))))));
+};
+exports.HTMLToplevelAndArticlesMenu = HTMLToplevelAndArticlesMenu;
+const WrapHTMLToplevelAndArticles = props => {
+    const { childProps: _childProps, ChildComponent } = props;
+    const childProps = _childProps;
+    return (react_1.default.createElement("div", { className: "toplevel-and-articles-wrap" },
+        react_1.default.createElement(exports.HTMLToplevelAndArticlesMenu, Object.assign({}, childProps)),
+        react_1.default.createElement(ChildComponent, Object.assign({}, childProps))));
+};
+exports.WrapHTMLToplevelAndArticles = WrapHTMLToplevelAndArticles;
+exports["default"] = exports.WrapHTMLToplevelAndArticles;
+
+
+/***/ }),
+
 /***/ 2375:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
@@ -37375,6 +37486,7 @@ const parse_1 = __importDefault(__webpack_require__(94762));
 const locate_1 = __importDefault(__webpack_require__(68968));
 const scroll_1 = __webpack_require__(31529);
 const WrapHTMLParagraphItem_1 = __webpack_require__(3424);
+const WrapHTMLToplevelAndArticles_1 = __webpack_require__(91864);
 const GlobalStyle = (0, styled_components_1.createGlobalStyle) `
 `;
 const LawViewDiv = styled_components_1.default.div `
@@ -37431,6 +37543,7 @@ const LawView = props => {
         react_1.default.createElement(GlobalStyle, null),
         react_1.default.createElement(ControlGlobalStyle_1.default, null),
         react_1.default.createElement(WrapHTMLParagraphItem_1.HTMLParagraphItemMenuCSS, null),
+        react_1.default.createElement(WrapHTMLToplevelAndArticles_1.HTMLToplevelAndArticlesMenuCSS, null),
         origState.hasError && react_1.default.createElement(LawViewError, Object.assign({}, props)),
         origState.law &&
             // (origState.navigatedPath === props.path) &&
@@ -45444,7 +45557,7 @@ var ContainerType;
     ContainerType["SENTENCES"] = "SENTENCES";
 })(ContainerType = exports.ContainerType || (exports.ContainerType = {}));
 exports.rootContainerTags = ["Law"];
-exports.toplevelContainerTags = ["EnactStatement", "MainProvision", "SupplProvision", ...std.appdxItemTags];
+exports.toplevelContainerTags = ["EnactStatement", "Preamble", "MainProvision", "SupplProvision", ...std.appdxItemTags];
 exports.articlesContainerTags = std.articleGroupTags;
 exports.sentencesContainerTags = [
     "Article",
@@ -55370,7 +55483,7 @@ const makePathFragments = (container, childFragments) => {
             ? `=${num}`
             : `[${nth}]`);
         const fragment = {
-            type: "TOPLEVEL",
+            type: "SENTENCES",
             text: `${alias}${modifier}`,
             tag: container.el.tag,
             num,
@@ -59139,6 +59252,10 @@ exports.HTMLParagraphItemCSS = `
     position: relative;
 }
 
+.paragraph-item-any > div:not(.paragraph-item-decoration-block) {
+    position: relative;
+}
+
 .paragraph-item-decoration-block {
     position: absolute;
     width: calc(100% - var(--paragraph-item-indent, 0));
@@ -59242,7 +59359,7 @@ exports.HTMLParagraphItem = (0, html_1.wrapHTMLComponent)("HTMLParagraphItem", (
     return (react_1.default.createElement("div", Object.assign({ className: `paragraph-item-${el.tag} paragraph-item-any` }, (0, html_1.elProps)(el, htmlOptions)),
         (decorations.length > 0) && react_1.default.createElement(react_1.default.Fragment, null, decorations.map((D, i) => (react_1.default.createElement("div", { key: i, className: "paragraph-item-decoration-block", style: { ["--paragraph-item-indent"]: `${indent}em` } },
             react_1.default.createElement(D, Object.assign({}, props)))))),
-        react_1.default.createElement("div", { style: { position: "relative" } }, (0, common_1.withKey)(blocks))));
+        (0, common_1.withKey)(blocks)));
 }));
 exports.DOCXParagraphItem = (0, docx_1.wrapDOCXComponent)("DOCXParagraphItem", ((props) => {
     var _a;
