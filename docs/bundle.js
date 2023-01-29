@@ -38084,7 +38084,7 @@ const ViewerWelcome = props => {
                             react_1.default.createElement("input", { ref: lawSearchKeyInputRef, name: "lawSearchKey", onChange: lawSearchKeyOnChange, className: "form-control search-law-textbox", placeholder: "法令名か法令番号を検索", value: editingKey }),
                             react_1.default.createElement("button", { className: "btn btn-primary search-law-button", type: "submit" }, "\u691C\u7D22"))))),
             react_1.default.createElement("p", { style: { textAlign: "center", marginTop: "1em" } },
-                react_1.default.createElement("a", { href: "/#/v1:405AC0000000088", className: "btn btn-outline-primary" }, "\u4F8B\uFF1A\u300C\u884C\u653F\u624B\u7D9A\u6CD5\u300D\u3092\u8868\u793A"))),
+                react_1.default.createElement("a", { href: "#/v1:405AC0000000088", className: "btn btn-outline-primary" }, "\u4F8B\uFF1A\u300C\u884C\u653F\u624B\u7D9A\u6CD5\u300D\u3092\u8868\u793A"))),
         react_1.default.createElement("div", { className: "container-fluid", style: { alignSelf: "center", maxWidth: "20em", margin: "0.5em" } },
             react_1.default.createElement("hr", null)),
         react_1.default.createElement("div", { className: "container-fruid", style: { alignSelf: "center", maxWidth: "500px" } },
