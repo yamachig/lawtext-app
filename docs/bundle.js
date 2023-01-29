@@ -36506,10 +36506,12 @@ const std = __importStar(__webpack_require__(93619));
 const download_1 = __webpack_require__(56644);
 const ReplaceHTMLFigRun_1 = __importDefault(__webpack_require__(39238));
 const WrapHTMLControlRun_1 = __importDefault(__webpack_require__(50360));
+const WrapHTMLParagraphItem_1 = __importDefault(__webpack_require__(3424));
 const container_1 = __webpack_require__(49814);
 const wrapperByID = {};
 wrapperByID["HTMLControlRun"] = WrapHTMLControlRun_1.default;
 wrapperByID["HTMLFigRun"] = ReplaceHTMLFigRun_1.default;
+wrapperByID["HTMLParagraphItem"] = WrapHTMLParagraphItem_1.default;
 const ErrorComponentDiv = styled_components_1.default.div `
 `;
 class LawErrorCatcher extends ErrorCatcher_1.ErrorCatcher {
@@ -37061,6 +37063,7 @@ const PeekView = (props) => {
                 fontSize: 0,
                 fontWeight: "normal",
                 position: "relative",
+                zIndex: 100,
                 color: "initial",
             } },
             react_1.default.createElement("div", { style: {
@@ -37230,6 +37233,96 @@ exports["default"] = exports.WrapHTMLControlRun;
 
 /***/ }),
 
+/***/ 3424:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.WrapHTMLParagraphItem = exports.HTMLParagraphItemMenu = exports.HTMLParagraphItemMenuCSS = void 0;
+const react_1 = __importDefault(__webpack_require__(67294));
+const styled_components_1 = __webpack_require__(58804);
+const make_1 = __importDefault(__webpack_require__(45940));
+const std_1 = __webpack_require__(93619);
+exports.HTMLParagraphItemMenuCSS = (0, styled_components_1.createGlobalStyle /*css*/) `
+.paragraph-item-menu {
+    margin-left: -1.5em;
+    margin-top: -0.15em;
+}
+
+.paragraph-item-menu-button {
+    opacity: 0%;
+    transition: opacity 0.3s;
+
+    font-size: 0.7em;
+    padding: 0 0 0 0.15em;
+    width: calc(1em/0.7);
+    height: calc(1em/0.7);
+    line-height: 0.5em;
+    background: var(--bs-body-bg);
+}
+
+.paragraph-item-any:hover > * > * > * > .paragraph-item-menu-button, .paragraph-item-menu-button:hover {
+    opacity: 100%;
+}
+`;
+const HTMLParagraphItemMenu = props => {
+    var _a, _b;
+    const { el, htmlOptions } = props;
+    const options = htmlOptions.options;
+    const analysis = options.lawData.analysis;
+    if (!analysis)
+        return null;
+    const container = analysis.containersByEL.get(el);
+    if (!container)
+        return null;
+    const path = (0, make_1.default)(container);
+    let articlePath = null;
+    let articleTitle = null;
+    const articleContainer = container.parentsSub(c => c.el.tag === "Article").next().value;
+    if (articleContainer) {
+        const article = articleContainer.el;
+        articlePath = (0, make_1.default)(articleContainer);
+        articleTitle = (_b = (_a = article.children.find(std_1.isArticleTitle)) === null || _a === void 0 ? void 0 : _a.text()) !== null && _b !== void 0 ? _b : "この条";
+    }
+    const onClickParagraphItemLink = (e) => {
+        navigator.clipboard.writeText(`${location.protocol}//${location.host}${location.pathname}#/${options.firstPart}/${path}`);
+        e.preventDefault();
+        return false;
+    };
+    const onClickArticleLink = (e) => {
+        if (articlePath)
+            navigator.clipboard.writeText(`${location.protocol}//${location.host}${location.pathname}#/${options.firstPart}/${articlePath}`);
+        e.preventDefault();
+        return false;
+    };
+    return react_1.default.createElement("div", { className: "paragraph-item-menu" },
+        react_1.default.createElement("div", { className: "btn-group dropstart" },
+            react_1.default.createElement("button", { className: "btn btn-sm btn-outline-secondary paragraph-item-menu-button dropdown-toggle", "data-bs-toggle": "dropdown", "aria-expanded": "false" }),
+            react_1.default.createElement("ul", { className: "dropdown-menu" },
+                react_1.default.createElement("li", null,
+                    react_1.default.createElement("a", { className: "dropdown-item", href: `#/${options.firstPart}/${path}`, onClick: onClickParagraphItemLink }, "\u3053\u306E\u9805\u76EE\u3078\u306E\u30EA\u30F3\u30AF\u3092\u30B3\u30D4\u30FC")),
+                articlePath && (react_1.default.createElement("li", null,
+                    react_1.default.createElement("a", { className: "dropdown-item", href: `#/${options.firstPart}/${articlePath}`, onClick: onClickArticleLink },
+                        articleTitle,
+                        "\u3078\u306E\u30EA\u30F3\u30AF\u3092\u30B3\u30D4\u30FC"))))));
+};
+exports.HTMLParagraphItemMenu = HTMLParagraphItemMenu;
+const WrapHTMLParagraphItem = props => {
+    const { childProps: _childProps, ChildComponent: _ChildComponent } = props;
+    const ChildComponent = _ChildComponent;
+    const childProps = _childProps;
+    return react_1.default.createElement(ChildComponent, Object.assign({}, childProps, { decorations: [exports.HTMLParagraphItemMenu] }));
+};
+exports.WrapHTMLParagraphItem = WrapHTMLParagraphItem;
+exports["default"] = exports.WrapHTMLParagraphItem;
+
+
+/***/ }),
+
 /***/ 2375:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
@@ -37273,6 +37366,7 @@ const ControlGlobalStyle_1 = __importDefault(__webpack_require__(40993));
 const parse_1 = __importDefault(__webpack_require__(94762));
 const locate_1 = __importDefault(__webpack_require__(68968));
 const scroll_1 = __webpack_require__(31529);
+const WrapHTMLParagraphItem_1 = __webpack_require__(3424);
 const GlobalStyle = (0, styled_components_1.createGlobalStyle) `
 `;
 const LawViewDiv = styled_components_1.default.div `
@@ -37323,14 +37417,16 @@ const LawView = props => {
             setPrevPath(origState.navigatedPath);
         }
     }, [prevPath, origState.navigatedPath, origState.law]);
+    const firstPart = props.origState.navigatedPath.split("/")[0];
     return (react_1.default.createElement(LawViewDiv, null,
         react_1.default.createElement("style", null, htmlCSS_1.default),
         react_1.default.createElement(GlobalStyle, null),
         react_1.default.createElement(ControlGlobalStyle_1.default, null),
+        react_1.default.createElement(WrapHTMLParagraphItem_1.HTMLParagraphItemMenuCSS, null),
         origState.hasError && react_1.default.createElement(LawViewError, Object.assign({}, props)),
         origState.law &&
             // (origState.navigatedPath === props.path) &&
-            react_1.default.createElement(MemoLawDataComponent, { lawData: origState.law, onError: onError, origSetState: origSetState })));
+            react_1.default.createElement(MemoLawDataComponent, { lawData: origState.law, onError: onError, origSetState: origSetState, firstPart: firstPart })));
 };
 exports.LawView = LawView;
 const LawViewErrorDiv = styled_components_1.default.div `
@@ -37343,7 +37439,7 @@ const LawViewError = props => {
         "\u500B\u306E\u30A8\u30E9\u30FC\u304C\u767A\u751F\u3057\u307E\u3057\u305F"));
 };
 const LawDataComponent = props => {
-    const { lawData, onError, origSetState } = props;
+    const { lawData, onError, origSetState, firstPart } = props;
     const { addAfterMountTask } = (0, useAfterMountTask_1.default)(origSetState);
     const getFigData = (0, react_1.useCallback)((src) => {
         var _a;
@@ -37353,7 +37449,8 @@ const LawDataComponent = props => {
         onError,
         lawData,
         addAfterMountTask,
-    }), [onError, lawData, addAfterMountTask]);
+        firstPart,
+    }), [onError, lawData, addAfterMountTask, firstPart]);
     const htmlOptions = {
         WrapComponent: LawWrapper_1.WrapLawComponent,
         renderControlEL: true,
@@ -59030,15 +59127,26 @@ const list_1 = __webpack_require__(42300);
 const amendProvision_1 = __webpack_require__(11543);
 const common_1 = __webpack_require__(66914);
 exports.HTMLParagraphItemCSS = `
-.paragraph-item-Paragraph {
-    clear: both;
-    border-left: 0.2em solid transparent;
-    padding-left: 0.8em;
+.paragraph-item-any {
+    position: relative;
+}
+
+.paragraph-item-decoration-block {
+    position: absolute;
+    width: calc(100% - var(--paragraph-item-indent, 0));
+    left: var(--paragraph-item-indent, 0);
+    height: 100%;
+}
+
+.paragraph-item-decoration-left-border {
     margin: 0 0 0 -1em;
+    border-left: 0.1em solid transparent;
+    width: 100%;
+    height: 100%;
     transition: border-left-color 0.3s;
 }
 
-.paragraph-item-Paragraph:hover {
+.paragraph-item-any:hover > * > .paragraph-item-decoration-left-border {
     border-left-color: rgba(255, 166, 0, 0.5);
 }
 
@@ -59058,12 +59166,16 @@ ${std.paragraphItemTags
 
 
 .paragraph-item-main {
+    position: relative;
     padding-left: 1em;
     text-indent: -1em;
 }
 `;
+const HTMLParagraphItemLeftBorder = () => {
+    return react_1.default.createElement("div", { className: "paragraph-item-decoration-left-border" });
+};
 exports.HTMLParagraphItem = (0, html_1.wrapHTMLComponent)("HTMLParagraphItem", ((props) => {
-    var _a;
+    var _a, _b;
     const { el, htmlOptions, indent, ArticleTitle } = props;
     const blocks = [];
     const ParagraphCaption = el.children.find(el => std.isParagraphCaption(el) || std.isArticleCaption(el));
@@ -59118,7 +59230,11 @@ exports.HTMLParagraphItem = (0, html_1.wrapHTMLComponent)("HTMLParagraphItem", (
             throw (0, util_1.assertNever)(child);
         }
     }
-    return (react_1.default.createElement("div", Object.assign({ className: `paragraph-item-${el.tag}` }, (0, html_1.elProps)(el, htmlOptions)), (0, common_1.withKey)(blocks)));
+    const decorations = [HTMLParagraphItemLeftBorder, ...((_b = props.decorations) !== null && _b !== void 0 ? _b : [])];
+    return (react_1.default.createElement("div", Object.assign({ className: `paragraph-item-${el.tag} paragraph-item-any` }, (0, html_1.elProps)(el, htmlOptions)),
+        (decorations.length > 0) && react_1.default.createElement(react_1.default.Fragment, null, decorations.map((D, i) => (react_1.default.createElement("div", { key: i, className: "paragraph-item-decoration-block", style: { ["--paragraph-item-indent"]: `${indent}em` } },
+            react_1.default.createElement(D, Object.assign({}, props)))))),
+        react_1.default.createElement(react_1.default.Fragment, null, (0, common_1.withKey)(blocks))));
 }));
 exports.DOCXParagraphItem = (0, docx_1.wrapDOCXComponent)("DOCXParagraphItem", ((props) => {
     var _a;
