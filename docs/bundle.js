@@ -36526,7 +36526,10 @@ const WrapLawComponent = props => {
     const options = childProps.htmlOptions.options;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const el = childProps.el;
-    const elID = (el instanceof el_1.EL) && (container_1.containerTags.includes(el.tag) || std.isPreamble(el) || std.isTOC(el)) && el.id;
+    const elID = ((el instanceof el_1.EL)
+        && (container_1.containerTags.includes(el.tag) || std.isPreamble(el) || std.isTOC(el))
+        && (!["TableRow", "TableColumn"].includes(el.tag))
+        && el.id);
     const WrapperByID = wrapperByID[htmlComponentID];
     const baseElement = (
     // (htmlComponentID === "HTMLSentenceChildrenRun")
@@ -36541,7 +36544,8 @@ const WrapLawComponent = props => {
         dataset.push(["data-toplevel_container_info", JSON.stringify((0, download_1.containerInfoOf)(el))]);
     }
     if ((el instanceof el_1.EL)
-        && (container_1.containerTags.includes(el.tag))) {
+        && (container_1.containerTags.includes(el.tag))
+        && (!["TableRow", "TableColumn"].includes(el.tag))) {
         dataset.push(["data-container_info", JSON.stringify((0, download_1.containerInfoOf)(el))]);
     }
     const withDatasetElement = (dataset.length > 0
