@@ -38321,7 +38321,7 @@ const ViewerWelcome = props => {
                             react_1.default.createElement("a", { className: "link-secondary", href: "#", onClick: downloadSampleLawtextOnClick }, "\u30B5\u30F3\u30D7\u30EB\u3092\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9")))))),
         react_1.default.createElement("div", { className: "container-fluid", style: { alignSelf: "center", maxWidth: "20em", margin: "0.5em" } },
             react_1.default.createElement("hr", null)),
-        react_1.default.createElement("div", { className: "container-fruid", style: { alignSelf: "center" } },
+        react_1.default.createElement("div", { className: "container-fruid", style: { alignSelf: "center", maxWidth: "100%" } },
             location.hostname === "yamachig.github.io" ? (react_1.default.createElement(react_1.default.Fragment, null,
                 react_1.default.createElement("div", { style: { textAlign: "center" } },
                     react_1.default.createElement("a", { href: "https://yamachig.github.io/lawtext-app/#/download/", target: "_blank", rel: "noreferrer" }, "\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9\u7248Lawtext\u306F\u3053\u3061\u3089")))) : (react_1.default.createElement(react_1.default.Fragment, null,
