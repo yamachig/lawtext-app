@@ -55762,6 +55762,14 @@ const $start = factory_1.default
     .action((({ lines }) => {
     return lines;
 })));
+/**
+ * Parse a lawtext string to the CST.
+ *
+ * This function converts a lawtext string to the CST (Concrete Syntax Tree), which consists of a sequence of {@link Line}s.
+ *
+ * @param lawtext - the lawtext string to parse
+ * @returns - the result CST
+ */
 const parse = (lawtext, options = {}) => {
     const env = (0, env_1.initialEnv)(options);
     const target = lawtext.endsWith("\n") ? lawtext : lawtext + "\r\n";
