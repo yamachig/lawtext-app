@@ -47959,7 +47959,7 @@ const findFilteredAmbiguousNameInline = (sentenceEnvsStruct, allDeclarations, po
         return { value: [], errors };
     const nameRegistry = new Map();
     for (const info of nameInfos) {
-        // "Word-likeness": Pick keywords consists of Kanji's or Katakana's excluding "当該", connected by at most one "の"
+        // "Word-likeness" (part 1): Pick keywords consisting of Kanji's or Katakana's excluding "当該", connected by at most one "の"
         // e.g. "（略）行政運営における公正の確保と透明性" -> ["透明性"]
         // e.g. "（略）命令等を定めようとする場合には、当該命令等の案" -> ["案", "命令等の案"]
         // e.g. "中期目標の期間" -> ["期間", "中期目標の期間"]
@@ -47980,7 +47980,7 @@ const findFilteredAmbiguousNameInline = (sentenceEnvsStruct, allDeclarations, po
         info.maxCandidateLength = match[1].length;
         const nameCandidateLastOffset = (_f = (_e = info.sentenceEnv.textRageOfEL(info.nameCandidateEL)) === null || _e === void 0 ? void 0 : _e[1]) !== null && _f !== void 0 ? _f : null;
         const parentheseeLastOffset = (_h = (_g = info.sentenceEnv.textRageOfEL(info.afterNameParentheses)) === null || _g === void 0 ? void 0 : _g[1]) !== null && _h !== void 0 ? _h : null;
-        // "Consistency": Skip candidates occured outside of the scope.
+        // "Consistency": Skip candidates occurred outside of the scope.
         for (const sentenceEnv of sentenceEnvsStruct.sentenceEnvs) {
             // TODO: exclude square parentheses, QuoteStruct and NewProvision
             if (info.nameCandidates.size === 0)
@@ -48140,8 +48140,11 @@ const findFilteredAmbiguousNameInline = (sentenceEnvsStruct, allDeclarations, po
             info.errorEmitted = true;
             continue;
         }
-        // "Greedy": Pick the longest candidate
-        filteredNameInfos.push(Object.assign(Object.assign({}, info), { name: [...info.nameCandidates].sort((a, b) => b.length - a.length)[0] }));
+        // "Word-likeness" (part 2): Pick the shortest candidate, avoiding a candidate with one character if possible.
+        let filteredCandidates = [...info.nameCandidates].filter(a => a.length > 1);
+        if (filteredCandidates.length === 0)
+            filteredCandidates = [...info.nameCandidates];
+        filteredNameInfos.push(Object.assign(Object.assign({}, info), { name: filteredCandidates.sort((a, b) => a.length - b.length)[0] }));
     }
     return {
         value: filteredNameInfos,
@@ -55015,8 +55018,17 @@ exports.____VarRef = ____VarRef;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.innerXML = exports.outerXML = exports.wrapXML = void 0;
+const xmlReplacers = {
+    "<": "&lt;",
+    ">": "&gt;",
+    "&": "&amp;",
+    "\"": "&quot;",
+    "'": "&apos;",
+};
 const wrapXML = (el, inner) => {
-    const attr = Object.keys(el.attr).map(key => { var _a; return ` ${key}="${(_a = el.attr[key]) !== null && _a !== void 0 ? _a : ""}"`; }).join("");
+    const attr = Object.keys(el.attr)
+        .map(key => { var _a, _b; return ` ${key}="${(_b = (_a = el.attr[key]) === null || _a === void 0 ? void 0 : _a.replace(/[<>&"']/g, c => xmlReplacers[c])) !== null && _b !== void 0 ? _b : ""}"`; })
+        .join("");
     if (inner) {
         return `<${el.tag}${attr}>${inner}</${el.tag}>`;
     }
@@ -55038,8 +55050,8 @@ exports.outerXML = outerXML;
 const innerXML = (el, withControlEl = false) => {
     if (!el.children)
         console.error(el);
-    return el.children.map(child => (child instanceof String || (typeof child === "string"))
-        ? child.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;")
+    return el.children.map(child => (typeof child === "string")
+        ? child.replace(/[<>&"']/g, c => xmlReplacers[c])
         : (0, exports.outerXML)(child, withControlEl)).join("");
 };
 exports.innerXML = innerXML;
@@ -68558,7 +68570,8 @@ const processProcessingInstruction = (node, state) => {
 };
 const formatXML = (xml, _options = {}) => {
     const options = Object.assign(Object.assign({}, defaultXMLFormatterOptions), _options);
-    const parsedXml = (0, xml_parser_xo_1.default)(`<root>${xml}</root>`, { filter: options.filter, strictMode: options.strictMode });
+    const m = /^((?:<\?.+?\?>)?)([\s\S]*)$/m.exec(xml.trim());
+    const parsedXml = (0, xml_parser_xo_1.default)(`${m ? m[1] : ""}<root>${m ? m[2] : xml}</root>`, { filter: options.filter, strictMode: options.strictMode });
     const state = { content: "", level: 0, options: options, path: [] };
     if (parsedXml.declaration) {
         processProcessingInstruction(parsedXml.declaration, state);
@@ -68568,8 +68581,8 @@ const formatXML = (xml, _options = {}) => {
     });
     return state.content
         .replace(/\r\n/g, "\n")
-        .replace(/^<root>\n?/, "")
-        .replace(/<\/root>\n?$/, "")
+        .replace(/^(\s*(?:<\?.+?\?>)?\s*)<root>\n?/, "$1")
+        .replace(/\n?<\/root>(\s*)$/, "$1")
         .replace(/\n*$/, "\n")
         .replace(new RegExp(`^${options.indentation}`, "mg"), "")
         .replace(/\n/g, options.lineSeparator);
