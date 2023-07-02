@@ -50314,7 +50314,14 @@ class FetchStoredLoader extends common_1.Loader {
         return (0, common_1.jsonTextToLawInfos)(text);
     }
     async loadBaseLawInfosFromCSV() {
-        const text = await fetchSjisText(this.listCSVPath);
+        let text = null;
+        text = await fetchSjisText(this.listCSVPath);
+        if (!(text === null || text === void 0 ? void 0 : text.includes("法令番号"))) {
+            text = await fetchText(this.listCSVPath);
+            if ((text === null || text === void 0 ? void 0 : text.charCodeAt(0)) === 0xFEFF) {
+                text = text.substring(1);
+            }
+        }
         if (text === null)
             throw new Error("Text cannot be fetched");
         return (0, common_1.csvTextToLawInfos)(text);
