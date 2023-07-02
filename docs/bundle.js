@@ -45987,7 +45987,10 @@ const SidebarFooter = () => {
             react_1.default.createElement("a", { href: "https://github.com/yamachig/lawtext", target: "_blank", rel: "noreferrer" }, "Lawtext"),
             "\u3067\u5225\u9014\u89E3\u6790\u30FB\u7DE8\u96C6\u3057\u305F\u3082\u306E\u3067\u3059\u3002"),
         react_1.default.createElement("div", { style: { fontSize: "0.8em", textAlign: "center", padding: "0.3em 0", color: "rgb(140, 140, 140)" } },
-            react_1.default.createElement("a", { href: "https://github.com/yamachig/lawtext", target: "_blank", rel: "noreferrer", style: { marginRight: "2em" } }, "GitHub"),
+            react_1.default.createElement("span", { style: { marginRight: "1em" } },
+                react_1.default.createElement("a", { href: "https://github.com/yamachig/lawtext", target: "_blank", rel: "noreferrer" }, "GitHub"),
+                "\u30FB",
+                react_1.default.createElement("a", { href: "https://yamachig.github.io/Lawtext/", target: "_blank", rel: "noreferrer" }, "Docs")),
             "\u00A9 2017-",
             new Date().getFullYear(),
             " yamachi")));
@@ -46162,7 +46165,9 @@ const ViewerWelcome = props => {
         react_1.default.createElement("div", { className: "text-muted", style: { alignSelf: "center", maxWidth: "500px" } },
             react_1.default.createElement("div", { className: "container-fluid" },
                 react_1.default.createElement("div", { style: { alignSelf: "center" } },
-                    react_1.default.createElement("a", { href: "https://github.com/yamachig/lawtext", target: "_blank", rel: "noreferrer" }, "GitHub"))))));
+                    react_1.default.createElement("a", { href: "https://github.com/yamachig/lawtext", target: "_blank", rel: "noreferrer" }, "GitHub"),
+                    "\u30FB",
+                    react_1.default.createElement("a", { href: "https://yamachig.github.io/Lawtext/", target: "_blank", rel: "noreferrer" }, "Docs"))))));
 };
 const ListJsonDownloader = () => {
     const [state, replaceState] = react_1.default.useState({
