@@ -48945,7 +48945,9 @@ const getSentenceEnvs = (el) => {
                 const name = ((_c = (_b = el.children.find(c => (std.isArticleTitle(c)
                     || std.isParagraphItemTitle(c)
                     || std.isArticleGroupTitle(c)
-                    || std.isAppdxItemTitle(c)))) === null || _b === void 0 ? void 0 : _b.text()) !== null && _c !== void 0 ? _c : null);
+                    || std.isAppdxItemTitle(c)
+                    || std.isSupplProvisionLabel(c)
+                    || std.isSupplProvisionAppdxItemTitle(c)))) === null || _b === void 0 ? void 0 : _b.text()) !== null && _c !== void 0 ? _c : null);
                 const num = ((name && (0, num_1.parseNamedNum)(name))
                     || ((std.isParagraph(el) && "1") || null));
                 const containerID = prevContainer ? `${prevContainer.containerID}-${el.tag}[${prevContainer.children.filter(c => c.el.tag === el.tag).length + 1}]${num ? "[num=" + num + "]" : ""}` : `container-${el.tag}`;
