@@ -48333,7 +48333,7 @@ const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct, pointerE
                 }
             }
             else {
-                const lawNameLength = (0, exports.getLawNameLength)(lawNumText);
+                const lawNameLength = (0, exports.getLawNameLength)((0, lawNum_1.lawNumLikeToLawNum)(lawNumText));
                 if (lawNameLength !== null) {
                     const name = lawNameCandidate.text().slice(-lawNameLength);
                     const scope = [
@@ -51780,7 +51780,7 @@ exports.parseLawID = parseLawID;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.parseLawNum = exports.lawNumLikeToLawNum = exports.ptnLawNumLike = exports.ptnLawNum = void 0;
+exports.parseLawNum = exports.lawNumLikeToLawNum = exports.ptnLawNumLike = exports.ptnLawNumArabic = exports.ptnLawNum = void 0;
 const num_1 = __webpack_require__(68685);
 const std_1 = __webpack_require__(93619);
 exports.ptnLawNum = "(?:\
@@ -51806,14 +51806,43 @@ exports.ptnLawNum = "(?:\
 )\
 )\
 )";
+exports.ptnLawNumArabic = "(?:\
+(?<a_era>明治|大正|昭和|平成|令和)(?<a_year>[0123456789０１２３４５６７８９]+)年\
+(?:\
+(?:\
+(?<a_type1>[^ 　\t\r\n<>()（）[\\]［］{}｛｝「」]+?)\
+(?:第(?<a_num1>[0123456789０１２３４５６７８９]+)号)\
+)\
+|\
+(?:\
+(?<a_type2>人事院規則)\
+(?<a_num2>[―0123456789０１２３４５６７８９]+)\
+)\
+|\
+(?:\
+([0123456789０１２３４５６７８９]+)月([0123456789０１２３４５６７８９]+)日\
+(?<a_type3>内閣総理大臣決定)\
+)\
+|\
+(?:\
+(?<a_type4>憲法|勅令|内務省・鉄道省令|逓信省・鉄道省令|逓信省・農林省令|農林省・大蔵省・内務省令第(?<a_num3>[0０])号)\
+)\
+)\
+)";
 exports.ptnLawNumLike = `(?:\
 (?:${exports.ptnLawNum})\
 |\
 (?:日本国憲法)\
+|\
+(?:${exports.ptnLawNumArabic})\
 )`;
+const reLawNumArabic = new RegExp(`^${exports.ptnLawNumArabic}$`);
 const lawNumLikeToLawNum = (lawNum) => {
     if (/日本国憲法$/.test(lawNum)) {
         return "昭和二十一年憲法";
+    }
+    else if (reLawNumArabic.test(lawNum)) {
+        return lawNum.replace(/[0123456789０１２３４５６７８９]+/g, digits => (0, num_1.digitsToKanjiNum)(digits, "non-positional"));
     }
     else {
         return lawNum;
@@ -51838,7 +51867,7 @@ const getLawtype = (text) => {
     }
     return null;
 };
-const reLawNum = new RegExp(`^${exports.ptnLawNumLike}$`);
+const reLawNum = new RegExp(`^${exports.ptnLawNum}$`);
 const parseLawNum = (lawNum) => {
     var _a;
     const ret = {
@@ -51900,7 +51929,7 @@ for (let i = 0; i < LAWNUM_TABLE_RAW.length; i += exports.KEY_LENGTH + LEN_LENGT
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.parseNamedNum = exports.KanaMode = exports.aiuChars = exports.irohaChars = exports.circledDigitChars = exports.parseKanjiNum = void 0;
+exports.parseNamedNum = exports.KanaMode = exports.aiuChars = exports.irohaChars = exports.circledDigitChars = exports.digitsToKanjiNum = exports.parseKanjiNum = void 0;
 const util_1 = __webpack_require__(84530);
 const reKanjiNum = /((\S*)千)?((\S*)百)?((\S*)十)?(\S*)/;
 const parseKanjiNum = (text) => {
@@ -51930,10 +51959,43 @@ const kanjiDigitToNumDict = {
     "〇": 0, "一": 1, "二": 2, "三": 3, "四": 4,
     "五": 5, "六": 6, "七": 7, "八": 8, "九": 9,
 };
+const numToKanjiDigitDict = {
+    0: "〇", 1: "一", 2: "二", 3: "三", 4: "四",
+    5: "五", 6: "六", 7: "七", 8: "八", 9: "九",
+};
+const digitToKanjiDigitDict = {
+    "0": "〇", "1": "一", "2": "二", "3": "三", "4": "四",
+    "5": "五", "6": "六", "7": "七", "8": "八", "9": "九",
+};
+const digitsToKanjiNum = (digits, type) => {
+    if (type === "positional") {
+        const numStr = replaceWideNum(typeof digits === "string" ? digits : digits.toString());
+        return Array.from(numStr).map(n => digitToKanjiDigitDict[n]).join("");
+    }
+    else {
+        const num = typeof digits === "string" ? Number(replaceWideNum(digits)) : digits;
+        const d1 = num % 10;
+        const d10 = Math.floor((num % 100) / 10);
+        const d100 = Math.floor((num % 1000) / 100);
+        const d1000 = Math.floor(num / 1000);
+        const parts = [];
+        if (d1000)
+            parts.push(`${d1000 === 1 ? "" : numToKanjiDigitDict[d1000]}千`);
+        if (d100)
+            parts.push(`${d100 === 1 ? "" : numToKanjiDigitDict[d100]}百`);
+        if (d10)
+            parts.push(`${d10 === 1 ? "" : numToKanjiDigitDict[d10]}十`);
+        if (d1)
+            parts.push(numToKanjiDigitDict[d1]);
+        return parts.join("");
+    }
+};
+exports.digitsToKanjiNum = digitsToKanjiNum;
 exports.circledDigitChars = "⓪①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚㉛㉜㉝㉞㉟㊱㊲㊳㊴㊵㊶㊷㊸㊹㊺㊻㊼㊽㊾㊿";
 exports.irohaChars = "イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセスン";
 exports.aiuChars = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
-const reNamedNum = /^(○?)第?([〇一二三四五六七八九十百千]+)\S*?([のノ―〇一二三四五六七八九十百千]*)$/;
+const reKanjiNamedNum = /^(○?)第?([〇一二三四五六七八九十百千]+)\S*?([のノ―〇一二三四五六七八九十百千]*)$/;
+const reArabicNamedNum = /^(○?)第?([0123456789０１２３４５６７８９]+)\S*?([のノ―0123456789０１２３４５６７８９]*)$/;
 const reIrohaChar = new RegExp(`[${exports.irohaChars}]`);
 const reAiuChar = new RegExp(`[${exports.aiuChars}]`);
 const reCircledDigit = new RegExp(`[${exports.circledDigitChars}]`);
@@ -51997,29 +52059,47 @@ const parseNamedNum = (text, kanaMode = KanaMode.Iroha) => {
         .replace("及", "、")
         .split("、");
     for (const subtext of subtexts) {
-        let m = reNamedNum.exec(subtext);
-        if (m) {
-            const nums = [(0, exports.parseKanjiNum)(m[2])];
-            if (m[3]) {
-                const bs = m[3].split(/[のノ―]/g);
-                for (const b of bs) {
-                    if (!b)
-                        continue;
-                    nums.push((0, exports.parseKanjiNum)(b));
+        {
+            const m = reKanjiNamedNum.exec(subtext);
+            if (m) {
+                const nums = [(0, exports.parseKanjiNum)(m[2])];
+                if (m[3]) {
+                    const bs = m[3].split(/[のノ―]/g);
+                    for (const b of bs) {
+                        if (!b)
+                            continue;
+                        nums.push((0, exports.parseKanjiNum)(b));
+                    }
                 }
+                numsGroup.push(nums.join("_"));
+                continue;
             }
-            numsGroup.push(nums.join("_"));
-            continue;
+        }
+        {
+            const m = reArabicNamedNum.exec(subtext);
+            if (m) {
+                const nums = [replaceWideNum(m[2])];
+                if (m[3]) {
+                    const bs = m[3].split(/[のノ―]/g);
+                    for (const b of bs) {
+                        if (!b)
+                            continue;
+                        nums.push(replaceWideNum(b));
+                    }
+                }
+                numsGroup.push(nums.join("_"));
+                continue;
+            }
         }
         if (kanaMode === KanaMode.Iroha) {
-            m = reIrohaChar.exec(subtext);
+            const m = reIrohaChar.exec(subtext);
             if (m) {
                 numsGroup.push(String(exports.irohaChars.indexOf(m[0]) + 1));
                 continue;
             }
         }
         else if (kanaMode === KanaMode.Aiu) {
-            m = reAiuChar.exec(subtext);
+            const m = reAiuChar.exec(subtext);
             if (m) {
                 numsGroup.push(String(exports.aiuChars.indexOf(m[0]) + 1));
                 continue;
@@ -52028,20 +52108,24 @@ const parseNamedNum = (text, kanaMode = KanaMode.Iroha) => {
         else {
             throw (0, util_1.assertNever)(kanaMode);
         }
-        m = reCircledDigit.exec(subtext);
-        if (m) {
-            numsGroup.push(String(exports.circledDigitChars.indexOf(m[0])));
-            continue;
+        {
+            const m = reCircledDigit.exec(subtext);
+            if (m) {
+                numsGroup.push(String(exports.circledDigitChars.indexOf(m[0])));
+                continue;
+            }
         }
-        const replacedSubtext = replaceWideNum(subtext);
-        m = reItemNum.exec(replacedSubtext);
-        if (m) {
-            numsGroup.push(m[1]);
-            continue;
-        }
-        const romanNum = parseRomanNum(replacedSubtext);
-        if (romanNum !== 0) {
-            numsGroup.push(String(romanNum));
+        {
+            const replacedSubtext = replaceWideNum(subtext);
+            const m = reItemNum.exec(replacedSubtext);
+            if (m) {
+                numsGroup.push(m[1]);
+                continue;
+            }
+            const romanNum = parseRomanNum(replacedSubtext);
+            if (romanNum !== 0) {
+                numsGroup.push(String(romanNum));
+            }
         }
     }
     return numsGroup.join(":");
@@ -56178,8 +56262,13 @@ exports.$articleTitle = factory_1.default
     .withName("articleTitle")
     .sequence(c => c
     .and(r => r
+    .choice(c => c
+    .or(r => r
     .regExp(new RegExp(`^第[${lexical_1.kanjiDigits}]+[条條](?:[のノ][${lexical_1.kanjiDigits}]+)*`)) // e.g. "第十二条", "第一条の二", "第一条の二の三"
-, "title")
+)
+    .or(r => r
+    .regExp(new RegExp(`^第[${lexical_1.arabicDigits}]+[条條](?:[のノ][${lexical_1.arabicDigits}]+)*`)) // e.g. "第１２条", "第1条の2", "第１条の２の３"
+)), "title")
     .action(({ title }) => {
     return { value: title, errors: [] };
 }));
@@ -56787,22 +56876,31 @@ const controls_1 = __webpack_require__(48075);
 const factory_1 = __webpack_require__(31707);
 const lexical_1 = __webpack_require__(99247);
 const makeRangesRule_1 = __importDefault(__webpack_require__(64358));
+const _sentenceChildren_1 = __webpack_require__(36096);
 const makeRange = (from, midText, to, trailingText, modifierParentheses, range) => {
-    return new controls_1.____PointerRange({
-        from,
-        midChildren: midText ? [new controls_1.__Text(midText.text, midText.range)] : [],
-        to,
-        trailingChildren: [
-            ...(trailingText ? [new controls_1.__Text(trailingText.text, trailingText.range)] : []),
-            ...(modifierParentheses ? [modifierParentheses] : []),
-        ],
-        range,
-    });
+    var _a, _b;
+    return {
+        value: new controls_1.____PointerRange({
+            from: from.value,
+            midChildren: midText ? [new controls_1.__Text(midText.text, midText.range)] : [],
+            to: (_a = to === null || to === void 0 ? void 0 : to.value) !== null && _a !== void 0 ? _a : null,
+            trailingChildren: [
+                ...(trailingText ? [new controls_1.__Text(trailingText.text, trailingText.range)] : []),
+                ...(modifierParentheses ? [modifierParentheses] : []),
+            ],
+            range,
+        }),
+        errors: [
+            ...from.errors,
+            ...((_b = to === null || to === void 0 ? void 0 : to.errors) !== null && _b !== void 0 ? _b : []),
+        ]
+    };
 };
 const makeRanges = (first, midText, rest, range) => {
     const children = [];
     const errors = [];
-    children.push(first.value);
+    children.push(first.value.value);
+    errors.push(...first.value.errors);
     errors.push(...first.errors);
     if (midText)
         children.push(new controls_1.__Text(midText.text, midText.range));
@@ -56831,22 +56929,41 @@ exports.$pointer = factory_1.factory
     .or(() => exports.$firstOnlyPointerFragment)), "first")
     .and(r => r
     .zeroOrMore(r => r
+    .sequence(s => s
+    .and(r => r
+    .zeroOrOne(() => _sentenceChildren_1.$ROUND_PARENTHESES_INLINE), "prevModifierParentheses")
+    .and(r => r
     .choice(c => c
     .or(() => exports.$anyWherePointerFragment)
-    .or(() => exports.$secondaryOnlyPointerFragment))), "rest")
+    .or(() => exports.$secondaryOnlyPointerFragment)), "fragment")
+    .action(({ prevModifierParentheses, fragment }) => {
+    return [
+        ...(prevModifierParentheses ? [prevModifierParentheses] : []),
+        { value: fragment, errors: [] },
+    ];
+}))), "rest")
     .action(({ first, rest, range }) => {
-    return new controls_1.____Pointer({
-        children: [first, ...rest],
-        range: range(),
-    });
+    return {
+        value: new controls_1.____Pointer({
+            children: [
+                first,
+                ...rest.map(s => s.map(({ value }) => value)).flat(),
+            ],
+            range: range(),
+        }),
+        errors: [...rest.map(s => s.map(({ errors }) => errors)).flat(2)],
+    };
 }))
     .orSequence(s => s
     .and(() => exports.$singleOnlyPointerFragment, "single")
     .action(({ single, range }) => {
-    return new controls_1.____Pointer({
-        children: [single],
-        range: range(),
-    });
+    return {
+        value: new controls_1.____Pointer({
+            children: [single],
+            range: range(),
+        }),
+        errors: [],
+    };
 })));
 exports.$singleOnlyPointerFragment = factory_1.factory
     .withName("firstOnlyPointerFragment")
@@ -57034,6 +57151,19 @@ exports.$anyWherePointerFragment = factory_1.factory
         range: range(),
     });
 }))
+    .orSequence(c => c
+    .and(r => r
+    .regExpObj(new RegExp(`^第[${lexical_1.arabicDigits}]+([編章節款目章条項号表])(?:[のノ][${lexical_1.arabicDigits}]+)*`)) // e.g. "第１２条", "第1章の2", "第１号の２の３"
+, "match")
+    .action(({ text, match, range }) => {
+    const type_char = match[1];
+    return new controls_1.____PF({
+        relPos: controls_1.RelPos.NAMED,
+        targetType: helpers_1.typeCharsMap[type_char],
+        name: text(),
+        range: range(),
+    });
+}))
     .orSequence(s => s
     .and(r => r.regExp(new RegExp(`^(?:[${num_1.irohaChars}](?![${num_1.irohaChars}])|[${lexical_1.romanDigits}]+)`))) // e.g. "イ", "Ｖ", "IV"
     .action(({ text, range }) => {
@@ -57116,7 +57246,7 @@ const sentenceChildrenToString = (els) => {
             runs.push(/* $$$$$$ */ el.outerXML() /* $$$$$$ */);
         }
         else if (el.tag === "Line") {
-            throw new util_1.NotImplementedError(el.tag);
+            runs.push(/* $$$$$$ */ el.outerXML() /* $$$$$$ */);
         }
         else {
             throw (0, util_1.assertNever)(el);
@@ -58358,7 +58488,7 @@ exports["default"] = exports.$xml;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.$irohaChar = exports.$romanDigits = exports.romanDigits = exports.$kanjiDigits = exports.kanjiDigits = exports.$_EOL = exports.ptn$_EOL = exports.$__ = exports.ptn$__ = exports.$_ = exports.ptn$_ = void 0;
+exports.$irohaChar = exports.$romanDigits = exports.romanDigits = exports.$arabicDigits = exports.arabicDigits = exports.$kanjiDigits = exports.kanjiDigits = exports.$_EOL = exports.ptn$_EOL = exports.$__ = exports.ptn$__ = exports.$_ = exports.ptn$_ = void 0;
 /* eslint-disable no-irregular-whitespace */
 const num_1 = __webpack_require__(68685);
 const factory_1 = __webpack_require__(31707);
@@ -58378,6 +58508,10 @@ exports.kanjiDigits = "〇一二三四五六七八九十百千";
 exports.$kanjiDigits = factory_1.factory
     .withName("kanjiDigits")
     .regExp(new RegExp(`^[${exports.kanjiDigits}]+`));
+exports.arabicDigits = "0123456789０１２３４５６７８９";
+exports.$arabicDigits = factory_1.factory
+    .withName("arabicDigits")
+    .regExp(new RegExp(`^[${exports.arabicDigits}]+`));
 exports.romanDigits = "iIｉＩvVｖＶxXｘＸ";
 exports.$romanDigits = factory_1.factory
     .withName("romanDigits")
@@ -67758,7 +67892,8 @@ exports.HTMLSentenceChildrenRun = (0, html_1.wrapHTMLComponent)("HTMLSentenceChi
                 runs.push(react_1.default.createElement(arithFormulaRun_1.HTMLArithFormulaRun, { el: el, htmlOptions }));
             }
             else if (el.tag === "Line") {
-                throw new util_1.NotImplementedError(el.tag);
+                return ((react_1.default.createElement("span", Object.assign({ className: "line" }, (0, html_1.elProps)(el, htmlOptions)),
+                    react_1.default.createElement(exports.HTMLSentenceChildrenRun, { els: el.children, htmlOptions }))));
             }
             else {
                 (0, util_1.assertNever)(el);
@@ -67824,7 +67959,7 @@ exports.DOCXSentenceChildrenRun = (0, docx_1.wrapDOCXComponent)("DOCXSentenceChi
                 runs.push(react_1.default.createElement(arithFormulaRun_1.DOCXArithFormulaRun, { el: el, docxOptions }));
             }
             else if (el.tag === "Line") {
-                throw new util_1.NotImplementedError(el.tag);
+                runs.push(react_1.default.createElement(exports.DOCXSentenceChildrenRun, { els: el.children, docxOptions }));
             }
             else {
                 (0, util_1.assertNever)(el);
