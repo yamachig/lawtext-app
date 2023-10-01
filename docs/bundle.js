@@ -48211,6 +48211,7 @@ const processAmbiguousNameInline = (sentenceEnvsStruct, allDeclarations, pointer
                 nameCandidateEL.range[1] - name.length,
                 nameCandidateEL.range[1],
             ] : null,
+            children: [name],
         });
         toAddDeclarations.push(declaration);
         newItems.push(declaration);
@@ -48231,6 +48232,29 @@ exports.processAmbiguousNameInline = processAmbiguousNameInline;
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -48246,6 +48270,7 @@ const container_1 = __webpack_require__(49814);
 const _lawRef_1 = __importDefault(__webpack_require__(78140));
 const env_1 = __webpack_require__(37025);
 const sentenceEnv_1 = __webpack_require__(6310);
+const std = __importStar(__webpack_require__(93619));
 const getScope_1 = __importDefault(__webpack_require__(70634));
 const lawNum_1 = __webpack_require__(3963);
 const getLawNameLength = (lawNum) => {
@@ -48257,14 +48282,14 @@ const getLawNameLength = (lawNum) => {
 };
 exports.getLawNameLength = getLawNameLength;
 const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct, pointerEnvsStruct) => {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w;
     const errors = [];
     const declarations = [];
     const lawRefs = [];
     for (let i = 0; i < elToBeModified.children.length; i++) {
         const result = _lawRef_1.default.match(i, elToBeModified.children, (0, env_1.initialEnv)({ target: "" }));
         if (result.ok) {
-            const { lawNameCandidate, lawRefInfo: { aliasInfo, lawNum } } = result.value.value;
+            const { lawNameCandidates, lawRefInfo: { aliasInfo, lawNum } } = result.value.value;
             errors.push(...result.value.errors);
             const lawNumText = lawNum.text();
             if (aliasInfo) {
@@ -48310,6 +48335,7 @@ const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct, pointerE
                     scope: scope,
                     nameSentenceTextRange,
                     range: nameSquareParentheses.content.range,
+                    children: [name],
                 });
                 declarations.push(declaration);
                 nameSquareParentheses.content.children.splice(0, nameSquareParentheses.content.children.length, declaration);
@@ -48334,39 +48360,71 @@ const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct, pointerE
             }
             else {
                 const lawNameLength = (0, exports.getLawNameLength)((0, lawNum_1.lawNumLikeToLawNum)(lawNumText));
+                const lawNameCandidateTexts = lawNameCandidates.map(c => {
+                    if (std.isRuby(c)) {
+                        return c.children.filter(cc => !std.isRt(cc)).map(cc => typeof cc === "string" ? cc : cc.text()).join("");
+                    }
+                    else {
+                        return c.text();
+                    }
+                });
                 if (lawNameLength !== null) {
-                    const name = lawNameCandidate.text().slice(-lawNameLength);
+                    let lawNameCandidateStartIndex = lawNameCandidateTexts.length - 1;
+                    let candidateStartTextRangeStart = (_o = (lawNameCandidates && ((_m = sentenceEnv.textRageOfEL(lawNameCandidates[0])) === null || _m === void 0 ? void 0 : _m[0]))) !== null && _o !== void 0 ? _o : 0;
+                    let candidateStartRestLength = 0;
+                    for (let i = lawNameCandidateTexts.length - 1; 0 <= i; i--) {
+                        const candidateLength = lawNameCandidateTexts.slice(i).reduce(((a, b) => a + b.length), 0);
+                        if (candidateLength >= lawNameLength) {
+                            const c = lawNameCandidates[i];
+                            const range = sentenceEnv.textRageOfEL(c);
+                            lawNameCandidateStartIndex = i;
+                            if (std.isRuby(c)) {
+                                if (range)
+                                    candidateStartTextRangeStart = range[0];
+                                candidateStartRestLength = 0;
+                            }
+                            else if (range) {
+                                candidateStartTextRangeStart = range[0] + (candidateLength - lawNameLength);
+                                candidateStartRestLength = candidateLength - lawNameLength;
+                            }
+                            break;
+                        }
+                    }
+                    const name = lawNameCandidateTexts.slice(lawNameCandidateStartIndex).join("").slice(-lawNameLength);
                     const scope = [
                         {
                             start: {
                                 sentenceIndex: sentenceEnv.index,
-                                textOffset: (_o = (_m = sentenceEnv.textRageOfEL(lawNum)) === null || _m === void 0 ? void 0 : _m[1]) !== null && _o !== void 0 ? _o : 0,
+                                textOffset: (_q = (_p = sentenceEnv.textRageOfEL(lawNum)) === null || _p === void 0 ? void 0 : _p[1]) !== null && _q !== void 0 ? _q : 0,
                             },
                             end: {
-                                sentenceIndex: ((_q = (_p = sentenceEnv.container.thisOrClosest(p => p.type === container_1.ContainerType.TOPLEVEL || p.type === container_1.ContainerType.ROOT)) === null || _p === void 0 ? void 0 : _p.sentenceRange[1]) !== null && _q !== void 0 ? _q : Number.NaN) + 1,
+                                sentenceIndex: ((_s = (_r = sentenceEnv.container.thisOrClosest(p => p.type === container_1.ContainerType.TOPLEVEL || p.type === container_1.ContainerType.ROOT)) === null || _r === void 0 ? void 0 : _r.sentenceRange[1]) !== null && _s !== void 0 ? _s : Number.NaN) + 1,
                                 textOffset: 0,
                             },
                         },
                     ];
-                    const lawNameCandidateTextRange = sentenceEnv.textRageOfEL(lawNameCandidate);
+                    const lawNameStartEL = lawNameCandidates[lawNameCandidateStartIndex];
+                    const lawNameCandidateTextStartRange = sentenceEnv.textRageOfEL(lawNameStartEL);
+                    const lawNameCandidateTextEndRange = sentenceEnv.textRageOfEL(lawNameCandidates[lawNameCandidates.length - 1]);
+                    const lawNameCandidateTextRange = lawNameCandidateTextStartRange && lawNameCandidateTextEndRange && [lawNameCandidateTextStartRange[0], lawNameCandidateTextEndRange[1]];
                     if (!lawNameCandidateTextRange) {
                         errors.push(new error_1.ErrorMessage("lawNameCandidateTextRange is null", [
-                            (_s = (_r = lawNameCandidate === null || lawNameCandidate === void 0 ? void 0 : lawNameCandidate.range) === null || _r === void 0 ? void 0 : _r[0]) !== null && _s !== void 0 ? _s : 0,
-                            (_u = (_t = lawNameCandidate === null || lawNameCandidate === void 0 ? void 0 : lawNameCandidate.range) === null || _t === void 0 ? void 0 : _t[1]) !== null && _u !== void 0 ? _u : 0,
+                            (_u = (_t = sentenceEnv.textRageOfEL(lawNameCandidates[0])) === null || _t === void 0 ? void 0 : _t[0]) !== null && _u !== void 0 ? _u : 0,
+                            (_w = (_v = sentenceEnv.textRageOfEL(lawNameCandidates[lawNameCandidates.length - 1])) === null || _v === void 0 ? void 0 : _v[1]) !== null && _w !== void 0 ? _w : 0,
                         ]));
                         continue;
                     }
                     const nameSentenceTextRange = {
                         start: {
                             sentenceIndex: sentenceEnv.index,
-                            textOffset: lawNameCandidateTextRange[1] - lawNameLength,
+                            textOffset: candidateStartTextRangeStart,
                         },
                         end: {
                             sentenceIndex: sentenceEnv.index,
                             textOffset: lawNameCandidateTextRange[1],
                         },
                     };
-                    const declarationID = `decl-sentence_${sentenceEnv.index}-text_${lawNameCandidateTextRange[1] - lawNameLength}_${lawNameCandidateTextRange[1]}`;
+                    const declarationID = `decl-sentence_${sentenceEnv.index}-text_${nameSentenceTextRange.start.textOffset}_${nameSentenceTextRange.end.textOffset}`;
                     const declaration = new controls_1.____Declaration({
                         declarationID,
                         type: "LawName",
@@ -48374,9 +48432,18 @@ const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct, pointerE
                         value: lawNumText,
                         scope: scope,
                         nameSentenceTextRange,
-                        range: lawNameCandidate.range && [
-                            lawNameCandidate.range[1] - lawNameLength,
-                            lawNameCandidate.range[1],
+                        children: [
+                            ...((std.isRuby(lawNameStartEL) || candidateStartRestLength === 0) ? [lawNameStartEL] : [
+                                new controls_1.__Text(lawNameStartEL.text().slice(candidateStartRestLength), lawNameStartEL.range && [
+                                    lawNameStartEL.range[0] + candidateStartRestLength,
+                                    lawNameStartEL.range[1],
+                                ]),
+                            ]),
+                            ...lawNameCandidates.slice(lawNameCandidateStartIndex + 1),
+                        ],
+                        range: lawNameStartEL.range && [
+                            lawNameStartEL.range[0] + candidateStartRestLength,
+                            lawNameStartEL.range[1],
                         ],
                     });
                     declarations.push(declaration);
@@ -48390,12 +48457,15 @@ const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct, pointerE
                     lawRefs.push(lawRef);
                     lawRef.children.push(declaration);
                     lawRef.children.push(result.value.value.lawRefInfo.lawRefParentheses);
-                    const pointerRangesIndex = i + 2;
-                    elToBeModified.children.splice(i, 2, new controls_1.__Text(lawNameCandidate.text().slice(0, lawNameCandidate.text().length - lawNameLength), lawNameCandidate.range && [
-                        lawNameCandidate.range[0],
-                        lawNameCandidate.range[1] - lawNameLength,
+                    const replacedCount = (lawNameCandidates.length - lawNameCandidateStartIndex) + 1;
+                    const pointerRangesIndex = i + lawNameCandidateStartIndex + replacedCount;
+                    elToBeModified.children.splice(i + lawNameCandidateStartIndex, replacedCount, ...((std.isRuby(lawNameStartEL) || candidateStartRestLength === 0) ? [] : [
+                        new controls_1.__Text(lawNameStartEL.text().slice(0, lawNameStartEL.text().length - lawNameLength), lawNameStartEL.range && [
+                            lawNameStartEL.range[0],
+                            lawNameStartEL.range[0] + candidateStartRestLength,
+                        ]),
                     ]), lawRef);
-                    i++;
+                    i += (replacedCount - 1);
                     if ((pointerRangesIndex < elToBeModified.children.length)
                         && (elToBeModified.children[pointerRangesIndex] instanceof controls_1.____PointerRanges)) {
                         const pointerRanges = elToBeModified.children[pointerRangesIndex];
@@ -48485,6 +48555,7 @@ const processNameInline = (elToBeModified, sentenceEnv, sentenceEnvsStruct, poin
                 scope: scope,
                 nameSentenceTextRange,
                 range: nameSquareParentheses.content.range,
+                children: [name],
             });
             declarations.push(declaration);
             nameSquareParentheses.content.children.splice(0, nameSquareParentheses.content.children.length, declaration);
@@ -48610,6 +48681,7 @@ const processNameList = (headSentenceEnv, sentenceEnvsStruct, pointerEnvsStruct)
                     scope: scope,
                     nameSentenceTextRange,
                     range: nameChild.content.range,
+                    children: [name],
                 });
                 declarations.push(declaration);
                 nameChild.content.children.splice(0, nameChild.content.children.length, declaration);
@@ -48649,6 +48721,7 @@ const processNameList = (headSentenceEnv, sentenceEnvsStruct, pointerEnvsStruct)
                         nameSentence.range[0],
                         nameSentence.range[0] + name.length,
                     ] : null,
+                    children: [name],
                 });
                 declarations.push(declaration);
                 nameSentence.children.splice(0, 1, declaration);
@@ -49461,11 +49534,35 @@ exports["default"] = exports.$ambiguousNameParenthesesContent;
 
 "use strict";
 
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.$lawRef = exports.$lawNum = void 0;
+const std = __importStar(__webpack_require__(93619));
 const controls_1 = __webpack_require__(48075);
 const env_1 = __webpack_require__(37025);
 const factory_1 = __importDefault(__webpack_require__(12266));
@@ -49561,6 +49658,9 @@ exports.$lawRef = factory_1.default
     .withName("lawRef")
     .sequence(s => s
     .and(r => r
+    .oneOrMore(r => r
+    .choice(c => c
+    .or(r => r
     .oneMatch(({ item }) => {
     if ((item instanceof controls_1.__Text)) {
         return item;
@@ -49568,7 +49668,16 @@ exports.$lawRef = factory_1.default
     else {
         return null;
     }
-}), "lawNameCandidate")
+}))
+    .or(r => r
+    .oneMatch(({ item }) => {
+    if ((std.isRuby(item) || std.isSup(item) || std.isSub(item))) {
+        return item;
+    }
+    else {
+        return null;
+    }
+})))), "lawNameCandidates")
     .and(r => r
     .oneMatch(({ item }) => {
     if ((item instanceof controls_1.__Parentheses)
@@ -49585,9 +49694,9 @@ exports.$lawRef = factory_1.default
         return null;
     }
 }), "lawRefInfo")
-    .action(({ lawNameCandidate, lawRefInfo }) => {
+    .action(({ lawNameCandidates, lawRefInfo }) => {
     const value = {
-        lawNameCandidate,
+        lawNameCandidates,
         lawRefInfo: lawRefInfo.value,
     };
     return { value, errors: [...lawRefInfo.errors] };
@@ -52056,6 +52165,7 @@ const parseNamedNum = (text, kanaMode = KanaMode.Iroha) => {
         .replace("～", "、")
         .replace("・", "、")
         .replace("乃至", "、")
+        .replace("及ビ", "、")
         .replace("及", "、")
         .split("、");
     for (const subtext of subtexts) {
@@ -54202,15 +54312,16 @@ exports.BlankLine = BlankLine;
  * A head line of a TOC (Table Of Contents). Please see the source code of {@link $tocHeadLine} for the detailed syntax.
  */
 /* eslint-enable tsdoc/syntax */
-class TOCHeadLine extends IndentsLine {
+class TOCHeadLine extends WithControlsLine {
     constructor(options) {
         super(Object.assign(Object.assign({}, options), { type: LineType.TOC }));
         this.title = options.title;
     }
     get titleRange() {
+        var _a;
         if (!this.range)
             return null;
-        const lastEnd = this.range[0] + this.indentTexts.map(t => t.length).reduce((a, b) => a + b, 0);
+        const lastEnd = ((_a = (this.controlsEndPos)) !== null && _a !== void 0 ? _a : (this.range[0] + this.indentTexts.map(t => t.length).reduce((a, b) => a + b, 0)));
         return [
             lastEnd,
             lastEnd + this.title.length,
@@ -54219,6 +54330,7 @@ class TOCHeadLine extends IndentsLine {
     rangeTexts() {
         const ret = [];
         ret.push(...this.indentRangeTexts());
+        ret.push(...this.controlsRangeTexts());
         ret.push([this.titleRange, this.title, "Title"]);
         ret.push([this.lineEndTextRange(), this.lineEndText, "LineEnd"]);
         return ret;
@@ -54678,7 +54790,7 @@ class ____Declaration extends __1.EL {
         this.tag = "____Declaration";
         this.scopeCache = null;
         this.nameSentenceTextRangeCache = null;
-        const { declarationID: id, type, name, value, scope, nameSentenceTextRange } = options;
+        const { declarationID: id, type, name, value, scope, nameSentenceTextRange, children } = options;
         this.attr = {
             declarationID: id,
             type,
@@ -54688,7 +54800,7 @@ class ____Declaration extends __1.EL {
         };
         if (value !== null)
             this.attr.value = value;
-        this.children = [name];
+        this.children = children;
     }
 }
 exports.____Declaration = ____Declaration;
@@ -56173,6 +56285,25 @@ exports.$articleGroupNum = factory_1.default
         },
         errors: [],
     };
+})))
+    .or(r => r
+    .sequence(c => c
+    .and(r => r.seqEqual("第"))
+    .and(() => lexical_1.$arabicDigits)
+    .and(r => r.regExp(/^[編章節款目]/), "typeChar")
+    .and(r => r
+    .zeroOrMore(r => r
+    .sequence(c => c
+    .and(r => r.regExp(/^[のノ]/))
+    .and(() => lexical_1.$arabicDigits))))
+    .action(({ text, typeChar }) => {
+    return {
+        value: {
+            typeChar: typeChar,
+            text: text(),
+        },
+        errors: [],
+    };
 }))));
 exports["default"] = exports.$articleGroupNum;
 //# sourceMappingURL=$articleGroupNum.js.map
@@ -56414,7 +56545,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.$otherLine = void 0;
+exports.$otherLine = exports.ignoreTitleControl = exports.keepLeadingSpacesControl = void 0;
 const factory_1 = __importDefault(__webpack_require__(31707));
 const _indents_1 = __importDefault(__webpack_require__(2027));
 const line_1 = __webpack_require__(69928);
@@ -56425,6 +56556,8 @@ const _xml_1 = __importDefault(__webpack_require__(33439));
 const std_1 = __webpack_require__(93619);
 const std = __importStar(__webpack_require__(93619));
 const el_1 = __webpack_require__(18539);
+exports.keepLeadingSpacesControl = ":keep-leading-spaces:";
+exports.ignoreTitleControl = ":ignore-title:";
 /**
  * The parser rule for {@link OtherLine} that represents a line of other types. Please see the source code for the detailed syntax, and the [test code](https://github.com/yamachig/Lawtext/blob/main/core/src/parser/cst/rules/$otherLine.spec.ts) for examples.
  */
@@ -56442,7 +56575,12 @@ exports.$otherLine = factory_1.default
     .action(({ value, range }) => ({ value, range: range() }))), "control")
     .and(r => r
     .sequence(s => s
-    .and(() => lexical_1.$_, "value")
+    .and(r => r
+    .asSlice(r => r
+    .choice(c => c
+    .or(s => s
+    .assert(({ control }) => control.value === exports.keepLeadingSpacesControl))
+    .or(() => lexical_1.$_))), "value")
     .action(({ value, range }) => ({ value, range: range() }))), "trailingSpace")
     .action(({ control, trailingSpace }) => new inline_1.Control(control.value, control.range, trailingSpace.value, trailingSpace.range)))), "controls")
     .and(r => r
@@ -57303,7 +57441,7 @@ exports.$inlineToken = factory_1.factory
     errors: [],
 })))
     .or(() => _pointerRanges_1.default));
-const rePeriodSentenceTextChars = new RegExp(`^(?:(?![${_pointerRanges_1.pointerRangesCandidateChars}])[^\r\n<>()（）[\\]［］{}｛｝「」 　\t。])+`);
+const rePeriodSentenceTextChars = new RegExp(`^(?:(?![ァ-ヿ${_pointerRanges_1.pointerRangesCandidateChars}])[^\r\n<>()（）[\\]［］{}｛｝「」 　\t。])+`);
 exports.$PERIOD_SENTENCE_FRAGMENT = factory_1.factory
     .withName("PERIOD_SENTENCE_FRAGMENT")
     .choice(c => c
@@ -57312,6 +57450,7 @@ exports.$PERIOD_SENTENCE_FRAGMENT = factory_1.factory
     .and(r => r
     .oneOrMore(r => r
     .choice(c => c
+    .or(r => r.regExp(_pointerRanges_1.reSuppressPointerRanges))
     .or(r => r.regExp(rePeriodSentenceTextChars))
     .or(() => exports.$inlineToken)
     .or(r => r.regExp(/^[^\r\n<>()（）[\]［］{}｛｝「」 　\t。]/))
@@ -57382,7 +57521,7 @@ exports.$OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES_WITHOUT_TOPLEVEL_INL
         errors: target.map(t => t.errors).flat(),
     };
 }));
-const reOutsideParenthesesTextChars = new RegExp(`^(?:(?![${_pointerRanges_1.pointerRangesCandidateChars}]|[ 　\t]*\r?\n)[^\r\n<>()（）[\\]［］{}｛｝「」])+`);
+const reOutsideParenthesesTextChars = new RegExp(`^(?:(?![ァ-ヿ${_pointerRanges_1.pointerRangesCandidateChars}]|[ 　\t]*\r?\n)[^\r\n<>()（）[\\]［］{}｛｝「」])+`);
 exports.$OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES = factory_1.factory
     .withName("OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES")
     .sequence(s => s
@@ -57484,7 +57623,7 @@ exports.ANY_PARENTHESES_INLINE = factory_1.factory
     }
 }))
     .or(() => exports.$MISMATCH_START_PARENTHESIS));
-const reParenthesesInlineTextChars = new RegExp(`^(?:(?![${_pointerRanges_1.pointerRangesCandidateChars}])[^\r\n<>()（）[\\]［］{}｛｝「」])+`);
+const reParenthesesInlineTextChars = new RegExp(`^(?:(?![ァ-ヿ${_pointerRanges_1.pointerRangesCandidateChars}])[^\r\n<>()（）[\\]［］{}｛｝「」])+`);
 const makeParenthesesInline = (parenthesisType, startPtn, endPtn) => {
     return factory_1.factory
         .choice(c => c
@@ -58322,11 +58461,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.$tocHeadLine = void 0;
 const factory_1 = __importDefault(__webpack_require__(31707));
-const std_1 = __webpack_require__(93619);
 const _indents_1 = __importDefault(__webpack_require__(2027));
 const line_1 = __webpack_require__(69928);
-const controls_1 = __webpack_require__(48075);
 const lexical_1 = __webpack_require__(99247);
+const inline_1 = __webpack_require__(22845);
+const _sentenceChildren_1 = __webpack_require__(36096);
 /**
  * The parser rule for {@link TOCHeadLine} that represents a head line of a TOC (Table Of Contents). Please see the source code for the detailed syntax, and the [test code](https://github.com/yamachig/Lawtext/blob/main/core/src/parser/cst/rules/$tocHeadLine.spec.ts) for examples.
  */
@@ -58335,23 +58474,51 @@ exports.$tocHeadLine = factory_1.default
     .sequence(s => s
     .and(() => _indents_1.default, "indentsStruct")
     .and(r => r
+    .zeroOrOne(r => r
     .sequence(s => s
+    .and(r => r
+    .sequence(s => s
+    .and(r => r.regExp(/^:toc:/), "value")
+    .action(({ value, range }) => ({ value, range: range() }))), "control")
+    .and(r => r
+    .sequence(s => s
+    .and(() => lexical_1.$_, "value")
+    .action(({ value, range }) => ({ value, range: range() }))), "trailingSpace")
+    .action(({ control, trailingSpace }) => {
+    return new inline_1.Control(control.value, control.range, trailingSpace.value, trailingSpace.range);
+}))), "control")
+    .and(r => r
+    .assert(({ indentsStruct, control }) => {
+    return (control !== null) || (indentsStruct.value.indentTexts.length === 0);
+}))
+    .and(r => r
+    .sequence(s => s
+    .and(r => r
+    .choice(c => c
     // eslint-disable-next-line no-irregular-whitespace
-    .and(r => r.regExp(/^目[ 　\t]*次/), "label")
-    .action(({ label, range }) => {
+    .or(r => r.regExp(/^目[ 　\t]*次/))
+    .orSequence(s => s
+    .andOmit(r => r
+    .assert(({ control }) => control))
+    .and(r => r
+    .asSlice(r => r
+    .choice(c => c
+    .or(() => _sentenceChildren_1.$sentenceChildrenWithoutToplevelInlineToken)
+    .or(r => r.nextIs(() => lexical_1.$_EOL))))))), "label")
+    .action(({ label }) => {
     return {
-        content: (0, std_1.newStdEL)("TOC", {}, [(0, std_1.newStdEL)("TOCLabel", {}, [new controls_1.__Text(label, range())], range())]),
         contentText: label,
     };
 })), "contentStruct")
     .and(() => lexical_1.$_EOL, "lineEndText")
-    .action(({ range, indentsStruct, contentStruct, lineEndText }) => {
+    .action(({ range, indentsStruct, control, contentStruct, lineEndText }) => {
     const errors = indentsStruct.errors;
     return {
         value: new line_1.TOCHeadLine({
             range: range(),
             indentTexts: indentsStruct.value.indentTexts,
             title: contentStruct.contentText,
+            controls: control ? [control] : [],
             lineEndText,
         }),
         errors,
@@ -58547,7 +58714,7 @@ const simpleRangesMaker = (first, midText, rest) => {
         errors: [...first.errors, ...((_b = rest === null || rest === void 0 ? void 0 : rest.errors) !== null && _b !== void 0 ? _b : [])],
     };
 };
-exports.ptnRangesConnectors = ["、", "及び", "及(?!至)", "並びに", "ならびに", "又は", "または", "若しくは", "もしくは"];
+exports.ptnRangesConnectors = ["、", "及び", "及ビ", "及(?!至)", "および", "並びに", "ならびに", "又は", "または", "若しくは", "もしくは"];
 const reRangesConnector = new RegExp(`^(${exports.ptnRangesConnectors.join("|")})`); // no $
 const makeRangesRule = (lazyPointerRule, rangeMaker = simpleRangeMaker, rangesMaker = simpleRangesMaker) => {
     const $ranges = factory_1.default
@@ -59584,12 +59751,16 @@ const columnsOrSentences_1 = __webpack_require__(15695);
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
 const util_1 = __webpack_require__(84530);
 const inline_1 = __webpack_require__(22845);
+const util_2 = __webpack_require__(80427);
 const factory_1 = __importDefault(__webpack_require__(13518));
 const virtualLine_1 = __webpack_require__(40504);
-const util_2 = __webpack_require__(80427);
+const util_3 = __webpack_require__(80427);
 const _paragraphItem_1 = __importStar(__webpack_require__(83974));
 const _supplNote_1 = __importStar(__webpack_require__(42455));
 const el_1 = __webpack_require__(18539);
+const num_1 = __webpack_require__(68685);
+const _sentenceChildren_1 = __webpack_require__(36096);
+const addSentenceChildrenControls_1 = __importDefault(__webpack_require__(16088));
 /**
  * The renderer for {@link std.Article}. Please see the source code for the detailed syntax, and the [test code](https://github.com/yamachig/Lawtext/blob/main/core/src/parser/std/rules/$article.spec.ts) for examples.
  */
@@ -59618,15 +59789,21 @@ const articleToLines = (el, indentTexts) => {
     }
     if (ArticleCaption.length > 0) {
         const newIndentTexts = [...indentTexts, toCSTSettings_1.default.INDENT];
-        lines.push(new line_1.OtherLine({
+        const captionSentence = std.newStdEL("Sentence", {}, [(0, _sentenceChildren_1.sentenceChildrenToString)(ArticleCaption)]);
+        (0, addSentenceChildrenControls_1.default)(captionSentence);
+        const line = new line_1.OtherLine({
             range: null,
             indentTexts: newIndentTexts,
             controls: [],
             sentencesArray: [
-                new inline_1.Sentences("", null, [], [(0, std_1.newStdEL)("Sentence", {}, ArticleCaption)])
+                new inline_1.Sentences("", null, [], [captionSentence])
             ],
             lineEndText: toCSTSettings_1.default.EOL,
-        }));
+        });
+        if (!(0, util_2.isSingleParentheses)(line)) {
+            line.controls.push(new inline_1.Control(util_2.captionControl, null, "", null));
+        }
+        lines.push(line);
     }
     for (let i = 0; i < Paragraphs.length; i++) {
         const Paragraph = Paragraphs[i];
@@ -59661,7 +59838,7 @@ exports.$article = factory_1.default
         return null;
     }
 }))
-    .andOmit(r => r.zeroOrMore(() => util_2.$blankLine)))), "captionLine")
+    .andOmit(r => r.zeroOrMore(() => util_3.$blankLine)))), "captionLine")
     .and(r => r
     .oneMatch(({ item }) => {
     if (item.type === line_1.LineType.ART) {
@@ -59671,16 +59848,16 @@ exports.$article = factory_1.default
         return null;
     }
 }), "firstParagraphItemLine")
-    .andOmit(r => r.zeroOrMore(() => util_2.$blankLine))
+    .andOmit(r => r.zeroOrMore(() => util_3.$blankLine))
     .and(r => r
     .zeroOrOne(() => _paragraphItem_1.$autoParagraphItemChildrenOuter), "firstAutoParagraphChildren")
-    .andOmit(r => r.zeroOrMore(() => util_2.$blankLine))
+    .andOmit(r => r.zeroOrMore(() => util_3.$blankLine))
     .and(r => r
     .zeroOrMore(r => r
     .sequence(s => s
-    .andOmit(r => r.zeroOrMore(() => util_2.$blankLine))
+    .andOmit(r => r.zeroOrMore(() => util_3.$blankLine))
     .and(() => (0, _paragraphItem_1.default)("Paragraph")))), "otherParagraphs")
-    .andOmit(r => r.zeroOrMore(() => util_2.$blankLine))
+    .andOmit(r => r.zeroOrMore(() => util_3.$blankLine))
     .and(r => r
     .zeroOrMore(() => _supplNote_1.default), "supplNotes")
     .action(({ captionLine, firstParagraphItemLine, firstAutoParagraphChildren, otherParagraphs, supplNotes }) => {
@@ -59698,6 +59875,9 @@ exports.$article = factory_1.default
     }
     if (firstParagraphItemLine.line.title) {
         article.children.push((0, std_1.newStdEL)("ArticleTitle", {}, [firstParagraphItemLine.line.title], firstParagraphItemLine.line.titleRange));
+        const num = (0, num_1.parseNamedNum)(firstParagraphItemLine.line.title);
+        if (num)
+            article.attr.Num = num;
     }
     const firstParagraph = (0, std_1.newStdEL)("Paragraph");
     // firstParagraph.attr.OldStyle = "false";
@@ -59708,7 +59888,11 @@ exports.$article = factory_1.default
         firstParagraph.children.push(...firstAutoParagraphChildren.value);
     }
     firstParagraph.range = (0, el_1.rangeOfELs)(firstParagraph.children);
-    article.children.push((0, _paragraphItem_1.paragraphItemFromAuto)("Paragraph", firstParagraph));
+    {
+        const paragraph = (0, _paragraphItem_1.paragraphItemFromAuto)("Paragraph", firstParagraph);
+        paragraph.attr.Num = "1";
+        article.children.push(paragraph);
+    }
     article.children.push(...otherParagraphs.map((p, i) => {
         if (std.isParagraph(p.value) && p.value.attr.OldNum === "true") {
             p.value.attr.Num = (i + 2).toString();
@@ -60667,6 +60851,7 @@ const factory_1 = __webpack_require__(13518);
 const line_1 = __webpack_require__(69928);
 const util_1 = __webpack_require__(80427);
 const std_1 = __webpack_require__(93619);
+const std = __importStar(__webpack_require__(93619));
 const _paragraphItem_1 = __importStar(__webpack_require__(83974));
 const util_2 = __webpack_require__(84530);
 const _article_1 = __importStar(__webpack_require__(60783));
@@ -60679,7 +60864,9 @@ const el_1 = __webpack_require__(18539);
 const mainProvisionToLines = (mainProvision, indentTexts) => {
     const lines = [];
     const paragraphs = mainProvision.children.filter(std_1.isParagraph);
-    const isSingleAnonymParagraph = paragraphs.length === 1 && paragraphs.every(p => p.children.filter(std_1.isParagraphItemTitle).every(el => el.text() === ""));
+    const isSingleAnonymParagraph = ((paragraphs.length === 1) &&
+        paragraphs.every(p => (p.children.filter(std_1.isParagraphItemTitle).every(el => el.text() === "") &&
+            (p.children.filter(c => std.isParagraphSentence(c) && c.text().length > 0).length > 0))));
     for (const child of mainProvision.children) {
         if ((0, std_1.isParagraphItem)(child)) {
             if (isSingleAnonymParagraph) {
@@ -60726,12 +60913,20 @@ const $mainProvisionChildren = factory_1.factory
     .or(() => (0, _paragraphItem_1.default)("Paragraph"))))
     .andOmit(r => r.zeroOrMore(() => util_1.$blankLine)))))
     .or(r => r
+    .sequence(s => s
+    .and(r => r
     .oneOrMore(r => r
     .sequence(s => s
     .and(r => r
     .choice(c => c
     .or(() => _paragraphItem_1.$noControlAnonymParagraph)))
-    .andOmit(r => r.zeroOrMore(() => util_1.$blankLine)))))), "children")
+    .andOmit(r => r.zeroOrMore(() => util_1.$blankLine)))), "anonymParagraphs")
+    .action(({ anonymParagraphs }) => {
+    for (const [i, { value: paragraph }] of anonymParagraphs.entries()) {
+        paragraph.attr.Num = (i + 1).toString();
+    }
+    return anonymParagraphs;
+})))), "children")
     .action(({ children }) => {
     return {
         value: children.map(c => c.value).flat(),
@@ -60808,6 +61003,9 @@ const util_2 = __webpack_require__(84530);
 const _remarks_1 = __importStar(__webpack_require__(90137));
 const _any_1 = __importStar(__webpack_require__(22351));
 const _sentencesArray_1 = __webpack_require__(10145);
+const columnsOrSentences_1 = __webpack_require__(15695);
+const parse_1 = __importDefault(__webpack_require__(18106));
+const _otherLine_1 = __webpack_require__(27328);
 /**
  * The renderer for note-like item ({@link std.NoteLike | NoteLike}). Please see the source code for the detailed syntax, and the [test code](https://github.com/yamachig/Lawtext/blob/main/core/src/parser/std/rules/$noteLike.spec.ts) for examples.
  */
@@ -60818,7 +61016,29 @@ exports.noteLikeStructControl = {
 };
 const noteLikeToLines = (noteLike, indentTexts) => {
     const lines = [];
-    lines.push(...noteLike.children.map(c => (0, _any_1.anyToLines)(c, indentTexts)).flat());
+    if (noteLike.children.every(std.isColumn) || noteLike.children.every(std.isSentence)) {
+        const line = new line_1.OtherLine({
+            range: null,
+            indentTexts,
+            controls: [],
+            sentencesArray: (0, columnsOrSentences_1.columnsOrSentencesToSentencesArray)(noteLike.children),
+            lineEndText: toCSTSettings_1.default.EOL,
+        });
+        const lineText = (0, _sentencesArray_1.sentencesArrayToString)(line.sentencesArray);
+        try {
+            const parsedLines = (0, parse_1.default)(lineText);
+            if (parsedLines.value[0].type !== line_1.LineType.OTH) {
+                line.controls.push(new inline_1.Control(_otherLine_1.ignoreTitleControl, null, "", null));
+            }
+        }
+        catch (e) {
+            //
+        }
+        lines.push(line);
+    }
+    else {
+        lines.push(...noteLike.children.map(c => (0, _any_1.anyToLines)(c, indentTexts)).flat());
+    }
     return lines;
 };
 exports.noteLikeToLines = noteLikeToLines;
@@ -61022,11 +61242,14 @@ const _noteLike_1 = __webpack_require__(88035);
 const _paragraphItemLine_1 = __webpack_require__(50686);
 const _tagControl_1 = __webpack_require__(71040);
 const num_1 = __webpack_require__(68685);
+const addSentenceChildrenControls_1 = __importDefault(__webpack_require__(16088));
 const reOldParagraphNum = new RegExp(`^(?:○[0123456789０１２３４５６７８９]+|[${num_1.circledDigitChars}])`);
+const reAmendingText = /.*?の一部を次のように(?:改正す|改め)る。$/;
 /**
  * The renderer for Paragraph, Item and subitem ({@link std.ParagraphItem | ParagraphItem}). Please see the source code for the detailed syntax, and the [test code](https://github.com/yamachig/Lawtext/blob/main/core/src/parser/std/rules/$paragraphItem.spec.ts) for examples.
  */
 const paragraphItemToLines = (el, indentTexts, options) => {
+    var _a, _b, _c;
     const lines = [];
     const { firstArticleParagraphArticleTitle, secondaryArticleParagraph, noControl, 
     // requireControl,
@@ -61060,15 +61283,21 @@ const paragraphItemToLines = (el, indentTexts, options) => {
     }
     if (ParagraphCaption.length > 0) {
         const newIndentTexts = [...indentTexts, toCSTSettings_1.default.INDENT];
-        lines.push(new line_1.OtherLine({
+        const captionSentence = std.newStdEL("Sentence", {}, [(0, _sentenceChildren_1.sentenceChildrenToString)(ParagraphCaption)]);
+        (0, addSentenceChildrenControls_1.default)(captionSentence);
+        const line = new line_1.OtherLine({
             range: null,
             indentTexts: newIndentTexts,
             controls: [],
             sentencesArray: [
-                new inline_1.Sentences("", null, [], [std.newStdEL("Sentence", {}, ParagraphCaption)]),
+                new inline_1.Sentences("", null, [], [captionSentence]),
             ],
             lineEndText: toCSTSettings_1.default.EOL,
-        }));
+        });
+        if (!(0, util_2.isSingleParentheses)(line)) {
+            line.controls.push(new inline_1.Control(util_2.captionControl, null, "", null));
+        }
+        lines.push(line);
     }
     const Title = ParagraphItemTitle;
     if (firstArticleParagraphArticleTitle
@@ -61086,11 +61315,12 @@ const paragraphItemToLines = (el, indentTexts, options) => {
         sentencesArray[0].attrEntries.unshift(new inline_1.AttrEntry(`[MissingNum="${MissingNum}"]`, ["MissingNum", "${MissingNum}"], null, "", null));
     }
     if (firstArticleParagraphArticleTitle) {
+        const title = (0, _sentenceChildren_1.sentenceChildrenToString)(firstArticleParagraphArticleTitle);
         lines.push(new line_1.ArticleLine({
             range: null,
             indentTexts,
-            title: (0, _sentenceChildren_1.sentenceChildrenToString)(firstArticleParagraphArticleTitle),
-            midSpace: toCSTSettings_1.default.MARGIN,
+            title,
+            midSpace: (title.length === 0 || sentencesArray.length === 0) ? "" : toCSTSettings_1.default.MARGIN,
             sentencesArray,
             lineEndText: toCSTSettings_1.default.EOL,
         }));
@@ -61189,7 +61419,8 @@ const paragraphItemToLines = (el, indentTexts, options) => {
             lines.push(...(0, _list_1.listOrSublistToLines)(child, [...indentTexts, toCSTSettings_1.default.INDENT])); /* >>>> INDENT >>>> */
         }
         else if (child.tag === "AmendProvision") {
-            lines.push(...(0, _amendProvision_1.amendProvisionToLines)(child, [...indentTexts, toCSTSettings_1.default.INDENT])); /* >>>> INDENT >>>> */
+            const lastText = (_c = (_b = (_a = sentencesArray.slice(-1)[0]) === null || _a === void 0 ? void 0 : _a.sentences.slice(-1)[0]) === null || _b === void 0 ? void 0 : _b.text()) !== null && _c !== void 0 ? _c : "";
+            lines.push(...(0, _amendProvision_1.amendProvisionToLines)(child, [...indentTexts, toCSTSettings_1.default.INDENT], { withControl: !reAmendingText.test(lastText) })); /* >>>> INDENT >>>> */
         }
         else if (child.tag === "Class") {
             throw new util_1.NotImplementedError(child.tag);
@@ -61241,13 +61472,29 @@ exports.$autoParagraphItemChildrenOuter = factory_1.default
     .and(r => r
     .choice(c => c
     .orSequence(s => s
-    .andOmit(r => r.assert(({ firstParagraphItemLine }) => {
+    .andOmit(r => r
+    .choice(c => c
+    .or(r => r
+    .assert(({ firstParagraphItemLine }) => {
     var _a, _b, _c;
     const lastText = (_c = (_b = (_a = firstParagraphItemLine.line
         .sentencesArray.slice(-1)[0]) === null || _a === void 0 ? void 0 : _a.sentences.slice(-1)[0]) === null || _b === void 0 ? void 0 : _b.text()) !== null && _c !== void 0 ? _c : "";
-    const m = /.*?の一部を次のように(?:改正す|改め)る。$/.exec(lastText);
-    return m !== null;
+    return reAmendingText.test(lastText);
 }))
+    .or(r => r
+    .nextIs(r => r
+    .sequence(s => s
+    .andOmit(() => util_2.$optBNK_INDENT)
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if (item.type === line_1.LineType.OTH
+        && item.line.controls.some(c => c.control === ":amend-provision:")) {
+        return item;
+    }
+    else {
+        return null;
+    }
+})))))))
     .and(() => $amendProvisionsBlock, "block")
     .action(({ block }) => {
     return {
@@ -61305,14 +61552,14 @@ const paragraphItemFromAuto = (defautTag, paragraphItem) => {
             return c;
         }
     });
-    if (tag === "Paragraph") {
-        const titleEL = children.find(std.isParagraphItemTitle);
-        const titleStr = titleEL ? titleEL.text() : "";
-        if (titleEL && reOldParagraphNum.test(titleStr)) {
-            attr.OldNum = "true";
-            attr.Num = (0, num_1.parseNamedNum)(titleStr);
-            titleEL.children.splice(0, titleEL.children.length);
-        }
+    const titleEL = children.find(std.isParagraphItemTitle);
+    const titleStr = titleEL ? titleEL.text() : "";
+    const num = titleStr ? (0, num_1.parseNamedNum)(titleStr) : null; // Assume KanaMode.Iroha tentatively
+    if (num)
+        attr.Num = num;
+    if (tag === "Paragraph" && titleEL && reOldParagraphNum.test(titleStr)) {
+        attr.OldNum = "true";
+        titleEL.children.splice(0, titleEL.children.length);
     }
     return std.newStdEL(tag, attr, children, paragraphItem.range);
 };
@@ -61635,6 +61882,10 @@ const util_2 = __webpack_require__(84530);
 const _sentenceChildren_1 = __webpack_require__(36096);
 const _sentencesArray_1 = __webpack_require__(10145);
 const el_1 = __webpack_require__(18539);
+const _otherLine_1 = __webpack_require__(27328);
+const parse_1 = __importDefault(__webpack_require__(18106));
+const util_3 = __webpack_require__(26459);
+const controls_1 = __webpack_require__(48075);
 exports.remarksControl = ":remarks:";
 exports.remarksLabelPtn = /^(?:備\s*考|注)\s*$/;
 /**
@@ -61657,11 +61908,10 @@ const remarksToLines = (remarks, indentTexts) => {
         lineEndText: toCSTSettings_1.default.EOL,
     }));
     const childrenIndentTexts = [...indentTexts, toCSTSettings_1.default.INDENT];
-    for (const child of remarks.children) {
-        if (child.tag === "RemarksLabel")
-            continue;
+    const restChildren = remarks.children.filter(c => c.tag !== "RemarksLabel");
+    for (const child of restChildren) {
         if (child.tag === "Sentence") {
-            lines.push(new line_1.OtherLine({
+            const line = new line_1.OtherLine({
                 range: null,
                 indentTexts: childrenIndentTexts,
                 controls: [],
@@ -61669,7 +61919,22 @@ const remarksToLines = (remarks, indentTexts) => {
                     new inline_1.Sentences("", null, [], [child]),
                 ],
                 lineEndText: toCSTSettings_1.default.EOL,
-            }));
+            });
+            const lineText = (0, _sentencesArray_1.sentencesArrayToString)(line.sentencesArray);
+            try {
+                const parsedLines = (0, parse_1.default)(lineText);
+                if (parsedLines.value[0].type !== line_1.LineType.OTH) {
+                    line.controls.push(new inline_1.Control(_otherLine_1.ignoreTitleControl, null, "", null));
+                }
+            }
+            catch (e) {
+                //
+            }
+            // eslint-disable-next-line no-irregular-whitespace
+            if (/^[ 　\t]+/.test(child.text())) {
+                line.controls.push(new inline_1.Control(_otherLine_1.keepLeadingSpacesControl, null, "", null));
+            }
+            lines.push(line);
         }
         else if (child.tag === "Item") {
             const itemLines = (0, _paragraphItem_1.paragraphItemToLines)(child, childrenIndentTexts, { defaultTag: "Item" });
@@ -61697,8 +61962,16 @@ const $remarksChildrenBlock = (0, util_1.makeIndentBlockWithCaptureRule)("$remar
     .oneMatch(({ item }) => {
     if (item.type === line_1.LineType.OTH
         && item.line.sentencesArray.length > 0) {
+        const sentenceChildren = [];
+        for (const sentences of item.line.sentencesArray) {
+            sentenceChildren.push(new controls_1.__Text(sentences.leadingSpace, sentences.leadingSpaceRange));
+            for (const sentence of sentences.sentences) {
+                sentenceChildren.push(...sentence.children);
+            }
+        }
+        const sentence = (0, std_1.newStdEL)("Sentence", (0, util_2.omit)(item.line.sentencesArray[0].sentences[0].attr, "Function", "Num"), (0, util_3.mergeAdjacentTextsWithString)(sentenceChildren), item.line.sentencesArrayRange);
         return {
-            value: item.line.sentencesArray.flat().map(ss => ss.sentences).flat(),
+            value: [sentence],
             errors: [],
         };
     }
@@ -61867,6 +62140,7 @@ const factory_1 = __webpack_require__(13518);
 const line_1 = __webpack_require__(69928);
 const util_1 = __webpack_require__(80427);
 const std_1 = __webpack_require__(93619);
+const std = __importStar(__webpack_require__(93619));
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
 const _paragraphItem_1 = __importStar(__webpack_require__(83974));
 const util_2 = __webpack_require__(84530);
@@ -61906,7 +62180,9 @@ const supplProvisionToLines = (supplProvision, indentTexts) => {
     }));
     lines.push(new line_1.BlankLine({ range: null, lineEndText: toCSTSettings_1.default.EOL }));
     const paragraphs = supplProvision.children.filter(std_1.isParagraph);
-    const isSingleAnonymParagraph = paragraphs.length === 1 && paragraphs.every(p => p.children.filter(std_1.isParagraphItemTitle).every(el => el.text() === ""));
+    const isSingleAnonymParagraph = ((paragraphs.length === 1) &&
+        paragraphs.every(p => (p.children.filter(std_1.isParagraphItemTitle).every(el => el.text() === "") &&
+            (p.children.filter(c => std.isParagraphSentence(c) && c.text().length > 0).length > 0))));
     for (const child of supplProvision.children) {
         if (child.tag === "SupplProvisionLabel")
             continue;
@@ -61961,12 +62237,20 @@ const $supplProvisionChildren = factory_1.factory
     .or(() => (0, _paragraphItem_1.default)("Paragraph"))))
     .andOmit(r => r.zeroOrMore(() => util_1.$blankLine)))))
     .or(r => r
+    .sequence(s => s
+    .and(r => r
     .oneOrMore(r => r
     .sequence(s => s
     .and(r => r
     .choice(c => c
     .or(() => _paragraphItem_1.$noControlAnonymParagraph)))
-    .andOmit(r => r.zeroOrMore(() => util_1.$blankLine)))))))
+    .andOmit(r => r.zeroOrMore(() => util_1.$blankLine)))), "anonymParagraphs")
+    .action(({ anonymParagraphs }) => {
+    for (const [i, { value: paragraph }] of anonymParagraphs.entries()) {
+        paragraph.attr.Num = (i + 1).toString();
+    }
+    return anonymParagraphs;
+})))))
     .and(r => r
     .zeroOrMore(r => r
     .sequence(s => s
@@ -62642,6 +62926,7 @@ const virtualLine_1 = __webpack_require__(40504);
 const controls_1 = __webpack_require__(48075);
 const _sentencesArray_1 = __webpack_require__(10145);
 const el_1 = __webpack_require__(18539);
+const num_1 = __webpack_require__(68685);
 /**
  * The renderer for {@link std.TOC}. Please see the source code for the detailed syntax, and the [test code](https://github.com/yamachig/Lawtext/blob/main/core/src/parser/std/rules/$toc.spec.ts) for examples.
  */
@@ -62737,10 +63022,15 @@ const tocToLines = (el, indentTexts) => {
     const lines = [];
     const childrenIndentTexts = [...indentTexts, toCSTSettings_1.default.INDENT];
     const tocLabel = el.children.find(std.isTOCLabel);
+    const title = (0, _sentenceChildren_1.sentenceChildrenToString)((_a = tocLabel === null || tocLabel === void 0 ? void 0 : tocLabel.children) !== null && _a !== void 0 ? _a : []);
     lines.push(new line_1.TOCHeadLine({
         range: null,
         indentTexts,
-        title: (0, _sentenceChildren_1.sentenceChildrenToString)((_a = tocLabel === null || tocLabel === void 0 ? void 0 : tocLabel.children) !== null && _a !== void 0 ? _a : []),
+        // eslint-disable-next-line no-irregular-whitespace
+        controls: ((indentTexts.length == 0) && /^目[ 　\t]*次/.test(title)) ? [] : [
+            new inline_1.Control(":toc:", null, "", null)
+        ],
+        title: title,
         lineEndText: toCSTSettings_1.default.EOL,
     }));
     for (const child of el.children) {
@@ -62816,6 +63106,9 @@ exports.$tocArticleGroup = factory_1.default
         range[0] = pos;
     }
     const tocArticleGroup = (0, std_1.newStdEL)(tocArticleGroupTag, {}, children, range);
+    const num = (0, num_1.parseNamedNum)(articleGroupTitle.text());
+    if (num)
+        tocArticleGroup.attr.Num = num;
     return {
         value: tocArticleGroup,
         errors,
@@ -62848,6 +63141,9 @@ exports.$tocArticle = factory_1.default
         range[0] = pos;
     }
     const tocArticle = (0, std_1.newStdEL)("TOCArticle", {}, tocArticleChildren, range);
+    const num = (0, num_1.parseNamedNum)(headLine.line.title);
+    if (num)
+        tocArticle.attr.Num = num;
     return {
         value: tocArticle,
         errors: [],
@@ -62945,8 +63241,10 @@ exports.$toc = factory_1.default
     var _a;
     const children = [];
     const errors = [];
-    const tocLabel = (0, std_1.newStdEL)("TOCLabel", {}, [headLine.line.title], headLine.line.titleRange);
-    children.push(tocLabel);
+    if (headLine.line.title.length > 0) {
+        const tocLabel = (0, std_1.newStdEL)("TOCLabel", {}, [headLine.line.title], headLine.line.titleRange);
+        children.push(tocLabel);
+    }
     if (childrenBlock) {
         children.push(...childrenBlock.value.flat().map(v => v.value));
         errors.push(...childrenBlock.value.flat().map(v => v.errors).flat());
@@ -63072,7 +63370,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.isSingleParentheses = exports.makeDoubleIndentBlockWithCaptureRule = exports.makeIndentBlockWithCaptureRule = exports.$indentBlock = exports.$blankLine = exports.$optBNK_DEDENT = exports.$DEDENT = exports.$optBNK_INDENT = exports.$INDENT = void 0;
+exports.isSingleParentheses = exports.captionControl = exports.makeDoubleIndentBlockWithCaptureRule = exports.makeIndentBlockWithCaptureRule = exports.$indentBlock = exports.$blankLine = exports.$optBNK_DEDENT = exports.$DEDENT = exports.$optBNK_INDENT = exports.$INDENT = void 0;
 const controls_1 = __webpack_require__(48075);
 const line_1 = __webpack_require__(69928);
 const error_1 = __webpack_require__(40520);
@@ -63231,6 +63529,7 @@ const makeDoubleIndentBlockWithCaptureRule = (ruleName, ruleRepeatedOneOrMore) =
     };
 }));
 exports.makeDoubleIndentBlockWithCaptureRule = makeDoubleIndentBlockWithCaptureRule;
+exports.captionControl = ":caption:";
 const isSingleParentheses = (line) => {
     let columns = [];
     if (Array.isArray(line)) {
@@ -63337,7 +63636,8 @@ const toVirtualLines = (lines) => {
             currentDepth = line.indentTexts.length;
             type = line.type;
             // If the current line is `OtherLine` and the following line is `ArticleLine` or `ParagraphItemLine`, treat the current line as Caption.
-            if (line.type === line_1.LineType.OTH && (0, util_1.isSingleParentheses)(line) && line.controls.length === 0) {
+            if ((line.type === line_1.LineType.OTH) && (line.controls.some(c => c.control === util_1.captionControl) ||
+                ((0, util_1.isSingleParentheses)(line) && line.controls.length === 0))) {
                 for (let currentOffset = i + 1; currentOffset < lines.length; currentOffset++) {
                     const nextLine = lines[currentOffset];
                     if (nextLine.type === line_1.LineType.BNK)
