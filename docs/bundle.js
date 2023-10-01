@@ -48460,7 +48460,7 @@ const processLawRef = (elToBeModified, sentenceEnv, sentenceEnvsStruct, pointerE
                     const replacedCount = (lawNameCandidates.length - lawNameCandidateStartIndex) + 1;
                     const pointerRangesIndex = i + lawNameCandidateStartIndex + replacedCount;
                     elToBeModified.children.splice(i + lawNameCandidateStartIndex, replacedCount, ...((std.isRuby(lawNameStartEL) || candidateStartRestLength === 0) ? [] : [
-                        new controls_1.__Text(lawNameStartEL.text().slice(0, lawNameStartEL.text().length - lawNameLength), lawNameStartEL.range && [
+                        new controls_1.__Text(lawNameStartEL.text().slice(0, candidateStartRestLength), lawNameStartEL.range && [
                             lawNameStartEL.range[0],
                             lawNameStartEL.range[0] + candidateStartRestLength,
                         ]),
@@ -57373,6 +57373,9 @@ const sentenceChildrenToString = (els) => {
         }
         else if (el instanceof controls_1.__Parentheses) {
             runs.push(/* $$$$$$ */ [el.start.text(), ...(0, exports.sentenceChildrenToString)(el.content.children), el.end.text()].join("") /* $$$$$$ */);
+        }
+        else if (el instanceof controls_1.____Declaration) {
+            runs.push(/* $$$$$$ */ [...(0, exports.sentenceChildrenToString)(el.children)].join("") /* $$$$$$ */);
         }
         else if (el.isControl) {
             runs.push(/* $$$$$$ */ el.text().replace(/\r|\n/g, "") /* $$$$$$ */);
