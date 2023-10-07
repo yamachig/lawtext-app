@@ -62530,6 +62530,8 @@ const _article_1 = __importDefault(__webpack_require__(60783));
 const _articleGroup_1 = __importDefault(__webpack_require__(40365));
 const _paragraphItem_1 = __webpack_require__(83974);
 const _figStruct_1 = __importDefault(__webpack_require__(43931));
+const util_3 = __webpack_require__(26459);
+const controls_1 = __webpack_require__(48075);
 /**
  * The renderer for {@link std.Table}. Please see the source code for the detailed syntax, and the [test code](https://github.com/yamachig/Lawtext/blob/main/core/src/parser/std/rules/$tableStruct.spec.ts) for examples.
  */
@@ -62563,7 +62565,33 @@ const tableToLines = (table, indentTexts) => {
                     cellLine.sentencesArray.push(...(0, columnsOrSentences_1.columnsOrSentencesToSentencesArray)(cell.children));
                 }
                 else if (cell.children.every(std_1.isSentence)) {
-                    cellLine.sentencesArray.push(...(0, columnsOrSentences_1.columnsOrSentencesToSentencesArray)(cell.children));
+                    if (cell.children.length === 1) {
+                        cellLine.sentencesArray.push(...(0, columnsOrSentences_1.columnsOrSentencesToSentencesArray)(cell.children));
+                    }
+                    else {
+                        cellLine.multilineIndicator = "|";
+                        if (cellLine.attrEntries.length > 0) {
+                            cellLine.attrEntries.slice(-1)[0].trailingSpace = " ";
+                        }
+                        for (const child of cell.children) {
+                            const sentencesArray = (0, columnsOrSentences_1.columnsOrSentencesToSentencesArray)([child]);
+                            if (sentencesArray[0].attrEntries.length > 0) {
+                                sentencesArray[0].attrEntries.slice(-1)[0].trailingSpace = " ";
+                            }
+                            lines.push(new line_1.TableColumnLine({
+                                range: null,
+                                indentTexts: childrenIndentTexts,
+                                firstColumnIndicator: "",
+                                midIndicatorsSpace: "",
+                                columnIndicator: "-",
+                                midSpace: " ",
+                                attrEntries: [],
+                                multilineIndicator: "",
+                                sentencesArray,
+                                lineEndText: toCSTSettings_1.default.EOL,
+                            }));
+                        }
+                    }
                 }
                 else {
                     cellLine.multilineIndicator = "|";
@@ -62641,6 +62669,26 @@ const $tableCellChildrenBlock = (0, util_1.makeDoubleIndentBlockWithCaptureRule)
     .action(({ any }) => ({ value: [any.value], errors: any.errors })))
     .or(r => r
     .oneMatch(({ item }) => {
+    if (item.type === line_1.LineType.TBL
+        && item.line.firstColumnIndicator === "") {
+        return {
+            value: [
+                (0, std_1.newStdEL)("Sentence", Object.fromEntries(item.line.attrEntries.map(e => e.entry)), (0, util_3.mergeAdjacentTextsWithString)(item.line.sentencesArray
+                    .map(sa => [
+                    new controls_1.__Text(sa.leadingSpace, sa.leadingSpaceRange),
+                    ...sa.sentences.map(s => s.children).flat(),
+                ])
+                    .flat()), item.line.sentencesArrayRange)
+            ],
+            errors: [],
+        };
+    }
+    else {
+        return null;
+    }
+}))
+    .or(r => r
+    .oneMatch(({ item }) => {
     if (item.type === line_1.LineType.OTH) {
         return {
             value: (0, columnsOrSentences_1.sentencesArrayToColumnsOrSentences)(item.line.sentencesArray),
@@ -62699,13 +62747,22 @@ const $table = factory_1.factory
     //         )
     //     )
     // )
-    .action(({ block }) => ({
-    value: block.value.map(v => v.value).flat(),
-    errors: [
-        ...block.value.map(v => v.errors).flat(),
-        ...block.errors,
-    ]
-})))))
+    .action(({ block }) => {
+    const children = block.value.map(v => v.value).flat();
+    if (children.every(std_1.isSentence)) {
+        for (const [i, s] of children.entries()) {
+            if (!("Num" in s.attr))
+                s.attr.Num = (i + 1).toString();
+        }
+    }
+    return {
+        value: block.value.map(v => v.value).flat(),
+        errors: [
+            ...block.value.map(v => v.errors).flat(),
+            ...block.errors,
+        ]
+    };
+}))))
     .andOmit(r => r.zeroOrMore(() => util_1.$blankLine)))), "tableColumnLines")
     .action(({ tableColumnLines }) => {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
@@ -63656,16 +63713,27 @@ const toVirtualLines = (lines) => {
                 }
             }
             // If the current line is `TableColumnLine` and it indicates that it is NOT a first column of the table line, search for the preceding first line and adopt the indent depth of the first line.
+            // If the current line is a child of `TableColumnLine` with `multilineIndicator` keep the indent depth.
             if (line.type === line_1.LineType.TBL && line.firstColumnIndicator === "") {
                 for (let currentOffset = i - 1; currentOffset >= 0; currentOffset--) {
                     const prevLine = lines[currentOffset];
                     if (prevLine.type === line_1.LineType.BNK)
                         continue;
-                    if ((prevLine.type === line_1.LineType.TBL && prevLine.firstColumnIndicator === "")
-                        || (prevLine.indentTexts.length > line.indentTexts.length))
+                    if (prevLine.indentTexts.length > line.indentTexts.length)
                         continue;
-                    if (prevLine.type === line_1.LineType.TBL && prevLine.firstColumnIndicator === "*") {
-                        currentDepth = prevLine.indentTexts.length;
+                    if (prevLine.type === line_1.LineType.TBL) {
+                        if ((prevLine.multilineIndicator !== "") &&
+                            (((prevLine.firstColumnIndicator === "") &&
+                                (line.indentTexts.length - prevLine.indentTexts.length >= 1))
+                                || ((prevLine.firstColumnIndicator === "*") &&
+                                    (line.indentTexts.length - prevLine.indentTexts.length >= 2))))
+                            break;
+                        if (prevLine.firstColumnIndicator === "")
+                            continue;
+                        if (prevLine.firstColumnIndicator === "*") {
+                            currentDepth = prevLine.indentTexts.length;
+                            break;
+                        }
                     }
                     break;
                 }
@@ -68419,8 +68487,10 @@ exports.HTMLTableColumn = (0, html_1.wrapHTMLComponent)("HTMLTableColumn", ((pro
                 react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, { els: el.children, htmlOptions }))));
         }
         else if (el.children.every(std.isSentence)) {
-            blocks.push((react_1.default.createElement("div", null,
-                react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, { els: el.children, htmlOptions }))));
+            for (const child of el.children) {
+                blocks.push((react_1.default.createElement("div", null,
+                    react_1.default.createElement(columnsOrSentencesRun_1.HTMLColumnsOrSentencesRun, { els: [child], htmlOptions }))));
+            }
         }
         else {
             for (const child of el.children) {
@@ -68576,8 +68646,10 @@ exports.DOCXTableColumn = (0, docx_1.wrapDOCXComponent)("DOCXTableColumn", ((pro
                 react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, { els: el.children, docxOptions }))));
         }
         else if (el.children.every(std.isSentence)) {
-            blocks.push((react_1.default.createElement(docx_1.w.p, null,
-                react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, { els: el.children, docxOptions }))));
+            for (const child of el.children) {
+                blocks.push((react_1.default.createElement(docx_1.w.p, null,
+                    react_1.default.createElement(columnsOrSentencesRun_1.DOCXColumnsOrSentencesRun, { els: [child], docxOptions }))));
+            }
         }
         else {
             for (const child of el.children) {
