@@ -44723,7 +44723,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ElawsPartialLawView = void 0;
-const elaws_api_1 = __webpack_require__(98120);
+const elawsApi_1 = __webpack_require__(16635);
 const std = __importStar(__webpack_require__(93619));
 const xmlToEL_1 = __webpack_require__(26338);
 const addSentenceChildrenControls_1 = __importDefault(__webpack_require__(16088));
@@ -44734,7 +44734,7 @@ const ElawsPartialLawView = (props) => {
     const [{ loading, el }, setState] = react_1.default.useState({ loading: true, el: null });
     react_1.default.useEffect(() => {
         (async () => {
-            const xml = await (0, elaws_api_1.fetchPartialLaw)({ lawNum, article, paragraph, appdxTable });
+            const xml = await (0, elawsApi_1.fetchPartialLaw)({ lawNum, article, paragraph, appdxTable });
             const el = (0, xmlToEL_1.xmlToEL)(xml);
             if (std.isParagraph(el)) {
                 let paragraphNum = el.children.find(std.isParagraphNum);
@@ -50018,7 +50018,7 @@ const std = __importStar(__webpack_require__(93619));
 const analyzer = __importStar(__webpack_require__(53868));
 const util = __importStar(__webpack_require__(84530));
 const lawtext_1 = __webpack_require__(23259);
-const elaws_api_1 = __webpack_require__(98120);
+const elawsApi_1 = __webpack_require__(16635);
 const xmlToEL_1 = __webpack_require__(26338);
 const addSentenceChildrenControls_1 = __importDefault(__webpack_require__(16088));
 class Timing {
@@ -50083,7 +50083,7 @@ const toLawData = async (props, onMessage, timing) => {
                 onMessage("画像情報を読み込んでいます...");
                 await util.wait(30);
                 const start = new Date();
-                if (lawXMLStruct instanceof elaws_api_1.ElawsLawData) {
+                if (lawXMLStruct instanceof elawsApi_1.ElawsLawData) {
                     const pict = await lawXMLStruct.ensurePict();
                     if (pict) {
                         for (const [src] of pict.entries()) {
@@ -50276,9 +50276,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FetchElawsLoader = void 0;
 const common_1 = __webpack_require__(10495);
 const lawinfo_1 = __webpack_require__(14292);
-const elaws_api_1 = __webpack_require__(98120);
+const elawsApi_1 = __webpack_require__(16635);
 const fetchBaseLawInfosFromElaws = async () => {
-    const lawNameList = await (0, elaws_api_1.fetchLawNameList)();
+    const lawNameList = await (0, elawsApi_1.fetchLawNameList)();
     return lawNameList.map(item => {
         const baseLawInfo = {
             LawID: item.LawId,
@@ -50302,7 +50302,7 @@ class FetchElawsLoader extends common_1.Loader {
         return fetchBaseLawInfosFromElaws();
     }
     async loadLawXMLStructByInfo(lawInfoOrLawIDOrLawNum) {
-        return (0, elaws_api_1.fetchLawData)(typeof lawInfoOrLawIDOrLawNum === "string" ? lawInfoOrLawIDOrLawNum : lawInfoOrLawIDOrLawNum.LawID);
+        return (0, elawsApi_1.fetchLawData)(typeof lawInfoOrLawIDOrLawNum === "string" ? lawInfoOrLawIDOrLawNum : lawInfoOrLawIDOrLawNum.LawID);
     }
 }
 exports.FetchElawsLoader = FetchElawsLoader;
@@ -50738,7 +50738,7 @@ var __asyncGenerator = (this && this.__asyncGenerator) || function (thisArg, _ar
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LawQuery = exports.LawQueryItem = exports.BaseLawCriteria = exports.Query = void 0;
-const elaws_api_1 = __webpack_require__(98120);
+const elawsApi_1 = __webpack_require__(16635);
 const util_1 = __webpack_require__(84530);
 const lawinfo_1 = __webpack_require__(14292);
 const FetchElawsLoader_1 = __webpack_require__(39028);
@@ -51288,7 +51288,7 @@ class LawQueryItem extends lawinfo_1.LawInfo {
             if (this.loader === null)
                 throw Error("Loader not specified");
             if (this.loader instanceof FetchElawsLoader_1.FetchElawsLoader) {
-                const elawsLawData = await (0, elaws_api_1.fetchLawData)(this.LawID);
+                const elawsLawData = await (0, elawsApi_1.fetchLawData)(this.LawID);
                 this._cache.xml = elawsLawData.xml;
                 this._cache.imageData = elawsLawData.imageData;
             }
@@ -51457,7 +51457,7 @@ exports.LawQuery = LawQuery;
 
 /***/ }),
 
-/***/ 98120:
+/***/ 16635:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
@@ -51645,7 +51645,7 @@ const fetchPartialLaw = async (options) => {
     return xml;
 };
 exports.fetchPartialLaw = fetchPartialLaw;
-//# sourceMappingURL=elaws_api.js.map
+//# sourceMappingURL=elawsApi.js.map
 
 /***/ }),
 
