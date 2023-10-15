@@ -48695,10 +48695,10 @@ const processNameList = (headSentenceEnv, sentenceEnvsStruct, pointerEnvsStruct)
                 const nameSentence = nameColumn.children[0];
                 if (!std.isSentence(nameSentence))
                     continue;
-                const name = nameSentence.text();
                 const nameSentenceEnv = sentenceEnvsStruct.sentenceEnvByEL.get(nameSentence);
                 if (!nameSentenceEnv)
                     continue;
+                const name = nameSentenceEnv.text;
                 const nameSentenceTextRange = {
                     start: {
                         sentenceIndex: nameSentenceEnv.index,
@@ -48714,17 +48714,14 @@ const processNameList = (headSentenceEnv, sentenceEnvsStruct, pointerEnvsStruct)
                     declarationID,
                     type: "Keyword",
                     name,
-                    value: defColumn.text(),
+                    value: defColumn.children.map(c => { var _a, _b; return (_b = (_a = sentenceEnvsStruct.sentenceEnvByEL.get(c)) === null || _a === void 0 ? void 0 : _a.text) !== null && _b !== void 0 ? _b : ""; }).join(""),
                     scope: scope,
                     nameSentenceTextRange,
-                    range: nameSentence.range ? [
-                        nameSentence.range[0],
-                        nameSentence.range[0] + name.length,
-                    ] : null,
-                    children: [name],
+                    range: nameSentence.range,
+                    children: [...nameSentence.children],
                 });
                 declarations.push(declaration);
-                nameSentence.children.splice(0, 1, declaration);
+                nameSentence.children.splice(0, nameSentence.children.length, declaration);
             }
         }
     }
@@ -54531,8 +54528,8 @@ class ArticleLine extends IndentsLine {
     get sentencesArrayRange() {
         if (this.sentencesArray.length > 0) {
             const ranges = this.sentencesArray.flat().map(ss => [
-                ...ss.attrEntries.map(e => [e.entryRange, e.trailingSpaceRange]).flat(),
                 ss.leadingSpaceRange,
+                ...ss.attrEntries.map(e => [e.entryRange, e.trailingSpaceRange]).flat(),
                 ...ss.sentences.map(s => s.range),
             ]).flat().filter(r => r !== null);
             if (ranges.length === 0)
@@ -54584,8 +54581,8 @@ class ParagraphItemLine extends WithControlsLine {
     get sentencesArrayRange() {
         if (this.sentencesArray.length > 0) {
             const ranges = this.sentencesArray.flat().map(ss => [
-                ...ss.attrEntries.map(e => [e.entryRange, e.trailingSpaceRange]).flat(),
                 ss.leadingSpaceRange,
+                ...ss.attrEntries.map(e => [e.entryRange, e.trailingSpaceRange]).flat(),
                 ...ss.sentences.map(s => s.range),
             ]).flat().filter(r => r !== null);
             if (ranges.length === 0)
@@ -54681,8 +54678,8 @@ class TableColumnLine extends IndentsLine {
     get sentencesArrayRange() {
         if (this.sentencesArray.length > 0) {
             const ranges = this.sentencesArray.flat().map(ss => [
-                ...ss.attrEntries.map(e => [e.entryRange, e.trailingSpaceRange]).flat(),
                 ss.leadingSpaceRange,
+                ...ss.attrEntries.map(e => [e.entryRange, e.trailingSpaceRange]).flat(),
                 ...ss.sentences.map(s => s.range),
             ]).flat().filter(r => r !== null);
             if (ranges.length === 0)
@@ -54705,7 +54702,7 @@ class TableColumnLine extends IndentsLine {
         ret.push([this.midSpaceRange, this.midSpace, "MidSpace"]);
         ret.push(...this.attrEntriesRangeTexts());
         ret.push([this.multilineIndicatorRange, this.multilineIndicator, "MultilineIndicator"]);
-        ret.push([this.sentencesArrayRange, (0, _sentencesArray_1.sentencesArrayToString)(this.sentencesArray), "SentencesArray"]);
+        ret.push([this.sentencesArrayRange, (0, _sentencesArray_1.sentencesArrayToString)(this.sentencesArray, { escapeLeadingSpaces: true }), "SentencesArray"]);
         ret.push([this.lineEndTextRange(), this.lineEndText, "LineEnd"]);
         return ret;
     }
@@ -54724,8 +54721,8 @@ class OtherLine extends WithControlsLine {
     get sentencesArrayRange() {
         if (this.sentencesArray.length > 0) {
             const ranges = this.sentencesArray.flat().map(ss => [
-                ...ss.attrEntries.map(e => [e.entryRange, e.trailingSpaceRange]).flat(),
                 ss.leadingSpaceRange,
+                ...ss.attrEntries.map(e => [e.entryRange, e.trailingSpaceRange]).flat(),
                 ...ss.sentences.map(s => s.range),
             ]).flat().filter(r => r !== null);
             if (ranges.length === 0)
@@ -56556,6 +56553,7 @@ const _xml_1 = __importDefault(__webpack_require__(33439));
 const std_1 = __webpack_require__(93619);
 const std = __importStar(__webpack_require__(93619));
 const el_1 = __webpack_require__(18539);
+const _squareAttr_1 = __importDefault(__webpack_require__(75498));
 exports.keepLeadingSpacesControl = ":keep-leading-spaces:";
 exports.ignoreTitleControl = ":ignore-title:";
 /**
@@ -56604,7 +56602,37 @@ exports.$otherLine = factory_1.default
         errors: xml.errors,
     };
 }))
-    .or(() => _sentencesArray_1.default))), "columns")
+    .or(() => _sentencesArray_1.default)
+    .orSequence(s => s
+    .and(r => r
+    .oneOrMore(r => r
+    .sequence(s => s
+    .and(() => _squareAttr_1.default, "entry")
+    .and(() => lexical_1.$_, "trailingSpace")
+    .action(({ entry, trailingSpace, range }) => {
+    const r = range();
+    entry.value.trailingSpace = trailingSpace;
+    if (entry.value.entryRange) {
+        entry.value.trailingSpaceRange = [
+            entry.value.entryRange[1],
+            r[1],
+        ];
+    }
+    return {
+        value: entry.value,
+        errors: entry.errors,
+    };
+}))), "attrEntries")
+    .action(({ attrEntries, range }) => {
+    const r = range();
+    const errors = [...attrEntries.map(e => e.errors).flat()];
+    return {
+        value: [
+            new inline_1.Sentences("", [r[0], r[0]], attrEntries.map(e => e.value).flat(), [])
+        ],
+        errors,
+    };
+})))), "columns")
     .and(() => lexical_1.$_EOL, "lineEndText")
     .action(({ range, indentsStruct, controls, columns, lineEndText }) => {
     var _a, _b;
@@ -57428,6 +57456,7 @@ exports.$sentenceChildrenWithoutToplevelInlineToken = factory_1.factory
 }));
 exports["default"] = exports.$sentenceChildren;
 const reLawNumLike = new RegExp(`^${lawNum_1.ptnLawNumLike}`);
+const reCharRef = /^&#(\d+|x[\da-fA-F]+);/;
 exports.$inlineToken = factory_1.factory
     .withName("inlineToken")
     .choice(c => c
@@ -57438,13 +57467,24 @@ exports.$inlineToken = factory_1.factory
     errors: [],
 })))
     .orSequence(s => s
+    .and(r => r.regExpObj(reCharRef), "charRef")
+    .action(({ charRef, range }) => {
+    const intStr = charRef[1].toLowerCase();
+    const isHex = intStr.startsWith("x");
+    const int = parseInt(intStr.slice(isHex ? 1 : 0), isHex ? 16 : 10);
+    return {
+        value: new controls_1.__Text(String.fromCharCode(int), range()),
+        errors: [],
+    };
+}))
+    .orSequence(s => s
     .and(r => r.regExp(reLawNumLike), "text")
     .action(({ text, range }) => ({
     value: new controls_1.____LawNum(text, range()),
     errors: [],
 })))
     .or(() => _pointerRanges_1.default));
-const rePeriodSentenceTextChars = new RegExp(`^(?:(?![ァ-ヿ${_pointerRanges_1.pointerRangesCandidateChars}])[^\r\n<>()（）[\\]［］{}｛｝「」 　\t。])+`);
+const rePeriodSentenceTextChars = new RegExp(`^(?:(?![ァ-ヿ${_pointerRanges_1.pointerRangesCandidateChars}])[^\r\n&<>()（）[\\]［］{}｛｝「」 　\t。])+`);
 exports.$PERIOD_SENTENCE_FRAGMENT = factory_1.factory
     .withName("PERIOD_SENTENCE_FRAGMENT")
     .choice(c => c
@@ -57456,7 +57496,7 @@ exports.$PERIOD_SENTENCE_FRAGMENT = factory_1.factory
     .or(r => r.regExp(_pointerRanges_1.reSuppressPointerRanges))
     .or(r => r.regExp(rePeriodSentenceTextChars))
     .or(() => exports.$inlineToken)
-    .or(r => r.regExp(/^[^\r\n<>()（）[\]［］{}｛｝「」 　\t。]/))
+    .or(r => r.regExp(/^[^\r\n&<>()（）[\]［］{}｛｝「」 　\t。]/))
     .or(() => exports.ANY_PARENTHESES_INLINE)
     .or(() => exports.$MISMATCH_END_PARENTHESIS))), "texts")
     .and(r => r
@@ -57511,7 +57551,7 @@ exports.$OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES_WITHOUT_TOPLEVEL_INL
     .choice(c => c
     .orSequence(s => s
     .and(r => r
-    .regExp(/^(?:(?![ 　\t]*\r?\n)[^\r\n<>()（）[\]［］{}｛｝「」])+/), "plain")
+    .regExp(/^(?:(?![ 　\t]*\r?\n)[^\r\n&<>()（）[\]［］{}｛｝「」])+/), "plain")
     .action(({ plain, range }) => {
     return {
         value: new controls_1.__Text(plain, range()),
@@ -57524,7 +57564,7 @@ exports.$OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES_WITHOUT_TOPLEVEL_INL
         errors: target.map(t => t.errors).flat(),
     };
 }));
-const reOutsideParenthesesTextChars = new RegExp(`^(?:(?![ァ-ヿ${_pointerRanges_1.pointerRangesCandidateChars}]|[ 　\t]*\r?\n)[^\r\n<>()（）[\\]［］{}｛｝「」])+`);
+const reOutsideParenthesesTextChars = new RegExp(`^(?:(?![ァ-ヿ${_pointerRanges_1.pointerRangesCandidateChars}]|[ 　\t]*\r?\n)[^\r\n&<>()（）[\\]［］{}｛｝「」])+`);
 exports.$OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES = factory_1.factory
     .withName("OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES")
     .sequence(s => s
@@ -57533,7 +57573,7 @@ exports.$OUTSIDE_PARENTHESES_INLINE_EXCLUDE_TRAILING_SPACES = factory_1.factory
     .choice(c => c
     .or(r => r.regExp(reOutsideParenthesesTextChars))
     .or(() => exports.$inlineToken)
-    .or(r => r.regExp(/^(?![ 　\t]*\r?\n)[^\r\n<>()（）[\]［］{}｛｝「」]/)))), "target")
+    .or(r => r.regExp(/^(?![ 　\t]*\r?\n)[^\r\n&<>()（）[\]［］{}｛｝「」]/)))), "target")
     .action(({ target, offset }) => {
     var _a, _b;
     const value = [];
@@ -57626,7 +57666,7 @@ exports.ANY_PARENTHESES_INLINE = factory_1.factory
     }
 }))
     .or(() => exports.$MISMATCH_START_PARENTHESIS));
-const reParenthesesInlineTextChars = new RegExp(`^(?:(?![ァ-ヿ${_pointerRanges_1.pointerRangesCandidateChars}])[^\r\n<>()（）[\\]［］{}｛｝「」])+`);
+const reParenthesesInlineTextChars = new RegExp(`^(?:(?![ァ-ヿ${_pointerRanges_1.pointerRangesCandidateChars}])[^\r\n&<>()（）[\\]［］{}｛｝「」])+`);
 const makeParenthesesInline = (parenthesisType, startPtn, endPtn) => {
     return factory_1.factory
         .choice(c => c
@@ -57647,7 +57687,7 @@ const makeParenthesesInline = (parenthesisType, startPtn, endPtn) => {
         .choice(c => c
         .or(r => r.regExp(reParenthesesInlineTextChars))
         .or(() => exports.$inlineToken)
-        .or(r => r.regExp(/^[^\r\n<>()（）[\]［］{}｛｝「」]/))
+        .or(r => r.regExp(/^[^\r\n&<>()（）[\]［］{}｛｝「」]/))
         .or(() => exports.ANY_PARENTHESES_INLINE)
         .or(r => r
         .sequence(c => c
@@ -57752,18 +57792,25 @@ exports.$SQUARE_PARENTHESES_INLINE = factory_1.factory
     .or(r => r
     .sequence(c => c
     .and(r => r
-    .asSlice(r => r
     .choice(c => c
-    .or(r => r
-    .oneOrMore(r => r.regExp(/^[^\r\n<>「」]/)))
-    .or(() => exports.$SQUARE_PARENTHESES_INLINE))), "text")
+    .orSequence(s => s
+    .and(r => r
+    .asSlice(r => r
+    .oneOrMore(r => r.regExp(/^[^\r\n<>「」]/))), "text")
     .action(({ text, range }) => {
     return {
         value: new controls_1.__Text(text, range()),
         errors: [],
     };
-}))))), "value")
-    .action(({ value, range }) => ({ value, range: range() }))), "content")
+}))
+    .or(() => exports.$SQUARE_PARENTHESES_INLINE))))))), "value")
+    .action(({ value, range }) => {
+    return {
+        value: value.map(v => v.value),
+        errors: value.map(v => v.errors).flat(),
+        range: range(),
+    };
+})), "content")
     .and(r => r
     .sequence(s => s
     .and(r => r.regExp(/^[」]/))
@@ -57780,14 +57827,14 @@ exports.$SQUARE_PARENTHESES_INLINE = factory_1.factory
             depth: state.parenthesesDepth + 1,
             start: start.text,
             end: end.text,
-            content: content.value.map(c => c.value),
+            content: content.value,
             range: {
                 start: start.range,
                 end: end.range,
                 content: content.range,
             },
         }),
-        errors: content.value.map(c => c.errors).flat(),
+        errors: content.errors,
     };
 }))
     .or(r => r
@@ -57843,29 +57890,40 @@ const util_1 = __webpack_require__(26459);
 const inline_1 = __webpack_require__(22845);
 const std = __importStar(__webpack_require__(93619));
 const _squareAttr_1 = __importDefault(__webpack_require__(75498));
-const sentencesArrayToString = (sentencesArray) => {
+const sentencesArrayToString = (sentencesArray, options) => {
     const runs = [];
+    const { withoutAttrs, escapeLeadingSpaces, } = Object.assign({ withoutAttrs: false, escapeLeadingSpaces: false }, options);
     for (const sentences of sentencesArray) {
         runs.push(sentences.leadingSpace);
-        for (const attrEntry of sentences.attrEntries) {
-            if (std.defaultAttrs.Sentence[attrEntry.entry[0]] === attrEntry.entry[1])
-                continue;
-            runs.push(attrEntry.entryText + attrEntry.trailingSpace);
+        if (!withoutAttrs) {
+            for (const attrEntry of sentences.attrEntries) {
+                if (std.defaultAttrs.Sentence[attrEntry.entry[0]] === attrEntry.entry[1])
+                    continue;
+                runs.push(attrEntry.entryText + attrEntry.trailingSpace);
+            }
         }
         for (const sentence of sentences.sentences) {
             runs.push((0, _sentenceChildren_1.sentenceChildrenToString)(sentence.children));
         }
     }
-    return runs.join("");
+    // eslint-disable-next-line no-irregular-whitespace
+    const trailingSpacesEscaped = runs.join("").replace(/[ 　\t]+$/g, s => Array.from(s).map(c => { var _a; return `&#x${(_a = c.codePointAt(0)) === null || _a === void 0 ? void 0 : _a.toString(16)};`; }).join(""));
+    if (escapeLeadingSpaces) {
+        // eslint-disable-next-line no-irregular-whitespace
+        return trailingSpacesEscaped.replace(/^[ 　\t]+/g, s => Array.from(s).map(c => { var _a; return `&#x${(_a = c.codePointAt(0)) === null || _a === void 0 ? void 0 : _a.toString(16)};`; }).join(""));
+    }
+    else {
+        return trailingSpacesEscaped;
+    }
 };
 exports.sentencesArrayToString = sentencesArrayToString;
 const forceSentencesArrayToSentenceChildren = (sentencesArray) => {
     return (0, util_1.mergeAdjacentTexts)(sentencesArray
-        .flat()
-        .map(ss => ({ ls: new controls_1.__Text(ss.leadingSpace, ss.leadingSpaceRange), ss: ss.sentences }))
-        .map(({ ls, ss }) => [
-        ls,
-        ...ss.map(s => s.children).flat(),
+        .map(sentences => [
+        ...((sentences.leadingSpace !== "")
+            ? [new controls_1.__Text(sentences.leadingSpace, sentences.leadingSpaceRange)]
+            : []),
+        ...sentences.sentences.map(s => s.children).flat(),
     ])
         .flat());
 };
@@ -58852,7 +58910,8 @@ const mergeAdjacentTextsWithString = (inline) => {
             && (lastItem === null || lastItem === void 0 ? void 0 : lastItem.tag) === "__Text"
             && (typeof item === "string" || item.tag === "__Text")) {
             const itemText = typeof item === "string" ? item : item.text();
-            const replacedTail = new controls_1.__Text(lastItem.text() + itemText, (lastItem.range ? [lastItem.range[0], lastItem.range[1] + itemText.length] : null));
+            const itemRange = typeof item === "string" ? (lastItem.range ? [lastItem.range[1], lastItem.range[1] + itemText.length] : null) : item.range;
+            const replacedTail = new controls_1.__Text(lastItem.text() + itemText, ((lastItem.range && itemRange) ? [lastItem.range[0], itemRange[1]] : null));
             result.splice(-1, 1);
             result.push(replacedTail);
         }
@@ -58863,7 +58922,7 @@ const mergeAdjacentTextsWithString = (inline) => {
             result.push(item);
         }
     }
-    return result;
+    return result.filter(r => !((r instanceof controls_1.__Text) && r.children[0] === ""));
 };
 exports.mergeAdjacentTextsWithString = mergeAdjacentTextsWithString;
 const separateTrailingSpaces = (inline) => {
@@ -59046,7 +59105,7 @@ const amendProvisionToLines = (amendProvision, indentTexts, options) => {
             }));
         }
         else if ((0, std_1.isNewProvision)(child)) {
-            for (const cc of child.children) {
+            for (const [cci, cc] of child.children.entries()) {
                 if ((0, std_1.isArticle)(cc)) {
                     lines.push(...(0, _article_1.articleToLines)(cc, newProvisionsIndentTexts));
                 }
@@ -59058,7 +59117,9 @@ const amendProvisionToLines = (amendProvision, indentTexts, options) => {
                 }
                 else if ((0, std_1.isTableStruct)(cc)) {
                     lines.push(new line_1.BlankLine({ range: null, lineEndText: toCSTSettings_1.default.EOL }));
-                    lines.push(...(0, _tableStruct_1.tableStructToLines)(cc, newProvisionsIndentTexts));
+                    const withControl = ((0 <= (cci - 1) && (0, std_1.isTableStruct)((child.children[cci - 1]))) ||
+                        ((cci + 1) < child.children.length && (0, std_1.isTableStruct)((child.children[cci + 1]))));
+                    lines.push(...(0, _tableStruct_1.tableStructToLines)(cc, newProvisionsIndentTexts, { withControl }));
                 }
                 else if ((0, std_1.isFigStruct)(cc)) {
                     lines.push(new line_1.BlankLine({ range: null, lineEndText: toCSTSettings_1.default.EOL }));
@@ -59330,7 +59391,7 @@ const anyToLines = (any, indentTexts) => {
         return (0, _tableStruct_1.tableToLines)(any, indentTexts);
     }
     else if (std.isTableStruct(any)) {
-        return (0, _tableStruct_1.tableStructToLines)(any, indentTexts);
+        return (0, _tableStruct_1.tableStructToLines)(any, indentTexts, { withControl: true });
     }
     else if (std.isColumn(any) || std.isSentence(any)) {
         lines.push(new line_1.OtherLine({
@@ -59466,7 +59527,7 @@ const appdxItemToLines = (appdxItem, indentTexts) => {
     }));
     lines.push(new line_1.BlankLine({ range: null, lineEndText: toCSTSettings_1.default.EOL }));
     const childrenIndentTexts = [...indentTexts, toCSTSettings_1.default.INDENT];
-    for (const child of appdxItem.children) {
+    for (const [ci, child] of appdxItem.children.entries()) {
         if ((0, std_1.isAppdxItemTitle)(child))
             continue;
         if ((0, std_1.isRelatedArticleNum)(child))
@@ -59488,7 +59549,9 @@ const appdxItemToLines = (appdxItem, indentTexts) => {
             lines.push(new line_1.BlankLine({ range: null, lineEndText: toCSTSettings_1.default.EOL }));
         }
         else if ((0, std_1.isTableStruct)(child)) {
-            lines.push(...(0, _tableStruct_1.tableStructToLines)(child, childrenIndentTexts));
+            const withControl = ((0 <= (ci - 1) && (0, std_1.isTableStruct)((appdxItem.children[ci - 1]))) ||
+                ((ci + 1) < appdxItem.children.length && (0, std_1.isTableStruct)((appdxItem.children[ci + 1]))));
+            lines.push(...(0, _tableStruct_1.tableStructToLines)(child, childrenIndentTexts, { withControl }));
             lines.push(new line_1.BlankLine({ range: null, lineEndText: toCSTSettings_1.default.EOL }));
         }
         else if ((0, std_1.isArithFormula)(child)) {
@@ -59762,12 +59825,13 @@ const _paragraphItem_1 = __importStar(__webpack_require__(83974));
 const _supplNote_1 = __importStar(__webpack_require__(42455));
 const el_1 = __webpack_require__(18539);
 const num_1 = __webpack_require__(68685);
-const _sentenceChildren_1 = __webpack_require__(36096);
-const addSentenceChildrenControls_1 = __importDefault(__webpack_require__(16088));
+const _sentenceChildren_1 = __importStar(__webpack_require__(36096));
+const env_1 = __webpack_require__(39099);
 /**
  * The renderer for {@link std.Article}. Please see the source code for the detailed syntax, and the [test code](https://github.com/yamachig/Lawtext/blob/main/core/src/parser/std/rules/$article.spec.ts) for examples.
  */
 const articleToLines = (el, indentTexts) => {
+    var _a, _b;
     const lines = [];
     const ArticleCaption = [];
     const ArticleTitle = [];
@@ -59792,14 +59856,18 @@ const articleToLines = (el, indentTexts) => {
     }
     if (ArticleCaption.length > 0) {
         const newIndentTexts = [...indentTexts, toCSTSettings_1.default.INDENT];
-        const captionSentence = std.newStdEL("Sentence", {}, [(0, _sentenceChildren_1.sentenceChildrenToString)(ArticleCaption)]);
-        (0, addSentenceChildrenControls_1.default)(captionSentence);
+        const captionString = (0, _sentenceChildren_1.sentenceChildrenToString)(ArticleCaption);
+        const result = _sentenceChildren_1.default.match(0, captionString, (0, env_1.initialEnv)({}));
+        if (!result.ok) {
+            const message = `addControls: Error: ${captionString}`;
+            throw new Error(message);
+        }
         const line = new line_1.OtherLine({
             range: null,
             indentTexts: newIndentTexts,
             controls: [],
             sentencesArray: [
-                new inline_1.Sentences("", null, [], [captionSentence])
+                new inline_1.Sentences("", null, [], [(0, std_1.newStdEL)("Sentence", {}, result.value.value)])
             ],
             lineEndText: toCSTSettings_1.default.EOL,
         });
@@ -59807,6 +59875,12 @@ const articleToLines = (el, indentTexts) => {
             line.controls.push(new inline_1.Control(util_2.captionControl, null, "", null));
         }
         lines.push(line);
+    }
+    if ((Paragraphs.length > 0) &&
+        // Paragraphs[0] has ParagraphNum
+        (((_b = (_a = Paragraphs[0].children.find(std.isParagraphNum)) === null || _a === void 0 ? void 0 : _a.text()) !== null && _b !== void 0 ? _b : "") !== "")) {
+        // Add an empty Paragraph at the beginning
+        Paragraphs.unshift((0, std_1.newStdEL)("Paragraph"));
     }
     for (let i = 0; i < Paragraphs.length; i++) {
         const Paragraph = Paragraphs[i];
@@ -59882,19 +59956,21 @@ exports.$article = factory_1.default
         if (num)
             article.attr.Num = num;
     }
-    const firstParagraph = (0, std_1.newStdEL)("Paragraph");
-    // firstParagraph.attr.OldStyle = "false";
-    const sentencesArrayRange = firstParagraphItemLine.line.sentencesArrayRange;
-    firstParagraph.children.push((0, std_1.newStdEL)("ParagraphNum", {}, [], sentencesArrayRange ? [sentencesArrayRange[0], sentencesArrayRange[0]] : null));
-    firstParagraph.children.push((0, std_1.newStdEL)("ParagraphSentence", {}, (0, columnsOrSentences_1.sentencesArrayToColumnsOrSentences)(firstParagraphItemLine.line.sentencesArray), sentencesArrayRange));
-    if (firstAutoParagraphChildren) {
-        firstParagraph.children.push(...firstAutoParagraphChildren.value);
-    }
-    firstParagraph.range = (0, el_1.rangeOfELs)(firstParagraph.children);
-    {
-        const paragraph = (0, _paragraphItem_1.paragraphItemFromAuto)("Paragraph", firstParagraph);
-        paragraph.attr.Num = "1";
-        article.children.push(paragraph);
+    if ((firstParagraphItemLine.line.sentencesArray.length > 0) || firstAutoParagraphChildren) {
+        const firstParagraph = (0, std_1.newStdEL)("Paragraph");
+        // firstParagraph.attr.OldStyle = "false";
+        const sentencesArrayRange = firstParagraphItemLine.line.sentencesArrayRange;
+        firstParagraph.children.push((0, std_1.newStdEL)("ParagraphNum", {}, [], sentencesArrayRange ? [sentencesArrayRange[0], sentencesArrayRange[0]] : null));
+        firstParagraph.children.push((0, std_1.newStdEL)("ParagraphSentence", {}, (0, columnsOrSentences_1.sentencesArrayToColumnsOrSentences)(firstParagraphItemLine.line.sentencesArray), sentencesArrayRange));
+        if (firstAutoParagraphChildren) {
+            firstParagraph.children.push(...firstAutoParagraphChildren.value);
+        }
+        firstParagraph.range = (0, el_1.rangeOfELs)(firstParagraph.children);
+        {
+            const paragraph = (0, _paragraphItem_1.paragraphItemFromAuto)("Paragraph", firstParagraph);
+            paragraph.attr.Num = "1";
+            article.children.push(paragraph);
+        }
     }
     article.children.push(...otherParagraphs.map((p, i) => {
         if (std.isParagraph(p.value) && p.value.attr.OldNum === "true") {
@@ -60344,6 +60420,7 @@ exports.$law = exports.$enactStatement = exports.enactStatementToLines = exports
 const factory_1 = __webpack_require__(13518);
 const line_1 = __webpack_require__(69928);
 const util_1 = __webpack_require__(80427);
+const std = __importStar(__webpack_require__(93619));
 const std_1 = __webpack_require__(93619);
 const inline_1 = __webpack_require__(22845);
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
@@ -60361,10 +60438,33 @@ const el_1 = __webpack_require__(18539);
  * The renderer for {@link std.Law}. Please see the source code for the detailed syntax, and the [test code](https://github.com/yamachig/Lawtext/blob/main/core/src/parser/std/rules/$law.spec.ts) for examples.
  */
 const lawToLines = (law, indentTexts) => {
+    var _a;
     const lines = [];
     const lawNum = law.children.find(std_1.isLawNum);
     const lawBody = law.children.find(std_1.isLawBody);
     const lawTitle = lawBody === null || lawBody === void 0 ? void 0 : lawBody.children.find(std_1.isLawTitle);
+    const lawAttr = {};
+    const { LawType: lawTypeFromLawNum } = (0, lawNum_1.parseLawNum)((_a = lawNum === null || lawNum === void 0 ? void 0 : lawNum.text()) !== null && _a !== void 0 ? _a : "");
+    if (law.attr.LawType && law.attr.LawType !== lawTypeFromLawNum) {
+        lawAttr.LawType = law.attr.LawType;
+    }
+    const attrEntries = [];
+    for (const [name, value] of Object.entries(lawAttr)) {
+        if (std.defaultAttrs[law.tag][name] === value)
+            continue;
+        attrEntries.push(new inline_1.AttrEntry(`[${name}="${value}"]`, [name, value], null, "", null));
+    }
+    if (attrEntries.length !== 0) {
+        lines.push(new line_1.OtherLine({
+            range: null,
+            indentTexts,
+            controls: [],
+            sentencesArray: [
+                new inline_1.Sentences("", null, attrEntries, [])
+            ],
+            lineEndText: toCSTSettings_1.default.EOL,
+        }));
+    }
     if (lawTitle) {
         lines.push(new line_1.OtherLine({
             range: null,
@@ -60520,6 +60620,28 @@ exports.$law = factory_1.factory
     .withName("Law")
     .sequence(s => s
     .and(r => r
+    .sequence(s => s
+    .and(r => r
+    .zeroOrMore(r => r
+    .sequence(s => s
+    .and(r => r
+    .oneMatch(({ item }) => {
+    if (item.type === line_1.LineType.OTH
+        && item.line.type === line_1.LineType.OTH
+        && item.virtualIndentDepth === 0
+        && item.line.controls.length === 0
+        && item.line.sentencesArray.length === 1
+        && item.line.sentencesArray[0].sentences.length === 0
+        && item.line.sentencesArray[0].attrEntries.length !== 0) {
+        return item.line.sentencesArray[0].attrEntries;
+    }
+    else {
+        return null;
+    }
+}))
+    .andOmit(r => r.zeroOrMore(() => util_1.$blankLine)))), "attrEntriesList")
+    .action(({ attrEntriesList }) => Object.fromEntries(attrEntriesList.map(ae => ae.map(a => a.entry)).flat()))), "lawAttr")
+    .and(r => r
     .zeroOrOne(r => r
     .sequence(s => s
     .and(() => exports.$lawTitleLines)
@@ -60578,7 +60700,7 @@ exports.$law = factory_1.factory
     .andOmit(r => r.zeroOrMore(() => util_1.$blankLine))
     .and(r => r.anyOne())
     .andOmit(r => r.zeroOrMore(() => util_1.$blankLine)))), "notCapturedErrorLines")
-    .action(({ lawTitleLines, enactStatements, toc, preambles, mainProvisionAndErrors, supplOrAppdxItemAndErrors, notCapturedErrorLines }) => {
+    .action(({ lawAttr, lawTitleLines, enactStatements, toc, preambles, mainProvisionAndErrors, supplOrAppdxItemAndErrors, notCapturedErrorLines }) => {
     const errors = [];
     const law = (0, std_1.newStdEL)("Law", {
         Lang: "ja",
@@ -60600,8 +60722,10 @@ exports.$law = factory_1.factory
     }
     const lawBody = (0, std_1.newStdEL)("LawBody");
     law.children.push(lawBody);
-    if (lawTitleLines) {
-        lawBody.children.push((0, std_1.newStdEL)("LawTitle", {}, (0, _sentencesArray_1.forceSentencesArrayToSentenceChildren)(lawTitleLines.value.lawNameLine.line.sentencesArray), lawTitleLines.value.lawNameLine.virtualRange));
+    Object.assign(law.attr, lawAttr);
+    const lawTitle = lawTitleLines && (0, std_1.newStdEL)("LawTitle", {}, (0, _sentencesArray_1.forceSentencesArrayToSentenceChildren)(lawTitleLines.value.lawNameLine.line.sentencesArray), lawTitleLines.value.lawNameLine.virtualRange);
+    if (lawTitle) {
+        lawBody.children.push(lawTitle);
     }
     lawBody.children.push(...enactStatements.map(v => v.value));
     errors.push(...enactStatements.map(v => v.errors).flat());
@@ -60621,6 +60745,9 @@ exports.$law = factory_1.factory
         }
         else {
             lawBody.children.push(mainProvision.value);
+            if (lawTitle && /\s+抄\s*$/.test(lawTitle.text())) {
+                mainProvision.value.attr.Extract = "true";
+            }
         }
         errors.push(...mainProvision.errors);
         for (const errorLine of errorLines) {
@@ -61228,7 +61355,7 @@ const line_1 = __webpack_require__(69928);
 const std = __importStar(__webpack_require__(93619));
 const columnsOrSentences_1 = __webpack_require__(15695);
 const toCSTSettings_1 = __importDefault(__webpack_require__(52915));
-const _sentenceChildren_1 = __webpack_require__(36096);
+const _sentenceChildren_1 = __importStar(__webpack_require__(36096));
 const util_1 = __webpack_require__(84530);
 const inline_1 = __webpack_require__(22845);
 const util_2 = __webpack_require__(80427);
@@ -61245,7 +61372,7 @@ const _noteLike_1 = __webpack_require__(88035);
 const _paragraphItemLine_1 = __webpack_require__(50686);
 const _tagControl_1 = __webpack_require__(71040);
 const num_1 = __webpack_require__(68685);
-const addSentenceChildrenControls_1 = __importDefault(__webpack_require__(16088));
+const env_1 = __webpack_require__(39099);
 const reOldParagraphNum = new RegExp(`^(?:○[0123456789０１２３４５６７８９]+|[${num_1.circledDigitChars}])`);
 const reAmendingText = /.*?の一部を次のように(?:改正す|改め)る。$/;
 /**
@@ -61286,14 +61413,18 @@ const paragraphItemToLines = (el, indentTexts, options) => {
     }
     if (ParagraphCaption.length > 0) {
         const newIndentTexts = [...indentTexts, toCSTSettings_1.default.INDENT];
-        const captionSentence = std.newStdEL("Sentence", {}, [(0, _sentenceChildren_1.sentenceChildrenToString)(ParagraphCaption)]);
-        (0, addSentenceChildrenControls_1.default)(captionSentence);
+        const captionString = (0, _sentenceChildren_1.sentenceChildrenToString)(ParagraphCaption);
+        const result = _sentenceChildren_1.default.match(0, captionString, (0, env_1.initialEnv)({}));
+        if (!result.ok) {
+            const message = `addControls: Error: ${captionString}`;
+            throw new Error(message);
+        }
         const line = new line_1.OtherLine({
             range: null,
             indentTexts: newIndentTexts,
             controls: [],
             sentencesArray: [
-                new inline_1.Sentences("", null, [], [captionSentence]),
+                new inline_1.Sentences("", null, [], [std.newStdEL("Sentence", {}, result.value.value)]),
             ],
             lineEndText: toCSTSettings_1.default.EOL,
         });
@@ -61397,7 +61528,7 @@ const paragraphItemToLines = (el, indentTexts, options) => {
             lineEndText: toCSTSettings_1.default.EOL,
         }));
     }
-    for (const child of Children) {
+    for (const [ci, child] of Children.entries()) {
         if (std.isParagraphItem(child)) {
             lines.push(...(0, exports.paragraphItemToLines)(child, [...indentTexts, toCSTSettings_1.default.INDENT], {
                 defaultTag: std.paragraphItemTags[std.paragraphItemTags.indexOf(el.tag) + 1],
@@ -61405,7 +61536,9 @@ const paragraphItemToLines = (el, indentTexts, options) => {
         }
         else if (child.tag === "TableStruct") {
             lines.push(new line_1.BlankLine({ range: null, lineEndText: toCSTSettings_1.default.EOL }));
-            lines.push(...(0, _tableStruct_1.tableStructToLines)(child, [...indentTexts, toCSTSettings_1.default.INDENT])); /* >>>> INDENT >>>> */
+            const withControl = ((0 <= (ci - 1) && std.isTableStruct((Children[ci - 1]))) ||
+                ((ci + 1) < Children.length && std.isTableStruct((Children[ci + 1]))));
+            lines.push(...(0, _tableStruct_1.tableStructToLines)(child, [...indentTexts, toCSTSettings_1.default.INDENT], { withControl })); /* >>>> INDENT >>>> */
             lines.push(new line_1.BlankLine({ range: null, lineEndText: toCSTSettings_1.default.EOL }));
         }
         else if (child.tag === "FigStruct") {
@@ -61895,21 +62028,27 @@ exports.remarksLabelPtn = /^(?:備\s*考|注)\s*$/;
  * The renderer for {@link std.Remarks}. Please see the source code for the detailed syntax, and the [test code](https://github.com/yamachig/Lawtext/blob/main/core/src/parser/std/rules/$remarks.spec.ts) for examples.
  */
 const remarksToLines = (remarks, indentTexts) => {
-    var _a;
     const lines = [];
-    const remarksLabelSentenceChildren = (_a = remarks.children.find(el => el.tag === "RemarksLabel")) === null || _a === void 0 ? void 0 : _a.children;
+    const remarksLabel = remarks.children.find(el => el.tag === "RemarksLabel");
+    const remarksLabelSentenceChildren = remarksLabel === null || remarksLabel === void 0 ? void 0 : remarksLabel.children;
     const controls = remarksLabelSentenceChildren && exports.remarksLabelPtn.exec((0, _sentenceChildren_1.sentenceChildrenToString)(remarksLabelSentenceChildren)) ? [] : [
         new inline_1.Control(exports.remarksControl, null, "", null),
     ];
+    const remarksLabelSentences = new inline_1.Sentences("", null, [], [(0, std_1.newStdEL)("Sentence", {}, remarksLabelSentenceChildren)]);
     lines.push(new line_1.OtherLine({
         range: null,
         indentTexts,
         controls,
-        sentencesArray: remarksLabelSentenceChildren ? [
-            new inline_1.Sentences("", null, [], [(0, std_1.newStdEL)("Sentence", {}, remarksLabelSentenceChildren)])
-        ] : [],
+        sentencesArray: remarksLabelSentenceChildren ? [remarksLabelSentences] : [],
         lineEndText: toCSTSettings_1.default.EOL,
     }));
+    if (remarksLabel) {
+        for (const [name, value] of Object.entries(remarksLabel.attr)) {
+            if (std.defaultAttrs[remarksLabel.tag][name] === value)
+                continue;
+            remarksLabelSentences.attrEntries.push(new inline_1.AttrEntry(`[${name}="${value}"]`, [name, value], null, "", null));
+        }
+    }
     const childrenIndentTexts = [...indentTexts, toCSTSettings_1.default.INDENT];
     const restChildren = remarks.children.filter(c => c.tag !== "RemarksLabel");
     for (const child of restChildren) {
@@ -61994,7 +62133,9 @@ exports.$remarks = factory_1.factory
         && item.line.type === line_1.LineType.OTH
         && ((item.line.controls.some(c => c.control === exports.remarksControl))
             || (item.line.sentencesArray.length > 0
-                && exports.remarksLabelPtn.exec((0, _sentencesArray_1.sentencesArrayToString)(item.line.sentencesArray))))) {
+                && exports.remarksLabelPtn.exec((0, _sentencesArray_1.sentencesArrayToString)(item.line.sentencesArray, {
+                    withoutAttrs: true,
+                }))))) {
         return item;
     }
     else {
@@ -62004,11 +62145,12 @@ exports.$remarks = factory_1.factory
     .and(r => r.zeroOrMore(() => util_1.$blankLine))
     .and(() => $remarksChildrenBlock, "childrenBlock")
     .action(({ labelLine, childrenBlock }) => {
-    var _a;
+    var _a, _b, _c;
     const children = [];
     const errors = [];
     const remarksLabelSentenceChildren = (0, _sentencesArray_1.forceSentencesArrayToSentenceChildren)(labelLine.line.sentencesArray);
-    const remarksLabel = remarksLabelSentenceChildren.length > 0 ? (0, std_1.newStdEL)("RemarksLabel", {}, remarksLabelSentenceChildren, labelLine.line.sentencesArrayRange) : null;
+    const attrEntries = (_b = (_a = labelLine.line.sentencesArray[0]) === null || _a === void 0 ? void 0 : _a.attrEntries) !== null && _b !== void 0 ? _b : [];
+    const remarksLabel = ((remarksLabelSentenceChildren.length > 0) || attrEntries.length > 0) ? (0, std_1.newStdEL)("RemarksLabel", Object.fromEntries(attrEntries.map(attrEntry => attrEntry.entry)), remarksLabelSentenceChildren, labelLine.line.sentencesArrayRange) : null;
     if (remarksLabel) {
         children.push(remarksLabel);
     }
@@ -62016,7 +62158,7 @@ exports.$remarks = factory_1.factory
     errors.push(...childrenBlock.value.flat().map(v => v.errors).flat());
     errors.push(...childrenBlock.errors);
     const pos = labelLine.line.indentsEndPos;
-    const range = (_a = (0, el_1.rangeOfELs)(children)) !== null && _a !== void 0 ? _a : (pos !== null ? [pos, pos] : null);
+    const range = (_c = (0, el_1.rangeOfELs)(children)) !== null && _c !== void 0 ? _c : (pos !== null ? [pos, pos] : null);
     if (range && pos !== null) {
         range[0] = pos;
     }
@@ -62384,7 +62526,7 @@ const supplProvisionAppdxItemToLines = (supplProvisionAppdxItem, indentTexts) =>
         lineEndText: toCSTSettings_1.default.EOL,
     }));
     const childrenIndentTexts = [...indentTexts, toCSTSettings_1.default.INDENT];
-    for (const child of supplProvisionAppdxItem.children) {
+    for (const [ci, child] of supplProvisionAppdxItem.children.entries()) {
         if ((0, std_1.isSupplProvisionAppdxItemTitle)(child))
             continue;
         if ((0, std_1.isRelatedArticleNum)(child))
@@ -62393,7 +62535,9 @@ const supplProvisionAppdxItemToLines = (supplProvisionAppdxItem, indentTexts) =>
             lines.push(...(0, _noteLike_1.noteLikeStructToLines)(child, childrenIndentTexts));
         }
         else if ((0, std_1.isTableStruct)(child)) {
-            lines.push(...(0, _tableStruct_1.tableStructToLines)(child, childrenIndentTexts));
+            const withControl = ((0 <= (ci - 1) && (0, std_1.isTableStruct)((supplProvisionAppdxItem.children[ci - 1]))) ||
+                ((ci + 1) < supplProvisionAppdxItem.children.length && (0, std_1.isTableStruct)((supplProvisionAppdxItem.children[ci + 1]))));
+            lines.push(...(0, _tableStruct_1.tableStructToLines)(child, childrenIndentTexts, { withControl }));
         }
         else if ((0, std_1.isArithFormula)(child)) {
             lines.push(...(0, _arithFormula_1.arithFormulaToLines)(child, childrenIndentTexts));
@@ -62615,11 +62759,12 @@ exports.tableToLines = tableToLines;
 /**
  * The renderer for {@link std.TableStruct}. Please see the source code for the detailed syntax, and the [test code](https://github.com/yamachig/Lawtext/blob/main/core/src/parser/std/rules/$tableStruct.spec.ts) for examples.
  */
-const tableStructToLines = (tableStruct, indentTexts) => {
+const tableStructToLines = (tableStruct, indentTexts, options) => {
     var _a;
+    const { withControl, } = Object.assign({ withControl: false }, options);
     const lines = [];
     const tableStructTitleSentenceChildren = (_a = tableStruct.children.find(el => el.tag === "TableStructTitle")) === null || _a === void 0 ? void 0 : _a.children;
-    const requireControl = Boolean(tableStructTitleSentenceChildren) || tableStruct.children.length !== 1 || tableStruct.children[0].tag !== "Table";
+    const requireControl = withControl || Boolean(tableStructTitleSentenceChildren) || tableStruct.children.length !== 1 || tableStruct.children[0].tag !== "Table";
     if (requireControl) {
         lines.push(new line_1.OtherLine({
             range: null,
@@ -62913,7 +63058,7 @@ exports.$tableStruct = factory_1.factory
     var _a;
     const children = [];
     const errors = [];
-    const tableStructTitleText = titleLine.line.sentencesArray.map(ss => ss.sentences).flat().map(s => s.text()).join("");
+    const tableStructTitleText = titleLine.line.sentencesArray.map(ss => [ss.leadingSpace, ...ss.sentences.map(s => s.text())]).flat().join("");
     const tableStructTitle = tableStructTitleText ? (0, std_1.newStdEL)("TableStructTitle", {}, [tableStructTitleText], titleLine.line.sentencesArrayRange) : null;
     if (tableStructTitle) {
         children.push(tableStructTitle);
@@ -63231,22 +63376,25 @@ exports.$tocSupplProvision = factory_1.default
     var _a;
     const children = [];
     const errors = [];
+    const amendLawNumParentheses = new controls_1.__Parentheses({
+        start: headLine.line.openParen,
+        content: [new controls_1.__Text(headLine.line.amendLawNum, headLine.line.amendLawNumRange)],
+        end: headLine.line.closeParen,
+        type: "round",
+        range: ((headLine.line.openParenRange && headLine.line.amendLawNumRange && headLine.line.closeParenRange)
+            ? {
+                start: headLine.line.openParenRange,
+                content: headLine.line.amendLawNumRange,
+                end: headLine.line.closeParenRange,
+            }
+            : null),
+        depth: 0,
+    });
     const inline = (0, util_3.mergeAdjacentTexts)([
         new controls_1.__Text(headLine.line.title, headLine.line.titleRange),
-        new controls_1.__Parentheses({
-            start: headLine.line.openParen,
-            content: [new controls_1.__Text(headLine.line.amendLawNum, headLine.line.amendLawNumRange)],
-            end: headLine.line.closeParen,
-            type: "round",
-            range: ((headLine.line.openParenRange && headLine.line.amendLawNumRange && headLine.line.closeParenRange)
-                ? {
-                    start: headLine.line.openParenRange,
-                    content: headLine.line.amendLawNumRange,
-                    end: headLine.line.closeParenRange,
-                }
-                : null),
-            depth: 0,
-        }),
+        ...((amendLawNumParentheses.text() === "")
+            ? []
+            : [amendLawNumParentheses]),
         new controls_1.__Text(headLine.line.extractText, headLine.line.extractTextRange),
     ]);
     const lastItem = inline.length > 0 ? inline[inline.length - 1] : null;
