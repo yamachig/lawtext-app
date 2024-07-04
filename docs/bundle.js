@@ -9564,7 +9564,7 @@ module.exports = posix;
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   A: () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Law Era=\"Heisei\" Lang=\"ja\" LawType=\"Act\" Num=\"88\" Year=\"05\"><LawNum>平成五年法律第八十八号</LawNum><LawBody><LawTitle>行政手続法</LawTitle><TOC><TOCLabel>目次</TOCLabel><TOCChapter Delete=\"false\" Num=\"1\"><ChapterTitle>第一章　総則</ChapterTitle><ArticleRange>（第一条―第四条）</ArticleRange></TOCChapter><TOCChapter Delete=\"false\" Num=\"2\"><ChapterTitle>第二章　申請に対する処分</ChapterTitle><ArticleRange>（第五条―第十一条）</ArticleRange></TOCChapter><TOCChapter Delete=\"false\" Num=\"3\"><ChapterTitle>第三章　不利益処分</ChapterTitle><TOCSection Delete=\"false\" Num=\"1\"><SectionTitle>第一節　通則</SectionTitle><ArticleRange>（第十二条―第十四条）</ArticleRange></TOCSection><TOCSection Delete=\"false\" Num=\"2\"><SectionTitle>第二節　聴聞</SectionTitle><ArticleRange>（第十五条―第二十八条）</ArticleRange></TOCSection><TOCSection Delete=\"false\" Num=\"3\"><SectionTitle>第三節　弁明の機会の付与</SectionTitle><ArticleRange>（第二十九条―第三十一条）</ArticleRange></TOCSection></TOCChapter><TOCChapter Delete=\"false\" Num=\"4\"><ChapterTitle>第四章　行政指導</ChapterTitle><ArticleRange>（第三十二条―第三十六条の二）</ArticleRange></TOCChapter><TOCChapter Delete=\"false\" Num=\"4_2\"><ChapterTitle>第四章の二　処分等の求め</ChapterTitle><ArticleRange>（第三十六条の三）</ArticleRange></TOCChapter><TOCChapter Delete=\"false\" Num=\"5\"><ChapterTitle>第五章　届出</ChapterTitle><ArticleRange>（第三十七条）</ArticleRange></TOCChapter><TOCChapter Delete=\"false\" Num=\"6\"><ChapterTitle>第六章　意見公募手続等</ChapterTitle><ArticleRange>（第三十八条―第四十五条）</ArticleRange></TOCChapter><TOCChapter Delete=\"false\" Num=\"7\"><ChapterTitle>第七章　補則</ChapterTitle><ArticleRange>（第四十六条）</ArticleRange></TOCChapter><TOCSupplProvision><SupplProvisionLabel>附則</SupplProvisionLabel></TOCSupplProvision></TOC><MainProvision><Chapter Delete=\"false\" Hide=\"false\" Num=\"1\"><ChapterTitle>第一章　総則</ChapterTitle><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（目的等）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、処分、行政指導及び届出に関する手続並びに命令等を定める手続に関し、共通する事項を定めることによって、行政運営における公正の確保と透明性（行政上の意思決定について、その内容及び過程が国民にとって明らかであることをいう。第四十六条において同じ。）の向上を図り、もって国民の権利利益の保護に資することを目的とする。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">処分、行政指導及び届出に関する手続並びに命令等を定める手続に関しこの法律に規定する事項について、他の法律に特別の定めがある場合は、その定めるところによる。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"2\"><ArticleCaption>（定義）</ArticleCaption><ArticleTitle>第二条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律において、次の各号に掲げる用語の意義は、当該各号に定めるところによる。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">法令</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">法律、法律に基づく命令（告示を含む。）、条例及び地方公共団体の執行機関の規則（規程を含む。以下「規則」という。）をいう。</Sentence></Column></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">処分</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">行政庁の処分その他公権力の行使に当たる行為をいう。</Sentence></Column></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">申請</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">法令に基づき、行政庁の許可、認可、免許その他の自己に対し何らかの利益を付与する処分（以下「許認可等」という。）を求める行為であって、当該行為に対して行政庁が諾否の応答をすべきこととされているものをいう。</Sentence></Column></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">不利益処分</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">行政庁が、法令に基づき、特定の者を名あて人として、直接に、これに義務を課し、又はその権利を制限する処分をいう。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、次のいずれかに該当するものを除く。</Sentence></Column></ItemSentence><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"1\"><Subitem1Title>イ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">事実上の行為及び事実上の行為をするに当たりその範囲、時期等を明らかにするために法令上必要とされている手続としての処分</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"2\"><Subitem1Title>ロ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">申請により求められた許認可等を拒否する処分その他申請に基づき当該申請をした者を名あて人としてされる処分</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"3\"><Subitem1Title>ハ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">名あて人となるべき者の同意の下にすることとされている処分</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"4\"><Subitem1Title>ニ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">許認可等の効力を失わせる処分であって、当該許認可等の基礎となった事実が消滅した旨の届出があったことを理由としてされるもの</Sentence></Subitem1Sentence></Subitem1></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">行政機関</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">次に掲げる機関をいう。</Sentence></Column></ItemSentence><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"1\"><Subitem1Title>イ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">法律の規定に基づき内閣に置かれる機関若しくは内閣の所轄の下に置かれる機関、宮内庁、内閣府設置法（平成十一年法律第八十九号）第四十九条第一項若しくは第二項に規定する機関、国家行政組織法（昭和二十三年法律第百二十号）第三条第二項に規定する機関、会計検査院若しくはこれらに置かれる機関又はこれらの機関の職員であって法律上独立に権限を行使することを認められた職員</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"2\"><Subitem1Title>ロ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">地方公共団体の機関（議会を除く。）</Sentence></Subitem1Sentence></Subitem1></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6\"><ItemTitle>六</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">行政指導</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">行政機関がその任務又は所掌事務の範囲内において一定の行政目的を実現するため特定の者に一定の作為又は不作為を求める指導、勧告、助言その他の行為であって処分に該当しないものをいう。</Sentence></Column></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"7\"><ItemTitle>七</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">届出</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">行政庁に対し一定の事項の通知をする行為（申請に該当するものを除く。）であって、法令により直接に当該通知が義務付けられているもの（自己の期待する一定の法律上の効果を発生させるためには当該通知をすべきこととされているものを含む。）をいう。</Sentence></Column></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"8\"><ItemTitle>八</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">命令等</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">内閣又は行政機関が定める次に掲げるものをいう。</Sentence></Column></ItemSentence><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"1\"><Subitem1Title>イ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">法律に基づく命令（処分の要件を定める告示を含む。次条第二項において単に「命令」という。）又は規則</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"2\"><Subitem1Title>ロ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">審査基準（申請により求められた許認可等をするかどうかをその法令の定めに従って判断するために必要とされる基準をいう。以下同じ。）</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"3\"><Subitem1Title>ハ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">処分基準（不利益処分をするかどうか又はどのような不利益処分とするかについてその法令の定めに従って判断するために必要とされる基準をいう。以下同じ。）</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"4\"><Subitem1Title>ニ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">行政指導指針（同一の行政目的を実現するため一定の条件に該当する複数の者に対し行政指導をしようとするときにこれらの行政指導に共通してその内容となるべき事項をいう。以下同じ。）</Sentence></Subitem1Sentence></Subitem1></Item></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"3\"><ArticleCaption>（適用除外）</ArticleCaption><ArticleTitle>第三条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">次に掲げる処分及び行政指導については、次章から第四章の二までの規定は、適用しない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">国会の両院若しくは一院又は議会の議決によってされる処分</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">裁判所若しくは裁判官の裁判により、又は裁判の執行としてされる処分</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">国会の両院若しくは一院若しくは議会の議決を経て、又はこれらの同意若しくは承認を得た上でされるべきものとされている処分</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">検査官会議で決すべきものとされている処分及び会計検査の際にされる行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">刑事事件に関する法令に基づいて検察官、検察事務官又は司法警察職員がする処分及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6\"><ItemTitle>六</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">国税又は地方税の犯則事件に関する法令（他の法令において準用する場合を含む。）に基づいて国税庁長官、国税局長、税務署長、国税庁、国税局若しくは税務署の当該職員、税関長、税関職員又は徴税吏員（他の法令の規定に基づいてこれらの職員の職務を行う者を含む。）がする処分及び行政指導並びに金融商品取引の犯則事件に関する法令（他の法令において準用する場合を含む。）に基づいて証券取引等監視委員会、その職員（当該法令においてその職員とみなされる者を含む。）、財務局長又は財務支局長がする処分及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"7\"><ItemTitle>七</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">学校、講習所、訓練所又は研修所において、教育、講習、訓練又は研修の目的を達成するために、学生、生徒、児童若しくは幼児若しくはこれらの保護者、講習生、訓練生又は研修生に対してされる処分及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"8\"><ItemTitle>八</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">刑務所、少年刑務所、拘置所、留置施設、海上保安留置施設、少年院、少年鑑別所又は婦人補導院において、収容の目的を達成するためにされる処分及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"9\"><ItemTitle>九</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">公務員（国家公務員法（昭和二十二年法律第百二十号）第二条第一項に規定する国家公務員及び地方公務員法（昭和二十五年法律第二百六十一号）第三条第一項に規定する地方公務員をいう。以下同じ。）又は公務員であった者に対してその職務又は身分に関してされる処分及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"10\"><ItemTitle>十</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">外国人の出入国、難民の認定又は帰化に関する処分及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"11\"><ItemTitle>十一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">専ら人の学識技能に関する試験又は検定の結果についての処分</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"12\"><ItemTitle>十二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">相反する利害を有する者の間の利害の調整を目的として法令の規定に基づいてされる裁定その他の処分（その双方を名宛人とするものに限る。）及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"13\"><ItemTitle>十三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">公衆衛生、環境保全、防疫、保安その他の公益に関わる事象が発生し又は発生する可能性のある現場において警察官若しくは海上保安官又はこれらの公益を確保するために行使すべき権限を法律上直接に与えられたその他の職員によってされる処分及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"14\"><ItemTitle>十四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">報告又は物件の提出を命ずる処分その他その職務の遂行上必要な情報の収集を直接の目的としてされる処分及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"15\"><ItemTitle>十五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">審査請求、再調査の請求その他の不服申立てに対する行政庁の裁決、決定その他の処分</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"16\"><ItemTitle>十六</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">前号に規定する処分の手続又は第三章に規定する聴聞若しくは弁明の機会の付与の手続その他の意見陳述のための手続において法令に基づいてされる処分及び行政指導</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">次に掲げる命令等を定める行為については、第六章の規定は、適用しない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">法律の施行期日について定める政令</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">恩赦に関する命令</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">命令又は規則を定める行為が処分に該当する場合における当該命令又は規則</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">法律の規定に基づき施設、区間、地域その他これらに類するものを指定する命令又は規則</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">公務員の給与、勤務時間その他の勤務条件について定める命令等</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6\"><ItemTitle>六</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">審査基準、処分基準又は行政指導指針であって、法令の規定により若しくは慣行として、又は命令等を定める機関の判断により公にされるもの以外のもの</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">第一項各号及び前項各号に掲げるもののほか、地方公共団体の機関がする処分（その根拠となる規定が条例又は規則に置かれているものに限る。）及び行政指導、地方公共団体の機関に対する届出（前条第七号の通知の根拠となる規定が条例又は規則に置かれているものに限る。）並びに地方公共団体の機関が命令等を定める行為については、次章から第六章までの規定は、適用しない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"4\"><ArticleCaption>（国の機関等に対する処分等の適用除外）</ArticleCaption><ArticleTitle>第四条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">国の機関又は地方公共団体若しくはその機関に対する処分（これらの機関又は団体がその固有の資格において当該処分の名あて人となるものに限る。）及び行政指導並びにこれらの機関又は団体がする届出（これらの機関又は団体がその固有の資格においてすべきこととされているものに限る。）については、この法律の規定は、適用しない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">次の各号のいずれかに該当する法人に対する処分であって、当該法人の監督に関する法律の特別の規定に基づいてされるもの（当該法人の解散を命じ、若しくは設立に関する認可を取り消す処分又は当該法人の役員若しくは当該法人の業務に従事する者の解任を命ずる処分を除く。）については、次章及び第三章の規定は、適用しない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">法律により直接に設立された法人又は特別の法律により特別の設立行為をもって設立された法人</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">特別の法律により設立され、かつ、その設立に関し行政庁の認可を要する法人のうち、その行う業務が国又は地方公共団体の行政運営と密接な関連を有するものとして政令で定める法人</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁が法律の規定に基づく試験、検査、検定、登録その他の行政上の事務について当該法律に基づきその全部又は一部を行わせる者を指定した場合において、その指定を受けた者（その者が法人である場合にあっては、その役員）又は職員その他の者が当該事務に従事することに関し公務に従事する職員とみなされるときは、その指定を受けた者に対し当該法律に基づいて当該事務に関し監督上される処分（当該指定を取り消す処分、その指定を受けた者が法人である場合におけるその役員の解任を命ずる処分又はその指定を受けた者の当該事務に従事する者の解任を命ずる処分を除く。）については、次章及び第三章の規定は、適用しない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">次に掲げる命令等を定める行為については、第六章の規定は、適用しない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">国又は地方公共団体の機関の設置、所掌事務の範囲その他の組織について定める命令等</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">皇室典範（昭和二十二年法律第三号）第二十六条の皇統譜について定める命令等</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">公務員の礼式、服制、研修、教育訓練、表彰及び報償並びに公務員の間における競争試験について定める命令等</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">国又は地方公共団体の予算、決算及び会計について定める命令等（入札の参加者の資格、入札保証金その他の国又は地方公共団体の契約の相手方又は相手方になろうとする者に係る事項を定める命令等を除く。）並びに国又は地方公共団体の財産及び物品の管理について定める命令等（国又は地方公共団体が財産及び物品を貸し付け、交換し、売り払い、譲与し、信託し、若しくは出資の目的とし、又はこれらに私権を設定することについて定める命令等であって、これらの行為の相手方又は相手方になろうとする者に係る事項を定めるものを除く。）</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">会計検査について定める命令等</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6\"><ItemTitle>六</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">国の機関相互間の関係について定める命令等並びに地方自治法（昭和二十二年法律第六十七号）第二編第十一章に規定する国と普通地方公共団体との関係及び普通地方公共団体相互間の関係その他の国と地方公共団体との関係及び地方公共団体相互間の関係について定める命令等（第一項の規定によりこの法律の規定を適用しないこととされる処分に係る命令等を含む。）</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"7\"><ItemTitle>七</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">第二項各号に規定する法人の役員及び職員、業務の範囲、財務及び会計その他の組織、運営及び管理について定める命令等（これらの法人に対する処分であって、これらの法人の解散を命じ、若しくは設立に関する認可を取り消す処分又はこれらの法人の役員若しくはこれらの法人の業務に従事する者の解任を命ずる処分に係る命令等を除く。）</Sentence></ItemSentence></Item></Paragraph></Article></Chapter><Chapter Delete=\"false\" Hide=\"false\" Num=\"2\"><ChapterTitle>第二章　申請に対する処分</ChapterTitle><Article Delete=\"false\" Hide=\"false\" Num=\"5\"><ArticleCaption>（審査基準）</ArticleCaption><ArticleTitle>第五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、審査基準を定めるものとする。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、審査基準を定めるに当たっては、許認可等の性質に照らしてできる限り具体的なものとしなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、行政上特別の支障があるときを除き、法令により申請の提出先とされている機関の事務所における備付けその他の適当な方法により審査基準を公にしておかなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"6\"><ArticleCaption>（標準処理期間）</ArticleCaption><ArticleTitle>第六条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、申請がその事務所に到達してから当該申請に対する処分をするまでに通常要すべき標準的な期間（法令により当該行政庁と異なる機関が当該申請の提出先とされている場合は、併せて、当該申請が当該提出先とされている機関の事務所に到達してから当該行政庁の事務所に到達するまでに通常要すべき標準的な期間）を定めるよう努めるとともに、これを定めたときは、これらの当該申請の提出先とされている機関の事務所における備付けその他の適当な方法により公にしておかなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"7\"><ArticleCaption>（申請に対する審査、応答）</ArticleCaption><ArticleTitle>第七条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、申請がその事務所に到達したときは遅滞なく当該申請の審査を開始しなければならず、かつ、申請書の記載事項に不備がないこと、申請書に必要な書類が添付されていること、申請をすることができる期間内にされたものであることその他の法令に定められた申請の形式上の要件に適合しない申請については、速やかに、申請をした者（以下「申請者」という。）に対し相当の期間を定めて当該申請の補正を求め、又は当該申請により求められた許認可等を拒否しなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"8\"><ArticleCaption>（理由の提示）</ArticleCaption><ArticleTitle>第八条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">行政庁は、申請により求められた許認可等を拒否する処分をする場合は、申請者に対し、同時に、当該処分の理由を示さなければならない。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、法令に定められた許認可等の要件又は公にされた審査基準が数量的指標その他の客観的指標により明確に定められている場合であって、当該申請がこれらに適合しないことが申請書の記載又は添付書類その他の申請の内容から明らかであるときは、申請者の求めがあったときにこれを示せば足りる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項本文に規定する処分を書面でするときは、同項の理由は、書面により示さなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"9\"><ArticleCaption>（情報の提供）</ArticleCaption><ArticleTitle>第九条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、申請者の求めに応じ、当該申請に係る審査の進行状況及び当該申請に対する処分の時期の見通しを示すよう努めなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、申請をしようとする者又は申請者の求めに応じ、申請書の記載及び添付書類に関する事項その他の申請に必要な情報の提供に努めなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"10\"><ArticleCaption>（公聴会の開催等）</ArticleCaption><ArticleTitle>第十条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、申請に対する処分であって、申請者以外の者の利害を考慮すべきことが当該法令において許認可等の要件とされているものを行う場合には、必要に応じ、公聴会の開催その他の適当な方法により当該申請者以外の者の意見を聴く機会を設けるよう努めなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"11\"><ArticleCaption>（複数の行政庁が関与する処分）</ArticleCaption><ArticleTitle>第十一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、申請の処理をするに当たり、他の行政庁において同一の申請者からされた関連する申請が審査中であることをもって自らすべき許認可等をするかどうかについての審査又は判断を殊更に遅延させるようなことをしてはならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">一の申請又は同一の申請者からされた相互に関連する複数の申請に対する処分について複数の行政庁が関与する場合においては、当該複数の行政庁は、必要に応じ、相互に連絡をとり、当該申請者からの説明の聴取を共同して行う等により審査の促進に努めるものとする。</Sentence></ParagraphSentence></Paragraph></Article></Chapter><Chapter Delete=\"false\" Hide=\"false\" Num=\"3\"><ChapterTitle>第三章　不利益処分</ChapterTitle><Section Delete=\"false\" Hide=\"false\" Num=\"1\"><SectionTitle>第一節　通則</SectionTitle><Article Delete=\"false\" Hide=\"false\" Num=\"12\"><ArticleCaption>（処分の基準）</ArticleCaption><ArticleTitle>第十二条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、処分基準を定め、かつ、これを公にしておくよう努めなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、処分基準を定めるに当たっては、不利益処分の性質に照らしてできる限り具体的なものとしなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"13\"><ArticleCaption>（不利益処分をしようとする場合の手続）</ArticleCaption><ArticleTitle>第十三条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、不利益処分をしようとする場合には、次の各号の区分に従い、この章の定めるところにより、当該不利益処分の名あて人となるべき者について、当該各号に定める意見陳述のための手続を執らなければならない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">次のいずれかに該当するとき</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">聴聞</Sentence></Column></ItemSentence><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"1\"><Subitem1Title>イ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">許認可等を取り消す不利益処分をしようとするとき。</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"2\"><Subitem1Title>ロ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">イに規定するもののほか、名あて人の資格又は地位を直接にはく奪する不利益処分をしようとするとき。</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"3\"><Subitem1Title>ハ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">名あて人が法人である場合におけるその役員の解任を命ずる不利益処分、名あて人の業務に従事する者の解任を命ずる不利益処分又は名あて人の会員である者の除名を命ずる不利益処分をしようとするとき。</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"4\"><Subitem1Title>ニ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">イからハまでに掲げる場合以外の場合であって行政庁が相当と認めるとき。</Sentence></Subitem1Sentence></Subitem1></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">前号イからニまでのいずれにも該当しないとき</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">弁明の機会の付与</Sentence></Column></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">次の各号のいずれかに該当するときは、前項の規定は、適用しない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">公益上、緊急に不利益処分をする必要があるため、前項に規定する意見陳述のための手続を執ることができないとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">法令上必要とされる資格がなかったこと又は失われるに至ったことが判明した場合に必ずすることとされている不利益処分であって、その資格の不存在又は喪失の事実が裁判所の判決書又は決定書、一定の職に就いたことを証する当該任命権者の書類その他の客観的な資料により直接証明されたものをしようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">施設若しくは設備の設置、維持若しくは管理又は物の製造、販売その他の取扱いについて遵守すべき事項が法令において技術的な基準をもって明確にされている場合において、専ら当該基準が充足されていないことを理由として当該基準に従うべきことを命ずる不利益処分であってその不充足の事実が計測、実験その他客観的な認定方法によって確認されたものをしようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">納付すべき金銭の額を確定し、一定の額の金銭の納付を命じ、又は金銭の給付決定の取消しその他の金銭の給付を制限する不利益処分をしようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該不利益処分の性質上、それによって課される義務の内容が著しく軽微なものであるため名あて人となるべき者の意見をあらかじめ聴くことを要しないものとして政令で定める処分をしようとするとき。</Sentence></ItemSentence></Item></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"14\"><ArticleCaption>（不利益処分の理由の提示）</ArticleCaption><ArticleTitle>第十四条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">行政庁は、不利益処分をする場合には、その名あて人に対し、同時に、当該不利益処分の理由を示さなければならない。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、当該理由を示さないで処分をすべき差し迫った必要がある場合は、この限りでない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、前項ただし書の場合においては、当該名あて人の所在が判明しなくなったときその他処分後において理由を示すことが困難な事情があるときを除き、処分後相当の期間内に、同項の理由を示さなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">不利益処分を書面でするときは、前二項の理由は、書面により示さなければならない。</Sentence></ParagraphSentence></Paragraph></Article></Section><Section Delete=\"false\" Hide=\"false\" Num=\"2\"><SectionTitle>第二節　聴聞</SectionTitle><Article Delete=\"false\" Hide=\"false\" Num=\"15\"><ArticleCaption>（聴聞の通知の方式）</ArticleCaption><ArticleTitle>第十五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、聴聞を行うに当たっては、聴聞を行うべき期日までに相当な期間をおいて、不利益処分の名あて人となるべき者に対し、次に掲げる事項を書面により通知しなければならない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">予定される不利益処分の内容及び根拠となる法令の条項</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">不利益処分の原因となる事実</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">聴聞の期日及び場所</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">聴聞に関する事務を所掌する組織の名称及び所在地</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の書面においては、次に掲げる事項を教示しなければならない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">聴聞の期日に出頭して意見を述べ、及び証拠書類又は証拠物（以下「証拠書類等」という。）を提出し、又は聴聞の期日への出頭に代えて陳述書及び証拠書類等を提出することができること。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">聴聞が終結する時までの間、当該不利益処分の原因となる事実を証する資料の閲覧を求めることができること。</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">行政庁は、不利益処分の名あて人となるべき者の所在が判明しない場合においては、第一項の規定による通知を、その者の氏名、同項第三号及び第四号に掲げる事項並びに当該行政庁が同項各号に掲げる事項を記載した書面をいつでもその者に交付する旨を当該行政庁の事務所の掲示場に掲示することによって行うことができる。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合においては、掲示を始めた日から二週間を経過したときに、当該通知がその者に到達したものとみなす。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"16\"><ArticleCaption>（代理人）</ArticleCaption><ArticleTitle>第十六条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">前条第一項の通知を受けた者（同条第三項後段の規定により当該通知が到達したものとみなされる者を含む。以下「当事者」という。）は、代理人を選任することができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">代理人は、各自、当事者のために、聴聞に関する一切の行為をすることができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">代理人の資格は、書面で証明しなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">代理人がその資格を失ったときは、当該代理人を選任した当事者は、書面でその旨を行政庁に届け出なければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"17\"><ArticleCaption>（参加人）</ArticleCaption><ArticleTitle>第十七条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">第十九条の規定により聴聞を主宰する者（以下「主宰者」という。）は、必要があると認めるときは、当事者以外の者であって当該不利益処分の根拠となる法令に照らし当該不利益処分につき利害関係を有するものと認められる者（同条第二項第六号において「関係人」という。）に対し、当該聴聞に関する手続に参加することを求め、又は当該聴聞に関する手続に参加することを許可することができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の規定により当該聴聞に関する手続に参加する者（以下「参加人」という。）は、代理人を選任することができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">前条第二項から第四項までの規定は、前項の代理人について準用する。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合において、同条第二項及び第四項中「当事者」とあるのは、「参加人」と読み替えるものとする。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"18\"><ArticleCaption>（文書等の閲覧）</ArticleCaption><ArticleTitle>第十八条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">当事者及び当該不利益処分がされた場合に自己の利益を害されることとなる参加人（以下この条及び第二十四条第三項において「当事者等」という。）は、聴聞の通知があった時から聴聞が終結する時までの間、行政庁に対し、当該事案についてした調査の結果に係る調書その他の当該不利益処分の原因となる事実を証する資料の閲覧を求めることができる。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合において、行政庁は、第三者の利益を害するおそれがあるときその他正当な理由があるときでなければ、その閲覧を拒むことができない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の規定は、当事者等が聴聞の期日における審理の進行に応じて必要となった資料の閲覧を更に求めることを妨げない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、前二項の閲覧について日時及び場所を指定することができる。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"19\"><ArticleCaption>（聴聞の主宰）</ArticleCaption><ArticleTitle>第十九条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">聴聞は、行政庁が指名する職員その他政令で定める者が主宰する。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">次の各号のいずれかに該当する者は、聴聞を主宰することができない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該聴聞の当事者又は参加人</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">前号に規定する者の配偶者、四親等内の親族又は同居の親族</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">第一号に規定する者の代理人又は次条第三項に規定する補佐人</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">前三号に規定する者であった者</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">第一号に規定する者の後見人、後見監督人、保佐人、保佐監督人、補助人又は補助監督人</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6\"><ItemTitle>六</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">参加人以外の関係人</Sentence></ItemSentence></Item></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"20\"><ArticleCaption>（聴聞の期日における審理の方式）</ArticleCaption><ArticleTitle>第二十条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、最初の聴聞の期日の冒頭において、行政庁の職員に、予定される不利益処分の内容及び根拠となる法令の条項並びにその原因となる事実を聴聞の期日に出頭した者に対し説明させなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">当事者又は参加人は、聴聞の期日に出頭して、意見を述べ、及び証拠書類等を提出し、並びに主宰者の許可を得て行政庁の職員に対し質問を発することができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の場合において、当事者又は参加人は、主宰者の許可を得て、補佐人とともに出頭することができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、聴聞の期日において必要があると認めるときは、当事者若しくは参加人に対し質問を発し、意見の陳述若しくは証拠書類等の提出を促し、又は行政庁の職員に対し説明を求めることができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"5\"><ParagraphNum>５</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、当事者又は参加人の一部が出頭しないときであっても、聴聞の期日における審理を行うことができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"6\"><ParagraphNum>６</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">聴聞の期日における審理は、行政庁が公開することを相当と認めるときを除き、公開しない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"21\"><ArticleCaption>（陳述書等の提出）</ArticleCaption><ArticleTitle>第二十一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">当事者又は参加人は、聴聞の期日への出頭に代えて、主宰者に対し、聴聞の期日までに陳述書及び証拠書類等を提出することができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、聴聞の期日に出頭した者に対し、その求めに応じて、前項の陳述書及び証拠書類等を示すことができる。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"22\"><ArticleCaption>（続行期日の指定）</ArticleCaption><ArticleTitle>第二十二条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、聴聞の期日における審理の結果、なお聴聞を続行する必要があると認めるときは、さらに新たな期日を定めることができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">前項の場合においては、当事者及び参加人に対し、あらかじめ、次回の聴聞の期日及び場所を書面により通知しなければならない。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、聴聞の期日に出頭した当事者及び参加人に対しては、当該聴聞の期日においてこれを告知すれば足りる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">第十五条第三項の規定は、前項本文の場合において、当事者又は参加人の所在が判明しないときにおける通知の方法について準用する。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合において、同条第三項中「不利益処分の名あて人となるべき者」とあるのは「当事者又は参加人」と、「掲示を始めた日から二週間を経過したとき」とあるのは「掲示を始めた日から二週間を経過したとき（同一の当事者又は参加人に対する二回目以降の通知にあっては、掲示を始めた日の翌日）」と読み替えるものとする。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"23\"><ArticleCaption>（当事者の不出頭等の場合における聴聞の終結）</ArticleCaption><ArticleTitle>第二十三条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、当事者の全部若しくは一部が正当な理由なく聴聞の期日に出頭せず、かつ、第二十一条第一項に規定する陳述書若しくは証拠書類等を提出しない場合、又は参加人の全部若しくは一部が聴聞の期日に出頭しない場合には、これらの者に対し改めて意見を述べ、及び証拠書類等を提出する機会を与えることなく、聴聞を終結することができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、前項に規定する場合のほか、当事者の全部又は一部が聴聞の期日に出頭せず、かつ、第二十一条第一項に規定する陳述書又は証拠書類等を提出しない場合において、これらの者の聴聞の期日への出頭が相当期間引き続き見込めないときは、これらの者に対し、期限を定めて陳述書及び証拠書類等の提出を求め、当該期限が到来したときに聴聞を終結することとすることができる。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"24\"><ArticleCaption>（聴聞調書及び報告書）</ArticleCaption><ArticleTitle>第二十四条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、聴聞の審理の経過を記載した調書を作成し、当該調書において、不利益処分の原因となる事実に対する当事者及び参加人の陳述の要旨を明らかにしておかなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の調書は、聴聞の期日における審理が行われた場合には各期日ごとに、当該審理が行われなかった場合には聴聞の終結後速やかに作成しなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、聴聞の終結後速やかに、不利益処分の原因となる事実に対する当事者等の主張に理由があるかどうかについての意見を記載した報告書を作成し、第一項の調書とともに行政庁に提出しなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">当事者又は参加人は、第一項の調書及び前項の報告書の閲覧を求めることができる。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"25\"><ArticleCaption>（聴聞の再開）</ArticleCaption><ArticleTitle>第二十五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">行政庁は、聴聞の終結後に生じた事情にかんがみ必要があると認めるときは、主宰者に対し、前条第三項の規定により提出された報告書を返戻して聴聞の再開を命ずることができる。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">第二十二条第二項本文及び第三項の規定は、この場合について準用する。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"26\"><ArticleCaption>（聴聞を経てされる不利益処分の決定）</ArticleCaption><ArticleTitle>第二十六条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、不利益処分の決定をするときは、第二十四条第一項の調書の内容及び同条第三項の報告書に記載された主宰者の意見を十分に参酌してこれをしなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"27\"><ArticleCaption>（審査請求の制限）</ArticleCaption><ArticleTitle>第二十七条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この節の規定に基づく処分又はその不作為については、審査請求をすることができない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"28\"><ArticleCaption>（役員等の解任等を命ずる不利益処分をしようとする場合の聴聞等の特例）</ArticleCaption><ArticleTitle>第二十八条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">第十三条第一項第一号ハに該当する不利益処分に係る聴聞において第十五条第一項の通知があった場合におけるこの節の規定の適用については、名あて人である法人の役員、名あて人の業務に従事する者又は名あて人の会員である者（当該処分において解任し又は除名すべきこととされている者に限る。）は、同項の通知を受けた者とみなす。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の不利益処分のうち名あて人である法人の役員又は名あて人の業務に従事する者（以下この項において「役員等」という。）の解任を命ずるものに係る聴聞が行われた場合においては、当該処分にその名あて人が従わないことを理由として法令の規定によりされる当該役員等を解任する不利益処分については、第十三条第一項の規定にかかわらず、行政庁は、当該役員等について聴聞を行うことを要しない。</Sentence></ParagraphSentence></Paragraph></Article></Section><Section Delete=\"false\" Hide=\"false\" Num=\"3\"><SectionTitle>第三節　弁明の機会の付与</SectionTitle><Article Delete=\"false\" Hide=\"false\" Num=\"29\"><ArticleCaption>（弁明の機会の付与の方式）</ArticleCaption><ArticleTitle>第二十九条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">弁明は、行政庁が口頭ですることを認めたときを除き、弁明を記載した書面（以下「弁明書」という。）を提出してするものとする。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">弁明をするときは、証拠書類等を提出することができる。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"30\"><ArticleCaption>（弁明の機会の付与の通知の方式）</ArticleCaption><ArticleTitle>第三十条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、弁明書の提出期限（口頭による弁明の機会の付与を行う場合には、その日時）までに相当な期間をおいて、不利益処分の名あて人となるべき者に対し、次に掲げる事項を書面により通知しなければならない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">予定される不利益処分の内容及び根拠となる法令の条項</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">不利益処分の原因となる事実</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">弁明書の提出先及び提出期限（口頭による弁明の機会の付与を行う場合には、その旨並びに出頭すべき日時及び場所）</Sentence></ItemSentence></Item></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"31\"><ArticleCaption>（聴聞に関する手続の準用）</ArticleCaption><ArticleTitle>第三十一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">第十五条第三項及び第十六条の規定は、弁明の機会の付与について準用する。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合において、第十五条第三項中「第一項」とあるのは「第三十条」と、「同項第三号及び第四号」とあるのは「同条第三号」と、第十六条第一項中「前条第一項」とあるのは「第三十条」と、「同条第三項後段」とあるのは「第三十一条において準用する第十五条第三項後段」と読み替えるものとする。</Sentence></ParagraphSentence></Paragraph></Article></Section></Chapter><Chapter Delete=\"false\" Hide=\"false\" Num=\"4\"><ChapterTitle>第四章　行政指導</ChapterTitle><Article Delete=\"false\" Hide=\"false\" Num=\"32\"><ArticleCaption>（行政指導の一般原則）</ArticleCaption><ArticleTitle>第三十二条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政指導にあっては、行政指導に携わる者は、いやしくも当該行政機関の任務又は所掌事務の範囲を逸脱してはならないこと及び行政指導の内容があくまでも相手方の任意の協力によってのみ実現されるものであることに留意しなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政指導に携わる者は、その相手方が行政指導に従わなかったことを理由として、不利益な取扱いをしてはならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"33\"><ArticleCaption>（申請に関連する行政指導）</ArticleCaption><ArticleTitle>第三十三条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">申請の取下げ又は内容の変更を求める行政指導にあっては、行政指導に携わる者は、申請者が当該行政指導に従う意思がない旨を表明したにもかかわらず当該行政指導を継続すること等により当該申請者の権利の行使を妨げるようなことをしてはならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"34\"><ArticleCaption>（許認可等の権限に関連する行政指導）</ArticleCaption><ArticleTitle>第三十四条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">許認可等をする権限又は許認可等に基づく処分をする権限を有する行政機関が、当該権限を行使することができない場合又は行使する意思がない場合においてする行政指導にあっては、行政指導に携わる者は、当該権限を行使し得る旨を殊更に示すことにより相手方に当該行政指導に従うことを余儀なくさせるようなことをしてはならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"35\"><ArticleCaption>（行政指導の方式）</ArticleCaption><ArticleTitle>第三十五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政指導に携わる者は、その相手方に対して、当該行政指導の趣旨及び内容並びに責任者を明確に示さなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政指導に携わる者は、当該行政指導をする際に、行政機関が許認可等をする権限又は許認可等に基づく処分をする権限を行使し得る旨を示すときは、その相手方に対して、次に掲げる事項を示さなければならない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該権限を行使し得る根拠となる法令の条項</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">前号の条項に規定する要件</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該権限の行使が前号の要件に適合する理由</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政指導が口頭でされた場合において、その相手方から前二項に規定する事項を記載した書面の交付を求められたときは、当該行政指導に携わる者は、行政上特別の支障がない限り、これを交付しなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の規定は、次に掲げる行政指導については、適用しない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">相手方に対しその場において完了する行為を求めるもの</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">既に文書（前項の書面を含む。）又は電磁的記録（電子的方式、磁気的方式その他人の知覚によっては認識することができない方式で作られる記録であって、電子計算機による情報処理の用に供されるものをいう。）によりその相手方に通知されている事項と同一の内容を求めるもの</Sentence></ItemSentence></Item></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"36\"><ArticleCaption>（複数の者を対象とする行政指導）</ArticleCaption><ArticleTitle>第三十六条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">同一の行政目的を実現するため一定の条件に該当する複数の者に対し行政指導をしようとするときは、行政機関は、あらかじめ、事案に応じ、行政指導指針を定め、かつ、行政上特別の支障がない限り、これを公表しなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"36_2\"><ArticleCaption>（行政指導の中止等の求め）</ArticleCaption><ArticleTitle>第三十六条の二</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">法令に違反する行為の是正を求める行政指導（その根拠となる規定が法律に置かれているものに限る。）の相手方は、当該行政指導が当該法律に規定する要件に適合しないと思料するときは、当該行政指導をした行政機関に対し、その旨を申し出て、当該行政指導の中止その他必要な措置をとることを求めることができる。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、当該行政指導がその相手方について弁明その他意見陳述のための手続を経てされたものであるときは、この限りでない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の申出は、次に掲げる事項を記載した申出書を提出してしなければならない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">申出をする者の氏名又は名称及び住所又は居所</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該行政指導の内容</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該行政指導がその根拠とする法律の条項</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">前号の条項に規定する要件</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該行政指導が前号の要件に適合しないと思料する理由</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6\"><ItemTitle>六</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">その他参考となる事項</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">当該行政機関は、第一項の規定による申出があったときは、必要な調査を行い、当該行政指導が当該法律に規定する要件に適合しないと認めるときは、当該行政指導の中止その他必要な措置をとらなければならない。</Sentence></ParagraphSentence></Paragraph></Article></Chapter><Chapter Delete=\"false\" Hide=\"false\" Num=\"4_2\"><ChapterTitle>第四章の二　処分等の求め</ChapterTitle><Article Delete=\"false\" Hide=\"false\" Num=\"36_3\"><ArticleTitle>第三十六条の三</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">何人も、法令に違反する事実がある場合において、その是正のためにされるべき処分又は行政指導（その根拠となる規定が法律に置かれているものに限る。）がされていないと思料するときは、当該処分をする権限を有する行政庁又は当該行政指導をする権限を有する行政機関に対し、その旨を申し出て、当該処分又は行政指導をすることを求めることができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の申出は、次に掲げる事項を記載した申出書を提出してしなければならない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">申出をする者の氏名又は名称及び住所又は居所</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">法令に違反する事実の内容</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該処分又は行政指導の内容</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該処分又は行政指導の根拠となる法令の条項</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該処分又は行政指導がされるべきであると思料する理由</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6\"><ItemTitle>六</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">その他参考となる事項</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">当該行政庁又は行政機関は、第一項の規定による申出があったときは、必要な調査を行い、その結果に基づき必要があると認めるときは、当該処分又は行政指導をしなければならない。</Sentence></ParagraphSentence></Paragraph></Article></Chapter><Chapter Delete=\"false\" Hide=\"false\" Num=\"5\"><ChapterTitle>第五章　届出</ChapterTitle><Article Delete=\"false\" Hide=\"false\" Num=\"37\"><ArticleCaption>（届出）</ArticleCaption><ArticleTitle>第三十七条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">届出が届出書の記載事項に不備がないこと、届出書に必要な書類が添付されていることその他の法令に定められた届出の形式上の要件に適合している場合は、当該届出が法令により当該届出の提出先とされている機関の事務所に到達したときに、当該届出をすべき手続上の義務が履行されたものとする。</Sentence></ParagraphSentence></Paragraph></Article></Chapter><Chapter Delete=\"false\" Hide=\"false\" Num=\"6\"><ChapterTitle>第六章　意見公募手続等</ChapterTitle><Article Delete=\"false\" Hide=\"false\" Num=\"38\"><ArticleCaption>（命令等を定める場合の一般原則）</ArticleCaption><ArticleTitle>第三十八条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等を定める機関（閣議の決定により命令等が定められる場合にあっては、当該命令等の立案をする各大臣。以下「命令等制定機関」という。）は、命令等を定めるに当たっては、当該命令等がこれを定める根拠となる法令の趣旨に適合するものとなるようにしなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等制定機関は、命令等を定めた後においても、当該命令等の規定の実施状況、社会経済情勢の変化等を勘案し、必要に応じ、当該命令等の内容について検討を加え、その適正を確保するよう努めなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"39\"><ArticleCaption>（意見公募手続）</ArticleCaption><ArticleTitle>第三十九条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等制定機関は、命令等を定めようとする場合には、当該命令等の案（命令等で定めようとする内容を示すものをいう。以下同じ。）及びこれに関連する資料をあらかじめ公示し、意見（情報を含む。以下同じ。）の提出先及び意見の提出のための期間（以下「意見提出期間」という。）を定めて広く一般の意見を求めなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の規定により公示する命令等の案は、具体的かつ明確な内容のものであって、かつ、当該命令等の題名及び当該命令等を定める根拠となる法令の条項が明示されたものでなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">第一項の規定により定める意見提出期間は、同項の公示の日から起算して三十日以上でなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">次の各号のいずれかに該当するときは、第一項の規定は、適用しない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">公益上、緊急に命令等を定める必要があるため、第一項の規定による手続（以下「意見公募手続」という。）を実施することが困難であるとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">納付すべき金銭について定める法律の制定又は改正により必要となる当該金銭の額の算定の基礎となるべき金額及び率並びに算定方法についての命令等その他当該法律の施行に関し必要な事項を定める命令等を定めようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">予算の定めるところにより金銭の給付決定を行うために必要となる当該金銭の額の算定の基礎となるべき金額及び率並びに算定方法その他の事項を定める命令等を定めようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">法律の規定により、内閣府設置法第四十九条第一項若しくは第二項若しくは国家行政組織法第三条第二項に規定する委員会又は内閣府設置法第三十七条若しくは第五十四条若しくは国家行政組織法第八条に規定する機関（以下「委員会等」という。）の議を経て定めることとされている命令等であって、相反する利害を有する者の間の利害の調整を目的として、法律又は政令の規定により、これらの者及び公益をそれぞれ代表する委員をもって組織される委員会等において審議を行うこととされているものとして政令で定める命令等を定めようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">他の行政機関が意見公募手続を実施して定めた命令等と実質的に同一の命令等を定めようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6\"><ItemTitle>六</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">法律の規定に基づき法令の規定の適用又は準用について必要な技術的読替えを定める命令等を定めようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"7\"><ItemTitle>七</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">命令等を定める根拠となる法令の規定の削除に伴い当然必要とされる当該命令等の廃止をしようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"8\"><ItemTitle>八</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">他の法令の制定又は改廃に伴い当然必要とされる規定の整理その他の意見公募手続を実施することを要しない軽微な変更として政令で定めるものを内容とする命令等を定めようとするとき。</Sentence></ItemSentence></Item></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"40\"><ArticleCaption>（意見公募手続の特例）</ArticleCaption><ArticleTitle>第四十条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">命令等制定機関は、命令等を定めようとする場合において、三十日以上の意見提出期間を定めることができないやむを得ない理由があるときは、前条第三項の規定にかかわらず、三十日を下回る意見提出期間を定めることができる。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合においては、当該命令等の案の公示の際その理由を明らかにしなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等制定機関は、委員会等の議を経て命令等を定めようとする場合（前条第四項第四号に該当する場合を除く。）において、当該委員会等が意見公募手続に準じた手続を実施したときは、同条第一項の規定にかかわらず、自ら意見公募手続を実施することを要しない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"41\"><ArticleCaption>（意見公募手続の周知等）</ArticleCaption><ArticleTitle>第四十一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等制定機関は、意見公募手続を実施して命令等を定めるに当たっては、必要に応じ、当該意見公募手続の実施について周知するよう努めるとともに、当該意見公募手続の実施に関連する情報の提供に努めるものとする。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"42\"><ArticleCaption>（提出意見の考慮）</ArticleCaption><ArticleTitle>第四十二条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等制定機関は、意見公募手続を実施して命令等を定める場合には、意見提出期間内に当該命令等制定機関に対し提出された当該命令等の案についての意見（以下「提出意見」という。）を十分に考慮しなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"43\"><ArticleCaption>（結果の公示等）</ArticleCaption><ArticleTitle>第四十三条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等制定機関は、意見公募手続を実施して命令等を定めた場合には、当該命令等の公布（公布をしないものにあっては、公にする行為。第五項において同じ。）と同時期に、次に掲げる事項を公示しなければならない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">命令等の題名</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">命令等の案の公示の日</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">提出意見（提出意見がなかった場合にあっては、その旨）</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">提出意見を考慮した結果（意見公募手続を実施した命令等の案と定めた命令等との差異を含む。）及びその理由</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">命令等制定機関は、前項の規定にかかわらず、必要に応じ、同項第三号の提出意見に代えて、当該提出意見を整理又は要約したものを公示することができる。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合においては、当該公示の後遅滞なく、当該提出意見を当該命令等制定機関の事務所における備付けその他の適当な方法により公にしなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等制定機関は、前二項の規定により提出意見を公示し又は公にすることにより第三者の利益を害するおそれがあるとき、その他正当な理由があるときは、当該提出意見の全部又は一部を除くことができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等制定機関は、意見公募手続を実施したにもかかわらず命令等を定めないこととした場合には、その旨（別の命令等の案について改めて意見公募手続を実施しようとする場合にあっては、その旨を含む。）並びに第一項第一号及び第二号に掲げる事項を速やかに公示しなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"5\"><ParagraphNum>５</ParagraphNum><ParagraphSentence><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">命令等制定機関は、第三十九条第四項各号のいずれかに該当することにより意見公募手続を実施しないで命令等を定めた場合には、当該命令等の公布と同時期に、次に掲げる事項を公示しなければならない。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、第一号に掲げる事項のうち命令等の趣旨については、同項第一号から第四号までのいずれかに該当することにより意見公募手続を実施しなかった場合において、当該命令等自体から明らかでないときに限る。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">命令等の題名及び趣旨</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">意見公募手続を実施しなかった旨及びその理由</Sentence></ItemSentence></Item></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"44\"><ArticleCaption>（準用）</ArticleCaption><ArticleTitle>第四十四条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">第四十二条の規定は第四十条第二項に該当することにより命令等制定機関が自ら意見公募手続を実施しないで命令等を定める場合について、前条第一項から第三項までの規定は第四十条第二項に該当することにより命令等制定機関が自ら意見公募手続を実施しないで命令等を定めた場合について、前条第四項の規定は第四十条第二項に該当することにより命令等制定機関が自ら意見公募手続を実施しないで命令等を定めないこととした場合について準用する。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合において、第四十二条中「当該命令等制定機関」とあるのは「委員会等」と、前条第一項第二号中「命令等の案の公示の日」とあるのは「委員会等が命令等の案について公示に準じた手続を実施した日」と、同項第四号中「意見公募手続を実施した」とあるのは「委員会等が意見公募手続に準じた手続を実施した」と読み替えるものとする。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"45\"><ArticleCaption>（公示の方法）</ArticleCaption><ArticleTitle>第四十五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">第三十九条第一項並びに第四十三条第一項（前条において読み替えて準用する場合を含む。）、第四項（前条において準用する場合を含む。）及び第五項の規定による公示は、電子情報処理組織を使用する方法その他の情報通信の技術を利用する方法により行うものとする。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の公示に関し必要な事項は、総務大臣が定める。</Sentence></ParagraphSentence></Paragraph></Article></Chapter><Chapter Delete=\"false\" Hide=\"false\" Num=\"7\"><ChapterTitle>第七章　補則</ChapterTitle><Article Delete=\"false\" Hide=\"false\" Num=\"46\"><ArticleCaption>（地方公共団体の措置）</ArticleCaption><ArticleTitle>第四十六条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">地方公共団体は、第三条第三項において第二章から前章までの規定を適用しないこととされた処分、行政指導及び届出並びに命令等を定める行為に関する手続について、この法律の規定の趣旨にのっとり、行政運営における公正の確保と透明性の向上を図るため必要な措置を講ずるよう努めなければならない。</Sentence></ParagraphSentence></Paragraph></Article></Chapter></MainProvision><SupplProvision><SupplProvisionLabel>附　則</SupplProvisionLabel><Paragraph Hide=\"false\" Num=\"1\"><ParagraphCaption>（施行期日）</ParagraphCaption><ParagraphNum>１</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、公布の日から起算して一年を超えない範囲内において政令で定める日から施行する。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphCaption>（経過措置）</ParagraphCaption><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律の施行前に第十五条第一項又は第三十条の規定による通知に相当する行為がされた場合においては、当該通知に相当する行為に係る不利益処分の手続に関しては、第三章の規定にかかわらず、なお従前の例による。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律の施行前に、届出その他政令で定める行為（以下「届出等」という。）がされた後一定期間内に限りすることができることとされている不利益処分に係る当該届出等がされた場合においては、当該不利益処分に係る手続に関しては、第三章の規定にかかわらず、なお従前の例による。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前二項に定めるもののほか、この法律の施行に関して必要な経過措置は、政令で定める。</Sentence></ParagraphSentence></Paragraph></SupplProvision><SupplProvision AmendLawNum=\"平成一一年一二月八日法律第一五一号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、平成十二年四月一日から施行する。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"3\"><ArticleCaption>（経過措置）</ArticleCaption><ArticleTitle>第三条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">民法の一部を改正する法律（平成十一年法律第百四十九号）附則第三条第三項の規定により従前の例によることとされる準禁治産者及びその保佐人に関するこの法律による改正規定の適用については、次に掲げる改正規定を除き、なお従前の例による。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一から二十五まで</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">略</Sentence></ItemSentence></Item></Paragraph></Article></SupplProvision><SupplProvision AmendLawNum=\"平成一一年一二月二二日法律第一六〇号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">この法律（第二条及び第三条を除く。）は、平成十三年一月六日から施行する。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、次の各号に掲げる規定は、当該各号に定める日から施行する。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">第九百九十五条（核原料物質、核燃料物質及び原子炉の規制に関する法律の一部を改正する法律附則の改正規定に係る部分に限る。）、第千三百五条、第千三百六条、第千三百二十四条第二項、第千三百二十六条第二項及び第千三百四十四条の規定</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">公布の日</Sentence></Column></ItemSentence></Item></Paragraph></Article></SupplProvision><SupplProvision AmendLawNum=\"平成一四年一二月一三日法律第一五二号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、行政手続等における情報通信の技術の利用に関する法律（平成十四年法律第百五十一号）の施行の日から施行する。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"5\"><ArticleCaption>（その他の経過措置の政令への委任）</ArticleCaption><ArticleTitle>第五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">前三条に定めるもののほか、この法律の施行に関し必要な経過措置は、政令で定める。</Sentence></ParagraphSentence></Paragraph></Article></SupplProvision><SupplProvision AmendLawNum=\"平成一五年七月一六日法律第一一九号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、地方独立行政法人法（平成十五年法律第百十八号）の施行の日から施行する。</Sentence></ParagraphSentence></Paragraph></Article></SupplProvision><SupplProvision AmendLawNum=\"平成一七年六月二九日法律第七三号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">この法律は、公布の日から起算して一年を超えない範囲内において政令で定める日から施行する。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、次条及び附則第八条の規定は、公布の日から施行する。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"2\"><ArticleCaption>（経過措置）</ArticleCaption><ArticleTitle>第二条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">この法律による改正後の行政手続法（以下「新法」という。）第二条第八号に規定する命令等（以下この条において「命令等」という。）を定める機関（以下この条において「命令等制定機関」という。）は、命令等を定めようとするときは、この法律の施行前においても、新法第六章の規定の例によることができる。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合において、同章の規定の例により実施した手続は、新法の適用については、当該命令等制定機関が同章の規定により実施したものとみなす。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の規定の適用がある場合を除き、命令等制定機関がこの法律の施行の日から六十日以内に定める命令等については、新法第六章の規定は、適用しない。</Sentence></ParagraphSentence></Paragraph></Article></SupplProvision><SupplProvision AmendLawNum=\"平成一八年六月八日法律第五八号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、公布の日から起算して一年を超えない範囲内において政令で定める日から施行する。</Sentence></ParagraphSentence></Paragraph></Article></SupplProvision><SupplProvision AmendLawNum=\"平成一八年六月一四日法律第六六号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、平成十八年証券取引法改正法の施行の日から施行する。</Sentence></ParagraphSentence></Paragraph></SupplProvision><SupplProvision AmendLawNum=\"平成二六年六月一三日法律第六九号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、行政不服審査法（平成二十六年法律第六十八号）の施行の日から施行する。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"5\"><ArticleCaption>（経過措置の原則）</ArticleCaption><ArticleTitle>第五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁の処分その他の行為又は不作為についての不服申立てであってこの法律の施行前にされた行政庁の処分その他の行為又はこの法律の施行前にされた申請に係る行政庁の不作為に係るものについては、この附則に特別の定めがある場合を除き、なお従前の例による。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"6\"><ArticleCaption>（訴訟に関する経過措置）</ArticleCaption><ArticleTitle>第六条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律による改正前の法律の規定により不服申立てに対する行政庁の裁決、決定その他の行為を経た後でなければ訴えを提起できないこととされる事項であって、当該不服申立てを提起しないでこの法律の施行前にこれを提起すべき期間を経過したもの（当該不服申立てが他の不服申立てに対する行政庁の裁決、決定その他の行為を経た後でなければ提起できないとされる場合にあっては、当該他の不服申立てを提起しないでこの法律の施行前にこれを提起すべき期間を経過したものを含む。）の訴えの提起については、なお従前の例による。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律の規定による改正前の法律の規定（前条の規定によりなお従前の例によることとされる場合を含む。）により異議申立てが提起された処分その他の行為であって、この法律の規定による改正後の法律の規定により審査請求に対する裁決を経た後でなければ取消しの訴えを提起することができないこととされるものの取消しの訴えの提起については、なお従前の例による。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">不服申立てに対する行政庁の裁決、決定その他の行為の取消しの訴えであって、この法律の施行前に提起されたものについては、なお従前の例による。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"10\"><ArticleCaption>（その他の経過措置の政令への委任）</ArticleCaption><ArticleTitle>第十条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">附則第五条から前条までに定めるもののほか、この法律の施行に関し必要な経過措置（罰則に関する経過措置を含む。）は、政令で定める。</Sentence></ParagraphSentence></Paragraph></Article></SupplProvision><SupplProvision AmendLawNum=\"平成二六年六月一三日法律第七〇号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、平成二十七年四月一日から施行する。</Sentence></ParagraphSentence></Paragraph></Article></SupplProvision><SupplProvision AmendLawNum=\"平成二九年三月三一日法律第四号\" Type=\"Amend\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">この法律は、平成二十九年四月一日から施行する。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、次の各号に掲げる規定は、当該各号に定める日から施行する。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1:4\"><ItemTitle>一から四まで</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">略</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">次に掲げる規定</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">平成三十年四月一日</Sentence></Column></ItemSentence><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"1\"><Subitem1Title>イからハまで</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">略</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"4\"><Subitem1Title>ニ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">第八条の規定（同条中国税通則法第十九条第四項第三号ハの改正規定、同法第三十四条の二（見出しを含む。）の改正規定及び同法第七十一条第二項の改正規定を除く。）並びに附則第四十条第二項及び第三項、第百五条、第百六条、第百八条から第百十四条まで、第百十八条、第百二十四条、第百二十五条、第百二十九条から第百三十三条まで、第百三十五条並びに第百三十六条の規定</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"3\"><Subitem1Title>ホからルまで</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">略</Sentence></Subitem1Sentence></Subitem1></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6:18\"><ItemTitle>六から十八まで</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">略</Sentence></ItemSentence></Item></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"35\"><ArticleCaption>（酒類の製造免許等に関する経過措置）</ArticleCaption><ArticleTitle>第三十五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">第七条の規定による改正前の酒税法（以下「旧酒税法」という。）の規定により発泡酒とされていたもののうち、新酒税法の規定によりビールとして分類される酒類につき旧酒税法の規定により製造免許又は販売業免許（以下この条において「製造免許等」という。）を受けていた者は、平成三十年四月一日に、新酒税法の規定によりビール（新酒税法第三条第十二号に規定するビールのうち、旧酒税法第三条第十八号に規定する発泡酒に該当するものに限る。）の製造免許等を受けたものとみなす。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">旧酒税法の規定により甘味果実酒又はスピリッツとされていたもののうち、新酒税法の規定により果実酒又はブランデーとして分類される酒類につき旧酒税法の規定により製造免許等を受けていた者は、平成三十年四月一日に、新酒税法の規定により果実酒（新酒税法第三条第十三号ホに掲げるものに限る。）又はブランデー（同条第十六号に規定するブランデーのうち、旧酒税法第三条第二十号に規定するスピリッツに該当するものに限る。）の製造免許等を受けたものとみなす。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">旧酒税法の規定によりその他の醸造酒、スピリッツ、リキュール又は雑酒とされていたもののうち、新酒税法の規定により発泡酒として分類される酒類につき旧酒税法の規定により製造免許等を受けていた者は、平成三十五年十月一日に、新酒税法の規定により発泡酒（新酒税法第三条第十八号ロ及びハに掲げるものに限る。）の製造免許等を受けたものとみなす。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">新酒税法第十条（第七号に係る部分に限る。）の規定の適用については、第十条の規定による廃止前の国税犯則取締法（以下「旧国税犯則取締法」という。）第十四条第一項の規定による通告処分は、第八条の規定による改正後の国税通則法（以下「新国税通則法」という。）第百五十七条第一項の規定による通告処分とみなす。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"5\"><ParagraphNum>５</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">第一項から第三項までの場合において、旧酒税法の規定による製造免許等に期限又は条件が付されていたときは、当該期限又は条件は、新酒税法の規定による製造免許等に付されたものとみなす。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"40\"><ArticleCaption>（国税通則法の一部改正に伴う経過措置）</ArticleCaption><ArticleTitle>第四十条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">新国税通則法第三十四条の二の規定は、平成三十年一月一日以後に納付する国税について適用し、同日前に納付した国税については、なお従前の例による。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">新国税通則法第六十八条の規定は、平成三十年四月一日以後に国税通則法第二条第七号に規定する法定申告期限（国税に関する法律の規定により当該法定申告期限とみなされる期限を含む。以下この項において「法定申告期限」という。）が到来する国税について適用し、同日前に法定申告期限が到来した国税については、なお従前の例による。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">新国税通則法第十一章第二節の規定は、平成三十年四月一日以後にした行為に係る国税（前項の規定によりなお従前の例によることとされる国税を除く。）に関する犯則事件の処分について適用する。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"41\"><ArticleCaption>（国税徴収法の一部改正に伴う経過措置）</ArticleCaption><ArticleTitle>第四十一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">第九条の規定による改正後の国税徴収法（次項において「新国税徴収法」という。）第三十三条の規定は、平成三十年一月一日以後に滞納となった国税について適用し、同日前に滞納となっている国税については、なお従前の例による。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">新国税徴収法第百五十九条第一項の規定の適用については、旧国税犯則取締法の規定による差押え又は領置は、新国税通則法第十一章の規定による差押え又は領置とみなす。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"42\"><ArticleCaption>（国税犯則取締法の廃止に伴う経過措置）</ArticleCaption><ArticleTitle>第四十二条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">平成三十年三月三十一日以前にした行為に係る国税に関する犯則事件及び同年四月一日以後にした行為に係る国税（附則第四十条第二項の規定によりなお従前の例によることとされる国税に限る。）に関する犯則事件の処分についての旧国税犯則取締法第十二条ノ二から第十九条までの規定の適用については、なお従前の例による。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"112\"><ArticleCaption>（税理士法の一部改正に伴う経過措置）</ArticleCaption><ArticleTitle>第百十二条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">前条の規定による改正後の税理士法第四条（第五号に係る部分に限る。）の規定の適用については、旧国税犯則取締法第十四条第一項の規定による通告処分は、新国税通則法第百五十七条第一項の規定による通告処分とみなす。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"125\"><ArticleCaption>（通関業法の一部改正に伴う経過措置）</ArticleCaption><ArticleTitle>第百二十五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">前条の規定による改正後の通関業法第六条（第四号に係る部分に限る。）の規定の適用については、旧国税犯則取締法第十四条第一項の規定による通告処分は、新国税通則法第百五十七条第一項の規定による通告処分とみなす。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"131\"><ArticleCaption>（金融機関等の更生手続の特例等に関する法律の一部改正に伴う経過措置）</ArticleCaption><ArticleTitle>第百三十一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">前条の規定による改正後の金融機関等の更生手続の特例等に関する法律第百二十五条第一項（第四号に係る部分に限る。）及び第二百九十五条第一項（第四号に係る部分に限る。）の規定の適用については、旧国税犯則取締法第十四条第一項の規定による通告は、新国税通則法第百五十七条第一項の規定による通告とみなす。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"133\"><ArticleCaption>（アルコール事業法の一部改正に伴う経過措置）</ArticleCaption><ArticleTitle>第百三十三条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">前条の規定による改正後のアルコール事業法第五条（第一号及び第三号に係る部分に限る。）の規定の適用については、旧国税犯則取締法第十四条第一項の規定による通告処分は、新国税通則法第百五十七条第一項の規定による通告処分とみなす。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"136\"><ArticleCaption>（会社更生法の一部改正に伴う経過措置）</ArticleCaption><ArticleTitle>第百三十六条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">前条の規定による改正後の会社更生法第二百四条第一項（第四号に係る部分に限る。）の規定の適用については、旧国税犯則取締法第十四条第一項の規定による通告は、新国税通則法第百五十七条第一項の規定による通告とみなす。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"141\"><ArticleCaption>（政令への委任）</ArticleCaption><ArticleTitle>第百四十一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この附則に規定するもののほか、この法律の施行に関し必要な経過措置は、政令で定める。</Sentence></ParagraphSentence></Paragraph></Article></SupplProvision></LawBody></Law>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><Law Era=\"Heisei\" Lang=\"ja\" LawType=\"Act\" Num=\"88\" Year=\"05\"><LawNum>平成五年法律第八十八号</LawNum><LawBody><LawTitle>行政手続法</LawTitle><TOC><TOCLabel>目次</TOCLabel><TOCChapter Delete=\"false\" Num=\"1\"><ChapterTitle>第一章　総則</ChapterTitle><ArticleRange>（第一条―第四条）</ArticleRange></TOCChapter><TOCChapter Delete=\"false\" Num=\"2\"><ChapterTitle>第二章　申請に対する処分</ChapterTitle><ArticleRange>（第五条―第十一条）</ArticleRange></TOCChapter><TOCChapter Delete=\"false\" Num=\"3\"><ChapterTitle>第三章　不利益処分</ChapterTitle><TOCSection Delete=\"false\" Num=\"1\"><SectionTitle>第一節　通則</SectionTitle><ArticleRange>（第十二条―第十四条）</ArticleRange></TOCSection><TOCSection Delete=\"false\" Num=\"2\"><SectionTitle>第二節　聴聞</SectionTitle><ArticleRange>（第十五条―第二十八条）</ArticleRange></TOCSection><TOCSection Delete=\"false\" Num=\"3\"><SectionTitle>第三節　弁明の機会の付与</SectionTitle><ArticleRange>（第二十九条―第三十一条）</ArticleRange></TOCSection></TOCChapter><TOCChapter Delete=\"false\" Num=\"4\"><ChapterTitle>第四章　行政指導</ChapterTitle><ArticleRange>（第三十二条―第三十六条の二）</ArticleRange></TOCChapter><TOCChapter Delete=\"false\" Num=\"4_2\"><ChapterTitle>第四章の二　処分等の求め</ChapterTitle><ArticleRange>（第三十六条の三）</ArticleRange></TOCChapter><TOCChapter Delete=\"false\" Num=\"5\"><ChapterTitle>第五章　届出</ChapterTitle><ArticleRange>（第三十七条）</ArticleRange></TOCChapter><TOCChapter Delete=\"false\" Num=\"6\"><ChapterTitle>第六章　意見公募手続等</ChapterTitle><ArticleRange>（第三十八条―第四十五条）</ArticleRange></TOCChapter><TOCChapter Delete=\"false\" Num=\"7\"><ChapterTitle>第七章　補則</ChapterTitle><ArticleRange>（第四十六条）</ArticleRange></TOCChapter><TOCSupplProvision><SupplProvisionLabel>附則</SupplProvisionLabel></TOCSupplProvision></TOC><MainProvision><Chapter Delete=\"false\" Hide=\"false\" Num=\"1\"><ChapterTitle>第一章　総則</ChapterTitle><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（目的等）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、処分、行政指導及び届出に関する手続並びに命令等を定める手続に関し、共通する事項を定めることによって、行政運営における公正の確保と透明性（行政上の意思決定について、その内容及び過程が国民にとって明らかであることをいう。第四十六条において同じ。）の向上を図り、もって国民の権利利益の保護に資することを目的とする。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">処分、行政指導及び届出に関する手続並びに命令等を定める手続に関しこの法律に規定する事項について、他の法律に特別の定めがある場合は、その定めるところによる。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"2\"><ArticleCaption>（定義）</ArticleCaption><ArticleTitle>第二条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律において、次の各号に掲げる用語の意義は、当該各号に定めるところによる。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">法令</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">法律、法律に基づく命令（告示を含む。）、条例及び地方公共団体の執行機関の規則（規程を含む。以下「規則」という。）をいう。</Sentence></Column></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">処分</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">行政庁の処分その他公権力の行使に当たる行為をいう。</Sentence></Column></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">申請</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">法令に基づき、行政庁の許可、認可、免許その他の自己に対し何らかの利益を付与する処分（以下「許認可等」という。）を求める行為であって、当該行為に対して行政庁が諾否の応答をすべきこととされているものをいう。</Sentence></Column></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">不利益処分</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">行政庁が、法令に基づき、特定の者を名あて人として、直接に、これに義務を課し、又はその権利を制限する処分をいう。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、次のいずれかに該当するものを除く。</Sentence></Column></ItemSentence><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"1\"><Subitem1Title>イ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">事実上の行為及び事実上の行為をするに当たりその範囲、時期等を明らかにするために法令上必要とされている手続としての処分</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"2\"><Subitem1Title>ロ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">申請により求められた許認可等を拒否する処分その他申請に基づき当該申請をした者を名あて人としてされる処分</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"3\"><Subitem1Title>ハ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">名あて人となるべき者の同意の下にすることとされている処分</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"4\"><Subitem1Title>ニ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">許認可等の効力を失わせる処分であって、当該許認可等の基礎となった事実が消滅した旨の届出があったことを理由としてされるもの</Sentence></Subitem1Sentence></Subitem1></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">行政機関</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">次に掲げる機関をいう。</Sentence></Column></ItemSentence><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"1\"><Subitem1Title>イ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">法律の規定に基づき内閣に置かれる機関若しくは内閣の所轄の下に置かれる機関、宮内庁、内閣府設置法（平成十一年法律第八十九号）第四十九条第一項若しくは第二項に規定する機関、国家行政組織法（昭和二十三年法律第百二十号）第三条第二項に規定する機関、会計検査院若しくはこれらに置かれる機関又はこれらの機関の職員であって法律上独立に権限を行使することを認められた職員</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"2\"><Subitem1Title>ロ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">地方公共団体の機関（議会を除く。）</Sentence></Subitem1Sentence></Subitem1></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6\"><ItemTitle>六</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">行政指導</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">行政機関がその任務又は所掌事務の範囲内において一定の行政目的を実現するため特定の者に一定の作為又は不作為を求める指導、勧告、助言その他の行為であって処分に該当しないものをいう。</Sentence></Column></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"7\"><ItemTitle>七</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">届出</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">行政庁に対し一定の事項の通知をする行為（申請に該当するものを除く。）であって、法令により直接に当該通知が義務付けられているもの（自己の期待する一定の法律上の効果を発生させるためには当該通知をすべきこととされているものを含む。）をいう。</Sentence></Column></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"8\"><ItemTitle>八</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">命令等</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">内閣又は行政機関が定める次に掲げるものをいう。</Sentence></Column></ItemSentence><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"1\"><Subitem1Title>イ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">法律に基づく命令（処分の要件を定める告示を含む。次条第二項において単に「命令」という。）又は規則</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"2\"><Subitem1Title>ロ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">審査基準（申請により求められた許認可等をするかどうかをその法令の定めに従って判断するために必要とされる基準をいう。以下同じ。）</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"3\"><Subitem1Title>ハ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">処分基準（不利益処分をするかどうか又はどのような不利益処分とするかについてその法令の定めに従って判断するために必要とされる基準をいう。以下同じ。）</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"4\"><Subitem1Title>ニ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">行政指導指針（同一の行政目的を実現するため一定の条件に該当する複数の者に対し行政指導をしようとするときにこれらの行政指導に共通してその内容となるべき事項をいう。以下同じ。）</Sentence></Subitem1Sentence></Subitem1></Item></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"3\"><ArticleCaption>（適用除外）</ArticleCaption><ArticleTitle>第三条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">次に掲げる処分及び行政指導については、次章から第四章の二までの規定は、適用しない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">国会の両院若しくは一院又は議会の議決によってされる処分</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">裁判所若しくは裁判官の裁判により、又は裁判の執行としてされる処分</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">国会の両院若しくは一院若しくは議会の議決を経て、又はこれらの同意若しくは承認を得た上でされるべきものとされている処分</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">検査官会議で決すべきものとされている処分及び会計検査の際にされる行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">刑事事件に関する法令に基づいて検察官、検察事務官又は司法警察職員がする処分及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6\"><ItemTitle>六</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">国税又は地方税の犯則事件に関する法令（他の法令において準用する場合を含む。）に基づいて国税庁長官、国税局長、税務署長、国税庁、国税局若しくは税務署の当該職員、税関長、税関職員又は徴税吏員（他の法令の規定に基づいてこれらの職員の職務を行う者を含む。）がする処分及び行政指導並びに金融商品取引の犯則事件に関する法令（他の法令において準用する場合を含む。）に基づいて証券取引等監視委員会、その職員（当該法令においてその職員とみなされる者を含む。）、財務局長又は財務支局長がする処分及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"7\"><ItemTitle>七</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">学校、講習所、訓練所又は研修所において、教育、講習、訓練又は研修の目的を達成するために、学生、生徒、児童若しくは幼児若しくはこれらの保護者、講習生、訓練生又は研修生に対してされる処分及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"8\"><ItemTitle>八</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">刑務所、少年刑務所、拘置所、留置施設、海上保安留置施設、少年院、少年鑑別所又は婦人補導院において、収容の目的を達成するためにされる処分及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"9\"><ItemTitle>九</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">公務員（国家公務員法（昭和二十二年法律第百二十号）第二条第一項に規定する国家公務員及び地方公務員法（昭和二十五年法律第二百六十一号）第三条第一項に規定する地方公務員をいう。以下同じ。）又は公務員であった者に対してその職務又は身分に関してされる処分及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"10\"><ItemTitle>十</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">外国人の出入国、難民の認定又は帰化に関する処分及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"11\"><ItemTitle>十一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">専ら人の学識技能に関する試験又は検定の結果についての処分</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"12\"><ItemTitle>十二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">相反する利害を有する者の間の利害の調整を目的として法令の規定に基づいてされる裁定その他の処分（その双方を名宛人とするものに限る。）及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"13\"><ItemTitle>十三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">公衆衛生、環境保全、防疫、保安その他の公益に関わる事象が発生し又は発生する可能性のある現場において警察官若しくは海上保安官又はこれらの公益を確保するために行使すべき権限を法律上直接に与えられたその他の職員によってされる処分及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"14\"><ItemTitle>十四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">報告又は物件の提出を命ずる処分その他その職務の遂行上必要な情報の収集を直接の目的としてされる処分及び行政指導</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"15\"><ItemTitle>十五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">審査請求、再調査の請求その他の不服申立てに対する行政庁の裁決、決定その他の処分</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"16\"><ItemTitle>十六</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">前号に規定する処分の手続又は第三章に規定する聴聞若しくは弁明の機会の付与の手続その他の意見陳述のための手続において法令に基づいてされる処分及び行政指導</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">次に掲げる命令等を定める行為については、第六章の規定は、適用しない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">法律の施行期日について定める政令</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">恩赦に関する命令</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">命令又は規則を定める行為が処分に該当する場合における当該命令又は規則</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">法律の規定に基づき施設、区間、地域その他これらに類するものを指定する命令又は規則</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">公務員の給与、勤務時間その他の勤務条件について定める命令等</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6\"><ItemTitle>六</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">審査基準、処分基準又は行政指導指針であって、法令の規定により若しくは慣行として、又は命令等を定める機関の判断により公にされるもの以外のもの</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">第一項各号及び前項各号に掲げるもののほか、地方公共団体の機関がする処分（その根拠となる規定が条例又は規則に置かれているものに限る。）及び行政指導、地方公共団体の機関に対する届出（前条第七号の通知の根拠となる規定が条例又は規則に置かれているものに限る。）並びに地方公共団体の機関が命令等を定める行為については、次章から第六章までの規定は、適用しない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"4\"><ArticleCaption>（国の機関等に対する処分等の適用除外）</ArticleCaption><ArticleTitle>第四条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">国の機関又は地方公共団体若しくはその機関に対する処分（これらの機関又は団体がその固有の資格において当該処分の名あて人となるものに限る。）及び行政指導並びにこれらの機関又は団体がする届出（これらの機関又は団体がその固有の資格においてすべきこととされているものに限る。）については、この法律の規定は、適用しない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">次の各号のいずれかに該当する法人に対する処分であって、当該法人の監督に関する法律の特別の規定に基づいてされるもの（当該法人の解散を命じ、若しくは設立に関する認可を取り消す処分又は当該法人の役員若しくは当該法人の業務に従事する者の解任を命ずる処分を除く。）については、次章及び第三章の規定は、適用しない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">法律により直接に設立された法人又は特別の法律により特別の設立行為をもって設立された法人</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">特別の法律により設立され、かつ、その設立に関し行政庁の認可を要する法人のうち、その行う業務が国又は地方公共団体の行政運営と密接な関連を有するものとして政令で定める法人</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁が法律の規定に基づく試験、検査、検定、登録その他の行政上の事務について当該法律に基づきその全部又は一部を行わせる者を指定した場合において、その指定を受けた者（その者が法人である場合にあっては、その役員）又は職員その他の者が当該事務に従事することに関し公務に従事する職員とみなされるときは、その指定を受けた者に対し当該法律に基づいて当該事務に関し監督上される処分（当該指定を取り消す処分、その指定を受けた者が法人である場合におけるその役員の解任を命ずる処分又はその指定を受けた者の当該事務に従事する者の解任を命ずる処分を除く。）については、次章及び第三章の規定は、適用しない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">次に掲げる命令等を定める行為については、第六章の規定は、適用しない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">国又は地方公共団体の機関の設置、所掌事務の範囲その他の組織について定める命令等</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">皇室典範（昭和二十二年法律第三号）第二十六条の皇統譜について定める命令等</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">公務員の礼式、服制、研修、教育訓練、表彰及び報償並びに公務員の間における競争試験について定める命令等</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">国又は地方公共団体の予算、決算及び会計について定める命令等（入札の参加者の資格、入札保証金その他の国又は地方公共団体の契約の相手方又は相手方になろうとする者に係る事項を定める命令等を除く。）並びに国又は地方公共団体の財産及び物品の管理について定める命令等（国又は地方公共団体が財産及び物品を貸し付け、交換し、売り払い、譲与し、信託し、若しくは出資の目的とし、又はこれらに私権を設定することについて定める命令等であって、これらの行為の相手方又は相手方になろうとする者に係る事項を定めるものを除く。）</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">会計検査について定める命令等</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6\"><ItemTitle>六</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">国の機関相互間の関係について定める命令等並びに地方自治法（昭和二十二年法律第六十七号）第二編第十一章に規定する国と普通地方公共団体との関係及び普通地方公共団体相互間の関係その他の国と地方公共団体との関係及び地方公共団体相互間の関係について定める命令等（第一項の規定によりこの法律の規定を適用しないこととされる処分に係る命令等を含む。）</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"7\"><ItemTitle>七</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">第二項各号に規定する法人の役員及び職員、業務の範囲、財務及び会計その他の組織、運営及び管理について定める命令等（これらの法人に対する処分であって、これらの法人の解散を命じ、若しくは設立に関する認可を取り消す処分又はこれらの法人の役員若しくはこれらの法人の業務に従事する者の解任を命ずる処分に係る命令等を除く。）</Sentence></ItemSentence></Item></Paragraph></Article></Chapter><Chapter Delete=\"false\" Hide=\"false\" Num=\"2\"><ChapterTitle>第二章　申請に対する処分</ChapterTitle><Article Delete=\"false\" Hide=\"false\" Num=\"5\"><ArticleCaption>（審査基準）</ArticleCaption><ArticleTitle>第五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、審査基準を定めるものとする。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、審査基準を定めるに当たっては、許認可等の性質に照らしてできる限り具体的なものとしなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、行政上特別の支障があるときを除き、法令により申請の提出先とされている機関の事務所における備付けその他の適当な方法により審査基準を公にしておかなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"6\"><ArticleCaption>（標準処理期間）</ArticleCaption><ArticleTitle>第六条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、申請がその事務所に到達してから当該申請に対する処分をするまでに通常要すべき標準的な期間（法令により当該行政庁と異なる機関が当該申請の提出先とされている場合は、併せて、当該申請が当該提出先とされている機関の事務所に到達してから当該行政庁の事務所に到達するまでに通常要すべき標準的な期間）を定めるよう努めるとともに、これを定めたときは、これらの当該申請の提出先とされている機関の事務所における備付けその他の適当な方法により公にしておかなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"7\"><ArticleCaption>（申請に対する審査、応答）</ArticleCaption><ArticleTitle>第七条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、申請がその事務所に到達したときは遅滞なく当該申請の審査を開始しなければならず、かつ、申請書の記載事項に不備がないこと、申請書に必要な書類が添付されていること、申請をすることができる期間内にされたものであることその他の法令に定められた申請の形式上の要件に適合しない申請については、速やかに、申請をした者（以下「申請者」という。）に対し相当の期間を定めて当該申請の補正を求め、又は当該申請により求められた許認可等を拒否しなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"8\"><ArticleCaption>（理由の提示）</ArticleCaption><ArticleTitle>第八条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">行政庁は、申請により求められた許認可等を拒否する処分をする場合は、申請者に対し、同時に、当該処分の理由を示さなければならない。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、法令に定められた許認可等の要件又は公にされた審査基準が数量的指標その他の客観的指標により明確に定められている場合であって、当該申請がこれらに適合しないことが申請書の記載又は添付書類その他の申請の内容から明らかであるときは、申請者の求めがあったときにこれを示せば足りる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項本文に規定する処分を書面でするときは、同項の理由は、書面により示さなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"9\"><ArticleCaption>（情報の提供）</ArticleCaption><ArticleTitle>第九条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、申請者の求めに応じ、当該申請に係る審査の進行状況及び当該申請に対する処分の時期の見通しを示すよう努めなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、申請をしようとする者又は申請者の求めに応じ、申請書の記載及び添付書類に関する事項その他の申請に必要な情報の提供に努めなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"10\"><ArticleCaption>（公聴会の開催等）</ArticleCaption><ArticleTitle>第十条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、申請に対する処分であって、申請者以外の者の利害を考慮すべきことが当該法令において許認可等の要件とされているものを行う場合には、必要に応じ、公聴会の開催その他の適当な方法により当該申請者以外の者の意見を聴く機会を設けるよう努めなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"11\"><ArticleCaption>（複数の行政庁が関与する処分）</ArticleCaption><ArticleTitle>第十一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、申請の処理をするに当たり、他の行政庁において同一の申請者からされた関連する申請が審査中であることをもって自らすべき許認可等をするかどうかについての審査又は判断を殊更に遅延させるようなことをしてはならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">一の申請又は同一の申請者からされた相互に関連する複数の申請に対する処分について複数の行政庁が関与する場合においては、当該複数の行政庁は、必要に応じ、相互に連絡をとり、当該申請者からの説明の聴取を共同して行う等により審査の促進に努めるものとする。</Sentence></ParagraphSentence></Paragraph></Article></Chapter><Chapter Delete=\"false\" Hide=\"false\" Num=\"3\"><ChapterTitle>第三章　不利益処分</ChapterTitle><Section Delete=\"false\" Hide=\"false\" Num=\"1\"><SectionTitle>第一節　通則</SectionTitle><Article Delete=\"false\" Hide=\"false\" Num=\"12\"><ArticleCaption>（処分の基準）</ArticleCaption><ArticleTitle>第十二条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、処分基準を定め、かつ、これを公にしておくよう努めなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、処分基準を定めるに当たっては、不利益処分の性質に照らしてできる限り具体的なものとしなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"13\"><ArticleCaption>（不利益処分をしようとする場合の手続）</ArticleCaption><ArticleTitle>第十三条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、不利益処分をしようとする場合には、次の各号の区分に従い、この章の定めるところにより、当該不利益処分の名あて人となるべき者について、当該各号に定める意見陳述のための手続を執らなければならない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">次のいずれかに該当するとき</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">聴聞</Sentence></Column></ItemSentence><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"1\"><Subitem1Title>イ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">許認可等を取り消す不利益処分をしようとするとき。</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"2\"><Subitem1Title>ロ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">イに規定するもののほか、名あて人の資格又は地位を直接にはく奪する不利益処分をしようとするとき。</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"3\"><Subitem1Title>ハ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">名あて人が法人である場合におけるその役員の解任を命ずる不利益処分、名あて人の業務に従事する者の解任を命ずる不利益処分又は名あて人の会員である者の除名を命ずる不利益処分をしようとするとき。</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"4\"><Subitem1Title>ニ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">イからハまでに掲げる場合以外の場合であって行政庁が相当と認めるとき。</Sentence></Subitem1Sentence></Subitem1></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">前号イからニまでのいずれにも該当しないとき</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">弁明の機会の付与</Sentence></Column></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">次の各号のいずれかに該当するときは、前項の規定は、適用しない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">公益上、緊急に不利益処分をする必要があるため、前項に規定する意見陳述のための手続を執ることができないとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">法令上必要とされる資格がなかったこと又は失われるに至ったことが判明した場合に必ずすることとされている不利益処分であって、その資格の不存在又は喪失の事実が裁判所の判決書又は決定書、一定の職に就いたことを証する当該任命権者の書類その他の客観的な資料により直接証明されたものをしようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">施設若しくは設備の設置、維持若しくは管理又は物の製造、販売その他の取扱いについて遵守すべき事項が法令において技術的な基準をもって明確にされている場合において、専ら当該基準が充足されていないことを理由として当該基準に従うべきことを命ずる不利益処分であってその不充足の事実が計測、実験その他客観的な認定方法によって確認されたものをしようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">納付すべき金銭の額を確定し、一定の額の金銭の納付を命じ、又は金銭の給付決定の取消しその他の金銭の給付を制限する不利益処分をしようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該不利益処分の性質上、それによって課される義務の内容が著しく軽微なものであるため名あて人となるべき者の意見をあらかじめ聴くことを要しないものとして政令で定める処分をしようとするとき。</Sentence></ItemSentence></Item></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"14\"><ArticleCaption>（不利益処分の理由の提示）</ArticleCaption><ArticleTitle>第十四条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">行政庁は、不利益処分をする場合には、その名あて人に対し、同時に、当該不利益処分の理由を示さなければならない。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、当該理由を示さないで処分をすべき差し迫った必要がある場合は、この限りでない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、前項ただし書の場合においては、当該名あて人の所在が判明しなくなったときその他処分後において理由を示すことが困難な事情があるときを除き、処分後相当の期間内に、同項の理由を示さなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">不利益処分を書面でするときは、前二項の理由は、書面により示さなければならない。</Sentence></ParagraphSentence></Paragraph></Article></Section><Section Delete=\"false\" Hide=\"false\" Num=\"2\"><SectionTitle>第二節　聴聞</SectionTitle><Article Delete=\"false\" Hide=\"false\" Num=\"15\"><ArticleCaption>（聴聞の通知の方式）</ArticleCaption><ArticleTitle>第十五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、聴聞を行うに当たっては、聴聞を行うべき期日までに相当な期間をおいて、不利益処分の名あて人となるべき者に対し、次に掲げる事項を書面により通知しなければならない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">予定される不利益処分の内容及び根拠となる法令の条項</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">不利益処分の原因となる事実</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">聴聞の期日及び場所</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">聴聞に関する事務を所掌する組織の名称及び所在地</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の書面においては、次に掲げる事項を教示しなければならない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">聴聞の期日に出頭して意見を述べ、及び証拠書類又は証拠物（以下「証拠書類等」という。）を提出し、又は聴聞の期日への出頭に代えて陳述書及び証拠書類等を提出することができること。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">聴聞が終結する時までの間、当該不利益処分の原因となる事実を証する資料の閲覧を求めることができること。</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">行政庁は、不利益処分の名あて人となるべき者の所在が判明しない場合においては、第一項の規定による通知を、その者の氏名、同項第三号及び第四号に掲げる事項並びに当該行政庁が同項各号に掲げる事項を記載した書面をいつでもその者に交付する旨を当該行政庁の事務所の掲示場に掲示することによって行うことができる。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合においては、掲示を始めた日から二週間を経過したときに、当該通知がその者に到達したものとみなす。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"16\"><ArticleCaption>（代理人）</ArticleCaption><ArticleTitle>第十六条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">前条第一項の通知を受けた者（同条第三項後段の規定により当該通知が到達したものとみなされる者を含む。以下「当事者」という。）は、代理人を選任することができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">代理人は、各自、当事者のために、聴聞に関する一切の行為をすることができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">代理人の資格は、書面で証明しなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">代理人がその資格を失ったときは、当該代理人を選任した当事者は、書面でその旨を行政庁に届け出なければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"17\"><ArticleCaption>（参加人）</ArticleCaption><ArticleTitle>第十七条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">第十九条の規定により聴聞を主宰する者（以下「主宰者」という。）は、必要があると認めるときは、当事者以外の者であって当該不利益処分の根拠となる法令に照らし当該不利益処分につき利害関係を有するものと認められる者（同条第二項第六号において「関係人」という。）に対し、当該聴聞に関する手続に参加することを求め、又は当該聴聞に関する手続に参加することを許可することができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の規定により当該聴聞に関する手続に参加する者（以下「参加人」という。）は、代理人を選任することができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">前条第二項から第四項までの規定は、前項の代理人について準用する。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合において、同条第二項及び第四項中「当事者」とあるのは、「参加人」と読み替えるものとする。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"18\"><ArticleCaption>（文書等の閲覧）</ArticleCaption><ArticleTitle>第十八条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">当事者及び当該不利益処分がされた場合に自己の利益を害されることとなる参加人（以下この条及び第二十四条第三項において「当事者等」という。）は、聴聞の通知があった時から聴聞が終結する時までの間、行政庁に対し、当該事案についてした調査の結果に係る調書その他の当該不利益処分の原因となる事実を証する資料の閲覧を求めることができる。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合において、行政庁は、第三者の利益を害するおそれがあるときその他正当な理由があるときでなければ、その閲覧を拒むことができない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の規定は、当事者等が聴聞の期日における審理の進行に応じて必要となった資料の閲覧を更に求めることを妨げない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、前二項の閲覧について日時及び場所を指定することができる。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"19\"><ArticleCaption>（聴聞の主宰）</ArticleCaption><ArticleTitle>第十九条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">聴聞は、行政庁が指名する職員その他政令で定める者が主宰する。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">次の各号のいずれかに該当する者は、聴聞を主宰することができない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該聴聞の当事者又は参加人</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">前号に規定する者の配偶者、四親等内の親族又は同居の親族</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">第一号に規定する者の代理人又は次条第三項に規定する補佐人</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">前三号に規定する者であった者</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">第一号に規定する者の後見人、後見監督人、保佐人、保佐監督人、補助人又は補助監督人</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6\"><ItemTitle>六</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">参加人以外の関係人</Sentence></ItemSentence></Item></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"20\"><ArticleCaption>（聴聞の期日における審理の方式）</ArticleCaption><ArticleTitle>第二十条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、最初の聴聞の期日の冒頭において、行政庁の職員に、予定される不利益処分の内容及び根拠となる法令の条項並びにその原因となる事実を聴聞の期日に出頭した者に対し説明させなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">当事者又は参加人は、聴聞の期日に出頭して、意見を述べ、及び証拠書類等を提出し、並びに主宰者の許可を得て行政庁の職員に対し質問を発することができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の場合において、当事者又は参加人は、主宰者の許可を得て、補佐人とともに出頭することができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、聴聞の期日において必要があると認めるときは、当事者若しくは参加人に対し質問を発し、意見の陳述若しくは証拠書類等の提出を促し、又は行政庁の職員に対し説明を求めることができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"5\"><ParagraphNum>５</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、当事者又は参加人の一部が出頭しないときであっても、聴聞の期日における審理を行うことができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"6\"><ParagraphNum>６</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">聴聞の期日における審理は、行政庁が公開することを相当と認めるときを除き、公開しない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"21\"><ArticleCaption>（陳述書等の提出）</ArticleCaption><ArticleTitle>第二十一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">当事者又は参加人は、聴聞の期日への出頭に代えて、主宰者に対し、聴聞の期日までに陳述書及び証拠書類等を提出することができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、聴聞の期日に出頭した者に対し、その求めに応じて、前項の陳述書及び証拠書類等を示すことができる。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"22\"><ArticleCaption>（続行期日の指定）</ArticleCaption><ArticleTitle>第二十二条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、聴聞の期日における審理の結果、なお聴聞を続行する必要があると認めるときは、さらに新たな期日を定めることができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">前項の場合においては、当事者及び参加人に対し、あらかじめ、次回の聴聞の期日及び場所を書面により通知しなければならない。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、聴聞の期日に出頭した当事者及び参加人に対しては、当該聴聞の期日においてこれを告知すれば足りる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">第十五条第三項の規定は、前項本文の場合において、当事者又は参加人の所在が判明しないときにおける通知の方法について準用する。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合において、同条第三項中「不利益処分の名あて人となるべき者」とあるのは「当事者又は参加人」と、「掲示を始めた日から二週間を経過したとき」とあるのは「掲示を始めた日から二週間を経過したとき（同一の当事者又は参加人に対する二回目以降の通知にあっては、掲示を始めた日の翌日）」と読み替えるものとする。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"23\"><ArticleCaption>（当事者の不出頭等の場合における聴聞の終結）</ArticleCaption><ArticleTitle>第二十三条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、当事者の全部若しくは一部が正当な理由なく聴聞の期日に出頭せず、かつ、第二十一条第一項に規定する陳述書若しくは証拠書類等を提出しない場合、又は参加人の全部若しくは一部が聴聞の期日に出頭しない場合には、これらの者に対し改めて意見を述べ、及び証拠書類等を提出する機会を与えることなく、聴聞を終結することができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、前項に規定する場合のほか、当事者の全部又は一部が聴聞の期日に出頭せず、かつ、第二十一条第一項に規定する陳述書又は証拠書類等を提出しない場合において、これらの者の聴聞の期日への出頭が相当期間引き続き見込めないときは、これらの者に対し、期限を定めて陳述書及び証拠書類等の提出を求め、当該期限が到来したときに聴聞を終結することとすることができる。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"24\"><ArticleCaption>（聴聞調書及び報告書）</ArticleCaption><ArticleTitle>第二十四条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、聴聞の審理の経過を記載した調書を作成し、当該調書において、不利益処分の原因となる事実に対する当事者及び参加人の陳述の要旨を明らかにしておかなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の調書は、聴聞の期日における審理が行われた場合には各期日ごとに、当該審理が行われなかった場合には聴聞の終結後速やかに作成しなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">主宰者は、聴聞の終結後速やかに、不利益処分の原因となる事実に対する当事者等の主張に理由があるかどうかについての意見を記載した報告書を作成し、第一項の調書とともに行政庁に提出しなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">当事者又は参加人は、第一項の調書及び前項の報告書の閲覧を求めることができる。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"25\"><ArticleCaption>（聴聞の再開）</ArticleCaption><ArticleTitle>第二十五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">行政庁は、聴聞の終結後に生じた事情にかんがみ必要があると認めるときは、主宰者に対し、前条第三項の規定により提出された報告書を返戻して聴聞の再開を命ずることができる。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">第二十二条第二項本文及び第三項の規定は、この場合について準用する。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"26\"><ArticleCaption>（聴聞を経てされる不利益処分の決定）</ArticleCaption><ArticleTitle>第二十六条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、不利益処分の決定をするときは、第二十四条第一項の調書の内容及び同条第三項の報告書に記載された主宰者の意見を十分に参酌してこれをしなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"27\"><ArticleCaption>（審査請求の制限）</ArticleCaption><ArticleTitle>第二十七条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この節の規定に基づく処分又はその不作為については、審査請求をすることができない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"28\"><ArticleCaption>（役員等の解任等を命ずる不利益処分をしようとする場合の聴聞等の特例）</ArticleCaption><ArticleTitle>第二十八条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">第十三条第一項第一号ハに該当する不利益処分に係る聴聞において第十五条第一項の通知があった場合におけるこの節の規定の適用については、名あて人である法人の役員、名あて人の業務に従事する者又は名あて人の会員である者（当該処分において解任し又は除名すべきこととされている者に限る。）は、同項の通知を受けた者とみなす。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の不利益処分のうち名あて人である法人の役員又は名あて人の業務に従事する者（以下この項において「役員等」という。）の解任を命ずるものに係る聴聞が行われた場合においては、当該処分にその名あて人が従わないことを理由として法令の規定によりされる当該役員等を解任する不利益処分については、第十三条第一項の規定にかかわらず、行政庁は、当該役員等について聴聞を行うことを要しない。</Sentence></ParagraphSentence></Paragraph></Article></Section><Section Delete=\"false\" Hide=\"false\" Num=\"3\"><SectionTitle>第三節　弁明の機会の付与</SectionTitle><Article Delete=\"false\" Hide=\"false\" Num=\"29\"><ArticleCaption>（弁明の機会の付与の方式）</ArticleCaption><ArticleTitle>第二十九条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">弁明は、行政庁が口頭ですることを認めたときを除き、弁明を記載した書面（以下「弁明書」という。）を提出してするものとする。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">弁明をするときは、証拠書類等を提出することができる。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"30\"><ArticleCaption>（弁明の機会の付与の通知の方式）</ArticleCaption><ArticleTitle>第三十条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁は、弁明書の提出期限（口頭による弁明の機会の付与を行う場合には、その日時）までに相当な期間をおいて、不利益処分の名あて人となるべき者に対し、次に掲げる事項を書面により通知しなければならない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">予定される不利益処分の内容及び根拠となる法令の条項</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">不利益処分の原因となる事実</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">弁明書の提出先及び提出期限（口頭による弁明の機会の付与を行う場合には、その旨並びに出頭すべき日時及び場所）</Sentence></ItemSentence></Item></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"31\"><ArticleCaption>（聴聞に関する手続の準用）</ArticleCaption><ArticleTitle>第三十一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">第十五条第三項及び第十六条の規定は、弁明の機会の付与について準用する。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合において、第十五条第三項中「第一項」とあるのは「第三十条」と、「同項第三号及び第四号」とあるのは「同条第三号」と、第十六条第一項中「前条第一項」とあるのは「第三十条」と、「同条第三項後段」とあるのは「第三十一条において準用する第十五条第三項後段」と読み替えるものとする。</Sentence></ParagraphSentence></Paragraph></Article></Section></Chapter><Chapter Delete=\"false\" Hide=\"false\" Num=\"4\"><ChapterTitle>第四章　行政指導</ChapterTitle><Article Delete=\"false\" Hide=\"false\" Num=\"32\"><ArticleCaption>（行政指導の一般原則）</ArticleCaption><ArticleTitle>第三十二条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政指導にあっては、行政指導に携わる者は、いやしくも当該行政機関の任務又は所掌事務の範囲を逸脱してはならないこと及び行政指導の内容があくまでも相手方の任意の協力によってのみ実現されるものであることに留意しなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政指導に携わる者は、その相手方が行政指導に従わなかったことを理由として、不利益な取扱いをしてはならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"33\"><ArticleCaption>（申請に関連する行政指導）</ArticleCaption><ArticleTitle>第三十三条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">申請の取下げ又は内容の変更を求める行政指導にあっては、行政指導に携わる者は、申請者が当該行政指導に従う意思がない旨を表明したにもかかわらず当該行政指導を継続すること等により当該申請者の権利の行使を妨げるようなことをしてはならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"34\"><ArticleCaption>（許認可等の権限に関連する行政指導）</ArticleCaption><ArticleTitle>第三十四条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">許認可等をする権限又は許認可等に基づく処分をする権限を有する行政機関が、当該権限を行使することができない場合又は行使する意思がない場合においてする行政指導にあっては、行政指導に携わる者は、当該権限を行使し得る旨を殊更に示すことにより相手方に当該行政指導に従うことを余儀なくさせるようなことをしてはならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"35\"><ArticleCaption>（行政指導の方式）</ArticleCaption><ArticleTitle>第三十五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政指導に携わる者は、その相手方に対して、当該行政指導の趣旨及び内容並びに責任者を明確に示さなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政指導に携わる者は、当該行政指導をする際に、行政機関が許認可等をする権限又は許認可等に基づく処分をする権限を行使し得る旨を示すときは、その相手方に対して、次に掲げる事項を示さなければならない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該権限を行使し得る根拠となる法令の条項</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">前号の条項に規定する要件</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該権限の行使が前号の要件に適合する理由</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">行政指導が口頭でされた場合において、その相手方から前二項に規定する事項を記載した書面の交付を求められたときは、当該行政指導に携わる者は、行政上特別の支障がない限り、これを交付しなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の規定は、次に掲げる行政指導については、適用しない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">相手方に対しその場において完了する行為を求めるもの</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">既に文書（前項の書面を含む。）又は電磁的記録（電子的方式、磁気的方式その他人の知覚によっては認識することができない方式で作られる記録であって、電子計算機による情報処理の用に供されるものをいう。）によりその相手方に通知されている事項と同一の内容を求めるもの</Sentence></ItemSentence></Item></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"36\"><ArticleCaption>（複数の者を対象とする行政指導）</ArticleCaption><ArticleTitle>第三十六条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">同一の行政目的を実現するため一定の条件に該当する複数の者に対し行政指導をしようとするときは、行政機関は、あらかじめ、事案に応じ、行政指導指針を定め、かつ、行政上特別の支障がない限り、これを公表しなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"36_2\"><ArticleCaption>（行政指導の中止等の求め）</ArticleCaption><ArticleTitle>第三十六条の二</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">法令に違反する行為の是正を求める行政指導（その根拠となる規定が法律に置かれているものに限る。）の相手方は、当該行政指導が当該法律に規定する要件に適合しないと思料するときは、当該行政指導をした行政機関に対し、その旨を申し出て、当該行政指導の中止その他必要な措置をとることを求めることができる。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、当該行政指導がその相手方について弁明その他意見陳述のための手続を経てされたものであるときは、この限りでない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の申出は、次に掲げる事項を記載した申出書を提出してしなければならない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">申出をする者の氏名又は名称及び住所又は居所</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該行政指導の内容</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該行政指導がその根拠とする法律の条項</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">前号の条項に規定する要件</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該行政指導が前号の要件に適合しないと思料する理由</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6\"><ItemTitle>六</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">その他参考となる事項</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">当該行政機関は、第一項の規定による申出があったときは、必要な調査を行い、当該行政指導が当該法律に規定する要件に適合しないと認めるときは、当該行政指導の中止その他必要な措置をとらなければならない。</Sentence></ParagraphSentence></Paragraph></Article></Chapter><Chapter Delete=\"false\" Hide=\"false\" Num=\"4_2\"><ChapterTitle>第四章の二　処分等の求め</ChapterTitle><Article Delete=\"false\" Hide=\"false\" Num=\"36_3\"><ArticleTitle>第三十六条の三</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">何人も、法令に違反する事実がある場合において、その是正のためにされるべき処分又は行政指導（その根拠となる規定が法律に置かれているものに限る。）がされていないと思料するときは、当該処分をする権限を有する行政庁又は当該行政指導をする権限を有する行政機関に対し、その旨を申し出て、当該処分又は行政指導をすることを求めることができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の申出は、次に掲げる事項を記載した申出書を提出してしなければならない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">申出をする者の氏名又は名称及び住所又は居所</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">法令に違反する事実の内容</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該処分又は行政指導の内容</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該処分又は行政指導の根拠となる法令の条項</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">当該処分又は行政指導がされるべきであると思料する理由</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6\"><ItemTitle>六</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">その他参考となる事項</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">当該行政庁又は行政機関は、第一項の規定による申出があったときは、必要な調査を行い、その結果に基づき必要があると認めるときは、当該処分又は行政指導をしなければならない。</Sentence></ParagraphSentence></Paragraph></Article></Chapter><Chapter Delete=\"false\" Hide=\"false\" Num=\"5\"><ChapterTitle>第五章　届出</ChapterTitle><Article Delete=\"false\" Hide=\"false\" Num=\"37\"><ArticleCaption>（届出）</ArticleCaption><ArticleTitle>第三十七条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">届出が届出書の記載事項に不備がないこと、届出書に必要な書類が添付されていることその他の法令に定められた届出の形式上の要件に適合している場合は、当該届出が法令により当該届出の提出先とされている機関の事務所に到達したときに、当該届出をすべき手続上の義務が履行されたものとする。</Sentence></ParagraphSentence></Paragraph></Article></Chapter><Chapter Delete=\"false\" Hide=\"false\" Num=\"6\"><ChapterTitle>第六章　意見公募手続等</ChapterTitle><Article Delete=\"false\" Hide=\"false\" Num=\"38\"><ArticleCaption>（命令等を定める場合の一般原則）</ArticleCaption><ArticleTitle>第三十八条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等を定める機関（閣議の決定により命令等が定められる場合にあっては、当該命令等の立案をする各大臣。以下「命令等制定機関」という。）は、命令等を定めるに当たっては、当該命令等がこれを定める根拠となる法令の趣旨に適合するものとなるようにしなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等制定機関は、命令等を定めた後においても、当該命令等の規定の実施状況、社会経済情勢の変化等を勘案し、必要に応じ、当該命令等の内容について検討を加え、その適正を確保するよう努めなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"39\"><ArticleCaption>（意見公募手続）</ArticleCaption><ArticleTitle>第三十九条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等制定機関は、命令等を定めようとする場合には、当該命令等の案（命令等で定めようとする内容を示すものをいう。以下同じ。）及びこれに関連する資料をあらかじめ公示し、意見（情報を含む。以下同じ。）の提出先及び意見の提出のための期間（以下「意見提出期間」という。）を定めて広く一般の意見を求めなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の規定により公示する命令等の案は、具体的かつ明確な内容のものであって、かつ、当該命令等の題名及び当該命令等を定める根拠となる法令の条項が明示されたものでなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">第一項の規定により定める意見提出期間は、同項の公示の日から起算して三十日以上でなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">次の各号のいずれかに該当するときは、第一項の規定は、適用しない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">公益上、緊急に命令等を定める必要があるため、第一項の規定による手続（以下「意見公募手続」という。）を実施することが困難であるとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">納付すべき金銭について定める法律の制定又は改正により必要となる当該金銭の額の算定の基礎となるべき金額及び率並びに算定方法についての命令等その他当該法律の施行に関し必要な事項を定める命令等を定めようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">予算の定めるところにより金銭の給付決定を行うために必要となる当該金銭の額の算定の基礎となるべき金額及び率並びに算定方法その他の事項を定める命令等を定めようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">法律の規定により、内閣府設置法第四十九条第一項若しくは第二項若しくは国家行政組織法第三条第二項に規定する委員会又は内閣府設置法第三十七条若しくは第五十四条若しくは国家行政組織法第八条に規定する機関（以下「委員会等」という。）の議を経て定めることとされている命令等であって、相反する利害を有する者の間の利害の調整を目的として、法律又は政令の規定により、これらの者及び公益をそれぞれ代表する委員をもって組織される委員会等において審議を行うこととされているものとして政令で定める命令等を定めようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">他の行政機関が意見公募手続を実施して定めた命令等と実質的に同一の命令等を定めようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6\"><ItemTitle>六</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">法律の規定に基づき法令の規定の適用又は準用について必要な技術的読替えを定める命令等を定めようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"7\"><ItemTitle>七</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">命令等を定める根拠となる法令の規定の削除に伴い当然必要とされる当該命令等の廃止をしようとするとき。</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"8\"><ItemTitle>八</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">他の法令の制定又は改廃に伴い当然必要とされる規定の整理その他の意見公募手続を実施することを要しない軽微な変更として政令で定めるものを内容とする命令等を定めようとするとき。</Sentence></ItemSentence></Item></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"40\"><ArticleCaption>（意見公募手続の特例）</ArticleCaption><ArticleTitle>第四十条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">命令等制定機関は、命令等を定めようとする場合において、三十日以上の意見提出期間を定めることができないやむを得ない理由があるときは、前条第三項の規定にかかわらず、三十日を下回る意見提出期間を定めることができる。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合においては、当該命令等の案の公示の際その理由を明らかにしなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等制定機関は、委員会等の議を経て命令等を定めようとする場合（前条第四項第四号に該当する場合を除く。）において、当該委員会等が意見公募手続に準じた手続を実施したときは、同条第一項の規定にかかわらず、自ら意見公募手続を実施することを要しない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"41\"><ArticleCaption>（意見公募手続の周知等）</ArticleCaption><ArticleTitle>第四十一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等制定機関は、意見公募手続を実施して命令等を定めるに当たっては、必要に応じ、当該意見公募手続の実施について周知するよう努めるとともに、当該意見公募手続の実施に関連する情報の提供に努めるものとする。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"42\"><ArticleCaption>（提出意見の考慮）</ArticleCaption><ArticleTitle>第四十二条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等制定機関は、意見公募手続を実施して命令等を定める場合には、意見提出期間内に当該命令等制定機関に対し提出された当該命令等の案についての意見（以下「提出意見」という。）を十分に考慮しなければならない。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"43\"><ArticleCaption>（結果の公示等）</ArticleCaption><ArticleTitle>第四十三条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等制定機関は、意見公募手続を実施して命令等を定めた場合には、当該命令等の公布（公布をしないものにあっては、公にする行為。第五項において同じ。）と同時期に、次に掲げる事項を公示しなければならない。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">命令等の題名</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">命令等の案の公示の日</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"3\"><ItemTitle>三</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">提出意見（提出意見がなかった場合にあっては、その旨）</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"4\"><ItemTitle>四</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">提出意見を考慮した結果（意見公募手続を実施した命令等の案と定めた命令等との差異を含む。）及びその理由</Sentence></ItemSentence></Item></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">命令等制定機関は、前項の規定にかかわらず、必要に応じ、同項第三号の提出意見に代えて、当該提出意見を整理又は要約したものを公示することができる。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合においては、当該公示の後遅滞なく、当該提出意見を当該命令等制定機関の事務所における備付けその他の適当な方法により公にしなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等制定機関は、前二項の規定により提出意見を公示し又は公にすることにより第三者の利益を害するおそれがあるとき、その他正当な理由があるときは、当該提出意見の全部又は一部を除くことができる。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">命令等制定機関は、意見公募手続を実施したにもかかわらず命令等を定めないこととした場合には、その旨（別の命令等の案について改めて意見公募手続を実施しようとする場合にあっては、その旨を含む。）並びに第一項第一号及び第二号に掲げる事項を速やかに公示しなければならない。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"5\"><ParagraphNum>５</ParagraphNum><ParagraphSentence><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">命令等制定機関は、第三十九条第四項各号のいずれかに該当することにより意見公募手続を実施しないで命令等を定めた場合には、当該命令等の公布と同時期に、次に掲げる事項を公示しなければならない。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、第一号に掲げる事項のうち命令等の趣旨については、同項第一号から第四号までのいずれかに該当することにより意見公募手続を実施しなかった場合において、当該命令等自体から明らかでないときに限る。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">命令等の題名及び趣旨</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"2\"><ItemTitle>二</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">意見公募手続を実施しなかった旨及びその理由</Sentence></ItemSentence></Item></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"44\"><ArticleCaption>（準用）</ArticleCaption><ArticleTitle>第四十四条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">第四十二条の規定は第四十条第二項に該当することにより命令等制定機関が自ら意見公募手続を実施しないで命令等を定める場合について、前条第一項から第三項までの規定は第四十条第二項に該当することにより命令等制定機関が自ら意見公募手続を実施しないで命令等を定めた場合について、前条第四項の規定は第四十条第二項に該当することにより命令等制定機関が自ら意見公募手続を実施しないで命令等を定めないこととした場合について準用する。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合において、第四十二条中「当該命令等制定機関」とあるのは「委員会等」と、前条第一項第二号中「命令等の案の公示の日」とあるのは「委員会等が命令等の案について公示に準じた手続を実施した日」と、同項第四号中「意見公募手続を実施した」とあるのは「委員会等が意見公募手続に準じた手続を実施した」と読み替えるものとする。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"45\"><ArticleCaption>（公示の方法）</ArticleCaption><ArticleTitle>第四十五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">第三十九条第一項並びに第四十三条第一項（前条において読み替えて準用する場合を含む。）、第四項（前条において準用する場合を含む。）及び第五項の規定による公示は、電子情報処理組織を使用する方法その他の情報通信の技術を利用する方法により行うものとする。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の公示に関し必要な事項は、総務大臣が定める。</Sentence></ParagraphSentence></Paragraph></Article></Chapter><Chapter Delete=\"false\" Hide=\"false\" Num=\"7\"><ChapterTitle>第七章　補則</ChapterTitle><Article Delete=\"false\" Hide=\"false\" Num=\"46\"><ArticleCaption>（地方公共団体の措置）</ArticleCaption><ArticleTitle>第四十六条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">地方公共団体は、第三条第三項において第二章から前章までの規定を適用しないこととされた処分、行政指導及び届出並びに命令等を定める行為に関する手続について、この法律の規定の趣旨にのっとり、行政運営における公正の確保と透明性の向上を図るため必要な措置を講ずるよう努めなければならない。</Sentence></ParagraphSentence></Paragraph></Article></Chapter></MainProvision><SupplProvision><SupplProvisionLabel>附　則</SupplProvisionLabel><Paragraph Hide=\"false\" Num=\"1\"><ParagraphCaption>（施行期日）</ParagraphCaption><ParagraphNum>１</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、公布の日から起算して一年を超えない範囲内において政令で定める日から施行する。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphCaption>（経過措置）</ParagraphCaption><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律の施行前に第十五条第一項又は第三十条の規定による通知に相当する行為がされた場合においては、当該通知に相当する行為に係る不利益処分の手続に関しては、第三章の規定にかかわらず、なお従前の例による。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律の施行前に、届出その他政令で定める行為（以下「届出等」という。）がされた後一定期間内に限りすることができることとされている不利益処分に係る当該届出等がされた場合においては、当該不利益処分に係る手続に関しては、第三章の規定にかかわらず、なお従前の例による。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前二項に定めるもののほか、この法律の施行に関して必要な経過措置は、政令で定める。</Sentence></ParagraphSentence></Paragraph></SupplProvision><SupplProvision AmendLawNum=\"平成一一年一二月八日法律第一五一号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、平成十二年四月一日から施行する。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"3\"><ArticleCaption>（経過措置）</ArticleCaption><ArticleTitle>第三条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">民法の一部を改正する法律（平成十一年法律第百四十九号）附則第三条第三項の規定により従前の例によることとされる準禁治産者及びその保佐人に関するこの法律による改正規定の適用については、次に掲げる改正規定を除き、なお従前の例による。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一から二十五まで</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">略</Sentence></ItemSentence></Item></Paragraph></Article></SupplProvision><SupplProvision AmendLawNum=\"平成一一年一二月二二日法律第一六〇号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">この法律（第二条及び第三条を除く。）は、平成十三年一月六日から施行する。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、次の各号に掲げる規定は、当該各号に定める日から施行する。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1\"><ItemTitle>一</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">第九百九十五条（核原料物質、核燃料物質及び原子炉の規制に関する法律の一部を改正する法律附則の改正規定に係る部分に限る。）、第千三百五条、第千三百六条、第千三百二十四条第二項、第千三百二十六条第二項及び第千三百四十四条の規定</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">公布の日</Sentence></Column></ItemSentence></Item></Paragraph></Article></SupplProvision><SupplProvision AmendLawNum=\"平成一四年一二月一三日法律第一五二号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、行政手続等における情報通信の技術の利用に関する法律（平成十四年法律第百五十一号）の施行の日から施行する。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"5\"><ArticleCaption>（その他の経過措置の政令への委任）</ArticleCaption><ArticleTitle>第五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">前三条に定めるもののほか、この法律の施行に関し必要な経過措置は、政令で定める。</Sentence></ParagraphSentence></Paragraph></Article></SupplProvision><SupplProvision AmendLawNum=\"平成一五年七月一六日法律第一一九号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、地方独立行政法人法（平成十五年法律第百十八号）の施行の日から施行する。</Sentence></ParagraphSentence></Paragraph></Article></SupplProvision><SupplProvision AmendLawNum=\"平成一七年六月二九日法律第七三号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">この法律は、公布の日から起算して一年を超えない範囲内において政令で定める日から施行する。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、次条及び附則第八条の規定は、公布の日から施行する。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"2\"><ArticleCaption>（経過措置）</ArticleCaption><ArticleTitle>第二条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Num=\"1\" WritingMode=\"vertical\">この法律による改正後の行政手続法（以下「新法」という。）第二条第八号に規定する命令等（以下この条において「命令等」という。）を定める機関（以下この条において「命令等制定機関」という。）は、命令等を定めようとするときは、この法律の施行前においても、新法第六章の規定の例によることができる。</Sentence><Sentence Num=\"2\" WritingMode=\"vertical\">この場合において、同章の規定の例により実施した手続は、新法の適用については、当該命令等制定機関が同章の規定により実施したものとみなす。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">前項の規定の適用がある場合を除き、命令等制定機関がこの法律の施行の日から六十日以内に定める命令等については、新法第六章の規定は、適用しない。</Sentence></ParagraphSentence></Paragraph></Article></SupplProvision><SupplProvision AmendLawNum=\"平成一八年六月八日法律第五八号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、公布の日から起算して一年を超えない範囲内において政令で定める日から施行する。</Sentence></ParagraphSentence></Paragraph></Article></SupplProvision><SupplProvision AmendLawNum=\"平成一八年六月一四日法律第六六号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、平成十八年証券取引法改正法の施行の日から施行する。</Sentence></ParagraphSentence></Paragraph></SupplProvision><SupplProvision AmendLawNum=\"平成二六年六月一三日法律第六九号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、行政不服審査法（平成二十六年法律第六十八号）の施行の日から施行する。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"5\"><ArticleCaption>（経過措置の原則）</ArticleCaption><ArticleTitle>第五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">行政庁の処分その他の行為又は不作為についての不服申立てであってこの法律の施行前にされた行政庁の処分その他の行為又はこの法律の施行前にされた申請に係る行政庁の不作為に係るものについては、この附則に特別の定めがある場合を除き、なお従前の例による。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"6\"><ArticleCaption>（訴訟に関する経過措置）</ArticleCaption><ArticleTitle>第六条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律による改正前の法律の規定により不服申立てに対する行政庁の裁決、決定その他の行為を経た後でなければ訴えを提起できないこととされる事項であって、当該不服申立てを提起しないでこの法律の施行前にこれを提起すべき期間を経過したもの（当該不服申立てが他の不服申立てに対する行政庁の裁決、決定その他の行為を経た後でなければ提起できないとされる場合にあっては、当該他の不服申立てを提起しないでこの法律の施行前にこれを提起すべき期間を経過したものを含む。）の訴えの提起については、なお従前の例による。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律の規定による改正前の法律の規定（前条の規定によりなお従前の例によることとされる場合を含む。）により異議申立てが提起された処分その他の行為であって、この法律の規定による改正後の法律の規定により審査請求に対する裁決を経た後でなければ取消しの訴えを提起することができないこととされるものの取消しの訴えの提起については、なお従前の例による。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">不服申立てに対する行政庁の裁決、決定その他の行為の取消しの訴えであって、この法律の施行前に提起されたものについては、なお従前の例による。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"10\"><ArticleCaption>（その他の経過措置の政令への委任）</ArticleCaption><ArticleTitle>第十条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">附則第五条から前条までに定めるもののほか、この法律の施行に関し必要な経過措置（罰則に関する経過措置を含む。）は、政令で定める。</Sentence></ParagraphSentence></Paragraph></Article></SupplProvision><SupplProvision AmendLawNum=\"平成二六年六月一三日法律第七〇号\" Extract=\"true\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この法律は、平成二十七年四月一日から施行する。</Sentence></ParagraphSentence></Paragraph></Article></SupplProvision><SupplProvision AmendLawNum=\"平成二九年三月三一日法律第四号\" Type=\"Amend\"><SupplProvisionLabel>附　則</SupplProvisionLabel><Article Delete=\"false\" Hide=\"false\" Num=\"1\"><ArticleCaption>（施行期日）</ArticleCaption><ArticleTitle>第一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence Function=\"main\" Num=\"1\" WritingMode=\"vertical\">この法律は、平成二十九年四月一日から施行する。</Sentence><Sentence Function=\"proviso\" Num=\"2\" WritingMode=\"vertical\">ただし、次の各号に掲げる規定は、当該各号に定める日から施行する。</Sentence></ParagraphSentence><Item Delete=\"false\" Hide=\"false\" Num=\"1:4\"><ItemTitle>一から四まで</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">略</Sentence></ItemSentence></Item><Item Delete=\"false\" Hide=\"false\" Num=\"5\"><ItemTitle>五</ItemTitle><ItemSentence><Column LineBreak=\"false\" Num=\"1\"><Sentence WritingMode=\"vertical\">次に掲げる規定</Sentence></Column><Column LineBreak=\"false\" Num=\"2\"><Sentence WritingMode=\"vertical\">平成三十年四月一日</Sentence></Column></ItemSentence><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"1\"><Subitem1Title>イからハまで</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">略</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"4\"><Subitem1Title>ニ</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">第八条の規定（同条中国税通則法第十九条第四項第三号ハの改正規定、同法第三十四条の二（見出しを含む。）の改正規定及び同法第七十一条第二項の改正規定を除く。）並びに附則第四十条第二項及び第三項、第百五条、第百六条、第百八条から第百十四条まで、第百十八条、第百二十四条、第百二十五条、第百二十九条から第百三十三条まで、第百三十五条並びに第百三十六条の規定</Sentence></Subitem1Sentence></Subitem1><Subitem1 Delete=\"false\" Hide=\"false\" Num=\"3\"><Subitem1Title>ホからルまで</Subitem1Title><Subitem1Sentence><Sentence WritingMode=\"vertical\">略</Sentence></Subitem1Sentence></Subitem1></Item><Item Delete=\"false\" Hide=\"false\" Num=\"6:18\"><ItemTitle>六から十八まで</ItemTitle><ItemSentence><Sentence WritingMode=\"vertical\">略</Sentence></ItemSentence></Item></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"35\"><ArticleCaption>（酒類の製造免許等に関する経過措置）</ArticleCaption><ArticleTitle>第三十五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">第七条の規定による改正前の酒税法（以下「旧酒税法」という。）の規定により発泡酒とされていたもののうち、新酒税法の規定によりビールとして分類される酒類につき旧酒税法の規定により製造免許又は販売業免許（以下この条において「製造免許等」という。）を受けていた者は、平成三十年四月一日に、新酒税法の規定によりビール（新酒税法第三条第十二号に規定するビールのうち、旧酒税法第三条第十八号に規定する発泡酒に該当するものに限る。）の製造免許等を受けたものとみなす。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">旧酒税法の規定により甘味果実酒又はスピリッツとされていたもののうち、新酒税法の規定により果実酒又はブランデーとして分類される酒類につき旧酒税法の規定により製造免許等を受けていた者は、平成三十年四月一日に、新酒税法の規定により果実酒（新酒税法第三条第十三号ホに掲げるものに限る。）又はブランデー（同条第十六号に規定するブランデーのうち、旧酒税法第三条第二十号に規定するスピリッツに該当するものに限る。）の製造免許等を受けたものとみなす。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">旧酒税法の規定によりその他の醸造酒、スピリッツ、リキュール又は雑酒とされていたもののうち、新酒税法の規定により発泡酒として分類される酒類につき旧酒税法の規定により製造免許等を受けていた者は、平成三十五年十月一日に、新酒税法の規定により発泡酒（新酒税法第三条第十八号ロ及びハに掲げるものに限る。）の製造免許等を受けたものとみなす。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"4\"><ParagraphNum>４</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">新酒税法第十条（第七号に係る部分に限る。）の規定の適用については、第十条の規定による廃止前の国税犯則取締法（以下「旧国税犯則取締法」という。）第十四条第一項の規定による通告処分は、第八条の規定による改正後の国税通則法（以下「新国税通則法」という。）第百五十七条第一項の規定による通告処分とみなす。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"5\"><ParagraphNum>５</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">第一項から第三項までの場合において、旧酒税法の規定による製造免許等に期限又は条件が付されていたときは、当該期限又は条件は、新酒税法の規定による製造免許等に付されたものとみなす。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"40\"><ArticleCaption>（国税通則法の一部改正に伴う経過措置）</ArticleCaption><ArticleTitle>第四十条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">新国税通則法第三十四条の二の規定は、平成三十年一月一日以後に納付する国税について適用し、同日前に納付した国税については、なお従前の例による。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">新国税通則法第六十八条の規定は、平成三十年四月一日以後に国税通則法第二条第七号に規定する法定申告期限（国税に関する法律の規定により当該法定申告期限とみなされる期限を含む。以下この項において「法定申告期限」という。）が到来する国税について適用し、同日前に法定申告期限が到来した国税については、なお従前の例による。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"3\"><ParagraphNum>３</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">新国税通則法第十一章第二節の規定は、平成三十年四月一日以後にした行為に係る国税（前項の規定によりなお従前の例によることとされる国税を除く。）に関する犯則事件の処分について適用する。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"41\"><ArticleCaption>（国税徴収法の一部改正に伴う経過措置）</ArticleCaption><ArticleTitle>第四十一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">第九条の規定による改正後の国税徴収法（次項において「新国税徴収法」という。）第三十三条の規定は、平成三十年一月一日以後に滞納となった国税について適用し、同日前に滞納となっている国税については、なお従前の例による。</Sentence></ParagraphSentence></Paragraph><Paragraph Hide=\"false\" Num=\"2\"><ParagraphNum>２</ParagraphNum><ParagraphSentence><Sentence WritingMode=\"vertical\">新国税徴収法第百五十九条第一項の規定の適用については、旧国税犯則取締法の規定による差押え又は領置は、新国税通則法第十一章の規定による差押え又は領置とみなす。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"42\"><ArticleCaption>（国税犯則取締法の廃止に伴う経過措置）</ArticleCaption><ArticleTitle>第四十二条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">平成三十年三月三十一日以前にした行為に係る国税に関する犯則事件及び同年四月一日以後にした行為に係る国税（附則第四十条第二項の規定によりなお従前の例によることとされる国税に限る。）に関する犯則事件の処分についての旧国税犯則取締法第十二条ノ二から第十九条までの規定の適用については、なお従前の例による。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"112\"><ArticleCaption>（税理士法の一部改正に伴う経過措置）</ArticleCaption><ArticleTitle>第百十二条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">前条の規定による改正後の税理士法第四条（第五号に係る部分に限る。）の規定の適用については、旧国税犯則取締法第十四条第一項の規定による通告処分は、新国税通則法第百五十七条第一項の規定による通告処分とみなす。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"125\"><ArticleCaption>（通関業法の一部改正に伴う経過措置）</ArticleCaption><ArticleTitle>第百二十五条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">前条の規定による改正後の通関業法第六条（第四号に係る部分に限る。）の規定の適用については、旧国税犯則取締法第十四条第一項の規定による通告処分は、新国税通則法第百五十七条第一項の規定による通告処分とみなす。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"131\"><ArticleCaption>（金融機関等の更生手続の特例等に関する法律の一部改正に伴う経過措置）</ArticleCaption><ArticleTitle>第百三十一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">前条の規定による改正後の金融機関等の更生手続の特例等に関する法律第百二十五条第一項（第四号に係る部分に限る。）及び第二百九十五条第一項（第四号に係る部分に限る。）の規定の適用については、旧国税犯則取締法第十四条第一項の規定による通告は、新国税通則法第百五十七条第一項の規定による通告とみなす。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"133\"><ArticleCaption>（アルコール事業法の一部改正に伴う経過措置）</ArticleCaption><ArticleTitle>第百三十三条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">前条の規定による改正後のアルコール事業法第五条（第一号及び第三号に係る部分に限る。）の規定の適用については、旧国税犯則取締法第十四条第一項の規定による通告処分は、新国税通則法第百五十七条第一項の規定による通告処分とみなす。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"136\"><ArticleCaption>（会社更生法の一部改正に伴う経過措置）</ArticleCaption><ArticleTitle>第百三十六条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">前条の規定による改正後の会社更生法第二百四条第一項（第四号に係る部分に限る。）の規定の適用については、旧国税犯則取締法第十四条第一項の規定による通告は、新国税通則法第百五十七条第一項の規定による通告とみなす。</Sentence></ParagraphSentence></Paragraph></Article><Article Delete=\"false\" Hide=\"false\" Num=\"141\"><ArticleCaption>（政令への委任）</ArticleCaption><ArticleTitle>第百四十一条</ArticleTitle><Paragraph Hide=\"false\" Num=\"1\"><ParagraphNum/><ParagraphSentence><Sentence WritingMode=\"vertical\">この附則に規定するもののほか、この法律の施行に関し必要な経過措置は、政令で定める。</Sentence></ParagraphSentence></Paragraph></Article></SupplProvision></LawBody></Law>\n");
 
 /***/ }),
 
@@ -10042,7 +10042,7 @@ var react_dom = __webpack_require__(40961);
 var react_dom_namespaceObject = /*#__PURE__*/__webpack_require__.t(react_dom, 2);
 ;// CONCATENATED MODULE: ./node_modules/@remix-run/router/dist/router.js
 /**
- * @remix-run/router v1.16.1
+ * @remix-run/router v1.17.1
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -10529,7 +10529,7 @@ function convertRoutesToDataRoutes(routes, mapRouteProperties, parentPath, manif
     manifest = {};
   }
   return routes.map((route, index) => {
-    let treePath = [...parentPath, index];
+    let treePath = [...parentPath, String(index)];
     let id = typeof route.id === "string" ? route.id : treePath.join("-");
     invariant(route.index !== true || !route.children, "Cannot specify children on an index route");
     invariant(!manifest[id], "Found a route id collision on id \"" + id + "\".  Route " + "id's must be globally unique within Data Router usages");
@@ -10561,6 +10561,9 @@ function matchRoutes(routes, locationArg, basename) {
   if (basename === void 0) {
     basename = "/";
   }
+  return matchRoutesImpl(routes, locationArg, basename, false);
+}
+function matchRoutesImpl(routes, locationArg, basename, allowPartial) {
   let location = typeof locationArg === "string" ? parsePath(locationArg) : locationArg;
   let pathname = stripBasename(location.pathname || "/", basename);
   if (pathname == null) {
@@ -10577,7 +10580,7 @@ function matchRoutes(routes, locationArg, basename) {
     // should be a safe operation.  This avoids needing matchRoutes to be
     // history-aware.
     let decoded = decodePath(pathname);
-    matches = matchRouteBranch(branches[i], decoded);
+    matches = matchRouteBranch(branches[i], decoded, allowPartial);
   }
   return matches;
 }
@@ -10730,7 +10733,10 @@ function compareIndexes(a, b) {
   // so they sort equally.
   0;
 }
-function matchRouteBranch(branch, pathname) {
+function matchRouteBranch(branch, pathname, allowPartial) {
+  if (allowPartial === void 0) {
+    allowPartial = false;
+  }
   let {
     routesMeta
   } = branch;
@@ -10746,9 +10752,18 @@ function matchRouteBranch(branch, pathname) {
       caseSensitive: meta.caseSensitive,
       end
     }, remainingPathname);
-    if (!match) return null;
-    Object.assign(matchedParams, match.params);
     let route = meta.route;
+    if (!match && end && allowPartial && !routesMeta[routesMeta.length - 1].route.index) {
+      match = matchPath({
+        path: meta.relativePath,
+        caseSensitive: meta.caseSensitive,
+        end: false
+      }, remainingPathname);
+    }
+    if (!match) {
+      return null;
+    }
+    Object.assign(matchedParams, match.params);
     matches.push({
       // TODO: Can this as be avoided?
       params: matchedParams,
@@ -10985,7 +11000,7 @@ function getResolveToMatches(matches, v7_relativeSplatPath) {
   // match so we include splat values for "." links.  See:
   // https://github.com/remix-run/react-router/issues/11052#issuecomment-1836589329
   if (v7_relativeSplatPath) {
-    return pathMatches.map((match, idx) => idx === matches.length - 1 ? match.pathname : match.pathnameBase);
+    return pathMatches.map((match, idx) => idx === pathMatches.length - 1 ? match.pathname : match.pathnameBase);
   }
   return pathMatches.map(match => match.pathnameBase);
 }
@@ -11364,6 +11379,7 @@ function createRouter(init) {
   let inFlightDataRoutes;
   let basename = init.basename || "/";
   let dataStrategyImpl = init.unstable_dataStrategy || defaultDataStrategy;
+  let patchRoutesOnMissImpl = init.unstable_patchRoutesOnMiss;
   // Config driven behavior flags
   let future = _extends({
     v7_fetcherPersist: false,
@@ -11392,7 +11408,7 @@ function createRouter(init) {
   let initialScrollRestored = init.hydrationData != null;
   let initialMatches = matchRoutes(dataRoutes, init.history.location, basename);
   let initialErrors = null;
-  if (initialMatches == null) {
+  if (initialMatches == null && !patchRoutesOnMissImpl) {
     // If we do not match a user-provided-route, fall back to the root
     // to allow the error boundary to take over
     let error = getInternalRouterError(404, {
@@ -11407,14 +11423,25 @@ function createRouter(init) {
       [route.id]: error
     };
   }
+  // If the user provided a patchRoutesOnMiss implementation and our initial
+  // match is a splat route, clear them out so we run through lazy discovery
+  // on hydration in case there's a more accurate lazy route match
+  if (initialMatches && patchRoutesOnMissImpl) {
+    let fogOfWar = checkFogOfWar(initialMatches, dataRoutes, init.history.location.pathname);
+    if (fogOfWar.active) {
+      initialMatches = null;
+    }
+  }
   let initialized;
-  let hasLazyRoutes = initialMatches.some(m => m.route.lazy);
-  let hasLoaders = initialMatches.some(m => m.route.loader);
-  if (hasLazyRoutes) {
+  if (!initialMatches) {
+    // We need to run patchRoutesOnMiss in initialize()
+    initialized = false;
+    initialMatches = [];
+  } else if (initialMatches.some(m => m.route.lazy)) {
     // All initialMatches need to be loaded before we're ready.  If we have lazy
     // functions around still then we'll need to run them in initialize()
     initialized = false;
-  } else if (!hasLoaders) {
+  } else if (!initialMatches.some(m => m.route.loader)) {
     // If we've got no loaders to run, then we're good to go
     initialized = true;
   } else if (future.v7_partialHydration) {
@@ -11519,6 +11546,9 @@ function createRouter(init) {
   // Store blocker functions in a separate Map outside of router state since
   // we don't need to update UI state if they change
   let blockerFunctions = new Map();
+  // Map of pending patchRoutesOnMiss() promises (keyed by path/matches) so
+  // that we only kick them off once for a given combo
+  let pendingPatchRoutes = new Map();
   // Flag to ignore the next history update, so we can revert the URL change on
   // a POP navigation that was blocked by the user without touching router state
   let ignoreNextHistoryUpdate = false;
@@ -11695,6 +11725,7 @@ function createRouter(init) {
     // Always respect the user flag.  Otherwise don't reset on mutation
     // submission navigations unless they redirect
     let preventScrollReset = pendingPreventScrollReset === true || state.navigation.formMethod != null && isMutationMethod(state.navigation.formMethod) && ((_location$state2 = location.state) == null ? void 0 : _location$state2._isRedirect) !== true;
+    // Commit any in-flight routes at the end of the HMR revalidation "navigation"
     if (inFlightDataRoutes) {
       dataRoutes = inFlightDataRoutes;
       inFlightDataRoutes = undefined;
@@ -11884,17 +11915,17 @@ function createRouter(init) {
     let loadingNavigation = opts && opts.overrideNavigation;
     let matches = matchRoutes(routesToUse, location, basename);
     let flushSync = (opts && opts.flushSync) === true;
+    let fogOfWar = checkFogOfWar(matches, routesToUse, location.pathname);
+    if (fogOfWar.active && fogOfWar.matches) {
+      matches = fogOfWar.matches;
+    }
     // Short circuit with a 404 on the root error boundary if we match nothing
     if (!matches) {
-      let error = getInternalRouterError(404, {
-        pathname: location.pathname
-      });
       let {
-        matches: notFoundMatches,
+        error,
+        notFoundMatches,
         route
-      } = getShortCircuitMatches(routesToUse);
-      // Cancel all pending deferred on 404s since we don't keep any routes
-      cancelActiveDeferreds();
+      } = handleNavigational404(location.pathname);
       completeNavigation(location, {
         matches: notFoundMatches,
         loaderData: {},
@@ -11935,25 +11966,45 @@ function createRouter(init) {
       }];
     } else if (opts && opts.submission && isMutationMethod(opts.submission.formMethod)) {
       // Call action if we received an action submission
-      let actionResult = await handleAction(request, location, opts.submission, matches, {
+      let actionResult = await handleAction(request, location, opts.submission, matches, fogOfWar.active, {
         replace: opts.replace,
         flushSync
       });
       if (actionResult.shortCircuited) {
         return;
       }
+      // If we received a 404 from handleAction, it's because we couldn't lazily
+      // discover the destination route so we don't want to call loaders
+      if (actionResult.pendingActionResult) {
+        let [routeId, result] = actionResult.pendingActionResult;
+        if (isErrorResult(result) && isRouteErrorResponse(result.error) && result.error.status === 404) {
+          pendingNavigationController = null;
+          completeNavigation(location, {
+            matches: actionResult.matches,
+            loaderData: {},
+            errors: {
+              [routeId]: result.error
+            }
+          });
+          return;
+        }
+      }
+      matches = actionResult.matches || matches;
       pendingActionResult = actionResult.pendingActionResult;
       loadingNavigation = getLoadingNavigation(location, opts.submission);
       flushSync = false;
+      // No need to do fog of war matching again on loader execution
+      fogOfWar.active = false;
       // Create a GET request for the loaders
       request = createClientSideRequest(init.history, request.url, request.signal);
     }
     // Call loaders
     let {
       shortCircuited,
+      matches: updatedMatches,
       loaderData,
       errors
-    } = await handleLoaders(request, location, matches, loadingNavigation, opts && opts.submission, opts && opts.fetcherSubmission, opts && opts.replace, opts && opts.initialHydration === true, flushSync, pendingActionResult);
+    } = await handleLoaders(request, location, matches, fogOfWar.active, loadingNavigation, opts && opts.submission, opts && opts.fetcherSubmission, opts && opts.replace, opts && opts.initialHydration === true, flushSync, pendingActionResult);
     if (shortCircuited) {
       return;
     }
@@ -11962,7 +12013,7 @@ function createRouter(init) {
     // been assigned to a new controller for the next navigation
     pendingNavigationController = null;
     completeNavigation(location, _extends({
-      matches
+      matches: updatedMatches || matches
     }, getActionDataForCommit(pendingActionResult), {
       loaderData,
       errors
@@ -11970,7 +12021,7 @@ function createRouter(init) {
   }
   // Call the action matched by the leaf route for this navigation and handle
   // redirects/errors
-  async function handleAction(request, location, submission, matches, opts) {
+  async function handleAction(request, location, submission, matches, isFogOfWar, opts) {
     if (opts === void 0) {
       opts = {};
     }
@@ -11982,6 +12033,42 @@ function createRouter(init) {
     }, {
       flushSync: opts.flushSync === true
     });
+    if (isFogOfWar) {
+      let discoverResult = await discoverRoutes(matches, location.pathname, request.signal);
+      if (discoverResult.type === "aborted") {
+        return {
+          shortCircuited: true
+        };
+      } else if (discoverResult.type === "error") {
+        let {
+          error,
+          notFoundMatches,
+          route
+        } = handleDiscoverRouteError(location.pathname, discoverResult);
+        return {
+          matches: notFoundMatches,
+          pendingActionResult: [route.id, {
+            type: ResultType.error,
+            error
+          }]
+        };
+      } else if (!discoverResult.matches) {
+        let {
+          notFoundMatches,
+          error,
+          route
+        } = handleNavigational404(location.pathname);
+        return {
+          matches: notFoundMatches,
+          pendingActionResult: [route.id, {
+            type: ResultType.error,
+            error
+          }]
+        };
+      } else {
+        matches = discoverResult.matches;
+      }
+    }
     // Call our action and get the result
     let result;
     let actionMatch = getTargetMatch(matches, location);
@@ -12031,29 +12118,90 @@ function createRouter(init) {
       // Store off the pending error - we use it to determine which loaders
       // to call and will commit it when we complete the navigation
       let boundaryMatch = findNearestBoundary(matches, actionMatch.route.id);
-      // By default, all submissions are REPLACE navigations, but if the
-      // action threw an error that'll be rendered in an errorElement, we fall
-      // back to PUSH so that the user can use the back button to get back to
-      // the pre-submission form location to try again
+      // By default, all submissions to the current location are REPLACE
+      // navigations, but if the action threw an error that'll be rendered in
+      // an errorElement, we fall back to PUSH so that the user can use the
+      // back button to get back to the pre-submission form location to try
+      // again
       if ((opts && opts.replace) !== true) {
         pendingAction = Action.Push;
       }
       return {
+        matches,
         pendingActionResult: [boundaryMatch.route.id, result]
       };
     }
     return {
+      matches,
       pendingActionResult: [actionMatch.route.id, result]
     };
   }
   // Call all applicable loaders for the given matches, handling redirects,
   // errors, etc.
-  async function handleLoaders(request, location, matches, overrideNavigation, submission, fetcherSubmission, replace, initialHydration, flushSync, pendingActionResult) {
+  async function handleLoaders(request, location, matches, isFogOfWar, overrideNavigation, submission, fetcherSubmission, replace, initialHydration, flushSync, pendingActionResult) {
     // Figure out the right navigation we want to use for data loading
     let loadingNavigation = overrideNavigation || getLoadingNavigation(location, submission);
     // If this was a redirect from an action we don't have a "submission" but
     // we have it on the loading navigation so use that if available
     let activeSubmission = submission || fetcherSubmission || getSubmissionFromNavigation(loadingNavigation);
+    // If this is an uninterrupted revalidation, we remain in our current idle
+    // state.  If not, we need to switch to our loading state and load data,
+    // preserving any new action data or existing action data (in the case of
+    // a revalidation interrupting an actionReload)
+    // If we have partialHydration enabled, then don't update the state for the
+    // initial data load since it's not a "navigation"
+    let shouldUpdateNavigationState = !isUninterruptedRevalidation && (!future.v7_partialHydration || !initialHydration);
+    // When fog of war is enabled, we enter our `loading` state earlier so we
+    // can discover new routes during the `loading` state.  We skip this if
+    // we've already run actions since we would have done our matching already.
+    // If the children() function threw then, we want to proceed with the
+    // partial matches it discovered.
+    if (isFogOfWar) {
+      if (shouldUpdateNavigationState) {
+        let actionData = getUpdatedActionData(pendingActionResult);
+        updateState(_extends({
+          navigation: loadingNavigation
+        }, actionData !== undefined ? {
+          actionData
+        } : {}), {
+          flushSync
+        });
+      }
+      let discoverResult = await discoverRoutes(matches, location.pathname, request.signal);
+      if (discoverResult.type === "aborted") {
+        return {
+          shortCircuited: true
+        };
+      } else if (discoverResult.type === "error") {
+        let {
+          error,
+          notFoundMatches,
+          route
+        } = handleDiscoverRouteError(location.pathname, discoverResult);
+        return {
+          matches: notFoundMatches,
+          loaderData: {},
+          errors: {
+            [route.id]: error
+          }
+        };
+      } else if (!discoverResult.matches) {
+        let {
+          error,
+          notFoundMatches,
+          route
+        } = handleNavigational404(location.pathname);
+        return {
+          matches: notFoundMatches,
+          loaderData: {},
+          errors: {
+            [route.id]: error
+          }
+        };
+      } else {
+        matches = discoverResult.matches;
+      }
+    }
     let routesToUse = inFlightDataRoutes || dataRoutes;
     let [matchesToLoad, revalidatingFetchers] = getMatchesToLoad(init.history, state, matches, activeSubmission, location, future.v7_partialHydration && initialHydration === true, future.unstable_skipActionErrorRevalidation, isRevalidationRequired, cancelledDeferredRoutes, cancelledFetcherLoads, deletedFetchers, fetchLoadMatches, fetchRedirectIds, routesToUse, basename, pendingActionResult);
     // Cancel pending deferreds for no-longer-matched routes or routes we're
@@ -12080,40 +12228,20 @@ function createRouter(init) {
         shortCircuited: true
       };
     }
-    // If this is an uninterrupted revalidation, we remain in our current idle
-    // state.  If not, we need to switch to our loading state and load data,
-    // preserving any new action data or existing action data (in the case of
-    // a revalidation interrupting an actionReload)
-    // If we have partialHydration enabled, then don't update the state for the
-    // initial data load since it's not a "navigation"
-    if (!isUninterruptedRevalidation && (!future.v7_partialHydration || !initialHydration)) {
-      revalidatingFetchers.forEach(rf => {
-        let fetcher = state.fetchers.get(rf.key);
-        let revalidatingFetcher = getLoadingFetcher(undefined, fetcher ? fetcher.data : undefined);
-        state.fetchers.set(rf.key, revalidatingFetcher);
-      });
-      let actionData;
-      if (pendingActionResult && !isErrorResult(pendingActionResult[1])) {
-        // This is cast to `any` currently because `RouteData`uses any and it
-        // would be a breaking change to use any.
-        // TODO: v7 - change `RouteData` to use `unknown` instead of `any`
-        actionData = {
-          [pendingActionResult[0]]: pendingActionResult[1].data
-        };
-      } else if (state.actionData) {
-        if (Object.keys(state.actionData).length === 0) {
-          actionData = null;
-        } else {
-          actionData = state.actionData;
+    if (shouldUpdateNavigationState) {
+      let updates = {};
+      if (!isFogOfWar) {
+        // Only update navigation/actionNData if we didn't already do it above
+        updates.navigation = loadingNavigation;
+        let actionData = getUpdatedActionData(pendingActionResult);
+        if (actionData !== undefined) {
+          updates.actionData = actionData;
         }
       }
-      updateState(_extends({
-        navigation: loadingNavigation
-      }, actionData !== undefined ? {
-        actionData
-      } : {}, revalidatingFetchers.length > 0 ? {
-        fetchers: new Map(state.fetchers)
-      } : {}), {
+      if (revalidatingFetchers.length > 0) {
+        updates.fetchers = getUpdatedRevalidatingFetchers(revalidatingFetchers);
+      }
+      updateState(updates, {
         flushSync
       });
     }
@@ -12198,11 +12326,36 @@ function createRouter(init) {
     let didAbortFetchLoads = abortStaleFetchLoads(pendingNavigationLoadId);
     let shouldUpdateFetchers = updatedFetchers || didAbortFetchLoads || revalidatingFetchers.length > 0;
     return _extends({
+      matches,
       loaderData,
       errors
     }, shouldUpdateFetchers ? {
       fetchers: new Map(state.fetchers)
     } : {});
+  }
+  function getUpdatedActionData(pendingActionResult) {
+    if (pendingActionResult && !isErrorResult(pendingActionResult[1])) {
+      // This is cast to `any` currently because `RouteData`uses any and it
+      // would be a breaking change to use any.
+      // TODO: v7 - change `RouteData` to use `unknown` instead of `any`
+      return {
+        [pendingActionResult[0]]: pendingActionResult[1].data
+      };
+    } else if (state.actionData) {
+      if (Object.keys(state.actionData).length === 0) {
+        return null;
+      } else {
+        return state.actionData;
+      }
+    }
+  }
+  function getUpdatedRevalidatingFetchers(revalidatingFetchers) {
+    revalidatingFetchers.forEach(rf => {
+      let fetcher = state.fetchers.get(rf.key);
+      let revalidatingFetcher = getLoadingFetcher(undefined, fetcher ? fetcher.data : undefined);
+      state.fetchers.set(rf.key, revalidatingFetcher);
+    });
+    return new Map(state.fetchers);
   }
   // Trigger a fetcher load/submit for the given fetcher key
   function fetch(key, routeId, href, opts) {
@@ -12214,6 +12367,10 @@ function createRouter(init) {
     let routesToUse = inFlightDataRoutes || dataRoutes;
     let normalizedPath = normalizeTo(state.location, state.matches, basename, future.v7_prependBasename, href, future.v7_relativeSplatPath, routeId, opts == null ? void 0 : opts.relative);
     let matches = matchRoutes(routesToUse, normalizedPath, basename);
+    let fogOfWar = checkFogOfWar(matches, routesToUse, normalizedPath);
+    if (fogOfWar.active && fogOfWar.matches) {
+      matches = fogOfWar.matches;
+    }
     if (!matches) {
       setFetcherError(key, routeId, getInternalRouterError(404, {
         pathname: normalizedPath
@@ -12236,7 +12393,7 @@ function createRouter(init) {
     let match = getTargetMatch(matches, path);
     pendingPreventScrollReset = (opts && opts.preventScrollReset) === true;
     if (submission && isMutationMethod(submission.formMethod)) {
-      handleFetcherAction(key, routeId, path, match, matches, flushSync, submission);
+      handleFetcherAction(key, routeId, path, match, matches, fogOfWar.active, flushSync, submission);
       return;
     }
     // Store off the match so we can call it's shouldRevalidate on subsequent
@@ -12245,22 +12402,28 @@ function createRouter(init) {
       routeId,
       path
     });
-    handleFetcherLoader(key, routeId, path, match, matches, flushSync, submission);
+    handleFetcherLoader(key, routeId, path, match, matches, fogOfWar.active, flushSync, submission);
   }
   // Call the action for the matched fetcher.submit(), and then handle redirects,
   // errors, and revalidation
-  async function handleFetcherAction(key, routeId, path, match, requestMatches, flushSync, submission) {
+  async function handleFetcherAction(key, routeId, path, match, requestMatches, isFogOfWar, flushSync, submission) {
     interruptActiveLoads();
     fetchLoadMatches.delete(key);
-    if (!match.route.action && !match.route.lazy) {
-      let error = getInternalRouterError(405, {
-        method: submission.formMethod,
-        pathname: path,
-        routeId: routeId
-      });
-      setFetcherError(key, routeId, error, {
-        flushSync
-      });
+    function detectAndHandle405Error(m) {
+      if (!m.route.action && !m.route.lazy) {
+        let error = getInternalRouterError(405, {
+          method: submission.formMethod,
+          pathname: path,
+          routeId: routeId
+        });
+        setFetcherError(key, routeId, error, {
+          flushSync
+        });
+        return true;
+      }
+      return false;
+    }
+    if (!isFogOfWar && detectAndHandle405Error(match)) {
       return;
     }
     // Put this fetcher into it's submitting state
@@ -12268,9 +12431,36 @@ function createRouter(init) {
     updateFetcherState(key, getSubmittingFetcher(submission, existingFetcher), {
       flushSync
     });
-    // Call the action for the fetcher
     let abortController = new AbortController();
     let fetchRequest = createClientSideRequest(init.history, path, abortController.signal, submission);
+    if (isFogOfWar) {
+      let discoverResult = await discoverRoutes(requestMatches, path, fetchRequest.signal);
+      if (discoverResult.type === "aborted") {
+        return;
+      } else if (discoverResult.type === "error") {
+        let {
+          error
+        } = handleDiscoverRouteError(path, discoverResult);
+        setFetcherError(key, routeId, error, {
+          flushSync
+        });
+        return;
+      } else if (!discoverResult.matches) {
+        setFetcherError(key, routeId, getInternalRouterError(404, {
+          pathname: path
+        }), {
+          flushSync
+        });
+        return;
+      } else {
+        requestMatches = discoverResult.matches;
+        match = getTargetMatch(requestMatches, path);
+        if (detectAndHandle405Error(match)) {
+          return;
+        }
+      }
+    }
+    // Call the action for the fetcher
     fetchControllers.set(key, abortController);
     let originatingLoadId = incrementingLoadId;
     let actionResults = await callDataStrategy("action", fetchRequest, [match], requestMatches);
@@ -12412,14 +12602,38 @@ function createRouter(init) {
     }
   }
   // Call the matched loader for fetcher.load(), handling redirects, errors, etc.
-  async function handleFetcherLoader(key, routeId, path, match, matches, flushSync, submission) {
+  async function handleFetcherLoader(key, routeId, path, match, matches, isFogOfWar, flushSync, submission) {
     let existingFetcher = state.fetchers.get(key);
     updateFetcherState(key, getLoadingFetcher(submission, existingFetcher ? existingFetcher.data : undefined), {
       flushSync
     });
-    // Call the loader for this fetcher route match
     let abortController = new AbortController();
     let fetchRequest = createClientSideRequest(init.history, path, abortController.signal);
+    if (isFogOfWar) {
+      let discoverResult = await discoverRoutes(matches, path, fetchRequest.signal);
+      if (discoverResult.type === "aborted") {
+        return;
+      } else if (discoverResult.type === "error") {
+        let {
+          error
+        } = handleDiscoverRouteError(path, discoverResult);
+        setFetcherError(key, routeId, error, {
+          flushSync
+        });
+        return;
+      } else if (!discoverResult.matches) {
+        setFetcherError(key, routeId, getInternalRouterError(404, {
+          pathname: path
+        }), {
+          flushSync
+        });
+        return;
+      } else {
+        matches = discoverResult.matches;
+        match = getTargetMatch(matches, path);
+      }
+    }
+    // Call the loader for this fetcher route match
     fetchControllers.set(key, abortController);
     let originatingLoadId = incrementingLoadId;
     let results = await callDataStrategy("loader", fetchRequest, [match], matches);
@@ -12786,6 +13000,38 @@ function createRouter(init) {
       return blockerKey;
     }
   }
+  function handleNavigational404(pathname) {
+    let error = getInternalRouterError(404, {
+      pathname
+    });
+    let routesToUse = inFlightDataRoutes || dataRoutes;
+    let {
+      matches,
+      route
+    } = getShortCircuitMatches(routesToUse);
+    // Cancel all pending deferred on 404s since we don't keep any routes
+    cancelActiveDeferreds();
+    return {
+      notFoundMatches: matches,
+      route,
+      error
+    };
+  }
+  function handleDiscoverRouteError(pathname, discoverResult) {
+    let matches = discoverResult.partialMatches;
+    let route = matches[matches.length - 1].route;
+    let error = getInternalRouterError(400, {
+      type: "route-discovery",
+      routeId: route.id,
+      pathname,
+      message: discoverResult.error != null && "message" in discoverResult.error ? discoverResult.error : String(discoverResult.error)
+    });
+    return {
+      notFoundMatches: matches,
+      route,
+      error
+    };
+  }
   function cancelActiveDeferreds(predicate) {
     let cancelledRouteIds = [];
     activeDeferreds.forEach((dfd, routeId) => {
@@ -12847,9 +13093,127 @@ function createRouter(init) {
     }
     return null;
   }
+  function checkFogOfWar(matches, routesToUse, pathname) {
+    if (patchRoutesOnMissImpl) {
+      if (!matches) {
+        let fogMatches = matchRoutesImpl(routesToUse, pathname, basename, true);
+        return {
+          active: true,
+          matches: fogMatches || []
+        };
+      } else {
+        let leafRoute = matches[matches.length - 1].route;
+        if (leafRoute.path && (leafRoute.path === "*" || leafRoute.path.endsWith("/*"))) {
+          // If we matched a splat, it might only be because we haven't yet fetched
+          // the children that would match with a higher score, so let's fetch
+          // around and find out
+          let partialMatches = matchRoutesImpl(routesToUse, pathname, basename, true);
+          return {
+            active: true,
+            matches: partialMatches
+          };
+        }
+      }
+    }
+    return {
+      active: false,
+      matches: null
+    };
+  }
+  async function discoverRoutes(matches, pathname, signal) {
+    let partialMatches = matches;
+    let route = partialMatches.length > 0 ? partialMatches[partialMatches.length - 1].route : null;
+    while (true) {
+      let isNonHMR = inFlightDataRoutes == null;
+      let routesToUse = inFlightDataRoutes || dataRoutes;
+      try {
+        await loadLazyRouteChildren(patchRoutesOnMissImpl, pathname, partialMatches, routesToUse, manifest, mapRouteProperties, pendingPatchRoutes, signal);
+      } catch (e) {
+        return {
+          type: "error",
+          error: e,
+          partialMatches
+        };
+      } finally {
+        // If we are not in the middle of an HMR revalidation and we changed the
+        // routes, provide a new identity so when we `updateState` at the end of
+        // this navigation/fetch `router.routes` will be a new identity and
+        // trigger a re-run of memoized `router.routes` dependencies.
+        // HMR will already update the identity and reflow when it lands
+        // `inFlightDataRoutes` in `completeNavigation`
+        if (isNonHMR) {
+          dataRoutes = [...dataRoutes];
+        }
+      }
+      if (signal.aborted) {
+        return {
+          type: "aborted"
+        };
+      }
+      let newMatches = matchRoutes(routesToUse, pathname, basename);
+      let matchedSplat = false;
+      if (newMatches) {
+        let leafRoute = newMatches[newMatches.length - 1].route;
+        if (leafRoute.index) {
+          // If we found an index route, we can stop
+          return {
+            type: "success",
+            matches: newMatches
+          };
+        }
+        if (leafRoute.path && leafRoute.path.length > 0) {
+          if (leafRoute.path === "*") {
+            // If we found a splat route, we can't be sure there's not a
+            // higher-scoring route down some partial matches trail so we need
+            // to check that out
+            matchedSplat = true;
+          } else {
+            // If we found a non-splat route, we can stop
+            return {
+              type: "success",
+              matches: newMatches
+            };
+          }
+        }
+      }
+      let newPartialMatches = matchRoutesImpl(routesToUse, pathname, basename, true);
+      // If we are no longer partially matching anything, this was either a
+      // legit splat match above, or it's a 404.  Also avoid loops if the
+      // second pass results in the same partial matches
+      if (!newPartialMatches || partialMatches.map(m => m.route.id).join("-") === newPartialMatches.map(m => m.route.id).join("-")) {
+        return {
+          type: "success",
+          matches: matchedSplat ? newMatches : null
+        };
+      }
+      partialMatches = newPartialMatches;
+      route = partialMatches[partialMatches.length - 1].route;
+      if (route.path === "*") {
+        // The splat is still our most accurate partial, so run with it
+        return {
+          type: "success",
+          matches: partialMatches
+        };
+      }
+    }
+  }
   function _internalSetRoutes(newRoutes) {
     manifest = {};
     inFlightDataRoutes = convertRoutesToDataRoutes(newRoutes, mapRouteProperties, undefined, manifest);
+  }
+  function patchRoutes(routeId, children) {
+    let isNonHMR = inFlightDataRoutes == null;
+    let routesToUse = inFlightDataRoutes || dataRoutes;
+    patchRoutesImpl(routeId, children, routesToUse, manifest, mapRouteProperties);
+    // If we are not in the middle of an HMR revalidation and we changed the
+    // routes, provide a new identity and trigger a reflow via `updateState`
+    // to re-run memoized `router.routes` dependencies.
+    // HMR will already update the identity and reflow when it lands
+    // `inFlightDataRoutes` in `completeNavigation`
+    if (isNonHMR) {
+      dataRoutes = [...dataRoutes];
+      updateState({});
+    }
   }
   router = {
     get basename() {
@@ -12882,6 +13246,7 @@ function createRouter(init) {
     dispose,
     getBlocker,
     deleteBlocker,
+    patchRoutes,
     _internalFetchControllers: fetchControllers,
     _internalActiveDeferreds: activeDeferreds,
     // TODO: Remove setRoutes, it's temporary to avoid dealing with
@@ -13658,6 +14023,49 @@ function shouldRevalidateLoader(loaderMatch, arg) {
   return arg.defaultShouldRevalidate;
 }
 /**
+ * Idempotent utility to execute patchRoutesOnMiss() to lazily load route
+ * definitions and update the routes/routeManifest
+ */
+async function loadLazyRouteChildren(patchRoutesOnMissImpl, path, matches, routes, manifest, mapRouteProperties, pendingRouteChildren, signal) {
+  let key = [path, ...matches.map(m => m.route.id)].join("-");
+  try {
+    let pending = pendingRouteChildren.get(key);
+    if (!pending) {
+      pending = patchRoutesOnMissImpl({
+        path,
+        matches,
+        patch: (routeId, children) => {
+          if (!signal.aborted) {
+            patchRoutesImpl(routeId, children, routes, manifest, mapRouteProperties);
+          }
+        }
+      });
+      pendingRouteChildren.set(key, pending);
+    }
+    if (pending && isPromise(pending)) {
+      await pending;
+    }
+  } finally {
+    pendingRouteChildren.delete(key);
+  }
+}
+function patchRoutesImpl(routeId, children, routesToUse, manifest, mapRouteProperties) {
+  if (routeId) {
+    var _route$children;
+    let route = manifest[routeId];
+    invariant(route, "No route found to patch children into: routeId = " + routeId);
+    let dataChildren = convertRoutesToDataRoutes(children, mapRouteProperties, [routeId, "patch", String(((_route$children = route.children) == null ? void 0 : _route$children.length) || "0")], manifest);
+    if (route.children) {
+      route.children.push(...dataChildren);
+    } else {
+      route.children = dataChildren;
+    }
+  } else {
+    let dataChildren = convertRoutesToDataRoutes(children, mapRouteProperties, ["patch", String(routesToUse.length || "0")], manifest);
+    routesToUse.push(...dataChildren);
+  }
+}
+/**
  * Execute route.lazy() methods to lazily load route modules (loader, action,
  * shouldRevalidate) and update the routeManifest in place which shares objects
  * with dataRoutes so those get updated as well.
@@ -14182,13 +14590,16 @@ function getInternalRouterError(status, _temp5) {
     pathname,
     routeId,
     method,
-    type
+    type,
+    message
   } = _temp5 === void 0 ? {} : _temp5;
   let statusText = "Unknown Server Error";
   let errorMessage = "Unknown @remix-run/router error";
   if (status === 400) {
     statusText = "Bad Request";
-    if (method && pathname && routeId) {
+    if (type === "route-discovery") {
+      errorMessage = "Unable to match URL \"" + pathname + "\" - the `children()` function for " + ("route `" + routeId + "` threw the following error:\n" + message);
+    } else if (method && pathname && routeId) {
       errorMessage = "You made a " + method + " request to \"" + pathname + "\" but " + ("did not provide a `loader` for route \"" + routeId + "\", ") + "so there is no way to handle the request.";
     } else if (type === "defer-action") {
       errorMessage = "defer() is not supported in actions";
@@ -14246,6 +14657,9 @@ function isHashChangeOnly(a, b) {
   // If the hash is removed the browser will re-perform a request to the server
   // /page#hash -> /page
   return false;
+}
+function isPromise(val) {
+  return typeof val === "object" && val != null && "then" in val;
 }
 function isHandlerResult(result) {
   return result != null && typeof result === "object" && "type" in result && "result" in result && (result.type === ResultType.data || result.type === ResultType.error);
@@ -14519,7 +14933,7 @@ function persistAppliedTransitions(_window, transitions) {
 
 ;// CONCATENATED MODULE: ./node_modules/react-router/dist/index.js
 /**
- * React Router v6.23.1
+ * React Router v6.24.1
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -15896,7 +16310,8 @@ function createMemoryRouter(routes, opts) {
     hydrationData: opts == null ? void 0 : opts.hydrationData,
     routes,
     mapRouteProperties,
-    unstable_dataStrategy: opts == null ? void 0 : opts.unstable_dataStrategy
+    unstable_dataStrategy: opts == null ? void 0 : opts.unstable_dataStrategy,
+    unstable_patchRoutesOnMiss: opts == null ? void 0 : opts.unstable_patchRoutesOnMiss
   }).initialize();
 }
 
@@ -15905,7 +16320,7 @@ function createMemoryRouter(routes, opts) {
 
 ;// CONCATENATED MODULE: ./node_modules/react-router-dom/dist/index.js
 /**
- * React Router DOM v6.23.1
+ * React Router DOM v6.24.1
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -16145,6 +16560,7 @@ function createBrowserRouter(routes, opts) {
     routes,
     mapRouteProperties: mapRouteProperties,
     unstable_dataStrategy: opts == null ? void 0 : opts.unstable_dataStrategy,
+    unstable_patchRoutesOnMiss: opts == null ? void 0 : opts.unstable_patchRoutesOnMiss,
     window: opts == null ? void 0 : opts.window
   }).initialize();
 }
@@ -16161,6 +16577,7 @@ function createHashRouter(routes, opts) {
     routes,
     mapRouteProperties: mapRouteProperties,
     unstable_dataStrategy: opts == null ? void 0 : opts.unstable_dataStrategy,
+    unstable_patchRoutesOnMiss: opts == null ? void 0 : opts.unstable_patchRoutesOnMiss,
     window: opts == null ? void 0 : opts.window
   }).initialize();
 }
@@ -18883,6 +19300,7 @@ const std = __importStar(__webpack_require__(59714));
 const el_1 = __webpack_require__(82596);
 const renderer = __importStar(__webpack_require__(16831));
 const lawtext_1 = __importDefault(__webpack_require__(15512));
+const FigDataManager_1 = __importDefault(__webpack_require__(17803));
 const file_saver_1 = __webpack_require__(4213);
 const law_util_1 = __webpack_require__(8251);
 const std_1 = __webpack_require__(59714);
@@ -19027,12 +19445,13 @@ const getLawRange = (origLaw, range) => {
     }
     return law;
 };
-const downloadDocx = async (law, downloadSelection) => {
+const downloadDocx = async (lawData, downloadSelection) => {
     const range = downloadSelection ? tobeDownloadedRange() : null;
-    if (range) {
-        law = getLawRange(law, range);
-    }
-    const buffer = await renderer.renderDocxAsync(law);
+    const law = range ? getLawRange(lawData.el, range) : lawData.el;
+    const figDataManager = ("lawXMLStruct" in lawData && lawData.lawXMLStruct)
+        ? await FigDataManager_1.default.create(lawData.lawXMLStruct, law)
+        : undefined;
+    const buffer = await renderer.renderDocxAsync(law, { figDataManager });
     const blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
     const lawName = (0, law_util_1.getLawTitleWithNum)(law) || "lawtext_output";
     (0, file_saver_1.saveAs)(blob, `${lawName}.docx`);
@@ -20874,12 +21293,12 @@ const SidebarHead = props => {
     };
     const downloadDocxAllClick = () => {
         if (origState.law) {
-            (0, download_1.downloadDocx)(origState.law.el, false);
+            (0, download_1.downloadDocx)(origState.law, false);
         }
     };
     const downloadDocxSelectionClick = () => {
         if (origState.law) {
-            (0, download_1.downloadDocx)(origState.law.el, true);
+            (0, download_1.downloadDocx)(origState.law, true);
         }
     };
     return (react_1.default.createElement(SidebarHeadDiv, null,
@@ -27242,7 +27661,7 @@ exports.parseLawNum = parseLawNum;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.KEY_LENGTH = exports.LAWNUM_TABLE = void 0;
 exports.LAWNUM_TABLE = {};
-const LAWNUM_TABLE_RAW = "115539405bc8ca8f161dbdff918284eed817be9fd810578464c10acd38b0e09a4763e702ab457d6034d3d0e50599d4d4a189df061c0323b6f6003702d19f025f0fb4505245fc4d22f18e5f10dca29a96055e48744225979f761977b4d5205cd249d813a210aac18d4a450f2b13a48e91806e447a24407153408ea08c51058515c1b05c4215c405e2725150e60c02842e0d75e9b170ddaee20949a6a32027de413c056f0baf80797fe9c804c7f600a0bf1c8b331cf333d442ecf82eaa17010051c1aa12b8d807954d7d3052f5c4511cc9e846b0a74ce5b203668219826b9231c222a96d4d319eba73f31ca5d6b8f0ff208c36076d33e6703acc552c21b45decd0ae289291057cd76af13f3da180039246dc0035fda72607bdf391c06ae922ae1a5a5e7950d810db3b0e8398c3f1a5bdcb4d270bdd42c1c2044046053e8ce660482751c81931cbe5003ccf5b1f054e6e05a099408951078e8309e044ea01b6173ef00ec053e4c98d090445e230544b227b13b75d2232a33c9ad91ac8862491b5125ed419c5cd01a1e42283241a3893d280b65e819d095d5a4e325060755507a9cfdf2099def29807556ce120eed4054b05cdf048d1c34376bb04ba4e4240594deb39038e01c9003e08c6c80333624ce058c6db7103d998053038f81e7d2564a97c5050a2c56d0a8f9cdc72afba1a5b2544d055d04bdb7497071bdab8f042878bdc1443037dc05fd033b204594824b2f54abecf066c31a55030670e6405e473d2d356d4ee842b647431b0832f1aba1bbd60a0105153606c067e131cb3695ba2cc05ca2fd04060f80e471537c10130708a2298051f72a37052b010d808748195b09b1280673fa00cb9627b151577056c4ba6903b9cdfbd7178957872a3fc8e2007cda4a29053abeb9408a0b87b61f378a56c1b11b48f8033927866050d892b42373b6ad147e04b95d051d6dd2604698659704341e49703c2d876415e58847617e0653601aca957f806f320a7605203ab6f0d6cc0af30658af9a316ac570c035c0282ab05b9bd4664102149e537690be370791499960f9a5f57b06c40bf6304aa1d18e06c9e79970ce1b40ab05166218a054952f660dcfedda40db561b6e11ed3969905f2dfe2208a3ebfca06d0347350525dede2070c9497f07dc261031766d7804052d2da0e03871b8350d901101a07d74db18053a38adc0f6d9d3f80d39d8fec08a0f847004eaf34cf04c5db34905c15eaa90a080a1f1138167fae0808c4a1a106ae46da06f90c541039b9af5a0758759f90360b9d2103e297e3d10baa9a83050e6292509a4d978c035841f4705886fbdd0abea805206576ae2103ddd95020e042b4ac0883abe6008fc302dc08a240dec1136da7ac05cbcecbf05129eeff08af13bf40d0cf2ad506dab6c6a0b3f689ae03f54e3b007cb7e2ec061dd06170b34a1f541718a11021486793bf18791b25410e80f6eb088607ba41caf6baee05053614f13bf217090f1d7da540569dbd4404c1603e505702c53708a9c563d0322b870b07254d19805861640307bc34ac40ac6d098b15bc66a9c11a565e8f05267629d1896b7b150a3d5ca100d1f4a977113b6cdaf0630dbd4b04d5abf3505196835a03c70bc7a064ab51c203c7a4b9d05ec03d0708df625fa07eff5e6f054378cb7069d16fa0067d031d30f46b12a60b0565b6a30f2b69dc0f15ac5a20f55f61210f97b80fa0f1e25eef03088404706d992213050b2028108909770e0dca0f0d0297030ee8115b5a1990434f6d970d003d3e904b70c7b40b535bc000b254be5712868c74e0e5ba1ffa0a58a576c087f444760df69b9e32290fa02a13101e25a17caff9de05274c38026c34747808fbce8420fb440baa0a3c53b8709db5079816ac571673022e102605ec4276a04e9aa8361c20f55a20548406770c2bafae5063b07b4c0f24014a6047eecf6806c5b7b9d0fac6426903832caa903c256b960399fdc5a056c4f82603bbc26fb06298b43f05e59f80505121eb621dc98fc2d10e122c160dc123ee2096cdc34216540d3ff0372e9e2c052d766a204ede89d107562cfbc07f73985306130296c0332985b9049ed3351071f603b01bc311eae06c0ea3ab096a97e9827322111c036849b4406c6be65e03ae872c216bd4996e090993ea213ca87aeb0644f740c0713232990f0ff2a25057c09ae5108a0e9d303aca8d5e0564fc07f04c2b1d2208783baaf08fcb31880f38b44c60fc57aa44088f77b8b0fa374c2c063b6d79609a85118e09df0e4910d45b7f8e0ddcff80a367ebc1b0226ffb17308ce90e95120ff8bab2759c201b0605ea6531d9f5e960050216f6d08ed0747e0cc1dcf14124e91c3f17264bc30076fddf0c084aac1a4051e1f00b0e8aeeda405ea3ae0905514879a086b737de0786b04ef0ad99ea21065ffb41809dbe7c570a7363ef5033ec596307b0ded4808269919e03183fd5f2152cd5c20a7b5c6f72ef11212330be9a396074802d96101703bfb0576725010833f540e08ca479400f17e2ca30646996cd059a5a21b0d83b2c5e0d730b13c15545ae530f0f53ecb0660d631007c4e60230816661b20fd7adab705031d8e622e5fe7df054e54d7711bc24e8107dee8306042592f970558206d60805bde940ac4fed15030fcbae2068cf042c10f01ae4304e39b9ed0701365e60f8820ccb1e027878009b9eb0100c3964d5f1b08c1e1e1f416a2ac069d7d4682a7c783bd1469c7fa32a84ad11a1996fbae01f598de7f2545960541ea2b450d58992719f5251d279e542b849365638f5d8b55f0be26857881205858a904c9b100f56eae551dfb22f4b8dddf1c5257028ec6e8bbad186baed30a12ac5057980dd8be3b62aeb3302f4bf9fd219569178564050bf226a4a67811ac178cfe82512be4382b075e084eb1f1d164fa056853d951010a59280c5690874095713a6403b8537d106e6acc0903940a2266b334ff1a089260f700718c34b808949d4e00a3f3d82d46dab4e2a084b2316210bf83ae8126b98d4107b4e6a0606b199da1161436cb50aa2cd58121f02c1e10928e1d4d09466f18b04cad7270080b092b808f12f44d13048475b06a35201c0828c3d2b032173e0506a66b97407a96abeb230f0e72c19b06af0b0e1409c650a80a84e8076ced0050713b88310b66c743211c52b17b035c0f5c813eac2f4e0b4a08f751f9509044047daefcf06ebf0ec2088cd658f0b275d81d09b67726f0793e8410135eeadc5041fc2bed065f0b90109404f6f91daecd55c267d370613429215913143109ea0ce20da790701ebded1efffd25e0716966b620af9449f11a78f90f1f6b527cb0adae1d282587502b010710c4b51cf21f7b72c62e82701b2dbe72d0585317d21995d8cef16e64a0411b1a4641a0d1ae4b2e058d0256f06560208b07ef83e560a9f29b6e06c7779a50715c70c21c938bfa01308e1b5f0f7f3c85c053483a4403af6635d186ef5f0810d04585104c78befe1b4754e07072766df0053a98ebf0cab60471159a1f6de1bf00f0162c6f574790bec02cfc07abb7ff907d883d7f0a9d07f8e0882c9a561270fd73f331611e9e2ded37bc419f900f9f229d8b0a51f70c684005d52d2560302e4ab206e69dcaf045a33e0113a9e50c412434b3352c548f74e4a652a3e71944866a508db8e5ff0ea3881910db492f2317fb9f88716636e88107b8223c22f80e7ab30aa1b321e0790fd18e09950cbd9061e4077c16aaeeb1609adbf2061b7c5c0591c4d51aef45cab50561fc7c224e05756399b063f9ae0a0917a8d7606f9e8b8421fd8374605b7322d3030efbeb00e37e2c91066e826c81a2b72ddc03363925e0985d6006176c28f6c055ccbaa20e316a88d05b3d29910c0158d730474b1f6405b50887b11b933bcb26ca0194334b63a3cd05f2d527a25933ea56162e0170c13935b79e15fbe5c1d1951c9adf1cf7c10791264a222117062d16d17285d68d0747aff1e080e672e704c5878cf06cf7b47b1aa34e4870591665e50b32338af080104e3708efbae6617d63d992170224f920458399090a7efb101142627e4a0c299cd5513bbd7ebe0574ccc88193e57b6011d9cdfaa090d3a8c403333eb490f35e6e571dee0be732281c8d160d747dfc916c7b9b2c3b6c0479007a0cf1dd04cd92bb019687ad9c0b4bb16780810cc36419bfa147c07bd13d2208dff88c204d5c09e3185e84f890878505081bb28f6d705f40ac0413d0137cf1e76bef512fa3f30f20a5ab167816442b9270fae7edfc081eca78a1382c280e21e05597307e8462f00aa4b7e4d04bb69206184db79890d7ee190f0a3f99ec608159f7510e8cbc3f7057f0357b0d74ceec3155783cd50363dbaca064b31a6e05025f12208e4b81d803e513bcd06ea170f1036f6ade406d5a13ce0f092c87409fb2cc3705a7b815505dddb70e057c092850bc96dccd0a54e63551894dadab1fc09f75a0dbce0bb924eee88e5049d51f84074d93dd9081a1d73505372934a077f3390104c40c42a0e3e4cfc60515f6f02100bd77c806ca0408f1f316a348048a219d11574c4ba50b49cc2e70b0ba22050b20f578607643bfc221cc29ce30a9c64eff1fe7c9ba10ecbafa0011fa5c17a1000f3cf31050a14df056a53ca71831d1e410d31042311cdb96b270e6bf9af908efeb14e1510b2d880a48cd06109d19ebc6226a6c9720cfbbd562088c70c5907a4aba8f07ec2d85f07ecc75781a2f3246516ad2dd4f05cf192780e68260452271139371383768d209088819d3a4f950490a9ddc1830e590187f07b7e080723ec2fa3b12791a5b01ac8a927e0b54ec8a9182f98bba0bb2787f808760ca8e1a5de6cbe0b963efb409d9c7c131277bff460d26123f210d52eb570ddbc052e050d7a4ee19ebb726c0607d324a27c5546fa0520b8b430990d1d662c034ba721c4501768074dfc6380ed1f7d7a07dda465718326facf09a56c4f70f67c32c30f524bb3226427f3c725d64dcd6212f9507220ef340cd0976f878610dc7321c0eacf99fc123818a3e1fa59bee80a6e2942d23d8ae30507408cc130859f29fe03070926b06ebc80410538b4a2304d11007b04ca4548b0984f3e99131ca19f5398e3bbfb08b67a77712ed795d00932db913185828f530d70d9a5205aa2089f47cfb6a15069c2b77708a51ed1b1b00b9f240505e2acd1312228ba1089c152914dabb40c0f1fc18f80af472dea195f52fb50772ac75e0ac3790ed098eed2461f33cbd6f1365f7c8410b7945c804bc00fe62b9cba4bd070563dad19ef46634270bc113d16bf23ef917959ef6b08a9fe40306ce54b7f0ac588f9c04e8c95a90672d252d1390bff1a0e3f2bd84110baceb3125eada720bd2b0576072dccb4021392322e181d0eb5a2195cd97a111ff283928fac62da272f932522009257a616ef22ac40ae6a27ea0473500090952fa3781a67530840f02d42a32148255bf124d47d4305c2421f61cf655f1711f3e8e0009114070307dac243e052e0ff1105f9dbcc908e43da0421ae5f933068038e30088b66e2a10877c12d065d106af24ca9363305c5643430abb64a5d15efa9c4c0ff126c6d094d3f7ee0e8b611e0303ae424a12fdc542b43e8e7500281c3703c1e2bd3ac91305f0b4523f9038ce044f932be05010b35e10839c6e40ee99d4c51214017cb07ef913e205537bf440d7b10f221028063081865b3faa0757c91b20999bf4122b7ade99f23869cab31ef3c1ca00d8c228ab140e8a5831089322cb07645ba011294eef77147e61a79099c2ae291d7b493190ecea186b066cd7d071549f5ed00aad8209e0b749138a062480be612c96fdea17bb7d78f05efcefc90577c354b0d5789ada0db2bc1131fbd78baf1a2e8bd8d0bdaf994706f4d18c64b4c6fe9b12e9143231ec79716f0525e83561dad418fb0766f6f1309a2c42da05be7c6e90a6b77501176e836890dac66ec00bcd58c251534f6e5a1254c70d1070dd4a1d0948b70bf2177893870bce68bb41efcc0a1f098c92f2d0bd28e5d90b460563a078ae7df60f217eedf07d0a0f5f0861c561906794ab6a0b3da693c1f41c8659074b42db10458c2c4c110a7ff14390cf519113116394722657a86919ca011dd0e6d3cebb0ae96f9af17aafd14c1fbb587850d41244b531c5d891c05692c17a094fcb83423a1019fc1064598bf16277469a0a06c313d15b519ca60bdf774980ba3475dd08a2e23bf0f0d6985a0b7acc1512937f14540f7c37ee50dd9c0e212ade31a54092e63b7105351c7d10c3b15b5e08910bc0b17550414c1546bbe3e05cb89c831181618f7070b77290077f7fa5b0c7a8fa1b1fe575c310ed01f1401580d211c13b584a420ce540e790ff4cbee12050eb5600967988bf12eb338070fd36e7de15f8bd5650e5002a4e16830610c0b81b2d0305cfc1bc725c5302d316829c466119ed1cd0428e008c1172d738dd0edd97e88255a86ab72d61f756716a36d1051d69d07822a5d5407c07dfecedb2570de3f60bad890e212a7a567f19992f94511b8b84320c869d203060626393121ff7e9e15f2d87880573e452a2b8e9703513c090fa90c867f7530dfef790c15955216043db13f74143bdf6ab0e27dd2e014fe6e0a3050ba545e0b382968a167b79bc9168d616620380985aa218ae75cb20212fb095a464f2f610662031e1f32caa61162ba31a80f7e9f0562377c5d550b157e5f10d92f4fe618635e37605ed3cbb417cbb17eb2ba1efe7822010f7c248f2a73812147563b11181cf2de1d95c97ed17ec9e00b1b8866ca80379167e0219ff5ec70d1b09d0d346449dea15159a0f847ce94de61698855e53245d72af0f0d7c9190a2d208241b6392e611bb9a7abe04b39f39925354744d31a2779df043295a87046460dc715af6eb1f0575a2e0026392e9340bbfb29da067e354350c7be061d055b00e2811acec77f076d1064e22e6dd2c5123a7c65d15b391f090ae209fb824b38ee1421a6691d305c08d86d21d5947870f94df1191375d03f925e2469130b38a30e11784443ac17036c4950bd895e533332ab2760e3f59fb609e583e1a1a7a5baa70543caf340d34b01b909ec4f98922fdf65670d40faa31194e957d113eb2931725f9b31a307581a5b306bda420e120c1578307deee52e09ce229a330374d64609fc08032309657ed9268183c322b6ce01fb10f14d80a05961dfd70fd27ca4619235666535eb74a3d1cf3339e13e1fa7f67120ca8b57052e474041bd6d9557256f9c5ff1965468e70c89d8f980dc12a9ec0c458c99d0ed66931505a7a0ee904a12fc4e214eba90a0e0c11185122a40086230c291f0188e96be82249ea41f1cc03248c105a55cce1360fcb170978918070a3b7435b05c3a8628059291ac826513b8f31cd3e4f0615d2411cb09cb20c8a163d47e6216824dd811c6118c9b11d2cee684147484d912925d409170628331068675cea16828d92611562a0a72fa6eb97618c1ee872124722e9104e8aa2f526c705ec12162d942a160beb838052c4f3293b51adb981112af9831138d83840e949964610bb8e41a0618361d604f6f830103ee24fcb26d015de91b69673c91416339982e5c770e419268317c2077c8503178027f6b12a6c0925121d031e4281569323143da51141e5f687ec164a2109916c4d1f8a1d4c8cc480c1753abb0cc40d85c1f67c74702190e956f16737e347135349f3307f2cb5ec1c8165e6e14b07d76a2924597d9245f969171e8d6372b05d429ee005f378cc038f81af881afb1d4d410e46ed470539febae1648aabd824589f8c5237ce7146153eb575f2d42d78600e46fa25d0afb776fb165cfa5b424b73bed706be4e62f46ce1ef57145fca0c71358edc7f1cd3cb8c7339dafe931f92ae92519fc64d513e928a0bf2102ea4580c9f88dd421041486d28f947666128b3a91d1582d8f182d480b36417786b67d148ad0be50768dd4de17777cc2604c0de02d1bd59b2d21b06c56d8114da1ceb15e5c6626095417e7a248787dda0bcd639dd0fa43428f0e3f57f0a246d8bf8e168a1285204571fe4e1087d7e502084776e41123c20731350a6e792072d66db12addb70a2157bff392306bd1761fbd472b114e194a8505ec2cf4427ded603d20bac16b218e9b9f2020c35644015b41094d0fbdc817b1978d2eef103fb433f1ff1dc91c34ef18c0e07486b2780fcd3c9ca05961fb461e0ae497f1221205d9266f97bba289371a50057c541110858fa34008148d01e069e6adad273d2b1450b0e5e05e169c9b607250e89783208cd50f913fa970b8248d2ced8230831a8617f4fbcbe17651536103afdea3f12c85b7d80a04068e70fcf13be90cd77032a1630038070a912a88a1e8bad3d20c43ac5dc19bd0549e1ab559cea18a3a64f6100d1da6718beb18a9261dd165a1b9341f920a46dab790ad3fb1010cb1822451274af1f321501984812483e9f31036a4fd606b966deb153d78a42184ccd033261f188a618ba204091887834ce0ae3276fa198b98ee91447811b60a4eea10e24bc158140f941d8590bf7c45d4116fb2b7c226cd740c06bd6e3450619dc6d5061d8393906a45964406ec50a430888b9469086da92fe08650858908b31027f084ae72ac067a15bfe0929755e80b3235c291add5c4140cee9c7c4129428d4219e08ca93123c21cdf18047e4e80c2329dce0b53edef50cbf8671e11200b6350ed6d4c38148a4a61c0ffdc5fc812cb1ba3c0fad933160eafcaba912035e56b12039874b152c43c8d0ca3dbb070e5e24ea91597858830f19ea0ce18c77a26f167f953791225f69f3125198c180e8d803df12525093112549461a11f9e6eff0ed079fff0ea2c39bf1673b44900d3e20c6b0cf1562b310f9b3ec6140117dd510d04850f0d2b78bfa149c115f00518a3c03167d7f3880e4bef8810d0832f7826d3c5ec1076ae7e060e40c210d2009140c81d7c918281d9165ca908312c9e4075bf9d461e452420a17df4c4e619861a2211836269ff23b273c9708d6e674e08c41e3b604fd577151b454c9861bfc6da011ee69095b066b7434d257e7d87114a94f15f0e61f7cef17870a8f7191d34f1a10d15f92c15aa7eace154b8727b0cd40ec4d152d34d6d13169d7ee19ac2eafa186cd208513321fc6d09b927d451e90cdf0b1bb96b7081636b618b12ed8863c35b01a7880eae4ecd61776c8bdb1d3d3b9dd139cc7818183bf93c21513e7a6b18d8f04a62326144ae1109d99a415e21fb3109e7967091520ec6001e3e533c30f4a49d3d12c27a2400780df69e052161fd007f46655d16cae5d750e38d875723fbe914714ec20a1c09e43b4bf1dd6e1bd61ee758fcf14e70dba625737f68317277f61532409f7541a6c810752d48331e71db6fb5aa19b4fdaaa07c86853f11d732e8d09a4c01ec21f83919923feac3de09ee8f8920a113c4ba0c151a0480ebad0463191b2a6141a79ff1f3070eca97308fe64685219374fe4147a6a64615a3f41e812d804cfa18f613dea15c91deed13d449b87054c6977907d1d4a500f2a0112d0f5f41f190e94fea160f0fca64f11e32b7f90d1abb9e60d6db87b419ab3104a1af3fa6c61133571f217f89b35b21fbac46105cdd2d4d07bc0a3d311e974ddb0e43905ba0f3fc5baf13d49a5d9130a99b55109680b021692a77e40d9e6f2f419a7573f212208478b101bf69a70fdc8c8a1161a70f360f4b96c380cb8b3f8f106bb44560a397152c09cc65a1317283b89c0d0c6f61b121a8c463154f0c5b52d1cf78c509942409f0dbd856be0aeaf32011c2a0f8582e124b2ab15aff04751b1d762321babda4da07cc25d971805c937923844f8d90b796a4dd0b96f4ec12509f11ce0facdb1f6103856112073a4b8190d74074d9118c2f7d413e3437ef1ce35d91e0d65da03c30cb283e625be3fd9f0ff017f7b1163cce8b2266be3c50df0e09520ce707bea0574747bf23ec2395507ef473251171026fd1463f97300968985930c4c6c1b90b0f5217503fdb0e3617f7adae12dc70de05181a043bc0aaf0b8ff1e81b3f1e41bc58671219271d6525c4e13031b76ee03a05b3376960f11ef76512b7377f407bbd4e9f039d3c7f529531ddcb1b5bad8a109fecc9cc16aa980e210932866210e167f3a03505c73a1c4ea48ac34eaa7c221baa8d03516f037f00263a196c21fdbcac8c0c35625f515d60cded0869310160609ecb4c15ca0060c16c74d39c1c8f91dbb2344dfdbf15904adf1047c28339147d749882ddfa63fb2548590c418c592a36131cc0fae095f53e8f1981eea4108f8a07fb2077eae0d1f5c64d58213f4edc3058aa9f6e0e5cbcf4910ef4095e0a7d266f52358274da16ad750be158294b6511caf01ef2334558cf0f30f830316625e467034d7029a1713156a106ef40eda097c7fd910956faa222152329d11c42a46272bf33087212bb836b52f550f40c05b6dddf00a2b0b78234e6e5e912cd7424a21d802957d20d0d8fc112efcefa6211c2f150143e806ad1e9f44b1d14a428738180a3ea3242e9afb7f17ecff1b1067c4e6411349e12b104220781e21bcb36010bb1a1b841a532252e1e4ed066519b088dd00396963c418a276da205490f31807c8405c61af5c19160dc4f12282bac53078108c5a4db1f6ac8e491c812ce16070b7554e09555e8ae12e36c4710aaac410b2158fdc4a13b915e6c14936c08d2317bd4ce201ea6d651321fdaa51fb1ef8f01646c620d0308053890d937bf2a14430c9800b712641217d5ce3aa165e69ec10de8b8a580d606b65c05f595ad1130df7e1507bb7ed121e83b4d2b07182f20705bf991ed237c4f4b91f2afd6ed2b16b2bae05734af8b174281770105969f8f0d20537070e3dafab620f40ef560ab1406cd23bb851461c4e08ecd1d1e190bd2200ecbb021652a61b189fe989f15b0734fe17d6549501fcc291691d73eb96b18709b7782265e8f84037e7fc2c142ccf3050c101a3e815676fab2141999c081226caaba1e95188ef18da7d324249c49a1b3d421157c05190e0ff0887b4a9124a403ed6201986f1113ccdfdc625332b07d2a3b25c0532c38a13d1668d5af7139c270291efacef040f2b19a9406bf9b46c1784d6b4b0ab99703a1005ad1122e69052130d4ab199b0d3cbec3034e51479a0e20308e723ed474d41b92b0638207202a8526bb5060c2985e3bed0952ca58e0c9fda5691c168bf143fe03375207a09131e2282baee316316db8e13a139d631a413257527f5d625520fdb2b24305a6177b30e185d6b2e4e9516f2a2e5590f15a5b2df80eb0251c14e34292cd474c2fba51529764631f4eef06130d085ffc265749f590f50e0e880b6fe2b291f0736f1b2b236b6c6266a82ec51c684a0742a29a20241cce1be6607ab0ead507becbc1224c8525b620b25d3070780dad491ff914ab61057a383b40e415e73199975bb11d7aaed5a1ae288e0d2a4d5eb033b109b67e0d11b0c420f1b4d6b30633282f11d44290281da8f43060fae0e5461905a673d142bbbe3a393bc22d31a96dc2750bc1452282666038a70b85cdab40dd260399079974c861dc3dede11d9628aa910d4c81231ee3a0af4482aa9d1e0bbd9f6f311c1269681f008920d1d7b7a64a183c059b10ad9652342fb218a5e12bb370eb10731a35a214c615b913edfe089418277cbc1191355320ede2546f1ae4b22a517df79ced1854800b51b15fe6280b2ff83bc20239f7f70b700f117153d0a3af0ab4b3cb21aded0e291d6c6fed122502281a21f94c6940fa23d63d1e512188d1f2f3c4290fb5a103510908796c1bcf8752916236ee5b1a6f773e005a9494261afdc265013be69d3e28e2b12b318a9953ad13df92fb81cb955c77116f01cef07bf4a99c25948077208976562311ad4a97e0a7cc4619094f6773b0db1dfb851f3446daa0e98220022bf44d20311f5addc02d2b41fe50a263712b1230011720d57b1fe8265087ed153697e7780eb364cc01945fc2f90691c673d145589dc70a799493113ca60d591218962f93b561b29a04d40a36406409fc3b074171c1b17688830414a43dbb30aa598c231e5f6f17d31beac5f920860f1af2bfa1702d0c375520e1bed16eac06ce173fe0e0632cda2585111e52821added0cf89c9a727a9ef1840b92590ae07a7e41390b4aa46ba0ea3ebf7f0d26e792c1a852ad0811264ce3124475f88519e1724b823bf1bbb818f1f72f315375c98d1331c1ba9174a3fdb0118f4899216db18f9e2e2fc45630987e38f7064d2091b1fbaebbd8105ca09201ebf7a4b718fb6fb181d34c92541e8abbda124c85208123b18568e1a56e074622009be381113b9eff128495e342a23db74217a8257e11f383489913f46845a0b458e3b82127360630c3e652330f14cc9aa23aa743b41075d0f010d46b503308eb5cb65169c9ed71056170083287b01a2b0a630f7e71194d0b8011275b33007eb7d8e412c97233d5623490e0081cf060907f775d792c7d2e2571c3c07f97186aea7eb073a892b315970172811c43a5e014d4b0dea0d448a47c2339163091e152392d29636d44927318c0cc151b33ad115635806a2903db6325e8e29778174bd131d1bbe0372b0eb6326851c44d7a13241f6af8c3cf0a831820ecbd604140126c851889917b124443a84f13b8980ef2791d14c2251e1d7e212e4d5c601b3ef70590ed35033415dea16f42ef0b19540a52f14c0175798e1e10863a8ef079e2f8ce11646437008a605a381bacaa69121cebb48f1bd70d9ee1eb5fbfee2159dfae816ec1dd3f29a3f11b04e32a6ce02293e01de20b3a9b4418a1ef87229d88a8001450b6bab1810592a32a789460d1b665105a21ec3bea51ebc737491d728711108006647e1d9c88f8d21210290d1cc5312b122b4fdcf014007013a0b837c69d08713718d25603a88824cf61bdc16df10a401aa691704170dde48c15d1b9a871f97ee6dc21349cc222471798b418addbcbf1cc70aaea1c67fa9f82a8888fe920d9e4e7416ff67f871de314415297ed8b4c2a01be0151e7a2475b21e80d60e233138b2821b621da909c24bbe1204c65dbb182b18b0524be577ca15eb1067121ea2e58a15b25a39f06965d3865505847c528299ac3f1e16d1cd120d87cb694639bc98562e6757a51a6fb2471265120b780a419d8730d919b02322a10e0f635a3969ad242c7da310b7f56c1e2de4a15753591dd5eb254512140159d8f3a329a27ab9f178d441aa4af3fc0363e4af3ea11db4d198b1ffe362ae1511789f20af760dcc2b606786810610978a1c23a66f90f958d56726eb8d41c2125732a51e29c487c27307ed5417c8619ca168d26b9915e38684b28734978b1eb69fc3a154e2af6f1516704030477b7b9c07d94f1152e3eaead108944846709304124c07ee2a53a07b6c81be231c1497c0a72da8c729be1abdc1099230ec0942afb6c08f451ad911ed7b35234e30d82652bd59d071d199a4c208798d3c908c0eb4be08c555156090bbd53429d59f75e10aa985641af9ba44a14a39f099080915ef2084c81c920628662a408081f16908dd8df2809e058b5a0658026f3345ca81b115d79ba540986531331097396c10bb11c55a0875d0e52171d5fb67120af676e142f116c806ab216f609a50f39506d6434e91df00ca760857fd7671831e491108f12f4740615eff7a084d55e4307ce43815067cb0008073f741830ad74a24f1bd125c30076c5b54124e0044331080cf63914a24fe761ca9b5bc31abe26dcf077fc260106a318a68085f8035d30fe1b9fb07c8210a21955711bb0b02d27950872afac309c47c3e80d3c0ba2f08199ac71207699ada16ff953a7068fdb065119cd0ac60d1cb40de143bf724a1249d952807fe8cc8213e10a64006cd4560407e315aad0af264c9e0c288f9f60a7c0d9940962e49e108da2fb9c0882410ea0cc20cdfc0695f98de05d3dcf8c095614ac80f48f7e890a66a4b93155e667e6076e1e4e30b392f485166ffb44e1a86af70933a8a599a0a195944107c418a7d08168fba7087c7d1a40731cfd040a15ea7ab0d3095e2f0605100130c2c1c331065ff9fda10d6a05b405e1319e62501034db08eacc139064fa5002133ed59e427feb250c245b9724e2a910aeed07a7ab4db273e631511c073980208aab459a0bfa4a2b911007bb4424e86adc9081e5a9f3263dce46c599a3c5205830388f057bc94d060b03adf09220bf1235261de1a2725575f98f105705f1e0a7ec09d259ab67da8594b7fdaa0ab24de730841edef20f1e39a482dab72cd10c6b56e8d0c699673515476b6630bb419ab808cff0bd60890f83cb0bd818c9c09ac3836129cb8e69b13e937c930ed45e391064b3ce800a841680b0af15c8fb06908289e1b768a52e1cb2d9778063bf0a3606c41867f21007d9db088945b420879653a909e07ab5606c5f7780384f8f2480c02e853d16a437a6a0efc4ca7b0ec130eec1c403f0700ce89f07b0a36418c009757992808797138d07de20ca01151bb5bc0c42b6a5214dbcede50958c0b5e2248a9c120ff97fb790d62b2d7b076effbbb089705adb0703bfcd20734c0ff10bfa325490be00202a09d8cfc4f08e55df1c085efc1a708d9a705e09894a5970704403890b7153c080d4521f1e2af370d25060004fb41201ecd8620b8dd9562bb23f5d80ab8eadbc0a07485f15763ba09b066f239372bd1bd65109084078420e08171c087d7fffc09dc9c3d328cba564213e4d943f0a135da15060981d1408d4458b70bd4557c10d25eb06c2074bec482082291c0208af292e20c175bcb2093f95201f67dc7f11a60d9c7c20d8e964c1f79a75482010fecca23470412020f63d23a20a7f20d12048341ef1fc3743120ddb1d095127eda90d08d122ec62f26be5550a75f4843126102bfe303cd30de2e0c5bdc61328fff1a2e78dbe9716463076a06c0c68040661684fd08c3a08df1520021dc0899a6f92066fffb2507e0d6ac30643cceb31204b9e1e0b62f8ce208e8308bc15846601e10b52fe3a0b3fbff130e14e6c5b0ac673f7711511770a07bea74cd0a7109cc316466d50c0710e151f0a0fd52451360b8df919ff4aa6107bc3edfc080af9cae0a7c860265713483d00ac2d802209eec2b7809fd8d5991b281ff7709208251d19b6cee420cb6cf25a26e870ce208e5574d40d4c024ed219c31d811666bb2ee0c4ce687e22c38cb3524615d0f911a5cb9c20c842c27632d8bed86074e076720965b094216c5c0e7a06f9118f7148d979af149e08b47202b30fed1ad463d5a1fff5c8f00793cc6e60d40aed7c0811b11090cfb685940676306bc1833b7950116476da708f3d17f21a0610d091a4cc2a6408ed6f91c0a222825c1ce6bd4ca0a58e4b7707adccb0409238ecb10864698930e85cdf8c25bd0997c0ff756f490d3815c4517720f5691300552a80f6c61958080b148232004658b31043db4e7073eebbeb0b8ec2d6c1f72acf0c0b2c171b20719390aa17e255f7911213efed077516b311c63ad82a25d2a701e0a3345788080ea63291a3d799be1c940dcbf1de71da8a09d7f2f8b06eee26430778fb5761aab817f00e7522e220dbad624f124e1f7161fc8c1e910b86390940989bb57e118f52f0e07815b47d1023ec1600a85aec0512c5ca14208df1c4fe0978da0bf1bfaa246721da8a4a40ded9a51011cec04a2107285e4116cd414880a960f88812cafaebe0b58037e207d10435209b1c127e1a74edadd475fc19330bca010e90a8df699e1c6eb1faf23cfbdc3c1697ed0c410a89280810adca12007dc62f1807ee6377a0884a57ed18b0fd9960869290ce123c6b25806adecf9c1e4aab4e70ea2c34741b747bde813a9fa2330c38fc19c1b97c917308967bd346efa6a73915902c89222f7cbd3406b8e09c50848f86b706b928e6f06fdfabde0a4703df905c70cf4307eaa36f705611555505b9077164066eb0e20a41c2ce80b82db4651ab6ea1110a6285e8e1f9773c62145d3b6e1090f29e4b08a5c983d25ca1f80813834ccd80b8f5a217223f50538070f0c5e906364d2b30e2ab161e0e8e554ea0c77abcd00e4090fda08d6e15ce33517604324f6f51ff05b5433c2134f0d70413b5d8e9d086cb3b280d82bd0be0cbbe4f7d10501ba6c0a96e8e1125057b09d117e9b6200f4c83b7f114515ce314612279718c67e0550686c71d408dababb11f96120b4265ae9a280a1323ab10ab5e645125ead1cb90b7e37d070bb4168c00a8ae6e6715499e8041653805c80eb9402cd0975802820c6bc04e42f9568ef528a9a2a011d2ef7d391d52fe99b0ab14b5c221dcc01ba185b625b0349abde691571b245107f523e0a0cb97bfaa2536277a71db5719b008ab6b6e54e2416e88202cebdab0a750c71813b64e5450f32cec0c0ccfc800e0cacd3b6e11a6c176b1b52f1bcd0aee3b9be06fec550029458e4010da0d15870af68e13511d0562414119560ff1d1d734fc24408461f0a97c943d2f643ca4506b29b2600bbfef50c094767fbd060dd118913dd8a5760e414b5e845a942f0a07779269507a96f0ca06f00a429221dfb3d322eda85a309e15578e166ff4edf0bde9d3760ce11df963e9f0c0182e228be1e0850c14220e72c37ba061a258a111dd6159b2dbd2bebf1542780a82c82f8c1e156ed91aa3b008b54e3c46cbf420aed9f3f01019c366118189a9020851a76d72f5efad200881fb58b0940a43711b2a6d21f10b2d9db10ce2932290ef7aca5c0e91aa9e9177d7866d1389b06fc0d486ff4019c0055100cb5c038616c90d0d92769c83422bda53b0b1cdc578cb2aad41e5e230e32ab00dc44566a10fba2dcf2ecdaf94359868ebaa10f4350561afbdc8c309d00af170bd61e4170855e57a5134d0b9f50d0cab08e0b238bcd127a78423607bbaf1c909f39471e165cc2ae00ef77e8163c60edeb219764c772072e762f50dc4d0fd10d6d79b290c875151e2305dc3730a1980eda2a4d476dc2bfa46e7a118e88bca24d6773bb14eb9c6aa1d296d26b201ea34fa084217613247449afd1573d991112dc7721308f2eec8a14dd213601f4bd21d71b5ab71a42094a588b21c55c53020257eed5213e22f73205a158f71ec6a212c2015d2baf21480c27e252a54b680810933bd087580e561734b59cd08ebe5ea10be04fb380a771fc033ea58a9343eb74222f27a9a22690c978c0700960fd56b08d23c91108d7b22d01488aec5c180a770dc0d8228c8109dbfc5cb120f9d3d80cde4529d0d74655ce33c4ebeb423e60d5bf118cd372f2143f3dcd13d4143990ae0fc8b6275938ffc148f7754a153e577b02e6213078246bd5d6a0cc13d251086ee33070ae5719741038a59800e8f829340aa6330c40ecb496341d58f605d0d07a69120b7e42a3518214b5fa1e2b95c3e05f95d2e8153529e2607ea2a6213f60fcba20ce03a0fd085a46aa90844841b9101e626570ab3c3452175e813151548d8dda0ef94417e08d0d25710990f91201a8e6aea34ee7f78411a9103ab50a581b637062fbee4f189663442081cc8b5a135d7165921df676d70dd77af0d07aeabc130ee705434130fea93918ed130e80e21ab2e5391984ce7155cadf47438dc18fa0af0a4cea2637efcbb1e356d2c92cf39aa7e1ed8d606c2097dc1a71e66fc8dc1feed47451f8102d361d7eb4c3a1d966f4a71e8cbf0471efac797e20b28e1341e66ef0cb1eee48dfa1bdd1de1f2585a06c21d3fe3af01e52372901e9fa28e020df828dc2622b28cc1b5797c340cdbbda130b55005af2140a32132098d96a80e0e9c10f1d9f74f6e19807e7d823c89468d082a73e6b0b27da1130eb043894122728be30c913e05e0af63c51245809f4ef0d80192102581285e7092bf51250b6b39a2b25f010f140e55a4e4b0a2983fe20a9ca6206153e17e9d2248642bb10d9316652159cac4f2cc76b9f526d701c150c881d75834e06a334104ae72c009e2090761263f915a0d17594880864f82880e28a48490b784b7bb0ee8364150809b45fe0dbf21cd609bed094008cf1d2ed1427913143e705afd818b7ce14b282b2073118d2a28bd169f0eabb3946de4180894fffa50fa5ea008133fdc3652bd0f3b7525f568dd80b9b66d710a20fa85f0939ad8d008667bf74125466a5d234696f321594f715a0a3a0f06c09ed032f20a5ad1df622645a4160f15cea140c250c1bd11fa5349a11b1a0d6c195e78b6e084ab4cc12b9ec369812026014416bfb2efa1997b7f520af0595f416b1f0b70152d1170f0891cddb90c0304a4b0e7ae7de8079ce9e970df83c84514bd2a7e72d8b34862118a2455120ad5b3c230706a19a28779a831198a1524b1511d07211c90830c92049d6a6d0ed45d7b00f99cf72c091069a8817635107e0998bc9c9465b145bf0e05c02510892e475b0b4e9bbec187af2df03340fdb6d159f14a2b08ca587370aeff68ee0f5919da017846e0660ed968a92239eb69ea198369ebc24766ad8416d6ae1990bb12d44f3c7dc5fcc3c1b3d5140505bbc5626f03367a2e7720a2b1edcd72590e7283f182b6dfae7f08c59636519c3d574005b40150d0d552ae371b94af8f013d59099b271e724c6229706a3e19efc937008e88dabb3f520347e3f3089bb324327d31d1052cea5f464dd715522d6c1166064544f460a90d475c1417c5bdd08083cf3f506e1e3ce10e3ecdea2d629e9dc07dd9ddce11dfe06ed24756436912ef83cba21696993d071cc78d930bb892d2071163b5906b70544d3563186ef0ca96e3e10ce53227a19fe79c5f13327ff6e150e109591772f04d908bc054141a3d567333299ad0ad08d08fab809e6452dd0f173711c1b10f6c4714d3a50fa51ce8a49c0ea4ae67d56ddacc940aaf6b0da33bbf33140de242246118dc19dd2086b00c22699f24eb266da506324c7764c5160c1e56636dc118d61efc8fd2608f862eef3a8c99dda2f6afa40c1ebec90b412d2fd6811de4db00a1a27a84750e5538d7e44553375b0cc0060ab350f5f3321d2a3b4cd1d0ddb50c1ef737f551668f69e73a5a194a02fe31e624191b9d23b0ccca127319f06089915b5d6b9b2e4fc07e93104714860d7f31fab276891ccf25d2956b60e052b0ab10c9176e20aaa5c89a09fafebe40a7ebfcfe160941b4115470919f3a83325822fb2852740fabb817f1e4d1a4e01b7309a690865f7b7811241806507eb066f6081a0cbbf1bdfcc16725f9a560e0625905011f9906e9e13cdf93a1385d93b262d960a1661f809e1051bca6d9462022961a844168aa2a385d35f2f2407aa867257e3927f24398aaae16a502f561f372d0ab38ade6f5b2d91e480b1aabe84f21f45c48001d4999f431438b844e18b06bbd60c10f88e508a6af9210783235de12d6369421957e248b0ded17a670d6f1a957192c218a407fc2f46808853561b387cfd3912dfa0a1991943e2b81094aad73a24ffba1313294508621b6ab8e58099e6a2c518caced531d043d78d149d66c7e196a8345308f24ed8b15285f67212247acb409ad1439c1ede3f6ed38ef72ed52d9d78f501762442b023154482a1a3c944cd07020298d075901a103a5a89e211e9fdf6c90963f8c1d1ede61d6136d6bf90b23020bcb015ba5d0d62dd7024b005325c371148b28cbf31bca11c31c0fe3dbb199e79bb01663ac0db2264ba3ab38e28789e2d1b0ce8e1fbafdd5807412c36e12814d36817a0577d930d3a11cf19803ca193a2b533b719bbc084e27064e4370bd151ca406f00ca561489b37081eec7479e094881a2c19a2fd5cf08f81655e07dbe5d63168a2d49829f5fdc8b3b5f65ef713bfec77419ade3f6a2750ee43b524aa72863491678b53820637a82d1f7c8ed1ee7da1e619b59e3220859763231c512e51320a5689a520f5ff26b22a7f30d9086a93c0f0d4795e590a92b1dfa0c377110d0bd8ab7f80b519bed02b8a9d65041890cc481697ef9c82468dbcc90f9c98e093edd2fc3c333411a723452224364cfeb9d59313eb203c32bad245a245d6676017b25332818c74e625303cff6062c73c3a911847b91321a65e649e216457d993883a36702dfc44444278e2e4f1156de75a60e7f840060be40825f28f68291c083c9333f3aae6982709cece7801e84e7b3035ad9099020ed7ad4827bf2579c1e81a85f10966a7ecc16048dbf30793d99e214c4d8edf1e3ae9a403610899e60c7e8c1251932b20ba08b2a061214494aabf383e8e7592d7e0973122b64b3d72ee471c0524c9383a507bef0d1d427fe1367093ea6b5b1612e20ba245853587404d7c5fb2d234f86c2afed3b760a237e0cf0d883efdf332c597b52262f9fed3869ad95e0c64696e576ef4f3af38d7348602ab0b5de0170885e9f187a3e28513d9c7eac3748a42100980ec43d1d8e4a9881cca867f00a6031de515cf4ef9112995b0792b185fc9a298eadf440851c16e00b28b57ad1920e2fd208c4a17e90f284e742166b2a4ee0fd8083fe38b3105852ae74806f15c068f901a97bc1d21583465d715bc6918812a62943d27b91606f0a410c8000966642870d08eac151bafbe52618c0020301bae10b310cad151b60d7372e0c15429ceb9067c0ac3d1c9c5cc380f6c0665e50fc8c71650b522d49067185e7329e5c4f05082bf56ec1423ac3821de818cf013bf5dbc6292be2e9419ce76de91b4e3f556194cb0a452449d681130a63bf0213a1ffe481c20925de2e58c45bf392a9db432b0c534d3116bce7f117cceff7b0d733fe0b3a0c180c825c936b0820d2c810f0f4fe49404253002371da9849ec0a2b58a4c472a7ce424bb701ba61b074377b106217d1f16c365a1b1be5fd9680bb5547151138f7b4813da636e80beec3b0a4310f177317d1c91f7387b18eca2eef785bc1425b5dae1e59ce01c0937f54f119096b94425e0510ce481d832b824e245f3228b551f2308bbc51ea0a69bb4bb101f878d319b9dd3863624c8ec50fd3ed5640bde3ab633c98c95fe088efdcee0610849c6062a827780608c64b406d1b4cd70891f8d7c08cf9093808a9c39d20826e2e5108abe5182065af5258099f97fc9117657b90095730ec30976e68140871809b608f9e6d84064bed1880f09fee130ccd2101b089819bc60881994e508db0cc4b3f27781e409ae7fd890c7b2bb830924d3855068a826730bc6f723108486dd16063d2fd97086b0ee3e08bb8641d08ac3845e069739c1a0607277920b957d9e008ecc47a10e488ab0c0aefae14c0895beaf10da019b3209f01e6c50aa9de87f1a539eac11d4133a84061cc4e4f0ae21336d08417927d069db06280bb2f066d481cf0ad31f7b9d7fa23f18f6ff3702e68dd20fb5d24a217f747d712a93e6412e557c1ff0a0078798078ad8ce9168e5c02c16246bdac201f824730bb730c9016ca0ce3c30866f15a15e56cf46377d67c6d45bb9e4cf11939717f0f4509059132fe21191c13bc395180d0664c1746aa2e9280ccd4442061a79f72d1895fe21fe312ddb2013e99eb26d4a76df3a78010cf0f79a031e2f7265adc1e2529f611a54594fd1b4c60be330dc3ae901301499392e8cf79f34e5ef29eb174786f80213a96e631bc4103521840a6f53218a9d09c08df23574185dc092106d3a3fdb0a488955d149957a4c2cc7d1da00ae79bbcd247a24fd3065ae9199075d1a0281d24dbf992193d0c8d082936a6c1530bb2da1cac1fb6a346957ffe156447c0e26fa5398c0cd9faa3d0b3941a0207d8a66141e96d73f50a4b744fe1c17a0bae377707d090c1d8d325175dc52770814c5ab6357c1d808182b5799f30ccfd0cf5586256c453aa3bfe32e1af60fc0bbbadb9e3f82eda830ca66445417365d88e08db559ff2b01c23bd0c5ab44011ac7066d1166de746c1e06d1ac91cbd255f7209204deb244c98d6122e89dd3225bdd99ab4577e69610c8ba93280ae046af51f98105640b24eef961ed724ad312fb7881b08a71581d1293ef05017b75271c2227ea7fb0d306c04723e3a32ab0f3fe24ca255f0c506152b4b1721bc96420a1a17a7baa1eb0f18281174f7edc1a42dd9ba3016df26a09655cff02ecba96994a43ba36a1b6d9fb7e0c62d4e5e0ff333e6b131943de02337c03311d31bb3c81739ae54508e62fe9618e271b7e3f24e525641b65f56f3f48c05144278121647faa564cf0e5ddc6910eef6260129c8dd3363365c707c30394dac21e9f34c4a084860f0619b44846b271308cfd291b072851f0175a2519849c73f22b6fba9d1f789eb6c0dc6035a72a0059e910f360917b11eac60b912a4b756e16273e72e14b827ad41d9b999a80a03dce8a16e3b61b41622d7b0313a1005190f55b78190d8af4c0e1b4a7612d32851438a230e2ef5e10e41a3463432b6ef0244fa10af25666df4710b0473e125e10957f303de2e1722c69376614ee1f10e128a7a3f60cb72bad120e18a9554934f0dd342dc88df810ce72bf10a651539814a68d9d622e94f65823c405b492dc041bb90c60c4a4b12021a618401cce51710c1d154808002970e10b52021527e7def652fe6b996a280ca7f8314800bed936948ac121838c5f5d13e76fbe9128674ff9144d5439f311314ba218189d9d3402c3e2e4300fa3bc214a991ab42c508ae3d22c3e5ead0efe6343d15c1b738648bf501973fb70de9a4327542954372d46ae1069e1a8a1e4325e6a1041e2aba602b3b0e814320a86931a5e277c37c204476188b1ee810a1635e462685e83303de89727a1fa65fad137e31e2f61e531c65b2917ed3b4581152225719e48f3426496f3012bf16cefa0834b33d7451d30da144aaa28243c73ba02910df81d1619c339f091317832130a7cfa028237135866446ed321731476f3f206318f516296f58f7222c170a3206d3addd30798bffc3263805e3405449438a1f54c80a72654a2ed62e719329f0ad5bae5b1603f9ea6380263b2533aa7c080129b22ba31c1997e230d285cb6b2b606de7332d27852c25f30e03615686082916b9f73ea4586b7b3b2ebe752000b531e995087428b060943354181e06702fa4027a6c083cba7c36d0c64bb74419715ff772295c7656262c129342ca570d760d4ab63e417de3222707639c8272b04ae065265fb88591342c3b9a14d6ef86628a9cf4ea15c022a9c2a313d33d4c61dfbe7194d587090a2cbb2952f28e0f0715ae19d260a7692320413f51b582dec64ce009b9d309c06c09b20b27f2ed9d72b1fc80731f3f314ac2eb5f99da0a7a5d7e524988859a2b95781e61563d271918b54621b3a534f894096a1ace94522c1f1e2d7fea7133eb9e4a6d0f39a38bc11bc7c7993e09ec7f93ea23da9d3ed28cc6634e4ac8691888083011967db98b47f2d6ea209c059d6809d46bb182141421461a80139380d79fdfa90aadff64019315ece7140b443382759f3a8445306a23f3acae90762370217e21e8cb750109e78f05b43d8531ae30b6a5cd90aa34950b1c0087dc71bba189150c05b5b5931ae492cb07fb0ee812e253f7f712d88c36d1714364342cf6e375f410b3f9fe0957fdb5e1285eb6ad0aec43f181be0109ae15458afa609bee655b2f74a95cb594d284df2dff4f473190751aa30ddc1f46b454dd5657224ef886f233adcc73227a4e99206202b2a30920d56af265a1b5942dda645aa14aaddfee2402a2dc2190b715bb13e7bfbb743957f2fd32f8fcf34198f2190f242c2c6831bf5866d345c74ef1736b63877a17db0a9b72ae70c52f3c93cc8dd17db3c99506f180ddb27fc277b81268b80bd21e5f6d3108a95d61f1c7d3d5ec32990fe161e5b4d2b02410bbb1e1063482fa0ce3e35882580c0b0b205ec25470e32d858d1a593105f1608f2bcc2c539d05c155daf777208f98945213307da21f406e15b265415fec2c614a9e4196a45b2815f482a122366411ff254e605a71e1fe376010b92a2e208ea2568f28ff4baae0a98fca37250c19b291c81013b8108f5fdf33c7ed70b50e9ce96c7228ddc3d122a0d88261a6466fb30943cecc6105fb6508307a0fd912be765ee028143e2e827f08f5f62274addc725dd2a52a15f2c23c91bae64b470a72c877d064f2cc841b844b1b728a66e60918f348af4271a05a180d14d1af01475292b70b1e5d35610e4531b427f24c8b4248cc57841518867c60c4fded8c1143025e535c8540a02bdf7516b3317d688f06a4a50963f8e19d8645fff5ba60a735ccd616b8533b91f9d5514e269827dfe079cd0702078d9ae9011ecf55ce38c9d695d09265f1673741168133c0b5a986134c5edb4426960b7443d0d29b821305d1c333ebb6e7323bc1ff540a6659e2c2d3daeb9407dba8e8c23f8d88330a5746a8d20d1b05e814aa976f80dc8df49a2d6524deb216ac28cb1a0292aeb191236e8e1dfe442252fb442d6b1601e3e4e342fa5d9f42a08f3882c3a395fa134bd8f82331c1948033e06dfb5552da3b86095a138f2234b7b5c73e770ec9a29ddc27223e81cf2751784191502a633a1875138c5cdd4a0f78c8723dcdc71e1b03b273f101143cf111b76de1c3156df7ab26f0579fe2872dbef42d9226e77211036d6115d4ab8093d8ede64e22e51089633f87cbf634887d8913094b54b133dcd580e426bb49e633c6bb7ba338148c6f320cd5ff1337a4b902395852105207dcfb242a8964b4d18584a6585078995b92c4f962f1295a8d39019a0e18d92d63bb4930e43b61e54b9803b884466f14e44e8ea29fc316398b9c48246e2fa0e7a9f7220a584d2e80a6aca0b048f14638c13ba226f83e91ffe3c40085649557fec3306797fb49974c4a06a7f31ca7105d1de74b7574c51ddb512038dc38d442ab1c4d1fd9bb99420f2105e9995bee37a325f444580d55a0944454117fdf282f35d8c0b9199419167253de50bca712991d797abb7276c349e03979e98704bbea8316245d1ceb420e9528521069cecfa20358d72f295ef2a745901dfe2b1208b722b0635b998f0d847426e0dcd6672b06e43919e07422a4b9082c880731cf3a1bbb642a1ee44170ca71912660685ee2d97fc66e27b19d182363d4b86a9a5ec515e0ebe53fe63f91ec70047138748e3385b783c228de95171d68cb97d08551ddc44565adc3e42a1f359e4119e8eed44a060f5f0d555b64e48dcac08e1c8cc14c80b91d2b1b0b64cae160ba6827350845d3b5b20f8371660b5076a313a7fcff61157928f1513b993e540af72c96129205579f2b36ac1a5236d047cb0628ec4cd185b709e31b832c7971ef267bae3ad0672f23ef2140bb2d9c8338414926ce27131e4bce029a6b40342201b011118bd80bec2755acec91d0c53753213e8d8da13fd0f97442fd42df746424554c191b5f05c311fed4ef1e859d8403001d6f2244c16bde81de3397fc0d265718d109ff165f27a06d5e53fa29bae72ca8a591040b6dd6a50b39254412bb23865232db6e666148fd741014fc4a7bb2d26a244038b16019a2fbc58ec241eaed3eb0c2c5fd303988a56a02a6ea961409812de0624c3f3ebd30477c1651fd727ed61d9ed8f560ef259bc411c68d85b0e624c85024b1e999c17c996024086ecc5ee25cca490c24100b39f0c5bc6baf4672eec350d92f754623a81b90916d42fffd286b6161916b9ba95645d951e89211b3333b118561c3f100f8e0720e1e668eb1a9b4e122363e59a0615b0d645f0eb6adc5323d9240af2183e56fe1082396b25bd9f900c1f9d467c33f9fb4ab00df62b7f72cf086dcd15a6ffc211bc68e18b55a870f7a2d7d86b3e075bcd6d6099275e050edef47d2429c8e366467e73a6e0eaf4bfba176925a292e95d14140f27966cb11924a5f811a45165c11b8147051137f4c5711dba58b80f73d5711147831e5017315ee911bafde89c263914baf1b015955e30046743744c52d7a20e2f6e85624585d4bb19a85781542d96761c112f3ed2b27cb07a3c085a255b3450dd9f5d446aedac27f366681d884a41bd0702f5ffda346625d4c2d1c0d2e243fa572302856aac8e16b43ef600ad92402b4a1d6d47d1c663c6390f371a0820f9bfa1383d3d98ffe1aaf626ee35bcd534317be0402636d08d1b53869f3c12180acf54c19ce3c8f6295789d6c22c950a2e3e516a455310d54f152d4de944d406b91302296cfb7683ea97c6f22eb369ca72ead3a6902c0e0ae231a0578c1f2f9ed8e4826270687e3137b05190d4e86e920ed391a2c21538755325a7f65713750c13103dc7a5a2e095fb2344439e7c0b52c14cdac332f6e23f34bdcb364e3e5349e4153178d577217e7bfe64594921643a266adfc32c89559b2af977a82149686f3524aa02b523baceabc72913a6de42d6016d481186045b429a7d58e22184614e50ba5c7fad0a3032ca80d6e7a41a44162a29f1762bc76624b3541250976d590044fdea9d608a6409fb0a93e6ea01bfab832f20b71475941a08959326debd88b1ff98a2ad20c62b79f22502901c1462ae5a12dd70e62b1bdaf7e150b62733662bf2307fe33041db9b2fef92c2030b8fb18133b8a372e427d4de821412815d52d276197f33cc93ce110eeb1bce33690d68d3597f51c81b3baf3eb0ac151c2d3e7f722ff2cfd8426f298f377e31670314de39dbed32f25456f923448172cb72c9cf64a2260f25a5110a622bd61b71330662862a4678085873b82162c5611b3b2a44ff32a764ef6c276326fd5162d56b990fa71958e15ef3f4a72b60f3cbd0a5de3fd4424c48cfe0b9918adf4327d8db431ff609873422afb12030d74d990e5eaa1ae0cc876f3b43f20a76521b5e03120851af8e755b0119fa3f3f956d714a6cc9ed66359720f13f041b2845618c8b52ba61cd4e1a3ea0ce20fd55919d0a16893d718b33a0782704ce96c2c2b3445a3d175a9c32ce9325602811caf0c2519756693c7c47ccf2f18d102a328b5f959516e3730e22c95c6001f1c6da881da4083073d09ed4382500df7cc1d653423b21a69bdb517d6609221c2ab54e219da3996636b862b8b406f982952b597a3551a686d0da289fe3eb7438357c37190bb1965113bf607c1af20ecaa3b0a1e92b37d8cd3a72a46fdc150c390182f1fb08d12f080cdf3240bcaedc1a1f568b4561323e36822bcc907ea06c60bc3f3b1ad96010b48c4811428e76c1b3d1aa1f3a14632c39e2ee26139e09155cc8c27e562eaf36171f0051aa00671e25badfdee2b35be0e7406e265812e87e91ed227e6915c1bce647a2082057f8b0bdfa08c40b6a915092cbfc08372d33dba8521237fa6b08341de2f2870dba7c36a930aab17208fa9b3c0ecf94e2df4e720d353d303e41f1c21432421d9a1f643c52dafa50b7a9a1f23f4415a72e356fe091c95bf0071ccbf99802454c7d8d22895d91b2efe8ea1b2b4e7242d1070bf295407496d1b097cafc2209e743df40ae40d99427fa527db3d125711933e7549da1d706133e3f1c00de50d8606a3149b2c338e6552d1e55439627d684a500b1fa2595249e33d7db000b1de60aa0e2989fc8970c196283d29072a9792af52e3a02160f036b0a68f6e8e1dd7935212f8f5a75f31d9b13fa34dcc525744c38f2fd21473ab5327817f53f36b4f1cee411bf8e542efb58c2640008e5e832fa41e7d2b90845af0ad8a8e5f39df484e14059c08ae0c4d687c20b1f1cb102c48ac6cd3818c5eed0b33f94734c0b635d706c0ca17a1e56d11531156d1153288e49a2706cb574811ed96a787057e865ba1ba994cdc2da81e33e1d3f9279718e91487f07825e1b5155c0897e102ac0b14262700a0e302700a0e512c5d15b2968509272ca9668540875ca2192937d9d5e1288d0931220aa7cb6304018e780539a1cee28382b99817337e08a1ffaf83621d859a93b0a87cfeb7303bfa84f060915ec5122ae1e373019713b81e0d1ce8408b411e4e03ed3a7ff0fccdb9f117af1cd9e215f885ed080ef0a5a3122209af3368f89f30aa9f8d740b41b488d0596f6b6b1ebced7ba2bf772b5708eb0d1a4051886f090c0f3a3680d3f446e33b0f5142728e311fc73bc004c3a34320c54b073a0562f209de03d20ecedcd050ce45b52807bc0e1050a2ce91f40c4832cca0aa42a1020dbbec5110981e7dde1e88555790aa78221608fd9f2a12b535211908ec81039360c1ba60264f8acf425c262eb134b66894707eac19b60931d7e95260150e960b5ad5f4336480bc30258837f50250b9564418f1e96b209bc244e408c5d6ee3090a096342fac181091bd6da3650825c9e901f76f667c20fe7c6e80f9a0b70c331debed714fe5e1e20717072a70df0ac1d71f07ea1fc2ecb0b4331fbe001f224fc123681f52aef1a1da133f5b1fb61776907fbe05750cb6add3a0c17ff6850aa2bfdd50e9a5ed1d14d1efa3604530eae40c43cef642baf6e37b37c8aa828322d4efcc06c32aef314e2208b9063b0bb4406a0182ea07a0182ea0658ee89131505f6f60d66fcd340cbacd39b1e61e30960714a6021096f7a87139d879085071127d541e1650f83218c0d66e0ddea7edf0afd0eb8b092c96e3808a9c538333bf9d0ad112321c430d23aa5f20da05b2c40670c160c0670c160c06c623b0948d7cba582390892850cde9acd01bbc12ddd0aa088eff0d5ff4c3c27be611393c47b0bc2097b9c85e1149e4cf5063aa5e901055868740bbf412483256a341b22a98bccd3a8269a391163c8f490f31f66d33e84a95c20d51d28670dfb42b9f3dc964e390b3917e7d38d8782b50e1e3f9f030c8207b633a1ca7c509aec2cee0b032b637075fe2c9907af93f0d32264b8e63b23449e10bd47613207a4338e2087267e6b24962f62e09dc55e984322af0d70948154b209f959c6f07d064fce35205cc330915afdbb38fe27127095f49380096ce4ca40d5ba89ca0ee05d82a3fa5c35c83f982c8cc432b766073b77a536a17fe22bec11093a3405119fcdab51d909a5f097aa54c71f5f80ae713bb01f19087baf5c50b41ce108093bf555d09db5d64810af3c8df09538454c085656f260853ed6760e31dd7aa11d2accb10764ee0e209241f13207a1208b909a8bae8e072a190dc26bd7990c1309a39400902585160d0973a9b09bc1d61507d5f3be40b1d02ea515ceda5931bbc44a9211e43a0bf1f49c94b708c11a68e0729a5bfe0f5ee875b08901228d1016b408e24cb5c4301416f14171c58dbb5016448e2e110358d564126cf04561256ed645154e6b8c30b4aca4b0088fd627208a8a9a560a404d47b091f5b317091f730ef07b15ef390837ff04607d9a00d509eaf48470810dd18d2be49a0320a9149b3a1164c0a9d092b99f2d09849b36a08abc3f4131e1be91215fa9cef40ee7d838f0ab836bbf0d9d8e8ed114a8998e1858ab67617ac05dd92b8a49de8118d7838a094af7ca90e005846a081d4c8ba0cea0512a0913b640017dd25a740c8476e480add4dd0a0ed1604db0a1c075e619a3e370e13e88b09f0aee6b2b907e1326f5098a311c40984bb5160d11dd69e08a81e77808c3c0bcd09647a3920a8babbdc09a28a8a512b9e798c07f0e93a40c1ead87f0df7f6f2c18641244c13817f51e09ec55c530aaab0fa40704bc439215ebfd910721eb08d0b84f5ee606e50d1a62afb5065c13f9c82900a66028130c9a24464099654f930ec5730a42923144481caba3be331c31cfd40ce4841f60d77ccf480c1d6ebae08444304825fe1b4d21c3835d670e923c2810fa46d93a10de250ae27e683ea218df83b470c1c09b4e0be63931615d873d730db225c530993bfa6a0a81062280ce7dee660edaaf84d12f075ae40778a9c72129d389df225afc7a010bc543d9079f480e309885a85207d58513206c17ba2c0a97c8c2418dfebeb10e4e9b6a30e4d6f6140b5f9b9e20f096d98207939a6590cb50439e0ec86b45f0bee2430d092435be218d79adb50929e0d7c097179fbb1266d690c07d8926b40916f796d0beb321890db5c7d8509dad92f00907beaf1105c3d3dc08768b0840f322733e095cac73e108db01f00a056546d0c840fd141325c8973143791f5b34fd63e5207d356cc40a68e9f0909fde4b191890ee7870b180e39e0ba9cb15c5a1dd49f14a77461e60976576360bfea57600dcd8b5b50cb833f6e13fe292fb1721c82680fadce8140abae46420dfd66e17098ed6b231ff644bd00bf516c360ea4c542516d9e5dc73a78c09c2132485d8d0c28c873912ccc62f613dedf9380d7b9b2541a5f3d26009e92e436089bb48f40af9cf11c158a3c0710e5b341441664c60ce117e052890903765450b95a66b30723e68390f9a403901d2789b871ea94dfde09e1ac34d0aa24050106b666a6f0783dbe680b6db9dcf0630165ee0978ae5c81507da72c09b86c0572efed927c16144328707e7eb1870d111cc420cffd9c160b6810fc40c13e354b0782952f80c3efd3ef0b1aa37f909a8bec0329bfa31600699b6f4321fc174b3345a7b3c118c61b39c177b694c0168b2ae062537eae7704c9d2af40a16bc2800ebac0bfb0ff064d1908a9175d4068cf81923454b2fec10874b7721527c1a3508bea63960f50ac32f0989928270f40af9dc0ab68a80728505ae160a8dbfed30a63674c13c74c1e103eedcb1d52f5e407a70bbe60efa0dac46ead12d4b65da07be4913215a26385d0bb3794390bd2da8340b42fed5211f3934780c14e57df0b6d198c70fc2936a809977b145084c2c1aa0cadc95ce1f01f2ba20832d944b07d525a310a1e760984bdbab0041991619d32f8baf87b0c7689b0724de38b4b0e762c2ac0bfc49bc60cc821832195c8237a21cf0eb430fc8c6d451977ce0c31692329f6130a066192f12bc31e16a9fd6cd0d5ceefc609bc6beec0913c6ba30bd27a4730ed5f8eff197ba9a1708f28c7c50bc0f49320815a82350c5295ed30b296a65b0f8d3f66a061421c28216606e2509cd4b4d40bb584aa8160436fc90706b73bd0cee6728512222b2ea0c3f10584299f5b6f1087fa023e125f17cc70cdba3da411e1ebbb8201362f930ed76cf3a21d2aba4b147debe97088963dbf0ab1f36d5148cc1352235fc40440e0db4a9b0c662d38d0e0ad5e0a0beb8bda80a30c479c090ea4c980dbcd4c56125522c2b207af67dd257a7c4bb39fe47fbd2a57ef37c09c1f652f0aebb5c6806c4362c50669e1e2f07f39c9d90e4a3166d1a7ab35e625ea87c5413b2d4cdd0763b2937108107a600deee4c8a08337a1d8075dd29f00c72d826d153c734ad09399b5800dd8cf0cc09a03f3c01049abfb2091323321071964e971b93055650ab0296bb0cc88abf90ef3ccc730a36b043b1b916aabe1b171f7a00fa9b132d17fa89c6a127a838fb0bc6d90d413a6ca7cc1852520b23484f2ebb10cd187cc1361e153b1d1e6371a372ab53d7257cb62511111f77eb118f1174f0ef62709c0f1bca4871d560015d166e4274909a82498307c1fea3f096e3b4bf123f9142219b4da2ad18d939f970e2c4c54a0a7c688730ddd0c7530b0b025860a1fd6aa058156e7240c026b2c00c16cfd610fde4b7431b5f00a470fd36ddae0d336d96e20a0a5ef3262cc5acb0d7ffb26923c59cecb08b68c16a175e3cf45210f137c625c6eab490c4b8c63f107058f7f163a7402c0ec036a620bcc9ee9922a1f483d1c686665011be71ae70855dc28008abf4fab0bb4045990e8ea16760c486318c13593a43d0ad8bc5fc12a04adf7130fbfd4319a5c03e70c6cf977033d540af20c94f41a90b1d8078a1e1cde4a20477fe56b12b13741210c080eda0deda3d400c346198f134ae7af90e04694ed1c0e386f31bc7f431d0cea122d31817cfe4511d0eef3f27817c5f20afa335de0db882e800bf5236b60d804f6bf14cd8a0df0965479600e264350a194b491de401cbb7ce0fb72e66b0f0f468dd15331ac6a094db442b0e9457f2e0a4af0d251bacb216f1929bdbcd08d3a952009048ea050c1e1d8e90e797e90507d6a5506091aa656507cf28bc407ab6f5fe099fbeb700b3e0f9d009afeefc7096d06f6708f4f68600a3fe3be30bdd6e72113adaf87c08010661a0b16bb0d60835d7e9b224a649e114e5cac7d094992e071d007f9610ad297cfb105aa5f47269ab4d7e0748e3fc40fa6077370af749246231300f9609cf3420d0f44a3d6b08a4d1a6f14a38b0840b048c37114aa59b16098a0f6111618ead950713066aa0cc7a383f1652ad4030a9d1cb6a0c8fbaea214f82967b125fe7e571163fa0981c73483fc19dd2dfde12340493427ec953d222ceb594510f92287a0bf6e44802017340f1268fa4e2e0b14eb7db0fed665ba1c4d9348d1a7fa564207be3ec53090f24e21095975df4097718f4c08f9d9d8a10e60c2ee08d82c6a30a8ea12750f1bb3d470d3c678210b8410c6c0d2ea55fb09e121f8516f370c93061870ada0b56d7dcc12c2f61e02474046cc1719433c01e6ca654b1103b14820817ced4a15b2a6f24332edfeeb0a41fbee619b4a9b5120a3d12561ccf45f7915013c55f207c1850a0eb2ec64630f54d7e6281fd5fc717b20aad2366a20cb51a659609416f0cf3d20951afa610d809fb5a1716da8561279831c91b6b5e2690cbaa1c4611a8c55710901344e6146c9ed930d29858c934da9d9eb116af0a1c08a59257a0921e895828988ac6709869d1a81393ca8402b7a7b1b810950f2ad1534e913d0647ef793095f837fe106789658130100a7e10acd370a2d4a1b3d52cc3f0f131c2cc7b381f7aeae500b156276d1aa6cf03d124dcefca162a55c271a29abdbd15c4541c40eff58ba70a3d02f810a5c6677c25c2dbd1424503ea6613f9d9c200c62a74ad228828f560d635e88413d8a08de12f5ad79c0a12098bb0a8cfad930bb6c7df5111d9b1870a48a737223d4b5d1409ec4e4421a80bdaa6157acb2340893811d90865dcf0112172596c31c711f721b058a94309529813917108f7a211fa5b7c70957d6ae40e314169e0c5c90f521b9a1ac1c08e7e38bb0aa3355dc08a47334c1686a172c2a06495bc087f9bb660850890d21fb0504988eea1f9f107e2e9cb322e9aeb05153f5594e0d4129db22441431ce1477b2f2d0f0637905169a9d33d13d2d775f0f43260c31100e4f72215fc87e40cedc4c19113f8b8df1d8b8f4f1101be9c820c468d0092fe7b5e1c0a1d85e6b10c13abb70e035d4a13117cc9aa1bfb6e05b1a8bb21d607894aa522e94a9983164f3ef2e17848582b23abac399147d6a27c170cda0851ab93b3010a5eebdf10baa635dd143da8df90671e8cd4065f61cd90a38aa5880ab1a88431f12957a00a873b6180bab7ebc12bdc7a7d41c1f34ae20e1b71e9b186dca1a70d7bf385f1dcb38eab0d96dd4511a5c51fa20ed2196e00acce54470a8c9a080087cd62100ab55626331ab635fc085f261232ec9fb526182f2b3d517dd2b53b0d6c301901599b6d8f08edb30a825be027fa1588835150a67f6cbd1c1ab1cc01e5d242e31b5f9ef2114121d5310c4473abf10e1f2f4008d2594d01364e4aee12180c6b50cc4c16ef0e0c1d91d0c6f9b2f42d1323b810c99b8b201787c66942e9791cdc19f05d9e01fe82873f38c8cb9901716e129a10912299807604fcec1a8ef02de21a0a86962081ceccc0c041192c0e98355cf16737765c5211b69250f8aaaf740beff6c6d2fb86e76e0d25e958610ae04d5f09dab931853abd90000ba5ab0ed06868e7cc2d5ed8275230a34cdd09b9eab5d0ef9561570df579f27196bdc31409c1036a80ad3c7c2a09d424aa0118986edf19ec7ab4c0976b78551369bbd2d090126b1a1ac64810f16be79d9f10f4d8f5d28cdc5ec10b23460ec23bfb9b551b61687e116b40e85b0a286ca0e10ec63b1208a52f3d10fe18396c09063ac79163aa76dd0744f653c1c8eccbd612ff3b6bd0edde479b0957594340b5bba7c0340aa4403099ffe76a12fed374f18daf4ac52f4b459010a4c36532168070d4a1bb4d2ec80dea69af32737c494e09bca25a84f0c8cc920bee3bebe207242b4b193b2f63e08bd1ecd319c78131c2e391d3e00ab916ca109b63ce95147c4de941995851dd2e995a28d0e12d8d4612268f0320b51c08c40b95bbd5c15447e90718064fbc7082ecffea0d1ff33861684f39c30e1e64e8f09b88142b1bda278360cdfed15d0fcbccf8a1253ab5850bc2131b5080b3432926cc5ac8e0f587f88b094421c9b11dd9178d1525ddf4e1c8aec4fc1b38cd814099b74b871c9c13363092eb0293241ad03220b1bd1f163227865a62263aeafa1ce6bd9070d379d09f264b4bb2a2a936701318bf00de817626f1711dac36c54255de86e70f68ebe271efe2f00214f7c63ee1ce2ac7f2162c1e1cf2329447260f8cd137a1ff8fcc031d4c8907d1f1b17be70a509194209a1e1e8812664acae2542843ff1ba9730573211fbd1a0e267f36a15a18778b10d9d45642f2a080261644f213f19dc6a61f1e22d253b11ac2dcd0207bb764216166339b433c9d8bc1c7b5acbb08d5236b80eaf12e4309d9a3925089fa77430a8309d7d07c7059260c3b759bd0c26458790b612362f0b98988de0a180ffd5096636c62201fcf950074706dd3127f3d7aa2ace227421b208a7530d3e36dad139a765930f853a6e820144f8791da62439f1d0a85c621e6a290ec2449aaa2a187ede539467e23502229d33cd211bd454e90bd0271cc1155d6daf2b31f263e1777583260f2612d8b10d9b27371b3e3f52c3f4b5e0ad35592b9b617d96a1360a10faebd12e4af9e80d2c1a1700eff078fe0bb57d08c0d0ea5389188e4c726097e899430ef357a16152ffe7b51a3bd07b7157f23852276792d2a1424e5bac114dbcff411ec4bb0b1a48434b00f779e598192db77de149512fea14083ef610b653a4441a7cd063d1097339a6141119bbc162d26ab2075eac2121a5bf17590c7e6ed9e198e065e32088a5f4614001bdbd19b3fb9171178b7cb22422ed39920cb8d6dc17f65167f08bd4ff7512a73da5c094c9e970093ead2d30beded9e90df0285d70db7ebe9f0e11757d4083a31a1e09fd464e51a97506970a4efc20e0c507d5502371c822c10120ee961a65d1ba906f0d1fba0b4d0932b128c1a00612cfa9c6113e69fbd12e0272caf085b1b7aa1fa804ef91d043355021b5539bf1980ea26220e9b0b7a19c631023244733f14155f36afd15745762314375fd3c094fbf5460b11f51590c654a55123a5d5a442396131e34a01b604338fd0e2cc30ac04bcc099288ce02189986a40f8fab1e91613b7fe60b300f38b17b5542ce19ee97ba82fd462d1b18c20b7d208814312c0be461e582284b3a171c231a891088e05bd013bc8255e0f19abd4828081b4e11023c7e14303a2274d190ff77f7158d9497e13743ed751606342981400db7ee1dbe22ab80e54bff261a07ded9a154abb6131acd6081f0bc4314dd1c0323d7131d89a4bf0eb5f268222b8477dc2f0adc00b21aac1afe227b1f0f22d4b2f6e31b1d662510edc123a80d480c7c92707b6c4315832e1f10b5be3e6d2e740a9580e187bfc82b81f94632a67a5e0f1d96fd621294b85b090fe9ab21b154d316f2160e225d71cc5d309e1ca7fea9d199b64ba40952582ee0c81d85820f64231ed47321d0dc1943c909b0ede81f11639327a16155e1dba70ab31472b18a8e5b111f5a7ffea28c6f261f0c8539e1c16904177118cbd715322399183d100279bf71a621a703182bc70730c09f546647479fa3e223d80ef60ffdf6e9a3f73d6d612549e0f7e1ad84c3761727ed73409df72af108b54d1c72f528764712c4e34bc07c4949be2499bb9d52b182cbdc21649360b3700c61f20a007071b19849b4b416c54fac70fe2501eb31ee177a61482125a60808baa3b1dafe6b1214417e5cd31e485fb10dbfc02ea174a9b5cf0a489cf030a0d72cdd1e94b0e43122a7e788126d9a4402ecf44c2d104c8b9b941b2c96ad3a79a8206415329a780a3d5f2fe1ab063cf32183c271313a1cba8822501e63b36bd36d5211feb0d781606c598a30aa1619330490f99f2f0fd1019092ee1a6431fbf6d22385958c730a66aaa9a0a65abd780b56e450b07bb5c4430b96c02380957538ba17ec816a20c7533d6b0c740eaf90ee451cfd181771f840961d041c0dbb9377808d7034b807b2a344014d2950431371412580a482f52b1b66c8bc308839936c2a9080bba0c8cc189e0b0c50e1a3258b20fa2bc924bd02732a9a421ca7c8a1f28191bb151875ea07a088ce9f2f0a22c33b115b0be052078e46d570de7fb23a211781b4209069cb0220c85606918068b4cd0722a7693061d674f40cfe82be92e7e957f40f1c81f550c864a6882adfccda61ee76892709a9c960a0acdf0f9f1001055900fb198b6322ed424c720966edc7116c74f0d159a6a9dc0b52b90f40a6b8f3e00b4e518f707582fec60b835980207394f2c6129456d911d78df7150fb348e232532d6eee0b634c17116f97fe0d14b7bd992121af7b430a75d65b920dee94660c145a15b2765419a90b4a6ea542958b47fb37692c87b134a406790dff444ba23fd2a63208318c667258c8eed71a45fbe2211c346179338a420ee142892bd421c82ab933e3ce5f011a88c56b11b3be05d10d4acc14411a87a543296e9f3b126636fd711140ff21b126d91ddd251594a4331609cba709d8342a0082c6151d0936ecfe709662cf9209ffec18c0964c626e06603775314afb33c514a84f7401e04f0f5e1778bf3241e50e48560bfdbeae613eb9f8a11f7a388e8161c428ea1774521771657b95ad28516dee516750038310409be5d251f23f4f17e5cc849175b5f3bb1646bbcb61dd7d61e00870d2cdc0b780b2b50b8f6953a0a634e2cd0ff98fbb20ef057f410bd48b7221d051dd980aa9df62b096ee764b0d22a01ab0b15e7b401f08ddfc03c88f198a104aea0d12e39215851eabb1f0220295822b093c7d6bb204685f3c0a255122a14d020c081c4a7665112f8c124c12ae166702669500b10a5b566ac132317e871ea7244b5100767ac5276692ce01ff1661021678deb991e297c9761e51ebc581f74c28270aefa8094335d6042e1e83df6b11aa44701e4e8c8b65b0812543e617974fa2219d054d980d9e1dc950ee05b7a00f93f3a1c153ea19290c50c9dd60d13cea5f19dc99a8a4a5829473072d09e650da5777151a96ca79b2751eea4e0d0a124a20d911467d139e945621b1a875b7081bb149c20137c74d2f25c62921eac798e60ad9261e41e9328d840eb6080151cf7a28e62789aee422aff3823b307de5a022d5b7cf3330b2604351a696a39d2d4fc82fa2b9bf7f403da6fb2b425853c0c233f0f37962b05298bd36679d9871b4f5016f2d1e9c945320dc3f35332b04b3b3dbf430b10ac8204f0191d07d873214750b6234629e9e0b26a4e171e8081daf1f240f2f7169e07fc308e80880b11c6566a220fa3569e0ffa283103b3912482065d4125c1700d998015a701c41203ce425918d84644a180df0eb032d016f561b79f1cc31f87376dd1d51d19352dbfffe97397fd935e0e277e1eb091fcacd529953e47415090568a1976be5ac157b9dd3420ce94d641ab388263244f54e8c1f087c18b1ea0d64e513e00783c1c7468c3113fddff181a186233019ef55088309165f9712e78c53320dc7495223e3ac1cf0a376bdde2e989303607ca93cc90b656c62e0719a15f43099be6b01fa4577aa1188ba66933c410c252f556d8101a543dd9d3ba7814d00e7f2df93224bd6f7d14ead4b4218e516ba528f60e91f28fe65dbb093bd882d10c1d00ff43faf9ad74a319ffa720f8ec26809636ebea23a323b5f23df4c6f2310e5957f079108c453ac156c3f1e86ee7ad1ac8ecfc91cbb17c90095cdead1226e9c91a1e071feba1a1ae59c21c454767237c128abe17a0f61b90edaf2fab0ae5272ce0b8dc70d7131c696726d1c41b500bbf94c2a19cbb165c236ff6a1028ba15313206e1e85a308b1e79019c5909a6186e76ea5126ce5fdb16f351ef43b5985da4247af78fc360250220460ae491d2fbb4347327e0236b82326ccbca3cdc0b7982ece72fe307dfd7c6c248a999c425cf0a47317684390f25c40b8291e7df473217bac5d501124db73124060e73d12396dfe72975d145b1468f09c918d59285222d676e89201d31365194da8210253c23f141b2a814950982f8c500c5f6b766219341180341bbbcc11f52a5d7e166ba8d0a22650a51a145881fb421992336210dabd204168ec82f41506948560e2bf2bb81b899cf7850642d99a2edb33114232fe799d1a195d7ce0b9b8016208702204812a216cef2588ba1d91aefe35e4237de2483086af32bf343843ac70ce635b810b8edb4cb0a862a6fa1230eb7c81add3e13722f2dd33a25d289125175cb68e7225e970cc21b44882634148d04c3743cc32423177f2bb31eb51e6436ae720702eeb08c920baa4aaae0ea6916c1467922f0a20b688bc81598bd7d217fe6dfe2083257e6076e0ef4741498ca6d91ac30271631d080bc22fc9893102ac95225e27a0255423e7f2561d2b1b446a7138b82f4f1bc0708c914eeeb5be1c1d211b914d09914720c5aa9ea3cd289333388e6019d0ff921ca11ffbc54831738fdb692bfe657f31e6c5334618e435b1433f092bb615c25a2fe1557ef974126648185157aaed58233e1844e1ddb7297a227143f15412a532780aeb20e371888c587527bd2d2350e54a140f0d10492450b2f66fb72be479b56111fe17a11d40e2ae92750a5f8c1df8300eb0d9c642380b6f2b5c68234cfc480e553949907b58b9d927078e8b50aec702250bebbbe301c8b8ad4a08d061c231a8db5d7d09da65e771891ef90a11206d0de248d291272434c04e72935683c024df2533730669669128b9d2e3b30aedca0a0cd927d9a1521d30c419d38475e0d4a9832b3dc35ced23f65c20cd1d10ae428352ae08eb1659a5d191a06559a1245a73b7608b16c7660bb216e0d1cd627de708e6b20f70bc3c91b41c7ad95110c6902f1d22e7598e820077529b331b99e735969c6aa80a719ce571ea095ba11e94b198e0e90aa6ee0f86ee56f2f444a2bb3002066bf07822698f063bc6e841b3feea9610543921b8e3b47076064b78ab717de63c8b5a14e21ac610ad72c57f5cea8a48b4aa87d04db8b4e7708871838e1c5eed4c7325763cac2129e411328c93d80109b1dc20752e68feab58c0e15f6535aeca2356e4aab0658ee85e33560940ed3578135f6c58232740865933e4d5753c50b3f81f062c24771c3d343719c460c0759d8245e7167851b2737de49247f54e99821623673e15285fe9715177df664755f1ea0b73c27d23f5acbbd73446f2db3c784636770552739de025d7542a091482fd3a512513fd8b08f35bea336b19ce5c0dc014f280bcdc6c2a13eeb361a14f8fbd7f1c1c253c9292c7bf2b37c643a2e0ca381e8412b210bef1da79e84e15a862dc3443ee2ede1a14ccf9209d61ab3e1c75edea21912cc8641a479c79c1d6ebe934188189ebd2b6a3566424ae3e94116a75b97d32660934d232c668870e46f0fba0a7f3a6b41eab584bb1dd874ce53063a73801c6b9e2e00ffe8d4f30e8483cfa0eeccbb0f233fc22b431bf3e9e02ff4c6f5e2edcef17a23ac8af83214b7b028230f6fe2823e1ab851142dd955d310a1f6462a5fdea0811e4ceb2b3d21dd9fe22501c030217575a9c2799f8bd820200450409500863119e27c5e91452a62e510fa434c91032799911417b2c3c31bf800972608f5e1e1135c218d0f235d9301a361a20618849a5fc291064bab36b3534d50b33fb49d2009aa6c71a59c12d81ab93b9763904e6c6938a8e9d66198d91c802cfce7e4e2ef54ff2c38d80c55f1bb9ca7f5290cbacae3041ac205336c28ddd27e65fded1ce8beafe0b1af604b106e6127b1ebbb1313182adefc60f8c7610b267b0e4e4161e788bc2cc9cb49f2e9fe4f93106307ac329977e989234968e202ceff2965308e2575830c9f59441f048250021316b14c2ea67e74b265cca6dd1299b439e11e729168178d6305411b1e5a381846bd29f1566464650c835deca55916954027c2a87645d236d6e92231c04a808356186a10310c40a1dafd0b7e302c20ac82b52e528c10181ee7a1ebccb59409534fb6e0d348cc6631a86f0101a3fcb8b819e190dd52e01312f20b827acc322b079d8711e48d4cf0fe9033732fca8b4c71ef544ae215a0280a41301da6013434ee3943c964d052388eee96c0777bd1e30ef1160211515a44e70f221963a083d2ba8e166d621f90bfe5e5ef22d5a3f5133bf4ced823ab6201f231032bd6111032bd6121032bd6165bfeaab09acca1860b452e77022e09d775213cccaf6277ea2d33078e2bd3b076ffc6a939a6d37901e9cd37c31ed3da4010fc266b0c4cee8712a07af200fd095ea10b7123b232a60e4aca97a0b58ce7880979b35f10e0668a6116556ebbd0cb67efd507b7a087219ed6ab9132efea57e34b2047f3073fc839d07f8a4f9b07b82741a131e038ff3198cc8392af296c181fc6561b5527477fae256bef9b647f04f75420579307711fdcf9200926be4a11feb58a950d034a67709453d489192a7144b1450a6964176b30d6c14500681b1325f7b9b17e437d09174b6c3732166e6028114449c6113922907e13797a8c70d0cef72109585fee80994303a457f88ce44287a87d07255006d10292ef99dc25353107522a6cdf9f25106c969246fd2f0323b37f16b2866e5d9431846d52b49a89c0f43336418ab3370e2cd4204ae27201fb65e4a33157d2f141ab749424373f900c021a591b0c0bd346ed11807a94e20d7e6d9041f343bae732d170e9e4387b079c12ff52d78091ab1a220936b3602288f7669227ce163422ec802d992a9a74d702a65c65fd36536701417542b2570b6647b4d1d1798bc80996adaaa0bcee8f95091b561222d38118ce31ee1fb8233445f1a537ec7c7b5434a1d374372686400342b0eea337b621c4622e832658498e12dc82f73da6a939306a97b3c6fdd52334243176733c9b4d10341445c3b3315a53e733b3fa28233239cc4a331d6d4ab3127a091c2eb31ba8f311412e8331ff48cab348bd179d31ac0ecfa3d0530ab23a1ea58b938f131294377d420b82f3a8f0cf323ede3ef310a266b531186d66131aa29fd331467ec912f7ec20cf2c127cf532fe4241792fc91a1b23309ec58d32463bd0f1d44e2837263addd9a2a726c76c090bb05352a4bd9a1e245372b912449878bd1e5efbe223394b84043395a228523b7702891541418622381948d5209a31dbe1e4a019061eaccd22838acaa7b0248ea7d5a34ec15c40278f3c36821d9d6f9a14400d21f52020d708303f53e8819ca5e5200989cfac7078447dc209b0da5c4092a3922b0d31c7e960b23769640bab4f0cc09f3f781509cff8d690ab1d94f609f8ab8150971612630b1dfe3c40920c302e1b1207f5013f10280e1b9989014129ead74511f6f6460224aa1b110f9eb35080ca1f988611617f8261574bba352fc99352a19200afef15fcf4b220edb67dba1ec8abe4612a8f8dd6355f531fa385a22776341185b56073f874341d00287e933dc72876240eeafb31c4137f2b22d165ddc3431969f92431a4a9f46b4a83ce312e5ddbc5398f01d71fe6fa67c2ca3a080242f3b25693ac90a3181223c5b0237d70dccb2a133503d472f219502df7f97a32640249950e66df31e153d71fc733c0f58981ce7bdc7f13d16d2631f82881971e1c42cf336502e1cc245dd1ec534bb2e686319a00f9f251bbe43f198420969383eedeb71f3e3703917b0cc8e806e6ee86616bcf9c9d0ff45b4100f4ee3aea313c6c8362dfa1fd531814809ba121ada9041a5dd2ec410e46d87f0ab2095fe0e866c6a90ffc454110c8c2751b0b18a15ba0d8796ba5077424a36071a8b3f4291e63ffe3153efed10d1c44c7118a4998cc25644a9c31845d9ebc0f204e30e0d6be9cc03f43c591d1b2aafc7c2cad1e31f245e7d0de53363d1c91e3dfbac20d9b90cd911ea7c60e20815dc3616056f4a31f391f90b177ec27c90a5410e040ce6a931531ae2ff1b2dca864a2290d46f1808ad7d5ec1e09e372714c10cfd3087b40f36152a39b6e204ea5aa30d66e555f099390b1118691dcc11f6c236241c7b2e2e40bc5590422041d865116fb3f0922f2f5530c19b64a6bd2fb5ba5282297e731f351993efc23eb91a9f0d9771d242c0e1718c42bfa41881838846a918f2f0f8c1d990e8d511a976c5521149034a0e11346db253901af92060d664329a996fd1121ec875207fae2fbf0605b109c133bd76dd1767e87101239c0b14254bd9e4c235f57b831aa14a4f21a2f28dec10083939426efaa4ea25f9ec13828821fd3d09ae64f310c24e4c95262c98cde17bf102bb127ac67552802c2dbc26f288b2912c9d662b20245a4880d344be6e3139d4ee220183f94d231f0025f1cc8659d024c1c46d10fa8055bb11c7231120eb3a88f135280b6c222ab5665320d899bc90e102f31014c59bfb922ef6a1aa2637768292188a27aa0aea2a3fb14a09f63d354c8de460cbeedc0646b03ee3f1903638a22e819150316e5855ba13f28cc57144a517f22e430dc531838accc41575a3c840bebc55c2168eb805419c0d30d50b865907f1a6b827822a830974d1d90a620f133431b791433f8bec09f5a9fd10acccb33e14bca24fe1f0c522ab10f15653435315611773abdc9332e711837f2587f53303147332862af4caa7f297bf5cbc17dd6156532f2e4ebe0e0d6067427137f8e5129cadb6e4b944a5da20d5166e835107c8a947c32469b12fb7ac3426efa83b913896f8f32790cd436374fc20c4323b88b8f29ea5a2e322290eff52e3f3ae641a4cb1b0739f7e70452f1fe752e2ac6b9892148b71b793a4332fb71c90bd5052778006c332afacb800f60e9d2d29040bdb820d0571762a2904de01fdc5955d1bb688413148c5584a198cba6401fafed89415e86c3ae14902fc110f9858a571638a018d0d7d5ee9228ef74fbd12dbe49cc331cec46f0b09b58420b143f69f27ce1112a1b7490e8c25bbbce891687ac3f826db703540b68793e6266dba39a1226ec7ad1115d214a1a4c3ed88098b223222f661857717cd91c0c38fcd5156090d81dc30834321a614453870b3de360c960d6b419582c84f07c22e5f5ef6e23012a9052154b4bdc51588b19520bf6e2ef23a99ff3617cf0f5e2104ce2ad90c9a0ba050f5b3be540c487607031ba10b7710478ee20389b9b39820970ea0e2759fe6a1167e4ba0b15ba3624418584bfe208e30eea3149fa48bd4705023d225c360b822e1dd3536160145e742a66723b62851402e03e8ee3eec487df0bc02547fb17b1c927451c38f68a28f33b208a2a572d460b62ef1273de245e352f23a2216c2f40184370f22832796f1c910c3652916f773c1e2ae460423acfca133cdd480d812de870270ba6978c11ee2ca9022d4985f0d229202f9038dab78f0693f26711398fecf463322c575109ac8a9a316c6a31ff37cb57bbb1f623fcad0e08795a02d12ef97a2ae67b23227ab472e60f06f82cf23df86a410e22f18851fb49a2e411567cf0212d5353eb3f7102a4f071eb74d20abfedc76169d225e6139a7975a1ac85729c42416b513141fa3847141324f3a2e3ef006e4967983cf0e01853b92ce81ece332b50f1b130abba313127dc5daf2f4bc46f724a4363462bb1e973e23d91322209c6a950d0a03a33ac07ca33c231df08d2bc38fa2e31c15f1035164e66ae8722182a1d5a17dd2166b09cf8fa03293eea0f6208b71c23066f030dd223b27a7421e29ac163df811ca32ce66b7fb1345ed837395832bb7232f3daf126097c91a2fa80e78633f56a4450717a1511083ed3dde0aac01b7a13d286b73087a7f7a508e3efd040a776ceba06717613106b0398362459d88800b2c882c208c7775600af13aee8349627986092b70e5b0b759b512398fc4796303efe43e2f8515f77281939e72251520df834c05564426f8902c2116181dcc2173929453951e976e3d00db9af0ef44f34a1cffcc5c62586996fd172a0c4c72d8dd3bc4353ae21680d7e84cbd6562cc7bb1fbf085bc4518564a908ef1f64e15821ee7b1d78805fb1d63e7ec0362c7bfff1da96c03b23a72c7fa0c2db770b1df502b22340bb94fa6f90779a4298511bbf2bd005e8d27b7930a00bb0d25b41964fc36b26c3a2ff5290bca7ee3696ccc620bb8a59d72079c9e4918fa3bae61f7ad719d207ba6b56108e6d84e0c7c523b936767ceb827012f58408c21219b3b93126d0260dffdba39f15ee602c964836e2632611f820851a0b7090417b7736032a64114612a44327fb58dbf331a26818313e918cc214aae1930b720a951310fad67f09b4a23e436d47c2c31fbc5e5b31b3e495ea0d4eb8ae01bbe3fdcc0ba719870276de2fa227dd1487d0e15ec288214d8b83b26f90b00935d0a333f0b32d7d763baba846e41cb96f8b3bd1c8e0c2ff12ceac199a027db211785c221aabe11432340c8091304cec8b2363ca8bcf39d8d3f2d34aede78553b6325c534d58a78b0b2be92ce2617afc30355b6ffc636c966b3e28047ae551365b8623941caa1868f9d7c6511f2dc180c3e2bea6866c039f29b3c3d4335c4c89e83654546deca4310dfeb004ad1278be0f7da72d30fecba63b299c1b54a0daf5a3c40f9100663116b6d9a913908d540137db86631343c678a13dd01a500d74b041d3223434ee09c39b2d042827802619a3820ee30aec8fde1aa7acdd923ace268307c0b312406c863cda0637468e11a2636b681c58aee1812531e8e6199b8c4cf130751ef032e289e8a1ee2905ce0d96851d014496c1cc3aa2fd2d03485fe9501343c25e912a25c2c41ef217aa22f2f5060c201d6eff263a6e880a1cd55f1c344e93a1741a29dbfb02ce0e93bb2048b1c4b1e75c9fe440055effe48e9c96d739b8520661dcaa42d428a7e83b5349628c3b21cbbdca8228fde0870f66ce3e13eabffb6f3a57be0de37681e60c37084ea133211de8de34c2318aa14276cfc52c08e82b5093aeaeb92299d7a634cfbf81f31a2ad6c030f6d25dd23065604f212bbb725c1ca4c47612f0b19af13b0b900df2f71523651aa4f787645741fb7f45cb441c1294eefbd8429e7bba7290ddfda81c1d8410f3993806ef0ab5c21aa12c129db81d7e88e6e1a6a8687a158154a381bb0e09fd1d75f69a542883169d27e8c1c422d1f09a9c389bbd5e3223cc899e3793402751e0ba660a446abe64c184aebc6a1fe715eeb1bb1648242ee26e4c5133843e321bb6d19fd4c162fce32056cfb4419a84c16b1950dcc103f29dc8d8278bf90bc16f5bab0327f01768127ff4212225ab95ffd209f3a43809e341e7b4aaafc9ee1cd02e75c0a5350330147304a0b0fe815db72341dd9920905f1cdc0cf602922100923db6129fdabd110e52852413168c3ba2672ed6ae1c30fc43a463b70d29264fffaed0aaa43b2e17a8f086d087d54b1a0da6ba196229c30aad3398205f116be771f1263fa8dc04d099a10f344373b093d959c98c33f1bf97f09ca2214b1810dcaaf0787f452d06445ab9f0a27a3f2034bf278a20f3a66f0629ab838290dfdeb4f420ab34b082f0a82b7e0f7272ea61b86dc3ea30bb272591ad9716161ff7f83b92e53e070522947844e21377893121c74f995176c90f7d4bd7080b729af77b75671244980279945b1017329cec51381e871b2b6fe1de81a23168ff21526dfbb17f6174463724d74911dc8df0dd24a80da7b231436d9b2307617d80cceb79e72866fca48149a9ac340ab2060463006495b91d359b5c5235ddd54f2814ba0db4d1756d2142bc0464d12dbf6fd51b903fdfa1b7df48981a5e996263545e10cd1832270c97757121f5148fb136c23e2b3d693c219e2c613eee98d8360160271210ba4fe12295f9a6b19f4a08ab2465e112c1080ef22d286a6eb4c4111e813b1104838f2199b3a1f0222b1e18b09345e79b1aafe696b2ae180cd30f4c95325137b1dd6626bc18f26141fe42d8104d27c0b1780a27a61036404650edd6c59b17f25cf6321c57dd2515fe8835736ac34f5617f860150215398be51400a447c1a1bbdc2c07dffa0652c8c730be2281a8df510e2060820b9512a140b65769a45b587d3750b8a58fed244ec42871251c033350d4cfd1a25eea6cd311222afe12a04ea7f62c6c902701e6c97ce615360ec753118a64751e53b4aea3db4e20963dde1901119829ce7333452826f2470e666f4a561f8e02818e380723dc5d34a23aa977c92c6517ee24149b8d412e42b67ae27fec6e831218814a636f04239b1422c7ec22670f32d215d6c763d235c1ca9b2782989413148578dd102f2f3d4105dc987725a4c7b5c0cb7f1deb1e2d3764a87d0865701972bd9c74acb4cd48236dd3f634d7eb186c269a824621abba63124059073680e71491c1280c508ee1343bcf1968af2dd4d50623d0c94fc79eb682330ef0db1c7285a553af00dd78206a64a562dfb43e71231fb828827850265215ff02d1c1162b6ed726c64b43c4f99751581bfcea09d17144135c18a827bee213e0e923268810d29553701c3907e0142040efc425172370f7127239f0fd885cf0a3b001c2b90d8942ce66a2b2f7c4609314ddb74c71623659b81c63e9aeb2a1313dc52162309a426648e2b90ee0b6df80e66ce6382122343112f17a71be15a3dc75b2a974c09f14874150b0deb8cc2f20677541d0a5798d17207e8de152f104b5bd1cbc97bc508d1a3b4d3ab6ce28a2e6d466ac22625fdd7203223aa52b53c30721fdf00f7926576794f32df1136c2836ba2381e89c572d11664f65412c9c702b1668810312ede505202184c461232b63d6ab1e6c6864c382de44562bb0c6f901e0e6147a2afdd84ef150151db7174dc0ed628341242320e7e234a29a641646242a0d78e2312dd0d11128d9deb13ab96d66242ed1dc81fd6bfa712ed32870f355a0aac5178396bbe3dcf79430181294a922096f47e842b0b8cd015f5f765b1140d76294656a91e81bf840dde27dbd49ee1b06bd0060e64041dc0d2fa00361900fceed35295812b41155f34b143fe976716494d3680f59a9b2d326efefa617a1275323876a707a1e2844e3037b2184b80d10830c934185940c13a821646191ded9023f34f16313186bc1380bf0d41c810b3c54dc111f7319e0f6615b080e30471720e91bd9c413366ff4a1786690e6113c749f92c3384abc32fd2110214633bed83fe30c344526429eb867fc0415e0ef121acd0cfa8be3f238339e9f1d7f3edcb1a1cb452c4bce3e81f170096fa012eeb5d8431cb46c2c1ec0440a02d3f936a02b5e0149a1f16cf26c38f878c1f328b2c68e510cadad629bfc39d74889663de3662fb2f5324e6b44032ec31c8c34f6341364fe906ce809954f336340eb8bca481d0642b34a00cead208f2571931e1f624c12f83d82577e922a0e0b33aaaf70ea50c409122a594ee21190d1850ff542218110a3f6f71110de62d3cbeff5832eba24725238e5cccd1a050de830fa050dce10c5f63c71ff055af41f94f124f15918988911f4bb17917ffd07664ee76ec7c4404d1e203ca1077ea232a0eef0468e95a54362e1f4152a14495335c2bca0042a282dbaa21676c30410a2620990c49a236444ca93fe62360e3d1f228a59f2e352152e151b1bd1f4c4d505a85f116e40bec21a9badfa3a732b2474fbcb58652f0c468be212a54de91b1ea3af519354bbbb4dfb55bd91e936a6dd320b016cb1c0c93f1c2285b7b9c1f58dddb83322358e02b3566ce62e7e16a3948e439b29203448822496d6fe1f3a63bd1b321d510f3121d61276b3aa8a92e0337a8e69f352c822e940a68c61718621db173208deafe2db52c62920bb83692331cfc9f71870c86ac369ad86ce26b2ed687374a9c6030909a6173321ffd04632b1a941f1251f1f0132ad0504c1a4d35d1a0cbd2dc09241e34c810e7608e5e7627275ef326d38b14187563fa6132c769f446d1aa04832bbf4a5b1c1f3db8814a009e0122d4421cf1e3e7fa1b34f86b984408567f55299ce900a155a19b1a4567ac5024c0bf86b84c7471b0b1699fc816161fe29de1cd6b49b54769bd1e71ce996d2e32069c075481cc34062259f20eb490e714c40fced38321f09199b930f50315a36dc6db6e28885c99816c2857c639a54ad89079614cd91c8c7a25b0f4eb88bc2edd3881746967bd463be68dc9621d02fd6816dce1eb42ef573669247dbe90a3a359b68e0d84d01260dcbbee633e8eea3f80fa205306139ca84bf20162ba4a234c07a3b237627fa4213c8b14d3871fa7d738f94bfd6227476bd064a6e11782158ddc681f75e15b4160d0b9b216e3af81d2b7923b85258ce5af22bdf4fc641ef479b0211a74d1d51d75ae6d513399feaf17beefd3227b85d2cd2e612993f3395c25932f8aa9c1039d7f452727215ae90261ecfba02f82369dd1e0576e6235670dbd8189ed2a9b286f40248278ad11ea2326bed6a14db4869c47e519ca64006b219930007d88e350d33515749f33cd02d0e1b6a63be55aec707ba7d32e412aaca2531a2202c6260cca8a21c8e9cfbe21f505ca91207da67710cf8e3d1328bcdc50125b00e7a279c607fc14eb7ad2260d493537281b81319372081b331148db2032e59f1b3819d4c0c19134a9fe7c39bd4e1721620bb7991871b51c850b1a4005218bfbb071ddf9b282352dd508429e8c483933f2d9e1746e2fd05208fa56fd43f2bffa333f2b0b73d294ee9b4d463b1b7ca30d248b732fc9af26947f3da4ea1e862a53c1b5607d2933f6038c2317426124178fc17d31b8a103656571cff82371931c1044b8bcba45cfdd96d711d1924a11339eba05189fe3a9926fadb4e61ebd313d2268ac638514a046dc268e423b372ed3de63212a8ec90a0ef90ee321eb28458e1be8c07241e1c4cdc8185e2eaf127bc2aaaa33469680c46bf3e6253a5f2e3b9212153027361758cf62e349adf62266fb4221cc65c3ae1fbccd96a34d3988ba2555d7d212041a4b1e32670addc2353547bb66b3d9bf60dac2423f31e66a80327a9f08c12eca7e1a70e513e2032ef909701133239ee22ada341bf2d80991f0468e592ab433e32eff3a77cf07d258bb090934c8d672c28f65240234b94958642587650e1b02b813d0a65bd1f50e4bc03a627f116d5033a2cb41422c20e65147fc995d3141df2cbd159d0b86c184c78b1620559e2a42050164ae18b36bb56202b3343b1b411029e2c193a1ac4a2fa1e23177e9bd511696c53e26f136d70d35823d4422f1462a72216c61c0725765b1da157e2db9614e4f88342cc80e88a12b56df9b32954d3a423e5613651bd13025f1b51eb55923cba2ce70f2b7c721289da1b3c10b702a231394e2efe2bfb20e0d0f3f763103d522694e4dc4b82a328904184b182f12fa52d18b1eca1bc9f21a01490d12c51852e7354121583a7218ccb67f81193e17e14869fb16255c8bba1435c49328718e470b7328a41ca8f3cb585f0d1dc1bb1443fc074e061dfea5dbb0c99e4a8d1da640c4315e87967e102241dc109acbe34f2b73b6b21065cc418d598c5de3e30fc59c5e2448ac9451192c632f12193d3bc1a7d2ac532ef3c7f9c29c827fca0f4e245e5438b0d76b10562f92c2a043426721f2c555408e15349422dd4a8b72c3cc8ac81fa01b5922108fdf011dcd1bbcd460b3b90019b29044c19b9b985218229fd3a0b1c7aa760969d0f96086df7cfa0aa874f2a12a035dba2b586c7c9316ab5c924da37de5d2a60fc26b7ffc060be19fb6ac942a7fb644b1d8ffeba12f570d577260bce0ea0eb8d27313838e19771f86b0986212df38e81e1d4ea0323ae0a2192a7975e9f0d5885cbf3496cbd9412cb5bba04bb0db12514105dd532a9ec367c2e9d982f618758f3500c94845694f29de1b33b60513c52be07d3236b8ec94a51b8fd896e18c9497de43c08949716cea7c2c24fb8e9c32084d62a84889cc34414fcaf3ca2b208122e2b09a74ba1d67f96f81409417c510369878d1bb99dab8159557a9016b10a12b09d0684c664112a0f72e6563856232fd96082dc9ee4f6337fbe5902981eccf02264524c913a67b6f61d8f2033b24576cda655c618f3307b5f31fe0e40e07090ddc0bf4712412c93d0c6a31017115153fa53a79488931ffe53e831a2e5783b12a1816b3178f44d3d14ec5ca7e0bb6e34fa2c35809a610deadea06826d343b0ec8027e04655044253e44eee1e3c85726db1eac37543487edb5603e7d53f043674ca45027d197ea43dc847e5d3097e7caf19c721fae0a24e248b105895b96080dc3c7926255b02315ada80eb2ffa993513e4edfba231c19ce0d227f8e51b165d7c0981ea1793660eae495621a0b76dea54331ff8827e7d90d4325378c9a140c2a13d18632bbdf228a6dcf513c697b880d1454c6e4b951df6b4790736b10f84f8d2f1573d17261c8a6d5584644ee0f54b10ab2fe118f8f36f3405e7a9e1bfcb2c251a0c97b0638cc4c9470b2eb1b940e4c3306b1ae4a7bec43e76c6b22d82293e3104aff8e93ce9fc824158c437330be7f823033dfe43146049b4b4113839ddb92f2de2091136de9b8534c8d580f1a830030510ca271bd214221973362b2d89d308bcfb7c2176a16491cdbbe31f2147697971894019094464253c5184c823c146ad22f8f30266c7813b203a57c475b2273522f9cebfa1b8d79a883a207b7aa3625713603a50caf7c4ae4058ff093c2bef00b91addc549320bedf0eb4feae04645dd33a3209a80f312e982cfb27f24988d2e4514ecd48c688c1f0ae082e930915c37914a976dea842620080b29f8883981d6f8cf222a04157d308a01da952350740cd22db671ef133b69c01105c2b8cf0e2ffa094136fb3b9f1671a1065405fe0b0131fed4f2915fa820c53154ec3c70ec6671994e43b01d34e8e56d3a25c929a7047204dff22061dee6a12d9e1f7c2d927c6420bcb01c691bdacc46e2b0149bde14a7ebc17338198b5455453ed1b18d0555b40b0fc2a14392ac0e4e38524a98b13252a805305ea5cd633d1f2c11176e2eff016a0d17be450f7f44e2c1cd9de11d687c2690c567e66635748f6a04599bf491256e608ba15c6d99ac1a81c56060970924d4179f3c02b3ba7739fc17e8c17633b620d78c16f1d7be82828cef8015089afae2d0bd12251cf2ef7b50bb748d07131378ef04308614c92dc51b45e53eb0f3fc2dfd889f42cb474ffa52b9be80e2d05dd22639ef95b181c3c8b4a22c7b36d1a1a371ad740c64394da244162896134f198f220c603e0a218cbf43e18617423d1c8e563b10c0c1945144421411721214f1fe30e8f76930a241d8f60e6c3869436db453a31a330c145166d590011a5f9d8a71a5aac691479a0eeb2293a2028c1e87230592353ab4a725d3e17fc0a0a1211e2edcd083727f277ee3285dcf0ac2997990270f98aa63308d08ee6e32619a5f22a1bcae89386767f1e1f3fe04de2834d74ac37310d4a016e9c370f35c69feca2ef7a3ff642ea432e01449db22632abf827f2fe386000287f78f8834c3f25721f805367839ab4879c2e28b13262fbeea18d17f7819380c72400202de264f4a0f6a580ef3de0dc8222efa877cf2374aa28c2c64b519b234084b0c36885763935f015b4a1609465a51c2a9935718f6a2b590b8a97ce34355292db15ab2670819ad384ce3f37150dc2b16660fc2120a59da36727b50e2663cbe8c152dc840314c2e641825f1e7f5844f83358f127e135ca1cb52605314ab5ed480e36d95cb0c37ea8ea2d947f75d33a0c48b026e2bc77e299934bda525db188234905a2a12c1694502214d835e921ba300f610412dff32c71c08ca2d8da04f23033dd1362d3be5b1937b7489141f0e0bad82095339890774a3284228bf43bb1a8aeb71112067a0c050e7db378191cb20c01d1c42a272cfa38e5d2ddbbbf2434c540fc43971fef2f3e638c00227091433d3179644a51cbf9116834db21bb045b6f691a2c04add8231d396567125f33fd8186de6c7a18a9de8ea593e510df278220f912106bc42e52940945f259629691314e13eb48f7834e1d14dfeab5e26f188e35237d4ef65244725c903305357b41353e1dca369ce407237cb59e0c2065f7f8e3fb99ce6c3bd2d0d1f365275b9731664b7324404e503a20e8528082f0e702c7192e2d66c21a4e911a23abb15a60fe3c3f271256bf62a3f85f79ff2946ab8d840298ed0c3ff51a15050eb94a2f19f28ee061b6b3f00715aead7e50acba1ab943ff2a6db45680b0582e51db5002fd808d2d284d101623a17556f10ef64d0d02373fe3023211d368b3574fcf9636fd181ea1ff5cef044dc282d6c4d53b274456dcbfbf73fe5ca1c724754768917bc28b6830859715b1cc7f890336b33554e247004b6c32da5951d2f737ae453012a8e2b1e008430d26cc5e9bd248e8f28433da5e85c341f338d14c38840014a6cbbf57331d70f43256e7fcf52765be2b82bebf233030fa27acf325ed8f272d7ebbf1b18f1fefae1a1cc173538f93e3ea2a0b5ae812d01f606c41fe2d8813445418bd2b98ac9901f05f73df3bbd8098d2f269b96e0ccd12fe60eeec3b2e185624b263a353e26345ce2eafd3ec4764541d1a6768c40f566b9c4a9d518a3385129eb6258720cec37bfeca8610bc41b9f57b508c8c09de847430b7a0c52c2a87f50b4379e134be20778911126f46a8b80fffeeb702bebb35e729387b49337b9578071c9bf1ccf36a2212c00f032fc94268971fd159a1ff3ad2e05fc215208c2823b44ec77265297f57692193710c9009dbf436925d9d2b913f18543ad070aef82e3de289e6753558ff8f2995520fb1e36918f20e820d7dc0cc40be3b2701eb2173a522718c2d97fa6520cf03342d591fbbd5f30d7871df29e4f0cb950155ff8431bc58c721c70d24462e3c84f953c85858854080160a1112a4ac0542fad49de1c3f2ad031ffeb06c2335cdde4c532d6900b25e85b0475104cfbbd3ab8d900730d678aa311b20c6ed125c7c66d1c8aa64f23153a38263c50b47da220e06cc64019610ce2ddea2c9b5244b07882da0273e34e7757a6e331e7336a1b9bba79e422cdc3cc2ad9e2d6b41def02841828af06a4a402f2ba3d5043ee43ab9467463109fca810a6667ec630643856e3c432d6ec15f24a6f43930de408473cce5f522130cbee13e8e38b5108b14b811ef73b6c33a7aa4cab35e51a24f1a8e0f8d42f5ca713444e33426f2fa2ad0f63acf642b119e5969a5204bb53700ffd9b82a3d336849241b85f74e2f2a9c0e20dda98f470e7ef4e9441479f95d1b390254b457089aaa2213d543e2a3541e220d6b4e0303c58eb56a15eda34c61964278ca28f7ef91c46d7feacc5bea1496919ae2395224db8b1bf428c1e24546e6dc05c43f991458144e98854274ba53a214868d722103b554394339e12ca1d8bbf398479b5e3573c2d1009d331ad438c3cfe851683e747e358159276e16341ceed3524ff2f2b857babc63f3c441019c30499d572275d2f00444d95f46131c03252b15e0737606a1ad846486ff26b1126cccb8781347d2b7e0e505463412646d50c2f5a688c013961aec21c7de63e32fb5aa8842153b639744f06fbda2a2033ed50ede4d2584eb6ca18631d9c47122c428de0232e4793750f46731610eaca1e961ca4013047867c8a60483c956ae315f2b3b4343b95f2b2ab08c9e831976f6582b64bd4ed1e25989161d80b20b0145f1f00a255a1fde00b6dd9b4133c0f4d7029cefb1dc4437bff424c6f425113ade347e014ee449fd41a00809d3d7e328dd4fba5b89128ee7779551ca05ae028af1c7f4107039c7a13d7cd7460a3c8b56007581d7da3f65e300117581f6d20f3c73e7f0f6719c6f115e84f9a19e336d9b2979acaf410337df0315874bfa411168740e12b7505271002ada31072e186fc17c090bd0071aeddb309dff12a4076b209e606ec1c6840edaaef830b97cb8aa0e20c9ef3195c6b30417ad9f0f5207798241246973dba1ebed556d1e551ec0727ce979aa20bc5d47d28dca10451231ce7240d9fa0d521a2a202e0060200849191aec7b708bca663a2afd9816f0feb003d311d4d8ba412f4c680410d19ef123acea6be012f7bb2b80b6b31b841048e0f0c0b51cb71c1c85eed7006f9a1eae307ebb9f3104285a541734d4cb204846f3560692a3477067b54d5a11258ff3e0d148146f2e4907e6e15405abe919e82a03c12e7f3393224138dd023ea5dbe71c6920b52093f11883081dab35e061dcf07423b722c541804bb99b0c4b009840e1b6a4fd0ed8c5af00dc1d05d606854e42408af3dd8412ddedea01058e7338041410b3c0ae65160809266ef380f3e793c5152eb134411f37e8731213605442354f4ef810ebf1f7f2db8df2230f9f254f81f52036d81a5b2ac4d065b3f6bd15de108bf167ca9a401e2096920105b959e91311599041bad52dd00fd82203c0b83fd3c4064d667f213c35a2161297a9e66094a567f2187c5da020c36fa5f908fd25498176a5c2180f933e4b00ee1598d0118b95f8912443b5bd1720c1a531535a90a611205573e2e07f2f9d0f9a193f610676efb022474244e16eeb43e11fe243aaa126a019c929f8d987e187d3433516dbfb32e1447a77410fd929c421d4ba02da1408729f91519d073c1657b318c044f1046814c515d9c060744490141a5984b23d5fc84f1bb7630c4205fd83a30a3915b330c6dc444b2146585c02333779b912a6d8ecd1b0a807a308f6786c10f0b23b2f1427ed3443f04dc17618a9dd590180aca5270ed351eb00f2965a6b1065e0cc319aaae8d00a846627c381973d0f0e93d7bd40c12632621c723651e2316353e3125aa1ded11a052f0c161e538671a14785102a33b3a2f0cc50c271122eb81f41bfe36c44154518e7b0e9b43a35129c4fb08267c33e70170a2bfec1cc41a6b1130854b4819f74699420beca8260e32cb24d10aa4a81933b9e17b315d815f6712dafc89a21b4e66801a21083551a001d78b11f7c1e84099438d4126d5085dc07564f9b413bb52a4c204e64d5b30fbded0f12ee3d7440d20b339e18168c9e1190920de31c4d9ca2f24a8293a31d45638a52ec23cecf2c973d3e9277579f843448665262d15c155f1b56e4f8b10aba6a7624948c6241341a6a1608cc59dab0632fef7e136aba33125fbf42d611049f92d06b7cb9db16741c81527fd4571c140f890dc202aa291e2165cbcbc1d5d42ed12b2daa24745139e6e01b46cf9be270ed8b7d2735449431a4a57f9924b52b8eb0e814d36110d23ec561d47e06151547bd10926b4b1c6f28f3fcaa627533dbff46580393e447a60cd9128332a3f2229b7d791fa41d731101f8d20d1416ad3f6081e9d24c13c5f04f92cdfd64101e1fda6b626fb8d6ab2c4b212890d23cf13a17df1091329a920e1e28c5aea89254a237a61e9374e67301735f8b0ba2afe40296ae7231113b1ef21156a0395910a4ad2d41588fb4550fe12208b380b228591ad6b8b610a679e6aa0eae842992424050480df1ef7e408115017a47347914d19d6f79701d271847c2639fab5f1168a565909f1071f02b7a5587e14454a94b0ff42d3231282bf3c516f523fa6155144a6908f62db46240ef10560d34734503b894fdce208c86b832af9a53781511a82410b3b63fa915140fa3224305102917c212ca80ca0682ec34fe4860d0aefd36380f5fb28650ee79588c10cd2688a152c4e59311bc8b54911e1e632c0dfbe26f60f0e76629385750d6d0f27abf7e506c5e6fc41863f3490cc7aa6290f5639193394d2fbba2e16d70202ccf573c523d57ef171b548c301272c0bc4d1fe30876c56329c2581720d75e8165a5dd8921da27cf81c77750a6189e96b041df5b29151ab1ffb75189f2e84146359914d28e0cfb3006b8a04d5207d804701065a46cd2e8dd7e0225c4fd9d718e15a4091b65185e43ab4930e9150ee79df1f7ffb8df19121b789152a1474f4e1e8ef0857d70a6b54cc32fe6a12316f5690d2ec70c135ba6534b46af4adbd24ecabecf312e2029d2ca857cb7256be90b611a1f1761268ce81113dc1557324c1790d140fdcf2b51263034e2a1969d18b817323a8fa2603dcf4312fa964112228de2d41cbf068703fcdc54ec41338ad51350df2c7e0e96e91b624e78e1120f8a1c6e419bf9ac9214c6730f8107de24ff22226d34310b76af634b7e0fd6a2d2a4b11e1b9b5dde62c5e759a41a1be8f751b2fe0f401487e4cac2d59791732313478192305936b021d3430fd132f2d84d04c70f0052aa27ac863aad1ff4c2995fcf5f1da9fd6971e9ecf9a6273a6024a108e289de1d63e5e2618e151d7d3954407f92ad4e46c413";
+const LAWNUM_TABLE_RAW = "115539405bc8ca8f161dbdff918284eed817be9fd810578464c10acd38b0e09a4763e702ab457d6034d3d0e50599d4d4a189df061c0323b6f6003702d19f025f0fb4505245fc4d22f18e5f10dca29a96055e48744225979f761977b4d5205cd249d813a210aac18d4a450f2b13a48e91806e447a24407153408ea08c51058515c1b05c4215c405e2725150e60c02842e0d75e9b170ddaee20949a6a32027de413c056f0baf80797fe9c804c7f600a0bf1c8b331cf333d442ecf82eaa17010051c1aa12b8d807954d7d3052f5c4511cc9e846b0a74ce5b203668219826b9231c222a96d4d319eba73f31ca5d6b8f0ff208c36076d33e6703acc552c21b45decd0ae289291057cd76af13f3da180039246dc0035fda72607bdf391c06ae922ae1a5a5e7950d810db3b0e8398c3f1a5bdcb4d270bdd42c1c2044046053e8ce660482751c81931cbe5003ccf5b1f054e6e05a099408951078e8309e044ea01b6173ef00ec053e4c98d090445e230544b227b13b75d2232a33c9ad91ac8862491b5125ed419c5cd01a1e42283241a3893d280b65e819d095d5a4e325060755507a9cfdf2099def29807556ce120eed4054b05cdf048d1c34376bb04ba4e4240594deb39038e01c9003e08c6c80333624ce058c6db7103d998053038f81e7d2564a97c5050a2c56d0a8f9cdc72afba1a5b2544d055d04bdb7497071bdab8f042878bdc1443037dc05fd033b204594824b2f54abecf066c31a55030670e6405e473d2d356d4ee842b647431b0832f1aba1bbd60a0105153606c067e131cb3695ba2cc05ca2fd04060f80e471537c10130708a2298051f72a37052b010d808748195b09b1280673fa00cb9627b151577056c4ba6903b9cdfbd7178957872a3fc8e2007cda4a29053abeb9408a0b87b61f378a56c1b11b48f8033927866050d892b42373b6ad147e04b95d051d6dd2604698659704341e49703c2d876415e58847617e0653601aca957f806f320a7605203ab6f0d6cc0af30658af9a316ac570c035c0282ab05b9bd4664102149e537690be370791499960f9a5f57b06c40bf6304aa1d18e06c9e79970ce1b40ab05166218a054952f660dcfedda40db561b6e11ed3969905f2dfe2208a3ebfca06d0347350525dede2070c9497f07dc261031766d7804052d2da0e03871b8350d901101a07d74db18053a38adc0f6d9d3f80d39d8fec08a0f847004eaf34cf04c5db34905c15eaa90a080a1f1138167fae0808c4a1a106ae46da06f90c541039b9af5a0758759f90360b9d2103e297e3d10baa9a83050e6292509a4d978c035841f4705886fbdd0abea805206576ae2103ddd95020e042b4ac0883abe6008fc302dc08a240dec1136da7ac05cbcecbf05129eeff08af13bf40d0cf2ad506dab6c6a0b3f689ae03f54e3b007cb7e2ec061dd06170b34a1f541718a11021486793bf18791b25410e80f6eb088607ba41caf6baee05053614f13bf217090f1d7da540569dbd4404c1603e505702c53708a9c563d0322b870b07254d19805861640307bc34ac40ac6d098b15bc66a9c11a565e8f05267629d1896b7b150a3d5ca100d1f4a977113b6cdaf0630dbd4b04d5abf3505196835a03c70bc7a064ab51c203c7a4b9d05ec03d0708df625fa07eff5e6f054378cb7069d16fa0067d031d30f46b12a60b0565b6a30f2b69dc0f15ac5a20f55f61210f97b80fa0f1e25eef03088404706d992213050b2028108909770e0dca0f0d0297030ee8115b5a1990434f6d970d003d3e904b70c7b40b535bc000b254be5712868c74e0e5ba1ffa0a58a576c087f444760df69b9e32290fa02a13101e25a17caff9de05274c38026c34747808fbce8420fb440baa0a3c53b8709db5079816ac571673022e102605ec4276a04e9aa8361c20f55a20548406770c2bafae5063b07b4c0f24014a6047eecf6806c5b7b9d0fac6426903832caa903c256b960399fdc5a056c4f82603bbc26fb06298b43f05e59f80505121eb621dc98fc2d10e122c160dc123ee2096cdc34216540d3ff0372e9e2c052d766a204ede89d107562cfbc07f73985306130296c0332985b9049ed3351071f603b01bc311eae06c0ea3ab096a97e9827322111c036849b4406c6be65e03ae872c216bd4996e090993ea213ca87aeb0644f740c0713232990f0ff2a25057c09ae5108a0e9d303aca8d5e0564fc07f04c2b1d2208783baaf08fcb31880f38b44c60fc57aa44088f77b8b0fa374c2c063b6d79609a85118e09df0e4910d45b7f8e0ddcff80a367ebc1b0226ffb17308ce90e95120ff8bab2759c201b0605ea6531d9f5e960050216f6d08ed0747e0cc1dcf14124e91c3f17264bc30076fddf0c084aac1a4051e1f00b0e8aeeda405ea3ae0905514879a086b737de0786b04ef0ad99ea21065ffb41809dbe7c570a7363ef5033ec596307b0ded4808269919e03183fd5f2152cd5c20a7b5c6f72ef11212330be9a396074802d96101703bfb0576725010833f540e08ca479400f17e2ca30646996cd059a5a21b0d83b2c5e0d730b13c15545ae530f0f53ecb0660d631007c4e60230816661b20fd7adab705031d8e622e5fe7df054e54d7711bc24e8107dee8306042592f970558206d60805bde940ac4fed15030fcbae2068cf042c10f01ae4304e39b9ed0701365e60f8820ccb1e027878009b9eb0100c3964d5f1b08c1e1e1f416a2ac069d7d4682a7c783bd1469c7fa32a84ad11a1996fbae01f598de7f2545960541ea2b450d58992719f5251d279e542b849365638f5d8b55f0be26857881205858a904c9b100f56eae551dfb22f4b8dddf1c5257028ec6e8bbad186baed30a12ac5057980dd8be3b62aeb3302f4bf9fd219569178564050bf226a4a67811ac178cfe82512be4382b075e084eb1f1d164fa056853d951010a59280c5690874095713a6403b8537d106e6acc0903940a2266b334ff1a089260f700718c34b808949d4e00a3f3d82d46dab4e2a084b2316210bf83ae8126b98d4107b4e6a0606b199da1161436cb50aa2cd58121f02c1e10928e1d4d09466f18b04cad7270080b092b808f12f44d13048475b06a35201c0828c3d2b032173e0506a66b97407a96abeb230f0e72c19b06af0b0e1409c650a80a84e8076ced0050713b88310b66c743211c52b17b035c0f5c813eac2f4e0b4a08f751f9509044047daefcf06ebf0ec2088cd658f0b275d81d09b67726f0793e8410135eeadc5041fc2bed065f0b90109404f6f91daecd55c267d370613429215913143109ea0ce20da790701ebded1efffd25e0716966b620af9449f11a78f90f1f6b527cb0adae1d282587502b010710c4b51cf21f7b72c62e82701b2dbe72d0585317d21995d8cef16e64a0411b1a4641a0d1ae4b2e058d0256f06560208b07ef83e560a9f29b6e06c7779a50715c70c21c938bfa01308e1b5f0f7f3c85c053483a4403af6635d186ef5f0810d04585104c78befe1b4754e07072766df0053a98ebf0cab60471159a1f6de1bf00f0162c6f574790bec02cfc07abb7ff907d883d7f0a9d07f8e0882c9a561270fd73f331611e9e2ded37bc419f900f9f229d8b0a51f70c684005d52d2560302e4ab206e69dcaf045a33e0113a9e50c412434b3352c548f74e4a652a3e71944866a508db8e5ff0ea3881910db492f2317fb9f88716636e88107b8223c22f80e7ab30aa1b321e0790fd18e09950cbd9061e4077c16aaeeb1609adbf2061b7c5c0591c4d51aef45cab50561fc7c224e05756399b063f9ae0a0917a8d7606f9e8b8421fd8374605b7322d3030efbeb00e37e2c91066e826c81a2b72ddc03363925e0985d6006176c28f6c055ccbaa20e316a88d05b3d29910c0158d730474b1f6405b50887b11b933bcb26ca0194334b63a3cd05f2d527a25933ea56162e0170c13935b79e15fbe5c1d1951c9adf1cf7c10791264a222117062d16d17285d68d0747aff1e080e672e704c5878cf06cf7b47b1aa34e4870591665e50b32338af080104e3708efbae6617d63d992170224f920458399090a7efb101142627e4a0c299cd5513bbd7ebe0574ccc88193e57b6011d9cdfaa090d3a8c403333eb490f35e6e571dee0be732281c8d160d747dfc916c7b9b2c3b6c0479007a0cf1dd04cd92bb019687ad9c0b4bb16780810cc36419bfa147c07bd13d2208dff88c204d5c09e3185e84f890878505081bb28f6d705f40ac0413d0137cf1e76bef512fa3f30f20a5ab167816442b9270fae7edfc081eca78a1382c280e21e05597307e8462f00aa4b7e4d04bb69206184db79890d7ee190f0a3f99ec608159f7510e8cbc3f7057f0357b0d74ceec3155783cd50363dbaca064b31a6e05025f12208e4b81d803e513bcd06ea170f1036f6ade406d5a13ce0f092c87409fb2cc3705a7b815505dddb70e057c092850bc96dccd0a54e63551894dadab1fc09f75a0dbce0bb924eee88e5049d51f84074d93dd9081a1d73505372934a077f3390104c40c42a0e3e4cfc60515f6f02100bd77c806ca0408f1f316a348048a219d11574c4ba50b49cc2e70b0ba22050b20f578607643bfc221cc29ce30a9c64eff1fe7c9ba10ecbafa0011fa5c17a1000f3cf31050a14df056a53ca71831d1e410d31042311cdb96b270e6bf9af908efeb14e1510b2d880a48cd06109d19ebc6226a6c9720cfbbd562088c70c5907a4aba8f07ec2d85f07ecc75781a2f3246516ad2dd4f05cf192780e68260452271139371383768d209088819d3a4f950490a9ddc1830e590187f07b7e080723ec2fa3b12791a5b01ac8a927e0b54ec8a9182f98bba0bb2787f808760ca8e1a5de6cbe0b963efb409d9c7c131277bff460d26123f210d52eb570ddbc052e050d7a4ee19ebb726c0607d324a27c5546fa0520b8b430990d1d662c034ba721c4501768074dfc6380ed1f7d7a07dda465718326facf09a56c4f70f67c32c30f524bb3226427f3c725d64dcd6212f9507220ef340cd0976f878610dc7321c0eacf99fc123818a3e1fa59bee80a6e2942d23d8ae30507408cc130859f29fe03070926b06ebc80410538b4a2304d11007b04ca4548b0984f3e99131ca19f5398e3bbfb08b67a77712ed795d00932db913185828f530d70d9a5205aa2089f47cfb6a15069c2b77708a51ed1b1b00b9f240505e2acd1312228ba1089c152914dabb40c0f1fc18f80af472dea195f52fb50772ac75e0ac3790ed098eed2461f33cbd6f1365f7c8410b7945c804bc00fe62b9cba4bd070563dad19ef46634270bc113d16bf23ef917959ef6b08a9fe40306ce54b7f0ac588f9c04e8c95a90672d252d1390bff1a0e3f2bd84110baceb3125eada720bd2b0576072dccb4021392322e181d0eb5a2195cd97a111ff283928fac62da272f932522009257a616ef22ac40ae6a27ea0473500090952fa3781a67530840f02d42a32148255bf124d47d4305c2421f61cf655f1711f3e8e0009114070307dac243e052e0ff1105f9dbcc908e43da0421ae5f933068038e30088b66e2a10877c12d065d106af24ca9363305c5643430abb64a5d15efa9c4c0ff126c6d094d3f7ee0e8b611e0303ae424a12fdc542b43e8e7500281c3703c1e2bd3ac91305f0b4523f9038ce044f932be05010b35e10839c6e40ee99d4c51214017cb07ef913e205537bf440d7b10f221028063081865b3faa0757c91b20999bf4122b7ade99f23869cab31ef3c1ca00d8c228ab140e8a5831089322cb07645ba011294eef77147e61a79099c2ae291d7b493190ecea186b066cd7d071549f5ed00aad8209e0b749138a062480be612c96fdea17bb7d78f05efcefc90577c354b0d5789ada0db2bc1131fbd78baf1a2e8bd8d0bdaf994706f4d18c64b4c6fe9b12e9143231ec79716f0525e83561dad418fb0766f6f1309a2c42da05be7c6e90a6b77501176e836890dac66ec00bcd58c251534f6e5a1254c70d1070dd4a1d0948b70bf2177893870bce68bb41efcc0a1f098c92f2d0bd28e5d90b460563a078ae7df60f217eedf07d0a0f5f0861c561906794ab6a0b3da693c1f41c8659074b42db10458c2c4c110a7ff14390cf519113116394722657a86919ca011dd0e6d3cebb0ae96f9af17aafd14c1fbb587850d41244b531c5d891c05692c17a094fcb83423a1019fc1064598bf16277469a0a06c313d15b519ca60bdf774980ba3475dd08a2e23bf0f0d6985a0b7acc1512937f14540f7c37ee50dd9c0e212ade31a54092e63b7105351c7d10c3b15b5e08910bc0b17550414c1546bbe3e05cb89c831181618f7070b77290077f7fa5b0c7a8fa1b1fe575c310ed01f1401580d211c13b584a420ce540e790ff4cbee12050eb5600967988bf12eb338070fd36e7de15f8bd5650e5002a4e16830610c0b81b2d0305cfc1bc725c5302d316829c466119ed1cd0428e008c1172d738dd0edd97e88255a86ab72d61f756716a36d1051d69d07822a5d5407c07dfecedb2570de3f60bad890e212a7a567f19992f94511b8b84320c869d203060626393121ff7e9e15f2d87880573e452a2b8e9703513c090fa90c867f7530dfef790c15955216043db13f74143bdf6ab0e27dd2e014fe6e0a3050ba545e0b382968a167b79bc9168d616620380985aa218ae75cb20212fb095a464f2f610662031e1f32caa61162ba31a80f7e9f0562377c5d550b157e5f10d92f4fe618635e37605ed3cbb417cbb17eb2ba1efe7822010f7c248f2a73812147563b11181cf2de1d95c97ed17ec9e00b1b8866ca80379167e0219ff5ec70d1b09d0d346449dea15159a0f847ce94de61698855e53245d72af0f0d7c9190a2d208241b6392e611bb9a7abe04b39f39925354744d31a2779df043295a87046460dc715af6eb1f0575a2e0026392e9340bbfb29da067e354350c7be061d055b00e2811acec77f076d1064e22e6dd2c5123a7c65d15b391f090ae209fb824b38ee1421a6691d305c08d86d21d5947870f94df1191375d03f925e2469130b38a30e11784443ac17036c4950bd895e533332ab2760e3f59fb609e583e1a1a7a5baa70543caf340d34b01b909ec4f98922fdf65670d40faa31194e957d113eb2931725f9b31a307581a5b306bda420e120c1578307deee52e09ce229a330374d64609fc08032309657ed9268183c322b6ce01fb10f14d80a05961dfd70fd27ca4619235666535eb74a3d1cf3339e13e1fa7f67120ca8b57052e474041bd6d9557256f9c5ff1965468e70c89d8f980dc12a9ec0c458c99d0ed66931505a7a0ee904a12fc4e214eba90a0e0c11185122a40086230c291f0188e96be82249ea41f1cc03248c115a55cce1360fcb170978918070a3b7435b05c3a8628059291ac826513b8f31cd3e4f0615d2411cb09cb20c8a163d47e6216824dd811c6118c9b11d2cee684147484d912925d409170628331068675cea16828d92611562a0a72fa6eb97618c1ee872124722e9104e8aa2f526c705ec12162d942a160beb838052c4f3293b51adb981112af9831138d83840e949964610bb8e41a0618361d604f6f830103ee24fcb26d015de91b69673c91416339982e5c770e419268317c2077c8503178027f6b12a6c0925121d031e4281569323143da51141e5f687ec164a2109916c4d1f8a1d4c8cc480c1753abb0cc40d85c1f67c74702190e956f16737e347135349f3307f2cb5ec1c8165e6e14b07d76a2924597d9245f969171e8d6372b05d429ee005f378cc038f81af881afb1d4d410e46ed470539febae1648aabd824589f8c5237ce7146153eb575f2d42d78600e46fa25d0afb776fb165cfa5b424b73bed706be4e62f46ce1ef57145fca0c71358edc7f1cd3cb8c7339dafe931f92ae92519fc64d513e928a0bf2102ea4580c9f88dd421041486d28f947666128b3a91d1582d8f182d480b36417786b67d148ad0be50768dd4de17777cc2604c0de02d1bd59b2d21b06c56d8114da1ceb15e5c6626095417e7a248787dda0bcd639dd0fa43428f0e3f57f0a246d8bf8e168a1285204571fe4e1087d7e502084776e41123c20731350a6e792072d66db12addb70a2157bff392306bd1761fbd472b114e194a8505ec2cf4427ded603d20bac16b218e9b9f2020c35644015b41094d0fbdc817b1978d2eef103fb433f1ff1dc91c34ef18c0e07486b2780fcd3c9ca05961fb461e0ae497f1221205d9266f97bba289371a50057c541110858fa34008148d01e069e6adad273d2b1450b0e5e05e169c9b607250e89783208cd50f913fa970b8248d2ced8230831a8617f4fbcbe17651536103afdea3f12c85b7d80a04068e70fcf13be90cd77032a1630038070a912a88a1e8bad3d20c43ac5dc19bd0549e1ab559cea18a3a64f6100d1da6718beb18a9261dd165a1b9341f920a46dab790ad3fb1010cb1822451274af1f321501984812483e9f31036a4fd606b966deb153d78a42184ccd033261f188a618ba204091887834ce0ae3276fa198b98ee91447811b60a4eea10e24bc158140f941d8590bf7c45d4116fb2b7c226cd740c06bd6e3450619dc6d5061d8393906a45964406ec50a430888b9469086da92fe08650858908b31027f084ae72ac067a15bfe0929755e80b3235c291add5c4140cee9c7c4129428d4219e08ca93123c21cdf18047e4e80c2329dce0b53edef50cbf8671e11200b6350ed6d4c38148a4a61c0ffdc5fc812cb1ba3c0fad933160eafcaba912035e56b12039874b152c43c8d0ca3dbb070e5e24ea91597858830f19ea0ce18c77a26f167f953791225f69f3125198c180e8d803df12525093112549461a11f9e6eff0ed079fff0ea2c39bf1673b44900d3e20c6b0cf1562b310f9b3ec6140117dd510d04850f0d2b78bfa149c115f00518a3c03167d7f3880e4bef8810d0832f7826d3c5ec1076ae7e060e40c210d2009140c81d7c918281d9165ca908312c9e4075bf9d461e452420a17df4c4e619861a2211836269ff23b273c9708d6e674e08c41e3b604fd577151b454c9861bfc6da011ee69095b066b7434d257e7d87114a94f15f0e61f7cef17870a8f7191d34f1a10d15f92c15aa7eace154b8727b0cd40ec4d152d34d6d13169d7ee19ac2eafa186cd208513321fc6d09b927d451e90cdf0b1bb96b7081636b618b12ed8863c35b01a7880eae4ecd61776c8bdb1d3d3b9dd139cc7818183bf93c21513e7a6b18d8f04a62326144ae1109d99a415e21fb3109e7967091520ec6001e3e533c30f4a49d3d12c27a2400780df69e052161fd007f46655d16cae5d750e38d875723fbe914714ec20a1c09e43b4bf1dd6e1bd61ee758fcf14e70dba625737f68317277f61532409f7541a6c810752d48331e71db6fb5aa19b4fdaaa07c86853f11d732e8d09a4c01ec21f83919923feac3de09ee8f8920a113c4ba0c151a0480ebad0463191b2a6141a79ff1f3070eca97308fe64685219374fe4147a6a64615a3f41e812d804cfa18f613dea15c91deed13d449b87054c6977907d1d4a500f2a0112d0f5f41f190e94fea160f0fca64f11e32b7f90d1abb9e60d6db87b419ab3104a1af3fa6c61133571f217f89b35b21fbac46105cdd2d4d07bc0a3d311e974ddb0e43905ba0f3fc5baf13d49a5d9130a99b55109680b021692a77e40d9e6f2f419a7573f212208478b101bf69a70fdc8c8a1161a70f360f4b96c380cb8b3f8f106bb44560a397152c09cc65a1317283b89c0d0c6f61b121a8c463154f0c5b52d1cf78c509942409f0dbd856be0aeaf32011c2a0f8582e124b2ab15aff04751b1d762321babda4da07cc25d971805c937923844f8d90b796a4dd0b96f4ec12509f11ce0facdb1f6103856112073a4b8190d74074d9118c2f7d413e3437ef1ce35d91e0d65da03c30cb283e625be3fd9f0ff017f7b1163cce8b2266be3c50df0e09520ce707bea0574747bf23ec2395507ef473251171026fd1463f97300968985930c4c6c1b90b0f5217503fdb0e3617f7adae12dc70de05181a043bc0aaf0b8ff1e81b3f1e41bc58671219271d6525c4e13031b76ee03a05b3376960f11ef76512b7377f407bbd4e9f039d3c7f529531ddcb1b5bad8a109fecc9cc16aa980e210932866210e167f3a03505c73a1c4ea48ac34eaa7c221baa8d03516f037f00263a196c21fdbcac8c0c35625f515d60cded0869310160609ecb4c15ca0060c16c74d39c1c8f91dbb2344dfdbf15904adf1047c28339147d749882ddfa63fb2548590c418c592a36131cc0fae095f53e8f1981eea4108f8a07fb2077eae0d1f5c64d58213f4edc3058aa9f6e0e5cbcf4910ef4095e0a7d266f52358274da16ad750be158294b6511caf01ef2334558cf0f30f830316625e467034d7029a1713156a106ef40eda097c7fd910956faa222152329d11c42a46272bf33087212bb836b52f550f40c05b6dddf00a2b0b78234e6e5e912cd7424a21d802957d20d0d8fc112efcefa6211c2f150143e806ad1e9f44b1d14a428738180a3ea3242e9afb7f17ecff1b1067c4e6411349e12b104220781e21bcb36010bb1a1b841a532252e1e4ed066519b088dd00396963c418a276da205490f31807c8405c61af5c19160dc4f12282bac53078108c5a4db1f6ac8e491c812ce16070b7554e09555e8ae12e36c4710aaac410b2158fdc4a13b915e6c14936c08d2317bd4ce201ea6d651321fdaa51fb1ef8f01646c620d0308053890d937bf2a14430c9800b712641217d5ce3aa165e69ec10de8b8a580d606b65c05f595ad1130df7e1507bb7ed121e83b4d2b07182f20705bf991ed237c4f4b91f2afd6ed2b16b2bae05734af8b174281770105969f8f0d20537070e3dafab620f40ef560ab1406cd23bb851461c4e08ecd1d1e190bd2200ecbb021652a61b189fe989f15b0734fe17d6549501fcc291691d73eb96b18709b7782265e8f84037e7fc2c142ccf3050c101a3e815676fab2141999c081226caaba1e95188ef18da7d324249c49a1b3d421157c05190e0ff0887b4a9124a403ed6201986f1113ccdfdc625332b07d2a3b25c0532c38a13d1668d5af7139c270291efacef040f2b19a9406bf9b46c1784d6b4b0ab99703a1005ad1122e69052130d4ab199b0d3cbec3034e51479a0e20308e723ed474d41b92b0638207202a8526bb5060c2985e3bed0952ca58e0c9fda5691c168bf143fe03375207a09131e2282baee316316db8e13a139d631a413257527f5d625520fdb2b24305a6177b30e185d6b2e4e9516f2a2e5590f15a5b2df80eb0251c14e34292cd474c2fba51529764631f4eef06130d085ffc265749f590f50e0e880b6fe2b291f0736f1b2b236b6c6266a82ec51c684a0742a29a20241cce1be6607ab0ead507becbc1224c8525b620b25d3070780dad491ff914ab61057a383b40e415e73199975bb11d7aaed5a1ae288e0d2a4d5eb033b109b67e0d11b0c420f1b4d6b30633282f11d44290281da8f43060fae0e5461905a673d142bbbe3a393bc22d31a96dc2750bc1452282666038a70b85cdab40dd260399079974c861dc3dede11d9628aa910d4c81231ee3a0af4482aa9d1e0bbd9f6f311c1269681f008920d1d7b7a64a183c059b10ad9652342fb218a5e12bb370eb10731a35a214c615b913edfe089418277cbc1191355320ede2546f1ae4b22a517df79ced1854800b51b15fe6280b2ff83bc20239f7f70b700f117153d0a3af0ab4b3cb21aded0e291d6c6fed122502281a21f94c6940fa23d63d1e512188d1f2f3c4290fb5a103510908796c1bcf8752916236ee5b1a6f773e005a9494261afdc265013be69d3e28e2b12b318a9953ad13df92fb81cb955c77116f01cef07bf4a99c25948077208976562311ad4a97e0a7cc4619094f6773b0db1dfb851f3446daa0e98220022bf44d20311f5addc02d2b41fe50a263712b1230011720d57b1fe8265087ed153697e7780eb364cc01945fc2f90691c673d145589dc70a799493113ca60d591218962f93b561b29a04d40a36406409fc3b074171c1b17688830414a43dbb30aa598c231e5f6f17d31beac5f920860f1af2bfa1702d0c375520e1bed16eac06ce173fe0e0632cda2585111e52821added0cf89c9a727a9ef1840b92590ae07a7e41390b4aa46ba0ea3ebf7f0d26e792c1a852ad0811264ce3124475f88519e1724b823bf1bbb818f1f72f315375c98d1331c1ba9174a3fdb0118f4899216db18f9e2e2fc45630987e38f7064d2091b1fbaebbd8105ca09201ebf7a4b718fb6fb181d34c92541e8abbda124c85208123b18568e1a56e074622009be381113b9eff128495e342a23db74217a8257e11f383489913f46845a0b458e3b82127360630c3e652330f14cc9aa23aa743b41075d0f010d46b503308eb5cb65169c9ed71056170083287b01a2b0a630f7e71194d0b8011275b33007eb7d8e412c97233d5623490e0081cf060907f775d792c7d2e2571c3c07f97186aea7eb073a892b315970172811c43a5e014d4b0dea0d448a47c2339163091e152392d29636d44927318c0cc151b33ad115635806a2903db6325e8e29778174bd131d1bbe0372b0eb6326851c44d7a13241f6af8c3cf0a831820ecbd604140126c851889917b124443a84f13b8980ef2791d14c2251e1d7e212e4d5c601b3ef70590ed35033415dea16f42ef0b19540a52f14c0175798e1e10863a8ef079e2f8ce11646437008a605a381bacaa69121cebb48f1bd70d9ee1eb5fbfee2159dfae816ec1dd3f29a3f11b04e32a6ce02293e01de20b3a9b4418a1ef87229d88a8001450b6bab1810592a32a789460d1b665105a21ec3bea51ebc737491d728711108006647e1d9c88f8d21210290d1cc5312b122b4fdcf014007013a0b837c69d08713718d25603a88824cf61bdc16df10a401aa691704170dde48c15d1b9a871f97ee6dc21349cc222471798b418addbcbf1cc70aaea1c67fa9f82a8888fe920d9e4e7416ff67f871de314415297ed8b4c2a01be0151e7a2475b21e80d60e233138b2821b621da909c24bbe1204c65dbb182b18b0524be577ca15eb1067121ea2e58a15b25a39f06965d3865505847c528299ac3f1e16d1cd120d87cb694639bc98562e6757a51a6fb2471265120b780a419d8730d919b02322a10e0f635a3969ad242c7da310b7f56c1e2de4a15753591dd5eb254512140159d8f3a329a27ab9f178d441aa4af3fc0363e4af3ea11db4d198b1ffe362ae1511789f20af760dcc2b606786810610978a1c23a66f90f958d56726eb8d41c219093ca52d25732a51e29c487c27307ed5417c8619ca168d26b9915e38684b28734978b1eb69fc3a154e2af6f1516704030477b7b9c07d94f1152e3eaead108944846709304124c07ee2a53a07b6c81be231c1497c0a72da8c729be1abdc1099230ec0942afb6c08f451ad911ed7b35234e30d82652bd59d071d199a4c208798d3c908c0eb4be08c555156090bbd53429d59f75e10aa985641af9ba44a14a39f099080915ef2084c81c920628662a408081f16908dd8df2809e058b5a0658026f3345ca81b115d79ba540986531331097396c10bb11c55a0875d0e52171d5fb67120af676e142f116c806ab216f609a50f39506d6434e91df00ca760857fd7671831e491108f12f4740615eff7a084d55e4307ce43815067cb0008073f741830ad74a24f1bd125c30076c5b54124e0044331080cf63914a24fe761ca9b5bc31abe26dcf077fc260106a318a68085f8035d30fe1b9fb07c8210a21955711bb0b02d27950872afac309c47c3e80d3c0ba2f08199ac71207699ada16ff953a7068fdb065119cd0ac60d1cb40de143bf724a1249d952807fe8cc8213e10a64006cd4560407e315aad0af264c9e0c288f9f60a7c0d9940962e49e108da2fb9c0882410ea0cc20cdfc0695f98de05d3dcf8c095614ac80f48f7e890a66a4b93155e667e6076e1e4e30b392f485166ffb44e1a86af70933a8a599a0a195944107c418a7d08168fba7087c7d1a40731cfd040a15ea7ab0d3095e2f0605100130c2c1c331065ff9fda10d6a05b405e1319e62501034db08eacc139064fa5002133ed59e427feb250c245b9724e2a910aeed07a7ab4db273e631511c073980208aab459a0bfa4a2b911007bb4424e86adc9081e5a9f3263dce46c599a3c5205830388f057bc94d060b03adf09220bf1235261de1a2725575f98f105705f1e0a7ec09d259ab67da8594b7fdaa0ab24de730841edef20f1e39a482dab72cd10c6b56e8d0c699673515476b6630bb419ab808cff0bd60890f83cb0bd818c9c09ac3836129cb8e69b13e937c930ed45e391064b3ce800a841680b0af15c8fb06908289e1b768a52e1cb2d9778063bf0a3606c41867f21007d9db088945b420879653a909e07ab5606c5f7780384f8f2480c02e853d16a437a6a0efc4ca7b0ec130eec1c403f0700ce89f07b0a36418c009757992808797138d07de20ca01151bb5bc0c42b6a5214dbcede50958c0b5e2248a9c120ff97fb790d62b2d7b076effbbb089705adb0703bfcd20734c0ff10bfa325490be00202a09d8cfc4f08e55df1c085efc1a708d9a705e09894a5970704403890b7153c080d4521f1e2af370d25060004fb41201ecd8620b8dd9562bb23f5d80ab8eadbc0a07485f15763ba09b066f239372bd1bd65109084078420e08171c087d7fffc09dc9c3d328cba564213e4d943f0a135da15060981d1408d4458b70bd4557c10d25eb06c2074bec482082291c0208af292e20c175bcb2093f95201f67dc7f11a60d9c7c20d8e964c1f79a75482010fecca23470412020f63d23a20a7f20d12048341ef1fc3743120ddb1d095127eda90d08d122ec62f26be5550a75f4843126102bfe303cd30de2e0c5bdc61328fff1a2e78dbe9716463076a06c0c68040661684fd08c3a08df1520021dc0899a6f92066fffb2507e0d6ac30643cceb31204b9e1e0b62f8ce208e8308bc15846601e10b52fe3a0b3fbff130e14e6c5b0ac673f7711511770a07bea74cd0a7109cc316466d50c0710e151f0a0fd52451360b8df919ff4aa6107bc3edfc080af9cae0a7c860265713483d00ac2d802209eec2b7809fd8d5991b281ff7709208251d19b6cee420cb6cf25a26e870ce208e5574d40d4c024ed219c31d811666bb2ee0c4ce687e22c38cb3524615d0f911a5cb9c20c842c27632d8bed86074e076720965b094216c5c0e7a06f9118f7148d979af149e08b47202b30fed1ad463d5a1fff5c8f00793cc6e60d40aed7c0811b11090cfb685940676306bc1833b7950116476da708f3d17f21a0610d091a4cc2a6408ed6f91c0a222825c1ce6bd4ca0a58e4b7707adccb0409238ecb10864698930e85cdf8c25bd0997c0ff756f490d3815c4517720f5691300552a80f6c61958080b148232004658b31043db4e7073eebbeb0b8ec2d6c1f72acf0c0b2c171b20719390aa17e255f7911213efed077516b311c63ad82a25d2a701e0a3345788080ea63291a3d799be1c940dcbf1de71da8a09d7f2f8b06eee26430778fb5761aab817f00e7522e220dbad624f124e1f7161fc8c1e910b86390940989bb57e118f52f0e07815b47d1023ec1600a85aec0512c5ca14208df1c4fe0978da0bf1bfaa246721da8a4a40ded9a51011cec04a2107285e4116cd414880a960f88812cafaebe0b58037e207d10435209b1c127e1a74edadd475fc19330bca010e90a8df699e1c6eb1faf23cfbdc3c1697ed0c410a89280810adca12007dc62f1807ee6377a0884a57ed18b0fd9960869290ce123c6b25806adecf9c1e4aab4e70ea2c34741b747bde813a9fa2330c38fc19c1b97c917308967bd346efa6a73915902c89222f7cbd3406b8e09c50848f86b706b928e6f06fdfabde0a4703df905c70cf4307eaa36f705611555505b9077164066eb0e20a41c2ce80b82db4651ab6ea1110a6285e8e1f9773c62145d3b6e1090f29e4b08a5c983d25ca1f80813834ccd80b8f5a217223f50538070f0c5e906364d2b30e2ab161e0e8e554ea0c77abcd00e4090fda08d6e15ce33517604324f6f51ff05b5433c2134f0d70413b5d8e9d086cb3b280d82bd0be0cbbe4f7d10501ba6c0a96e8e1125057b09d117e9b6200f4c83b7f114515ce314612279718c67e0550686c71d408dababb11f96120b4265ae9a280a1323ab10ab5e645125ead1cb90b7e37d070bb4168c00a8ae6e6715499e8041653805c80eb9402cd0975802820c6bc04e42f9568ef528a9a2a011d2ef7d391d52fe99b0ab14b5c221dcc01ba185b625b0349abde691571b245107f523e0a0cb97bfaa2536277a71db5719b008ab6b6e54e2416e88202cebdab0a750c71813b64e5450f32cec0c0ccfc800e0cacd3b6e11a6c176b1b52f1bcd0aee3b9be06fec550029458e4010da0d15870af68e13511d0562414119560ff1d1d734fc24408461f0a97c943d2f643ca4506b29b2600bbfef50c094767fbd060dd118913dd8a5760e414b5e845a942f0a07779269507a96f0ca06f00a429221dfb3d322eda85a309e15578e166ff4edf0bde9d3760ce11df963e9f0c0182e228be1e0850c14220e72c37ba061a258a111dd6159b2dbd2bebf1542780a82c82f8c1e156ed91aa3b008b54e3c46cbf420aed9f3f01019c366118189a9020851a76d72f5efad200881fb58b0940a43711b2a6d21f10b2d9db10ce2932290ef7aca5c0e91aa9e9177d7866d1389b06fc0d486ff4019c0055100cb5c038616c90d0d92769c83422bda53b0b1cdc578cb2aad41e5e230e32ab00dc44566a10fba2dcf2ecdaf94359868ebaa10f4350561afbdc8c309d00af170bd61e4170855e57a5134d0b9f50d0cab08e0b238bcd127a78423607bbaf1c909f39471e165cc2ae00ef77e8163c60edeb219764c772072e762f50dc4d0fd10d6d79b290c875151e2305dc3730a1980eda2a4d476dc2bfa46e7a118e88bca24d6773bb14eb9c6aa1d296d26b201ea34fa084217613247449afd1573d991112dc7721308f2eec8a14dd213601f4bd21d71b5ab71a42094a588b21c55c53020257eed5213e22f73205a158f71ec6a212c2015d2baf21480c27e252a54b680810933bd087580e561734b59cd08ebe5ea10be04fb380a771fc033ea58a9343eb74222f27a9a22690c978c0700960fd56b08d23c91108d7b22d01488aec5c180a770dc0d8228c8109dbfc5cb120f9d3d80cde4529d0d74655ce33c4ebeb423e60d5bf118cd372f2143f3dcd13d4143990ae0fc8b6275938ffc148f7754a153e577b02e6213078246bd5d6a0cc13d251086ee33070ae5719741038a59800e8f829340aa6330c40ecb496341d58f605d0d07a69120b7e42a3518214b5fa1e2b95c3e05f95d2e8153529e2607ea2a6213f60fcba20ce03a0fd085a46aa90844841b9101e626570ab3c3452175e813151548d8dda0ef94417e08d0d25710990f91201a8e6aea34ee7f78411a9103ab50a581b637062fbee4f189663442081cc8b5a135d7165921df676d70dd77af0d07aeabc130ee705434130fea93918ed130e80e21ab2e5391984ce7155cadf47438dc18fa0af0a4cea2637efcbb1e356d2c92cf39aa7e1ed8d606c2097dc1a71e66fc8dc1feed47451f8102d361d7eb4c3a1d966f4a71e8cbf0471efac797e20b28e1341e66ef0cb1eee48dfa1bdd1de1f2585a06c21d3fe3af01e52372901e9fa28e020df828dc2622b28cc1b5797c340cdbbda130b55005af2140a32132098d96a80e0e9c10f1d9f74f6e19807e7d823c89468d082a73e6b0b27da1130eb043894122728be30c913e05e0af63c51245809f4ef0d80192102581285e7092bf51250b6b39a2b25f010f140e55a4e4b0a2983fe20a9ca6206153e17e9d2248642bb10d9316652159cac4f2cc76b9f526d701c150c881d75834e06a334104ae72c009e2090761263f915a0d17594880864f82880e28a48490b784b7bb0ee8364150809b45fe0dbf21cd609bed094008cf1d2ed1427913143e705afd818b7ce14b282b2073118d2a28bd169f0eabb3946de4180894fffa50fa5ea008133fdc3652bd0f3b7525f568dd80b9b66d710a20fa85f0939ad8d008667bf74125466a5d234696f321594f715a0a3a0f06c09ed032f20a5ad1df622645a4160f15cea140c250c1bd11fa5349a11b1a0d6c195e78b6e084ab4cc12b9ec369812026014416bfb2efa1997b7f520af0595f416b1f0b70152d1170f0891cddb90c0304a4b0e7ae7de8079ce9e970df83c84514bd2a7e72d8b34862118a2455120ad5b3c230706a19a28779a831198a1524b1511d07211c90830c92049d6a6d0ed45d7b00f99cf72c091069a8817635107e0998bc9c9465b145bf0e05c02510892e475b0b4e9bbec187af2df03340fdb6d159f14a2b08ca587370aeff68ee0f5919da017846e0660ed968a92239eb69ea198369ebc24766ad8416d6ae1990bb12d44f3c7dc5fcc3c1b3d5140505bbc5626f03367a2e7720a2b1edcd72590e7283f182b6dfae7f08c59636519c3d574005b40150d0d552ae371b94af8f013d59099b271e724c6229706a3e19efc937008e88dabb3f520347e3f3089bb324327d31d1052cea5f464dd715522d6c1166064544f460a90d475c1417c5bdd08083cf3f506e1e3ce10e3ecdea2d629e9dc07dd9ddce11dfe06ed24756436912ef83cba21696993d071cc78d930bb892d2071163b5906b70544d3563186ef0ca96e3e10ce53227a19fe79c5f13327ff6e150e109591772f04d908bc054141a3d567333299ad0ad08d08fab809e6452dd0f173711c1b10f6c4714d3a50fa51ce8a49c0ea4ae67d56ddacc940aaf6b0da33bbf33140de242246118dc19dd2086b00c22699f24eb266da506324c7764c5160c1e56636dc118d61efc8fd2608f862eef3a8c99dda2f6afa40c1ebec90b412d2fd6811de4db00a1a27a84750e5538d7e44553375b0cc0060ab350f5f3321d2a3b4cd1d0ddb50c1ef737f551668f69e73a5a194a02fe31e624191b9d23b0ccca127319f06089915b5d6b9b2e4fc07e93104714860d7f31fab276891ccf25d2956b60e052b0ab10c9176e20aaa5c89a09fafebe40a7ebfcfe160941b4115470919f3a83325822fb2852740fabb817f1e4d1a4e01b7309a690865f7b7811241806507eb066f6081a0cbbf1bdfcc16725f9a560e0625905011f9906e9e13cdf93a1385d93b262d960a1661f809e1051bca6d9462022961a844168aa2a385d35f2f2407aa867257e3927f24398aaae16a502f561f372d0ab38ade6f5b2d91e480b1aabe84f21f45c48001d4999f431438b844e18b06bbd60c10f88e508a6af9210783235de12d6369421957e248b0ded17a670d6f1a957192c218a407fc2f46808853561b387cfd3912dfa0a1991943e2b81094aad73a24ffba1313294508621b6ab8e58099e6a2c518caced531d043d78d149d66c7e196a8345308f24ed8b15285f67212247acb409ad1439c1ede3f6ed38ef72ed52d9d78f501762442b023154482a1a3c944cd07020298d075901a103a5a89e211e9fdf6c90963f8c1d1ede61d6136d6bf90b23020bcb015ba5d0d62dd7024b005325c371148b28cbf31bca11c31c0fe3dbb199e79bb01663ac0db2264ba3ab38e28789e2d1b0ce8e1fbafdd5807412c36e12814d36817a0577d930d3a11cf19803ca193a2b533b719bbc084e27064e4370bd151ca406f00ca561489b37081eec7479e094881a2c19a2fd5cf08f81655e07dbe5d63168a2d49829f5fdc8b3b5f65ef713bfec77419ade3f6a2750ee43b524aa72863491678b53820637a82d1f7c8ed1ee7da1e619b59e3220859763231c512e51320a5689a520f5ff26b22a7f30d9086a93c0f0d4795e590a92b1dfa0c377110d0bd8ab7f80b519bed02b8a9d65041890cc481697ef9c82468dbcc90f9c98e093edd2fc3c333411a723452224364cfeb9d59313eb203c32bad245a245d6676017b25332818c74e625303cff6062c73c3a911847b91321a65e649e216457d993883a36702dfc44444278e2e4f1156de75a60e7f840060be40825f28f68291c083c9333f3aae6982709cece7801e84e7b3035ad9099020ed7ad4827bf2579c1e81a85f10966a7ecc16048dbf30793d99e214c4d8edf1e3ae9a403610899e60c7e8c1251932b20ba08b2a061214494aabf383e8e7592d7e0973122b64b3d72ee471c0524c9383a507bef0d1d427fe1367093ea6b5b1612e20ba245853587404d7c5fb2d234f86c2afed3b760a237e0cf0d883efdf332c597b52262f9fed3869ad95e0c64696e576ef4f3af38d7348602ab0b5de0170885e9f187a3e28513d9c7eac3748a42100980ec43d1d8e4a9881cca867f00a6031de515cf4ef9112995b0792b185fc9a298eadf440851c16e00b28b57ad1920e2fd208c4a17e90f284e742166b2a4ee0fd8083fe38b3105852ae74806f15c068f901a97bc1d21583465d715bc6918812a62943d27b91606f0a410c8000966642870d08eac151bafbe52618c0020301bae10b310cad151b60d7372e0c15429ceb9067c0ac3d1c9c5cc380f6c0665e50fc8c71650b522d49067185e7329e5c4f05082bf56ec1423ac3821de818cf013bf5dbc6292be2e9419ce76de91b4e3f556194cb0a452449d681130a63bf0213a1ffe481c20925de2e58c45bf392a9db432b0c534d3116bce7f117cceff7b0d733fe0b3a0c180c825c936b0820d2c810f0f4fe49404253002371da9849ec0a2b58a4c472a7ce424bb701ba61b074377b106217d1f16c365a1b1be5fd9680bb5547151138f7b4813da636e80beec3b0a4310f177317d1c91f7387b18eca2eef785bc1425b5dae1e59ce01c0937f54f119096b94425e0510ce481d832b824e245f3228b551f2308bbc51ea0a69bb4bb101f878d319b9dd3863624c8ec50fd3ed5640bde3ab633c98c95fe088efdcee0610849c6062a827780608c64b406d1b4cd70891f8d7c08cf9093808a9c39d20826e2e5108abe5182065af5258099f97fc9117657b90095730ec30976e68140871809b608f9e6d84064bed1880f09fee130ccd2101b089819bc60881994e508db0cc4b3f27781e409ae7fd890c7b2bb830924d3855068a826730bc6f723108486dd16063d2fd97086b0ee3e08bb8641d08ac3845e069739c1a0607277920b957d9e008ecc47a10e488ab0c0aefae14c0895beaf10da019b3209f01e6c50aa9de87f1a539eac11d4133a84061cc4e4f0ae21336d08417927d069db06280bb2f066d481cf0ad31f7b9d7fa23f18f6ff3702e68dd20fb5d24a217f747d712a93e6412e557c1ff0a0078798078ad8ce9168e5c02c16246bdac201f824730bb730c9016ca0ce3c30866f15a15e56cf46377d67c6d45bb9e4cf11939717f0f4509059132fe21191c13bc395180d0664c1746aa2e9280ccd4442061a79f72d1895fe21fe312ddb2013e99eb26d4a76df3a78010cf0f79a031e2f7265adc1e2529f611a54594fd1b4c60be330dc3ae901301499392e8cf79f34e5ef29eb174786f80213a96e631bc4103521840a6f53218a9d09c08df23574185dc092106d3a3fdb0a488955d149957a4c2cc7d1da00ae79bbcd247a24fd3065ae9199075d1a0281d24dbf992193d0c8d082936a6c1530bb2da1cac1fb6a346957ffe156447c0e26fa5398c0cd9faa3d0b3941a0207d8a66141e96d73f50a4b744fe1c17a0bae377707d090c1d8d325175dc52770814c5ab6357c1d808182b5799f30ccfd0cf5586256c453aa3bfe32e1af60fc0bbbadb9e3f82eda830ca66445417365d88e08db559ff2b01c23bd0c5ab44011ac7066d1166de746c1e06d1ac91cbd255f7209204deb244c98d6122e89dd3225bdd99ab4577e69610c8ba93280ae046af51f98105640b24eef961ed724ad312fb7881b08a71581d1293ef05017b75271c2227ea7fb0d306c04723e3a32ab0f3fe24ca255f0c506152b4b1721bc96420a1a17a7baa1eb0f18281174f7edc1a42dd9ba3016df26a09655cff02ecba96994a43ba36a1b6d9fb7e0c62d4e5e0ff333e6b131943de02337c03311d31bb3c81739ae54508e62fe9618e271b7e3f24e525641b65f56f3f48c05144278121647faa564cf0e5ddc6910eef6260129c8dd3363365c707c30394dac21e9f34c4a084860f0619b44846b271308cfd291b072851f0175a2519849c73f22b6fba9d1f789eb6c0dc6035a72a0059e910f360917b11eac60b912a4b756e16273e72e14b827ad41d9b999a80a03dce8a16e3b61b41622d7b0313a1005190f55b78190d8af4c0e1b4a7612d32851438a230e2ef5e10e41a3463432b6ef0244fa10af25666df4710b0473e125e10957f303de2e1722c69376614ee1f10e128a7a3f60cb72bad120e18a9554934f0dd342dc88df810ce72bf10a651539814a68d9d622e94f65823c405b492dc041bb90c60c4a4b12021a618401cce51710c1d154808002970e10b52021527e7def652fe6b996a280ca7f8314800bed936948ac121838c5f5d13e76fbe9128674ff9144d5439f311314ba218189d9d3402c3e2e4300fa3bc214a991ab42c508ae3d22c3e5ead0efe6343d15c1b738648bf501973fb70de9a4327542954372d46ae1069e1a8a1e4325e6a1041e2aba602b3b0e814320a86931a5e277c37c204476188b1ee810a1635e462685e83303de89727a1fa65fad137e31e2f61e531c65b2917ed3b4581152225719e48f3426496f3012bf16cefa0834b33d7451d30da144aaa28243c73ba02910df81d1619c339f091317832130a7cfa028237135866446ed321731476f3f206318f516296f58f7222c170a3206d3addd30798bffc3263805e3405449438a1f54c80a72654a2ed62e719329f0ad5bae5b1603f9ea6380263b2533aa7c080129b22ba31c1997e230d285cb6b2b606de7332d27852c25f30e03615686082916b9f73ea4586b7b3b2ebe752000b531e995087428b060943354181e06702fa4027a6c083cba7c36d0c64bb74419715ff772295c7656262c129342ca570d760d4ab63e417de3222707639c8272b04ae065265fb88591342c3b9a14d6ef86628a9cf4ea15c022a9c2a313d33d4c61dfbe7194d587090a2cbb2952f28e0f0715ae19d260a7692320413f51b582dec64ce009b9d309c06c09b20b27f2ed9d72b1fc80731f3f314ac2eb5f99da0a7a5d7e524988859a2b95781e61563d271918b54621b3a534f894096a1ace94522c1f1e2d7fea7133eb9e4a6d0f39a38bc11bc7c7993e09ec7f93ea23da9d3ed28cc6634e4ac8691888083011967db98b47f2d6ea209c059d6809d46bb182141421461a80139380d79fdfa90aadff64019315ece7140b443382759f3a8445306a23f3acae90762370217e21e8cb750109e78f05b43d8531ae30b6a5cd90aa34950b1c0087dc71bba189150c05b5b5931ae492cb07fb0ee812e253f7f712d88c36d1714364342cf6e375f410b3f9fe0957fdb5e1285eb6ad0aec43f181be0109ae15458afa609bee655b2f74a95cb594d284df2dff4f473190751aa30ddc1f46b454dd5657224ef886f233adcc73227a4e99206202b2a30920d56af265a1b5942dda645aa14aaddfee2402a2dc2190b715bb13e7bfbb743957f2fd32f8fcf34198f2190f242c2c6831bf5866d345c74ef1736b63877a17db0a9b72ae70c52f3c93cc8dd17db3c99506f180ddb27fc277b81268b80bd21e5f6d3108a95d61f1c7d3d5ec32990fe161e5b4d2b02410bbb1e1063482fa0ce3e35882580c0b0b205ec25470e32d858d1a593105f1608f2bcc2c539d05c155daf777208f98945213307da21f406e15b265415fec2c614a9e4196a45b2815f482a122366411ff254e605a71e1fe376010b92a2e208ea2568f28ff4baae0a98fca37250c19b291c81013b8108f5fdf33c7ed70b50e9ce96c7228ddc3d122a0d88261a6466fb30943cecc6105fb6508307a0fd912be765ee028143e2e827f08f5f62274addc725dd2a52a15f2c23c91bae64b470a72c877d064f2cc841b844b1b728a66e60918f348af4271a05a180d14d1af01475292b70b1e5d35610e4531b427f24c8b4248cc57841518867c60c4fded8c1143025e535c8540a02bdf7516b3317d688f06a4a50963f8e19d8645fff5ba60a735ccd616b8533b91f9d5514e269827dfe079cd0702078d9ae9011ecf55ce38c9d695d09265f1673741168133c0b5a986134c5edb4426960b7443d0d29b821305d1c333ebb6e7323bc1ff540a6659e2c2d3daeb9407dba8e8c23f8d88330a5746a8d20d1b05e814aa976f80dc8df49a2d6524deb216ac28cb1a0292aeb191236e8e1dfe442252fb442d6b1601e3e4e342fa5d9f42a08f3882c3a395fa134bd8f82331c1948033e06dfb5552da3b86095a138f2234b7b5c73e770ec9a29ddc27223e81cf2751784191502a633a1875138c5cdd4a0f78c8723dcdc71e1b03b273f101143cf111b76de1c3156df7ab26f0579fe2872dbef42d9226e77211036d6115d4ab8093d8ede64e22e51089633f87cbf634887d8913094b54b133dcd580e426bb49e633c6bb7ba338148c6f320cd5ff1337a4b902395852105207dcfb242a8964b4d18584a6585078995b92c4f962f1295a8d39019a0e18d92d63bb4930e43b61e54b9803b884466f14e44e8ea29fc316398b9c48246e2fa0e7a9f7220a584d2e80a6aca0b048f14638c13ba226f83e91ffe3c40085649557fec3306797fb49974c4a06a7f31ca7105d1de74b7574c51ddb512038dc38d442ab1c4d1fd9bb99420f2105e9995bee37a325f444580d55a0944454117fdf282f35d8c0b9199419167253de50bca712991d797abb7276c349e03979e98704bbea8316245d1ceb420e9528521069cecfa20358d72f295ef2a745901dfe2b1208b722b0635b998f0d847426e0dcd6672b06e43919e07422a4b9082c880731cf3a1bbb642a1ee44170ca71912660685ee2d97fc66e27b19d182363d4b86a9a5ec515e0ebe53fe63f91ec70047138748e3385b783c228de95171d68cb97d08551ddc44565adc3e42a1f359e4119e8eed44a060f5f0d555b64e48dcac08e1c8cc14c80b91d2b1b0b64cae160ba6827350845d3b5b20f8371660b5076a313a7fcff61157928f1513b993e540af72c96129205579f2b36ac1a5236d047cb0628ec4cd185b709e31b832c7971ef267bae3ad0672f23ef2140bb2d9c8338414926ce27131e4bce029a6b40342201b011118bd80bec2755acec91d0c53753213e8d8da13fd0f97442fd42df746424554c191b5f05c311fed4ef1e859d8403001d6f2244c16bde81de3397fc0d265718d109ff165f27a06d5e53fa29bae72ca8a591040b6dd6a50b39254412bb23865232db6e666148fd741014fc4a7bb2d26a244038b16019a2fbc58ec241eaed3eb0c2c5fd303988a56a02a6ea961409812de0624c3f3ebd30477c1651fd727ed61d9ed8f560ef259bc411c68d85b0e624c85024b1e999c17c996024086ecc5ee25cca490c24100b39f0c5bc6baf4672eec350d92f754623a81b90916d42fffd286b6161916b9ba95645d951e89211b3333b118561c3f100f8e0720e1e668eb1a9b4e122363e59a0615b0d645f0eb6adc5323d9240af2183e56fe1082396b25bd9f900c1f9d467c33f9fb4ab00df62b7f72cf086dcd15a6ffc211bc68e18b55a870f7a2d7d86b3e075bcd6d6099275e050edef47d2429c8e366467e73a6e0eaf4bfba176925a292e95d14140f27966cb11924a5f811a45165c11b8147051137f4c5711dba58b80f73d5711147831e5017315ee911bafde89c263914baf1b015955e30046743744c52d7a20e2f6e85624585d4bb19a85781542d96761c112f3ed2b27cb07a3c085a255b3450dd9f5d446aedac27f366681d884a41bd0702f5ffda346625d4c2d1c0d2e243fa572302856aac8e16b43ef600ad92402b4a1d6d47d1c663c6390f371a0820f9bfa1383d3d98ffe1aaf626ee35bcd534317be0402636d08d1b53869f3c12180acf54c19ce3c8f6295789d6c22c950a2e3e516a455310d54f152d4de944d406b91302296cfb7683ea97c6f22eb369ca72ead3a6902c0e0ae231a0578c1f2f9ed8e4826270687e3137b05190d4e86e920ed391a2c21538755325a7f65713750c13103dc7a5a2e095fb2344439e7c0b52c14cdac332f6e23f34bdcb364e3e5349e4153178d577217e7bfe64594921643a266adfc32c89559b2af977a82149686f3524aa02b523baceabc72913a6de42d6016d481186045b429a7d58e22184614e50ba5c7fad0a3032ca80d6e7a41a44162a29f1762bc76624b3541250976d590044fdea9d608a6409fb0a93e6ea01bfab832f20b71475941a08959326debd88b1ff98a2ad20c62b79f22502901c1462ae5a12dd70e62b1bdaf7e150b62733662bf2307fe33041db9b2fef92c2030b8fb18133b8a372e427d4de821412815d52d276197f33cc93ce110eeb1bce33690d68d3597f51c81b3baf3eb0ac151c2d3e7f722ff2cfd8426f298f377e31670314de39dbed32f25456f923448172cb72c9cf64a2260f25a5110a622bd61b71330662862a4678085873b82162c5611b3b2a44ff32a764ef6c276326fd5162d56b990fa71958e15ef3f4a72b60f3cbd0a5de3fd4424c48cfe0b9918adf4327d8db431ff609873422afb12030d74d990e5eaa1ae0cc876f3b43f20a76521b5e03120851af8e755b0119fa3f3f956d714a6cc9ed66359720f13f041b2845618c8b52ba61cd4e1a3ea0ce20fd55919d0a16893d718b33a0782704ce96c2c2b3445a3d175a9c32ce9325602811caf0c2519756693c7c47ccf2f18d102a328b5f959516e3730e22c95c6001f1c6da881da4083073d09ed4382500df7cc1d653423b21a69bdb517d6609221c2ab54e219da3996636b862b8b406f982952b597a3551a686d0da289fe3eb7438357c37190bb1965113bf607c1af20ecaa3b0a1e92b37d8cd3a72a46fdc150c390182f1fb08d12f080cdf3240bcaedc1a1f568b4561323e36822bcc907ea06c60bc3f3b1ad96010b48c4811428e76c1b3d1aa1f3a14632c39e2ee26139e09155cc8c27e562eaf36171f0051aa00671e25badfdee2b35be0e7406e265812e87e91ed227e6915c1bce647a2082057f8b0bdfa08c40b6a915092cbfc08372d33dba8521237fa6b08341de2f2870dba7c36a930aab17208fa9b3c0ecf94e2df4e720d353d303e41f1c21432421d9a1f643c52dafa50b7a9a1f23f4415a72e356fe091c95bf0071ccbf99802454c7d8d22895d91b2efe8ea1b2b4e7242d1070bf295407496d1b097cafc2209e743df40ae40d99427fa527db3d125711933e7549da1d706133e3f1c00de50d8606a3149b2c338e6552d1e55439627d684a500b1fa2595249e33d7db000b1de60aa0e2989fc8970c196283d29072a9792af52e3a02160f036b0a68f6e8e1dd7935212f8f5a75f31d9b13fa34dcc525744c38f2fd21473ab5327817f53f36b4f1cee411bf8e542efb58c2640008e5e832fa41e7d2b90845af0ad8a8e5f39df484e14059c08ae0c4d687c20b1f1cb102c48ac6cd3818c5eed0b33f94734c0b635d706c0ca17a1e56d11531156d1153288e49a2706cb574811ed96a787057e865ba1ba994cdc2da81e33e1d3f9279718e91487f07825e1b5155c0897e102ac0b14262700a0e302700a0e512c5d15b2968509272ca9668540875ca2192937d9d5e1288d0931220aa7cb6304018e780539a1cee28382b99817337e08a1ffaf83621d859a93b0a87cfeb7303bfa84f060915ec5122ae1e373019713b81e0d1ce8408b411e4e03ed3a7ff0fccdb9f117af1cd9e215f885ed080ef0a5a3122209af3368f89f30aa9f8d740b41b488d0596f6b6b1ebced7ba2bf772b5708eb0d1a4051886f090c0f3a3680d3f446e33b0f5142728e311fc73bc004c3a34320c54b073a0562f209de03d20ecedcd050ce45b52807bc0e1050a2ce91f40c4832cca0aa42a1020dbbec5110981e7dde1e88555790aa78221608fd9f2a12b535211908ec81039360c1ba60264f8acf425c262eb134b66894707eac19b60931d7e95260150e960b5ad5f4336480bc30258837f50250b9564418f1e96b209bc244e408c5d6ee3090a096342fac181091bd6da3650825c9e901f76f667c20fe7c6e80f9a0b70c331debed714fe5e1e20717072a70df0ac1d71f07ea1fc2ecb0b4331fbe001f224fc123681f52aef1a1da133f5b1fb61776907fbe05750cb6add3a0c17ff6850aa2bfdd50e9a5ed1d14d1efa3604530eae40c43cef642baf6e37b37c8aa828322d4efcc06c32aef314e2208b9063b0bb4406a0182ea07a0182ea0658ee89131505f6f60d66fcd340cbacd39b1e61e30960714a6021096f7a87139d879085071127d541e1650f83218c0d66e0ddea7edf0afd0eb8b092c96e3808a9c538333bf9d0ad112321c430d23aa5f20da05b2c40670c160c0670c160c06c623b0948d7cba582390892850cde9acd01bbc12ddd0aa088eff0d5ff4c3c27be611393c47b0bc2097b9c85e1149e4cf5063aa5e901055868740bbf412483256a341b22a98bccd3a8269a391163c8f490f31f66d33e84a95c20d51d28670dfb42b9f3dc964e390b3917e7d38d8782b50e1e3f9f030c8207b633a1ca7c509aec2cee0b032b637075fe2c9907af93f0d32264b8e63b23449e10bd47613207a4338e2087267e6b24962f62e09dc55e984322af0d70948154b209f959c6f07d064fce35205cc330915afdbb38fe27127095f49380096ce4ca40d5ba89ca0ee05d82a3fa5c35c83f982c8cc432b766073b77a536a17fe22bec11093a3405119fcdab51d909a5f097aa54c71f5f80ae713bb01f19087baf5c50b41ce108093bf555d09db5d64810af3c8df09538454c085656f260853ed6760e31dd7aa11d2accb10764ee0e209241f13207a1208b909a8bae8e072a190dc26bd7990c1309a39400902585160d0973a9b09bc1d61507d5f3be40b1d02ea515ceda5931bbc44a9211e43a0bf1f49c94b708c11a68e0729a5bfe0f5ee875b08901228d1016b408e24cb5c4301416f14171c58dbb5016448e2e110358d564126cf04561256ed645154e6b8c30b4aca4b0088fd627208a8a9a560a404d47b091f5b317091f730ef07b15ef390837ff04607d9a00d509eaf48470810dd18d2be49a0320a9149b3a1164c0a9d092b99f2d09849b36a08abc3f4131e1be91215fa9cef40ee7d838f0ab836bbf0d9d8e8ed114a8998e1858ab67617ac05dd92b8a49de8118d7838a094af7ca90e005846a081d4c8ba0cea0512a0913b640017dd25a740c8476e480add4dd0a0ed1604db0a1c075e619a3e370e13e88b09f0aee6b2b907e1326f5098a311c40984bb5160d11dd69e08a81e77808c3c0bcd09647a3920a8babbdc09a28a8a512b9e798c07f0e93a40c1ead87f0df7f6f2c18641244c13817f51e09ec55c530aaab0fa40704bc439215ebfd910721eb08d0b84f5ee606e50d1a62afb5065c13f9c82900a66028130c9a24464099654f930ec5730a42923144481caba3be331c31cfd40ce4841f60d77ccf480c1d6ebae08444304825fe1b4d21c3835d670e923c2810fa46d93a10de250ae27e683ea218df83b470c1c09b4e0be63931615d873d730db225c530993bfa6a0a81062280ce7dee660edaaf84d12f075ae40778a9c72129d389df225afc7a010bc543d9079f480e309885a85207d58513206c17ba2c0a97c8c2418dfebeb10e4e9b6a30e4d6f6140b5f9b9e20f096d98207939a6590cb50439e0ec86b45f0bee2430d092435be218d79adb50929e0d7c097179fbb1266d690c07d8926b40916f796d0beb321890db5c7d8509dad92f00907beaf1105c3d3dc08768b0840f322733e095cac73e108db01f00a056546d0c840fd141325c8973143791f5b34fd63e5207d356cc40a68e9f0909fde4b191890ee7870b180e39e0ba9cb15c5a1dd49f14a77461e60976576360bfea57600dcd8b5b50cb833f6e13fe292fb1721c82680fadce8140abae46420dfd66e17098ed6b231ff644bd00bf516c360ea4c542516d9e5dc73a78c09c2132485d8d0c28c873912ccc62f613dedf9380d7b9b2541a5f3d26009e92e436089bb48f40af9cf11c158a3c0710e5b341441664c60ce117e052890903765450b95a66b30723e68390f9a403901d2789b871ea94dfde09e1ac34d0aa24050106b666a6f0783dbe680b6db9dcf0630165ee0978ae5c81507da72c09b86c0572efed927c16144328707e7eb1870d111cc420cffd9c160b6810fc40c13e354b0782952f80c3efd3ef0b1aa37f909a8bec0329bfa31600699b6f4321fc174b3345a7b3c118c61b39c177b694c0168b2ae062537eae7704c9d2af40a16bc2800ebac0bfb0ff064d1908a9175d4068cf81923454b2fec10874b7721527c1a3508bea63960f50ac32f0989928270f40af9dc0ab68a80728505ae160a8dbfed30a63674c13c74c1e103eedcb1d52f5e407a70bbe60efa0dac46ead12d4b65da07be4913215a26385d0bb3794390bd2da8340b42fed5211f3934780c14e57df0b6d198c70fc2936a809977b145084c2c1aa0cadc95ce1f01f2ba20832d944b07d525a310a1e760984bdbab0041991619d32f8baf87b0c7689b0724de38b4b0e762c2ac0bfc49bc60cc821832195c8237a21cf0eb430fc8c6d451977ce0c31692329f6130a066192f12bc31e16a9fd6cd0d5ceefc609bc6beec0913c6ba30bd27a4730ed5f8eff197ba9a1708f28c7c50bc0f49320815a82350c5295ed30b296a65b0f8d3f66a061421c28216606e2509cd4b4d40bb584aa8160436fc90706b73bd0cee6728512222b2ea0c3f10584299f5b6f1087fa023e125f17cc70cdba3da411e1ebbb8201362f930ed76cf3a21d2aba4b147debe97088963dbf0ab1f36d5148cc1352235fc40440e0db4a9b0c662d38d0e0ad5e0a0beb8bda80a30c479c090ea4c980dbcd4c56125522c2b207af67dd257a7c4bb39fe47fbd2a57ef37c09c1f652f0aebb5c6806c4362c50669e1e2f07f39c9d90e4a3166d1a7ab35e625ea87c5413b2d4cdd0763b2937108107a600deee4c8a08337a1d8075dd29f00c72d826d153c734ad09399b5800dd8cf0cc09a03f3c01049abfb2091323321071964e971b93055650ab0296bb0cc88abf90ef3ccc730a36b043b1b916aabe1b171f7a00fa9b132d17fa89c6a127a838fb0bc6d90d413a6ca7cc1852520b23484f2ebb10cd187cc1361e153b1d1e6371a372ab53d7257cb62511111f77eb118f1174f0ef62709c0f1bca4871d560015d166e4274909a82498307c1fea3f096e3b4bf123f9142219b4da2ad18d939f970e2c4c54a0a7c688730ddd0c7530b0b025860a1fd6aa058156e7240c026b2c00c16cfd610fde4b7431b5f00a470fd36ddae0d336d96e20a0a5ef3262cc5acb0d7ffb26923c59cecb08b68c16a175e3cf45210f137c625c6eab490c4b8c63f107058f7f163a7402c0ec036a620bcc9ee9922a1f483d1c686665011be71ae70855dc28008abf4fab0bb4045990e8ea16760c486318c13593a43d0ad8bc5fc12a04adf7130fbfd4319a5c03e70c6cf977033d540af20c94f41a90b1d8078a1e1cde4a20477fe56b12b13741210c080eda0deda3d400c346198f134ae7af90e04694ed1c0e386f31bc7f431d0cea122d31817cfe4511d0eef3f27817c5f20afa335de0db882e800bf5236b60d804f6bf14cd8a0df0965479600e264350a194b491de401cbb7ce0fb72e66b0f0f468dd15331ac6a094db442b0e9457f2e0a4af0d251bacb216f1929bdbcd08d3a952009048ea050c1e1d8e90e797e90507d6a5506091aa656507cf28bc407ab6f5fe099fbeb700b3e0f9d009afeefc7096d06f6708f4f68600a3fe3be30bdd6e72113adaf87c08010661a0b16bb0d60835d7e9b224a649e114e5cac7d094992e071d007f9610ad297cfb105aa5f47269ab4d7e0748e3fc40fa6077370af749246231300f9609cf3420d0f44a3d6b08a4d1a6f14a38b0840b048c37114aa59b16098a0f6111618ead950713066aa0cc7a383f1652ad4030a9d1cb6a0c8fbaea214f82967b125fe7e571163fa0981c73483fc19dd2dfde12340493427ec953d222ceb594510f92287a0bf6e44802017340f1268fa4e2e0b14eb7db0fed665ba1c4d9348d1a7fa564207be3ec53090f24e21095975df4097718f4c08f9d9d8a10e60c2ee08d82c6a30a8ea12750f1bb3d470d3c678210b8410c6c0d2ea55fb09e121f8516f370c93061870ada0b56d7dcc12c2f61e02474046cc1719433c01e6ca654b1103b14820817ced4a15b2a6f24332edfeeb0a41fbee619b4a9b5120a3d12561ccf45f7915013c55f207c1850a0eb2ec64630f54d7e6281fd5fc717b20aad2366a20cb51a659609416f0cf3d20951afa610d809fb5a1716da8561279831c91b6b5e2690cbaa1c4611a8c55710901344e6146c9ed930d29858c934da9d9eb116af0a1c08a59257a0921e895828988ac6709869d1a81393ca8402b7a7b1b810950f2ad1534e913d0647ef793095f837fe106789658130100a7e10acd370a2d4a1b3d52cc3f0f131c2cc7b381f7aeae500b156276d1aa6cf03d124dcefca162a55c271a29abdbd15c4541c40eff58ba70a3d02f810a5c6677c25c2dbd1424503ea6613f9d9c200c62a74ad228828f560d635e88413d8a08de12f5ad79c0a12098bb0a8cfad930bb6c7df5111d9b1870a48a737223d4b5d1409ec4e4421a80bdaa6157acb2340893811d90865dcf0112172596c31c711f721b058a94309529813917108f7a211fa5b7c70957d6ae40e314169e0c5c90f521b9a1ac1c08e7e38bb0aa3355dc08a47334c1686a172c2a06495bc087f9bb660850890d21fb0504988eea1f9f107e2e9cb322e9aeb05153f5594e0d4129db22441431ce1477b2f2d0f0637905169a9d33d13d2d775f0f43260c31100e4f72215fc87e40cedc4c19113f8b8df1d8b8f4f1101be9c820c468d0092fe7b5e1c0a1d85e6b10c13abb70e035d4a13117cc9aa1bfb6e05b1a8bb21d607894aa522e94a9983164f3ef2e17848582b23abac399147d6a27c170cda0851ab93b3010a5eebdf10baa635dd143da8df90671e8cd4065f61cd90a38aa5880ab1a88431f12957a00a873b6180bab7ebc12bdc7a7d41c1f34ae20e1b71e9b186dca1a70d7bf385f1dcb38eab0d96dd4511a5c51fa20ed2196e00acce54470a8c9a080087cd62100ab55626331ab635fc085f261232ec9fb526182f2b3d517dd2b53b0d6c301901599b6d8f08edb30a825be027fa1588835150a67f6cbd1c1ab1cc01e5d242e31b5f9ef2114121d5310c4473abf10e1f2f4008d2594d01364e4aee12180c6b50cc4c16ef0e0c1d91d0c6f9b2f42d1323b810c99b8b201787c66942e9791cdc19f05d9e01fe82873f38c8cb9901716e129a10912299807604fcec1a8ef02de21a0a86962081ceccc0c041192c0e98355cf16737765c5211b69250f8aaaf740beff6c6d2fb86e76e0d25e958610ae04d5f09dab931853abd90000ba5ab0ed06868e7cc2d5ed8275230a34cdd09b9eab5d0ef9561570df579f27196bdc31409c1036a80ad3c7c2a09d424aa0118986edf19ec7ab4c0976b78551369bbd2d090126b1a1ac64810f16be79d9f10f4d8f5d28cdc5ec10b23460ec23bfb9b551b61687e116b40e85b0a286ca0e10ec63b1208a52f3d10fe18396c09063ac79163aa76dd0744f653c1c8eccbd612ff3b6bd0edde479b0957594340b5bba7c0340aa4403099ffe76a12fed374f18daf4ac52f4b459010a4c36532168070d4a1bb4d2ec80dea69af32737c494e09bca25a84f0c8cc920bee3bebe207242b4b193b2f63e08bd1ecd319c78131c2e391d3e00ab916ca109b63ce95147c4de941995851dd2e995a28d0e12d8d4612268f0320b51c08c40b95bbd5c15447e90718064fbc7082ecffea0d1ff33861684f39c30e1e64e8f09b88142b1bda278360cdfed15d0fcbccf8a1253ab5850bc2131b5080b3432926cc5ac8e0f587f88b094421c9b11dd9178d1525ddf4e1c8aec4fc1b38cd814099b74b871c9c13363092eb0293241ad03220b1bd1f163227865a62263aeafa1ce6bd9070d379d09f264b4bb2a2a936701318bf00de817626f1711dac36c54255de86e70f68ebe271efe2f00214f7c63ee1ce2ac7f2162c1e1cf2329447260f8cd137a1ff8fcc031d4c8907d1f1b17be70a509194209a1e1e8812664acae2542843ff1ba9730573211fbd1a0e267f36a15a18778b10d9d45642f2a080261644f213f19dc6a61f1e22d253b11ac2dcd0207bb764216166339b433c9d8bc1c7b5acbb08d5236b80eaf12e4309d9a3925089fa77430a8309d7d07c7059260c3b759bd0c26458790b612362f0b98988de0a180ffd5096636c62201fcf950074706dd3127f3d7aa2ace227421b208a7530d3e36dad139a765930f853a6e820144f8791da62439f1d0a85c621e6a290ec2449aaa2a187ede539467e23502229d33cd211bd454e90bd0271cc1155d6daf2b31f263e1777583260f2612d8b10d9b27371b3e3f52c3f4b5e0ad35592b9b617d96a1360a10faebd12e4af9e80d2c1a1700eff078fe0bb57d08c0d0ea5389188e4c726097e899430ef357a16152ffe7b51a3bd07b7157f23852276792d2a1424e5bac114dbcff411ec4bb0b1a48434b00f779e598192db77de149512fea14083ef610b653a4441a7cd063d1097339a6141119bbc162d26ab2075eac2121a5bf17590c7e6ed9e198e065e32088a5f4614001bdbd19b3fb9171178b7cb22422ed39920cb8d6dc17f65167f08bd4ff7512a73da5c094c9e970093ead2d30beded9e90df0285d70db7ebe9f0e11757d4083a31a1e09fd464e51a97506970a4efc20e0c507d5502371c822c10120ee961a65d1ba906f0d1fba0b4d0932b128c1a00612cfa9c6113e69fbd12e0272caf085b1b7aa1fa804ef91d043355021b5539bf1980ea26220e9b0b7a19c631023244733f14155f36afd15745762314375fd3c094fbf5460b11f51590c654a55123a5d5a442396131e34a01b604338fd0e2cc30ac04bcc099288ce02189986a40f8fab1e91613b7fe60b300f38b17b5542ce19ee97ba82fd462d1b18c20b7d208814312c0be461e582284b3a171c231a891088e05bd013bc8255e0f19abd4828081b4e11023c7e14303a2274d190ff77f7158d9497e13743ed751606342981400db7ee1dbe22ab80e54bff261a07ded9a154abb6131acd6081f0bc4314dd1c0323d7131d89a4bf0eb5f268222b8477dc2f0adc00b21aac1afe227b1f0f22d4b2f6e31b1d662510edc123a80d480c7c92707b6c4315832e1f10b5be3e6d2e740a9580e187bfc82b81f94632a67a5e0f1d96fd621294b85b090fe9ab21b154d316f2160e225d71cc5d309e1ca7fea9d199b64ba40952582ee0c81d85820f64231ed47321d0dc1943c909b0ede81f11639327a16155e1dba70ab31472b18a8e5b111f5a7ffea28c6f261f0c8539e1c16904177118cbd715322399183d100279bf71a621a703182bc70730c09f546647479fa3e223d80ef60ffdf6e9a3f73d6d612549e0f7e1ad84c3761727ed73409df72af108b54d1c72f528764712c4e34bc07c4949be2499bb9d52b182cbdc21649360b3700c61f20a007071b19849b4b416c54fac70fe2501eb31ee177a61482125a60808baa3b1dafe6b1214417e5cd31e485fb10dbfc02ea174a9b5cf0a489cf030a0d72cdd1e94b0e43122a7e788126d9a4402ecf44c2d104c8b9b941b2c96ad3a79a8206415329a780a3d5f2fe1ab063cf32183c271313a1cba8822501e63b36bd36d5211feb0d781606c598a30aa1619330490f99f2f0fd1019092ee1a6431fbf6d22385958c730a66aaa9a0a65abd780b56e450b07bb5c4430b96c02380957538ba17ec816a20c7533d6b0c740eaf90ee451cfd181771f840961d041c0dbb9377808d7034b807b2a344014d2950431371412580a482f52b1b66c8bc308839936c2a9080bba0c8cc189e0b0c50e1a3258b20fa2bc924bd02732a9a421ca7c8a1f28191bb151875ea07a088ce9f2f0a22c33b115b0be052078e46d570de7fb23a211781b4209069cb0220c85606918068b4cd0722a7693061d674f40cfe82be92e7e957f40f1c81f550c864a6882adfccda61ee76892709a9c960a0acdf0f9f1001055900fb198b6322ed424c720966edc7116c74f0d159a6a9dc0b52b90f40a6b8f3e00b4e518f707582fec60b835980207394f2c6129456d911d78df7150fb348e232532d6eee0b634c17116f97fe0d14b7bd992121af7b430a75d65b920dee94660c145a15b2765419a90b4a6ea542958b47fb37692c87b134a406790dff444ba23fd2a63208318c667258c8eed71a45fbe2211c346179338a420ee142892bd421c82ab933e3ce5f011a88c56b11b3be05d10d4acc14411a87a543296e9f3b126636fd711140ff21b126d91ddd251594a4331609cba709d8342a0082c6151d0936ecfe709662cf9209ffec18c0964c626e06603775314afb33c514a84f7401e04f0f5e1778bf3241e50e48560bfdbeae613eb9f8a11f7a388e8161c428ea1774521771657b95ad28516dee516750038310409be5d251f23f4f17e5cc849175b5f3bb1646bbcb61dd7d61e00870d2cdc0b780b2b50b8f6953a0a634e2cd0ff98fbb20ef057f410bd48b7221d051dd980aa9df62b096ee764b0d22a01ab0b15e7b401f08ddfc03c88f198a104aea0d12e39215851eabb1f0220295822b093c7d6bb204685f3c0a255122a14d020c081c4a7665112f8c124c12ae166702669500b10a5b566ac132317e871ea7244b5100767ac5276692ce01ff1661021678deb991e297c9761e51ebc581f74c28270aefa8094335d6042e1e83df6b11aa44701e4e8c8b65b0812543e617974fa2219d054d980d9e1dc950ee05b7a00f93f3a1c153ea19290c50c9dd60d13cea5f19dc99a8a4a5829473072d09e650da5777151a96ca79b2751eea4e0d0a124a20d911467d139e945621b1a875b7081bb149c20137c74d2f25c62921eac798e60ad9261e41e9328d840eb6080151cf7a28e62789aee422aff3823b307de5a022d5b7cf3330b2604351a696a39d2d4fc82fa2b9bf7f403da6fb2b425853c0c233f0f37962b05298bd36679d9871b4f5016f2d1e9c945320dc3f35332b04b3b3dbf430b10ac8204f0191d07d873214750b6234629e9e0b26a4e171e8081daf1f240f2f7169e07fc308e80880b11c6566a220fa3569e0ffa283103b3912482065d4125c1700d998015a701c41203ce425918d84644a180df0eb032d016f561b79f1cc31f87376dd1d51d19352dbfffe97397fd935e0e277e1eb091fcacd529953e47415090568a1976be5ac157b9dd3420ce94d641ab388263244f54e8c1f087c18b1ea0d64e513e00783c1c7468c3113fddff181a186233019ef55088309165f9712e78c53320dc7495223e3ac1cf0a376bdde2e989303607ca93cc90b656c62e0719a15f43099be6b01fa4577aa1188ba66933c410c252f556d8101a543dd9d3ba7814d00e7f2df93224bd6f7d14ead4b4218e516ba528f60e91f28fe65dbb093bd882d10c1d00ff43faf9ad74a319ffa720f8ec26809636ebea23a323b5f23df4c6f2310e5957f079108c453ac156c3f1e86ee7ad1ac8ecfc91cbb17c90095cdead1226e9c91a1e071feba1a1ae59c21c454767237c128abe17a0f61b90edaf2fab0ae5272ce0b8dc70d7131c696726d1c41b500bbf94c2a19cbb165c236ff6a1028ba15313206e1e85a308b1e79019c5909a6186e76ea5126ce5fdb16f351ef43b5985da4247af78fc360250220460ae491d2fbb4347327e0236b82326ccbca3cdc0b7982ece72fe307dfd7c6c248a999c425cf0a47317684390f25c40b8291e7df473217bac5d501124db73124060e73d12396dfe72975d145b1468f09c918d59285222d676e89201d31365194da8210253c23f141b2a814950982f8c500c5f6b766219341180341bbbcc11f52a5d7e166ba8d0a22650a51a145881fb421992336210dabd204168ec82f41506948560e2bf2bb81b899cf7850642d99a2edb33114232fe799d1a195d7ce0b9b8016208702204812a216cef2588ba1d91aefe35e4237de2483086af32bf343843ac70ce635b810b8edb4cb0a862a6fa1230eb7c81add3e13722f2dd33a25d289125175cb68e7225e970cc21b44882634148d04c3743cc32423177f2bb31eb51e6436ae720702eeb08c920baa4aaae0ea6916c1467922f0a20b688bc81598bd7d217fe6dfe2083257e6076e0ef4741498ca6d91ac30271631d080bc22fc9893102ac95225e27a0255423e7f2561d2b1b446a7138b82f4f1bc0708c914eeeb5be1c1d211b914d09914720c5aa9ea3cd289333388e6019d0ff921ca11ffbc54831738fdb692bfe657f31e6c5334618e435b1433f092bb615c25a2fe1557ef974126648185157aaed58233e1844e1ddb7297a227143f15412a532780aeb20e371888c587527bd2d2350e54a140f0d10492450b2f66fb72be479b56111fe17a11d40e2ae92750a5f8c1df8300eb0d9c642380b6f2b5c68234cfc480e553949907b58b9d927078e8b50aec702250bebbbe301c8b8ad4a08d061c231a8db5d7d09da65e771891ef90a11206d0de248d291272434c04e72935683c024df2533730669669128b9d2e3b30aedca0a0cd927d9a1521d30c419d38475e0d4a9832b3dc35ced23f65c20cd1d10ae428352ae08eb1659a5d191a06559a1245a73b7608b16c7660bb216e0d1cd627de708e6b20f70bc3c91b41c7ad95110c6902f1d22e7598e820077529b331b99e735969c6aa80a719ce571ea095ba11e94b198e0e90aa6ee0f86ee56f2f444a2bb3002066bf07822698f063bc6e841b3feea9610543921b8e3b47076064b78ab717de63c8b5a14e21ac610ad72c57f5cea8a48b4aa87d04db8b4e7708871838e1c5eed4c7325763cac2129e411328c93d80109b1dc20752e68feab58c0e15f6535aeca2356e4aab0658ee85e33560940ed3578135f6c58232740865933e4d5753c50b3f81f062c24771c3d343719c460c0759d8245e7167851b2737de49247f54e99821623673e15285fe9715177df664755f1ea0b73c27d23f5acbbd73446f2db3c784636770552739de025d7542a091482fd3a512513fd8b08f35bea336b19ce5c0dc014f280bcdc6c2a13eeb361a14f8fbd7f1c1c253c9292c7bf2b37c643a2e0ca381e8412b210bef1da79e84e15a862dc3443ee2ede1a14ccf9209d61ab3e1c75edea21912cc8641a479c79c1d6ebe934188189ebd2b6a3566424ae3e94116a75b97d32660934d232c668870e46f0fba0a7f3a6b41eab584bb1dd874ce53063a73801c6b9e2e00ffe8d4f30e8483cfa0eeccbb0f233fc22b431bf3e9e02ff4c6f5e2edcef17a23ac8af83214b7b028230f6fe2823e1ab851142dd955d310a1f6462a5fdea0811e4ceb2b3d21dd9fe22501c030217575a9c2799f8bd820200450409500863119e27c5e91452a62e510fa434c91032799911417b2c3c31bf800972608f5e1e1135c218d0f235d9301a361a20618849a5fc291064bab36b3534d50b33fb49d2009aa6c71a59c12d81ab93b9763904e6c6938a8e9d66198d91c802cfce7e4e2ef54ff2c38d80c55f1bb9ca7f5290cbacae3041ac205336c28ddd27e65fded1ce8beafe0b1af604b106e6127b1ebbb1313182adefc60f8c7610b267b0e4e4161e788bc2cc9cb49f2e9fe4f93106307ac329977e989234968e202ceff2965308e2575830c9f59441f048250021316b14c2ea67e74b265cca6dd1299b439e11e729168178d6305411b1e5a381846bd29f1566464650c835deca55916954027c2a87645d236d6e92231c04a808356186a10310c40a1dafd0b7e302c20ac82b52e528c10181ee7a1ebccb59409534fb6e0d348cc6631a86f0101a3fcb8b819e190dd52e01312f20b827acc322b079d8711e48d4cf0fe9033732fca8b4c71ef544ae215a0280a41301da6013434ee3943c964d052388eee96c0777bd1e30ef1160211515a44e70f221963a083d2ba8e166d621f90bfe5e5ef22d5a3f5133bf4ced823ab6201f231032bd6111032bd6121032bd6165bfeaab09acca1860b452e77022e09d775213cccaf6277ea2d33078e2bd3b076ffc6a939a6d37901e9cd37c31ed3da4010fc266b0c4cee8712a07af200fd095ea10b7123b232a60e4aca97a0b58ce7880979b35f10e0668a6116556ebbd0cb67efd507b7a087219ed6ab9132efea57e34b2047f3073fc839d07f8a4f9b07b82741a131e038ff3198cc8392af296c181fc6561b5527477fae256bef9b647f04f75420579307711fdcf9200926be4a11feb58a950d034a67709453d489192a7144b1450a6964176b30d6c14500681b1325f7b9b17e437d09174b6c3732166e6028114449c6113922907e13797a8c70d0cef72109585fee80994303a457f88ce44287a87d07255006d10292ef99dc25353107522a6cdf9f25106c969246fd2f0323b37f16b2866e5d9431846d52b49a89c0f43336418ab3370e2cd4204ae27201fb65e4a33157d2f141ab749424373f900c021a591b0c0bd346ed11807a94e20d7e6d9041f343bae732d170e9e4387b079c12ff52d78091ab1a220936b3602288f7669227ce163422ec802d992a9a74d702a65c65fd36536701417542b2570b6647b4d1d1798bc80996adaaa0bcee8f95091b561222d38118ce31ee1fb8233445f1a537ec7c7b5434a1d374372686400342b0eea337b621c4622e832658498e12dc82f73da6a939306a97b3c6fdd52334243176733c9b4d10341445c3b3315a53e733b3fa28233239cc4a331d6d4ab3127a091c2eb31ba8f311412e8331ff48cab348bd179d31ac0ecfa3d0530ab23a1ea58b938f131294377d420b82f3a8f0cf323ede3ef310a266b531186d66131aa29fd331467ec912f7ec20cf2c127cf532fe4241792fc91a1b23309ec58d32463bd0f1d44e2837263addd9a2a726c76c090bb05352a4bd9a1e245372b912449878bd1e5efbe223394b84043395a228523b7702891541418622381948d5209a31dbe1e4a019061eaccd22838acaa7b0248ea7d5a34ec15c40278f3c36821d9d6f9a14400d21f52020d708303f53e8819ca5e5200989cfac7078447dc209b0da5c4092a3922b0d31c7e960b23769640bab4f0cc09f3f781509cff8d690ab1d94f609f8ab8150971612630b1dfe3c40920c302e1b1207f5013f10280e1b9989014129ead74511f6f6460224aa1b110f9eb35080ca1f988611617f8261574bba352fc99352a19200afef15fcf4b220edb67dba1ec8abe4612a8f8dd6355f531fa385a22776341185b56073f874341d00287e933dc72876240eeafb31c4137f2b22d165ddc3431969f92431a4a9f46b4a83ce312e5ddbc5398f01d71fe6fa67c2ca3a080242f3b25693ac90a3181223c5b0237d70dccb2a133503d472f219502df7f97a32640249950e66df31e153d71fc733c0f58981ce7bdc7f13d16d2631f82881971e1c42cf336502e1cc245dd1ec534bb2e686319a00f9f251bbe43f198420969383eedeb71f3e3703917b0cc8e806e6ee86616bcf9c9d0ff45b4100f4ee3aea313c6c8362dfa1fd531814809ba121ada9041a5dd2ec410e46d87f0ab2095fe0e866c6a90ffc454110c8c2751b0b18a15ba0d8796ba5077424a36071a8b3f4291e63ffe3153efed10d1c44c7118a4998cc25644a9c31845d9ebc0f204e30e0d6be9cc03f43c591d1b2aafc7c2cad1e31f245e7d0de53363d1c91e3dfbac20d9b90cd911ea7c60e20815dc3616056f4a31f391f90b177ec27c90a5410e040ce6a931531ae2ff1b2dca864a2290d46f1808ad7d5ec1e09e372714c10cfd3087b40f36152a39b6e204ea5aa30d66e555f099390b1118691dcc11f6c236241c7b2e2e40bc5590422041d865116fb3f0922f2f5530c19b64a6bd2fb5ba5282297e731f351993efc23eb91a9f0d9771d242c0e1718c42bfa41881838846a918f2f0f8c1d990e8d511a976c5521149034a0e11346db253901af92060d664329a996fd1121ec875207fae2fbf0605b109c133bd76dd1767e87101239c0b14254bd9e4c235f57b831aa14a4f21a2f28dec10083939426efaa4ea25f9ec13828821fd3d09ae64f310c24e4c95262c98cde17bf102bb127ac67552802c2dbc26f288b2912c9d662b20245a4880d344be6e3139d4ee220183f94d231f0025f1cc8659d024c1c46d10fa8055bb11c7231120eb3a88f135280b6c222ab5665320d899bc90e102f31014c59bfb922ef6a1aa2637768292188a27aa0aea2a3fb14a09f63d354c8de460cbeedc0646b03ee3f1903638a22e819150316e5855ba13f28cc57144a517f22e430dc531838accc41575a3c840bebc55c2168eb805419c0d30d50b865907f1a6b827822a830974d1d90a620f133431b791433f8bec09f5a9fd10acccb33e14bca24fe1f0c522ab10f15653435315611773abdc9332e711837f2587f53303147332862af4caa7f297bf5cbc17dd6156532f2e4ebe0e0d6067427137f8e5129cadb6e4b944a5da20d5166e835107c8a947c32469b12fb7ac3426efa83b913896f8f32790cd436374fc20c4323b88b8f29ea5a2e322290eff52e3f3ae641a4cb1b0739f7e70452f1fe752e2ac6b9892148b71b793a4332fb71c90bd5052778006c332afacb800f60e9d2d29040bdb820d0571762a2904de01fdc5955d1bb688413148c5584a198cba6401fafed89415e86c3ae14902fc110f9858a571638a018d0d7d5ee9228ef74fbd12dbe49cc331cec46f0b09b58420b143f69f27ce1112a1b7490e8c25bbbce891687ac3f826db703540b68793e6266dba39a1226ec7ad1115d214a1a4c3ed88098b223222f661857717cd91c0c38fcd5156090d81dc30834321a614453870b3de360c960d6b419582c84f07c22e5f5ef6e23012a9052154b4bdc51588b19520bf6e2ef23a99ff3617cf0f5e2104ce2ad90c9a0ba050f5b3be540c487607031ba10b7710478ee20389b9b39820970ea0e2759fe6a1167e4ba0b15ba3624418584bfe208e30eea3149fa48bd4705023d225c360b822e1dd3536160145e742a66723b62851402e03e8ee3eec487df0bc02547fb17b1c927451c38f68a28f33b208a2a572d460b62ef1273de245e352f23a2216c2f40184370f22832796f1c910c3652916f773c1e2ae460423acfca133cdd480d812de870270ba6978c11ee2ca9022d4985f0d229202f9038dab78f0693f26711398fecf463322c575109ac8a9a316c6a31ff37cb57bbb1f623fcad0e08795a02d12ef97a2ae67b23227ab472e60f06f82cf23df86a410e22f18851fb49a2e411567cf0212d5353eb3f7102a4f071eb74d20abfedc76169d225e6139a7975a1ac85729c42416b513141fa3847141324f3a2e3ef006e4967983cf0e01853b92ce81ece332b50f1b130abba313127dc5daf2f4bc46f724a4363462bb1e973e23d91322209c6a950d0a03a33ac07ca33c231df08d2bc38fa2e31c15f1035164e66ae8722182a1d5a17dd2166b09cf8fa03293eea0f6208b71c23066f030dd223b27a7421e29ac163df811ca32ce66b7fb1345ed837395832bb7232f3daf126097c91a2fa80e78633f56a4450717a1511083ed3dde0aac01b7a13d286b73087a7f7a508e3efd040a776ceba06717613106b0398362459d88800b2c882c208c7775600af13aee8349627986092b70e5b0b759b512398fc4796303efe43e2f8515f77281939e72251520df834c05564426f8902c2116181dcc2173929453951e976e3d00db9af0ef44f34a1cffcc5c62586996fd172a0c4c72d8dd3bc4353ae21680d7e84cbd6562cc7bb1fbf085bc4518564a908ef1f64e15821ee7b1d78805fb1d63e7ec0362c7bfff1da96c03b23a72c7fa0c2db770b1df502b22340bb94fa6f90779a4298511bbf2bd005e8d27b7930a00bb0d25b41964fc36b26c3a2ff5290bca7ee3696ccc620bb8a59d72079c9e4918fa3bae61f7ad719d207ba6b56108e6d84e0c7c523b936767ceb827012f58408c21219b3b93126d0260dffdba39f15ee602c964836e2632611f820851a0b7090417b7736032a64114612a44327fb58dbf331a26818313e918cc214aae1930b720a951310fad67f09b4a23e436d47c2c31fbc5e5b31b3e495ea0d4eb8ae01bbe3fdcc0ba719870276de2fa227dd1487d0e15ec288214d8b83b26f90b00935d0a333f0b32d7d763baba846e41cb96f8b3bd1c8e0c2ff12ceac199a027db211785c221aabe11432340c8091304cec8b2363ca8bcf39d8d3f2d34aede78553b6325c534d58a78b0b2be92ce2617afc30355b6ffc636c966b3e28047ae551365b8623941caa1868f9d7c6511f2dc180c3e2bea6866c039f29b3c3d4335c4c89e83654546deca4310dfeb004ad1278be0f7da72d30fecba63b299c1b54a0daf5a3c40f9100663116b6d9a913908d540137db86631343c678a13dd01a500d74b041d3223434ee09c39b2d042827802619a3820ee30aec8fde1aa7acdd923ace268307c0b312406c863cda0637468e11a2636b681c58aee1812531e8e6199b8c4cf130751ef032e289e8a1ee2905ce0d96851d014496c1cc3aa2fd2d03485fe9501343c25e912a25c2c41ef217aa22f2f5060c201d6eff263a6e880a1cd55f1c344e93a1741a29dbfb02ce0e93bb2048b1c4b1e75c9fe440055effe48e9c96d739b8520661dcaa42d428a7e83b5349628c3b21cbbdca8228fde0870f66ce3e13eabffb6f3a57be0de37681e60c37084ea133211de8de34c2318aa14276cfc52c08e82b5093aeaeb92299d7a634cfbf81f31a2ad6c030f6d25dd23065604f212bbb725c1ca4c47612f0b19af13b0b900df2f71523651aa4f787645741fb7f45cb441c1294eefbd8429e7bba7290ddfda81c1d8410f3993806ef0ab5c21aa12c129db81d7e88e6e1a6a8687a158154a381bb0e09fd1d75f69a542883169d27e8c1c422d1f09a9c389bbd5e3223cc899e3793402751e0ba660a446abe64c184aebc6a1fe715eeb1bb1648242ee26e4c5133843e321bb6d19fd4c162fce32056cfb4419a84c16b1950dcc103f29dc8d8278bf90bc16f5bab0327f01768127ff4212225ab95ffd209f3a43809e341e7b4aaafc9ee1cd02e75c0a5350330147304a0b0fe815db72341dd9920905f1cdc0cf602922100923db6129fdabd110e52852413168c3ba2672ed6ae1c30fc43a463b70d29264fffaed0aaa43b2e17a8f086d087d54b1a0da6ba196229c30aad3398205f116be771f1263fa8dc04d099a10f344373b093d959c98c33f1bf97f09ca2214b1810dcaaf0787f452d06445ab9f0a27a3f2034bf278a20f3a66f0629ab838290dfdeb4f420ab34b082f0a82b7e0f7272ea61b86dc3ea30bb272591ad9716161ff7f83b92e53e070522947844e21377893121c74f995176c90f7d4bd7080b729af77b75671244980279945b1017329cec51381e871b2b6fe1de81a23168ff21526dfbb17f6174463724d74911dc8df0dd24a80da7b231436d9b2307617d80cceb79e72866fca48149a9ac340ab2060463006495b91d359b5c5235ddd54f2814ba0db4d1756d2142bc0464d12dbf6fd51b903fdfa1b7df48981a5e996263545e10cd1832270c97757121f5148fb136c23e2b3d693c219e2c613eee98d8360160271210ba4fe12295f9a6b19f4a08ab2465e112c1080ef22d286a6eb4c4111e813b1104838f2199b3a1f0222b1e18b09345e79b1aafe696b2ae180cd30f4c95325137b1dd6626bc18f26141fe42d8104d27c0b1780a27a61036404650edd6c59b17f25cf6321c57dd2515fe8835736ac34f5617f860150215398be51400a447c1a1bbdc2c07dffa0652c8c730be2281a8df510e2060820b9512a140b65769a45b587d3750b8a58fed244ec42871251c033350d4cfd1a25eea6cd311222afe12a04ea7f62c6c902701e6c97ce615360ec753118a64751e53b4aea3db4e20963dde1901119829ce7333452826f2470e666f4a561f8e02818e380723dc5d34a23aa977c92c6517ee24149b8d412e42b67ae27fec6e831218814a636f04239b1422c7ec22670f32d215d6c763d235c1ca9b2782989413148578dd102f2f3d4105dc987725a4c7b5c0cb7f1deb1e2d3764a87d0865701972bd9c74acb4cd48236dd3f634d7eb186c269a824621abba63124059073680e71491c1280c508ee1343bcf1968af2dd4d50623d0c94fc79eb682330ef0db1c7285a553af00dd78206a64a562dfb43e71231fb828827850265215ff02d1c1162b6ed726c64b43c4f99751581bfcea09d17144135c18a827bee213e0e923268810d29553701c3907e0142040efc425172370f7127239f0fd885cf0a3b001c2b90d8942ce66a2b2f7c4609314ddb74c71623659b81c63e9aeb2a1313dc52162309a426648e2b90ee0b6df80e66ce6382122343112f17a71be15a3dc75b2a974c09f14874150b0deb8cc2f20677541d0a5798d17207e8de152f104b5bd1cbc97bc508d1a3b4d3ab6ce28a2e6d466ac22625fdd7203223aa52b53c30721fdf00f7926576794f32df1136c2836ba2381e89c572d11664f65412c9c702b1668810312ede505202184c461232b63d6ab1e6c6864c382de44562bb0c6f901e0e6147a2afdd84ef150151db7174dc0ed628341242320e7e234a29a641646242a0d78e2312dd0d11128d9deb13ab96d66242ed1dc81fd6bfa712ed32870f355a0aac5178396bbe3dcf79430181294a922096f47e842b0b8cd015f5f765b1140d76294656a91e81bf840dde27dbd49ee1b06bd0060e64041dc0d2fa00361900fceed35295812b41155f34b143fe976716494d3680f59a9b2d326efefa617a1275323876a707a1e2844e3037b2184b80d10830c934185940c13a821646191ded9023f34f16313186bc1380bf0d41c810b3c54dc111f7319e0f6615b080e30471720e91bd9c413366ff4a1786690e6113c749f92c3384abc32fd2110214633bed83fe30c344526429eb867fc0415e0ef121acd0cfa8be3f238339e9f1d7f3edcb1a1cb452c4bce3e81f170096fa012eeb5d8431cb46c2c1ec0440a02d3f936a02b5e0149a1f16cf26c38f878c1f328b2c68e510cadad629bfc39d74889663de3662fb2f5324e6b44032ec31c8c34f6341364fe906ce809954f336340eb8bca481d0642b34a00cead208f2571931e1f624c12f83d82577e922a0e0b33aaaf70ea50c409122a594ee21190d1850ff542218110a3f6f71110de62d3cbeff5832eba24725238e5cccd1a050de830fa050dce10c5f63c71ff055af41f94f124f15918988911f4bb17917ffd07664ee76ec7c4404d1e203ca1077ea232a0eef0468e95a54362e1f4152a14495335c2bca0042a282dbaa21676c30410a2620990c49a236444ca93fe62360e3d1f228a59f2e352152e151b1bd1f4c4d505a85f116e40bec21a9badfa3a732b2474fbcb58652f0c468be212a54de91b1ea3af519354bbbb4dfb55bd91e936a6dd320b016cb1c0c93f1c2285b7b9c1f58dddb83322358e02b3566ce62e7e16a3948e439b29203448822496d6fe1f3a63bd1b321d510f3121d61276b3aa8a92e0337a8e69f352c822e940a68c61718621db173208deafe2db52c62920bb83692331cfc9f71870c86ac369ad86ce26b2ed687374a9c6030909a6173321ffd04632b1a941f1251f1f0132ad0504c1a4d35d1a0cbd2dc09241e34c810e7608e5e7627275ef326d38b14187563fa6132c769f446d1aa04832bbf4a5b1c1f3db8814a009e0122d4421cf1e3e7fa1b34f86b984408567f55299ce900a155a19b1a4567ac5024c0bf86b84c7471b0b1699fc816161fe29de1cd6b49b54769bd1e71ce996d2e32069c075481cc34062259f20eb490e714c40fced38321f09199b930f50315a36dc6db6e28885c99816c2857c639a54ad89079614cd91c8c7a25b0f4eb88bc2edd3881746967bd463be68dc9621d02fd6816dce1eb42ef573669247dbe90a3a359b68e0d84d01260dcbbee633e8eea3f80fa205306139ca84bf20162ba4a234c07a3b237627fa4213c8b14d3871fa7d738f94bfd6227476bd064a6e11782158ddc681f75e15b4160d0b9b216e3af81d2b7923b85258ce5af22bdf4fc641ef479b0211a74d1d51d75ae6d513399feaf17beefd3227b85d2cd2e612993f3395c25932f8aa9c1039d7f452727215ae90261ecfba02f82369dd1e0576e6235670dbd8189ed2a9b286f40248278ad11ea2326bed6a14db4869c47e519ca64006b219930007d88e350d33515749f33cd02d0e1b6a63be55aec707ba7d32e412aaca2531a2202c6260cca8a21c8e9cfbe21f505ca91207da67710cf8e3d1328bcdc50125b00e7a279c607fc14eb7ad2260d493537281b81319372081b331148db2032e59f1b3819d4c0c19134a9fe7c39bd4e1721620bb7991871b51c850b1a4005218bfbb071ddf9b282352dd508429e8c483933f2d9e1746e2fd05208fa56fd43f2bffa333f2b0b73d294ee9b4d463b1b7ca30d248b732fc9af26947f3da4ea1e862a53c1b5607d2933f6038c2317426124178fc17d31b8a103656571cff82371931c1044b8bcba45cfdd96d711d1924a11339eba05189fe3a9926fadb4e61ebd313d2268ac638514a046dc268e423b372ed3de63212a8ec90a0ef90ee321eb28458e1be8c07241e1c4cdc8185e2eaf127bc2aaaa33469680c46bf3e6253a5f2e3b9212153027361758cf62e349adf62266fb4221cc65c3ae1fbccd96a34d3988ba2555d7d212041a4b1e32670addc2353547bb66b3d9bf60dac2423f31e66a80327a9f08c12eca7e1a70e513e2032ef909701133239ee22ada341bf2d80991f0468e592ab433e32eff3a77cf07d258bb090934c8d672c28f65240234b94958642587650e1b02b813d0a65bd1f50e4bc03a627f116d5033a2cb41422c20e65147fc995d3141df2cbd159d0b86c184c78b1620559e2a42050164ae18b36bb56202b3343b1b411029e2c193a1ac4a2fa1e23177e9bd511696c53e26f136d70d35823d4422f1462a72216c61c0725765b1da157e2db9614e4f88342cc80e88a12b56df9b32954d3a423e5613651bd13025f1b51eb55923cba2ce70f2b7c721289da1b3c10b702a231394e2efe2bfb20e0d0f3f763103d522694e4dc4b82a328904184b182f12fa52d18b1eca1bc9f21a01490d12c51852e7354121583a7218ccb67f81193e17e14869fb16255c8bba1435c49328718e470b7328a41ca8f3cb585f0d1dc1bb1443fc074e061dfea5dbb0c99e4a8d1da640c4315e87967e102241dc109acbe34f2b73b6b21065cc418d598c5de3e30fc59c5e2448ac9451192c632f12193d3bc1a7d2ac532ef3c7f9c29c827fca0f4e245e5438b0d76b10562f92c2a043426721f2c555408e15349422dd4a8b72c3cc8ac81fa01b5922108fdf011dcd1bbcd460b3b90019b29044c19b9b985218229fd3a0b1c7aa760969d0f96086df7cfa0aa874f2a12a035dba2b586c7c9316ab5c924da37de5d2a60fc26b7ffc060be19fb6ac942a7fb644b1d8ffeba12f570d577260bce0ea0eb8d27313838e19771f86b0986212df38e81e1d4ea0323ae0a2192a7975e9f0d5885cbf3496cbd9412cb5bba04bb0db12514105dd532a9ec367c2e9d982f618758f3500c94845694f29de1b33b60513c52be07d3236b8ec94a51b8fd896e18c9497de43c08949716cea7c2c24fb8e9c32084d62a84889cc34414fcaf3ca2b208122e2b09a74ba1d67f96f81409417c510369878d1bb99dab8159557a9016b10a12b09d0684c664112a0f72e6563856232fd96082dc9ee4f6337fbe5902981eccf02264524c913a67b6f61d8f2033b24576cda655c618f3307b5f31fe0e40e07090ddc0bf4712412c93d0c6a31017115153fa53a79488931ffe53e831a2e5783b12a1816b3178f44d3d14ec5ca7e0bb6e34fa2c35809a610deadea06826d343b0ec8027e04655044253e44eee1e3c85726db1eac37543487edb5603e7d53f043674ca45027d197ea43dc847e5d3097e7caf19c721fae0a24e248b105895b96080dc3c7926255b02315ada80eb2ffa993513e4edfba231c19ce0d227f8e51b165d7c0981ea1793660eae495621a0b76dea54331ff8827e7d90d4325378c9a140c2a13d18632bbdf228a6dcf513c697b880d1454c6e4b951df6b4790736b10f84f8d2f1573d17261c8a6d5584644ee0f54b10ab2fe118f8f36f3405e7a9e1bfcb2c251a0c97b0638cc4c9470b2eb1b940e4c3306b1ae4a7bec43e76c6b22d82293e3104aff8e93ce9fc824158c437330be7f823033dfe43146049b4b4113839ddb92f2de2091136de9b8534c8d580f1a830030510ca271bd214221973362b2d89d308bcfb7c2176a16491cdbbe31f2147697971894019094464253c5184c823c146ad22f8f30266c7813b203a57c475b2273522f9cebfa1b8d79a883a207b7aa3625713603a50caf7c4ae4058ff093c2bef00b91addc549320bedf0eb4feae04645dd33a3209a80f312e982cfb27f24988d2e4514ecd48c688c1f0ae082e930915c37914a976dea842620080b29f8883981d6f8cf222a04157d308a01da952350740cd22db671ef133b69c01105c2b8cf0e2ffa094136fb3b9f1671a1065405fe0b0131fed4f2915fa820c53154ec3c70ec6671994e43b01d34e8e56d3a25c929a7047204dff22061dee6a12d9e1f7c2d927c6420bcb01c691bdacc46e2b0149bde14a7ebc17338198b5455453ed1b18d0555b40b0fc2a14392ac0e4e38524a98b13252a805305ea5cd633d1f2c11176e2eff016a0d17be450f7f44e2c1cd9de11d687c2690c567e66635748f6a04599bf491256e608ba15c6d99ac1a81c56060970924d4179f3c02b3ba7739fc17e8c17633b620d78c16f1d7be82828cef8015089afae2d0bd12251cf2ef7b50bb748d07131378ef04308614c92dc51b45e53eb0f3fc2dfd889f42cb474ffa52b9be80e2d05dd22639ef95b181c3c8b4a22c7b36d1a1a371ad740c64394da244162896134f198f220c603e0a218cbf43e18617423d1c8e563b10c0c1945144421411721214f1fe30e8f76930a241d8f60e6c3869436db453a31a330c145166d590011a5f9d8a71a5aac691479a0eeb2293a2028c1e87230592353ab4a725d3e17fc0a0a1211e2edcd083727f277ee3285dcf0ac2997990270f98aa63308d08ee6e32619a5f22a1bcae89386767f1e1f3fe04de2834d74ac37310d4a016e9c370f35c69feca2ef7a3ff642ea432e01449db22632abf827f2fe386000287f78f8834c3f25721f805367839ab4879c2e28b13262fbeea18d17f7819380c72400202de264f4a0f6a580ef3de0dc8222efa877cf2374aa28c2c64b519b234084b0c36885763935f015b4a1609465a51c2a9935718f6a2b590b8a97ce34355292db15ab2670819ad384ce3f37150dc2b16660fc2120a59da36727b50e2663cbe8c152dc840314c2e641825f1e7f5844f83358f127e135ca1cb52605314ab5ed480e36d95cb0c37ea8ea2d947f75d33a0c48b026e2bc77e299934bda525db188234905a2a12c1694502214d835e921ba300f610412dff32c71c08ca2d8da04f23033dd1362d3be5b1937b7489141f0e0bad82095339890774a3284228bf43bb1a8aeb71112067a0c050e7db378191cb20c01d1c42a272cfa38e5d2ddbbbf2434c540fc43971fef2f3e638c00227091433d3179644a51cbf9116834db21bb045b6f691a2c04add8231d396567125f33fd8186de6c7a18a9de8ea593e510df278220f912106bc42e52940945f259629691314e13eb48f7834e1d14dfeab5e26f188e35237d4ef65244725c903305357b41353e1dca369ce407237cb59e0c2065f7f8e3fb99ce6c3bd2d0d1f365275b9731664b7324404e503a20e8528082f0e702c7192e2d66c21a4e911a23abb15a60fe3c3f271256bf62a3f85f79ff2946ab8d840298ed0c3ff51a15050eb94a2f19f28ee061b6b3f00715aead7e50acba1ab943ff2a6db45680b0582e51db5002fd808d2d284d101623a17556f10ef64d0d02373fe3023211d368b3574fcf9636fd181ea1ff5cef044dc282d6c4d53b274456dcbfbf73fe5ca1c724754768917bc28b6830859715b1cc7f890336b33554e247004b6c32da5951d2f737ae453012a8e2b1e008430d26cc5e9bd248e8f28433da5e85c341f338d14c38840014a6cbbf57331d70f43256e7fcf52765be2b82bebf233030fa27acf325ed8f272d7ebbf1b18f1fefae1a1cc173538f93e3ea2a0b5ae812d01f606c41fe2d8813445418bd2b98ac9901f05f73df3bbd8098d2f269b96e0ccd12fe60eeec3b2e185624b263a353e26345ce2eafd3ec4764541d1a6768c40f566b9c4a9d518a3385129eb6258720cec37bfeca8610bc41b9f57b508c8c09de847430b7a0c52c2a87f50b4379e134be20778911126f46a8b80fffeeb702bebb35e729387b49337b9578071c9bf1ccf36a2212c00f032fc94268971fd159a1ff3ad2e05fc215208c2823b44ec77265297f57692193710c9009dbf436925d9d2b913f18543ad070aef82e3de289e6753558ff8f2995520fb1e36918f20e820d7dc0cc40be3b2701eb2173a522718c2d97fa6520cf03342d591fbbd5f30d7871df29e4f0cb950155ff8431bc58c721c70d24462e3c84f953c85858854080160a1112a4ac0542fad49de1c3f2ad031ffeb06c2335cdde4c532d6900b25e85b0475104cfbbd3ab8d900730d678aa311b20c6ed125c7c66d1c8aa64f23153a38263c50b47da220e06cc64019610ce2ddea2c9b5244b07882da0273e34e7757a6e331e7336a1b9bba79e422cdc3cc2ad9e2d6b41def02841828af06a4a402f2ba3d5043ee43ab9467463109fca810a6667ec630643856e3c432d6ec15f24a6f43930de408473cce5f522130cbee13e8e38b5108b14b811ef73b6c33a7aa4cab35e51a24f1a8e0f8d42f5ca713444e33426f2fa2ad0f63acf642b119e5969a5204bb53700ffd9b82a3d336849241b85f74e2f2a9c0e20dda98f470e7ef4e9441479f95d1b390254b457089aaa2213d543e2a3541e220d6b4e0303c58eb56a15eda34c61964278ca28f7ef91c46d7feacc5bea1496919ae2395224db8b1bf428c1e24546e6dc05c43f991458144e98854274ba53a214868d722103b554394339e12ca1d8bbf398479b5e3573c2d1009d331ad438c3cfe851683e747e358159276e16341ceed3524ff2f2b857babc63f3c441019c30499d572275d2f00444d95f46131c03252b15e0737606a1ad846486ff26b1126cccb8781347d2b7e0e505463412646d50c2f5a688c013961aec21c7de63e32fb5aa8842153b639744f06fbda2a2033ed50ede4d2584eb6ca18631881b83039d9c47122c428de0232e4793750f46731610eaca1e961ca4013047867c8a60483c956ae315f2b3b4343b95f2b2ab08c9e831976f6582b64bd4ed1e25989161d80b20b0145f1f00a255a1fde00b6dd9b4133c0f4d7029cefb1dc4437bff424c6f425113ade347e014ee449fd41a00809d3d7e328dd4fba5b89128ee7779551ca05ae028af1c7f4107039c7a13d7cd7460a3c8b56007581d7da3f65e300117581f6d20f3c73e7f0f6719c6f115e84f9a19e336d9b2979acaf410337df0315874bfa411168740e12b7505271002ada31072e186fc17c090bd0071aeddb309dff12a4076b209e606ec1c6840edaaef830b97cb8aa0e20c9ef3195c6b30417ad9f0f5207798241246973dba1ebed556d1e551ec0727ce979aa20bc5d47d28dca10451231ce7240d9fa0d521a2a202e0060200849191aec7b708bca663a2afd9816f0feb003d311d4d8ba412f4c680410d19ef123acea6be012f7bb2b80b6b31b841048e0f0c0b51cb71c1c85eed7006f9a1eae307ebb9f3104285a541734d4cb204846f3560692a3477067b54d5a11258ff3e0d148146f2e4907e6e15405abe919e82a03c12e7f3393224138dd023ea5dbe71c6920b52093f11883081dab35e061dcf07423b722c541804bb99b0c4b009840e1b6a4fd0ed8c5af00dc1d05d606854e42408af3dd8412ddedea01058e7338041410b3c0ae65160809266ef380f3e793c5152eb134411f37e8731213605442354f4ef810ebf1f7f2db8df2230f9f254f81f52036d81a5b2ac4d065b3f6bd15de108bf167ca9a401e2096920105b959e91311599041bad52dd00fd82203c0b83fd3c4064d667f213c35a2161297a9e66094a567f2187c5da020c36fa5f908fd25498176a5c2180f933e4b00ee1598d0118b95f8912443b5bd1720c1a531535a90a611205573e2e07f2f9d0f9a193f610676efb022474244e16eeb43e11fe243aaa126a019c929f8d987e187d3433516dbfb32e1447a77410fd929c421d4ba02da1408729f91519d073c1657b318c044f1046814c515d9c060744490141a5984b23d5fc84f1bb7630c4205fd83a30a3915b330c6dc444b2146585c02333779b912a6d8ecd1b0a807a308f6786c10f0b23b2f1427ed3443f04dc17618a9dd590180aca5270ed351eb00f2965a6b1065e0cc319aaae8d00a846627c381973d0f0e93d7bd40c12632621c723651e2316353e3125aa1ded11a052f0c161e538671a14785102a33b3a2f0cc50c271122eb81f41bfe36c44154518e7b0e9b43a35129c4fb08267c33e70170a2bfec1cc41a6b1130854b4819f74699420beca8260e32cb24d10aa4a81933b9e17b315d815f6712dafc89a21b4e66801a21083551a001d78b11f7c1e84099438d4126d5085dc07564f9b413bb52a4c204e64d5b30fbded0f12ee3d7440d20b339e18168c9e1190920de31c4d9ca2f24a8293a31d45638a52ec23cecf2c973d3e9277579f843448665262d15c155f1b56e4f8b10aba6a7624948c6241341a6a1608cc59dab0632fef7e136aba33125fbf42d611049f92d06b7cb9db16741c81527fd4571c140f890dc202aa291e2165cbcbc1d5d42ed12b2daa24745139e6e01b46cf9be270ed8b7d2735449431a4a57f9924b52b8eb0e814d36110d23ec561d47e06151547bd10926b4b1c6f28f3fcaa627533dbff46580393e447a60cd9128332a3f2229b7d791fa41d731101f8d20d1416ad3f6081e9d24c13c5f04f92cdfd64101e1fda6b626fb8d6ab2c4b212890d23cf13a17df1091329a920e1e28c5aea89254a237a61e9374e67301735f8b0ba2afe40296ae7231113b1ef21156a0395910a4ad2d41588fb4550fe12208b380b228591ad6b8b610a679e6aa0eae842992424050480df1ef7e408115017a47347914d19d6f79701d271847c2639fab5f1168a565909f1071f02b7a5587e14454a94b0ff42d3231282bf3c516f523fa6155144a6908f62db46240ef10560d34734503b894fdce208c86b832af9a53781511a82410b3b63fa915140fa3224305102917c212ca80ca0682ec34fe4860d0aefd36380f5fb28650ee79588c10cd2688a152c4e59311bc8b54911e1e632c0dfbe26f60f0e76629385750d6d0f27abf7e506c5e6fc41863f3490cc7aa6290f5639193394d2fbba2e16d70202ccf573c523d57ef171b548c301272c0bc4d1fe30876c56329c2581720d75e8165a5dd8921da27cf81c77750a6189e96b041df5b29151ab1ffb75189f2e84146359914d28e0cfb3006b8a04d5207d804701065a46cd2e8dd7e0225c4fd9d718e15a4091b65185e43ab4930e9150ee79df1f7ffb8df19121b789152a1474f4e1e8ef0857d70a6b54cc32fe6a12316f5690d2ec70c135ba6534b46af4adbd24ecabecf312e2029d2ca857cb7256be90b611a1f1761268ce81113dc1557324c1790d140fdcf2b51263034e2a1969d18b817323a8fa2603dcf4312fa964112228de2d41cbf068703fcdc54ec41338ad51350df2c7e0e96e91b624e78e1120f8a1c6e419bf9ac9214c6730f8107de24ff22226d34310b76af634b7e0fd6a2d2a4b11e1b9b5dde62c5e759a41a1be8f751b2fe0f401487e4cac2d59791732313478192305936b021d3430fd132f2d84d04c70f0052aa27ac863aad1ff4c2995fcf5f1da9fd6971e9ecf9a6273a6024a108e289de1d63e5e2618e151d7d3954407f92ad4e46c413";
 exports.KEY_LENGTH = 7;
 const LEN_LENGTH = 2;
 for (let i = 0; i < LAWNUM_TABLE_RAW.length; i += exports.KEY_LENGTH + LEN_LENGTH) {
@@ -39644,6 +40063,94 @@ exports["default"] = exports.EmptyParagraph;
 
 /***/ }),
 
+/***/ 17803:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.FigDataManager = void 0;
+const image_size_1 = __webpack_require__(71781);
+const std = __importStar(__webpack_require__(59714));
+function* iterateFig(el) {
+    if (std.isFig(el))
+        yield el;
+    for (const c of el.children) {
+        if (typeof c === "string")
+            continue;
+        yield* iterateFig(c);
+    }
+}
+class FigDataManager {
+    constructor(lawXMLStruct, figDataMap, subsetLaw) {
+        this.lawXMLStruct = lawXMLStruct;
+        this.figDataMap = figDataMap;
+        this.subsetLaw = subsetLaw;
+    }
+    static async create(lawXMLStruct, subsetLaw) {
+        var _a, _b;
+        const figDataMap = new Map();
+        for (const el of iterateFig(subsetLaw)) {
+            const src = el.attr.src;
+            const blob = await lawXMLStruct.getPictBlob(src);
+            if (!blob)
+                continue;
+            try {
+                const size = (0, image_size_1.imageSize)(new Uint8Array(blob.buf));
+                const figData = {
+                    id: 1000000 + figDataMap.size,
+                    rId: `fig${figDataMap.size + 1}`,
+                    cx: ((_a = size.width) !== null && _a !== void 0 ? _a : 100) * 9525,
+                    cy: ((_b = size.height) !== null && _b !== void 0 ? _b : 100) * 9525,
+                    name: src,
+                    fileName: src.split("/").slice(-1)[0],
+                    blob,
+                };
+                figDataMap.set(src, figData);
+            }
+            catch (_c) {
+                //
+            }
+        }
+        return new FigDataManager(lawXMLStruct, figDataMap, subsetLaw);
+    }
+    getFigData(src) {
+        var _a;
+        return (_a = this.figDataMap.get(src)) !== null && _a !== void 0 ? _a : null;
+    }
+    getFigDataItems() {
+        return [...this.figDataMap.entries()];
+    }
+}
+exports.FigDataManager = FigDataManager;
+exports["default"] = FigDataManager;
+//# sourceMappingURL=FigDataManager.js.map
+
+/***/ }),
+
 /***/ 26267:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
@@ -39693,7 +40200,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DOCXMargin = void 0;
+exports.Types = exports.Relationships = exports.DOCXMargin = void 0;
 exports.wrapDOCXComponent = wrapDOCXComponent;
 exports.makeComponentWithTag = makeComponentWithTag;
 const react_1 = __importDefault(__webpack_require__(62932));
@@ -39713,6 +40220,17 @@ function makeComponentWithTag(tag) {
     func.displayName = `ComponentWithTag<${tag}>`;
     return func;
 }
+const RelationshipsTag = makeComponentWithTag("Relationships");
+const Relationship = makeComponentWithTag("Relationship");
+const Relationships = props => (react_1.default.createElement(RelationshipsTag, { xmlns: "http://schemas.openxmlformats.org/package/2006/relationships" }, props.relationships.map((r, key) => react_1.default.createElement(Relationship, Object.assign({}, r, { key: key })))));
+exports.Relationships = Relationships;
+const TypesTag = makeComponentWithTag("Types");
+const Default = makeComponentWithTag("Default");
+const Override = makeComponentWithTag("Override");
+const Types = props => (react_1.default.createElement(TypesTag, { xmlns: "http://schemas.openxmlformats.org/package/2006/content-types" }, props.types.map((type, key) => type.tag === "Default"
+    ? react_1.default.createElement(Default, { key: key, Extension: type.Extension, ContentType: type.ContentType })
+    : react_1.default.createElement(Override, { key: key, PartName: type.PartName, ContentType: type.ContentType }))));
+exports.Types = Types;
 //# sourceMappingURL=component.js.map
 
 /***/ }),
@@ -39731,46 +40249,82 @@ const react_1 = __importDefault(__webpack_require__(62932));
 const jszip_1 = __importDefault(__webpack_require__(10518));
 const __1 = __webpack_require__(65981);
 const tags_1 = __webpack_require__(24759);
-const contentTypes_1 = __importDefault(__webpack_require__(82392));
-const rels_1 = __importDefault(__webpack_require__(23622));
-const documentRels_1 = __importDefault(__webpack_require__(84495));
 const styles_1 = __importDefault(__webpack_require__(55644));
-const settings_1 = __importDefault(__webpack_require__(89871));
-const renderDocxAsync = (bodyEL) => {
-    const document = (react_1.default.createElement(tags_1.w.document, { "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main", "xmlns:wp": "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing", "xmlns:wps": "http://schemas.microsoft.com/office/word/2010/wordprocessingShape" },
+const component_1 = __webpack_require__(30343);
+const renderDocxAsync = (bodyEL, docxOptions) => {
+    const media = [];
+    const types = new Map();
+    const figDataManager = docxOptions === null || docxOptions === void 0 ? void 0 : docxOptions.figDataManager;
+    if (figDataManager) {
+        for (const [, figData] of figDataManager.getFigDataItems()) {
+            media.push({
+                Id: figData.rId,
+                Type: "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image",
+                fileName: figData.fileName,
+                buf: figData.blob.buf,
+            });
+            types.set(figData.fileName.split(".").slice(-1)[0], figData.blob.type);
+        }
+    }
+    types.set("rels", "application/vnd.openxmlformats-package.relationships+xml");
+    types.set("xml", "application/xml");
+    const document = (react_1.default.createElement(tags_1.w.document, { "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main", "xmlns:wp": "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing", "xmlns:wps": "http://schemas.microsoft.com/office/word/2010/wordprocessingShape", "xmlns:r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships" },
         react_1.default.createElement(tags_1.w.body, null, bodyEL)));
-    return new jszip_1.default()
-        .file("[Content_Types].xml", 
+    const zip = new jszip_1.default();
+    zip.file("[Content_Types].xml", 
     /*xml*/ `\
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-${(0, __1.renderToStaticMarkup)(contentTypes_1.default)}
-`)
-        .file("_rels/.rels", 
+${(0, __1.renderToStaticMarkup)(react_1.default.createElement(component_1.Types, { types: [
+            { tag: "Override", PartName: "/word/document.xml", ContentType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" },
+            { tag: "Override", PartName: "/word/styles.xml", ContentType: "application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" },
+            { tag: "Override", PartName: "/word/settings.xml", ContentType: "application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml" },
+            { tag: "Override", PartName: "/word/fontTable.xml", ContentType: "application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml" },
+            ...([...types.entries()].map(([ext, type]) => ({
+                tag: "Default",
+                Extension: ext,
+                ContentType: type,
+            }))),
+        ] }))}
+`);
+    zip.file("_rels/.rels", 
     /*xml*/ `\
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-${(0, __1.renderToStaticMarkup)(rels_1.default)}
-`)
-        .file("word/_rels/document.xml.rels", 
+${(0, __1.renderToStaticMarkup)(react_1.default.createElement(component_1.Relationships, { relationships: [{ Id: "rId1", Type: "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument", Target: "word/document.xml" }] }))}
+`);
+    zip.file("word/_rels/document.xml.rels", 
     /*xml*/ `\
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-${(0, __1.renderToStaticMarkup)(documentRels_1.default)}
-`)
-        .file("word/document.xml", 
+${(0, __1.renderToStaticMarkup)(react_1.default.createElement(component_1.Relationships, { relationships: [
+            { Id: "rId1", Type: "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles", Target: "styles.xml" },
+            { Id: "rId2", Type: "http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings", Target: "settings.xml" },
+            ...(media.map(m => ({
+                Id: m.Id,
+                Type: m.Type,
+                Target: `media/${m.fileName}`,
+            }))),
+        ] }))}
+`);
+    for (const m of media) {
+        zip.file(`word/media/${m.fileName}`, m.buf);
+    }
+    zip.file("word/document.xml", 
     /*xml*/ `\
 <?xml version="1.0" encoding="utf-8"?>
 ${(0, __1.renderToStaticMarkup)(document)}
-`)
-        .file("word/styles.xml", 
+`);
+    zip.file("word/styles.xml", 
     /*xml*/ `\
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 ${(0, __1.renderToStaticMarkup)(styles_1.default)}
-`)
-        .file("word/settings.xml", 
+`);
+    zip.file("word/settings.xml", 
     /*xml*/ `\
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-${(0, __1.renderToStaticMarkup)(settings_1.default)}
-`)
-        .generateAsync({
+${(0, __1.renderToStaticMarkup)((react_1.default.createElement(tags_1.w.settings, { "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main" },
+        react_1.default.createElement(tags_1.w.compat, null,
+            react_1.default.createElement(tags_1.w.compatSetting, { "w:name": "compatibilityMode", "w:uri": "http://schemas.microsoft.com/office/word", "w:val": "15" })))))}
+`);
+    return zip.generateAsync({
         type: jszip_1.default.support.nodebuffer ? "nodebuffer" : "uint8array",
         compression: "DEFLATE",
         compressionOptions: {
@@ -39780,96 +40334,6 @@ ${(0, __1.renderToStaticMarkup)(settings_1.default)}
 };
 exports.renderDocxAsync = renderDocxAsync;
 //# sourceMappingURL=file.js.map
-
-/***/ }),
-
-/***/ 82392:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.contentTypes = void 0;
-const react_1 = __importDefault(__webpack_require__(62932));
-const component_1 = __webpack_require__(30343);
-const Types = (0, component_1.makeComponentWithTag)("Types");
-const Default = (0, component_1.makeComponentWithTag)("Default");
-const Override = (0, component_1.makeComponentWithTag)("Override");
-exports.contentTypes = (react_1.default.createElement(Types, { xmlns: "http://schemas.openxmlformats.org/package/2006/content-types" },
-    react_1.default.createElement(Default, { Extension: "rels", ContentType: "application/vnd.openxmlformats-package.relationships+xml" }),
-    react_1.default.createElement(Default, { Extension: "xml", ContentType: "application/xml" }),
-    react_1.default.createElement(Override, { PartName: "/word/document.xml", ContentType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml" }),
-    react_1.default.createElement(Override, { PartName: "/word/styles.xml", ContentType: "application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml" }),
-    react_1.default.createElement(Override, { PartName: "/word/settings.xml", ContentType: "application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml" }),
-    react_1.default.createElement(Override, { PartName: "/word/fontTable.xml", ContentType: "application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml" })));
-exports["default"] = exports.contentTypes;
-//# sourceMappingURL=contentTypes.js.map
-
-/***/ }),
-
-/***/ 84495:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.documentRels = void 0;
-const react_1 = __importDefault(__webpack_require__(62932));
-const component_1 = __webpack_require__(30343);
-const Relationships = (0, component_1.makeComponentWithTag)("Relationships");
-const Relationship = (0, component_1.makeComponentWithTag)("Relationship");
-exports.documentRels = (react_1.default.createElement(Relationships, { xmlns: "http://schemas.openxmlformats.org/package/2006/relationships" },
-    react_1.default.createElement(Relationship, { Id: "rId1", Type: "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles", Target: "styles.xml" }),
-    react_1.default.createElement(Relationship, { Id: "rId2", Type: "http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings", Target: "settings.xml" })));
-exports["default"] = exports.documentRels;
-//# sourceMappingURL=documentRels.js.map
-
-/***/ }),
-
-/***/ 23622:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.rels = void 0;
-const react_1 = __importDefault(__webpack_require__(62932));
-const component_1 = __webpack_require__(30343);
-const Relationships = (0, component_1.makeComponentWithTag)("Relationships");
-const Relationship = (0, component_1.makeComponentWithTag)("Relationship");
-exports.rels = (react_1.default.createElement(Relationships, { xmlns: "http://schemas.openxmlformats.org/package/2006/relationships" },
-    react_1.default.createElement(Relationship, { Id: "rId1", Type: "http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument", Target: "word/document.xml" })));
-exports["default"] = exports.rels;
-//# sourceMappingURL=rels.js.map
-
-/***/ }),
-
-/***/ 89871:
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.settings = void 0;
-const react_1 = __importDefault(__webpack_require__(62932));
-const tags_1 = __webpack_require__(24759);
-exports.settings = (react_1.default.createElement(tags_1.w.settings, { "xmlns:w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main" },
-    react_1.default.createElement(tags_1.w.compat, null,
-        react_1.default.createElement(tags_1.w.compatSetting, { "w:name": "compatibilityMode", "w:uri": "http://schemas.microsoft.com/office/word", "w:val": "15" }))));
-exports["default"] = exports.settings;
-//# sourceMappingURL=settings.js.map
 
 /***/ }),
 
@@ -39895,11 +40359,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 __exportStar(__webpack_require__(30343), exports);
 __exportStar(__webpack_require__(24759), exports);
-__exportStar(__webpack_require__(82392), exports);
 __exportStar(__webpack_require__(70696), exports);
-__exportStar(__webpack_require__(23622), exports);
 __exportStar(__webpack_require__(55644), exports);
-__exportStar(__webpack_require__(84495), exports);
 //# sourceMappingURL=index.js.map
 
 /***/ }),
@@ -40004,7 +40465,7 @@ exports["default"] = exports.styles;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.wps = exports.a = exports.wp = exports.w = void 0;
+exports.pic = exports.wps = exports.a = exports.wp = exports.w = void 0;
 const component_1 = __webpack_require__(30343);
 const wTags = [
     "abstractNum",
@@ -40944,6 +41405,19 @@ for (const key of wpsTags) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     exports.wps[key] = (0, component_1.makeComponentWithTag)(`wps:${key}`);
 }
+const picTags = [
+    "cNvPr",
+    "cNvPicPr",
+    "nvPicPr",
+    "blipFill",
+    "spPr",
+    "pic",
+];
+exports.pic = {};
+for (const key of picTags) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    exports.pic[key] = (0, component_1.makeComponentWithTag)(`pic:${key}`);
+}
 //# sourceMappingURL=tags.js.map
 
 /***/ }),
@@ -41118,7 +41592,7 @@ const renderDocxAsync = (elOrJsonEL, docxOptions) => {
     const element = std.isLaw(el)
         ? react_1.default.createElement(law_1.DOCXLaw, { el: el, indent: 0, docxOptions: docxOptions !== null && docxOptions !== void 0 ? docxOptions : {} })
         : react_1.default.createElement(any_1.DOCXAnyELs, { els: [el], indent: 0, docxOptions: docxOptions !== null && docxOptions !== void 0 ? docxOptions : {} });
-    return (0, docx_1.renderDocxAsync)(element);
+    return (0, docx_1.renderDocxAsync)(element, docxOptions);
 };
 exports.renderDocxAsync = renderDocxAsync;
 exports["default"] = exports.renderDocxAsync;
@@ -42527,7 +43001,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DOCXFigRun = exports.HTMLFigRunWithFigData = exports.HTMLFigRun = exports.HTMLFigRunCSS = void 0;
+exports.DOCXFigRunWithFigData = exports.DOCXFigRun = exports.HTMLFigRunWithFigData = exports.HTMLFigRun = exports.HTMLFigRunCSS = void 0;
 const react_1 = __importDefault(__webpack_require__(62932));
 const html_1 = __webpack_require__(38264);
 const docx_1 = __webpack_require__(5016);
@@ -42571,10 +43045,52 @@ const HTMLFigRunWithFigData = (props) => {
 };
 exports.HTMLFigRunWithFigData = HTMLFigRunWithFigData;
 exports.DOCXFigRun = (0, docx_1.wrapDOCXComponent)("DOCXFigRun", ((props) => {
-    const { el } = props;
-    return (react_1.default.createElement(docx_1.w.r, null,
-        react_1.default.createElement(docx_1.w.t, null, el.attr.src)));
+    const { el, docxOptions } = props;
+    const { figDataManager } = docxOptions;
+    if (el.children.length > 0) {
+        throw new util_1.NotImplementedError(el.outerXML());
+    }
+    if (figDataManager) {
+        const figData = figDataManager.getFigData(el.attr.src);
+        return figData === null ? (react_1.default.createElement(docx_1.w.r, null,
+            react_1.default.createElement(docx_1.w.t, null, el.attr.src))) : (react_1.default.createElement(exports.DOCXFigRunWithFigData, Object.assign({}, props, { figData: figData, fig: el })));
+    }
+    else {
+        return (react_1.default.createElement(docx_1.w.r, null,
+            react_1.default.createElement(docx_1.w.t, null, el.attr.src)));
+    }
 }));
+const DOCXFigRunWithFigData = (props) => {
+    const { el, figData } = props;
+    return (figData.blob.type.startsWith("image/")
+        ? (react_1.default.createElement(docx_1.w.r, null,
+            react_1.default.createElement(docx_1.w.drawing, null,
+                react_1.default.createElement(docx_1.wp.inline, null,
+                    react_1.default.createElement(docx_1.wp.extent, { cx: figData.cx, cy: figData.cy }),
+                    react_1.default.createElement(docx_1.wp.effectExtent, { l: "0", t: "0", r: "0", b: "0" }),
+                    react_1.default.createElement(docx_1.wp.docPr, { id: figData.id, name: figData.name }),
+                    react_1.default.createElement(docx_1.a.graphic, { "xmlns:a": "http://schemas.openxmlformats.org/drawingml/2006/main" },
+                        react_1.default.createElement(docx_1.a.graphicData, { uri: "http://schemas.openxmlformats.org/drawingml/2006/picture" },
+                            react_1.default.createElement(docx_1.pic.pic, { "xmlns:pic": "http://schemas.openxmlformats.org/drawingml/2006/picture" },
+                                react_1.default.createElement(docx_1.pic.nvPicPr, null,
+                                    react_1.default.createElement(docx_1.pic.cNvPr, { id: figData.id, name: figData.name }),
+                                    react_1.default.createElement(docx_1.pic.cNvPicPr, null,
+                                        react_1.default.createElement(docx_1.a.picLocks, { noChangeAspect: "1", noChangeArrowheads: "1" }))),
+                                react_1.default.createElement(docx_1.pic.blipFill, null,
+                                    react_1.default.createElement(docx_1.a.blip, { "r:embed": figData.rId }),
+                                    react_1.default.createElement(docx_1.a.srcRect, null),
+                                    react_1.default.createElement(docx_1.a.stretch, null,
+                                        react_1.default.createElement(docx_1.a.fillRect, null))),
+                                react_1.default.createElement(docx_1.pic.spPr, null,
+                                    react_1.default.createElement(docx_1.a.xfrm, null,
+                                        react_1.default.createElement(docx_1.a.off, { x: "0", y: "0" }),
+                                        react_1.default.createElement(docx_1.a.ext, { cx: figData.cx, cy: figData.cy })),
+                                    react_1.default.createElement(docx_1.a.prstGeom, { prst: "rect" },
+                                        react_1.default.createElement(docx_1.a.avLst, null))))))))))
+        : (react_1.default.createElement(docx_1.w.r, null,
+            react_1.default.createElement(docx_1.w.t, null, el.attr.src))));
+};
+exports.DOCXFigRunWithFigData = DOCXFigRunWithFigData;
 //# sourceMappingURL=figRun.js.map
 
 /***/ }),
@@ -43690,14 +44206,12 @@ exports.DOCXSentenceChildrenRun = (0, docx_1.wrapDOCXComponent)("DOCXSentenceChi
                     react_1.default.createElement(docx_1.w.rPr, null,
                         react_1.default.createElement(docx_1.w.vertAlign, { "w:val": "subscript" })),
                     react_1.default.createElement(docx_1.w.t, null, el.text())));
-                runs.push(react_1.default.createElement("sub", null, el.text()));
             }
             else if (el.tag === "Sup") {
                 runs.push(react_1.default.createElement(docx_1.w.r, null,
                     react_1.default.createElement(docx_1.w.rPr, null,
                         react_1.default.createElement(docx_1.w.vertAlign, { "w:val": "superscript" })),
                     react_1.default.createElement(docx_1.w.t, null, el.text())));
-                runs.push(react_1.default.createElement("sub", null, el.text()));
             }
             else if (el.tag === "QuoteStruct") {
                 runs.push(react_1.default.createElement(quoteStructRun_1.DOCXQuoteStructRun, { el: el, docxOptions }));
@@ -49859,6 +50373,511 @@ exports.ParseError = ParseError;
 
 /***/ }),
 
+/***/ 28759:
+/***/ ((module) => {
+
+"use strict";
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+var R = typeof Reflect === 'object' ? Reflect : null
+var ReflectApply = R && typeof R.apply === 'function'
+  ? R.apply
+  : function ReflectApply(target, receiver, args) {
+    return Function.prototype.apply.call(target, receiver, args);
+  }
+
+var ReflectOwnKeys
+if (R && typeof R.ownKeys === 'function') {
+  ReflectOwnKeys = R.ownKeys
+} else if (Object.getOwnPropertySymbols) {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target)
+      .concat(Object.getOwnPropertySymbols(target));
+  };
+} else {
+  ReflectOwnKeys = function ReflectOwnKeys(target) {
+    return Object.getOwnPropertyNames(target);
+  };
+}
+
+function ProcessEmitWarning(warning) {
+  if (console && console.warn) console.warn(warning);
+}
+
+var NumberIsNaN = Number.isNaN || function NumberIsNaN(value) {
+  return value !== value;
+}
+
+function EventEmitter() {
+  EventEmitter.init.call(this);
+}
+module.exports = EventEmitter;
+module.exports.once = once;
+
+// Backwards-compat with node 0.10.x
+EventEmitter.EventEmitter = EventEmitter;
+
+EventEmitter.prototype._events = undefined;
+EventEmitter.prototype._eventsCount = 0;
+EventEmitter.prototype._maxListeners = undefined;
+
+// By default EventEmitters will print a warning if more than 10 listeners are
+// added to it. This is a useful default which helps finding memory leaks.
+var defaultMaxListeners = 10;
+
+function checkListener(listener) {
+  if (typeof listener !== 'function') {
+    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof listener);
+  }
+}
+
+Object.defineProperty(EventEmitter, 'defaultMaxListeners', {
+  enumerable: true,
+  get: function() {
+    return defaultMaxListeners;
+  },
+  set: function(arg) {
+    if (typeof arg !== 'number' || arg < 0 || NumberIsNaN(arg)) {
+      throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + arg + '.');
+    }
+    defaultMaxListeners = arg;
+  }
+});
+
+EventEmitter.init = function() {
+
+  if (this._events === undefined ||
+      this._events === Object.getPrototypeOf(this)._events) {
+    this._events = Object.create(null);
+    this._eventsCount = 0;
+  }
+
+  this._maxListeners = this._maxListeners || undefined;
+};
+
+// Obviously not all Emitters should be limited to 10. This function allows
+// that to be increased. Set to zero for unlimited.
+EventEmitter.prototype.setMaxListeners = function setMaxListeners(n) {
+  if (typeof n !== 'number' || n < 0 || NumberIsNaN(n)) {
+    throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + '.');
+  }
+  this._maxListeners = n;
+  return this;
+};
+
+function _getMaxListeners(that) {
+  if (that._maxListeners === undefined)
+    return EventEmitter.defaultMaxListeners;
+  return that._maxListeners;
+}
+
+EventEmitter.prototype.getMaxListeners = function getMaxListeners() {
+  return _getMaxListeners(this);
+};
+
+EventEmitter.prototype.emit = function emit(type) {
+  var args = [];
+  for (var i = 1; i < arguments.length; i++) args.push(arguments[i]);
+  var doError = (type === 'error');
+
+  var events = this._events;
+  if (events !== undefined)
+    doError = (doError && events.error === undefined);
+  else if (!doError)
+    return false;
+
+  // If there is no 'error' event listener then throw.
+  if (doError) {
+    var er;
+    if (args.length > 0)
+      er = args[0];
+    if (er instanceof Error) {
+      // Note: The comments on the `throw` lines are intentional, they show
+      // up in Node's output if this results in an unhandled exception.
+      throw er; // Unhandled 'error' event
+    }
+    // At least give some kind of context to the user
+    var err = new Error('Unhandled error.' + (er ? ' (' + er.message + ')' : ''));
+    err.context = er;
+    throw err; // Unhandled 'error' event
+  }
+
+  var handler = events[type];
+
+  if (handler === undefined)
+    return false;
+
+  if (typeof handler === 'function') {
+    ReflectApply(handler, this, args);
+  } else {
+    var len = handler.length;
+    var listeners = arrayClone(handler, len);
+    for (var i = 0; i < len; ++i)
+      ReflectApply(listeners[i], this, args);
+  }
+
+  return true;
+};
+
+function _addListener(target, type, listener, prepend) {
+  var m;
+  var events;
+  var existing;
+
+  checkListener(listener);
+
+  events = target._events;
+  if (events === undefined) {
+    events = target._events = Object.create(null);
+    target._eventsCount = 0;
+  } else {
+    // To avoid recursion in the case that type === "newListener"! Before
+    // adding it to the listeners, first emit "newListener".
+    if (events.newListener !== undefined) {
+      target.emit('newListener', type,
+                  listener.listener ? listener.listener : listener);
+
+      // Re-assign `events` because a newListener handler could have caused the
+      // this._events to be assigned to a new object
+      events = target._events;
+    }
+    existing = events[type];
+  }
+
+  if (existing === undefined) {
+    // Optimize the case of one listener. Don't need the extra array object.
+    existing = events[type] = listener;
+    ++target._eventsCount;
+  } else {
+    if (typeof existing === 'function') {
+      // Adding the second element, need to change to array.
+      existing = events[type] =
+        prepend ? [listener, existing] : [existing, listener];
+      // If we've already got an array, just append.
+    } else if (prepend) {
+      existing.unshift(listener);
+    } else {
+      existing.push(listener);
+    }
+
+    // Check for listener leak
+    m = _getMaxListeners(target);
+    if (m > 0 && existing.length > m && !existing.warned) {
+      existing.warned = true;
+      // No error code for this since it is a Warning
+      // eslint-disable-next-line no-restricted-syntax
+      var w = new Error('Possible EventEmitter memory leak detected. ' +
+                          existing.length + ' ' + String(type) + ' listeners ' +
+                          'added. Use emitter.setMaxListeners() to ' +
+                          'increase limit');
+      w.name = 'MaxListenersExceededWarning';
+      w.emitter = target;
+      w.type = type;
+      w.count = existing.length;
+      ProcessEmitWarning(w);
+    }
+  }
+
+  return target;
+}
+
+EventEmitter.prototype.addListener = function addListener(type, listener) {
+  return _addListener(this, type, listener, false);
+};
+
+EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+EventEmitter.prototype.prependListener =
+    function prependListener(type, listener) {
+      return _addListener(this, type, listener, true);
+    };
+
+function onceWrapper() {
+  if (!this.fired) {
+    this.target.removeListener(this.type, this.wrapFn);
+    this.fired = true;
+    if (arguments.length === 0)
+      return this.listener.call(this.target);
+    return this.listener.apply(this.target, arguments);
+  }
+}
+
+function _onceWrap(target, type, listener) {
+  var state = { fired: false, wrapFn: undefined, target: target, type: type, listener: listener };
+  var wrapped = onceWrapper.bind(state);
+  wrapped.listener = listener;
+  state.wrapFn = wrapped;
+  return wrapped;
+}
+
+EventEmitter.prototype.once = function once(type, listener) {
+  checkListener(listener);
+  this.on(type, _onceWrap(this, type, listener));
+  return this;
+};
+
+EventEmitter.prototype.prependOnceListener =
+    function prependOnceListener(type, listener) {
+      checkListener(listener);
+      this.prependListener(type, _onceWrap(this, type, listener));
+      return this;
+    };
+
+// Emits a 'removeListener' event if and only if the listener was removed.
+EventEmitter.prototype.removeListener =
+    function removeListener(type, listener) {
+      var list, events, position, i, originalListener;
+
+      checkListener(listener);
+
+      events = this._events;
+      if (events === undefined)
+        return this;
+
+      list = events[type];
+      if (list === undefined)
+        return this;
+
+      if (list === listener || list.listener === listener) {
+        if (--this._eventsCount === 0)
+          this._events = Object.create(null);
+        else {
+          delete events[type];
+          if (events.removeListener)
+            this.emit('removeListener', type, list.listener || listener);
+        }
+      } else if (typeof list !== 'function') {
+        position = -1;
+
+        for (i = list.length - 1; i >= 0; i--) {
+          if (list[i] === listener || list[i].listener === listener) {
+            originalListener = list[i].listener;
+            position = i;
+            break;
+          }
+        }
+
+        if (position < 0)
+          return this;
+
+        if (position === 0)
+          list.shift();
+        else {
+          spliceOne(list, position);
+        }
+
+        if (list.length === 1)
+          events[type] = list[0];
+
+        if (events.removeListener !== undefined)
+          this.emit('removeListener', type, originalListener || listener);
+      }
+
+      return this;
+    };
+
+EventEmitter.prototype.off = EventEmitter.prototype.removeListener;
+
+EventEmitter.prototype.removeAllListeners =
+    function removeAllListeners(type) {
+      var listeners, events, i;
+
+      events = this._events;
+      if (events === undefined)
+        return this;
+
+      // not listening for removeListener, no need to emit
+      if (events.removeListener === undefined) {
+        if (arguments.length === 0) {
+          this._events = Object.create(null);
+          this._eventsCount = 0;
+        } else if (events[type] !== undefined) {
+          if (--this._eventsCount === 0)
+            this._events = Object.create(null);
+          else
+            delete events[type];
+        }
+        return this;
+      }
+
+      // emit removeListener for all listeners on all events
+      if (arguments.length === 0) {
+        var keys = Object.keys(events);
+        var key;
+        for (i = 0; i < keys.length; ++i) {
+          key = keys[i];
+          if (key === 'removeListener') continue;
+          this.removeAllListeners(key);
+        }
+        this.removeAllListeners('removeListener');
+        this._events = Object.create(null);
+        this._eventsCount = 0;
+        return this;
+      }
+
+      listeners = events[type];
+
+      if (typeof listeners === 'function') {
+        this.removeListener(type, listeners);
+      } else if (listeners !== undefined) {
+        // LIFO order
+        for (i = listeners.length - 1; i >= 0; i--) {
+          this.removeListener(type, listeners[i]);
+        }
+      }
+
+      return this;
+    };
+
+function _listeners(target, type, unwrap) {
+  var events = target._events;
+
+  if (events === undefined)
+    return [];
+
+  var evlistener = events[type];
+  if (evlistener === undefined)
+    return [];
+
+  if (typeof evlistener === 'function')
+    return unwrap ? [evlistener.listener || evlistener] : [evlistener];
+
+  return unwrap ?
+    unwrapListeners(evlistener) : arrayClone(evlistener, evlistener.length);
+}
+
+EventEmitter.prototype.listeners = function listeners(type) {
+  return _listeners(this, type, true);
+};
+
+EventEmitter.prototype.rawListeners = function rawListeners(type) {
+  return _listeners(this, type, false);
+};
+
+EventEmitter.listenerCount = function(emitter, type) {
+  if (typeof emitter.listenerCount === 'function') {
+    return emitter.listenerCount(type);
+  } else {
+    return listenerCount.call(emitter, type);
+  }
+};
+
+EventEmitter.prototype.listenerCount = listenerCount;
+function listenerCount(type) {
+  var events = this._events;
+
+  if (events !== undefined) {
+    var evlistener = events[type];
+
+    if (typeof evlistener === 'function') {
+      return 1;
+    } else if (evlistener !== undefined) {
+      return evlistener.length;
+    }
+  }
+
+  return 0;
+}
+
+EventEmitter.prototype.eventNames = function eventNames() {
+  return this._eventsCount > 0 ? ReflectOwnKeys(this._events) : [];
+};
+
+function arrayClone(arr, n) {
+  var copy = new Array(n);
+  for (var i = 0; i < n; ++i)
+    copy[i] = arr[i];
+  return copy;
+}
+
+function spliceOne(list, index) {
+  for (; index + 1 < list.length; index++)
+    list[index] = list[index + 1];
+  list.pop();
+}
+
+function unwrapListeners(arr) {
+  var ret = new Array(arr.length);
+  for (var i = 0; i < ret.length; ++i) {
+    ret[i] = arr[i].listener || arr[i];
+  }
+  return ret;
+}
+
+function once(emitter, name) {
+  return new Promise(function (resolve, reject) {
+    function errorListener(err) {
+      emitter.removeListener(name, resolver);
+      reject(err);
+    }
+
+    function resolver() {
+      if (typeof emitter.removeListener === 'function') {
+        emitter.removeListener('error', errorListener);
+      }
+      resolve([].slice.call(arguments));
+    };
+
+    eventTargetAgnosticAddListener(emitter, name, resolver, { once: true });
+    if (name !== 'error') {
+      addErrorHandlerIfEventEmitter(emitter, errorListener, { once: true });
+    }
+  });
+}
+
+function addErrorHandlerIfEventEmitter(emitter, handler, flags) {
+  if (typeof emitter.on === 'function') {
+    eventTargetAgnosticAddListener(emitter, 'error', handler, flags);
+  }
+}
+
+function eventTargetAgnosticAddListener(emitter, name, listener, flags) {
+  if (typeof emitter.on === 'function') {
+    if (flags.once) {
+      emitter.once(name, listener);
+    } else {
+      emitter.on(name, listener);
+    }
+  } else if (typeof emitter.addEventListener === 'function') {
+    // EventTarget does not have `error` event semantics like Node
+    // EventEmitters, we do not listen for `error` events here.
+    emitter.addEventListener(name, function wrapListener(arg) {
+      // IE does not have builtin `{ once: true }` support so we
+      // have to do it manually.
+      if (flags.once) {
+        emitter.removeEventListener(name, wrapListener);
+      }
+      listener(arg);
+    });
+  } else {
+    throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + typeof emitter);
+  }
+}
+
+
+/***/ }),
+
 /***/ 29843:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
@@ -55540,6 +56559,1268 @@ module.exports = function(stream_module) {
 
 /***/ }),
 
+/***/ 26623:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.detector = void 0;
+const index_1 = __webpack_require__(72739);
+const keys = Object.keys(index_1.typeHandlers);
+// This map helps avoid validating for every single image type
+const firstBytes = {
+    0x38: 'psd',
+    0x42: 'bmp',
+    0x44: 'dds',
+    0x47: 'gif',
+    0x49: 'tiff',
+    0x4d: 'tiff',
+    0x52: 'webp',
+    0x69: 'icns',
+    0x89: 'png',
+    0xff: 'jpg',
+};
+function detector(input) {
+    const byte = input[0];
+    if (byte in firstBytes) {
+        const type = firstBytes[byte];
+        if (type && index_1.typeHandlers[type].validate(input)) {
+            return type;
+        }
+    }
+    const finder = (key) => index_1.typeHandlers[key].validate(input);
+    return keys.find(finder);
+}
+exports.detector = detector;
+
+
+/***/ }),
+
+/***/ 71781:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.types = exports.setConcurrency = exports.disableTypes = exports.disableFS = exports.imageSize = void 0;
+const fs = __webpack_require__(93590);
+const path = __webpack_require__(57975);
+const queue_1 = __webpack_require__(95784);
+const index_1 = __webpack_require__(72739);
+const detector_1 = __webpack_require__(26623);
+// Maximum input size, with a default of 512 kilobytes.
+// TO-DO: make this adaptive based on the initial signature of the image
+const MaxInputSize = 512 * 1024;
+// This queue is for async `fs` operations, to avoid reaching file-descriptor limits
+const queue = new queue_1.default({ concurrency: 100, autostart: true });
+const globalOptions = {
+    disabledFS: false,
+    disabledTypes: [],
+};
+/**
+ * Return size information based on an Uint8Array
+ *
+ * @param {Uint8Array} input
+ * @param {String} filepath
+ * @returns {Object}
+ */
+function lookup(input, filepath) {
+    // detect the file type.. don't rely on the extension
+    const type = (0, detector_1.detector)(input);
+    if (typeof type !== 'undefined') {
+        if (globalOptions.disabledTypes.indexOf(type) > -1) {
+            throw new TypeError('disabled file type: ' + type);
+        }
+        // find an appropriate handler for this file type
+        if (type in index_1.typeHandlers) {
+            const size = index_1.typeHandlers[type].calculate(input, filepath);
+            if (size !== undefined) {
+                size.type = size.type ?? type;
+                return size;
+            }
+        }
+    }
+    // throw up, if we don't understand the file
+    throw new TypeError('unsupported file type: ' + type + ' (file: ' + filepath + ')');
+}
+/**
+ * Reads a file into an Uint8Array.
+ * @param {String} filepath
+ * @returns {Promise<Uint8Array>}
+ */
+async function readFileAsync(filepath) {
+    const handle = await fs.promises.open(filepath, 'r');
+    try {
+        const { size } = await handle.stat();
+        if (size <= 0) {
+            throw new Error('Empty file');
+        }
+        const inputSize = Math.min(size, MaxInputSize);
+        const input = new Uint8Array(inputSize);
+        await handle.read(input, 0, inputSize, 0);
+        return input;
+    }
+    finally {
+        await handle.close();
+    }
+}
+/**
+ * Synchronously reads a file into an Uint8Array, blocking the nodejs process.
+ *
+ * @param {String} filepath
+ * @returns {Uint8Array}
+ */
+function readFileSync(filepath) {
+    // read from the file, synchronously
+    const descriptor = fs.openSync(filepath, 'r');
+    try {
+        const { size } = fs.fstatSync(descriptor);
+        if (size <= 0) {
+            throw new Error('Empty file');
+        }
+        const inputSize = Math.min(size, MaxInputSize);
+        const input = new Uint8Array(inputSize);
+        fs.readSync(descriptor, input, 0, inputSize, 0);
+        return input;
+    }
+    finally {
+        fs.closeSync(descriptor);
+    }
+}
+// eslint-disable-next-line @typescript-eslint/no-use-before-define
+module.exports = exports = imageSize; // backwards compatibility
+exports["default"] = imageSize;
+/**
+ * @param {Uint8Array|string} input - Uint8Array or relative/absolute path of the image file
+ * @param {Function=} [callback] - optional function for async detection
+ */
+function imageSize(input, callback) {
+    // Handle Uint8Array input
+    if (input instanceof Uint8Array) {
+        return lookup(input);
+    }
+    // input should be a string at this point
+    if (typeof input !== 'string' || globalOptions.disabledFS) {
+        throw new TypeError('invalid invocation. input should be a Uint8Array');
+    }
+    // resolve the file path
+    const filepath = path.resolve(input);
+    if (typeof callback === 'function') {
+        queue.push(() => readFileAsync(filepath)
+            .then((input) => process.nextTick(callback, null, lookup(input, filepath)))
+            .catch(callback));
+    }
+    else {
+        const input = readFileSync(filepath);
+        return lookup(input, filepath);
+    }
+}
+exports.imageSize = imageSize;
+const disableFS = (v) => {
+    globalOptions.disabledFS = v;
+};
+exports.disableFS = disableFS;
+const disableTypes = (types) => {
+    globalOptions.disabledTypes = types;
+};
+exports.disableTypes = disableTypes;
+const setConcurrency = (c) => {
+    queue.concurrency = c;
+};
+exports.setConcurrency = setConcurrency;
+exports.types = Object.keys(index_1.typeHandlers);
+
+
+/***/ }),
+
+/***/ 72728:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.BMP = void 0;
+const utils_1 = __webpack_require__(62462);
+exports.BMP = {
+    validate: (input) => (0, utils_1.toUTF8String)(input, 0, 2) === 'BM',
+    calculate: (input) => ({
+        height: Math.abs((0, utils_1.readInt32LE)(input, 22)),
+        width: (0, utils_1.readUInt32LE)(input, 18),
+    }),
+};
+
+
+/***/ }),
+
+/***/ 98613:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CUR = void 0;
+const ico_1 = __webpack_require__(15558);
+const utils_1 = __webpack_require__(62462);
+const TYPE_CURSOR = 2;
+exports.CUR = {
+    validate(input) {
+        const reserved = (0, utils_1.readUInt16LE)(input, 0);
+        const imageCount = (0, utils_1.readUInt16LE)(input, 4);
+        if (reserved !== 0 || imageCount === 0)
+            return false;
+        const imageType = (0, utils_1.readUInt16LE)(input, 2);
+        return imageType === TYPE_CURSOR;
+    },
+    calculate: (input) => ico_1.ICO.calculate(input),
+};
+
+
+/***/ }),
+
+/***/ 7186:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DDS = void 0;
+const utils_1 = __webpack_require__(62462);
+exports.DDS = {
+    validate: (input) => (0, utils_1.readUInt32LE)(input, 0) === 0x20534444,
+    calculate: (input) => ({
+        height: (0, utils_1.readUInt32LE)(input, 12),
+        width: (0, utils_1.readUInt32LE)(input, 16),
+    }),
+};
+
+
+/***/ }),
+
+/***/ 88249:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.GIF = void 0;
+const utils_1 = __webpack_require__(62462);
+const gifRegexp = /^GIF8[79]a/;
+exports.GIF = {
+    validate: (input) => gifRegexp.test((0, utils_1.toUTF8String)(input, 0, 6)),
+    calculate: (input) => ({
+        height: (0, utils_1.readUInt16LE)(input, 8),
+        width: (0, utils_1.readUInt16LE)(input, 6),
+    }),
+};
+
+
+/***/ }),
+
+/***/ 96507:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.HEIF = void 0;
+const utils_1 = __webpack_require__(62462);
+const brandMap = {
+    avif: 'avif',
+    mif1: 'heif',
+    msf1: 'heif', // hief-sequence
+    heic: 'heic',
+    heix: 'heic',
+    hevc: 'heic', // heic-sequence
+    hevx: 'heic', // heic-sequence
+};
+exports.HEIF = {
+    validate(buffer) {
+        const ftype = (0, utils_1.toUTF8String)(buffer, 4, 8);
+        const brand = (0, utils_1.toUTF8String)(buffer, 8, 12);
+        return 'ftyp' === ftype && brand in brandMap;
+    },
+    calculate(buffer) {
+        // Based on https://nokiatech.github.io/heif/technical.html
+        const metaBox = (0, utils_1.findBox)(buffer, 'meta', 0);
+        const iprpBox = metaBox && (0, utils_1.findBox)(buffer, 'iprp', metaBox.offset + 12);
+        const ipcoBox = iprpBox && (0, utils_1.findBox)(buffer, 'ipco', iprpBox.offset + 8);
+        const ispeBox = ipcoBox && (0, utils_1.findBox)(buffer, 'ispe', ipcoBox.offset + 8);
+        if (ispeBox) {
+            return {
+                height: (0, utils_1.readUInt32BE)(buffer, ispeBox.offset + 16),
+                width: (0, utils_1.readUInt32BE)(buffer, ispeBox.offset + 12),
+                type: (0, utils_1.toUTF8String)(buffer, 8, 12),
+            };
+        }
+        throw new TypeError('Invalid HEIF, no size found');
+    }
+};
+
+
+/***/ }),
+
+/***/ 15888:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ICNS = void 0;
+const utils_1 = __webpack_require__(62462);
+/**
+ * ICNS Header
+ *
+ * | Offset | Size | Purpose                                                |
+ * | 0	    | 4    | Magic literal, must be "icns" (0x69, 0x63, 0x6e, 0x73) |
+ * | 4      | 4    | Length of file, in bytes, msb first.                   |
+ *
+ */
+const SIZE_HEADER = 4 + 4; // 8
+const FILE_LENGTH_OFFSET = 4; // MSB => BIG ENDIAN
+/**
+ * Image Entry
+ *
+ * | Offset | Size | Purpose                                                          |
+ * | 0	    | 4    | Icon type, see OSType below.                                     |
+ * | 4      | 4    | Length of data, in bytes (including type and length), msb first. |
+ * | 8      | n    | Icon data                                                        |
+ */
+const ENTRY_LENGTH_OFFSET = 4; // MSB => BIG ENDIAN
+const ICON_TYPE_SIZE = {
+    ICON: 32,
+    'ICN#': 32,
+    // m => 16 x 16
+    'icm#': 16,
+    icm4: 16,
+    icm8: 16,
+    // s => 16 x 16
+    'ics#': 16,
+    ics4: 16,
+    ics8: 16,
+    is32: 16,
+    s8mk: 16,
+    icp4: 16,
+    // l => 32 x 32
+    icl4: 32,
+    icl8: 32,
+    il32: 32,
+    l8mk: 32,
+    icp5: 32,
+    ic11: 32,
+    // h => 48 x 48
+    ich4: 48,
+    ich8: 48,
+    ih32: 48,
+    h8mk: 48,
+    // . => 64 x 64
+    icp6: 64,
+    ic12: 32,
+    // t => 128 x 128
+    it32: 128,
+    t8mk: 128,
+    ic07: 128,
+    // . => 256 x 256
+    ic08: 256,
+    ic13: 256,
+    // . => 512 x 512
+    ic09: 512,
+    ic14: 512,
+    // . => 1024 x 1024
+    ic10: 1024,
+};
+function readImageHeader(input, imageOffset) {
+    const imageLengthOffset = imageOffset + ENTRY_LENGTH_OFFSET;
+    return [
+        (0, utils_1.toUTF8String)(input, imageOffset, imageLengthOffset),
+        (0, utils_1.readUInt32BE)(input, imageLengthOffset),
+    ];
+}
+function getImageSize(type) {
+    const size = ICON_TYPE_SIZE[type];
+    return { width: size, height: size, type };
+}
+exports.ICNS = {
+    validate: (input) => (0, utils_1.toUTF8String)(input, 0, 4) === 'icns',
+    calculate(input) {
+        const inputLength = input.length;
+        const fileLength = (0, utils_1.readUInt32BE)(input, FILE_LENGTH_OFFSET);
+        let imageOffset = SIZE_HEADER;
+        let imageHeader = readImageHeader(input, imageOffset);
+        let imageSize = getImageSize(imageHeader[0]);
+        imageOffset += imageHeader[1];
+        if (imageOffset === fileLength)
+            return imageSize;
+        const result = {
+            height: imageSize.height,
+            images: [imageSize],
+            width: imageSize.width,
+        };
+        while (imageOffset < fileLength && imageOffset < inputLength) {
+            imageHeader = readImageHeader(input, imageOffset);
+            imageSize = getImageSize(imageHeader[0]);
+            imageOffset += imageHeader[1];
+            result.images.push(imageSize);
+        }
+        return result;
+    },
+};
+
+
+/***/ }),
+
+/***/ 15558:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ICO = void 0;
+const utils_1 = __webpack_require__(62462);
+const TYPE_ICON = 1;
+/**
+ * ICON Header
+ *
+ * | Offset | Size | Purpose |
+ * | 0	    | 2    | Reserved. Must always be 0.  |
+ * | 2      | 2    | Image type: 1 for icon (.ICO) image, 2 for cursor (.CUR) image. Other values are invalid. |
+ * | 4      | 2    | Number of images in the file. |
+ *
+ */
+const SIZE_HEADER = 2 + 2 + 2; // 6
+/**
+ * Image Entry
+ *
+ * | Offset | Size | Purpose |
+ * | 0	    | 1    | Image width in pixels. Can be any number between 0 and 255. Value 0 means width is 256 pixels. |
+ * | 1      | 1    | Image height in pixels. Can be any number between 0 and 255. Value 0 means height is 256 pixels. |
+ * | 2      | 1    | Number of colors in the color palette. Should be 0 if the image does not use a color palette. |
+ * | 3      | 1    | Reserved. Should be 0. |
+ * | 4      | 2    | ICO format: Color planes. Should be 0 or 1. |
+ * |        |      | CUR format: The horizontal coordinates of the hotspot in number of pixels from the left. |
+ * | 6      | 2    | ICO format: Bits per pixel. |
+ * |        |      | CUR format: The vertical coordinates of the hotspot in number of pixels from the top. |
+ * | 8      | 4    | The size of the image's data in bytes |
+ * | 12     | 4    | The offset of BMP or PNG data from the beginning of the ICO/CUR file |
+ *
+ */
+const SIZE_IMAGE_ENTRY = 1 + 1 + 1 + 1 + 2 + 2 + 4 + 4; // 16
+function getSizeFromOffset(input, offset) {
+    const value = input[offset];
+    return value === 0 ? 256 : value;
+}
+function getImageSize(input, imageIndex) {
+    const offset = SIZE_HEADER + imageIndex * SIZE_IMAGE_ENTRY;
+    return {
+        height: getSizeFromOffset(input, offset + 1),
+        width: getSizeFromOffset(input, offset),
+    };
+}
+exports.ICO = {
+    validate(input) {
+        const reserved = (0, utils_1.readUInt16LE)(input, 0);
+        const imageCount = (0, utils_1.readUInt16LE)(input, 4);
+        if (reserved !== 0 || imageCount === 0)
+            return false;
+        const imageType = (0, utils_1.readUInt16LE)(input, 2);
+        return imageType === TYPE_ICON;
+    },
+    calculate(input) {
+        const nbImages = (0, utils_1.readUInt16LE)(input, 4);
+        const imageSize = getImageSize(input, 0);
+        if (nbImages === 1)
+            return imageSize;
+        const imgs = [imageSize];
+        for (let imageIndex = 1; imageIndex < nbImages; imageIndex += 1) {
+            imgs.push(getImageSize(input, imageIndex));
+        }
+        return {
+            height: imageSize.height,
+            images: imgs,
+            width: imageSize.width,
+        };
+    },
+};
+
+
+/***/ }),
+
+/***/ 72739:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.typeHandlers = void 0;
+// load all available handlers explicitly for browserify support
+const bmp_1 = __webpack_require__(72728);
+const cur_1 = __webpack_require__(98613);
+const dds_1 = __webpack_require__(7186);
+const gif_1 = __webpack_require__(88249);
+const heif_1 = __webpack_require__(96507);
+const icns_1 = __webpack_require__(15888);
+const ico_1 = __webpack_require__(15558);
+const j2c_1 = __webpack_require__(89566);
+const jp2_1 = __webpack_require__(78415);
+const jpg_1 = __webpack_require__(20948);
+const ktx_1 = __webpack_require__(89222);
+const png_1 = __webpack_require__(77868);
+const pnm_1 = __webpack_require__(8926);
+const psd_1 = __webpack_require__(74964);
+const svg_1 = __webpack_require__(96577);
+const tga_1 = __webpack_require__(57927);
+const tiff_1 = __webpack_require__(98220);
+const webp_1 = __webpack_require__(23941);
+exports.typeHandlers = {
+    bmp: bmp_1.BMP,
+    cur: cur_1.CUR,
+    dds: dds_1.DDS,
+    gif: gif_1.GIF,
+    heif: heif_1.HEIF,
+    icns: icns_1.ICNS,
+    ico: ico_1.ICO,
+    j2c: j2c_1.J2C,
+    jp2: jp2_1.JP2,
+    jpg: jpg_1.JPG,
+    ktx: ktx_1.KTX,
+    png: png_1.PNG,
+    pnm: pnm_1.PNM,
+    psd: psd_1.PSD,
+    svg: svg_1.SVG,
+    tga: tga_1.TGA,
+    tiff: tiff_1.TIFF,
+    webp: webp_1.WEBP,
+};
+
+
+/***/ }),
+
+/***/ 89566:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.J2C = void 0;
+const utils_1 = __webpack_require__(62462);
+exports.J2C = {
+    // TODO: this doesn't seem right. SIZ marker doesn't have to be right after the SOC
+    validate: (input) => (0, utils_1.toHexString)(input, 0, 4) === 'ff4fff51',
+    calculate: (input) => ({
+        height: (0, utils_1.readUInt32BE)(input, 12),
+        width: (0, utils_1.readUInt32BE)(input, 8),
+    }),
+};
+
+
+/***/ }),
+
+/***/ 78415:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.JP2 = void 0;
+const utils_1 = __webpack_require__(62462);
+exports.JP2 = {
+    validate(input) {
+        if ((0, utils_1.readUInt32BE)(input, 4) !== 0x6a502020 || (0, utils_1.readUInt32BE)(input, 0) < 1)
+            return false;
+        const ftypBox = (0, utils_1.findBox)(input, 'ftyp', 0);
+        if (!ftypBox)
+            return false;
+        return (0, utils_1.readUInt32BE)(input, ftypBox.offset + 4) === 0x66747970;
+    },
+    calculate(input) {
+        const jp2hBox = (0, utils_1.findBox)(input, 'jp2h', 0);
+        const ihdrBox = jp2hBox && (0, utils_1.findBox)(input, 'ihdr', jp2hBox.offset + 8);
+        if (ihdrBox) {
+            return {
+                height: (0, utils_1.readUInt32BE)(input, ihdrBox.offset + 8),
+                width: (0, utils_1.readUInt32BE)(input, ihdrBox.offset + 12),
+            };
+        }
+        throw new TypeError('Unsupported JPEG 2000 format');
+    },
+};
+
+
+/***/ }),
+
+/***/ 20948:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+// NOTE: we only support baseline and progressive JPGs here
+// due to the structure of the loader class, we only get a buffer
+// with a maximum size of 4096 bytes. so if the SOF marker is outside
+// if this range we can't detect the file size correctly.
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.JPG = void 0;
+const utils_1 = __webpack_require__(62462);
+const EXIF_MARKER = '45786966';
+const APP1_DATA_SIZE_BYTES = 2;
+const EXIF_HEADER_BYTES = 6;
+const TIFF_BYTE_ALIGN_BYTES = 2;
+const BIG_ENDIAN_BYTE_ALIGN = '4d4d';
+const LITTLE_ENDIAN_BYTE_ALIGN = '4949';
+// Each entry is exactly 12 bytes
+const IDF_ENTRY_BYTES = 12;
+const NUM_DIRECTORY_ENTRIES_BYTES = 2;
+function isEXIF(input) {
+    return (0, utils_1.toHexString)(input, 2, 6) === EXIF_MARKER;
+}
+function extractSize(input, index) {
+    return {
+        height: (0, utils_1.readUInt16BE)(input, index),
+        width: (0, utils_1.readUInt16BE)(input, index + 2),
+    };
+}
+function extractOrientation(exifBlock, isBigEndian) {
+    // TODO: assert that this contains 0x002A
+    // let STATIC_MOTOROLA_TIFF_HEADER_BYTES = 2
+    // let TIFF_IMAGE_FILE_DIRECTORY_BYTES = 4
+    // TODO: derive from TIFF_IMAGE_FILE_DIRECTORY_BYTES
+    const idfOffset = 8;
+    // IDF osset works from right after the header bytes
+    // (so the offset includes the tiff byte align)
+    const offset = EXIF_HEADER_BYTES + idfOffset;
+    const idfDirectoryEntries = (0, utils_1.readUInt)(exifBlock, 16, offset, isBigEndian);
+    for (let directoryEntryNumber = 0; directoryEntryNumber < idfDirectoryEntries; directoryEntryNumber++) {
+        const start = offset +
+            NUM_DIRECTORY_ENTRIES_BYTES +
+            directoryEntryNumber * IDF_ENTRY_BYTES;
+        const end = start + IDF_ENTRY_BYTES;
+        // Skip on corrupt EXIF blocks
+        if (start > exifBlock.length) {
+            return;
+        }
+        const block = exifBlock.slice(start, end);
+        const tagNumber = (0, utils_1.readUInt)(block, 16, 0, isBigEndian);
+        // 0x0112 (decimal: 274) is the `orientation` tag ID
+        if (tagNumber === 274) {
+            const dataFormat = (0, utils_1.readUInt)(block, 16, 2, isBigEndian);
+            if (dataFormat !== 3) {
+                return;
+            }
+            // unsinged int has 2 bytes per component
+            // if there would more than 4 bytes in total it's a pointer
+            const numberOfComponents = (0, utils_1.readUInt)(block, 32, 4, isBigEndian);
+            if (numberOfComponents !== 1) {
+                return;
+            }
+            return (0, utils_1.readUInt)(block, 16, 8, isBigEndian);
+        }
+    }
+}
+function validateExifBlock(input, index) {
+    // Skip APP1 Data Size
+    const exifBlock = input.slice(APP1_DATA_SIZE_BYTES, index);
+    // Consider byte alignment
+    const byteAlign = (0, utils_1.toHexString)(exifBlock, EXIF_HEADER_BYTES, EXIF_HEADER_BYTES + TIFF_BYTE_ALIGN_BYTES);
+    // Ignore Empty EXIF. Validate byte alignment
+    const isBigEndian = byteAlign === BIG_ENDIAN_BYTE_ALIGN;
+    const isLittleEndian = byteAlign === LITTLE_ENDIAN_BYTE_ALIGN;
+    if (isBigEndian || isLittleEndian) {
+        return extractOrientation(exifBlock, isBigEndian);
+    }
+}
+function validateInput(input, index) {
+    // index should be within buffer limits
+    if (index > input.length) {
+        throw new TypeError('Corrupt JPG, exceeded buffer limits');
+    }
+}
+exports.JPG = {
+    validate: (input) => (0, utils_1.toHexString)(input, 0, 2) === 'ffd8',
+    calculate(input) {
+        // Skip 4 chars, they are for signature
+        input = input.slice(4);
+        let orientation;
+        let next;
+        while (input.length) {
+            // read length of the next block
+            const i = (0, utils_1.readUInt16BE)(input, 0);
+            // Every JPEG block must begin with a 0xFF
+            if (input[i] !== 0xff) {
+                input = input.slice(1);
+                continue;
+            }
+            if (isEXIF(input)) {
+                orientation = validateExifBlock(input, i);
+            }
+            // ensure correct format
+            validateInput(input, i);
+            // 0xFFC0 is baseline standard(SOF)
+            // 0xFFC1 is baseline optimized(SOF)
+            // 0xFFC2 is progressive(SOF2)
+            next = input[i + 1];
+            if (next === 0xc0 || next === 0xc1 || next === 0xc2) {
+                const size = extractSize(input, i + 5);
+                // TODO: is orientation=0 a valid answer here?
+                if (!orientation) {
+                    return size;
+                }
+                return {
+                    height: size.height,
+                    orientation,
+                    width: size.width,
+                };
+            }
+            // move to the next block
+            input = input.slice(i + 2);
+        }
+        throw new TypeError('Invalid JPG, no size found');
+    },
+};
+
+
+/***/ }),
+
+/***/ 89222:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.KTX = void 0;
+const utils_1 = __webpack_require__(62462);
+exports.KTX = {
+    validate: (input) => {
+        const signature = (0, utils_1.toUTF8String)(input, 1, 7);
+        return ['KTX 11', 'KTX 20'].includes(signature);
+    },
+    calculate: (input) => {
+        const type = input[5] === 0x31 ? 'ktx' : 'ktx2';
+        const offset = type === 'ktx' ? 36 : 20;
+        return ({
+            height: (0, utils_1.readUInt32LE)(input, offset + 4),
+            width: (0, utils_1.readUInt32LE)(input, offset),
+            type,
+        });
+    },
+};
+
+
+/***/ }),
+
+/***/ 77868:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PNG = void 0;
+const utils_1 = __webpack_require__(62462);
+const pngSignature = 'PNG\r\n\x1a\n';
+const pngImageHeaderChunkName = 'IHDR';
+// Used to detect "fried" png's: http://www.jongware.com/pngdefry.html
+const pngFriedChunkName = 'CgBI';
+exports.PNG = {
+    validate(input) {
+        if (pngSignature === (0, utils_1.toUTF8String)(input, 1, 8)) {
+            let chunkName = (0, utils_1.toUTF8String)(input, 12, 16);
+            if (chunkName === pngFriedChunkName) {
+                chunkName = (0, utils_1.toUTF8String)(input, 28, 32);
+            }
+            if (chunkName !== pngImageHeaderChunkName) {
+                throw new TypeError('Invalid PNG');
+            }
+            return true;
+        }
+        return false;
+    },
+    calculate(input) {
+        if ((0, utils_1.toUTF8String)(input, 12, 16) === pngFriedChunkName) {
+            return {
+                height: (0, utils_1.readUInt32BE)(input, 36),
+                width: (0, utils_1.readUInt32BE)(input, 32),
+            };
+        }
+        return {
+            height: (0, utils_1.readUInt32BE)(input, 20),
+            width: (0, utils_1.readUInt32BE)(input, 16),
+        };
+    },
+};
+
+
+/***/ }),
+
+/***/ 8926:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PNM = void 0;
+const utils_1 = __webpack_require__(62462);
+const PNMTypes = {
+    P1: 'pbm/ascii',
+    P2: 'pgm/ascii',
+    P3: 'ppm/ascii',
+    P4: 'pbm',
+    P5: 'pgm',
+    P6: 'ppm',
+    P7: 'pam',
+    PF: 'pfm',
+};
+const handlers = {
+    default: (lines) => {
+        let dimensions = [];
+        while (lines.length > 0) {
+            const line = lines.shift();
+            if (line[0] === '#') {
+                continue;
+            }
+            dimensions = line.split(' ');
+            break;
+        }
+        if (dimensions.length === 2) {
+            return {
+                height: parseInt(dimensions[1], 10),
+                width: parseInt(dimensions[0], 10),
+            };
+        }
+        else {
+            throw new TypeError('Invalid PNM');
+        }
+    },
+    pam: (lines) => {
+        const size = {};
+        while (lines.length > 0) {
+            const line = lines.shift();
+            if (line.length > 16 || line.charCodeAt(0) > 128) {
+                continue;
+            }
+            const [key, value] = line.split(' ');
+            if (key && value) {
+                size[key.toLowerCase()] = parseInt(value, 10);
+            }
+            if (size.height && size.width) {
+                break;
+            }
+        }
+        if (size.height && size.width) {
+            return {
+                height: size.height,
+                width: size.width,
+            };
+        }
+        else {
+            throw new TypeError('Invalid PAM');
+        }
+    },
+};
+exports.PNM = {
+    validate: (input) => (0, utils_1.toUTF8String)(input, 0, 2) in PNMTypes,
+    calculate(input) {
+        const signature = (0, utils_1.toUTF8String)(input, 0, 2);
+        const type = PNMTypes[signature];
+        // TODO: this probably generates garbage. move to a stream based parser
+        const lines = (0, utils_1.toUTF8String)(input, 3).split(/[\r\n]+/);
+        const handler = handlers[type] || handlers.default;
+        return handler(lines);
+    },
+};
+
+
+/***/ }),
+
+/***/ 74964:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PSD = void 0;
+const utils_1 = __webpack_require__(62462);
+exports.PSD = {
+    validate: (input) => (0, utils_1.toUTF8String)(input, 0, 4) === '8BPS',
+    calculate: (input) => ({
+        height: (0, utils_1.readUInt32BE)(input, 14),
+        width: (0, utils_1.readUInt32BE)(input, 18),
+    }),
+};
+
+
+/***/ }),
+
+/***/ 96577:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SVG = void 0;
+const utils_1 = __webpack_require__(62462);
+const svgReg = /<svg\s([^>"']|"[^"]*"|'[^']*')*>/;
+const extractorRegExps = {
+    height: /\sheight=(['"])([^%]+?)\1/,
+    root: svgReg,
+    viewbox: /\sviewBox=(['"])(.+?)\1/i,
+    width: /\swidth=(['"])([^%]+?)\1/,
+};
+const INCH_CM = 2.54;
+const units = {
+    in: 96,
+    cm: 96 / INCH_CM,
+    em: 16,
+    ex: 8,
+    m: (96 / INCH_CM) * 100,
+    mm: 96 / INCH_CM / 10,
+    pc: 96 / 72 / 12,
+    pt: 96 / 72,
+    px: 1,
+};
+const unitsReg = new RegExp(`^([0-9.]+(?:e\\d+)?)(${Object.keys(units).join('|')})?$`);
+function parseLength(len) {
+    const m = unitsReg.exec(len);
+    if (!m) {
+        return undefined;
+    }
+    return Math.round(Number(m[1]) * (units[m[2]] || 1));
+}
+function parseViewbox(viewbox) {
+    const bounds = viewbox.split(' ');
+    return {
+        height: parseLength(bounds[3]),
+        width: parseLength(bounds[2]),
+    };
+}
+function parseAttributes(root) {
+    const width = root.match(extractorRegExps.width);
+    const height = root.match(extractorRegExps.height);
+    const viewbox = root.match(extractorRegExps.viewbox);
+    return {
+        height: height && parseLength(height[2]),
+        viewbox: viewbox && parseViewbox(viewbox[2]),
+        width: width && parseLength(width[2]),
+    };
+}
+function calculateByDimensions(attrs) {
+    return {
+        height: attrs.height,
+        width: attrs.width,
+    };
+}
+function calculateByViewbox(attrs, viewbox) {
+    const ratio = viewbox.width / viewbox.height;
+    if (attrs.width) {
+        return {
+            height: Math.floor(attrs.width / ratio),
+            width: attrs.width,
+        };
+    }
+    if (attrs.height) {
+        return {
+            height: attrs.height,
+            width: Math.floor(attrs.height * ratio),
+        };
+    }
+    return {
+        height: viewbox.height,
+        width: viewbox.width,
+    };
+}
+exports.SVG = {
+    // Scan only the first kilo-byte to speed up the check on larger files
+    validate: (input) => svgReg.test((0, utils_1.toUTF8String)(input, 0, 1000)),
+    calculate(input) {
+        const root = (0, utils_1.toUTF8String)(input).match(extractorRegExps.root);
+        if (root) {
+            const attrs = parseAttributes(root[0]);
+            if (attrs.width && attrs.height) {
+                return calculateByDimensions(attrs);
+            }
+            if (attrs.viewbox) {
+                return calculateByViewbox(attrs, attrs.viewbox);
+            }
+        }
+        throw new TypeError('Invalid SVG');
+    },
+};
+
+
+/***/ }),
+
+/***/ 57927:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.TGA = void 0;
+const utils_1 = __webpack_require__(62462);
+exports.TGA = {
+    validate(input) {
+        return (0, utils_1.readUInt16LE)(input, 0) === 0 && (0, utils_1.readUInt16LE)(input, 4) === 0;
+    },
+    calculate(input) {
+        return {
+            height: (0, utils_1.readUInt16LE)(input, 14),
+            width: (0, utils_1.readUInt16LE)(input, 12),
+        };
+    },
+};
+
+
+/***/ }),
+
+/***/ 98220:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.TIFF = void 0;
+// based on http://www.compix.com/fileformattif.htm
+// TO-DO: support big-endian as well
+const fs = __webpack_require__(87768);
+const utils_1 = __webpack_require__(62462);
+// Read IFD (image-file-directory) into a buffer
+function readIFD(input, filepath, isBigEndian) {
+    const ifdOffset = (0, utils_1.readUInt)(input, 32, 4, isBigEndian);
+    // read only till the end of the file
+    let bufferSize = 1024;
+    const fileSize = fs.statSync(filepath).size;
+    if (ifdOffset + bufferSize > fileSize) {
+        bufferSize = fileSize - ifdOffset - 10;
+    }
+    // populate the buffer
+    const endBuffer = new Uint8Array(bufferSize);
+    const descriptor = fs.openSync(filepath, 'r');
+    fs.readSync(descriptor, endBuffer, 0, bufferSize, ifdOffset);
+    fs.closeSync(descriptor);
+    return endBuffer.slice(2);
+}
+// TIFF values seem to be messed up on Big-Endian, this helps
+function readValue(input, isBigEndian) {
+    const low = (0, utils_1.readUInt)(input, 16, 8, isBigEndian);
+    const high = (0, utils_1.readUInt)(input, 16, 10, isBigEndian);
+    return (high << 16) + low;
+}
+// move to the next tag
+function nextTag(input) {
+    if (input.length > 24) {
+        return input.slice(12);
+    }
+}
+// Extract IFD tags from TIFF metadata
+function extractTags(input, isBigEndian) {
+    const tags = {};
+    let temp = input;
+    while (temp && temp.length) {
+        const code = (0, utils_1.readUInt)(temp, 16, 0, isBigEndian);
+        const type = (0, utils_1.readUInt)(temp, 16, 2, isBigEndian);
+        const length = (0, utils_1.readUInt)(temp, 32, 4, isBigEndian);
+        // 0 means end of IFD
+        if (code === 0) {
+            break;
+        }
+        else {
+            // 256 is width, 257 is height
+            // if (code === 256 || code === 257) {
+            if (length === 1 && (type === 3 || type === 4)) {
+                tags[code] = readValue(temp, isBigEndian);
+            }
+            // move to the next tag
+            temp = nextTag(temp);
+        }
+    }
+    return tags;
+}
+// Test if the TIFF is Big Endian or Little Endian
+function determineEndianness(input) {
+    const signature = (0, utils_1.toUTF8String)(input, 0, 2);
+    if ('II' === signature) {
+        return 'LE';
+    }
+    else if ('MM' === signature) {
+        return 'BE';
+    }
+}
+const signatures = [
+    // '492049', // currently not supported
+    '49492a00', // Little endian
+    '4d4d002a', // Big Endian
+    // '4d4d002a', // BigTIFF > 4GB. currently not supported
+];
+exports.TIFF = {
+    validate: (input) => signatures.includes((0, utils_1.toHexString)(input, 0, 4)),
+    calculate(input, filepath) {
+        if (!filepath) {
+            throw new TypeError('Tiff doesn\'t support buffer');
+        }
+        // Determine BE/LE
+        const isBigEndian = determineEndianness(input) === 'BE';
+        // read the IFD
+        const ifdBuffer = readIFD(input, filepath, isBigEndian);
+        // extract the tags from the IFD
+        const tags = extractTags(ifdBuffer, isBigEndian);
+        const width = tags[256];
+        const height = tags[257];
+        if (!width || !height) {
+            throw new TypeError('Invalid Tiff. Missing tags');
+        }
+        return { height, width };
+    },
+};
+
+
+/***/ }),
+
+/***/ 62462:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.findBox = exports.readUInt = exports.readUInt32LE = exports.readUInt32BE = exports.readInt32LE = exports.readUInt24LE = exports.readUInt16LE = exports.readUInt16BE = exports.readInt16LE = exports.toHexString = exports.toUTF8String = void 0;
+const decoder = new TextDecoder();
+const toUTF8String = (input, start = 0, end = input.length) => decoder.decode(input.slice(start, end));
+exports.toUTF8String = toUTF8String;
+const toHexString = (input, start = 0, end = input.length) => input
+    .slice(start, end)
+    .reduce((memo, i) => memo + ('0' + i.toString(16)).slice(-2), '');
+exports.toHexString = toHexString;
+const readInt16LE = (input, offset = 0) => {
+    const val = input[offset] + input[offset + 1] * 2 ** 8;
+    return val | ((val & (2 ** 15)) * 0x1fffe);
+};
+exports.readInt16LE = readInt16LE;
+const readUInt16BE = (input, offset = 0) => input[offset] * 2 ** 8 + input[offset + 1];
+exports.readUInt16BE = readUInt16BE;
+const readUInt16LE = (input, offset = 0) => input[offset] + input[offset + 1] * 2 ** 8;
+exports.readUInt16LE = readUInt16LE;
+const readUInt24LE = (input, offset = 0) => input[offset] + input[offset + 1] * 2 ** 8 + input[offset + 2] * 2 ** 16;
+exports.readUInt24LE = readUInt24LE;
+const readInt32LE = (input, offset = 0) => input[offset] +
+    input[offset + 1] * 2 ** 8 +
+    input[offset + 2] * 2 ** 16 +
+    (input[offset + 3] << 24);
+exports.readInt32LE = readInt32LE;
+const readUInt32BE = (input, offset = 0) => input[offset] * 2 ** 24 +
+    input[offset + 1] * 2 ** 16 +
+    input[offset + 2] * 2 ** 8 +
+    input[offset + 3];
+exports.readUInt32BE = readUInt32BE;
+const readUInt32LE = (input, offset = 0) => input[offset] +
+    input[offset + 1] * 2 ** 8 +
+    input[offset + 2] * 2 ** 16 +
+    input[offset + 3] * 2 ** 24;
+exports.readUInt32LE = readUInt32LE;
+// Abstract reading multi-byte unsigned integers
+const methods = {
+    readUInt16BE: exports.readUInt16BE,
+    readUInt16LE: exports.readUInt16LE,
+    readUInt32BE: exports.readUInt32BE,
+    readUInt32LE: exports.readUInt32LE,
+};
+function readUInt(input, bits, offset, isBigEndian) {
+    offset = offset || 0;
+    const endian = isBigEndian ? 'BE' : 'LE';
+    const methodName = ('readUInt' + bits + endian);
+    return methods[methodName](input, offset);
+}
+exports.readUInt = readUInt;
+function readBox(buffer, offset) {
+    if (buffer.length - offset < 4)
+        return;
+    const boxSize = (0, exports.readUInt32BE)(buffer, offset);
+    if (buffer.length - offset < boxSize)
+        return;
+    return {
+        name: (0, exports.toUTF8String)(buffer, 4 + offset, 8 + offset),
+        offset,
+        size: boxSize,
+    };
+}
+function findBox(buffer, boxName, offset) {
+    while (offset < buffer.length) {
+        const box = readBox(buffer, offset);
+        if (!box)
+            break;
+        if (box.name === boxName)
+            return box;
+        offset += box.size;
+    }
+}
+exports.findBox = findBox;
+
+
+/***/ }),
+
+/***/ 23941:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.WEBP = void 0;
+const utils_1 = __webpack_require__(62462);
+function calculateExtended(input) {
+    return {
+        height: 1 + (0, utils_1.readUInt24LE)(input, 7),
+        width: 1 + (0, utils_1.readUInt24LE)(input, 4),
+    };
+}
+function calculateLossless(input) {
+    return {
+        height: 1 +
+            (((input[4] & 0xf) << 10) | (input[3] << 2) | ((input[2] & 0xc0) >> 6)),
+        width: 1 + (((input[2] & 0x3f) << 8) | input[1]),
+    };
+}
+function calculateLossy(input) {
+    // `& 0x3fff` returns the last 14 bits
+    // TO-DO: include webp scaling in the calculations
+    return {
+        height: (0, utils_1.readInt16LE)(input, 8) & 0x3fff,
+        width: (0, utils_1.readInt16LE)(input, 6) & 0x3fff,
+    };
+}
+exports.WEBP = {
+    validate(input) {
+        const riffHeader = 'RIFF' === (0, utils_1.toUTF8String)(input, 0, 4);
+        const webpHeader = 'WEBP' === (0, utils_1.toUTF8String)(input, 8, 12);
+        const vp8Header = 'VP8' === (0, utils_1.toUTF8String)(input, 12, 15);
+        return riffHeader && webpHeader && vp8Header;
+    },
+    calculate(input) {
+        const chunkHeader = (0, utils_1.toUTF8String)(input, 12, 16);
+        input = input.slice(20, 30);
+        // Extended webp stream signature
+        if (chunkHeader === 'VP8X') {
+            const extendedHeader = input[0];
+            const validStart = (extendedHeader & 0xc0) === 0;
+            const validEnd = (extendedHeader & 0x01) === 0;
+            if (validStart && validEnd) {
+                return calculateExtended(input);
+            }
+            else {
+                // TODO: breaking change
+                throw new TypeError('Invalid WebP');
+            }
+        }
+        // Lossless webp stream signature
+        if (chunkHeader === 'VP8 ' && input[0] !== 0x2f) {
+            return calculateLossy(input);
+        }
+        // Lossy webp stream signature
+        const signature = (0, utils_1.toHexString)(input, 3, 6);
+        if (chunkHeader === 'VP8L' && signature !== '9d012a') {
+            return calculateLossless(input);
+        }
+        throw new TypeError('Invalid WebP');
+    },
+};
+
+
+/***/ }),
+
 /***/ 23426:
 /***/ ((module) => {
 
@@ -55608,6 +57889,208 @@ assert.equal = function assertEqual(l, r, msg) {
   if (l != r)
     throw new Error(msg || ('Assertion failed: ' + l + ' != ' + r));
 };
+
+
+/***/ }),
+
+/***/ 95784:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var inherits = __webpack_require__(23426)
+var EventEmitter = (__webpack_require__(28759).EventEmitter)
+
+module.exports = Queue
+module.exports["default"] = Queue
+
+function Queue (options) {
+  if (!(this instanceof Queue)) {
+    return new Queue(options)
+  }
+
+  EventEmitter.call(this)
+  options = options || {}
+  this.concurrency = options.concurrency || Infinity
+  this.timeout = options.timeout || 0
+  this.autostart = options.autostart || false
+  this.results = options.results || null
+  this.pending = 0
+  this.session = 0
+  this.running = false
+  this.jobs = []
+  this.timers = {}
+}
+inherits(Queue, EventEmitter)
+
+var arrayMethods = [
+  'pop',
+  'shift',
+  'indexOf',
+  'lastIndexOf'
+]
+
+arrayMethods.forEach(function (method) {
+  Queue.prototype[method] = function () {
+    return Array.prototype[method].apply(this.jobs, arguments)
+  }
+})
+
+Queue.prototype.slice = function (begin, end) {
+  this.jobs = this.jobs.slice(begin, end)
+  return this
+}
+
+Queue.prototype.reverse = function () {
+  this.jobs.reverse()
+  return this
+}
+
+var arrayAddMethods = [
+  'push',
+  'unshift',
+  'splice'
+]
+
+arrayAddMethods.forEach(function (method) {
+  Queue.prototype[method] = function () {
+    var methodResult = Array.prototype[method].apply(this.jobs, arguments)
+    if (this.autostart) {
+      this.start()
+    }
+    return methodResult
+  }
+})
+
+Object.defineProperty(Queue.prototype, 'length', {
+  get: function () {
+    return this.pending + this.jobs.length
+  }
+})
+
+Queue.prototype.start = function (cb) {
+  if (cb) {
+    callOnErrorOrEnd.call(this, cb)
+  }
+
+  this.running = true
+
+  if (this.pending >= this.concurrency) {
+    return
+  }
+
+  if (this.jobs.length === 0) {
+    if (this.pending === 0) {
+      done.call(this)
+    }
+    return
+  }
+
+  var self = this
+  var job = this.jobs.shift()
+  var once = true
+  var session = this.session
+  var timeoutId = null
+  var didTimeout = false
+  var resultIndex = null
+  var timeout = job.hasOwnProperty('timeout') ? job.timeout : this.timeout
+
+  function next (err, result) {
+    if (once && self.session === session) {
+      once = false
+      self.pending--
+      if (timeoutId !== null) {
+        delete self.timers[timeoutId]
+        clearTimeout(timeoutId)
+      }
+
+      if (err) {
+        self.emit('error', err, job)
+      } else if (didTimeout === false) {
+        if (resultIndex !== null) {
+          self.results[resultIndex] = Array.prototype.slice.call(arguments, 1)
+        }
+        self.emit('success', result, job)
+      }
+
+      if (self.session === session) {
+        if (self.pending === 0 && self.jobs.length === 0) {
+          done.call(self)
+        } else if (self.running) {
+          self.start()
+        }
+      }
+    }
+  }
+
+  if (timeout) {
+    timeoutId = setTimeout(function () {
+      didTimeout = true
+      if (self.listeners('timeout').length > 0) {
+        self.emit('timeout', next, job)
+      } else {
+        next()
+      }
+    }, timeout)
+    this.timers[timeoutId] = timeoutId
+  }
+
+  if (this.results) {
+    resultIndex = this.results.length
+    this.results[resultIndex] = null
+  }
+
+  this.pending++
+  self.emit('start', job)
+  var promise = job(next)
+  if (promise && promise.then && typeof promise.then === 'function') {
+    promise.then(function (result) {
+      return next(null, result)
+    }).catch(function (err) {
+      return next(err || true)
+    })
+  }
+
+  if (this.running && this.jobs.length > 0) {
+    this.start()
+  }
+}
+
+Queue.prototype.stop = function () {
+  this.running = false
+}
+
+Queue.prototype.end = function (err) {
+  clearTimers.call(this)
+  this.jobs.length = 0
+  this.pending = 0
+  done.call(this, err)
+}
+
+function clearTimers () {
+  for (var key in this.timers) {
+    var timeoutId = this.timers[key]
+    delete this.timers[key]
+    clearTimeout(timeoutId)
+  }
+}
+
+function callOnErrorOrEnd (cb) {
+  var self = this
+  this.on('error', onerror)
+  this.on('end', onend)
+
+  function onerror (err) { self.end(err) }
+  function onend (err) {
+    self.removeListener('error', onerror)
+    self.removeListener('end', onend)
+    cb(err, this.results)
+  }
+}
+
+function done (err) {
+  this.session++
+  this.running = false
+  this.emit('end', err)
+}
 
 
 /***/ }),
@@ -56598,6 +59081,20 @@ exports["default"] = parseXml;
 /***/ }),
 
 /***/ 60039:
+/***/ (() => {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 87768:
+/***/ (() => {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 93590:
 /***/ (() => {
 
 /* (ignored) */
